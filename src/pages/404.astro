@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+	title="404 — Page Not Found | Accurate Online Compass"
+	description="That page drifted off course. Head back to the Accurate Online Compass to find north, Qibla direction, bearings, and sun position."
+	path="/404/"
+>
+	<div class="mx-auto max-w-3xl px-4 py-24 text-center sm:px-6 md:py-32">
+		<p class="eyebrow">error 404</p>
+		<h1 class="mt-4 text-display-xl text-ink">Lost your bearing.</h1>
+		<p class="mx-auto mt-4 max-w-md text-body-lg text-body">
+			This page has drifted off course. The needle points elsewhere — try heading back to a
+			known location.
+		</p>
+		<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+			<a href="/" class="btn btn-primary">Back to the compass</a>
+			<a href="/qibla/" class="btn btn-ghost">Find Qibla</a>
+		</div>
+	</div>
+</Layout>

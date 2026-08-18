@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SunPanel from '../components/SunPanel.astro';
+import PageHero from '../components/PageHero.astro';
+import RelatedTools from '../components/RelatedTools.astro';
+---
+
+<Layout
+	title="Sun Position Calculator Online — Azimuth, Sunrise & Sunset"
+	description="Calculate sun position online: azimuth, elevation, sunrise, solar noon, and sunset for any location. Free and instant — runs entirely in your browser."
+	path="/sun/"
+	keywords="sun position calculator, sun azimuth, sunrise sunset times, sun direction, solar position online"
+>
+	<PageHero
+		eyebrow="sun position"
+		title="Track the sun, precisely."
+		description="Live solar azimuth and elevation, plus sunrise, solar noon, and sunset — computed for your location or any coordinates you enter."
+	>
+		<SunPanel />
+	</PageHero>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-2">
+			<div>
+				<p class="eyebrow mb-2">what the numbers mean</p>
+				<p class="text-sm text-body leading-6">
+					Azimuth is the sun's compass direction (0° = north, 90° = east). Elevation is how
+					high it sits above the horizon — useful for shade, solar panels, and photography.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">cross-check your compass</p>
+				<p class="text-sm text-body leading-6">
+					At midday the sun sits near true south in the northern hemisphere and true north in
+					the southern — a reliable way to sanity-check your heading in daylight.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<RelatedTools current="/sun/" />
+</Layout>

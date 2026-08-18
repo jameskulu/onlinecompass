@@ -1,0 +1,239 @@
+---
+const CITIES = [
+  { name: 'New York', lat: 40.7128, lng: -74.006 },
+  { name: 'London', lat: 51.5074, lng: -0.1278 },
+  { name: 'Tokyo', lat: 35.6762, lng: 139.6503 },
+  { name: 'Sydney', lat: -33.8688, lng: 151.2093 },
+  { name: 'Paris', lat: 48.8566, lng: 2.3522 },
+  { name: 'Dubai', lat: 25.2048, lng: 55.2708 },
+  { name: 'Singapore', lat: 1.3521, lng: 103.8198 },
+  { name: 'Moscow', lat: 55.7558, lng: 37.6173 },
+  { name: 'Los Angeles', lat: 34.0522, lng: -118.2437 },
+  { name: 'Istanbul', lat: 41.0082, lng: 28.9784 },
+  { name: 'Cairo', lat: 30.0444, lng: 31.2357 },
+  { name: 'Delhi', lat: 28.6139, lng: 77.209 },
+  { name: 'Mumbai', lat: 19.076, lng: 72.8777 },
+  { name: 'Beijing', lat: 39.9042, lng: 116.4074 },
+  { name: 'Bangkok', lat: 13.7563, lng: 100.5018 },
+  { name: 'Jakarta', lat: -6.2088, lng: 106.8456 },
+  { name: 'Berlin', lat: 52.52, lng: 13.405 },
+  { name: 'São Paulo', lat: -23.5505, lng: -46.6333 },
+  { name: 'Mexico City', lat: 19.4326, lng: -99.1332 },
+  { name: 'Cape Town', lat: -33.9249, lng: 18.4241 },
+  { name: 'Mecca (Kaaba)', lat: 21.4225, lng: 39.8262 },
+];
+---
+<section class="bearing-calc card-lg p-6 md:p-8">
+  <div class="mb-6">
+    <p class="eyebrow mb-1">bearing calculator</p>
+    <h3 class="text-display-sm text-ink">Bearing between two points</h3>
+    <p class="text-sm text-body mt-2 max-w-md">
+      Computes the initial great-circle bearing and distance from point A to point B. Useful for
+      navigation, surveying, and route planning.
+    </p>
+  </div>
+
+  <div class="grid gap-5 md:grid-cols-2">
+    <fieldset class="grid gap-3 content-start">
+      <legend class="eyebrow mb-1">from · point A</legend>
+      <label class="grid gap-1.5">
+        <span class="eyebrow">latitude</span>
+        <input data-a-lat class="field-input" type="number" step="any" placeholder="latitude" />
+        <input data-a-lat-r class="slider" type="range" min="-90" max="90" step="1" value="0" aria-label="point A latitude slider" />
+      </label>
+      <label class="grid gap-1.5">
+        <span class="eyebrow">longitude</span>
+        <input data-a-lng class="field-input" type="number" step="any" placeholder="longitude" />
+        <input data-a-lng-r class="slider" type="range" min="-180" max="180" step="1" value="0" aria-label="point A longitude slider" />
+      </label>
+      <button data-a-gps class="btn-nav btn-nav-white border border-hairline self-start">Use my location</button>
+    </fieldset>
+    <fieldset class="grid gap-3 content-start">
+      <legend class="eyebrow mb-1">to · point B</legend>
+      <label class="grid gap-1.5">
+        <span class="eyebrow">latitude</span>
+        <input data-b-lat class="field-input" type="number" step="any" placeholder="latitude" />
+        <input data-b-lat-r class="slider" type="range" min="-90" max="90" step="1" value="0" aria-label="point B latitude slider" />
+      </label>
+      <label class="grid gap-1.5">
+        <span class="eyebrow">longitude</span>
+        <input data-b-lng class="field-input" type="number" step="any" placeholder="longitude" />
+        <input data-b-lng-r class="slider" type="range" min="-180" max="180" step="1" value="0" aria-label="point B longitude slider" />
+      </label>
+      <label class="grid gap-1.5">
+        <span class="eyebrow">destination</span>
+        <select data-b-city class="field-input">
+          <option value="">Choose a destination…</option>
+          {CITIES.map((c) => (
+            <option value={`${c.lat},${c.lng}`} data-name={c.name}>
+              {c.name}
+            </option>
+          ))}
+        </select>
+      </label>
+      <div class="grid grid-cols-2 gap-2">
+        <button data-cities-custom class="btn-nav btn-nav-white border border-hairline self-start">London → New York</button>
+        <button data-cities-tokyo class="btn-nav btn-nav-white border border-hairline self-start">Tokyo → Sydney</button>
+      </div>
+    </fieldset>
+  </div>
+
+  <button data-b-calc class="btn-primary text-sm h-12 px-6 mt-5">Compute bearing</button>
+
+  <div data-b-result class="hidden mt-6 space-y-6">
+    <div>
+      <p data-b-summary class="text-body text-sm leading-6 mb-3">—</p>
+      <div class="grid gap-4 sm:grid-cols-3">
+        <div class="card-soft p-4">
+          <p class="eyebrow mb-1">bearing</p>
+          <p data-b-bearing class="text-display-md text-ink tabular-nums">—</p>
+        </div>
+        <div class="card-soft p-4">
+          <p class="eyebrow mb-1">direction</p>
+          <p data-b-dir class="text-display-md text-ink">—</p>
+        </div>
+        <div class="card-soft p-4">
+          <p class="eyebrow mb-1">distance</p>
+          <p data-b-distance class="text-display-md text-ink">—</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <p class="eyebrow mb-3">from point A</p>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="card-soft p-4">
+          <p class="eyebrow mb-1">destination coords</p>
+          <p data-b-dest class="text-sm font-mono text-ink leading-5">—</p>
+        </div>
+        <div class="card-soft p-4">
+          <p class="eyebrow mb-1">qibla direction</p>
+          <p data-b-qibla class="text-display-md text-ink">—</p>
+        </div>
+        <div class="card-soft p-4">
+          <p class="eyebrow mb-1">magnetic declination</p>
+          <p data-b-decl class="text-display-md text-ink tabular-nums">—</p>
+        </div>
+        <div class="card-soft p-4">
+          <p class="eyebrow mb-1">sun direction</p>
+          <p data-b-sun class="text-display-md text-ink">—</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initialBearing, haversine, directionName, qiblaBearing, magneticDeclination, sunPosition } from '../lib/geo.js';
+  import { wireSlider } from '../lib/slider.js';
+
+  const root = document.querySelector('.bearing-calc');
+  const $ = (sel) => root.querySelector(sel);
+  const aLat = $('[data-a-lat]');
+  const aLng = $('[data-a-lng]');
+  const bLat = $('[data-b-lat]');
+  const bLng = $('[data-b-lng]');
+  const syncALat = wireSlider(aLat, $('[data-a-lat-r]'), -90, 90);
+  const syncALng = wireSlider(aLng, $('[data-a-lng-r]'), -180, 180);
+  const syncBLat = wireSlider(bLat, $('[data-b-lat-r]'), -90, 90);
+  const syncBLng = wireSlider(bLng, $('[data-b-lng-r]'), -180, 180);
+  const calcBtn = $('[data-b-calc]');
+  const citySel = $('[data-b-city]');
+  const aGpsBtn = $('[data-a-gps]');
+  const londonBtn = $('[data-cities-custom]');
+  const tokyoBtn = $('[data-cities-tokyo]');
+  const result = $('[data-b-result]');
+  const bearingEl = $('[data-b-bearing]');
+  const dirEl = $('[data-b-dir]');
+  const distanceEl = $('[data-b-distance]');
+  const summaryEl = $('[data-b-summary]');
+  const destEl = $('[data-b-dest]');
+  const qiblaEl = $('[data-b-qibla]');
+  const declEl = $('[data-b-decl]');
+  const sunEl = $('[data-b-sun]');
+
+  const read = (el) => parseFloat(el.value);
+
+  let aName = 'Point A';
+  let bName = 'Point B';
+
+  function compute() {
+    const lat1 = read(aLat);
+    const lng1 = read(aLng);
+    const lat2 = read(bLat);
+    const lng2 = read(bLng);
+    if ([lat1, lng1, lat2, lng2].some(Number.isNaN)) return;
+    const bearing = initialBearing(lat1, lng1, lat2, lng2);
+    const distance = haversine(lat1, lng1, lat2, lng2);
+    bearingEl.textContent = `${Math.round(bearing)}°`;
+    dirEl.textContent = directionName(bearing, false);
+    distanceEl.textContent = `${distance.toFixed(distance > 100 ? 0 : 1)} km`;
+    summaryEl.textContent = `${bName} is ${Math.round(bearing)}° ${directionName(bearing, false)} from ${aName}, ${distance.toFixed(distance > 100 ? 0 : 1)} km away.`;
+
+    const qibla = qiblaBearing(lat1, lng1);
+    qiblaEl.textContent = `${Math.round(qibla)}° ${directionName(qibla, false)}`;
+    const decl = magneticDeclination(lat1, lng1);
+    declEl.textContent = `${decl >= 0 ? '+' : ''}${decl.toFixed(1)}°`;
+    const sun = sunPosition(new Date(), lat1, lng1).azimuth;
+    sunEl.textContent = `${Math.round(sun)}° ${directionName(sun, false)}`;
+    destEl.textContent = `${lat2.toFixed(4)}°, ${lng2.toFixed(4)}°`;
+    result.classList.remove('hidden');
+    result.classList.add('grid');
+  }
+
+  calcBtn.addEventListener('click', compute);
+
+  citySel.addEventListener('change', () => {
+    const opt = citySel.selectedOptions[0];
+    if (!opt?.value) return;
+    const [lat, lng] = opt.value.split(',').map(Number);
+    bLat.value = lat;
+    bLng.value = lng;
+    bName = opt.dataset.name || 'Destination';
+    syncBLat();
+    syncBLng();
+    compute();
+  });
+
+  aGpsBtn.addEventListener('click', () => {
+    if (!navigator.geolocation) return;
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        aLat.value = pos.coords.latitude.toFixed(6);
+        aLng.value = pos.coords.longitude.toFixed(6);
+        aName = 'Your location';
+        syncALat();
+        syncALng();
+      },
+      () => {},
+      { enableHighAccuracy: true },
+    );
+  });
+
+  londonBtn.addEventListener('click', () => {
+    aLat.value = 51.5074;
+    aLng.value = -0.1278;
+    bLat.value = 40.7128;
+    bLng.value = -74.006;
+    aName = 'London';
+    bName = 'New York';
+    syncALat();
+    syncALng();
+    syncBLat();
+    syncBLng();
+    compute();
+  });
+
+  tokyoBtn.addEventListener('click', () => {
+    aLat.value = 35.6762;
+    aLng.value = 139.6503;
+    bLat.value = -33.8688;
+    bLng.value = 151.2093;
+    aName = 'Tokyo';
+    bName = 'Sydney';
+    syncALat();
+    syncALng();
+    syncBLat();
+    syncBLng();
+    compute();
+  });
+</script>

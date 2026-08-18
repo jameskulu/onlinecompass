@@ -1,0 +1,43 @@
+---
+import Layout from '../layouts/Layout.astro';
+import QiblaFinder from '../components/QiblaFinder.astro';
+import PageHero from '../components/PageHero.astro';
+import RelatedTools from '../components/RelatedTools.astro';
+---
+
+<Layout
+	title="Qibla Finder Online — Direction to Kaaba from My Location"
+	description="Online compass for Qibla — find the direction to the Kaaba from my location. Quibla finder with great-circle bearing and distance to Mecca, computed privately in your browser."
+	path="/qibla/"
+	keywords="online compass for qibla, quibla finder online compass, online compass kabba to find north from my location, qibla direction, direction to kaaba, find qibla from my location"
+>
+	<PageHero
+		eyebrow="qibla finder"
+		title="Face the Kaaba, anywhere on Earth."
+		description="The great-circle bearing to Makkah is computed on your device from your coordinates — accurate to the degree, private by design."
+	>
+		<QiblaFinder />
+	</PageHero>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-2">
+			<div>
+				<p class="eyebrow mb-2">how it's calculated</p>
+				<p class="text-sm text-body leading-6">
+					The bearing uses the shortest great-circle path between your location and the Kaaba
+					(21.4225° N, 39.8262° E). It accounts for Earth's curvature, so it differs from a flat
+					compass-rose reading.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">put it into practice</p>
+				<p class="text-sm text-body leading-6">
+					Note the bearing, then open the compass tool and turn until your heading matches it.
+					Or calibrate outside away from metal for the best accuracy.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<RelatedTools current="/qibla/" />
+</Layout>

@@ -1,0 +1,115 @@
+---
+const props = Astro.props;
+---
+<section class="sun-panel card-lg p-6 md:p-8">
+  <div class="mb-6">
+    <p class="eyebrow mb-1">sun position</p>
+    <h3 class="text-display-sm text-ink">Sun path & day times</h3>
+    <p class="text-sm text-body mt-2 max-w-md">
+      Live solar azimuth and elevation, plus sunrise, solar noon, and sunset for your location.
+    </p>
+  </div>
+
+  <div class="grid gap-3 md:grid-cols-2">
+    <label class="block">
+      <span class="eyebrow block mb-1">latitude</span>
+      <input data-s-lat class="field-input" type="number" step="any" placeholder="e.g. 40.7128" />
+      <input data-s-lat-r class="slider mt-2" type="range" min="-90" max="90" step="1" value="0" aria-label="latitude slider" />
+    </label>
+    <label class="block">
+      <span class="eyebrow block mb-1">longitude</span>
+      <input data-s-lng class="field-input" type="number" step="any" placeholder="e.g. -74.0060" />
+      <input data-s-lng-r class="slider mt-2" type="range" min="-180" max="180" step="1" value="0" aria-label="longitude slider" />
+    </label>
+  </div>
+
+  <div class="mt-4 flex flex-wrap gap-2">
+    <button data-s-calc class="btn-primary text-sm h-12 px-6">Calculate</button>
+    <button data-s-gps class="btn-secondary text-sm h-12 px-6">Use my location</button>
+    <a href="/compass/" class="btn-nav btn-nav-white border border-hairline no-underline">Check on the compass</a>
+  </div>
+
+  <div data-s-now class="hidden mt-6 grid gap-4 sm:grid-cols-2">
+    <div class="card-soft p-4">
+      <p class="eyebrow mb-1">azimuth · now</p>
+      <p data-s-az class="text-display-md text-ink tabular-nums">—</p>
+    </div>
+    <div class="card-soft p-4">
+      <p class="eyebrow mb-1">elevation · now</p>
+      <p data-s-elev class="text-display-md text-ink tabular-nums">—</p>
+    </div>
+  </div>
+
+  <div data-s-times class="hidden mt-4 grid gap-4 sm:grid-cols-3">
+    <div class="card-soft p-4">
+      <p class="eyebrow mb-1">sunrise</p>
+      <p data-s-sunrise class="text-display-md text-ink tabular-nums">—</p>
+    </div>
+    <div class="card-soft p-4">
+      <p class="eyebrow mb-1">solar noon</p>
+      <p data-s-noon class="text-display-md text-ink tabular-nums">—</p>
+    </div>
+    <div class="card-soft p-4">
+      <p class="eyebrow mb-1">sunset</p>
+      <p data-s-sunset class="text-display-md text-ink tabular-nums">—</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { sunPosition, sunTimes, formatTime } from '../lib/geo.js';
+  import { wireSlider } from '../lib/slider.js';
+
+  const root = document.querySelector('.sun-panel');
+  const $ = (sel) => root.querySelector(sel);
+  const latIn = $('[data-s-lat]');
+  const lngIn = $('[data-s-lng]');
+  const syncLat = wireSlider(latIn, $('[data-s-lat-r]'), -90, 90);
+  const syncLng = wireSlider(lngIn, $('[data-s-lng-r]'), -180, 180);
+  const calcBtn = $('[data-s-calc]');
+  const gpsBtn = $('[data-s-gps]');
+  const nowBox = $('[data-s-now]');
+  const timesBox = $('[data-s-times]');
+  const azEl = $('[data-s-az]');
+  const elevEl = $('[data-s-elev]');
+  const sunriseEl = $('[data-s-sunrise]');
+  const noonEl = $('[data-s-noon]');
+  const sunsetEl = $('[data-s-sunset]');
+
+  function show(lat, lng) {
+    const now = new Date();
+    const pos = sunPosition(now, lat, lng);
+    const times = sunTimes(now, lat, lng);
+    azEl.textContent = `${Math.round(pos.azimuth)}°`;
+    elevEl.textContent = `${pos.altitude.toFixed(1)}°`;
+    sunriseEl.textContent = formatTime(times.sunrise);
+    noonEl.textContent = formatTime(times.solarNoon);
+    sunsetEl.textContent = formatTime(times.sunset);
+    nowBox.classList.remove('hidden');
+    nowBox.classList.add('grid');
+    timesBox.classList.remove('hidden');
+    timesBox.classList.add('grid');
+  }
+
+  calcBtn.addEventListener('click', () => {
+    const lat = parseFloat(latIn.value);
+    const lng = parseFloat(lngIn.value);
+    if (Number.isNaN(lat) || Number.isNaN(lng)) return;
+    show(lat, lng);
+  });
+
+  gpsBtn.addEventListener('click', () => {
+    if (!navigator.geolocation) return;
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        latIn.value = pos.coords.latitude.toFixed(6);
+        lngIn.value = pos.coords.longitude.toFixed(6);
+        syncLat();
+        syncLng();
+        show(pos.coords.latitude, pos.coords.longitude);
+      },
+      () => {},
+      { enableHighAccuracy: true },
+    );
+  });
+</script>

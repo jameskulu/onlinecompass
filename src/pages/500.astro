@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+	title="500 — Server Error | Accurate Online Compass"
+	description="Something went wrong on our end. The Accurate Online Compass will be back on course shortly — try again in a moment."
+	path="/500/"
+>
+	<div class="mx-auto max-w-3xl px-4 py-24 text-center sm:px-6 md:py-32">
+		<p class="eyebrow">error 500</p>
+		<h1 class="mt-4 text-display-xl text-ink">Needle's stuck.</h1>
+		<p class="mx-auto mt-4 max-w-md text-body-lg text-body">
+			Something went wrong on our side. The compass is recalibrating — give it a moment and try
+			again.
+		</p>
+		<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+			<a href="/" class="btn btn-primary">Back to the compass</a>
+			<a href="/contact/" class="btn btn-ghost">Report a problem</a>
+		</div>
+	</div>
+</Layout>

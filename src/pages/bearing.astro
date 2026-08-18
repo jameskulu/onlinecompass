@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BearingCalculator from '../components/BearingCalculator.astro';
+import PageHero from '../components/PageHero.astro';
+import RelatedTools from '../components/RelatedTools.astro';
+---
+
+<Layout
+	title="Bearing Calculator Online — Direction & Distance Between Two Points"
+	description="Free online compass tool to calculate bearing and great-circle distance between two coordinates. Also shows Qibla direction, magnetic declination, and sun position from your location."
+	path="/bearing/"
+	keywords="online compass math, online compass geometry, bearing calculator, direction between two points, great-circle distance, bearing calculator online"
+>
+	<PageHero
+		eyebrow="bearing calculator"
+		title="Plot a course, degree by degree."
+		description="Compute the initial bearing and great-circle distance between any two points on Earth — from your live location, manual coordinates, or a preset route."
+	>
+		<BearingCalculator />
+	</PageHero>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-2">
+			<div>
+				<p class="eyebrow mb-2">initial vs final bearing</p>
+				<p class="text-sm text-body leading-6">
+					This returns the initial bearing — the direction you set off in. On long routes the
+					bearing changes along the great circle, so mid-course corrections are normal.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">use it with the compass</p>
+				<p class="text-sm text-body leading-6">
+					Take your computed bearing into the compass tool and steer until the heading matches.
+					Switch to true north for map-accurate steering.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<RelatedTools current="/bearing/" />
+</Layout>

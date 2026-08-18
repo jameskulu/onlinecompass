@@ -1,0 +1,154 @@
+---
+const props = Astro.props;
+---
+<section class="location-panel card-lg p-6 md:p-8">
+  <div class="flex items-center justify-between gap-4 mb-6">
+    <div>
+      <p class="eyebrow mb-1">gps · location</p>
+      <h3 class="text-display-sm text-ink">Your coordinates</h3>
+    </div>
+    <button data-loc-toggle class="btn-nav btn-nav-ink">Locate me</button>
+  </div>
+
+  <div data-loc-status class="badge mb-5" hidden>
+    <span data-loc-dot class="inline-block w-1.5 h-1.5 rounded-full bg-mute"></span>
+    <span data-loc-status-text>idle</span>
+  </div>
+
+  <dl class="grid grid-cols-2 gap-4">
+    <div class="card-soft p-4">
+      <p class="eyebrow mb-1">latitude</p>
+      <p data-lat class="font-mono text-sm text-ink">—</p>
+    </div>
+    <div class="card-soft p-4">
+      <p class="eyebrow mb-1">longitude</p>
+      <p data-lng class="font-mono text-sm text-ink">—</p>
+    </div>
+    <div class="card-soft p-4">
+      <p class="eyebrow mb-1">altitude</p>
+      <p data-alt class="font-mono text-sm text-ink">—</p>
+    </div>
+    <div class="card-soft p-4">
+      <p class="eyebrow mb-1">accuracy</p>
+      <p data-acc class="font-mono text-sm text-ink">—</p>
+    </div>
+  </dl>
+
+  <div class="mt-4 card-soft p-4">
+    <p class="eyebrow mb-1">dms</p>
+    <p data-dms class="font-mono text-sm text-ink break-all">—</p>
+  </div>
+
+  <div class="mt-5 flex flex-wrap gap-2">
+    <button data-loc-copy class="btn-nav btn-nav-white border border-hairline">Copy coords</button>
+    <button data-loc-share class="btn-nav btn-nav-white border border-hairline">Share</button>
+    <a data-loc-maps class="btn-nav btn-nav-white border border-hairline no-underline" href="#" target="_blank" rel="noopener">Open in Maps</a>
+  </div>
+</section>
+
+<script>
+  const root = document.querySelector('.location-panel');
+  const $ = (sel) => root.querySelector(sel);
+  const toggleBtn = $('[data-loc-toggle]');
+  const statusText = $('[data-loc-status-text]');
+  const statusEl = $('[data-loc-status]');
+  const dot = $('[data-loc-dot]');
+  const latEl = $('[data-lat]');
+  const lngEl = $('[data-lng]');
+  const altEl = $('[data-alt]');
+  const accEl = $('[data-acc]');
+  const dmsEl = $('[data-dms]');
+  const copyBtn = $('[data-loc-copy]');
+  const shareBtn = $('[data-loc-share]');
+  const mapsLink = $('[data-loc-maps]');
+
+  let watchId = null;
+  let current = null;
+
+  function fmt(n, digits) {
+    return n == null ? '—' : n.toFixed(digits);
+  }
+
+  function dms(value, pos, neg) {
+    if (value == null) return '—';
+    const dir = value >= 0 ? pos : neg;
+    const abs = Math.abs(value);
+    const d = Math.floor(abs);
+    const mFull = (abs - d) * 60;
+    const m = Math.floor(mFull);
+    const s = ((mFull - m) * 60).toFixed(1);
+    return `${d}°${m}'${s}" ${dir}`;
+  }
+
+  function setStatus(label, cls) {
+    statusEl.hidden = false;
+    statusText.textContent = label;
+    dot.className = `inline-block w-1.5 h-1.5 rounded-full ${cls}`;
+  }
+
+  async function start() {
+    if (!navigator.geolocation) {
+      setStatus('geolocation unsupported', 'bg-error');
+      return;
+    }
+    setStatus('locating…', 'bg-warning');
+    toggleBtn.disabled = true;
+    toggleBtn.textContent = 'Watching…';
+
+    if (watchId == null) {
+      watchId = navigator.geolocation.watchPosition(
+        (pos) => {
+          const c = pos.coords;
+          current = { lat: c.latitude, lng: c.longitude, alt: c.altitude, accuracy: c.accuracy, speed: c.speed };
+          latEl.textContent = fmt(c.latitude, 6);
+          lngEl.textContent = fmt(c.longitude, 6);
+          altEl.textContent = c.altitude != null ? `${fmt(c.altitude, 1)} m` : '—';
+          accEl.textContent = c.accuracy != null ? `±${fmt(c.accuracy, 0)} m` : '—';
+          dmsEl.textContent = `${dms(c.latitude, 'N', 'S')}, ${dms(c.longitude, 'E', 'W')}`;
+          mapsLink.href = `https://www.google.com/maps?q=${c.latitude},${c.longitude}`;
+          setStatus(
+            c.accuracy <= 50 ? 'locked' : 'low accuracy',
+            c.accuracy <= 50 ? 'bg-success' : 'bg-warning',
+          );
+          window.dispatchEvent(new CustomEvent('compass:location', { detail: current }));
+        },
+        (err) => {
+          setStatus(
+            err.code === 1 ? 'permission denied' : 'unable to locate',
+            'bg-error',
+          );
+          toggleBtn.disabled = false;
+          toggleBtn.textContent = 'Retry';
+        },
+        { enableHighAccuracy: true, maximumAge: 5000, timeout: 20000 },
+      );
+    }
+  }
+
+  toggleBtn.addEventListener('click', start);
+
+  copyBtn.addEventListener('click', async () => {
+    if (!current) return;
+    const text = `${current.lat.toFixed(6)}, ${current.lng.toFixed(6)}`;
+    try {
+      await navigator.clipboard.writeText(text);
+      copyBtn.textContent = 'Copied!';
+      setTimeout(() => (copyBtn.textContent = 'Copy coords'), 1500);
+    } catch {
+      /* ignore */
+    }
+  });
+
+  shareBtn.addEventListener('click', async () => {
+    if (!current || !navigator.share) return;
+    try {
+      await navigator.share({
+        title: 'My location',
+        text: `${current.lat.toFixed(6)}, ${current.lng.toFixed(6)}`,
+        url: mapsLink.href,
+      });
+    } catch {
+      /* ignore */
+    }
+  });
+</script>

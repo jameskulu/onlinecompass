@@ -1,0 +1,31 @@
+---
+interface Props {
+	current?: string;
+}
+
+const { current } = Astro.props;
+
+const tools = [
+	{ href: '/', name: 'Compass', desc: 'Real-time heading, true & magnetic north.' },
+	{ href: '/location/', name: 'Location', desc: 'GPS coordinates, altitude, and accuracy.' },
+	{ href: '/qibla/', name: 'Qibla', desc: 'Direction and distance to Makkah.' },
+	{ href: '/bearing/', name: 'Bearing', desc: 'Bearing between two coordinates.' },
+	{ href: '/sun/', name: 'Sun', desc: 'Azimuth, elevation, sunrise and sunset.' },
+].filter((t) => t.href !== current);
+---
+<section class="border-t border-hairline bg-canvas">
+	<div class="mx-auto max-w-[1200px] px-4 py-16 sm:px-6">
+		<p class="eyebrow mb-6">more tools</p>
+		<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+			{tools.map((t) => (
+				<a
+					href={t.href}
+					class="card group p-5 transition-shadow hover:shadow-float"
+				>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">{t.name}</h3>
+					<p class="mt-1.5 text-sm text-body leading-5">{t.desc}</p>
+				</a>
+			))}
+		</div>
+	</div>
+</section>

@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Compass from '../components/Compass.astro';
+import PageHero from '../components/PageHero.astro';
+import RelatedTools from '../components/RelatedTools.astro';
+---
+
+<Layout
+	title="Online Compass Tool — Live True & Magnetic North Heading"
+	description="Use this free online compass tool for a live 360° heading on your phone. Online compass direction with magnetic and true north, automatic declination, accuracy feedback, and calibration guide."
+	path="/compass/"
+	keywords="online compass, online compass tool, free online compass tool, online compass live, online compass direction, online compass to find north, online compass free"
+>
+	<section class="relative overflow-hidden">
+		<div class="mesh-gradient" aria-hidden="true"></div>
+		<div class="relative">
+			<PageHero
+				eyebrow="live compass"
+				title="Your phone is the compass."
+				description="Grant sensor access and this page turns your phone into a precise digital compass — 360° dial, smooth needle, and both magnetic and true north readings."
+			>
+				<Compass />
+			</PageHero>
+		</div>
+	</section>
+
+	<section class="border-y border-hairline bg-canvas">
+		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-3">
+			<div>
+				<p class="eyebrow mb-2">how to read it</p>
+				<p class="text-sm text-body leading-6">
+					The needle's red end always points north. Rotate your body until the fixed top
+					marker meets the direction you want — the heading reads at the top.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">true vs magnetic</p>
+				<p class="text-sm text-body leading-6">
+					Toggle between headings. True north applies your location's magnetic declination so
+					maps, navigation, and bearings all line up.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">accuracy</p>
+				<p class="text-sm text-body leading-6">
+					The status pill shows your live sensor source and estimated drift. If readings wobble,
+					follow the calibration steps below the dial.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<RelatedTools current="/" />
+</Layout>

@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LocationPanel from '../components/LocationPanel.astro';
+import PageHero from '../components/PageHero.astro';
+import RelatedTools from '../components/RelatedTools.astro';
+---
+
+<Layout
+	title="GPS Coordinates Online — Latitude, Longitude & DMS"
+	description="Find my GPS coordinates online: latitude, longitude, altitude, and accuracy in decimal and DMS format. Copy, share, or open in Google Maps. No install, no tracking."
+	path="/location/"
+	keywords="gps coordinates online, find my location, latitude longitude, dms coordinates, my gps location"
+>
+	<PageHero
+		eyebrow="gps · location"
+		title="Know exactly where you are."
+		description="Live GPS coordinates, altitude, and accuracy straight from your device. Everything is computed locally — your location never leaves your browser."
+	>
+		<LocationPanel />
+	</PageHero>
+
+	<RelatedTools current="/location/" />
+</Layout>

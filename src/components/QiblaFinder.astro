@@ -1,0 +1,97 @@
+---
+const props = Astro.props;
+---
+<section class="qibla-finder card-lg p-6 md:p-8">
+  <div class="mb-6">
+    <p class="eyebrow mb-1">qibla finder</p>
+    <h3 class="text-display-sm text-ink">Direction to Makkah</h3>
+    <p class="text-sm text-body mt-2 max-w-md">
+      Uses your location to compute the great-circle bearing to the Kaaba. Add the marker to the
+      compass dial and align the phone.
+    </p>
+  </div>
+
+  <div class="grid gap-3 md:grid-cols-2">
+    <label class="block">
+      <span class="eyebrow block mb-1">latitude</span>
+      <input data-q-lat class="field-input" type="number" step="any" placeholder="e.g. 40.7128" />
+      <input data-q-lat-r class="slider mt-2" type="range" min="-90" max="90" step="1" value="0" aria-label="latitude slider" />
+    </label>
+    <label class="block">
+      <span class="eyebrow block mb-1">longitude</span>
+      <input data-q-lng class="field-input" type="number" step="any" placeholder="e.g. -74.0060" />
+      <input data-q-lng-r class="slider mt-2" type="range" min="-180" max="180" step="1" value="0" aria-label="longitude slider" />
+    </label>
+  </div>
+
+  <div class="mt-4 flex flex-wrap gap-2">
+    <button data-q-calc class="btn-primary text-sm h-12 px-6">Calculate</button>
+    <button data-q-use-gps class="btn-secondary text-sm h-12 px-6">Use my location</button>
+    <a href="/compass/" class="btn-nav btn-nav-white border border-hairline no-underline">Steer on the compass</a>
+  </div>
+
+  <div data-q-result class="hidden mt-6 grid gap-4 sm:grid-cols-3">
+    <div class="card-soft p-4">
+      <p class="eyebrow mb-1">qibla bearing</p>
+      <p data-q-bearing class="text-display-md text-ink tabular-nums">—</p>
+    </div>
+    <div class="card-soft p-4">
+      <p class="eyebrow mb-1">direction</p>
+      <p data-q-dir class="text-display-md text-ink">—</p>
+    </div>
+    <div class="card-soft p-4">
+      <p class="eyebrow mb-1">distance</p>
+      <p data-q-distance class="text-display-md text-ink">—</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { qiblaBearing, haversine, directionName, KAABA } from '../lib/geo.js';
+  import { wireSlider } from '../lib/slider.js';
+
+  const root = document.querySelector('.qibla-finder');
+  const $ = (sel) => root.querySelector(sel);
+  const latIn = $('[data-q-lat]');
+  const lngIn = $('[data-q-lng]');
+  const syncLat = wireSlider(latIn, $('[data-q-lat-r]'), -90, 90);
+  const syncLng = wireSlider(lngIn, $('[data-q-lng-r]'), -180, 180);
+  const calcBtn = $('[data-q-calc]');
+  const useGpsBtn = $('[data-q-use-gps]');
+  const result = $('[data-q-result]');
+  const bearingEl = $('[data-q-bearing]');
+  const dirEl = $('[data-q-dir]');
+  const distanceEl = $('[data-q-distance]');
+
+  function showResult(lat, lng) {
+    const bearing = qiblaBearing(lat, lng);
+    const distance = haversine(lat, lng, KAABA.lat, KAABA.lng);
+    bearingEl.textContent = `${Math.round(bearing)}°`;
+    dirEl.textContent = directionName(bearing, false);
+    distanceEl.textContent = `${distance.toFixed(distance > 100 ? 0 : 1)} km`;
+    result.classList.remove('hidden');
+    result.classList.add('grid');
+  }
+
+  calcBtn.addEventListener('click', () => {
+    const lat = parseFloat(latIn.value);
+    const lng = parseFloat(lngIn.value);
+    if (Number.isNaN(lat) || Number.isNaN(lng)) return;
+    showResult(lat, lng);
+  });
+
+  useGpsBtn.addEventListener('click', () => {
+    if (!navigator.geolocation) return;
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        latIn.value = pos.coords.latitude.toFixed(6);
+        lngIn.value = pos.coords.longitude.toFixed(6);
+        syncLat();
+        syncLng();
+        showResult(pos.coords.latitude, pos.coords.longitude);
+      },
+      () => {},
+      { enableHighAccuracy: true },
+    );
+  });
+</script>

@@ -1,0 +1,567 @@
+---
+import QRCode from 'qrcode';
+
+const pageUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const qrDataUrl = import.meta.env.PROD ? await QRCode.toDataURL(pageUrl, { margin: 1, width: 240 }) : null;
+---
+<div class="compass-root relative w-full max-w-xl mx-auto select-none">
+  <!-- Live compass -->
+  <div data-live-view class="flex flex-col items-center gap-8">
+    <div class="relative w-full max-w-[360px] aspect-square">
+      <div data-dial-svg class="absolute inset-0"></div>
+
+      <!-- status pill -->
+      <div class="absolute top-2 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
+        <span class="badge">
+          <span data-status-dot class="inline-block w-1.5 h-1.5 rounded-full bg-mute"></span>
+          <span data-status-text>starting…</span>
+        </span>
+      </div>
+
+      <!-- fullscreen -->
+      <button
+        data-fs-btn
+        class="absolute top-2 right-2 z-10 flex h-8 w-8 items-center justify-center rounded-full border border-hairline bg-canvas text-ink transition-colors hover:bg-canvas-soft-2"
+        aria-label="Toggle fullscreen"
+        title="Toggle fullscreen"
+      >
+        <svg data-fs-open class="h-4 w-4" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <svg data-fs-close class="hidden h-4 w-4" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Heading readout -->
+    <div class="text-center -mt-4">
+      <div class="flex items-end justify-center gap-2">
+        <span data-heading-deg class="text-[64px] leading-none font-semibold text-ink tracking-tight tabular-nums">
+          0°
+        </span>
+        <span data-heading-dir class="text-display-md text-body mb-1">N</span>
+      </div>
+      <p class="eyebrow mt-3" data-heading-desc>heading</p>
+
+      <div class="mt-6 inline-flex items-center gap-1 rounded-full border border-hairline bg-canvas p-1">
+        <button data-mode="true" class="rounded-full px-3 py-1 text-xs font-medium text-body hover:text-ink transition-colors">True north</button>
+        <button data-mode="mag" class="rounded-full px-3 py-1 text-xs font-medium text-body hover:text-ink transition-colors">Magnetic</button>
+      </div>
+
+      <div class="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-mute font-mono">
+        <span>decl <span data-decl>0.0°</span></span>
+        <span>·</span>
+        <span>src <span data-src>—</span></span>
+        <span>·</span>
+        <span>±<span data-accuracy>—</span>°</span>
+      </div>
+
+      <div class="mt-3 flex flex-col items-center gap-2">
+        <button data-loc-btn class="btn-ghost text-xs">Use location for declination</button>
+        <p data-loc-coords class="hidden text-xs text-mute font-mono"></p>
+      </div>
+    </div>
+
+    <!-- Demo notice -->
+    <div data-demo-notice class="hidden w-full max-w-sm card-soft p-4 items-start gap-3">
+      <span class="text-lg leading-none mt-0.5" aria-hidden="true">◎</span>
+      <div class="text-left">
+        <p class="text-sm font-medium text-ink mb-1">Demo mode</p>
+        <p data-demo-text class="text-xs text-body leading-5"></p>
+        <button data-perm-btn class="btn-primary mt-3">Enable live compass</button>
+        <div data-demo-share class="hidden mt-4 flex-col items-stretch gap-4 border-t border-hairline pt-4 sm:items-center sm:flex-row" data-page-url={pageUrl} data-qr={qrDataUrl ? 'yes' : 'no'}>
+          <img
+            data-demo-qr
+            alt="QR code to open this page on your phone"
+            class="hidden w-36 h-36 shrink-0 rounded-xl border border-hairline bg-white p-2 shadow-card"
+            src={qrDataUrl ?? ''}
+          />
+          <div class="text-left">
+            <p class="text-sm font-semibold text-ink mb-1.5">Scan with your phone to open this page</p>
+            <p data-demo-url class="inline-block text-xs text-body font-mono break-all leading-5 mb-3 bg-canvas-soft rounded-lg px-2.5 py-1.5 border border-hairline">{pageUrl}</p>
+            <div>
+              <button data-demo-copy type="button" class="btn-ghost text-xs">Copy link</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Calibration / tips -->
+    <div data-calibration class="hidden w-full max-w-sm card-soft p-4 flex items-start gap-3">
+      <span class="text-lg leading-none mt-0.5" aria-hidden="true">◇</span>
+      <div class="text-left">
+        <p class="text-sm font-medium text-ink mb-1">Calibration needed</p>
+        <p data-calibration-text class="text-xs text-body leading-5"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { Compass } from '../lib/compass.js';
+  import { normalize, headingDiff, directionName, formatTime } from '../lib/geo.js';
+
+  const root = document.querySelector('.compass-root');
+  if (!root) throw new Error('compass root missing');
+
+  const $ = (sel) => root.querySelector(sel);
+  const svgHost = $('[data-dial-svg]');
+  const permBtn = $('[data-perm-btn]');
+  const degEl = $('[data-heading-deg]');
+  const dirEl = $('[data-heading-dir]');
+  const descEl = $('[data-heading-desc]');
+  const declEl = $('[data-decl]');
+  const srcEl = $('[data-src]');
+  const accEl = $('[data-accuracy]');
+  const statusText = $('[data-status-text]');
+  const statusDot = $('[data-status-dot]');
+  const fsBtn = $('[data-fs-btn]');
+  const fsOpenIcon = $('[data-fs-open]');
+  const fsCloseIcon = $('[data-fs-close]');
+  const locBtn = $('[data-loc-btn]');
+  const locCoords = $('[data-loc-coords]');
+  const demoNotice = $('[data-demo-notice]');
+  const demoTextEl = $('[data-demo-text]');
+  const demoShare = $('[data-demo-share]');
+  const demoQr = $('[data-demo-qr]');
+  const demoUrlEl = $('[data-demo-url]');
+  const demoCopy = $('[data-demo-copy]');
+  const calibrationBox = $('[data-calibration]');
+  const calibrationText = $('[data-calibration-text]');
+
+  const compass = new Compass();
+
+  let mode = 'true';
+  let magnetic = null;
+  let trueHeading = null;
+  let lastDecl = 0;
+  let displayed = 0;
+  let target = 0;
+  let frozen = null;
+  let qiblaBearing = null;
+  let sunAzimuth = null;
+  let rafId = null;
+
+  /* ---------------- dial ---------------- */
+
+  const NS = 'http://www.w3.org/2000/svg';
+  const SIZE = 320;
+  const C = SIZE / 2;
+
+  const svg = document.createElementNS(NS, 'svg');
+  svg.setAttribute('viewBox', `0 0 ${SIZE} ${SIZE}`);
+  svg.classList.add('w-full', 'h-full');
+
+  const rose = document.createElementNS(NS, 'g'); // rotates
+  svg.appendChild(rose);
+
+  function line(x1, y1, x2, y2, stroke, width) {
+    const l = document.createElementNS(NS, 'line');
+    l.setAttribute('x1', x1);
+    l.setAttribute('y1', y1);
+    l.setAttribute('x2', x2);
+    l.setAttribute('y2', y2);
+    l.setAttribute('stroke', stroke);
+    l.setAttribute('stroke-width', width);
+    return l;
+  }
+
+  function text(x, y, str, cls, size) {
+    const t = document.createElementNS(NS, 'text');
+    t.setAttribute('x', x);
+    t.setAttribute('y', y);
+    t.setAttribute('text-anchor', 'middle');
+    t.setAttribute('dominant-baseline', 'central');
+    t.setAttribute('font-size', size);
+    t.setAttribute('fill', 'currentColor');
+    t.textContent = str;
+    return t;
+  }
+
+  function buildDial() {
+    const R = 148;
+    const ink = 'var(--color-ink)';
+    const body = 'var(--color-body)';
+    const mute = 'var(--color-mute)';
+    const hairline = 'var(--color-hairline)';
+
+    // face
+    const face = document.createElementNS(NS, 'circle');
+    face.setAttribute('cx', C);
+    face.setAttribute('cy', C);
+    face.setAttribute('r', R + 6);
+    face.setAttribute('fill', 'var(--color-canvas)');
+    face.setAttribute('stroke', hairline);
+    face.setAttribute('stroke-width', '1');
+    rose.appendChild(face);
+
+    // ticks
+    for (let i = 0; i < 360; i += 2) {
+      const a = ((i - 90) * Math.PI) / 180;
+      const major = i % 30 === 0;
+      const minor = i % 10 === 0 && !major;
+      const inner = major ? R - 18 : minor ? R - 10 : R - 6;
+      const outer = R - 2;
+      const w = major ? 2 : minor ? 1.6 : 1;
+      const col = major ? ink : body;
+      rose.appendChild(
+        line(
+          C + inner * Math.cos(a),
+          C + inner * Math.sin(a),
+          C + outer * Math.cos(a),
+          C + outer * Math.sin(a),
+          col,
+          w,
+        ),
+      );
+      if (major) {
+        const deg = i % 360 === 0 ? '0' : String(i);
+        const label = text(C + (R - 32) * Math.cos(a), C + (R - 32) * Math.sin(a), deg, '', 11);
+        label.setAttribute('fill', mute);
+        rose.appendChild(label);
+      }
+    }
+
+    // cardinal + intercardinal labels
+    const cards = [
+      [0, 'N', 26, 'var(--color-error)'],
+      [90, 'E', 20, body],
+      [180, 'S', 20, body],
+      [270, 'W', 20, body],
+      [45, 'NE', 13, mute],
+      [135, 'SE', 13, mute],
+      [225, 'SW', 13, mute],
+      [315, 'NW', 13, mute],
+    ];
+    for (const [deg, label, size, fill] of cards) {
+      const a = ((deg - 90) * Math.PI) / 180;
+      const t = text(C + (R - 56) * Math.cos(a), C + (R - 56) * Math.sin(a), label, '', size);
+      t.setAttribute('fill', fill);
+      t.setAttribute('font-weight', deg === 0 ? '600' : '400');
+      rose.appendChild(t);
+    }
+
+    // needle — north (red) + south (gray)
+    const north = document.createElementNS(NS, 'polygon');
+    north.setAttribute('points', `${C},${C - R + 34} ${C - 9},${C} ${C + 9},${C}`);
+    north.setAttribute('fill', 'var(--color-error)');
+    rose.appendChild(north);
+
+    const south = document.createElementNS(NS, 'polygon');
+    south.setAttribute('points', `${C},${C + R - 26} ${C - 7},${C} ${C + 7},${C}`);
+    south.setAttribute('fill', body);
+    rose.appendChild(south);
+
+    // center cap
+    const cap = document.createElementNS(NS, 'circle');
+    cap.setAttribute('cx', C);
+    cap.setAttribute('cy', C);
+    cap.setAttribute('r', 10);
+    cap.setAttribute('fill', 'var(--color-canvas)');
+    cap.setAttribute('stroke', hairline);
+    rose.appendChild(cap);
+
+    // qibla marker (hidden)
+    const qibla = document.createElementNS(NS, 'g');
+    qibla.setAttribute('data-marker', 'qibla');
+    qibla.style.display = 'none';
+    const qArrow = line(C, C - R + 40, C, C - R + 60, 'var(--color-link)', 3);
+    qibla.appendChild(qArrow);
+    rose.appendChild(qibla);
+
+    // sun marker (hidden)
+    const sun = document.createElementNS(NS, 'g');
+    sun.setAttribute('data-marker', 'sun');
+    sun.style.display = 'none';
+    const sArrow = line(C, C - R + 40, C, C - R + 60, 'var(--color-amber)', 3);
+    sun.appendChild(sArrow);
+    rose.appendChild(sun);
+  }
+
+  function setMarker(el, bearing) {
+    el.setAttribute('transform', `rotate(${bearing} ${C} ${C})`);
+    el.style.display = bearing == null ? 'none' : '';
+  }
+
+  buildDial();
+  svgHost.appendChild(svg);
+
+  /* ---------------- status ---------------- */
+
+  const STATUS = {
+    starting: ['starting…', 'bg-mute'],
+    live: ['live', 'bg-success'],
+    demo: ['demo', 'bg-warning'],
+    unsupported: ['no sensor', 'bg-mute'],
+    denied: ['permission denied', 'bg-error'],
+    insecure: ['requires https', 'bg-warning'],
+  };
+
+  function setStatus(key) {
+    const [label, cls] = STATUS[key] ?? STATUS.starting;
+    statusText.textContent = label;
+    statusDot.className = `inline-block w-1.5 h-1.5 rounded-full ${cls}`;
+  }
+
+  compass.onStatus = setStatus;
+  compass.onPermission = (state) => {
+    if (state === 'denied') {
+      enterDemo(
+        'Permission was denied. Enable motion & orientation sensors for this site in your browser settings, then reload.',
+        true,
+      );
+    }
+  };
+
+  /* ---------------- readings ---------------- */
+
+  compass.subscribe((r) => {
+    if (demoActive && r.source !== 'demo') stopDemo();
+    if (r.magnetic != null) magnetic = r.magnetic;
+    if (r.trueHeading != null) trueHeading = r.trueHeading;
+    lastDecl = r.declination ?? lastDecl;
+    target = mode === 'true' ? (trueHeading ?? magnetic ?? target) : (magnetic ?? trueHeading ?? target);
+    if (frozen == null) {
+      degEl.textContent = `${Math.round(normalize(target))}°`;
+      dirEl.textContent = directionName(target);
+      descEl.textContent = `heading · ${r.source}`;
+    }
+    declEl.textContent = `${lastDecl >= 0 ? '+' : ''}${lastDecl.toFixed(1)}°`;
+    srcEl.textContent = r.source;
+    if (r.accuracy != null) accEl.textContent = r.accuracy.toFixed(1);
+
+    // calibration heuristic
+    if (r.accuracy != null && r.accuracy > 8) {
+      calibrationText.textContent =
+        'Readings are drifting. Hold the device flat and trace a figure-eight motion until the needle steadies.';
+      calibrationBox.classList.remove('hidden');
+      calibrationBox.classList.add('flex');
+    } else {
+      calibrationBox.classList.add('hidden');
+    }
+  });
+
+  /* ---------------- animation loop ---------------- */
+
+  function tick() {
+    rafId = requestAnimationFrame(tick);
+    if (frozen != null) {
+      displayed += (frozen - displayed) * 0.2;
+      degEl.textContent = `${Math.round(normalize(displayed))}°`;
+      dirEl.textContent = directionName(displayed);
+      return;
+    }
+    const diff = headingDiff(target, displayed);
+    displayed += diff * 0.18;
+    rose.setAttribute('transform', `rotate(${-displayed} ${C} ${C})`);
+    if (demoActive) {
+      degEl.textContent = `${Math.round(normalize(displayed))}°`;
+      dirEl.textContent = directionName(displayed);
+    }
+  }
+
+  /* ---------------- mode toggle ---------------- */
+
+  function setMode(next) {
+    mode = next;
+    const buttons = root.querySelectorAll('[data-mode]');
+    buttons.forEach((b) => {
+      const active = b.dataset.mode === next;
+      b.className = `rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+        active
+          ? 'bg-ink text-on-primary'
+          : 'text-body hover:text-ink'
+      }`;
+    });
+    target =
+      mode === 'true'
+        ? (trueHeading ?? magnetic ?? target)
+        : (magnetic ?? trueHeading ?? target);
+    if (trueHeading != null && magnetic != null) {
+      degEl.textContent = `${Math.round(normalize(target))}°`;
+      dirEl.textContent = directionName(target);
+    }
+  }
+
+  root.querySelectorAll('[data-mode]').forEach((b) => b.addEventListener('click', () => setMode(b.dataset.mode)));
+  setMode('true');
+
+  /* ---------------- demo / auto-start ---------------- */
+
+  let demoActive = false;
+  let demoRafId = null;
+
+  function enterDemo(text, rotate) {
+    demoTextEl.textContent = text;
+    demoNotice.classList.remove('hidden');
+    demoNotice.classList.add('flex');
+    if (!demoActive && rotate) {
+      demoActive = true;
+      setStatus('demo');
+      let demo = displayed;
+      const step = () => {
+        demo = (demo + 0.4) % 360;
+        target = demo;
+        demoRafId = requestAnimationFrame(step);
+      };
+      step();
+    }
+  }
+
+  function stopDemo() {
+    if (!demoActive) return;
+    demoActive = false;
+    if (demoRafId) cancelAnimationFrame(demoRafId);
+    demoNotice.classList.add('hidden');
+    demoNotice.classList.remove('flex');
+  }
+
+  /* ---------------- permission flow ---------------- */
+
+  permBtn.addEventListener('click', async () => {
+    permBtn.disabled = true;
+    permBtn.textContent = 'Starting…';
+    const ok = await compass.requestPermission();
+    if (!ok) {
+      permBtn.disabled = false;
+      permBtn.textContent = 'Enable live compass';
+      return;
+    }
+    permBtn.textContent = 'Live';
+    compass.start();
+  });
+
+  const needsPermission =
+    typeof DeviceOrientationEvent !== 'undefined' &&
+    typeof DeviceOrientationEvent.requestPermission === 'function';
+
+  /* ---------------- location → declination ---------------- */
+
+  locBtn.addEventListener('click', () => {
+    if (!navigator.geolocation) {
+      locBtn.textContent = 'Not supported';
+      return;
+    }
+    locBtn.disabled = true;
+    locBtn.textContent = 'Locating…';
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const { latitude, longitude } = pos.coords;
+        compass.setLocation(latitude, longitude);
+        locCoords.textContent = `lat ${latitude.toFixed(4)} · lng ${longitude.toFixed(4)}`;
+        locCoords.classList.remove('hidden');
+        locBtn.classList.add('hidden');
+        declEl.textContent = `${compass.declination >= 0 ? '+' : ''}${compass.declination.toFixed(1)}°`;
+      },
+      (err) => {
+        locBtn.disabled = false;
+        locBtn.textContent = err.code === 1 ? 'Location denied — magnetic only' : 'Retry location';
+      },
+      { enableHighAccuracy: true, timeout: 15000 },
+    );
+  });
+
+  /* ---------------- fullscreen ---------------- */
+
+  const fsRoot = document.documentElement;
+  const supportsFullscreen =
+    !!fsRoot.requestFullscreen || !!fsRoot.webkitRequestFullscreen;
+
+  function updateFsIcon() {
+    const fs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+    fsOpenIcon.classList.toggle('hidden', fs);
+    fsCloseIcon.classList.toggle('hidden', !fs);
+  }
+
+  if (!supportsFullscreen) {
+    fsBtn.classList.add('hidden');
+  } else {
+    fsBtn.addEventListener('click', () => {
+      const fs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+      if (fs) {
+        (document.exitFullscreen || document.webkitExitFullscreen)?.call(document);
+      } else {
+        (fsRoot.requestFullscreen || fsRoot.webkitRequestFullscreen).call(fsRoot);
+      }
+    });
+    document.addEventListener('fullscreenchange', updateFsIcon);
+    document.addEventListener('webkitfullscreenchange', updateFsIcon);
+    updateFsIcon();
+  }
+
+  const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+
+  if (needsPermission) {
+    // iOS (iPhone/iPad) — sensors are gated behind an explicit user gesture.
+    permBtn.classList.remove('hidden');
+    enterDemo('Live heading needs your device sensors. Tap "Enable live compass" to start.', true);
+  } else if (isMobile) {
+    // Android phone/tablet — no prompt required; attach listeners and see what fires.
+    permBtn.classList.add('hidden');
+    enterDemo('Looking for your device sensors…', true);
+    compass.start();
+    setTimeout(() => {
+      if (compass.source === 'none') {
+        setStatus('unsupported');
+        enterDemo(
+          "Sensors aren't responding. Try moving the device, or check that motion & orientation access is allowed for this site.",
+          true,
+        );
+      }
+    }, 3000);
+  } else {
+    // Desktop / laptop — no magnetometer to read. Point them at a phone.
+    permBtn.classList.add('hidden');
+    demoShare.classList.remove('hidden');
+    demoShare.classList.add('flex');
+    if (demoShare.dataset.qr === 'yes') {
+      demoQr.classList.remove('hidden');
+    } else {
+      demoUrlEl.classList.add('font-medium');
+    }
+    setStatus('unsupported');
+    enterDemo(
+      'The live compass needs a magnetometer, which most computers do not have. Open this page on your phone to get real headings — the location, Qibla, bearing, and sun tools all work here.',
+      false,
+    );
+  }
+
+  demoCopy?.addEventListener('click', () => {
+    const url = demoShare.dataset.pageUrl;
+    if (!url) return;
+    navigator.clipboard
+      .writeText(url)
+      .then(() => {
+        demoCopy.textContent = 'Copied ✓';
+        setTimeout(() => (demoCopy.textContent = 'Copy link'), 1500);
+      })
+      .catch(() => {});
+  });
+
+  tick();
+
+  /* ---------------- cross-component markers ---------------- */
+
+  window.addEventListener('compass:target', (e) => {
+    qiblaBearing = e.detail?.bearing ?? null;
+    const marker = rose.querySelector('[data-marker="qibla"]');
+    setMarker(marker, qiblaBearing);
+  });
+
+  window.addEventListener('compass:sun', (e) => {
+    sunAzimuth = e.detail?.azimuth ?? null;
+    const marker = rose.querySelector('[data-marker="sun"]');
+    setMarker(marker, sunAzimuth);
+  });
+</script>
+
+<style>
+  [data-live-view] {
+    transition: opacity 0.3s ease;
+  }
+  .compass-root svg text {
+    user-select: none;
+  }
+</style>

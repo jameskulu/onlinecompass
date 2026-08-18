@@ -1,11 +1,458 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Compass from '../components/Compass.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const faq = [
+	{
+		q: 'Which direction am I facing — online compass?',
+		a: 'Open this page on your phone and the live heading readout below the dial shows the exact degree and compass direction (N, NE, E, SE, S, SW, W, NW) you are facing, updated in real time as you turn.',
+	},
+	{
+		q: 'Online compass — where is north?',
+		a: 'The red end of the needle always points north, which reads 0°/360° at the top of the dial. Toggle to "True north" and the site corrects for magnetic declination at your location so north lines up with maps.',
+	},
+	{
+		q: 'What direction am I facing — online compass?',
+		a: 'Hold your phone flat, grant sensor access, and the heading below the dial tells you the direction you are facing both in degrees and as a compass point — for example 274° or W.',
+	},
+	{
+		q: 'How to know direction without a compass online?',
+		a: "Use the sun: around local noon it sits due south in the northern hemisphere and due north in the southern hemisphere. This site's Sun tool shows the exact solar azimuth for any location, and the Qibla finder works as a fixed reference direction too.",
+	},
+	{
+		q: 'What way am I facing — online compass?',
+		a: 'Grant sensor access, hold the phone flat away from metal, and read the heading readout. It updates continuously as you rotate, so you always know which way you are facing.',
+	},
+	{
+		q: 'How to use an online compass?',
+		a: 'Open this page on a phone, tap "Enable live compass", hold the device flat, and read the heading. If the needle drifts, trace a figure-eight motion a few times to recalibrate the magnetometer.',
+	},
+	{
+		q: 'Can I use my phone as a compass?',
+		a: 'Yes. Modern phones contain a magnetometer, and this website turns that sensor into a compass right in your browser — no app to download and nothing to install.',
+	},
+	{
+		q: 'Where is my compass in Google?',
+		a: 'Google Maps shows a small compass at the top-right of the map view. For a live heading in degrees, just search "online compass" on Google and open this page — it becomes a compass the moment you grant sensor access.',
+	},
+	{
+		q: "Can my phone tell me what direction I'm facing?",
+		a: "Yes. Your phone's magnetometer combined with this page gives a live heading, and the site automatically corrects for magnetic declination so north matches your maps.",
+	},
+	{
+		q: 'How to see a compass on mobile?',
+		a: 'Open this page on your phone and the compass appears instantly — no app needed. On Android, Google Maps also includes a compass, and some phones ship a built-in compass app.',
+	},
+	{
+		q: 'Which is my north direction?',
+		a: 'True north is the geographic North Pole; magnetic north is where a compass needle points. The angle between the two (declination) varies by location, and this site corrects for it automatically.',
+	},
+	{
+		q: 'Where is the compass on my phone?',
+		a: 'Many phones do not ship a dedicated compass app — but the sensor is built in. Open this website on your phone and it becomes a compass with no install.',
+	},
+	{
+		q: 'Which mobile phones have a compass sensor?',
+		a: 'Virtually every modern smartphone — every iPhone since the iPhone 3GS and almost all Android phones — includes a magnetometer, so this online compass works on nearly any device.',
+	},
+	{
+		q: 'Why does my heading jump around?',
+		a: 'Nearby metal and electronics distort the magnetometer. Follow the calibration steps above, and make sure the phone is flat. Drift of a few degrees is normal indoors.',
+	},
+	{
+		q: "What's the difference between magnetic and true north?",
+		a: 'Magnetic north is where your compass needle points. True north is the geographic North Pole, which is what maps and navigation use. The angle between them — the declination — varies by location, and this tool corrects for it automatically.',
+	},
+	{
+		q: 'Why does it ask for my location?',
+		a: 'Location lets us compute magnetic declination, Qibla bearing, and sun position with precision. It is optional — every tool works with manual coordinates too — and it never leaves your device.',
+	},
+	{
+		q: 'Do you store or sell my location?',
+		a: 'No. There are no trackers, no analytics, and no backend. All sensor and location data is processed locally in your browser and discarded when you leave.',
+	},
+];
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+	title="Online Compass — Free Live Tool to Find North"
+	description="Free online compass to find north from your location. Live heading with true and magnetic north, declination, Qibla finder, bearing calculator, and sun position — no install, works on any phone."
+	keywords="online compass, online compass tool, free online compass, online compass google, online compass free, online compass to find north, online compass direction, online compass geometry, online compass tool geometry, online compass for geometry, online compass math, free online compass tool, online compass for qibla, online compass live, online compass kabba to find north from my location, quibla finder online compass"
+>
+	<!-- ─── Hero ───────────────────────────────────────────── -->
+	<section id="compass" class="relative overflow-hidden">
+		<div class="mesh-gradient" aria-hidden="true"></div>
+		<div
+			class="relative mx-auto max-w-[1200px] px-4 pb-20 pt-16 text-center sm:px-6 md:pb-28 md:pt-24"
+		>
+			<div class="badge mx-auto">free · private · no install</div>
+
+			<h1
+				class="mx-auto mt-6 max-w-3xl text-[36px] leading-[40px] text-ink sm:text-display-xl md:text-[56px] md:leading-[56px]"
+			>
+				A compass that points to true north, not just magnetic.
+			</h1>
+
+			<p class="mx-auto mt-4 max-w-xl text-body-lg text-body">
+				Real-time device heading with automatic declination, GPS coordinates, Qibla direction,
+				and sun position — all in your browser. Nothing to install, nothing uploaded.
+			</p>
+
+			<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+				<a href="/location/" class="btn-primary">Locate me</a>
+				<a href="/compass/" class="btn-secondary">Open the compass</a>
+			</div>
+
+			<div class="mx-auto mt-12 max-w-xl md:mt-16">
+				<Compass />
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Feature strip ──────────────────────────────────── -->
+	<section class="border-y border-hairline bg-canvas">
+		<div
+			class="mx-auto grid max-w-[1200px] grid-cols-1 gap-px overflow-hidden px-4 py-12 sm:grid-cols-3 sm:px-6"
+		>
+			<div class="p-4">
+				<p class="eyebrow mb-2">true vs magnetic</p>
+				<p class="text-sm text-body leading-6">
+					Declination is computed automatically from the World Magnetic Model — see both
+					headings at a glance.
+				</p>
+			</div>
+			<div class="p-4">
+				<p class="eyebrow mb-2">privacy first</p>
+				<p class="text-sm text-body leading-6">
+					All sensor processing happens on-device. No accounts, no tracking, and nothing ever
+					leaves your browser.
+				</p>
+			</div>
+			<div class="p-4">
+				<p class="eyebrow mb-2">works everywhere</p>
+				<p class="text-sm text-body leading-6">
+					Chrome, Safari, and Firefox on iOS and Android, with a GPS heading fallback when you're
+					moving.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Tools grid ─────────────────────────────────────── -->
+	<section id="tools" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<p class="eyebrow">the toolkit</p>
+			<h2 class="mt-3 max-w-2xl text-display-lg text-ink">
+				One compass, every bearing you'll need.
+			</h2>
+			<p class="mt-3 max-w-xl text-body-lg text-body">
+				Five focused tools, each on its own page, all running locally on your device.
+			</p>
+
+			<div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+				<a href="/compass/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">compass</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Live heading</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Real-time 360° dial with a smooth needle, magnetic and true north, and live accuracy
+						feedback.
+					</p>
+				</a>
+				<a href="/location/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">location</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">GPS coordinates</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Latitude, longitude, altitude, and accuracy in decimal and DMS — with copy, share,
+						and open-in-Maps.
+					</p>
+				</a>
+				<a href="/qibla/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">qibla</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Direction to Makkah</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Great-circle bearing and distance to the Kaaba from your coordinates, accurate to
+						the degree.
+					</p>
+				</a>
+				<a href="/bearing/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">bearing</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Course calculator</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Bearing and great-circle distance between any two points — perfect for navigation
+						and route planning.
+					</p>
+				</a>
+				<a href="/sun/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">sun</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Sun position</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Solar azimuth and elevation right now, plus sunrise, solar noon, and sunset for any
+						location.
+					</p>
+				</a>
+				<div class="card-soft flex flex-col justify-center p-6">
+					<p class="text-sm text-body leading-6">
+						No accounts. No trackers. Every calculation runs in your browser and is discarded
+						the moment you leave.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── How it works ───────────────────────────────────── -->
+	<section id="how-it-works" class="border-y border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<p class="eyebrow">how it works</p>
+			<h2 class="mt-3 max-w-2xl text-display-lg text-ink">Engineered for accuracy.</h2>
+			<p class="mt-3 max-w-xl text-body-lg text-body">
+				Your phone's magnetometer, gyroscope, and accelerometer feed a tilt-compensated heading
+				engine, corrected against the World Magnetic Model.
+			</p>
+
+			<div class="mt-12 grid gap-6 md:grid-cols-3">
+				<div class="card p-6">
+					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
+						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
+							<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" />
+							<path d="M15.5 8.5 13 13l-4.5 2.5L11 11z" fill="var(--color-error)" />
+						</svg>
+					</div>
+					<h3 class="text-display-sm text-ink">Sensor fusion</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Heading is derived from orientation and magnetometer data, smoothed in real time so
+						the needle stays steady in your hand.
+					</p>
+				</div>
+				<div class="card p-6">
+					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
+						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
+							<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" />
+							<path
+								d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"
+								stroke="currentColor"
+								stroke-width="1.5"
+							/>
+							<circle cx="12" cy="12" r="3" fill="currentColor" />
+						</svg>
+					</div>
+					<h3 class="text-display-sm text-ink">True north correction</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Declination varies from −30° to +30° across the planet. We apply the World Magnetic
+						Model so true north is exact, wherever you are.
+					</p>
+				</div>
+				<div class="card p-6">
+					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
+						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
+							<path
+								d="M12 21s7-5.1 7-11a7 7 0 1 0-14 0c0 5.9 7 11 7 11Z"
+								stroke="currentColor"
+								stroke-width="1.5"
+							/>
+							<circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5" />
+						</svg>
+					</div>
+					<h3 class="text-display-sm text-ink">Local by design</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Coordinates, Qibla bearing, and solar calculations run entirely on your device. Your
+						location never touches a server.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── About the tool (SEO) ──────────────────────────── -->
+	<section id="about" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow text-center">the free online compass</p>
+				<h2 class="mt-3 text-center text-display-lg text-ink">What is an online compass?</h2>
+				<p class="mt-6 text-body-lg text-body">
+					An <strong class="text-ink font-medium">online compass</strong> is a digital compass
+					that runs directly in your web browser — no app to download, no install, and nothing
+					to pay for. Open this page on your phone and, in a few seconds, you have a free online
+					compass that shows your live heading in degrees, points toward north from wherever you
+					are, and can even correct itself for the difference between magnetic north and true
+					north.
+				</p>
+				<p class="mt-4 text-body text-body leading-7">
+					Because it lives in the browser, it works exactly the same whether you are at home, in
+					the field, or in a classroom. Just search "online compass" on Google, open this site,
+					and your device's sensors take over. Unlike a traditional compass, this online compass
+					uses your phone's magnetometer, gyroscope, and accelerometer together, which gives a
+					more stable and reliable <strong class="text-ink font-medium">online compass
+					direction</strong> than a needle that is always fighting gravity and drift.
+				</p>
+				<p class="mt-4 text-body text-body leading-7">
+					Every tool on this site is designed to <strong class="text-ink font-medium">find
+					north online</strong> and much more: a live heading readout in degrees, cardinal and
+					intercardinal directions (N, NE, E, SE, S, SW, W, NW), a one-tap fullscreen mode, and
+					an accuracy indicator so you always know how trustworthy the reading is. And because
+					everything is processed locally, your location never leaves your device — a genuinely
+					free online compass, not a data-harvesting one.
+				</p>
+			</div>
+
+			<div class="mx-auto mt-12 grid max-w-4xl gap-8 md:grid-cols-2">
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">Online compass for geometry and math</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						An <strong class="text-ink font-medium">online compass tool</strong> is also a
+						teaching aid. In geometry, a compass is used to draw circles and arcs and to measure
+						distances; on this site, the online compass for geometry works with the math instead
+						of the pencil. Measure the angle of any direction, convert between bearings and
+						compass points, and use the bearing calculator to find the direction and
+						great-circle distance between any two coordinates on Earth. It is the online compass
+						math tool that turns abstract angles into a heading you can see on a dial.
+					</p>
+					<p class="mt-3 text-sm text-body leading-6">
+						Students can check their work against a real magnetic compass, and teachers can use
+						the live dial to explain true north versus magnetic north with an example that moves
+						as you turn the phone. This online compass free tool is used daily for simple tasks
+						too — orienting a map, aligning a solar panel, or checking which way a room faces.
+					</p>
+				</div>
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">Online compass for Qibla — find the Kaaba from my location</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						This site includes a dedicated <strong class="text-ink font-medium">quibla finder
+						online compass</strong> that computes the direction to the Kaaba in Mecca from your
+						current coordinates. Wherever you are, the Qibla finder gives you a bearing in
+						degrees and a compass direction, plus the great-circle distance to Makkah. For many
+						travellers, the phrase they search for is "online compass kabba to find north from
+						my location" — and this page answers it: locate yourself, read the Qibla bearing,
+						then follow it on the live compass dial.
+					</p>
+					<p class="mt-3 text-sm text-body leading-6">
+						Because the online compass for Qibla runs entirely on your device, there is no
+						server, no account, and no location stored anywhere. Enter coordinates manually, or
+						grant one-time location access and the bearing is calculated instantly to within a
+						fraction of a degree.
+					</p>
+				</div>
+			</div>
+
+			<div class="mx-auto mt-12 max-w-3xl">
+				<h3 class="text-display-sm text-ink">Why choose an online compass?</h3>
+				<p class="mt-3 text-body text-body leading-7">
+					A physical compass is a wonderful instrument, but a digital online compass adds live
+					accuracy: it shows not just north, but the exact degree of any heading, corrects for
+					magnetic declination anywhere on Earth, and can be held in any orientation. This site's
+					free online compass tool bundles that live compass with everything a navigator needs —
+					GPS coordinates in decimal and DMS, the Qibla direction, a bearing calculator, and sun
+					position for daytime orientation. It is fast, private, and ready whenever you need to
+					find north.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Calibration ────────────────────────────────────── -->
+	<section id="calibration" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="grid gap-10 lg:grid-cols-2 lg:items-start">
+				<div>
+					<p class="eyebrow">calibration</p>
+					<h2 class="mt-3 text-display-lg text-ink">Get the most accurate reading.</h2>
+					<p class="mt-3 text-body-lg text-body">
+						Phone magnetometers are sensitive to nearby metal and magnetic fields. A few
+						seconds of calibration turns a drifting needle into a trustworthy heading.
+					</p>
+				</div>
+				<ol class="card-soft divide-y divide-hairline">
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">01</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Hold the phone flat</p>
+							<p class="mt-1 text-sm text-body">Keep the screen parallel to the ground, in your palm or on a stable surface.</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">02</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Trace a figure-eight</p>
+							<p class="mt-1 text-sm text-body">Wave the phone gently in a figure-eight motion a few times, then hold still.</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">03</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Move away from interference</p>
+							<p class="mt-1 text-sm text-body">Step away from laptops, phones, magnets, and metal tables before taking a reading.</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">04</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Confirm with the sun</p>
+							<p class="mt-1 text-sm text-body">Use the sun position marker on the dial as an independent cross-check in daylight.</p>
+						</div>
+					</li>
+				</ol>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── FAQ ────────────────────────────────────────────── -->
+	<section id="faq" class="border-t border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow text-center">faq</p>
+			<h2 class="mt-3 text-center text-display-lg text-ink">Questions, answered.</h2>
+
+			<div class="mt-10 space-y-3">
+				{faq.map((f) => (
+					<details class="card overflow-hidden">
+						<summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-4 text-sm font-medium text-ink">
+							{f.q}
+							<svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0 text-mute" fill="none" aria-hidden="true">
+								<path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+							</svg>
+						</summary>
+						<p class="px-6 pb-5 text-sm text-body leading-6">{f.a}</p>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── CTA band ───────────────────────────────────────── -->
+	<section class="bg-ink text-on-primary">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 text-center sm:px-6 md:py-24">
+			<p class="font-mono text-xs uppercase tracking-[0.08em] text-on-primary/60">ready when you are</p>
+			<h2 class="mt-4 text-display-lg text-on-primary">Find your bearings.</h2>
+			<p class="mx-auto mt-3 max-w-lg text-body-lg text-on-primary/70">
+				Point your phone north, check your Qibla, or plot a course — all in one free tool.
+			</p>
+			<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+				<a href="/compass/" class="btn-primary bg-on-primary text-primary hover:opacity-85">Open the compass</a>
+			</div>
+		</div>
+	</section>
+
+	<script type="application/ld+json" set:html={JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'FAQPage',
+		mainEntity: faq.map((f) => ({
+			'@type': 'Question',
+			name: f.q,
+			acceptedAnswer: {
+				'@type': 'Answer',
+				text: f.a,
+			},
+		})),
+	})} />
 </Layout>
+
+<style>
+	details summary::-webkit-details-marker {
+		display: none;
+	}
+	details[open] summary svg {
+		transform: rotate(180deg);
+	}
+	details summary svg {
+		transition: transform 0.2s ease;
+	}
+</style>
