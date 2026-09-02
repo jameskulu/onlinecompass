@@ -97,6 +97,20 @@ export class Compass {
       } catch {
         /* fall through */
       }
+      // iOS gates devicemotion behind its own permission request. Without it
+      // rotationRate stays null and the gyro-aided smoothing never engages.
+      try {
+        if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
+          const state = await DeviceMotionEvent.requestPermission();
+          if (state !== 'granted') {
+            this._setPermission('denied');
+            this._setStatus('denied');
+            return false;
+          }
+        }
+      } catch {
+        /* fall through */
+      }
     }
 
     if (typeof sensors.AbsoluteOrientationSensor !== 'undefined') {
@@ -125,8 +139,10 @@ export class Compass {
     // 1. AbsoluteOrientationSensor -> true heading
     if (typeof s.AbsoluteOrientationSensor !== 'undefined') {
       try {
-        const sensor = new s.AbsoluteOrientationSensor({ frequency: 30 });
+        const sensor = new s.AbsoluteOrientationSensor({ frequency: 120 });
+        let gotReading = false;
         const onReading = () => {
+          gotReading = true;
           const q = sensor.quaternion;
           const heading = this._headingFromQuaternion(q);
           this._reading({ trueHeading: heading, source: 'orientation', calibrated: true });
@@ -145,6 +161,14 @@ export class Compass {
         this._cleanups.push(() => sensor.stop());
         this._setStatus('live');
         started = true;
+        // Watchdog: if the sensor is present but never emits a reading
+        // (some Android devices), fall back to the event API.
+        setTimeout(() => {
+          if (!gotReading) {
+            sensor.stop();
+            started = started || this._startDeviceOrientation();
+          }
+        }, 2500);
         return;
       } catch {
         /* fall through */
@@ -178,42 +202,52 @@ export class Compass {
   }
 
   _startDeviceOrientation() {
-    const s = globalThis;
-    let used = false;
-
     const handler = (event) => {
-      used = true;
-      const isAbsolute = event.absolute === true;
+      let headingMagnetic = null;
+      let headingTrue = null;
+      let acc = null;
+      let source = 'device';
+      let calibrated = false;
 
-      if (typeof event.webkitCompassHeading === 'number' && !isAbsolute) {
-        // iOS — magnetic heading
-        const magnetic = normalize(event.webkitCompassHeading);
-        const acc = typeof event.webkitCompassAccuracy === 'number' ? event.webkitCompassAccuracy : null;
-        const trueHeading = normalize(magnetic + this.declination);
-        this._reading({ magnetic, trueHeading, accuracy: acc, source: 'device', calibrated: acc == null || acc < 10 });
-        return;
-      }
-
-      const alpha = typeof event.alpha === 'number' ? event.alpha : 0;
-      if (isAbsolute) {
-        const trueHeading = normalize(360 - alpha);
-        const magnetic = normalize(trueHeading - this.declination);
-        this._reading({ magnetic, trueHeading, source: 'device-absolute', calibrated: true });
+      if (typeof event.webkitCompassHeading === 'number') {
+        // iOS — webkitCompassHeading gives the magnetic heading directly.
+        headingMagnetic = normalize(event.webkitCompassHeading);
+        acc = typeof event.webkitCompassAccuracy === 'number' ? event.webkitCompassAccuracy : null;
+        calibrated = acc == null || acc < 10;
       } else {
-        const magnetic = normalize(360 - alpha);
-        const trueHeading = normalize(magnetic + this.declination);
-        this._reading({ magnetic, trueHeading, source: 'device', calibrated: false });
+        const alpha = typeof event.alpha === 'number' ? event.alpha : 0;
+        if (event.absolute === true) {
+          headingTrue = normalize(360 - alpha);
+          source = 'device-absolute';
+          calibrated = true;
+        } else {
+          headingMagnetic = normalize(360 - alpha);
+          calibrated = false;
+        }
       }
+
+      if (headingMagnetic == null && headingTrue == null) return;
+      if (headingMagnetic != null) {
+        headingTrue = normalize(headingMagnetic + this.declination);
+      } else {
+        headingMagnetic = normalize(headingTrue - this.declination);
+      }
+      this._reading({ magnetic: headingMagnetic, trueHeading: headingTrue, accuracy: acc, source, calibrated });
     };
 
+    // Listen on BOTH event types: iOS fires `deviceorientation`
+    // (with webkitCompassHeading), Android/Chrome may fire
+    // `deviceorientationabsolute`. Whichever one arrives, we use it.
+    let attached = false;
     if ('ondeviceorientationabsolute' in window) {
       window.addEventListener('deviceorientationabsolute', handler, true);
-      this._onDeviceOrientation = handler;
-      this._setStatus('live');
-      return true;
+      attached = true;
     }
     if ('ondeviceorientation' in window) {
       window.addEventListener('deviceorientation', handler, true);
+      attached = true;
+    }
+    if (attached) {
       this._onDeviceOrientation = handler;
       this._setStatus('live');
       return true;
@@ -230,7 +264,7 @@ export class Compass {
       return;
     }
     try {
-      const sensor = new s.Magnetometer({ frequency: 30 });
+      const sensor = new s.Magnetometer({ frequency: 120 });
       const onReading = () => {
         const { x, y } = sensor;
         const magnetic = normalize((Math.atan2(y, x) * 180) / Math.PI - 90);
