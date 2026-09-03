@@ -340,7 +340,7 @@ let mode = 'true';
       declEl.textContent = `${lastDecl >= 0 ? '+' : ''}${lastDecl.toFixed(1)}°`;
     }
     // Throttled degree text: only update when the rounded degree changes
-    const degNow = Math.round(latest);
+    const degNow = Math.round(normalize(latest));
     if (degNow !== lastTextDeg) {
       lastTextDeg = degNow;
       degEl.textContent = `${degNow}°`;
@@ -356,12 +356,13 @@ let mode = 'true';
       calibrationBox.classList.add('hidden');
     }
     // Telemetry: event rate once per second
-    now = performance.now();
+    const now = performance.now();
     if (now - telemAt >= 1000) {
       telemAt = now;
       telemetryEl.textContent = `${evtN} Hz`;
       evtN = 0;
     }
+    evtN++;
   });
 
 /* ---------------- dial rendering ---------------- */
@@ -369,22 +370,30 @@ let mode = 'true';
   // Interpolate the dial rotation toward the latest sensor heading.
   // Sensor events only set `latest`; this loop runs once per frame
   // and provides smooth, responsive motion using a time-based exponential.
+  //
+  // The dial is rotated by -heading (not +heading): as you turn right,
+  // the rose needs to spin left underneath the fixed N/E/S/W labels so
+  // that "N" keeps pointing at true north on screen. This must match the
+  // hard-snap convention used in setMode() below, or the animation loop
+  // fights the snapped value every time you flip modes — which is what
+  // was causing both the wrong-looking heading and the jittery lag.
   function tick() {
     const now = performance.now();
     const dt = lastFrameTime ? Math.min((now - lastFrameTime) / 1000, 0.1) : 1 / 60;
     lastFrameTime = now;
 
     if (latest != null) {
-      // Compute raw diff, adjusting for 0/360 boundary crossing to maintain unwrapped angle.
-      let target = latest;
-      const rawDiff = latest - currentAngle;
+      const desired = -latest;
+      let target = desired;
+      const rawDiff = desired - currentAngle;
       if (Math.abs(rawDiff) > 180) {
         if (rawDiff > 0) target -= 360;
         else target += 360;
       }
       const diff = target - currentAngle;
-      // Low-latency smoothing: fixed tau for minimal lag.
-      const tau = 0.020;
+      // Smoothing time-constant: small enough to feel immediate, large
+      // enough to absorb sensor jitter so the needle doesn't shudder.
+      const tau = 0.08;
       const k = 1 - Math.exp(-dt / tau);
       currentAngle += diff * k;
       // GPU-friendly transform with translateZ(0) for layer promotion.
@@ -552,78 +561,6 @@ let mode = 'true';
   });
 
   tick();
-
-  /* ---------------- debug mode ---------------- */
-  const DEBUG = true;
-  let sensorEventCount = 0;
-  let lastSensorAt = 0;
-  let sensorRate = 0;
-  let lastRafAt = performance.now();
-  let rafRate = 0;
-
-  if (DEBUG) {
-    const debugPanel = document.createElement('div');
-    debugPanel.style.position = 'fixed';
-    debugPanel.style.bottom = '20px';
-    debugPanel.style.right = '20px';
-    debugPanel.style.background = 'rgba(0,0,0,0.7)';
-    debugPanel.style.color = 'white';
-    debugPanel.style.padding = '10px';
-    debugPanel.style.fontFamily = 'monospace';
-    debugPanel.style.fontSize = '12px';
-    debugPanel.style.zIndex = '9999';
-    debugPanel.innerHTML = `
-      <div>Sensor: -- Hz</div>
-      <div>RAF: -- FPS</div>
-      <div>Target: --°</div>
-      <div>Rendered: --°</div>
-      <div>Lag: --°</div>
-      <div>Source: --</div>
-    `;
-    document.body.appendChild(debugPanel);
-
-    // Update debug panel from existing tick loop via requestAnimationFrame
-    let debugLast = 0;
-    const updateDebug = () => {
-      const now = performance.now();
-      // Calculate sensor rate
-      if (now - lastSensorAt >= 1000) {
-        sensorRate = sensorEventCount;
-        sensorEventCount = 0;
-        lastSensorAt = now;
-      }
-      sensorEventCount++;
-
-      // Calculate RAF rate
-      const dt = now - lastRafAt;
-      if (dt >= 1000) {
-        rafRate = Math.round(1000 / dt);
-        lastRafAt = now;
-      }
-
-      if (latest != null) {
-        let target = latest;
-        const rawDiff = latest - currentAngle;
-        if (Math.abs(rawDiff) > 180) {
-          if (rawDiff > 0) target -= 360;
-          else target += 360;
-        }
-        const diff = target - currentAngle;
-
-        debugPanel.innerHTML = `
-          <div>Sensor: ${sensorRate} Hz</div>
-          <div>RAF: ${rafRate} FPS</div>
-          <div>Target: ${latest.toFixed(1)}°</div>
-          <div>Rendered: ${currentAngle.toFixed(1)}°</div>
-          <div>Lag: ${diff.toFixed(1)}°</div>
-          <div>Source: ${compass.source}</div>
-        `;
-      }
-
-      debugLast = requestAnimationFrame(updateDebug);
-    };
-    updateDebug();
-  }
 
   /* ---------------- cross-component markers ---------------- */
 
