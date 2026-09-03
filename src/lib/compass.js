@@ -2,15 +2,34 @@ import { normalize, magneticDeclination } from './geo.js';
 
 const isSecure = () => typeof window !== 'undefined' && window.isSecureContext === true;
 
+// Angle the OS has rotated the UI by (0 portrait, 90/180/270 landscape).
+// Chromium's alpha is referenced to the device's top edge, so in landscape
+// the heading must be compensated for what the user is actually facing.
+const screenAngle = () => {
+  if (typeof screen !== 'undefined' && screen.orientation && typeof screen.orientation.angle === 'number') {
+    return screen.orientation.angle;
+  }
+  if (typeof window !== 'undefined' && typeof window.orientation === 'number') return window.orientation;
+  return 0;
+};
+
+// Small per-event filter applied ONLY to the alpha-derived path (Android and
+// other W3C browsers) where the raw magnetometer is visibly jittery. It runs in
+// the SENSOR handler — never in the render loop — so it tames input noise
+// without adding rendering latency. iOS's webkitCompassHeading is already
+// OS-fused/smoothed and is passed through untouched.
+const ALPHA_SMOOTHING = 0.35;
+
 /**
- * Compass engine — acquires the best available heading source and emits
- * smoothed readings. Priority:
- *   1. AbsoluteOrientationSensor (Chrome)        -> true heading
- *   2. deviceorientationabsolute                 -> true reference
- *   3. iOS deviceorientation (webkitCompassHeading) -> magnetic heading
- *   4. deviceorientation (alpha)                 -> magnetic heading
- *   5. Magnetometer Generic Sensor               -> magnetic heading
- *   6. Geolocation heading (moving)              -> true heading
+ * Compass engine.
+ *
+ * Sensor sources (one per platform, never both — subscribing to both
+ * interleaves relative and absolute readings and makes the dial fight itself):
+ *   - iOS/Safari: `deviceorientation`, read via `webkitCompassHeading`. This is
+ *     used DIRECTLY; heading is never derived from alpha/beta/gamma when
+ *     webkitCompassHeading exists.
+ *   - Chromium/Android: `deviceorientationabsolute` (North-referenced alpha),
+ *     with the small source-side filter above.
  */
 export class Compass {
   constructor() {
@@ -24,7 +43,7 @@ export class Compass {
     this.accuracy = null;
     this._running = false;
     this._history = [];
-    this._cleanups = [];
+    this._smoothed = null;
   }
 
   subscribe(fn) {
@@ -78,14 +97,12 @@ export class Compass {
     });
   }
 
-  /* ------------------- Permission & start ------------------- */
+  /* ---------------- Permission & start ---------------- */
 
   async requestPermission() {
     const iOS =
       typeof DeviceOrientationEvent !== 'undefined' &&
       typeof DeviceOrientationEvent.requestPermission === 'function';
-    const sensors = typeof window !== 'undefined' ? window : globalThis;
-
     if (iOS) {
       try {
         const state = await DeviceOrientationEvent.requestPermission();
@@ -97,218 +114,98 @@ export class Compass {
       } catch {
         /* fall through */
       }
-      // iOS gates devicemotion behind its own permission request. Without it
-      // rotationRate stays null and the gyro-aided smoothing never engages.
-      try {
-        if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
-          const state = await DeviceMotionEvent.requestPermission();
-          if (state !== 'granted') {
-            this._setPermission('denied');
-            this._setStatus('denied');
-            return false;
-          }
-        }
-      } catch {
-        /* fall through */
-      }
     }
-
-    if (typeof sensors.AbsoluteOrientationSensor !== 'undefined') {
-      try {
-        await navigator.permissions.query({ name: 'accelerometer' });
-      } catch {
-        /* older browsers */
-      }
-    }
-
     this._setPermission('granted');
     return true;
   }
 
-  async start() {
+  start() {
     if (this._running) return;
     this._running = true;
-    const s = globalThis;
-    let started = false;
+    this._smoothed = null;
+    this._history = [];
 
-    if (!isSecure() && !('webkitCompassHeading' in (s.DeviceOrientationEvent?.prototype ?? {}))) {
+    if (!isSecure() && !('webkitCompassHeading' in (window.DeviceOrientationEvent?.prototype ?? {}))) {
       this._setStatus('insecure');
       return;
     }
 
-    // 1. AbsoluteOrientationSensor -> true heading
-    if (typeof s.AbsoluteOrientationSensor !== 'undefined') {
-      try {
-        const sensor = new s.AbsoluteOrientationSensor({ frequency: 120 });
-        let gotReading = false;
-        const onReading = () => {
-          gotReading = true;
-          const q = sensor.quaternion;
-          const heading = this._headingFromQuaternion(q);
-          this._reading({ trueHeading: heading, source: 'orientation', calibrated: true });
-        };
-        sensor.addEventListener('reading', onReading);
-        sensor.addEventListener(
-          'error',
-          () => {
-            sensor.removeEventListener('reading', onReading);
-            this._cleanups.push(() => sensor.stop());
-            started = started || this._startDeviceOrientation();
-          },
-          { once: true },
-        );
-        sensor.start();
-        this._cleanups.push(() => sensor.stop());
-        this._setStatus('live');
-        started = true;
-        // Watchdog: if the sensor is present but never emits a reading
-        // (some Android devices), fall back to the event API.
-        setTimeout(() => {
-          if (!gotReading) {
-            sensor.stop();
-            started = started || this._startDeviceOrientation();
-          }
-        }, 2500);
-        return;
-      } catch {
-        /* fall through */
-      }
+    // Chromium/Android must use `deviceorientationabsolute` to get a
+    // North-referenced reading; plain `deviceorientation` there is relative to
+    // the page-load pose, which makes the dial drift and spin the wrong way.
+    // iOS has no absolute event but delivers webkitCompassHeading on the plain
+    // `deviceorientation` event.
+    if ('ondeviceorientationabsolute' in window) {
+      this._onDeviceOrientation = this._makeHandler();
+      window.addEventListener('deviceorientationabsolute', this._onDeviceOrientation, true);
+      this._setStatus('live');
+      return;
     }
-
-    started = this._startDeviceOrientation();
-    if (!started) this._startMagnetometer();
+    if ('ondeviceorientation' in window) {
+      this._onDeviceOrientation = this._makeHandler();
+      window.addEventListener('deviceorientation', this._onDeviceOrientation, true);
+      this._setStatus('live');
+      return;
+    }
+    this._setStatus('unsupported');
   }
 
   stop() {
     this._running = false;
-    for (const cleanup of this._cleanups) cleanup();
-    this._cleanups = [];
-    window.removeEventListener('deviceorientation', this._onDeviceOrientation, true);
     window.removeEventListener('deviceorientationabsolute', this._onDeviceOrientation, true);
+    window.removeEventListener('deviceorientation', this._onDeviceOrientation, true);
   }
 
-  /* ------------------- DeviceOrientation ------------------- */
-
-  _headingFromQuaternion(q) {
-    // q maps device frame -> world frame (x east, y north, z up)
-    const [w, x, y, z] = q;
-    // rotate device +Y axis [0,1,0] by q into world frame
-    const t0 = 2 * (y * 0 - z * 1);
-    const t1 = 2 * (z * 0 - x * 0);
-    const t2 = 2 * (x * 1 - y * 0);
-    const vy = 1 + w * t1 + z * t0 - x * t2;
-    const vx = 0 + w * t0 + y * t2 - z * t1;
-    return normalize((Math.atan2(vx, vy) * 180) / Math.PI);
-  }
-
-  _startDeviceOrientation() {
-    const handler = (event) => {
+  _makeHandler() {
+    return (event) => {
       let headingMagnetic = null;
-      let headingTrue = null;
       let acc = null;
-      let source = 'device';
       let calibrated = false;
+      let source = 'device';
 
-      if (typeof event.webkitCompassHeading === 'number') {
-        // iOS — webkitCompassHeading gives the magnetic heading directly.
+      // iOS/Safari: webkitCompassHeading is available on the deviceorientation event.
+      // Use it raw and immediate - the OS has already fused magnetometer + gyro,
+      // corrected for screen rotation, and smoothed the value. Deriving a heading
+      // from alpha/beta/gamma would reintroduce error AND latency.
+      if (typeof event.webkitCompassHeading === 'number' && !Number.isNaN(event.webkitCompassHeading)) {
         headingMagnetic = normalize(event.webkitCompassHeading);
         acc = typeof event.webkitCompassAccuracy === 'number' ? event.webkitCompassAccuracy : null;
         calibrated = acc == null || acc < 10;
-      } else {
-        const alpha = typeof event.alpha === 'number' ? event.alpha : 0;
-        if (event.absolute === true) {
-          headingTrue = normalize(360 - alpha);
-          source = 'device-absolute';
-          calibrated = true;
+        source = 'webkitCompassHeading';
+      }
+      // Chromium/Android: use deviceorientationabsolute for a North-referenced
+      // absolute reading. Plain deviceorientation there is relative to page-load
+      // pose and makes the dial drift/spin the wrong way.
+      else if (typeof event.alpha === 'number' && !Number.isNaN(event.alpha)) {
+        // Alpha increases counter-clockwise from North. Convert to compass heading:
+        // heading = 360 - alpha, then compensate for screen orientation.
+        const heading = normalize(360 - event.alpha + screenAngle());
+        // Only apply source-side filter for the alpha path (jittery on some Android);
+        // iOS webkitCompassHeading path above passes through untouched.
+        if (source !== 'webkitCompassHeading') {
+          if (this._smoothed == null) {
+            this._smoothed = heading;
+          } else {
+            const d = normalize(heading - this._smoothed);
+            this._smoothed = normalize(this._smoothed + ALPHA_SMOOTHING * (d > 180 ? d - 360 : d));
+          }
+          headingMagnetic = this._smoothed;
         } else {
-          headingMagnetic = normalize(360 - alpha);
-          calibrated = false;
+          headingMagnetic = heading;
         }
+        source = 'device-absolute';
+        calibrated = event.absolute === true;
       }
 
-      if (headingMagnetic == null && headingTrue == null) return;
-      if (headingMagnetic != null) {
-        headingTrue = normalize(headingMagnetic + this.declination);
-      } else {
-        headingMagnetic = normalize(headingTrue - this.declination);
-      }
-      this._reading({ magnetic: headingMagnetic, trueHeading: headingTrue, accuracy: acc, source, calibrated });
+      if (headingMagnetic == null) return;
+      const headingTrue = normalize(headingMagnetic + this.declination);
+      this._reading({
+        magnetic: normalize(headingMagnetic),
+        trueHeading: headingTrue,
+        accuracy: acc,
+        source,
+        calibrated,
+      });
     };
-
-    // Listen on BOTH event types: iOS fires `deviceorientation`
-    // (with webkitCompassHeading), Android/Chrome may fire
-    // `deviceorientationabsolute`. Whichever one arrives, we use it.
-    let attached = false;
-    if ('ondeviceorientationabsolute' in window) {
-      window.addEventListener('deviceorientationabsolute', handler, true);
-      attached = true;
-    }
-    if ('ondeviceorientation' in window) {
-      window.addEventListener('deviceorientation', handler, true);
-      attached = true;
-    }
-    if (attached) {
-      this._onDeviceOrientation = handler;
-      this._setStatus('live');
-      return true;
-    }
-    return false;
-  }
-
-  /* ------------------- Magnetometer sensor ------------------- */
-
-  _startMagnetometer() {
-    const s = globalThis;
-    if (typeof s.Magnetometer === 'undefined') {
-      this._setStatus('unsupported');
-      return;
-    }
-    try {
-      const sensor = new s.Magnetometer({ frequency: 120 });
-      const onReading = () => {
-        const { x, y } = sensor;
-        const magnetic = normalize((Math.atan2(y, x) * 180) / Math.PI - 90);
-        const trueHeading = normalize(magnetic + this.declination);
-        this._reading({ magnetic, trueHeading, source: 'magnetometer', calibrated: false });
-      };
-      sensor.addEventListener('reading', onReading);
-      sensor.addEventListener('error', () => {
-        sensor.removeEventListener('reading', onReading);
-        this._setStatus('unsupported');
-      }, { once: true });
-      sensor.start();
-      this._cleanups.push(() => sensor.stop());
-      this._setStatus('live');
-    } catch {
-      this._setStatus('unsupported');
-    }
-  }
-
-  /* ------------------- Geolocation heading fallback ------------------- */
-
-  startGeoHeading() {
-    if (!navigator.geolocation) return;
-    let lastLat = null;
-    let lastLng = null;
-    navigator.geolocation.watchPosition(
-      (pos) => {
-        const { latitude, longitude } = pos.coords;
-        if (lastLat != null && pos.coords.speed > 0.5) {
-          const lat2 = latitude;
-          const lng2 = longitude;
-          const dLng = (lng2 - lastLng) * (Math.PI / 180);
-          const φ1 = lastLat * (Math.PI / 180);
-          const φ2 = lat2 * (Math.PI / 180);
-          const y = Math.sin(dLng) * Math.cos(φ2);
-          const x = Math.cos(φ1) * Math.sin(φ2) - Math.sin(φ1) * Math.cos(φ2) * Math.cos(dLng);
-          const heading = normalize((Math.atan2(y, x) * 180) / Math.PI);
-          this._reading({ trueHeading: heading, source: 'gps', calibrated: false });
-        }
-        lastLat = latitude;
-        lastLng = longitude;
-      },
-      () => {},
-      { enableHighAccuracy: true },
-    );
   }
 }

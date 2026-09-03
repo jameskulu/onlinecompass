@@ -56,7 +56,7 @@ const qrDataUrl = import.meta.env.PROD ? await QRCode.toDataURL(pageUrl, { margi
         <span>·</span>
         <span>±<span data-accuracy>—</span>°</span>
         <span>·</span>
-        <span data-telemetry>do — · dm —</span>
+        <span data-telemetry>— Hz</span>
       </div>
 
       <div class="mt-3 flex flex-col items-center gap-2">
@@ -71,7 +71,7 @@ const qrDataUrl = import.meta.env.PROD ? await QRCode.toDataURL(pageUrl, { margi
       <div class="text-left">
         <p class="text-sm font-medium text-ink mb-1">Demo mode</p>
         <p data-demo-text class="text-xs text-body leading-5"></p>
-        <button data-perm-btn class="btn-primary mt-3">Enable live compass</button>
+        <button data-perm-btn class="btn-primary mt-3 hidden">Enable live compass</button>
         <div data-demo-share class="hidden mt-4 flex-col items-stretch gap-4 border-t border-hairline pt-4 sm:items-center sm:flex-row" data-page-url={pageUrl} data-qr={qrDataUrl ? 'yes' : 'no'}>
           <img
             data-demo-qr
@@ -136,31 +136,20 @@ const qrDataUrl = import.meta.env.PROD ? await QRCode.toDataURL(pageUrl, { margi
 
   const compass = new Compass();
 
-  let mode = 'true';
+let mode = 'true';
   let magnetic = null;
   let trueHeading = null;
   let lastDecl = 0;
-  let displayed = 0;
-  let target = 0;
-  let frozen = null;
+  let latest = null; // newest sensor heading (mutable; sensor events only set this)
+  let currentAngle = 0; // dial rotation; accumulates so shortest-arc moves never wrap badly
+  let lastFrameTime = 0; // for rAF dt calculation
+  let lastTextDeg = 0; // last rounded degree shown in readout
+  let noticeLive = false; // hide the notice once live readings arrive
+  let telemAt = 0; // telemetry timestamp
   let qiblaBearing = null;
   let sunAzimuth = null;
-  let rafId = null;
-  let lastReadingTime = 0;
-  let lastReadingHeading = null;
-  let angularVel = 0;
-  let gyroHeading = null;
-  let lastGyroTime = 0;
-  let lastGyroSample = 0;
-  let motionActive = false;
-  let tilt = null;
-  let doN = 0;
-  let dmN = 0;
-  let gyroAvail = false;
-  let lastRateTime = 0;
-  let lastTextDeg = null;
-  let lastFrameTime = 0;
-  let subN = 0;
+  let evtN = 0;
+  let rafId = 0;
 
   /* ---------------- dial ---------------- */
 
@@ -305,20 +294,19 @@ const qrDataUrl = import.meta.env.PROD ? await QRCode.toDataURL(pageUrl, { margi
 
   buildDial();
   svgHost.appendChild(svg);
-  // The dial is driven by the rAF loop below, which writes the transform
-  // every frame at full precision. A CSS transition cannot do this: each
-  // write restarts the transition, so the dial perpetually trails the
-  // phone. willChange promotes the host to its own compositor layer so
-  // per-frame rotation never re-rasterizes the SVG.
+  // The dial is rotated once per sensor event; this transition interpolates
+  // between events so motion stays continuous at the display refresh rate.
+  // willChange promotes the host to its own compositor layer so the
+  // per-event rotation never re-rasterizes the SVG.
   svgHost.style.transformOrigin = '50% 50%';
   svgHost.style.willChange = 'transform';
+  svgHost.style.transition = 'none';
 
   /* ---------------- status ---------------- */
 
   const STATUS = {
     starting: ['starting…', 'bg-mute'],
     live: ['live', 'bg-success'],
-    demo: ['demo', 'bg-warning'],
     unsupported: ['no sensor', 'bg-mute'],
     denied: ['permission denied', 'bg-error'],
     insecure: ['requires https', 'bg-warning'],
@@ -333,196 +321,82 @@ const qrDataUrl = import.meta.env.PROD ? await QRCode.toDataURL(pageUrl, { margi
   compass.onStatus = setStatus;
   compass.onPermission = (state) => {
     if (state === 'denied') {
-      enterDemo(
-        'Permission was denied. Enable motion & orientation sensors for this site in your browser settings, then reload.',
-        true,
-      );
+      enterDemo('Permission was denied. Enable motion & orientation sensors for this site in your browser settings, then reload.');
     }
   };
-
-  // Capture the device tilt so the gyro yaw rate can be projected onto the
-  // world vertical axis — the flat-only approximation (heading -= alpha*dt)
-  // is wrong when the phone is held at an angle, which then fights the
-  // re-anchor and reads as lag.
-  const onTilt = (e) => {
-    doN++;
-    if (typeof e.beta === 'number' && typeof e.gamma === 'number') {
-      tilt = { b: e.beta * (Math.PI / 180), g: e.gamma * (Math.PI / 180) };
-    }
-  };
-  if ('ondeviceorientation' in window) window.addEventListener('deviceorientation', onTilt, true);
-  if ('ondeviceorientationabsolute' in window) window.addEventListener('deviceorientationabsolute', onTilt, true);
-
-  // Gyro-aided dead reckoning: deviceorientation fires sparsely on iOS
-  // (WebKit throttles it), so between fused readings we propagate a
-  // continuous heading estimate from the instant gyro angular velocity and
-  // feed it straight into the dial spring. rotationRate is expressed about
-  // the DEVICE axes; project it onto the world vertical (yaw) axis using the
-  // current tilt so the estimate stays correct at any holding angle.
-  window.addEventListener(
-    'devicemotion',
-    (e) => {
-      const rr = e.rotationRate;
-      dmN++;
-      gyroAvail = !!rr && typeof rr.alpha === 'number' && rr.alpha != null;
-      if (!rr || typeof rr.alpha !== 'number' || rr.alpha == null) return;
-      const now = performance.now();
-      const dt = lastGyroTime ? (now - lastGyroTime) / 1000 : 0;
-      if (gyroHeading != null && dt > 0 && dt <= 0.25) {
-        const t = tilt ?? { b: 0, g: 0 };
-        const cb = Math.cos(t.b);
-        const sb = Math.sin(t.b);
-        const cg = Math.cos(t.g);
-        const sg = Math.sin(t.g);
-        const yawRate = -cb * sg * (rr.beta ?? 0) + sb * (rr.gamma ?? 0) + cb * cg * rr.alpha;
-        gyroHeading = normalize(gyroHeading - yawRate * dt);
-        angularVel = -yawRate;
-      }
-      lastGyroTime = now;
-      lastGyroSample = now;
-      motionActive = true;
-    },
-    true,
-  );
 
   /* ---------------- readings ---------------- */
 
   compass.subscribe((r) => {
-    subN++;
-    if (demoActive && r.source !== 'demo') stopDemo();
-    if (r.magnetic != null) magnetic = r.magnetic;
-    if (r.trueHeading != null) trueHeading = r.trueHeading;
-    lastDecl = r.declination ?? lastDecl;
-    target = mode === 'true' ? (trueHeading ?? magnetic ?? target) : (magnetic ?? trueHeading ?? target);
-    // Re-anchor the gyro estimate to the authoritative fused heading. The
-    // blend is deliberately small: the fused reading is sparse and OS-lagged
-    // on iOS, so a strong pull would drag the instant gyro motion back
-    // toward where the phone was — that reads as lag. This just corrects
-    // slow absolute drift.
-    const now = performance.now();
-    if (motionActive) {
-      // Re-anchor the gyro estimate to the fused heading with a TIME-BASED
-      // pull (~5s time constant, frequency-independent). The fused heading is
-      // OS-smoothed and LAGGED during motion, so a per-reading pull would
-      // drag the instant gyro motion back toward where the phone was — that
-      // reads as lag. Time-based correction only removes slow gyro drift.
-      const dt = lastReadingTime ? (now - lastReadingTime) / 1000 : 0;
-      if (gyroHeading == null) {
-        gyroHeading = target;
-      } else if (dt > 0) {
-        // Motion-adaptive re-anchor: when the phone is turning, the fused
-        // heading LAGS the gyro, so a fixed pull drags the estimate back
-        // toward where the phone was — that reads as slow. Trust the gyro
-        // almost fully while moving (slow anchor) and let the fused heading
-        // correct drift quickly only when the phone is still (fast anchor).
-        const speed = Math.abs(angularVel);
-        const tau = speed > 8 ? 8 : speed > 1 ? 3 : 1.2;
-        gyroHeading = normalize(gyroHeading + headingDiff(target, gyroHeading) * Math.min(0.8, dt / tau));
-      }
+    latest = mode === 'true' ? (r.trueHeading ?? r.magnetic) : (r.magnetic ?? r.trueHeading);
+    if (r.source != null) {
+      srcEl.textContent = r.source;
     }
-    if (lastReadingHeading != null) {
-      const dt = (now - lastReadingTime) / 1000;
-      // Only recompute the reading-averaged rate when the gyro isn't
-      // supplying a fresher instantaneous rate (it would reintroduce the
-      // laggy, OS-filtered iOS values otherwise).
-      if (dt > 0 && (!motionActive || now - lastGyroSample > 250)) {
-        angularVel = headingDiff(target, lastReadingHeading) / dt;
-      }
+    if (r.accuracy != null && r.accuracy !== accEl.textContent) {
+      accEl.textContent = r.accuracy.toFixed(1);
     }
-    lastReadingHeading = target;
-    lastReadingTime = now;
-    if (frozen == null) {
-      // Degree + direction text are owned by the animation loop so the
-      // readout stays in sync with the smoothed needle.
-      descEl.textContent = `heading · ${r.source}`;
+    if (r.declination != null && r.declination !== lastDecl) {
+      lastDecl = r.declination;
+      declEl.textContent = `${lastDecl >= 0 ? '+' : ''}${lastDecl.toFixed(1)}°`;
     }
-    declEl.textContent = `${lastDecl >= 0 ? '+' : ''}${lastDecl.toFixed(1)}°`;
-    srcEl.textContent = r.source;
-    if (r.accuracy != null) accEl.textContent = r.accuracy.toFixed(1);
-
-    // calibration heuristic
+    // Throttled degree text: only update when the rounded degree changes
+    const degNow = Math.round(latest);
+    if (degNow !== lastTextDeg) {
+      lastTextDeg = degNow;
+      degEl.textContent = `${degNow}°`;
+      dirEl.textContent = directionName(latest);
+    }
+    // calibration heuristic - only update if accuracy materially changed
     if (r.accuracy != null && r.accuracy > 8) {
       calibrationText.textContent =
         'Readings are drifting. Hold the device flat and trace a figure-eight motion until the needle steadies.';
       calibrationBox.classList.remove('hidden');
       calibrationBox.classList.add('flex');
-    } else {
+    } else if (r.accuracy == null || r.accuracy <= 8) {
       calibrationBox.classList.add('hidden');
+    }
+    // Telemetry: event rate once per second
+    now = performance.now();
+    if (now - telemAt >= 1000) {
+      telemAt = now;
+      telemetryEl.textContent = `${evtN} Hz`;
+      evtN = 0;
     }
   });
 
-  /* ---------------- animation loop ---------------- */
+/* ---------------- dial rendering ---------------- */
 
+  // Interpolate the dial rotation toward the latest sensor heading.
+  // Sensor events only set `latest`; this loop runs once per frame
+  // and provides smooth, responsive motion using a time-based exponential.
   function tick() {
-    rafId = requestAnimationFrame(tick);
     const now = performance.now();
     const dt = lastFrameTime ? Math.min((now - lastFrameTime) / 1000, 0.1) : 1 / 60;
     lastFrameTime = now;
 
-    // Pick the freshest heading estimate for this frame.
-    let estimate = null;
-    let gyroFresh = false;
-    if (frozen != null) {
-      estimate = frozen;
-    } else if (demoActive) {
-      estimate = target;
-    } else {
-      // Propagate the gyro estimate at display rate between devicemotion
-      // samples so the needle tracks the phone's rotation continuously
-      // instead of stepping between sparse events.
-      if (motionActive && gyroHeading != null && angularVel !== 0) {
-        const dtNow = (now - lastGyroTime) / 1000;
-        if (dtNow > 0 && dtNow <= 0.25) {
-          gyroHeading = normalize(gyroHeading + angularVel * dtNow);
-          lastGyroTime = now;
-        }
+    if (latest != null) {
+      // Compute raw diff, adjusting for 0/360 boundary crossing to maintain unwrapped angle.
+      let target = latest;
+      const rawDiff = latest - currentAngle;
+      if (Math.abs(rawDiff) > 180) {
+        if (rawDiff > 0) target -= 360;
+        else target += 360;
       }
-      gyroFresh = motionActive && gyroHeading != null && now - lastGyroSample < 250;
-      estimate = gyroFresh ? gyroHeading : lastReadingHeading;
+      const diff = target - currentAngle;
+      // Low-latency smoothing: fixed tau for minimal lag.
+      const tau = 0.020;
+      const k = 1 - Math.exp(-dt / tau);
+      currentAngle += diff * k;
+      // GPU-friendly transform with translateZ(0) for layer promotion.
+      svgHost.style.transform = `rotate(${currentAngle}deg) translateZ(0)`;
     }
 
-    if (estimate != null) {
-      // Critically damped smoothing toward the estimate — a frame-rate
-      // independent exponential that gives the iPhone-compass feel: the
-      // needle is visually locked to the phone, with no jitter, steps, or
-      // overshoot. The time constant adapts: snappy while the phone is
-      // turning or far from target, gentler once settled so sensor noise
-      // doesn't wiggle the dial. The gyro estimate is already smooth
-      // (integrated rotation), so it always gets the fastest constant.
-      const err = headingDiff(estimate, displayed);
-      let tau = Math.abs(angularVel) > 5 || Math.abs(err) > 3 ? 0.05 : 0.12;
-      if (gyroFresh) tau = Math.min(tau, 0.04);
-      displayed = normalize(displayed + err * (1 - Math.exp(-dt / tau)));
-
-      // Render every frame at full precision — sub-degree resolution keeps
-      // slow rotations continuous instead of stepping in 1° increments.
-      svgHost.style.transform = `rotate(${(-displayed).toFixed(2)}deg)`;
-
-      const deg = Math.round(normalize(displayed));
-      if (deg !== lastTextDeg) {
-        lastTextDeg = deg;
-        degEl.textContent = `${deg}°`;
-        dirEl.textContent = directionName(displayed);
-      }
-    }
-
-    // Telemetry: sensor event rates, computed once per second, so we can see
-    // the actual device behavior instead of guessing.
-    if (lastRateTime === 0) lastRateTime = now;
-    if (now - lastRateTime >= 1000) {
-      const el = (now - lastRateTime) / 1000;
-      const doHz = (doN / el).toFixed(1);
-      const dmHz = (dmN / el).toFixed(1);
-      const subHz = (subN / el).toFixed(1);
-      doN = 0;
-      dmN = 0;
-      subN = 0;
-      lastRateTime = now;
-      telemetryEl.textContent = `do ${doHz} · dm ${dmHz} · sub ${subHz}Hz · g ${motionActive && gyroAvail ? 'on' : 'off'}`;
-    }
+    rafId = requestAnimationFrame(tick);
   }
 
-  /* ---------------- mode toggle ---------------- */
+  
+
+/* ---------------- mode toggle ---------------- */
 
   function setMode(next) {
     mode = next;
@@ -535,47 +409,27 @@ const qrDataUrl = import.meta.env.PROD ? await QRCode.toDataURL(pageUrl, { margi
           : 'text-body hover:text-ink'
       }`;
     });
-    target =
-      mode === 'true'
-        ? (trueHeading ?? magnetic ?? target)
-        : (magnetic ?? trueHeading ?? target);
-    if (trueHeading != null && magnetic != null) {
-      degEl.textContent = `${Math.round(normalize(target))}°`;
-      dirEl.textContent = directionName(target);
+    // Snap the dial to the new mode's heading instantly.
+    const h = mode === 'true' ? (trueHeading ?? magnetic) : (magnetic ?? trueHeading);
+    if (h != null) {
+      latest = h;
+      currentAngle += headingDiff(-h, currentAngle); // hard snap
+      svgHost.style.transform = `rotate(${currentAngle}deg) translateZ(0)`;
+      degEl.textContent = `${Math.round(normalize(h))}°`;
+      dirEl.textContent = directionName(h);
+      lastTextDeg = Math.round(normalize(h));
     }
   }
 
   root.querySelectorAll('[data-mode]').forEach((b) => b.addEventListener('click', () => setMode(b.dataset.mode)));
   setMode('true');
 
-  /* ---------------- demo / auto-start ---------------- */
+  /* ---------------- notices (never rotate the dial here) ---------------- */
 
-  let demoActive = false;
-  let demoRafId = null;
-
-  function enterDemo(text, rotate) {
+  function enterDemo(text) {
     demoTextEl.textContent = text;
     demoNotice.classList.remove('hidden');
     demoNotice.classList.add('flex');
-    if (!demoActive && rotate) {
-      demoActive = true;
-      setStatus('demo');
-      let demo = displayed;
-      const step = () => {
-        demo = (demo + 2.5) % 360;
-        target = demo;
-        demoRafId = requestAnimationFrame(step);
-      };
-      step();
-    }
-  }
-
-  function stopDemo() {
-    if (!demoActive) return;
-    demoActive = false;
-    if (demoRafId) cancelAnimationFrame(demoRafId);
-    demoNotice.classList.add('hidden');
-    demoNotice.classList.remove('flex');
   }
 
   /* ---------------- permission flow ---------------- */
@@ -655,20 +509,20 @@ const qrDataUrl = import.meta.env.PROD ? await QRCode.toDataURL(pageUrl, { margi
 
   if (needsPermission) {
     // iOS (iPhone/iPad) — sensors are gated behind an explicit user gesture.
+    // The dial stays still until the user enables it.
     permBtn.classList.remove('hidden');
-    enterDemo('Live heading needs your device sensors. Tap "Enable live compass" to start.', true);
+    noticeLive = true;
+    enterDemo('Live heading needs your device sensors. Tap "Enable live compass" to start.');
   } else if (isMobile) {
     // Android phone/tablet — no prompt required; attach listeners and see what fires.
     permBtn.classList.add('hidden');
-    enterDemo('Looking for your device sensors…', true);
+    noticeLive = true;
+    enterDemo('Looking for your device sensors…');
     compass.start();
     setTimeout(() => {
       if (compass.source === 'none') {
         setStatus('unsupported');
-        enterDemo(
-          "Sensors aren't responding. Try moving the device, or check that motion & orientation access is allowed for this site.",
-          true,
-        );
+        enterDemo("Sensors aren't responding. Try moving the device, or check that motion & orientation access is allowed for this site.");
       }
     }, 3000);
   } else {
@@ -682,10 +536,7 @@ const qrDataUrl = import.meta.env.PROD ? await QRCode.toDataURL(pageUrl, { margi
       demoUrlEl.classList.add('font-medium');
     }
     setStatus('unsupported');
-    enterDemo(
-      'The live compass needs a magnetometer, which most computers do not have. Open this page on your phone to get real headings — the location, Qibla, bearing, and sun tools all work here.',
-      false,
-    );
+    enterDemo('The live compass needs a magnetometer, which most computers do not have. Open this page on your phone to get real headings — the location, Qibla, bearing, and sun tools all work here.');
   }
 
   demoCopy?.addEventListener('click', () => {
@@ -701,6 +552,78 @@ const qrDataUrl = import.meta.env.PROD ? await QRCode.toDataURL(pageUrl, { margi
   });
 
   tick();
+
+  /* ---------------- debug mode ---------------- */
+  const DEBUG = true;
+  let sensorEventCount = 0;
+  let lastSensorAt = 0;
+  let sensorRate = 0;
+  let lastRafAt = performance.now();
+  let rafRate = 0;
+
+  if (DEBUG) {
+    const debugPanel = document.createElement('div');
+    debugPanel.style.position = 'fixed';
+    debugPanel.style.bottom = '20px';
+    debugPanel.style.right = '20px';
+    debugPanel.style.background = 'rgba(0,0,0,0.7)';
+    debugPanel.style.color = 'white';
+    debugPanel.style.padding = '10px';
+    debugPanel.style.fontFamily = 'monospace';
+    debugPanel.style.fontSize = '12px';
+    debugPanel.style.zIndex = '9999';
+    debugPanel.innerHTML = `
+      <div>Sensor: -- Hz</div>
+      <div>RAF: -- FPS</div>
+      <div>Target: --°</div>
+      <div>Rendered: --°</div>
+      <div>Lag: --°</div>
+      <div>Source: --</div>
+    `;
+    document.body.appendChild(debugPanel);
+
+    // Update debug panel from existing tick loop via requestAnimationFrame
+    let debugLast = 0;
+    const updateDebug = () => {
+      const now = performance.now();
+      // Calculate sensor rate
+      if (now - lastSensorAt >= 1000) {
+        sensorRate = sensorEventCount;
+        sensorEventCount = 0;
+        lastSensorAt = now;
+      }
+      sensorEventCount++;
+
+      // Calculate RAF rate
+      const dt = now - lastRafAt;
+      if (dt >= 1000) {
+        rafRate = Math.round(1000 / dt);
+        lastRafAt = now;
+      }
+
+      if (latest != null) {
+        let target = latest;
+        const rawDiff = latest - currentAngle;
+        if (Math.abs(rawDiff) > 180) {
+          if (rawDiff > 0) target -= 360;
+          else target += 360;
+        }
+        const diff = target - currentAngle;
+
+        debugPanel.innerHTML = `
+          <div>Sensor: ${sensorRate} Hz</div>
+          <div>RAF: ${rafRate} FPS</div>
+          <div>Target: ${latest.toFixed(1)}°</div>
+          <div>Rendered: ${currentAngle.toFixed(1)}°</div>
+          <div>Lag: ${diff.toFixed(1)}°</div>
+          <div>Source: ${compass.source}</div>
+        `;
+      }
+
+      debugLast = requestAnimationFrame(updateDebug);
+    };
+    updateDebug();
+  }
 
   /* ---------------- cross-component markers ---------------- */
 

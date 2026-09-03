@@ -7,8 +7,10 @@ const rad = Math.PI / 180;
 export const normalize = (deg) => ((deg % 360) + 360) % 360;
 
 export const headingDiff = (a, b) => {
-  let d = normalize(a - b);
+  let d = a - b;
+  d = d % 360;
   if (d > 180) d -= 360;
+  if (d <= -180) d += 360;
   return d;
 };
 
