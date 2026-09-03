@@ -1,7 +1,7 @@
 I have initialized a new astrojs project, use astro docs mcp and tailwind-4-docs skill for creating the website. Also use @DESIGN.md file for the website design.
 
-Name: Accurate Online Compass
-Domain: accurateonlinecompass.com
+Name: True Online Compass
+Domain: trueonlinecompass.com
 
 Website Description:
 Create a online compass website that will have

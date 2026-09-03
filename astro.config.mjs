@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://accurateonlinecompass.com',
+	site: 'https://trueonlinecompass.com',
 	integrations: [
 		sitemap(),
 		{

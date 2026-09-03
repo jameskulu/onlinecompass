@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://accurateonlinecompass.com/sitemap.xml
+Sitemap: https://trueonlinecompass.com/sitemap.xml

@@ -53,10 +53,10 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" 
     <circle r="14" fill="#ffffff" stroke="#ebebeb" stroke-width="2"/>
   </g>
 
-  <text x="600" y="462" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="700" fill="#171717">Accurate Online Compass</text>
+  <text x="600" y="462" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="700" fill="#171717">True Online Compass</text>
   <text x="600" y="512" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="26" fill="#4d4d4d">Free online compass — live heading, Qibla, bearing &amp; sun position</text>
 
-  <text x="60" y="596" font-family="Courier New, monospace" font-size="22" fill="#888888">accurateonlinecompass.com</text>
+  <text x="60" y="596" font-family="Courier New, monospace" font-size="22" fill="#888888">trueonlinecompass.com</text>
 </svg>`;
 
 await sharp(Buffer.from(svg), { density: 144 }).png().toFile(out);

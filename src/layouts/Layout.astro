@@ -9,7 +9,7 @@ interface Props {
 }
 
 const {
-	title = 'Accurate Online Compass — Free True & Magnetic North Compass',
+	title = 'True Online Compass — Free True & Magnetic North Compass',
 	description = 'A free, privacy-first online compass. Real-time device heading, true vs magnetic north, GPS coordinates, Qibla direction, bearing calculator, and sun position.',
 	path = '/',
 	keywords = '',
@@ -42,19 +42,19 @@ const navLinks = [
 		<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0a0a0a" />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="default" />
-		<meta name="apple-mobile-web-app-title" content="Accurate Compass" />
+		<meta name="apple-mobile-web-app-title" content="True Online Compass" />
 
 		<!-- Open Graph -->
 		<meta property="og:type" content="website" />
 		<meta property="og:locale" content="en_US" />
-		<meta property="og:site_name" content="Accurate Online Compass" />
+		<meta property="og:site_name" content="True Online Compass" />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonical} />
 		<meta property="og:image" content={ogImage} />
 		<meta property="og:image:width" content="2400" />
 		<meta property="og:image:height" content="1260" />
-		<meta property="og:image:alt" content="Accurate Online Compass — free online compass tool with live heading, Qibla, bearing, and sun position" />
+		<meta property="og:image:alt" content="True Online Compass — free online compass tool with live heading, Qibla, bearing, and sun position" />
 
 		<!-- Twitter -->
 		<meta name="twitter:card" content="summary_large_image" />
@@ -66,11 +66,21 @@ const navLinks = [
 		<script type="application/ld+json" set:html={JSON.stringify({
 			'@context': 'https://schema.org',
 			'@type': 'WebSite',
-			name: 'Accurate Online Compass',
+			name: 'True Online Compass',
 			alternateName: 'Online Compass',
 			url: new URL('/', Astro.site).href,
 			description: 'Free online compass tool — live heading, true and magnetic north, Qibla finder, bearing calculator, and sun position. All in your browser, no install.',
 		})} />
+
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-4Y5H9H5KZD"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'G-4Y5H9H5KZD');
+		</script>
 
 		<!-- Theme init — avoids FOUC -->
 		<script is:inline>
@@ -104,7 +114,7 @@ const navLinks = [
 						<path d="M15.5 8.5 13 13l-4.5 2.5L11 11z" fill="var(--color-error)" />
 						<path d="M8.5 15.5 11 11l4.5-2.5L13 13z" fill="currentColor" opacity="0.5" />
 					</svg>
-					<span class="font-semibold tracking-tight text-sm">Accurate Compass</span>
+					<span class="font-semibold tracking-tight text-sm">True Online Compass</span>
 				</a>
 
 				<div class="hidden items-center gap-1 md:flex">
@@ -201,7 +211,7 @@ const navLinks = [
 						<path d="M15.5 8.5 13 13l-4.5 2.5L11 11z" fill="var(--color-error)" />
 						<path d="M8.5 15.5 11 11l4.5-2.5L13 13z" fill="currentColor" opacity="0.5" />
 					</svg>
-					<span class="font-semibold tracking-tight text-sm">Accurate Compass</span>
+					<span class="font-semibold tracking-tight text-sm">True Online Compass</span>
 				</a>
 				<p class="text-sm text-body max-w-xs leading-6">
 					A free, private, and accurate online compass. Real device sensors, no tracking, no
@@ -241,7 +251,7 @@ const navLinks = [
 			</div>
 			<div class="border-t border-hairline">
 				<p class="mx-auto max-w-[1200px] px-4 sm:px-6 py-6 text-xs text-mute font-mono">
-					© {new Date().getFullYear()} Accurate Online Compass · accurateonlinecompass.com
+					© {new Date().getFullYear()} True Online Compass · trueonlinecompass.com
 				</p>
 			</div>
 		</footer>
