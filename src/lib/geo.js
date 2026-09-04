@@ -155,3 +155,36 @@ export function formatTime(date) {
   if (!date) return '—';
   return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
+
+/* ---------------- Moon position (SunCalc-derived) ---------------- */
+
+const J1999 = 2451550.09766;
+
+const moonCoords = (d) => {
+  const L = rad * (218.316 + 481267.8813 * d);
+  const M = rad * (134.963 + 477198.8676 * d);
+  const F = rad * (93.272 + 483202.0175 * d);
+  const l = L + rad * 6.289 * Math.sin(M);
+  const b = rad * 5.128 * Math.sin(F);
+  const dt = 385001 - 20905 * Math.cos(M);
+  return {
+    ra: rightAscension(l, b),
+    dec: declination(l, b),
+    dist: dt,
+  };
+};
+
+export function moonPosition(date, lat, lng) {
+  const lw = rad * -lng;
+  const phi = rad * lat;
+  const d = toDays(date);
+  const c = moonCoords(d);
+  const H = siderealTime(d, lw) - c.ra;
+  const az = azimuth(H, phi, c.dec);
+  const alt = altitude(H, phi, c.dec);
+  return {
+    azimuth: normalize((az * 180) / Math.PI),
+    altitude: alt * (180 / Math.PI),
+    distance: c.dist,
+  };
+}

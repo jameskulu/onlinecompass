@@ -1,0 +1,107 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SunMoonCompass from '../../components/SunMoonCompass.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="Sun & Moon Direction on the Compass — Live Azimuth"
+	description="Find the sun and moon direction from the compass diagram. Live sensor heading with the sun's azimuth and the moon's azimuth plotted on the dial for any location."
+	path="/de/sun-moon/"
+	keywords="sun direction, moon direction, sun azimuth, moon azimuth, find sun on compass, sun position, moon position"
+>
+	<section class="relative overflow-hidden">
+		<div class="mesh-gradient" aria-hidden="true"></div>
+		<div class="relative">
+			<PageHero
+				eyebrow="sun & moon direction"
+				title="Watch the sun and moon on the compass."
+				description="A live phone compass with the sun's azimuth and the moon's azimuth plotted straight onto the dial. Face the marker, and you're looking at the sun or moon — no guessing."
+			>
+				<SunMoonCompass />
+			</PageHero>
+		</div>
+	</section>
+
+	<section class="border-y border-hairline bg-canvas">
+		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-3">
+			<div>
+				<p class="eyebrow mb-2">how to read it</p>
+				<p class="text-sm text-body leading-6">
+					The red needle points north. Two colored dots on the dial show the compass direction
+					of the sun (amber) and the moon (blue). Turn until you face a dot to look straight at it.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">live updates</p>
+				<p class="text-sm text-body leading-6">
+					The sun and moon markers reposition automatically as the day and night progress. Use
+					your location so the azimuths match the sky above you.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">direction, not just numbers</p>
+				<p class="text-sm text-body leading-6">
+					Azimuths are absolute directions. The dial overlays them on your real heading, so you
+					can find the sun or moon instantly, even behind the clouds.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">the sun & moon direction tool</p>
+			<h2 class="mt-3 text-display-lg text-ink">Find the sun and moon direction from the compass diagram</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				This page puts the
+				<strong class="text-ink font-medium">sun direction</strong> and
+				<strong class="text-ink font-medium">moon direction</strong> directly onto a live compass
+				diagram. Wherever the amber or blue marker sits on the dial is the compass direction you
+				should face to look at the sun or the moon. It is the fastest way to
+				<strong class="text-ink font-medium">find the sun on a compass</strong> or spot the moon
+				in daylight — no astronomy knowledge required.
+			</p>
+			<p class="mt-4 leading-7">
+				Azimuth is measured clockwise from true north: 0° is north, 90° east, 180° south, and
+				270° west. The tool computes the live azimuth of both bodies for your coordinates and
+				draws them on the dial alongside your real device heading, so the diagram always points
+				you in the right direction.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Reading the sun and moon on the dial</h3>
+			<p class="mt-3 leading-7">
+				The <strong class="text-ink font-medium">amber marker</strong> is the sun and the
+				<strong class="text-ink font-medium">blue marker</strong> is the moon. Each shows the
+				body's compass bearing in degrees and as a compass point, along with its elevation above
+				the horizon. When a marker points off the dial or reads a low elevation, that body is
+				below the horizon — it is under your feet, not in view.
+			</p>
+			<p class="mt-4 leading-7">
+				The sun rises in the east and sets in the west, so its marker sweeps across the northern
+				half of the dial (in the northern hemisphere) from morning to evening. The moon follows a
+				similar path but shifts roughly 12 degrees later each day, which is why its position on
+				the compass changes from one day to the next.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Why use the compass to find the sun and moon</h3>
+			<p class="mt-3 leading-7">
+				A compass direction is far more practical than a set of sky coordinates. Whether you are
+				photographing, planning shade, aligning a satellite dish, checking where light will fall,
+				or just curious which way the moon is tonight, seeing the direction as a point on the
+				compass makes it instantly actionable — turn, and there it is.
+			</p>
+			<p class="mt-4 leading-7">
+				Everything runs locally in your browser and no data is uploaded. Combined with the
+				<a href="/de/sun/" class="text-link underline decoration-link/30 hover:decoration-link">sun position calculator</a>
+				and the
+				<a href="/de/compass/" class="text-link underline decoration-link/30 hover:decoration-link">online compass</a>,
+				this gives you the full picture of what is above you, wherever you are.
+			</p>
+		</div>
+	</section>
+
+	<RelatedTools current="/sun-moon/" />
+</Layout>

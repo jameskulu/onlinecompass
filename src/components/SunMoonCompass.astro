@@ -1,0 +1,601 @@
+---
+const props = Astro.props;
+---
+<div class="sunmoon-root relative w-full max-w-xl mx-auto select-none">
+  <!-- Live compass -->
+  <div data-live-view class="flex flex-col items-center gap-8">
+    <div class="relative w-full max-w-[380px] aspect-square">
+      <!-- fixed outer casing ring -->
+      <div class="absolute inset-0 rounded-full border border-hairline-strong/60" aria-hidden="true"></div>
+
+      <!-- rotating dial (scaled inward to leave room for the outer markers) -->
+      <div data-dial-svg class="absolute inset-[12%]"></div>
+
+      <!-- Sun & Moon images positioned around the dial on the outer ring -->
+      <div data-sun-icon class="absolute z-20 pointer-events-none" aria-hidden="true">
+        <svg data-sun-art width="46" height="46" viewBox="0 0 48 48"></svg>
+      </div>
+      <div data-moon-icon class="absolute z-20 pointer-events-none" aria-hidden="true">
+        <svg data-moon-art width="46" height="46" viewBox="0 0 48 48"></svg>
+      </div>
+
+      <!-- status pill -->
+      <div class="absolute top-2 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
+        <span class="badge">
+          <span data-status-dot class="inline-block w-1.5 h-1.5 rounded-full bg-mute"></span>
+          <span data-status-text>starting…</span>
+        </span>
+      </div>
+
+      <!-- fullscreen -->
+      <button
+        data-fs-btn
+        class="absolute top-2 right-2 z-10 flex h-8 w-8 items-center justify-center rounded-full border border-hairline bg-canvas text-ink transition-colors hover:bg-canvas-soft-2"
+        aria-label="Toggle fullscreen"
+        title="Toggle fullscreen"
+      >
+        <svg data-fs-open class="h-4 w-4" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <svg data-fs-close class="hidden h-4 w-4" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Heading readout -->
+    <div class="text-center -mt-4">
+      <div class="flex items-end justify-center gap-2">
+        <span data-heading-deg class="text-[64px] leading-none font-semibold text-ink tracking-tight tabular-nums">
+          0°
+        </span>
+        <span data-heading-dir class="text-display-md text-body mb-1">N</span>
+      </div>
+      <p class="eyebrow mt-3" data-heading-desc>heading</p>
+
+      <div class="mt-6 inline-flex items-center gap-1 rounded-full border border-hairline bg-canvas p-1">
+        <button data-mode="true" class="rounded-full px-3 py-1 text-xs font-medium text-body hover:text-ink transition-colors">True north</button>
+        <button data-mode="mag" class="rounded-full px-3 py-1 text-xs font-medium text-body hover:text-ink transition-colors">Magnetic</button>
+      </div>
+
+      <div class="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-mute font-mono">
+        <span>decl <span data-decl>0.0°</span></span>
+        <span>·</span>
+        <span>src <span data-src>—</span></span>
+      </div>
+
+      <div class="mt-3 flex flex-col items-center gap-2">
+        <button data-loc-btn class="btn-ghost text-xs">Use location for declination</button>
+        <p data-loc-coords class="hidden text-xs text-mute font-mono"></p>
+      </div>
+    </div>
+
+    <!-- Sun & Moon markers readout -->
+    <div class="grid w-full max-w-md grid-cols-1 gap-3 sm:grid-cols-2">
+      <div class="card-soft p-4">
+        <p class="eyebrow mb-1 flex items-center gap-1.5">
+          <span class="inline-block h-2 w-2 rounded-full bg-amber shadow-[0_0_0_3px] shadow-amber/30"></span>
+          sun direction
+        </p>
+        <p class="text-display-md text-ink tabular-nums"><span data-sun-az>—</span></p>
+        <p class="text-xs text-body mt-0.5"><span data-sun-dir>—</span> · elev <span data-sun-elev>—</span>°</p>
+      </div>
+      <div class="card-soft p-4">
+        <p class="eyebrow mb-1 flex items-center gap-1.5">
+          <span class="inline-block h-2 w-2 rounded-full bg-link shadow-[0_0_0_3px] shadow-link/30"></span>
+          moon direction
+        </p>
+        <p class="text-display-md text-ink tabular-nums"><span data-moon-az>—</span></p>
+        <p class="text-xs text-body mt-0.5"><span data-moon-dir>—</span> · elev <span data-moon-elev>—</span>°</p>
+      </div>
+    </div>
+
+    <!-- Legend -->
+    <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-1 text-xs text-body">
+      <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-amber"></span> Sun</span>
+      <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-link"></span> Moon</span>
+      <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-sm bg-error"></span> North</span>
+    </div>
+
+    <!-- Demo notice -->
+    <div data-demo-notice class="hidden w-full max-w-sm card-soft p-4 items-start gap-3">
+      <span class="text-lg leading-none mt-0.5" aria-hidden="true">◎</span>
+      <div class="text-left">
+        <p class="text-sm font-medium text-ink mb-1">Demo mode</p>
+        <p data-demo-text class="text-xs text-body leading-5"></p>
+        <button data-perm-btn class="btn-primary mt-3 hidden">Enable live compass</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { sunPosition, moonPosition, directionName, normalize, headingDiff } from '../lib/geo.js';
+  import { Compass } from '../lib/compass.js';
+
+  const root = document.querySelector('.sunmoon-root');
+  if (!root) throw new Error('sunmoon root missing');
+
+  const $ = (sel) => root.querySelector(sel);
+  const svgHost = $('[data-dial-svg]');
+  const sunIconHost = $('[data-sun-icon]');
+  const moonIconHost = $('[data-moon-icon]');
+  const sunArtEl = $('[data-sun-art]');
+  const moonArtEl = $('[data-moon-art]');
+  const permBtn = $('[data-perm-btn]');
+  const degEl = $('[data-heading-deg]');
+  const dirEl = $('[data-heading-dir]');
+  const descEl = $('[data-heading-desc]');
+  const declEl = $('[data-decl]');
+  const srcEl = $('[data-src]');
+  const statusText = $('[data-status-text]');
+  const statusDot = $('[data-status-dot]');
+  const fsBtn = $('[data-fs-btn]');
+  const fsOpenIcon = $('[data-fs-open]');
+  const fsCloseIcon = $('[data-fs-close]');
+  const locBtn = $('[data-loc-btn]');
+  const locCoords = $('[data-loc-coords]');
+  const demoNotice = $('[data-demo-notice]');
+  const demoTextEl = $('[data-demo-text]');
+  const sunAzEl = $('[data-sun-az]');
+  const sunDirEl = $('[data-sun-dir]');
+  const sunElevEl = $('[data-sun-elev]');
+  const moonAzEl = $('[data-moon-az]');
+  const moonDirEl = $('[data-moon-dir]');
+  const moonElevEl = $('[data-moon-elev]');
+
+  const compass = new Compass();
+
+  let mode = 'true';
+  let magnetic = null;
+  let trueHeading = null;
+  let latest = null;
+  let currentAngle = 0;
+  let lastFrameTime = 0;
+  let lastTextDeg = 0;
+  let rafId = 0;
+
+  let lat = null;
+  let lng = null;
+  let sunElevation = null;
+  let moonElevation = null;
+
+  /* ---------------- dial ---------------- */
+
+  const NS = 'http://www.w3.org/2000/svg';
+  const SIZE = 320;
+  const C = SIZE / 2;
+
+  const svg = document.createElementNS(NS, 'svg');
+  svg.setAttribute('viewBox', `0 0 ${SIZE} ${SIZE}`);
+  svg.classList.add('w-full', 'h-full');
+
+  const rose = document.createElementNS(NS, 'g');
+  svg.appendChild(rose);
+
+  // Where the sun/moon icons sit on the fixed outer ring, as a percentage of
+  // the container width from its centre (dial is scaled to inset-[12%], so the
+  // ring between ~38% and ~50% is free for the icons).
+  const OUTER_R_PCT = 43;
+
+  function line(x1, y1, x2, y2, stroke, width) {
+    const l = document.createElementNS(NS, 'line');
+    l.setAttribute('x1', x1);
+    l.setAttribute('y1', y1);
+    l.setAttribute('x2', x2);
+    l.setAttribute('y2', y2);
+    l.setAttribute('stroke', stroke);
+    l.setAttribute('stroke-width', width);
+    return l;
+  }
+
+  function text(x, y, str, cls, size) {
+    const t = document.createElementNS(NS, 'text');
+    t.setAttribute('x', x);
+    t.setAttribute('y', y);
+    t.setAttribute('text-anchor', 'middle');
+    t.setAttribute('dominant-baseline', 'central');
+    t.setAttribute('font-size', size);
+    t.setAttribute('fill', 'currentColor');
+    t.textContent = str;
+    return t;
+  }
+
+  function circleNode(cx, cy, r, fill) {
+    const c = document.createElementNS(NS, 'circle');
+    c.setAttribute('cx', cx);
+    c.setAttribute('cy', cy);
+    c.setAttribute('r', r);
+    c.setAttribute('fill', fill);
+    return c;
+  }
+
+  function polygonNode(points, fill) {
+    const p = document.createElementNS(NS, 'polygon');
+    p.setAttribute('points', points);
+    p.setAttribute('fill', fill);
+    return p;
+  }
+
+  function buildDial() {
+    const R = 148;
+    const ink = 'var(--color-ink)';
+    const body = 'var(--color-body)';
+    const mute = 'var(--color-mute)';
+    const hairline = 'var(--color-hairline)';
+
+    const face = document.createElementNS(NS, 'circle');
+    face.setAttribute('cx', C);
+    face.setAttribute('cy', C);
+    face.setAttribute('r', R + 6);
+    face.setAttribute('fill', 'var(--color-canvas)');
+    face.setAttribute('stroke', hairline);
+    face.setAttribute('stroke-width', '1');
+    rose.appendChild(face);
+
+    for (let i = 0; i < 360; i += 2) {
+      const a = ((i - 90) * Math.PI) / 180;
+      const major = i % 30 === 0;
+      const minor = i % 10 === 0 && !major;
+      const inner = major ? R - 18 : minor ? R - 10 : R - 6;
+      const outer = R - 2;
+      const w = major ? 2 : minor ? 1.6 : 1;
+      const col = major ? ink : body;
+      rose.appendChild(
+        line(
+          C + inner * Math.cos(a),
+          C + inner * Math.sin(a),
+          C + outer * Math.cos(a),
+          C + outer * Math.sin(a),
+          col,
+          w,
+        ),
+      );
+      if (major) {
+        const deg = i % 360 === 0 ? '0' : String(i);
+        const label = text(C + (R - 32) * Math.cos(a), C + (R - 32) * Math.sin(a), deg, '', 11);
+        label.setAttribute('fill', mute);
+        rose.appendChild(label);
+      }
+    }
+
+    const cards = [
+      [0, 'N', 26, 'var(--color-error)'],
+      [90, 'E', 20, body],
+      [180, 'S', 20, body],
+      [270, 'W', 20, body],
+      [45, 'NE', 13, mute],
+      [135, 'SE', 13, mute],
+      [225, 'SW', 13, mute],
+      [315, 'NW', 13, mute],
+    ];
+    for (const [deg, label, size, fill] of cards) {
+      const a = ((deg - 90) * Math.PI) / 180;
+      const t = text(C + (R - 56) * Math.cos(a), C + (R - 56) * Math.sin(a), label, '', size);
+      t.setAttribute('fill', fill);
+      t.setAttribute('font-weight', deg === 0 ? '600' : '400');
+      rose.appendChild(t);
+    }
+
+    const north = document.createElementNS(NS, 'polygon');
+    north.setAttribute('points', `${C},${C - R + 34} ${C - 9},${C} ${C + 9},${C}`);
+    north.setAttribute('fill', 'var(--color-error)');
+    rose.appendChild(north);
+
+    const south = document.createElementNS(NS, 'polygon');
+    south.setAttribute('points', `${C},${C + R - 26} ${C - 7},${C} ${C + 7},${C}`);
+    south.setAttribute('fill', body);
+    rose.appendChild(south);
+
+    const cap = document.createElementNS(NS, 'circle');
+    cap.setAttribute('cx', C);
+    cap.setAttribute('cy', C);
+    cap.setAttribute('r', 10);
+    cap.setAttribute('fill', 'var(--color-canvas)');
+    cap.setAttribute('stroke', hairline);
+    rose.appendChild(cap);
+  }
+
+  buildDial();
+  svgHost.appendChild(svg);
+  svgHost.style.transformOrigin = '50% 50%';
+  svgHost.style.willChange = 'transform';
+  svgHost.style.transition = 'none';
+
+  // Realistic sun & moon images that sit on the fixed outer ring.
+  sunArtEl.appendChild(buildCelestialIcon('sun'));
+  moonArtEl.appendChild(buildCelestialIcon('moon'));
+
+  /* ---------------- status ---------------- */
+
+  const STATUS = {
+    starting: ['starting…', 'bg-mute'],
+    live: ['live', 'bg-success'],
+    unsupported: ['no sensor', 'bg-mute'],
+    denied: ['permission denied', 'bg-error'],
+    insecure: ['requires https', 'bg-warning'],
+  };
+
+  function setStatus(key) {
+    const [label, cls] = STATUS[key] ?? STATUS.starting;
+    statusText.textContent = label;
+    statusDot.className = `inline-block w-1.5 h-1.5 rounded-full ${cls}`;
+  }
+
+  compass.onStatus = setStatus;
+
+  /* ---------------- coordinate / celestial update ---------------- */
+
+  function updateBodies() {
+    if (lat == null || lng == null) return;
+    const now = new Date();
+    const sp = sunPosition(now, lat, lng);
+    const mp = moonPosition(now, lat, lng);
+    sunElevation = sp.altitude;
+    moonElevation = mp.altitude;
+    sunAzEl.textContent = `${Math.round(sp.azimuth)}°`;
+    sunDirEl.textContent = directionName(sp.azimuth, false);
+    sunElevEl.textContent = `${sp.altitude.toFixed(1)}`;
+    moonAzEl.textContent = `${Math.round(mp.azimuth)}°`;
+    moonDirEl.textContent = directionName(mp.azimuth, false);
+    moonElevEl.textContent = `${mp.altitude.toFixed(1)}`;
+    placeIcon(sunIconHost, sp.azimuth);
+    placeIcon(moonIconHost, mp.azimuth);
+  }
+
+  // Place a celestial icon on the fixed outer ring of the compass at its world
+  // bearing. Bearing 0° = top of the dial (north); clockwise increases.
+  // The icon is rotated to the bearing so its built-in arrow points outward,
+  // i.e. directly at that body's direction from the centre.
+  function placeIcon(el, bearing) {
+    const rad = (bearing * Math.PI) / 180;
+    const x = 50 + OUTER_R_PCT * Math.sin(rad);
+    const y = 50 - OUTER_R_PCT * Math.cos(rad);
+    el.style.left = `${x.toFixed(2)}%`;
+    el.style.top = `${y.toFixed(2)}%`;
+    el.style.transform = `translate(-50%, -50%) rotate(${bearing}deg)`;
+  }
+
+  // Build a realistic celestial icon (48x48 viewBox) with a small arrow that
+  // points "down" (toward the dial centre). When the host element is rotated to
+  // the body's bearing, the arrow points inward from the outer ring toward the
+  // centre of the dial, indicating the direction of the body.
+  function buildCelestialIcon(kind) {
+    const svgElem = document.createElementNS(NS, 'svg');
+    if (kind === 'sun') {
+      const amber = 'var(--color-amber)';
+      // disc
+      svgElem.appendChild(circleNode(24, 24, 10, amber));
+      // rays
+      for (let i = 0; i < 8; i++) {
+        const a = (i * 45 * Math.PI) / 180;
+        const ray = line(24 + 14 * Math.cos(a), 24 + 14 * Math.sin(a), 24 + 20 * Math.cos(a), 24 + 20 * Math.sin(a), amber, 2.5);
+        ray.setAttribute('stroke-linecap', 'round');
+        svgElem.appendChild(ray);
+      }
+      // highlight
+      svgElem.appendChild(circleNode(21.5, 20.5, 3, 'rgba(255,255,255,0.55)'));
+      // direction arrow pointing down/toward the dial centre
+      svgElem.appendChild(line(24, 44, 24, 39, amber, 2.5));
+      svgElem.appendChild(polygonNode('19 41 29 41 24 33', amber));
+    } else {
+      const link = 'var(--color-link)';
+      // disc
+      svgElem.appendChild(circleNode(24, 24, 10, link));
+      // craters
+      svgElem.appendChild(circleNode(21, 20.5, 2.2, 'rgba(255,255,255,0.6)'));
+      svgElem.appendChild(circleNode(27, 26, 1.6, 'rgba(255,255,255,0.5)'));
+      svgElem.appendChild(circleNode(24.5, 19, 1.3, 'rgba(255,255,255,0.4)'));
+      // terminator shadow
+      svgElem.appendChild(circleNode(26.5, 22, 6, 'rgba(0,0,0,0.14)'));
+      // direction arrow pointing down/toward the dial centre
+      svgElem.appendChild(line(24, 44, 24, 39, link, 2.5));
+      svgElem.appendChild(polygonNode('19 41 29 41 24 33', link));
+    }
+    return svgElem;
+  }
+
+  /* ---------------- readings ---------------- */
+
+  compass.subscribe((r) => {
+    latest = mode === 'true' ? (r.trueHeading ?? r.magnetic) : (r.magnetic ?? r.trueHeading);
+    if (r.source != null) srcEl.textContent = r.source;
+    if (r.declination != null) declEl.textContent = `${r.declination >= 0 ? '+' : ''}${r.declination.toFixed(1)}°`;
+    const degNow = Math.round(normalize(latest));
+    if (degNow !== lastTextDeg) {
+      lastTextDeg = degNow;
+      degEl.textContent = `${degNow}°`;
+      dirEl.textContent = directionName(latest);
+    }
+  });
+
+  /* ---------------- dial rendering ---------------- */
+
+  function tick() {
+    const now = performance.now();
+    const dt = lastFrameTime ? Math.min((now - lastFrameTime) / 1000, 0.1) : 1 / 60;
+    lastFrameTime = now;
+
+    if (latest != null) {
+      const desired = -latest;
+      let target = desired;
+      const rawDiff = desired - currentAngle;
+      if (Math.abs(rawDiff) > 180) {
+        if (rawDiff > 0) target -= 360;
+        else target += 360;
+      }
+      const diff = target - currentAngle;
+      const tau = 0.08;
+      const k = 1 - Math.exp(-dt / tau);
+      currentAngle += diff * k;
+      svgHost.style.transform = `rotate(${currentAngle}deg) translateZ(0)`;
+    }
+
+    rafId = requestAnimationFrame(tick);
+  }
+
+  /* ---------------- mode toggle ---------------- */
+
+  function setMode(next) {
+    mode = next;
+    const buttons = root.querySelectorAll('[data-mode]');
+    buttons.forEach((b) => {
+      const active = b.dataset.mode === next;
+      b.className = `rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+        active ? 'bg-ink text-on-primary' : 'text-body hover:text-ink'
+      }`;
+    });
+    const h = mode === 'true' ? (trueHeading ?? magnetic) : (magnetic ?? trueHeading);
+    if (h != null) {
+      latest = h;
+      currentAngle += headingDiff(-h, currentAngle);
+      svgHost.style.transform = `rotate(${currentAngle}deg) translateZ(0)`;
+      degEl.textContent = `${Math.round(normalize(h))}°`;
+      dirEl.textContent = directionName(h);
+      lastTextDeg = Math.round(normalize(h));
+    }
+  }
+
+  root.querySelectorAll('[data-mode]').forEach((b) => b.addEventListener('click', () => setMode(b.dataset.mode)));
+  setMode('true');
+
+  /* ---------------- notices ---------------- */
+
+  function enterDemo(text) {
+    demoTextEl.textContent = text;
+    demoNotice.classList.remove('hidden');
+    demoNotice.classList.add('flex');
+  }
+
+  /* ---------------- permission flow ---------------- */
+
+  permBtn.addEventListener('click', async () => {
+    permBtn.disabled = true;
+    permBtn.textContent = 'Starting…';
+    const ok = await compass.requestPermission();
+    if (!ok) {
+      permBtn.disabled = false;
+      permBtn.textContent = 'Enable live compass';
+      return;
+    }
+    permBtn.textContent = 'Live';
+    compass.start();
+  });
+
+  const needsPermission =
+    typeof DeviceOrientationEvent !== 'undefined' &&
+    typeof DeviceOrientationEvent.requestPermission === 'function';
+
+  /* ---------------- location ---------------- */
+
+  function useLocationText(latitude, longitude) {
+    lat = latitude;
+    lng = longitude;
+    locCoords.textContent = `lat ${latitude.toFixed(4)} · lng ${longitude.toFixed(4)}`;
+    locCoords.classList.remove('hidden');
+    locBtn.classList.add('hidden');
+    updateBodies();
+  }
+
+  function useLocation() {
+    if (!navigator.geolocation) {
+      locBtn.textContent = 'Not supported';
+      return;
+    }
+    locBtn.disabled = true;
+    locBtn.textContent = 'Locating…';
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const { latitude, longitude } = pos.coords;
+        compass.setLocation(latitude, longitude);
+        declEl.textContent = `${compass.declination >= 0 ? '+' : ''}${compass.declination.toFixed(1)}°`;
+        useLocationText(latitude, longitude);
+      },
+      (err) => {
+        locBtn.disabled = false;
+        locBtn.textContent = err.code === 1 ? 'Location denied — magnetic only' : 'Retry location';
+      },
+      { enableHighAccuracy: true, timeout: 15000 },
+    );
+  }
+
+  locBtn.addEventListener('click', useLocation);
+
+  // Auto-use location so sun/moon directions appear immediately.
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const { latitude, longitude } = pos.coords;
+        compass.setLocation(latitude, longitude);
+        declEl.textContent = `${compass.declination >= 0 ? '+' : ''}${compass.declination.toFixed(1)}°`;
+        useLocationText(latitude, longitude);
+      },
+      () => {},
+      { enableHighAccuracy: true, timeout: 10000 },
+    );
+  }
+
+  // Keep sun/moon fresh over time.
+  setInterval(() => {
+    if (lat != null && lng != null) updateBodies();
+  }, 60000);
+
+  /* ---------------- fullscreen ---------------- */
+
+  const fsRoot = document.documentElement;
+  const supportsFullscreen = !!fsRoot.requestFullscreen || !!fsRoot.webkitRequestFullscreen;
+
+  function updateFsIcon() {
+    const fs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+    fsOpenIcon.classList.toggle('hidden', fs);
+    fsCloseIcon.classList.toggle('hidden', !fs);
+  }
+
+  if (!supportsFullscreen) {
+    fsBtn.classList.add('hidden');
+  } else {
+    fsBtn.addEventListener('click', () => {
+      const fs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+      if (fs) {
+        (document.exitFullscreen || document.webkitExitFullscreen)?.call(document);
+      } else {
+        (fsRoot.requestFullscreen || fsRoot.webkitRequestFullscreen).call(fsRoot);
+      }
+    });
+    document.addEventListener('fullscreenchange', updateFsIcon);
+    document.addEventListener('webkitfullscreenchange', updateFsIcon);
+    updateFsIcon();
+  }
+
+  const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+
+  if (needsPermission) {
+    permBtn.classList.remove('hidden');
+    enterDemo('Live heading needs your device sensors. Tap "Enable live compass" to start.');
+  } else if (isMobile) {
+    permBtn.classList.add('hidden');
+    enterDemo('Looking for your device sensors…');
+    compass.start();
+    setTimeout(() => {
+      if (compass.source === 'none') {
+        setStatus('unsupported');
+        enterDemo("Sensors aren't responding. Try moving the device, or check that motion & orientation access is allowed for this site.");
+      }
+    }, 3000);
+  } else {
+    permBtn.classList.add('hidden');
+    setStatus('unsupported');
+    enterDemo('The live compass needs a magnetometer, which most computers do not have. Open this page on your phone to get real headings — the sun and moon directions update automatically with your location.');
+  }
+
+  tick();
+</script>
+
+<style>
+  [data-live-view] {
+    transition: opacity 0.3s ease;
+  }
+  .sunmoon-root svg text {
+    user-select: none;
+  }
+</style>

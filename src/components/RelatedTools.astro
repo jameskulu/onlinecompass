@@ -10,35 +10,35 @@ const { current } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 
 const toolNames: Record<string, Record<string, string>> = {
-	en: { compass: 'Compass', location: 'Location', qibla: 'Qibla', bearing: 'Bearing', sun: 'Sun' },
-	es: { compass: 'Brújula', location: 'Ubicación', qibla: 'Qibla', bearing: 'Rumbo', sun: 'Sol' },
-	ja: { compass: 'コンパス', location: '位置情報', qibla: 'キブラ', bearing: '方位', sun: '太陽' },
-	fr: { compass: 'Boussole', location: 'Position', qibla: 'Qibla', bearing: 'Cap', sun: 'Soleil' },
-	de: { compass: 'Kompass', location: 'Standort', qibla: 'Qibla', bearing: 'Kurs', sun: 'Sonne' },
-	pt: { compass: 'Bússola', location: 'Localização', qibla: 'Qibla', bearing: 'Rumbo', sun: 'Sol' },
-	ko: { compass: '나침반', location: '위치', qibla: '키블라', bearing: '방위각', sun: '태양' },
-	it: { compass: 'Bussola', location: 'Posizione', qibla: 'Qibla', bearing: 'Rotta', sun: 'Sole' },
-	id: { compass: 'Kompas', location: 'Lokasi', qibla: 'Qibla', bearing: 'Arah', sun: 'Matahari' },
-	bn: { compass: 'কম্পাস', location: 'অবস্থান', qibla: 'কিবলা', bearing: 'বেয়ারিং', sun: 'সূর্য' },
-	tr: { compass: 'Pusula', location: 'Konum', qibla: 'Kıble', bearing: 'Yön', sun: 'Güneş' },
-	ur: { compass: 'کمپاس', location: 'مقام', qibla: 'قبلہ', bearing: 'ہدایت', sun: 'سورج' },
-	ar: { compass: 'بوصلة', location: 'الموقع', qibla: 'القبلة', bearing: 'الاتجاه', sun: 'الشمس' },
+	en: { compass: 'Compass', location: 'Location', qibla: 'Qibla', bearing: 'Bearing', sun: 'Sun', sunmoon: 'Sun & Moon' },
+	es: { compass: 'Brújula', location: 'Ubicación', qibla: 'Qibla', bearing: 'Rumbo', sun: 'Sol', sunmoon: 'Sol y Luna' },
+	ja: { compass: 'コンパス', location: '位置情報', qibla: 'キブラ', bearing: '方位', sun: '太陽', sunmoon: '太陽と月' },
+	fr: { compass: 'Boussole', location: 'Position', qibla: 'Qibla', bearing: 'Cap', sun: 'Soleil', sunmoon: 'Soleil et Lune' },
+	de: { compass: 'Kompass', location: 'Standort', qibla: 'Qibla', bearing: 'Kurs', sun: 'Sonne', sunmoon: 'Sonne & Mond' },
+	pt: { compass: 'Bússola', location: 'Localização', qibla: 'Qibla', bearing: 'Rumbo', sun: 'Sol', sunmoon: 'Sol e Lua' },
+	ko: { compass: '나침반', location: '위치', qibla: '키블라', bearing: '방위각', sun: '태양', sunmoon: '태양과 달' },
+	it: { compass: 'Bussola', location: 'Posizione', qibla: 'Qibla', bearing: 'Rotta', sun: 'Sole', sunmoon: 'Sole e Luna' },
+	id: { compass: 'Kompas', location: 'Lokasi', qibla: 'Qibla', bearing: 'Arah', sun: 'Matahari', sunmoon: 'Matahari & Bulan' },
+	bn: { compass: 'কম্পাস', location: 'অবস্থান', qibla: 'কিবলা', bearing: 'বেয়ারিং', sun: 'সূর্য', sunmoon: 'সূর্য ও চাঁদ' },
+	tr: { compass: 'Pusula', location: 'Konum', qibla: 'Kıble', bearing: 'Yön', sun: 'Güneş', sunmoon: 'Güneş ve Ay' },
+	ur: { compass: 'کمپاس', location: 'مقام', qibla: 'قبلہ', bearing: 'ہدایت', sun: 'سورج', sunmoon: 'سورج اور چاند' },
+	ar: { compass: 'بوصلة', location: 'الموقع', qibla: 'القبلة', bearing: 'الاتجاه', sun: 'الشمس', sunmoon: 'الشمس والقمر' },
 };
 
 const toolDescs: Record<string, Record<string, string>> = {
-	en: { compass: 'Real-time heading, true & magnetic north.', location: 'GPS coordinates, altitude, and accuracy.', qibla: 'Direction and distance to Makkah.', bearing: 'Bearing between two coordinates.', sun: 'Azimuth, elevation, sunrise and sunset.' },
-	es: { compass: 'Rumbo en tiempo real, norte magnético y verdadero.', location: 'Coordenadas GPS, altitud y precisión.', qibla: 'Dirección y distancia a la Meca.', bearing: 'Rumbo entre dos coordenadas.', sun: 'Acimut, elevación, amanecer y atardecer.' },
-	ja: { compass: 'リアルタイム方位、真北と磁北。', location: 'GPS座標、標高、精度。', qibla: 'メッカへの方位と距離。', bearing: '2点間の方位。', sun: '方位角、高度、日の出と日没。' },
-	fr: { compass: 'Cap en temps réel, nord vrai et magnétique.', location: 'Coordonnées GPS, altitude et précision.', qibla: 'Direction et distance vers La Mecque.', bearing: 'Cap entre deux coordonnées.', sun: 'Azimut, élévation, lever et coucher du soleil.' },
-	de: { compass: 'Echtzeit-Kurs, wahrer & magnetischer Norden.', location: 'GPS-Koordinaten, Höhe und Genauigkeit.', qibla: 'Richtung und Entfernung nach Mekka.', bearing: 'Kurs zwischen zwei Koordinaten.', sun: 'Azimut, Höhenwinkel, Sonnenauf- und Untergang.' },
-	pt: { compass: 'Rumbo em tempo real, norte magnético e verdadeiro.', location: 'Coordenadas GPS, altitude e precisão.', qibla: 'Direção e distância para Meca.', bearing: 'Rumbo entre duas coordenadas.', sun: 'Azimute, elevação, nascer e pôr do sol.' },
-	ko: { compass: '실시간 방위각, 진북 및 자북.', location: 'GPS 좌표, 고도 및 정확도.', qibla: '메카 방향과 거리.', bearing: '두 좌표 간 방위각.', sun: '방위각, 고도, 일출 및 일몰.' },
-	it: { compass: 'Rotta in tempo reale, nord vero e magnetico.', location: 'Coordinate GPS, altitudine e precisione.', qibla: 'Direzione e distanza verso La Mecca.', bearing: 'Rotta tra due coordinate.', sun: 'Azimut, elevazione, alba e tramonto.' },
-	id: { compass: 'Arah waktu nyata, utara magnetik & sejati.', location: 'Koordinat GPS, ketinggian, dan akurasi.', qibla: 'Arah dan jarak ke Makkah.', bearing: 'Arah antara dua koordinat.', sun: 'Azimut, elevasi, terbit dan terbenam matahari.' },
-	bn: { compass: 'রিয়েল-টাইম বেয়ারিং, সত্য ও চৌম্বক উত্তর।', location: 'জিপিএস সমন্বয়, উচ্চতা ও নির্ভুলতা।', qibla: 'মক্কার দিক ও দূরত্ব।', bearing: 'দুই সমন্বয়ের মধ্যে বেয়ারিং।', sun: 'এজিমুথ, উচ্চতা, সূর্যোদয় ও সূর্যাস্ত।' },
-	tr: { compass: 'Gerçek zamanlı yön, manyetik ve gerçek kuzey.', location: 'GPS koordinatları, rakım ve doğruluk.', qibla: 'Kabe yönü ve mesafesi.', bearing: 'İki koordinat arası yön.', sun: 'Azimut, yükseklik, gün doğumu ve batımı.' },
-	ur: { compass: 'رئیل ٹائم ہدایت، اصلی اور مقناطیسی شمال۔', location: 'جی پی اس کوآرڈینیٹس، اونچائی اور درستگی۔', qibla: 'مکہ کی سمت اور فاصلہ۔', bearing: 'دو کوآرڈینیٹس کے درمیان ہدایت۔', sun: 'ایزیموت، اونچائی، طلوع آفتاب اور غروب۔' },
-	ar: { compass: 'اتجاه فوري، الشمال الحقيقي والمغناطيسي.', location: 'إحداثيات GPS والارتفاع والدقة.', qibla: 'اتجاه المسافة إلى مكة.', bearing: 'الاتجاه بين إحداثيتين.', sun: 'الazimuth والارتفاع وشروق وغروب الشمس.' },
+	en: { compass: 'Real-time heading, true & magnetic north.', location: 'GPS coordinates, altitude, and accuracy.', qibla: 'Direction and distance to Makkah.', bearing: 'Bearing between two coordinates.', sun: 'Azimuth, elevation, sunrise and sunset.', sunmoon: 'Sun and moon direction on the compass.' },
+	es: { compass: 'Rumbo en tiempo real, norte magnético y verdadero.', location: 'Coordenadas GPS, altitud y precisión.', qibla: 'Dirección y distancia a la Meca.', bearing: 'Rumbo entre dos coordenadas.', sun: 'Acimut, elevación, amanecer y atardecer.', sunmoon: 'Dirección del sol y la luna en la brújula.' },
+	ja: { compass: 'リアルタイム方位、真北と磁北。', location: 'GPS座標、標高、精度。', qibla: 'メッカへの方位と距離。', bearing: '2点間の方位。', sun: '方位角、高度、日の出と日没。', sunmoon: 'コンパス上の太陽と月の方向。' },
+	fr: { compass: 'Cap en temps réel, nord vrai et magnétique.', location: 'Coordonnées GPS, altitude et précision.', qibla: 'Direction et distance vers La Mecque.', bearing: 'Cap entre deux coordonnées.', sun: 'Azimut, élévation, lever et coucher du soleil.', sunmoon: 'Direction du soleil et de la lune sur la boussole.' },
+	de: { compass: 'Echtzeit-Kurs, wahrer & magnetischer Norden.', location: 'GPS-Koordinaten, Höhe und Genauigkeit.', qibla: 'Richtung und Entfernung nach Mekka.', bearing: 'Kurs zwischen zwei Koordinaten.', sun: 'Azimut, Höhenwinkel, Sonnenauf- und Untergang.', sunmoon: 'Sonne- und Mondrichtung auf dem Kompass.' },
+	pt: { compass: 'Rumbo em tempo real, norte magnético e verdadeiro.', location: 'Coordenadas GPS, altitude e precisão.', qibla: 'Direção e distância para Meca.', bearing: 'Rumbo entre duas coordenadas.', sun: 'Azimute, elevação, nascer e pôr do sol.', sunmoon: 'Direção do sol e da lua na bússola.' },
+	ko: { compass: '실시간 방위각, 진북 및 자북.', location: 'GPS 좌표, 고도 및 정확도.', qibla: '메카 방향과 거리.', bearing: '두 좌표 간 방위각.', sun: '방위각, 고도, 일출 및 일몰.', sunmoon: '나침반 위의 태양과 달 방향.' },
+	it: { compass: 'Rotta in tempo reale, nord vero e magnetico.', location: 'Coordinate GPS, altitudine e precisione.', qibla: 'Direzione e distanza verso La Mecca.', bearing: 'Rotta tra due coordinate.', sun: 'Azimut, elevazione, alba e tramonto.', sunmoon: 'Direzione del sole e della luna sulla bussola.' },
+	id: { compass: 'Arah waktu nyata, utara magnetik & sejati.', location: 'Koordinat GPS, ketinggian, dan akurasi.', qibla: 'Arah dan jarak ke Makkah.', bearing: 'Arah antara dua koordinat.', sun: 'Azimut, elevasi, terbit dan terbenam matahari.', sunmoon: 'Arah matahari & bulan pada kompas.' },
+	bn: { compass: 'রিয়েল-টাইম বেয়ারিং, সত্য ও চৌম্বক উত্তর।', location: 'জিপিএস সমন্বয়, উচ্চতা ও নির্ভুলতা।', qibla: 'মক্কার দিক ও দূরত্ব।', bearing: 'দুই সমন্বয়ের মধ্যে বেয়ারিং।', sun: 'এজিমুথ, উচ্চতা, সূর্যোদয় ও সূর্যাস্ত।', sunmoon: 'কম্পাসে সূর্য ও চাঁদের দিক।' },
+	tr: { compass: 'Gerçek zamanlı yön, manyetik ve gerçek kuzey.', location: 'GPS koordinatları, rakım ve doğruluk.', qibla: 'Kabe yönü ve mesafesi.', bearing: 'İki koordinat arası yön.', sun: 'Azimut, yükseklik, gün doğumu ve batımı.', sunmoon: 'Pusulada güneş ve ay yönü.' },
+	ur: { compass: 'رئیل ٹائم ہدایت، اصلی اور مقناطیسی شمال۔', location: 'جی پی اس کوآرڈینیٹس، اونچائی اور درستگی۔', qibla: 'مکہ کی سمت اور فاصلہ۔', bearing: 'دو کوآرڈینیٹس کے درمیان ہدایت۔', sun: 'ایزیموت، اونچائی، طلوع آفتاب اور غروب۔', sunmoon: 'کمپاس پر سورج اور چاند کی سمت۔' },
+	ar: { compass: 'اتجاه فوري، الشمال الحقيقي والمغناطيسي.', location: 'إحداثيات GPS والارتفاع والدقة.', qibla: 'اتجاه المسافة إلى مكة.', bearing: 'الاتجاه بين إحداثيتين.', sun: 'الazimuth والارتفاع وشروق وغروب الشمس.', sunmoon: 'اتجاه الشمس والقمر على البوصلة.' },
 };
 
 const names = toolNames[lang] || toolNames.en;
@@ -50,6 +50,7 @@ const toolPaths: Record<string, string> = {
 	qibla: '/qibla/',
 	bearing: '/bearing/',
 	sun: '/sun/',
+	sunmoon: '/sun-moon/',
 };
 
 const tools = [
@@ -58,6 +59,7 @@ const tools = [
 	{ href: `/${lang}/qibla/`, name: names.qibla, desc: descs.qibla },
 	{ href: `/${lang}/bearing/`, name: names.bearing, desc: descs.bearing },
 	{ href: `/${lang}/sun/`, name: names.sun, desc: descs.sun },
+	{ href: `/${lang}/sun-moon/`, name: names.sunmoon, desc: descs.sunmoon },
 ].filter((t) => {
 	const currentSlug = current?.replace(/^\//, '').replace(/\/$/, '');
 	const toolSlug = t.href.replace(`/${lang}/`, '').replace(/\/$/, '');
