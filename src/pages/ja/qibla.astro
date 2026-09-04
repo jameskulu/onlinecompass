@@ -1,0 +1,93 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import QiblaFinder from '../../components/QiblaFinder.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="キブラファインダーオンライン — 現在地からカッバへの方向"
+	description="キブラ用オンラインコンパス — 現在地からカッバへの方向を発見。メッカへの大圏方位と距離をブラウザ内でプライベートに計算。"
+	path="/ja/qibla/"
+	keywords="キブラ用オンラインコンパス, キブラファインダー オンラインコンパス, オンラインコンパス カッバ 現在地から北を見つける, キブラ方向, カッバへの方向, 現在地からキブラを見つける"
+>
+	<PageHero
+		eyebrow="キブラファインダー"
+		title="地球上のどこからでもカッバの方を向く。"
+		description="メッカへの大圏方位は、現在の座標からデバイス上で計算されます — 度単位で正確、プライバシーを重視した設計。"
+	>
+		<QiblaFinder />
+	</PageHero>
+
+	<section class="border-y border-hairline bg-canvas">
+		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-2">
+			<div>
+				<p class="eyebrow mb-2">計算方法</p>
+				<p class="text-sm text-body leading-6">
+					方位は現在地とカッバ（21.4225° N, 39.8262° E）の間の最短大圏パスを使用します。地球の曲率を考慮しているため、平面のコンパス方位とは異なります。
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">実際の使い方</p>
+				<p class="text-sm text-body leading-6">
+					方位をメモし、コンパスツールを開いて方位が一致するまで回転させてください。最良の精度を得るには、屋外で金属から離れてキャリブレーションを行ってください。
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">キブラファインダー</p>
+			<h2 class="mt-3 text-display-lg text-ink">現在地からキブラ方向を見つける</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				<strong class="text-ink font-medium">キブラファインダーオンライン</strong>は、礼拝に向き合う正確な方向を教えるツールです — 現在地からサウジアラビアのメッカにあるカッバ（21.4225° N, 39.8262° E）への方位。このページは、リアルタイムの現在地または入力した座標からその方向を計算し、度数と方位で方位を表示し、メッカへの大圏距離も表示します。アプリもインストールもアカウントも不要 — ページを開いて礼拝する方向を確認するだけです。
+			</p>
+			<p class="mt-4 leading-7">
+				世界中のイスラム教徒は1日5回カッバの方を向いて礼拝します。方向を正確にすることは重要です。旅行中、新しい地域に来たばかり、自宅での方向を確認したい場合でも、この無料の<strong class="text-ink font-medium">キブラファインダーオンラインコンパス</strong>が数秒で正確な答えを提供します。
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">カッバへの方向の計算方法</h3>
+			<p class="mt-3 leading-7">
+				<strong class="text-ink font-medium">現在地からカッバへの方向</strong>は平面マップの shortcuts ではありません。地球は球体であるため、正しい方位は2点間の最短大圏パスに沿います。ロンドンからメッカへの方位は約118°、ニューヨークから約58°、ジャカルタから約295°、シドニーから北から西に約295° — 大圏方位であるため驚く人が多い数字です。このツールは航空機のナビゲーションと同じ球面三角法を実行するため、地球上のどこでも度単位で正確な結果が得られます。
+			</p>
+			<p class="mt-4 leading-7">
+				計算がブラウザ上で完全に実行されるため、座標がサーバーに送信されることはありません。多くのオンラインキブラツールは位置情報をこっそり記録しますが、このツールは不可能です。プライバシーと精度を両立したオンラインコンパスです。
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">キブラ方位の実践的な使い方</h3>
+			<p class="mt-3 leading-7">
+				方位を入手したら、次はそれを物理的に向ける方向に変換します。最も簡単な方法：度数で方位をメモし、<a href="/" class="text-link underline decoration-link/30 hover:decoration-link">リアルタイムオンラインコンパス</a>を開いて、方位がキブラ方位と一致するまで回転させます。コンパスダイヤルはリアルタイムで方位を表示するため、一致させるのは数秒です。
+			</p>
+			<p class="mt-4 leading-7">
+				最良の結果を得るには、両方のツールで「位置情報を使う」をタップし、偏角が補正され真北ベースの読み取りになるようにしてください。コンパスがない場合は、太陽で方向を確認できます。北半球では地方の正午に太陽は真南に、南半球では真北に位置します。方位で微調整する前に、大まかな方向を確認する信頼できる日中の基準点です。
+			</p>
+
+			<div class="mt-10 grid gap-4 sm:grid-cols-2">
+				<div class="card-soft p-5">
+					<h4 class="text-sm font-medium text-ink mb-1">よく検索される：「オンラインコンパス カッバ 現在地から北を見つける」</h4>
+					<p class="text-sm leading-6">
+						そのフレーズに正確に答えるのがこのツールです。位置情報を取得し、キブラ方位を読み取り、コンパスでそれに従います — 地球上のどこからでも利用できる無料オンラインコンパスです。
+					</p>
+				</div>
+				<div class="card-soft p-5">
+					<h4 class="text-sm font-medium text-ink mb-1">メッカまでの距離</h4>
+					<p class="text-sm leading-6">
+						方位と一緒にカッバへの大圏距離も表示されます — 旅行の計画や距離に応じた方位の変化の理解に役立ちます。
+					</p>
+				</div>
+			</div>
+
+			<h3 class="mt-10 text-display-sm text-ink">位置に応じて変化するキブラ方向</h3>
+			<p class="mt-3 leading-7">
+				<strong class="text-ink font-medium">キブラ方向</strong>は完全に現在地に依存します。都市によって、さらには通りによっても変わるため、数年前に別の国で調べた値が正しいことはほとんどありません。それがリアルタイム計算機が信頼できる選択肢な理由です。現在の座標に対して毎回新しい方位を計算します。数百万メートル移動すると方位が数度変化する場合もあり、このページは自動的に追従します。
+			</p>
+			<p class="mt-4 leading-7">
+				ツールは手動座標でも動作するため、訪問予定の場所の方向を確認したり、ブラウザの権限がオフの場合に便利です。都市または座標を入力すれば、キブラファインダーは同じ正確な方位と距離を返します。「現在地からキブラを見つける」という質問に、プライベートに、正確に、無料で答えるこのページです。
+			</p>
+		</div>
+	</section>
+
+	<RelatedTools current="/qibla/" />
+</Layout>

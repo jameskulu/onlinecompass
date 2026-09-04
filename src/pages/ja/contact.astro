@@ -1,0 +1,71 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+	title="お問い合わせ"
+	description="True Online Compassチームにお問い合わせ — フィードバック、バグ報告、提案。"
+	path="/ja/contact/"
+>
+	<div class="mx-auto max-w-3xl px-4 py-16 sm:px-6 md:py-24">
+		<p class="eyebrow">お問い合わせ</p>
+		<h1 class="mt-4 text-display-lg text-ink">お問い合わせ。</h1>
+		<p class="mt-4 text-body-lg text-body">
+			バグを見つけた、機能をリクエストしたい、またはフィードバックがある？すべて拝見しています。
+		</p>
+
+		<form data-contact-form class="card-lg mt-10 p-6 md:p-8 space-y-5">
+			<div class="grid gap-5 sm:grid-cols-2">
+				<label class="block">
+					<span class="eyebrow block mb-1">お名前</span>
+					<input data-c-name class="field-input" type="text" autocomplete="name" placeholder="お名前" />
+				</label>
+				<label class="block">
+					<span class="eyebrow block mb-1">メールアドレス</span>
+					<input data-c-email class="field-input" type="email" autocomplete="email" placeholder="example@email.com" />
+				</label>
+			</div>
+			<label class="block">
+				<span class="eyebrow block mb-1">メッセージ</span>
+				<textarea
+					data-c-message
+					class="field-input h-36 resize-y py-2"
+					placeholder="ご意見やご要望をお聞かせください…"
+					required
+				></textarea>
+			</label>
+			<div class="flex items-center gap-3">
+				<button data-c-submit type="submit" class="btn-primary">メッセージを送信</button>
+				<p data-c-note class="text-xs text-mute"></p>
+			</div>
+		</form>
+
+		<p class="mt-6 text-xs text-mute leading-5">
+			メールがお好きな場合は hello@trueonlinecompass.com にご連絡ください。ツールはすべてブラウザ上で完結しているため、センサーの問題を報告する際はデバイスとブラウザの情報をお知らせください。
+		</p>
+
+		<div class="card-soft mt-10 p-6">
+			<p class="text-sm font-medium text-ink mb-1">このオンラインコンパスについて</p>
+			<p class="text-sm leading-6">
+				True Online Compassは無料のブラウザベースツールキットです。真北と磁北を表示する<a href="/" class="text-link underline decoration-link/30 hover:decoration-link">リアルタイムコンパス</a>、<a href="/ja/location/" class="text-link underline decoration-link/30 hover:decoration-link">GPS座標</a>、<a href="/ja/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">キブラファインダー</a>、<a href="/ja/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">方位計算機</a>、<a href="/ja/sun/" class="text-link underline decoration-link/30 hover:decoration-link">太陽位置計算機</a>を提供しています。すべてがローカルで実行 — 無料、プライベート、インストール不要。<a href="/ja/about/" class="text-link underline decoration-link/30 hover:decoration-link">詳細ページ</a>、<a href="/ja/privacy/" class="text-link underline decoration-link/30 hover:decoration-link">プライバシーポリシー</a>、<a href="/ja/terms/" class="text-link underline decoration-link/30 hover:decoration-link">利用規約</a>をご覧ください。
+			</p>
+		</div>
+	</div>
+</Layout>
+
+<script>
+	const form = document.querySelector('[data-contact-form]');
+	const note = document.querySelector('[data-c-note]');
+	const submit = document.querySelector('[data-c-submit]');
+
+	form?.addEventListener('submit', (e) => {
+		e.preventDefault();
+		submit.disabled = true;
+		note.textContent = '送信中…';
+		// バックエンドなし — このフォームはエンドポイントが設定されるまでのプレースホルダーです。
+		setTimeout(() => {
+			submit.disabled = false;
+			note.textContent = 'このフォームはまだ接続されていません。メールで hello@trueonlinecompass.com にご連絡ください。';
+		}, 800);
+	});
+</script>

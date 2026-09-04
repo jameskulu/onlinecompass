@@ -1,0 +1,81 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import LocationPanel from '../../components/LocationPanel.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="GPS座標オンライン — 緯度、経度とDMS"
+	description="オンラインでGPS座標を取得：緯度、経度、標高、精度を10進数とDMS形式で表示。コピー、共有、Googleマップで開く。インストール不要、トラッキングなし。"
+	path="/ja/location/"
+	keywords="GPS座標 オンライン, 位置情報を取得, 緯度 経度, DMS座標, 私のGPS位置"
+>
+	<PageHero
+		eyebrow="GPS・位置情報"
+		title="正確な位置を把握。"
+		description="デバイスから直接リアルタイムのGPS座標、標高、精度を取得。すべてがローカルで計算されるため、位置情報がブラウザの外に出ることはありません。"
+	>
+		<LocationPanel />
+	</PageHero>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">GPS位置ツール</p>
+			<h2 class="mt-3 text-display-lg text-ink">オンラインでGPS座標を取得 — 即座に</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				<strong class="text-ink font-medium">オンラインでGPS座標を取得する</strong>必要はありますか？このツールはデバイスの位置をリアルタイムで読み取り、現在の緯度と経度を10進数と度分秒（DMS）形式の両方で表示します。標高と推定精度も表示されます。一度許可すれば、移動中もページが継続的に位置を追跡します — ハイキング、フィールドワーク、ジオキャッシング、または誰かと正確な位置を共有するのに便利です。
+			</p>
+			<p class="mt-4 leading-7">
+				すべてがブラウザ内でローカルに処理されます。位置情報がサーバーに送信されること、保存されること、共有されることはありません — このGPS座標オンラインツールはプライバシーを重視して設計されており、読み取りはページを閉じた瞬間に消えます。
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">緯度、経度、DMSの解説</h3>
+			<p class="mt-3 leading-7">
+				<strong class="text-ink font-medium">緯度</strong>は赤道から北または南にどの程度離れているかを測定します（赤道で0°、極で90°）。<strong class="text-ink font-medium">経度</strong>は本初子午線から東または西にどの程度離れているかを測定します。これらは組み合わさって地球上の任意の場所を数メートル以内で特定するグリッドを形成します。ほとんどのマッピングアプリは10進数を使用します（例：パリの48.8584, 2.2945）。多くのフォームやナビゲーションマニュアルではDMS（48° 51' 29.6" N, 2° 17' 40.2" E）が求められます。このツールは<strong class="text-ink font-medium">位置情報</strong>を両方の形式で表示するため、必要な形式をコピーできます。手動変換は不要です。
+			</p>
+			<p class="mt-4 leading-7">
+				10進数とDMSは同じ位置を異なる形式で表したものです。緯度の1度は約111km、1分は約1.85km、1秒は約30mです。単位を理解することで、座標が実際にどれほど正確かを判断でき、フィールドでナビゲーションする際に精度がなぜ重要かを理解できます。
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">リアルタイムGPS座標の使い道</h3>
+			<div class="mt-4 space-y-3">
+				<p class="leading-7">
+					<strong class="text-ink font-medium">屋外ナビゲーション。</strong>トレイル、キャンプサイト、新しい都市を探索する際に、座標を取得して共有したり、戻り道のナビゲーションに使えます。「今どこにいる？」という質問に答える最も速い方法です。
+				</p>
+				<p class="leading-7">
+					<strong class="text-ink font-medium">写真撮影と計画。</strong>撮影場所のジオタグ、写真を撮った位置の記録、ルート計画前の展望地の標高確認に便利です。
+				</p>
+				<p class="leading-7">
+					<strong class="text-ink font-medium">仕事と学習。</strong>測量士、農家、フィールド研究者はプロットやポイントの指定に正確な座標を使用します。生徒は地理のプロジェクトや地図作業の確認に使用します。
+				</p>
+				<p class="leading-7">
+					<strong class="text-ink font-medium">サイト上の他のツール。</strong>座標はキブラファインダー、方位計算機、太陽位置ツールに直接反映されるため、正確な位置をあらゆる場所で活用できます。
+				</p>
+			</div>
+
+			<h3 class="mt-10 text-display-sm text-ink">GPS位置の精度は？</h3>
+			<p class="mt-3 leading-7">
+				最近のスマートフォンは衛星GPS、Wi-Fi、携帯基地局データを組み合わせています。屋外で空が見える環境では通常3～10mの精度が得られます。屋内では信号が弱まり、精度が低下します。ツールは推定精度をメートル単位で表示するため、読み取りの信頼性を確認できます。最良の測位結果を得るには、屋外で高層建築物や密な木陰から離れて数秒静止してください。
+			</p>
+			<p class="mt-4 leading-7">
+				これはデータを一切アップロードしないGPS座標オンラインツールであるため、どこでも安心して使用できます。プライバシーを重視した位置情報の取得方法であり、必要な精度も提供します。
+			</p>
+			<h3 class="mt-10 text-display-sm text-ink">座標のコピー、共有、マップで開く</h3>
+			<p class="mt-3 leading-7">
+				このツールは表示だけでなく、実際の使用のために構築されています。必要な形式で座標をコピーし、友達と共有し、Googleマップで直接開いて周囲の広い視野を確認できます。リアルタイムの精度表示と組み合わせることで、場所を記録し後で戻ってくることができます — ハイキング、会議、配送の便利なウェイポイントです。
+			</p>
+			<p class="mt-4 leading-7">
+				このGPS座標オンラインツールはサイト上の他のツールと連携します：現在の位置は<a href="/ja/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">方位計算機</a>の出発点、<a href="/ja/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">キブラファインダー</a>の参照点、<a href="/ja/sun/" class="text-link underline decoration-link/30 hover:decoration-link">太陽位置</a>と<a href="/" class="text-link underline decoration-link/30 hover:decoration-link">リアルタイムコンパス</a>の位置情報となります。正確な1回の測位で、このサイトのすべての方向ツールがそれを活用します。
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">なぜ座標をローカルで計算するのか</h3>
+			<p class="mt-3 leading-7">
+				多くの「位置情報取得」サイトは座標を読み取った瞬間にサーバーに送信します。このページは逆です。GPS測位はブラウザのジオロケーションAPIから直接取得され、どこにも送信されません。これはトラッキングもログも、意図せず位置が保存されるリスクもないことを意味します。真正にプライバシーを重視したGPS座標のオンライン取得方法です。高速で無料、モダンなスマートフォンやノートパソコンのブラウザで動作します。
+			</p>
+		</div>
+	</section>
+
+	<RelatedTools current="/location/" />
+</Layout>

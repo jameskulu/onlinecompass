@@ -1,0 +1,130 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SunPanel from '../../components/SunPanel.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="Kalkulator Posisi Matahari Online - Azimuth, Terbit & Terbenam"
+	description="Hitung posisi matahari secara online: azimuth, elevasi, terbit, tengah hari matahari, dan terbenam untuk lokasi mana pun. Gratis dan instan - berjalan sepenuhnya di perangkat browser Anda."
+	path="/id/sun/"
+	keywords="kalkulator posisi matahari, azimuth matahari, waktu terbit terbenam, arah matahari, posisi surya online"
+>
+	<PageHero
+		eyebrow="posisi matahari"
+		title="Lacak matahari, dengan presisi."
+		description="Azimuth dan elevasi matahari langsung, ditambah terbit, tengah hari matahari, dan terbenam - dihitung untuk lokasi Anda atau koordinat mana pun yang Anda masukkan."
+	>
+		<SunPanel />
+	</PageHero>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-2">
+			<div>
+				<p class="eyebrow mb-2">apa arti angka-angka</p>
+				<p class="text-sm text-body leading-6">
+					Azimuth adalah arah kompas matahari (0° = utara, 90° = timur). Elevasi adalah seberapa
+					tinggi matahari di atas cakrawala - berguna untuk bayangan, panel surya, dan fotografi.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">cross-check kompas Anda</p>
+				<p class="text-sm text-body leading-6">
+					Pada tengah hari matahari berada di dekat utara sejati di belahan bumi utara dan utara sejati di
+					belahan bumi selatan - cara andal untuk memverifikasi heading pada siang hari.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">alat posisi matahari</p>
+			<h2 class="mt-3 text-display-lg text-ink">Hitung posisi matahari secara online - untuk lokasi mana pun</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				<strong class="text-ink font-medium">Kalkulator posisi matahari online</strong> menunjukkan di mana
+				matahari berada di langit pada saat tertentu untuk tempat tertentu. Halaman ini menghitung <strong class="text-ink font-medium">azimuth</strong> matahari
+				saat ini (arah kompasnya dalam derajat) dan <strong class="text-ink font-medium">elevasi</strong>
+				(ketinggiannya di atas cakrawala), beserta waktu terbit, tengah hari matahari, dan terbenam - untuk
+				lokasi langsung Anda atau koordinat mana pun yang Anda masukkan. Semuanya berjalan di perangkat browser Anda, sehingga instan, gratis, dan
+				privat.
+			</p>
+			<p class="mt-4 leading-7">
+				Angka-angka diperbarui secara real time seiring berjalannya hari, yang membuat alat ini berguna untuk
+				berbagai tugas yang mengejutkan: menempatkan panel surya, merencanakan pencahayaan fotografi, mengatur
+				bedengan kebun, memposisikan naungan untuk teras, atau sekadar mengetahui kapan matahari akan terlihat
+				di balik gedung di seberang jalan.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Azimuth dan elevasi - membaca langit</h3>
+			<p class="mt-3 leading-7">
+				<strong class="text-ink font-medium">Azimuth</strong> adalah arah matahari yang diukur
+				searah jarum jam dari utara: 0° adalah utara murni, 90° timur murni, 180° selatan murni, dan 270° barat murni. Pada
+				tengah hari matahari berada sekitar 180° (selatan murni) di belahan bumi utara dan sekitar 0° (utara
+				murni) di belahan bumi selatan. <strong class="text-ink font-medium">Elevasi</strong>
+				adalah sudut matahari di atas cakrawala, dari 0° saat terbit dan terbenam hingga titik tertinggi
+				pada tengah hari matahari. Bersama-sama mereka menjelaskan persis di mana matahari berada di langit - koordinat yang sama
+				yang digunakan insinyur surya dan astronom.
+			</p>
+			<p class="mt-4 leading-7">
+				Jalur matahari berubah sesuai garis lintang Anda dan musim: lebih tinggi di musim panas, lebih rendah di
+				musim dingin, terbit di timur dan terbenam di barat di mana-mana di Bumi. Kalkulator
+				memperhitungkan semua ini melalui algoritma posisi surya standar, sehingga azimuth dan
+				elevasi yang Anda lihat akurat untuk tanggal, waktu, dan koordinat Anda.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Mengapa matahari berguna untuk menemukan arah</h3>
+			<p class="mt-3 leading-7">
+				Sebelum kompas dan GPS, orang menggunakan matahari untuk orientasi - dan masih berfungsi hari ini.
+				Sekitar tengah hari lokal matahari berada tepat di selatan di belahan bumi utara dan tepat di utara di
+				belahan bumi selatan. Saat terbit kira-kira di timur; saat terbenam, kira-kira di barat. Ini adalah
+				pedoman yang dapat diandalkan, dan halaman ini mengubahnya menjadi angka yang presisi. Jika Anda di luar ruangan
+				pada siang hari tanpa kompas, periksa azimuth di sini dan orientasi diri Anda - lalu
+				verifikasi dengan
+				<a href="/" class="text-link underline decoration-link/30 hover:decoration-link">kompas online</a>
+				saat Anda kembali ke ponsel.
+			</p>
+
+			<div class="mt-10 grid gap-4 sm:grid-cols-2">
+				<div class="card-soft p-5">
+					<h4 class="text-sm font-medium text-ink mb-1">Energi surya</h4>
+					<p class="text-sm leading-6">
+						Sejajarkan panel atau rencanakan instalasi: elevasi pada tengah hari menunjukkan kemiringan
+						terbaik, dan rentang azimuth menunjukkan berapa banyak matahari yang diterima permukaan
+						selama sehari.
+					</p>
+				</div>
+				<div class="card-soft p-5">
+					<h4 class="text-sm font-medium text-ink mb-1">Fotografi dan berkebun</h4>
+					<p class="text-sm leading-6">
+						Rencanakan sesi golden hour, ketahui kapan bedengan kebun mendapat cahaya, atau posisikan teras atau
+						kain naungan untuk matahari sore - semuanya dari lokasi tepat Anda.
+					</p>
+				</div>
+			</div>
+
+			<h3 class="mt-10 text-display-sm text-ink">Terbit, tengah hari matahari, dan terbenam</h3>
+			<p class="mt-3 leading-7">
+				Alat ini juga melaporkan momen-momen penting hari itu: <strong class="text-ink font-medium">terbit</strong>,
+				saat matahari pertama kali muncul di atas cakrawala; <strong class="text-ink font-medium">tengah hari
+				matahari</strong>, saat mencapai titik tertinggi; dan <strong class="text-ink font-medium">terbenam</strong>,
+				saat menghilang. Tengah hari matahari adalah saat matahari melewati meridian dan menampilkan
+				bayangan terpendek - titik referensi untuk trik kompas-matahari yang disebutkan di atas.
+			</p>
+			<p class="mt-4 leading-7">
+				Karena perhitungan bersifat lokal, hasil berubah secara alami sesuai koordinat dan
+				tanggal Anda: musim dingin utara membawa hari pendek dan elevasi tengah hari yang rendah, sedangkan lokasi
+				tropis melihat matahari naik tinggi sepanjang tahun. Di mana pun Anda berada, kalkulator posisi matahari gratis ini
+				memberikan jalur surya secara sekilas - dan berpasangan sempurna dengan
+				<a href="/id/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">kalkulator bearing</a>
+				dan
+				<a href="/id/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">pencari Qibla</a>
+				untuk gambaran lengkap langit di atas Anda.
+			</p>
+		</div>
+	</section>
+
+	<RelatedTools current="/sun/" />
+</Layout>

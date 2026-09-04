@@ -1,0 +1,87 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+	title="যোগাযোগ"
+	description="প্রকৃত অনলাইন কম্পাস দলের সাথে যোগাযোগ করুন — মতামত, বাগ রিপোর্ট এবং পরামর্শ।"
+	path="/bn/contact/"
+>
+	<div class="mx-auto max-w-3xl px-4 py-16 sm:px-6 md:py-24">
+		<p class="eyebrow">যোগাযোগ</p>
+		<h1 class="mt-4 text-display-lg text-ink">যোগাযোগ করুন।</h1>
+		<p class="mt-4 text-body-lg text-body">
+			একটি বাগ খুঁজে পেলেন, একটি ফিচার চান, অথবা শুধু মতামত আছে? আমরা সবকিছু পড়ি।
+		</p>
+
+		<form data-contact-form class="card-lg mt-10 p-6 md:p-8 space-y-5">
+			<div class="grid gap-5 sm:grid-cols-2">
+				<label class="block">
+					<span class="eyebrow block mb-1">নাম</span>
+					<input data-c-name class="field-input" type="text" autocomplete="name" placeholder="আপনার নাম" />
+				</label>
+				<label class="block">
+					<span class="eyebrow block mb-1">ইমেইল</span>
+					<input data-c-email class="field-input" type="email" autocomplete="email" placeholder="you@example.com" />
+				</label>
+			</div>
+			<label class="block">
+				<span class="eyebrow block mb-1">বার্তা</span>
+				<textarea
+					data-c-message
+					class="field-input h-36 resize-y py-2"
+					placeholder="আমাদের জানান আপনার মনে কী আছে…"
+					required
+				></textarea>
+			</label>
+			<div class="flex items-center gap-3">
+				<button data-c-submit type="submit" class="btn-primary">বার্তা পাঠান</button>
+				<p data-c-note class="text-xs text-mute"></p>
+			</div>
+		</form>
+
+		<p class="mt-6 text-xs text-mute leading-5">
+			ইমেইলে পছন্দ করেন? hello@trueonlinecompass.com-এ লিখুন। যেহেতু টুলগুলো সম্পূর্ণরূপে আপনার
+			ব্রাউজারে চলে, সেন্সর সমস্যা রিপোর্ট করার সময় আপনার ডিভাইস এবং ব্রাউজার অন্তর্ভুক্ত করুন।
+		</p>
+
+		<div class="card-soft mt-10 p-6">
+			<p class="text-sm font-medium text-ink mb-1">এই অনলাইন কম্পাস সম্পর্কে</p>
+			<p class="text-sm leading-6">
+				প্রকৃত অনলাইন কম্পাস একটি বিনামূল্যে, ব্রাউজার-ভিত্তিক টুলকিট: প্রকৃত এবং চৌম্বক উত্তর সহ একটি লাইভ
+				<a href="/" class="text-link underline decoration-link/30 hover:decoration-link">অনলাইন কম্পাস</a>,
+				GPS
+				<a href="/bn/location/" class="text-link underline decoration-link/30 hover:decoration-link">কো-অর্ডিনেট</a>,
+				একটি
+				<a href="/bn/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">কিবলা ফাইন্ডার</a>,
+				একটি
+				<a href="/bn/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">বেয়ারিং ক্যালকুলেটর</a>,
+				এবং একটি
+				<a href="/bn/sun/" class="text-link underline decoration-link/30 hover:decoration-link">সূর্যের অবস্থান ক্যালকুলেটর</a>।
+				সবকিছু স্থানীয়ভাবে চলে — বিনামূল্যে, গোপনীয়, ইনস্টল ছাড়াই। দেখুন
+				<a href="/bn/about/" class="text-link underline decoration-link/30 hover:decoration-link">আমাদের সম্পর্কে পৃষ্ঠা</a>
+				অথবা আমাদের
+				<a href="/bn/privacy/" class="text-link underline decoration-link/30 hover:decoration-link">গোপনীয়তা নীতি</a>
+				এবং
+				<a href="/bn/terms/" class="text-link underline decoration-link/30 hover:decoration-link">শর্তাবলী</a>।
+			</p>
+		</div>
+	</div>
+</Layout>
+
+<script>
+	const form = document.querySelector('[data-contact-form]');
+	const note = document.querySelector('[data-c-note]');
+	const submit = document.querySelector('[data-c-submit]');
+
+	form?.addEventListener('submit', (e) => {
+		e.preventDefault();
+		submit.disabled = true;
+		note.textContent = 'পাঠানো হচ্ছে…';
+		// No backend — this form is a placeholder until an endpoint is configured.
+		setTimeout(() => {
+			submit.disabled = false;
+			note.textContent = 'এই ফর্মটি এখনো সংযুক্ত হয়নি। আমাদের ইমেইল করুন hello@trueonlinecompass.com-এ';
+		}, 800);
+	});
+</script>

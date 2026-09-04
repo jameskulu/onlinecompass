@@ -1,0 +1,459 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Compass from '../../components/Compass.astro';
+
+const faq = [
+	{
+		q: 'Arah mana yang saya hadap - kompas online?',
+		a: 'Buka halaman ini di ponsel Anda dan pembacaan heading langsung di bawah jarum kompas menunjukkan derajat dan arah kompas (N, NE, E, SE, S, SW, W, NW) yang Anda hadapi secara akurat, diperbarui secara real time saat Anda berputar.',
+	},
+	{
+		q: 'Kompas online - di mana utara?',
+		a: 'Ujung merah jarum selalu menunjuk utara, yang terbaca 0°/360° di bagian atas jarum kompas. Beralih ke "Utara sejati" dan situs ini mengoreksi deklinasi magnetik di lokasi Anda sehingga utara sejajar dengan peta.',
+	},
+	{
+		q: 'Arah apa yang saya hadap - kompas online?',
+		a: 'Pegang ponsel Anda datar, berikan akses sensor, dan heading di bawah jarum kompas memberi tahu Anda arah yang Anda hadapi dalam bentuk derajat dan titik kompas - misalnya 274° atau W.',
+	},
+	{
+		q: 'Bagaimana cara mengetahui arah tanpa kompas secara online?',
+		a: 'Gunakan matahari: sekitar tengah hari lokal matahari berada tepat di selatan di belahan bumi utara dan tepat di utara di belahan bumi selatan. Alat Matahari di situs ini menunjukkan azimuth matahari yang tepat untuk lokasi mana pun, dan pencari Qibla juga berfungsi sebagai patokan arah tetap.',
+	},
+	{
+		q: 'Ke arah mana saya menghadap - kompas online?',
+		a: 'Berikan akses sensor, pegang ponsel datar menjauh dari logam, dan baca pembacaan heading. Pembacaan ini diperbarui secara terus-menerus saat Anda berputar, sehingga Anda selalu tahu ke arah mana Anda menghadap.',
+	},
+	{
+		q: 'Bagaimana cara menggunakan kompas online?',
+		a: 'Buka halaman ini di ponsel, ketuk "Aktifkan kompas langsung", pegang perangkat datar, dan baca heading. Jika jarum bergoyang, buat gerakan angka delapan beberapa kali untuk mengkalibrasi ulang magnetometer.',
+	},
+	{
+		q: 'Bisakah saya menggunakan ponsel saya sebagai kompas?',
+		a: 'Ya. Ponsel modern mengandung magnetometer, dan situs web ini mengubah sensor tersebut menjadi kompas langsung di perangkat browser Anda - tidak perlu mengunduh aplikasi atau menginstal apa pun.',
+	},
+	{
+	q: 'Di mana kompas saya di Google?',
+		a: 'Google Maps menampilkan kompas kecil di pojok kanan atas tampilan peta. Untuk heading langsung dalam derajat, cukup cari "kompas online" di Google dan buka halaman ini - halaman ini menjadi kompas segera setelah Anda memberikan akses sensor.',
+	},
+	{
+		q: 'Bisakah ponsel saya memberi tahu saya arah yang saya hadapi?',
+		a: 'Ya. Magnetometer ponsel Anda dikombinasikan dengan halaman ini memberikan heading langsung, dan situs ini secara otomatis mengoreksi deklinasi magnetik sehingga utara sesuai dengan peta Anda.',
+	},
+	{
+		q: 'Bagaimana cara melihat kompas di ponsel?',
+		a: 'Buka halaman ini di ponsel Anda dan kompas langsung muncul - tidak perlu aplikasi. Di Android, Google Maps juga menyertakan kompas, dan beberapa ponsel hadir dengan aplikasi kompas bawaan.',
+	},
+	{
+		q: 'Mana yang merupakan arah utara saya?',
+		a: 'Utara sejati adalah Kutub Utara geografis; utara magnetik adalah tempat jarum kompas menunjuk. Sudut antara keduanya (deklinasi) bervariasi menurut lokasi, dan situs ini mengoreksinya secara otomatis.',
+	},
+	{
+		q: 'Di mana kompas di ponsel saya?',
+		a: 'Banyak ponsel tidak menyertakan aplikasi kompas khusus - tetapi sensornya sudah tertanam. Buka situs web ini di ponsel Anda dan situs ini menjadi kompas tanpa perlu instalasi.',
+	},
+	{
+		q: 'Ponsel mana yang memiliki sensor kompas?',
+		a: 'Hampir semua ponsel pintar modern - setiap iPhone sejak iPhone 3GS dan hampir semua ponsel Android - menyertakan magnetometer, sehingga kompas online ini berfungsi di hampir semua perangkat.',
+	},
+	{
+		q: 'Mengapa heading saya loncat-loncat?',
+		a: 'Logam dan elektronik di sekitar memutar magnetometer. Ikuti langkah kalibrasi di atas, dan pastikan ponsel dalam posisi datar. Sedikit pergeseran beberapa derajat adalah hal normal di dalam ruangan.',
+	},
+	{
+		q: 'Apa perbedaan antara utara magnetik dan utara sejati?',
+		a: 'Utara magnetik adalah tempat jarum kompas Anda menunjuk. Utara sejati adalah Kutub Utara geografis, yang digunakan oleh peta dan navigasi. Sudut antara keduanya - deklinasi - bervariasi menurut lokasi, dan alat ini mengoreksinya secara otomatis.',
+	},
+	{
+		q: 'Mengapa situs meminta lokasi saya?',
+		a: 'Lokasi memungkinkan kami menghitung deklinasi magnetik, arah Qibla, dan posisi matahari dengan presisi. Ini bersifat opsional - setiap alat juga berfungsi dengan koordinat manual - dan data tidak pernah meninggalkan perangkat Anda.',
+	},
+	{
+		q: 'Apakah Anda menyimpan atau menjual lokasi saya?',
+		a: 'Tidak. Tidak ada pelacak, tidak ada analitik, dan tidak ada backend. Semua data sensor dan lokasi diproses secara lokal di perangkat browser Anda dan dihapus saat Anda meninggalkan halaman.',
+	},
+];
+---
+
+<Layout
+	path="/id/"
+	title="Kompas Online - Alat Gratis untuk Menemukan Utara"
+	description="Kompas online gratis untuk menemukan utara dari lokasi Anda. Heading langsung dengan utara sejati dan magnetik, deklinasi, pencari Qibla, kalkulator bearing, dan posisi matahari - tanpa instalasi, berfungsi di ponsel apa pun."
+	keywords="kompas online, alat kompas online, kompas online gratis, kompas online google, kompas online gratis, kompas online untuk menemukan utara, arah kompas online, kompas online geometri, alat kompas online geometri, kompas online untuk geometri, kompas matematika online, alat kompas online gratis, kompas online untuk qibla, kompas online langsung, kompas online kabba untuk menemukan utara dari lokasi saya, pencari qibla kompas online"
+>
+	<!-- ——— Hero ————————————————————————————— -->
+	<section id="compass" class="relative overflow-hidden">
+		<div class="mesh-gradient" aria-hidden="true"></div>
+		<div
+			class="relative mx-auto max-w-[1200px] px-4 pb-20 pt-16 text-center sm:px-6 md:pb-28 md:pt-24"
+		>
+			<div class="badge mx-auto">gratis · privat · tanpa instalasi</div>
+
+			<h1
+				class="mx-auto mt-6 max-w-3xl text-[36px] leading-[40px] text-ink sm:text-display-xl md:text-[56px] md:leading-[56px]"
+			>
+				Kompas yang menunjuk utara sejati, bukan hanya magnetik.
+			</h1>
+
+			<p class="mx-auto mt-4 max-w-xl text-body-lg text-body">
+				Heading perangkat real time dengan deklinasi otomatis, koordinat GPS, arah Qibla,
+				dan posisi matahari - semuanya di perangkat browser Anda. Tidak perlu instalasi, tidak ada yang diunggah.
+			</p>
+
+			<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+				<a href="/id/location/" class="btn-primary">Lokasi saya</a>
+				<a href="/id/compass/" class="btn-secondary">Buka kompas</a>
+			</div>
+
+			<div class="mx-auto mt-12 max-w-xl md:mt-16">
+				<Compass />
+			</div>
+		</div>
+	</section>
+
+	<!-- ——— Feature strip ————————————————————— -->
+	<section class="border-y border-hairline bg-canvas">
+		<div
+			class="mx-auto grid max-w-[1200px] grid-cols-1 gap-px overflow-hidden px-4 py-12 sm:grid-cols-3 sm:px-6"
+		>
+			<div class="p-4">
+				<p class="eyebrow mb-2">sejati vs magnetik</p>
+				<p class="text-sm text-body leading-6">
+					Deklinasi dihitung secara otomatis dari Model Magnetik Dunia - lihat kedua
+					heading sekaligus.
+				</p>
+			</div>
+			<div class="p-4">
+				<p class="eyebrow mb-2">privasi utama</p>
+				<p class="text-sm text-body leading-6">
+					Semua pemrosesan sensor dilakukan di perangkat. Tanpa akun, tanpa pelacakan, dan tidak ada yang
+					pernah meninggalkan perangkat browser Anda.
+				</p>
+			</div>
+			<div class="p-4">
+				<p class="eyebrow mb-2">berfungsi di mana saja</p>
+				<p class="text-sm text-body leading-6">
+					Chrome, Safari, dan Firefox di iOS dan Android, dengan cadangan heading GPS saat Anda
+					bergerak.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- ——— Tools grid ——————————————————————— -->
+	<section id="tools" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<p class="eyebrow">kumpulan alat</p>
+			<h2 class="mt-3 max-w-2xl text-display-lg text-ink">
+				Satu kompas, setiap bearing yang Anda butuhkan.
+			</h2>
+			<p class="mt-3 max-w-xl text-body-lg text-body">
+				Lima alat terfokus, masing-masing di halaman sendiri, semuanya berjalan secara lokal di perangkat Anda.
+			</p>
+
+			<div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+				<a href="/id/compass/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">kompas</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Heading langsung</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Jarum kompas 360° real time dengan jarum halus, utara magnetik dan sejati, serta umpan balik
+						akurasi langsung.
+					</p>
+				</a>
+				<a href="/id/location/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">lokasi</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Koordinat GPS</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Lintang, bujur, ketinggian, dan akurasi dalam desimal dan DMS - dengan salin, bagikan,
+						dan buka di Peta.
+					</p>
+				</a>
+				<a href="/id/qibla/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">qibla</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Arah ke Makkah</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Bearing lingkaran besar dan jarak ke Ka'bah dari koordinat Anda, akurat
+						hingga satu derajat.
+					</p>
+				</a>
+				<a href="/id/bearing/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">bearing</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Kalkulator jalur</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Bearing dan jarak lingkaran besar antara dua titik mana pun - sempurna untuk navigasi
+						dan perencanaan rute.
+					</p>
+				</a>
+				<a href="/id/sun/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">matahari</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Posisi matahari</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Azimuth dan elevasi matahari saat ini, ditambah terbit, tengah hari matahari, dan terbenam untuk
+						lokasi mana pun.
+					</p>
+				</a>
+				<div class="card-soft flex flex-col justify-center p-6">
+					<p class="text-sm text-body leading-6">
+						Tanpa akun. Tanpa pelacak. Setiap perhitungan berjalan di perangkat browser Anda dan dihapus
+						saat Anda meninggalkan halaman.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ——— How it works —————————————————————— -->
+	<section id="how-it-works" class="border-y border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<p class="eyebrow">cara kerja</p>
+			<h2 class="mt-3 max-w-2xl text-display-lg text-ink">Dirancang untuk akurasi.</h2>
+			<p class="mt-3 max-w-xl text-body-lg text-body">
+				Magnetometer, giroskop, dan akselerometer ponsel Anda memberi makan mesin heading yang dikompensasi kemiringan, dikoreksi berdasarkan Model Magnetik Dunia.
+			</p>
+
+			<div class="mt-12 grid gap-6 md:grid-cols-3">
+				<div class="card p-6">
+					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
+						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
+							<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" />
+							<path d="M15.5 8.5 13 13l-4.5 2.5L11 11z" fill="var(--color-error)" />
+						</svg>
+					</div>
+					<h3 class="text-display-sm text-ink">Fusi sensor</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Heading diperoleh dari data orientasi dan magnetometer, dilicinkan secara real time sehingga
+						jarum tetap stabil di tangan Anda.
+					</p>
+				</div>
+				<div class="card p-6">
+					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
+						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
+							<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" />
+							<path
+								d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"
+								stroke="currentColor"
+								stroke-width="1.5"
+							/>
+							<circle cx="12" cy="12" r="3" fill="currentColor" />
+						</svg>
+					</div>
+					<h3 class="text-display-sm text-ink">Koreksi utara sejati</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Deklinasi bervariasi dari −30° hingga +30° di seluruh planet. Kami menerapkan Model Magnetik
+						Dunia sehingga utara sejati akurat, di mana pun Anda berada.
+					</p>
+				</div>
+				<div class="card p-6">
+					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
+						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
+							<path
+								d="M12 21s7-5.1 7-11a7 7 0 1 0-14 0c0 5.9 7 11 7 11Z"
+								stroke="currentColor"
+								stroke-width="1.5"
+							/>
+							<circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5" />
+						</svg>
+					</div>
+					<h3 class="text-display-sm text-ink">Lokal karena desain</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Koordinat, bearing Qibla, dan perhitungan surya berjalan sepenuhnya di perangkat Anda. Lokasi
+						Anda tidak pernah menyentuh server.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ——— About the tool (SEO) ————————————————— -->
+	<section id="about" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow text-center">kompas online gratis</p>
+				<h2 class="mt-3 text-center text-display-lg text-ink">Apa itu kompas online?</h2>
+				<p class="mt-6 text-body-lg text-body">
+					<strong class="text-ink font-medium">Kompas online</strong> adalah kompas digital
+					yang berjalan langsung di perangkat browser web Anda - tidak perlu mengunduh aplikasi, tidak perlu
+					menginstal, dan tidak perlu membayar apa pun. Buka halaman ini di ponsel Anda dan dalam beberapa
+					detik, Anda memiliki kompas online gratis
+					yang menunjukkan heading langsung dalam derajat, mengarah ke utara dari mana pun
+					Anda berada, dan bahkan dapat mengoreksi dirinya sendiri untuk perbedaan antara utara magnetik dan utara
+					sejati.
+				</p>
+				<p class="mt-4 text-body text-body leading-7">
+					Karena kompas ini berada di browser, cara kerjanya persis sama apakah Anda di rumah, di
+					lapangan, atau di ruang kelas. Cukup cari "kompas online" di Google, buka situs ini,
+					dan sensor perangkat Anda mulai bekerja. Berbeda dengan kompas tradisional, kompas online
+					ini menggunakan magnetometer, giroskop, dan akselerometer ponsel Anda secara bersamaan, yang menghasilkan
+					<strong class="text-ink font-medium">arah kompas online</strong> yang lebih stabil dan andal
+					daripada jarum yang selalu melawan gravitasi dan drift.
+				</p>
+				<p class="mt-4 text-body text-body leading-7">
+					Setiap alat di situs ini dirancang untuk <strong class="text-ink font-medium">menemukan
+					utara secara online</strong> dan banyak lagi: pembacaan heading langsung dalam derajat, arah mata angin dan
+					mata angin antara (N, NE, E, SE, S, SW, W, NW), mode layar penuh sekali sentuh, dan
+					indikator akurasi sehingga Anda selalu tahu seberapa dapat dipercaya pembacaan tersebut. Dan karena
+					semuanya diproses secara lokal, lokasi Anda tidak pernah meninggalkan perangkat Anda - kompas online yang
+					benar-benar gratis, bukan yang mengumpulkan data.
+				</p>
+			</div>
+
+			<div class="mx-auto mt-12 grid max-w-4xl gap-8 md:grid-cols-2">
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">Kompas online untuk geometri dan matematika</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						<strong class="text-ink font-medium">Alat kompas online</strong> juga merupakan
+						alat bantu mengajar. Dalam geometri, kompas digunakan untuk menggambar lingkaran dan busur dan untuk mengukur
+						jarak; di situs ini, kompas online untuk geometri bekerja dengan matematika bukan
+						dengan pensil. Ukur sudut arah mana pun, konversikan antara bearing dan
+						titik kompas, dan gunakan kalkulator bearing untuk menemukan arah dan
+						jarak lingkaran besar antara dua koordinat mana pun di Bumi. Ini adalah alat kompas online
+						matematika yang mengubah sudut abstrak menjadi heading yang dapat Anda lihat di jarum kompas.
+					</p>
+					<p class="mt-3 text-sm text-body leading-6">
+						Siswa dapat memeriksa pekerjaan mereka dengan kompas magnetik nyata, dan guru dapat menggunakan
+						jarum kompas langsung untuk menjelaskan utara sejati versus utara magnetik dengan contoh yang bergerak
+						saat Anda memutar ponsel. Alat kompas online gratis ini digunakan setiap hari untuk tugas sederhana
+						juga - mengorientasi peta, menyejajarkan panel surya, atau memeriksa arah ruangan menghadap.
+					</p>
+				</div>
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">Kompas online untuk Qibla - temukan Ka'bah dari lokasi saya</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Situs ini menyertakan <strong class="text-ink font-medium">pencari Qibla kompas online</strong>
+						khusus yang menghitung arah ke Ka'bah di Makkah dari
+						koordinat lokasi Anda saat ini. Di mana pun Anda berada, pencari Qibla memberikan bearing dalam
+						derajat dan arah kompas, ditambah jarak lingkaran besar ke Makkah. Bagi banyak
+						perjalanan, frasa yang dicari adalah "kompas online kabba untuk menemukan utara dari
+						lokasi saya" - dan halaman ini menjawabnya: tentukan lokasi Anda, baca bearing Qibla,
+						lalu ikuti di jarum kompas langsung.
+					</p>
+					<p class="mt-3 text-sm text-body leading-6">
+						Karena kompas online untuk Qibla berjalan sepenuhnya di perangkat Anda, tidak ada
+						server, tidak ada akun, dan tidak ada lokasi yang disimpan di mana pun. Masukkan koordinat secara manual, atau
+						berikan akses lokasi satu kali dan bearing dihitung secara instan dengan ketelitian
+						fracio derajat.
+					</p>
+				</div>
+			</div>
+
+			<div class="mx-auto mt-12 max-w-3xl">
+				<h3 class="text-display-sm text-ink">Mengapa memilih kompas online?</h3>
+				<p class="mt-3 text-body text-body leading-7">
+					Kompas fisik adalah instrumen yang luar biasa, tetapi kompas online digital menambahkan
+					akurasi langsung: tidak hanya menunjukkan utara, tetapi juga derajat tepat dari heading mana pun, mengoreksi
+					deklinasi magnetik di mana saja di Bumi, dan dapat dipegang dalam orientasi apa pun. Alat kompas online
+					gratis di situs ini menggabungkan kompas langsung tersebut dengan semua yang dibutuhkan navigator -
+					koordinat GPS dalam desimal dan DMS, arah Qibla, kalkulator bearing, dan posisi
+					matahari untuk orientasi siang hari. Alat ini cepat, privat, dan siap kapan pun Anda perlu
+					menemukan utara.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- ——— Calibration ——————————————————————— -->
+	<section id="calibration" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="grid gap-10 lg:grid-cols-2 lg:items-start">
+				<div>
+					<p class="eyebrow">kalibrasi</p>
+					<h2 class="mt-3 text-display-lg text-ink">Dapatkan pembacaan paling akurat.</h2>
+					<p class="mt-3 text-body-lg text-body">
+						Magnetometer ponsel sensitif terhadap logam dan medan magnet di sekitar. Beberapa
+						detik kalibrasi mengubah jarum yang bergerak menjadi heading yang dapat diandalkan.
+					</p>
+				</div>
+				<ol class="card-soft divide-y divide-hairline">
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">01</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Pegang ponsel datar</p>
+							<p class="mt-1 text-sm text-body">Jaga layar sejajar dengan tanah, di telapak tangan Anda atau di permukaan yang stabil.</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">02</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Buat gerakan angka delapan</p>
+							<p class="mt-1 text-sm text-body">Ayunkan ponsel perlahan dalam gerakan angka delapan beberapa kali, lalu diam.</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">03</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Jauhkan dari gangguan</p>
+							<p class="mt-1 text-sm text-body">Jauhkan dari laptop, ponsel, magnet, dan meja logam sebelum mengambil pembacaan.</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">04</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Konfirmasi dengan matahari</p>
+							<p class="mt-1 text-sm text-body">Gunakan penanda posisi matahari di jarum kompas sebagai cross-check independen pada siang hari.</p>
+						</div>
+					</li>
+				</ol>
+			</div>
+		</div>
+	</section>
+
+	<!-- ——— FAQ ————————————————————————————————— -->
+	<section id="faq" class="border-t border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow text-center">faq</p>
+			<h2 class="mt-3 text-center text-display-lg text-ink">Pertanyaan, dijawab.</h2>
+
+			<div class="mt-10 space-y-3">
+				{faq.map((f) => (
+					<details class="card overflow-hidden">
+						<summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-4 text-sm font-medium text-ink">
+							{f.q}
+							<svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0 text-mute" fill="none" aria-hidden="true">
+								<path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+							</svg>
+						</summary>
+						<p class="px-6 pb-5 text-sm text-body leading-6">{f.a}</p>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- ——— CTA band ————————————————————————————— -->
+	<section class="bg-ink text-on-primary">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 text-center sm:px-6 md:py-24">
+			<p class="font-mono text-xs uppercase tracking-[0.08em] text-on-primary/60">siap saat Anda siap</p>
+			<h2 class="mt-4 text-display-lg text-on-primary">Tentukan arah Anda.</h2>
+			<p class="mx-auto mt-3 max-w-lg text-body-lg text-on-primary/70">
+				Arahkan ponsel ke utara, periksa Qibla Anda, atau tentukan jalur - semuanya dalam satu alat gratis.
+			</p>
+			<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+				<a href="/id/compass/" class="btn-primary bg-on-primary text-primary hover:opacity-85">Buka kompas</a>
+			</div>
+		</div>
+	</section>
+
+	<script type="application/ld+json" set:html={JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'FAQPage',
+		mainEntity: faq.map((f) => ({
+			'@type': 'Question',
+			name: f.q,
+			acceptedAnswer: {
+				'@type': 'Answer',
+				text: f.a,
+			},
+		})),
+	})} />
+</Layout>
+
+<style>
+	details summary::-webkit-details-marker {
+		display: none;
+	}
+	details[open] summary svg {
+		transform: rotate(180deg);
+	}
+	details summary svg {
+		transition: transform 0.2s ease;
+	}
+</style>

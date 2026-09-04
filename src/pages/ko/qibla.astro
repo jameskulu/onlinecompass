@@ -1,0 +1,129 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import QiblaFinder from '../../components/QiblaFinder.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="키블라 finder 온라인 — 내 위치에서 카바 방향"
+	description="키블라용 온라인 나침반 — 내 위치에서 카바 방향을 찾으세요. 대원 방위각과 메카까지의 거리가 포함된 키블라 finder, 브라우저에서 개인정보를 보호하며 계산."
+	path="/ko/qibla/"
+	keywords="키블라용 온라인 나침반, 키블라 finder 온라인 나침반, 온라인 나침반 카바 내 위치에서 북쪽 찾기, 키블라 방향, 카바 방향, 내 위치에서 키블라 찾기"
+>
+	<PageHero
+		eyebrow="키블라 finder"
+		title="어디에서든 카바를 향하세요."
+		description="현재 좌표에서 메카까지의 대원 방위각이 기기에서 계산됩니다 — 도 단위로 정확하며, 설계부터 개인정보 보호."
+	>
+		<QiblaFinder />
+	</PageHero>
+
+	<section class="border-y border-hairline bg-canvas">
+		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-2">
+			<div>
+				<p class="eyebrow mb-2">계산 방법</p>
+				<p class="text-sm text-body leading-6">
+					방위각은 현재 위치와 카바(21.4225° N, 39.8262° E) 사이의 가장 짧은 대원 경로를
+					사용합니다. 지구의 곡률을 고려하기 때문에 평면 나침반 장미와 다릅니다.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">실제로 활용하기</p>
+				<p class="text-sm text-body leading-6">
+					방위각을 확인한 다음 나침반 도구를 열고 향이 일치할 때까지 회전하세요.
+					또는 야외에서 금속에서 멀리 보정하면 최고의 정확도를 얻을 수 있습니다.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">키블라 finder</p>
+			<h2 class="mt-3 text-display-lg text-ink">내 위치에서 키블라 방향을 찾으세요</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				<strong class="text-ink font-medium">키블라 finder 온라인</strong>은 기도를 위해
+				향해야 할 정확한 방향을 알려줍니다 — 현재 위치에서 사우디아라비아 메카의
+				카바(21.4225° N, 39.8262° E)까지의 방위각. 이 페이지는 실시간 위치 또는 입력한
+				좌표에서 해당 방향을 계산하여 도수의 방위각과 나침반 방향, 메카까지의 대원 거리를
+				함께 표시합니다. 앱도, 설치도, 계정도 필요 없습니다 — 페이지를 열고 기도할 방향을
+				알면 됩니다.
+			</p>
+			<p class="mt-4 leading-7">
+				전 세계 무슬림은 하루 다섯 번 카바를 향해 기도하며, 방향을 올바르게 잡는 것이
+				중요합니다. 여행 중이든, 새로 온 지역이든, 집에서 방향을 확인하고 싶든, 이 무료
+				<strong class="text-ink font-medium">키블라 finder 온라인 나침반</strong>이 몇 초
+				안에 정확한 답을 제공합니다.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">카바 방향 계산 방법</h3>
+			<p class="mt-3 leading-7">
+				<strong class="text-ink font-medium">내 위치에서 카바까지의 방향</strong>은 평면
+				지도의 지름길이 아닙니다. 지구는 곡률이 있기 때문에 올바른 방위각은 두 지점 사이의
+				가장 짧은 대원 경로를 따릅니다. 런던에서 메카까지의 방위각은 약 118°, 뉴욕에서 약
+				58°, 자카르타에서 약 295°, 시드니에서 북쪽에서 서쪽으로 약 295°입니다 — 이 수치는
+				많은 사람들에게 놀라움을 주는데, 그 이유는 이것이 대원 방위각이지 직선 지도 방향이
+				아니기 때문입니다. 이 도구는 항공기 내비게이션에 사용되는 것과 동일한 구면 삼각법을
+				수행하므로 행성상 어디에서든 도 단위로 정확한 결과를 얻습니다.
+			</p>
+			<p class="mt-4 leading-7">
+				계산이 완전히 브라우저에서 이루어지기 때문에 좌표는 서버로 전송되지 않습니다.
+				많은 온라인 키블라 도구는 위치를 은밀히 기록하지만, 이 도구는 그렇지 않습니다.
+				이것은 프라이버시와 정밀함을 동시에 갖춘 키블라용 온라인 나침반입니다.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">키블라 방위각 실전 활용</h3>
+			<p class="mt-3 leading-7">
+				방위각을 얻으면 다음 단계는 실제로 향할 수 있는 방향으로 변환하는 것입니다. 가장 간단한
+				방법: 도수로 된 방위각을 확인하고,
+				<a href="/ko/" class="text-link underline decoration-link/30 hover:decoration-link">실시간 온라인 나침반</a>을
+				연 다음 향이 키블라 방위각과 일치할 때까지 회전하세요. 나침반 다이얼이 실시간으로 향을
+				표시하므로 일치시키는 데 몇 초면 됩니다.
+			</p>
+			<p class="mt-4 leading-7">
+				최상의 결과를 얻으려면 두 도구 모두에서 "위치 사용"을 탭하여 자극편위가 보정되고
+				읽기가 진북 기반이 되도록 하세요. 나침반이 없으면 태ULK으로도 방향을 잡을 수 있습니다:
+				북반구에서는 현지 정오에 태양이 정확히 남쪽, 남반구에서는 정확히 북쪽에 있습니다 —
+				방위각으로 미세 조정하기 전에 일반적인 방향을 파악하는 신뢰할 수 있는 낮 시간의
+				참조점입니다.
+			</p>
+
+			<div class="mt-10 grid gap-4 sm:grid-cols-2">
+				<div class="card-soft p-5">
+					<h4 class="text-sm font-medium text-ink mb-1">자주 검색하는 문구: "온라인 나침반 카바 내 위치에서 북쪽 찾기"</h4>
+					<p class="text-sm leading-6">
+						이 문구가 바로 이 도구가 해결하는 문제입니다. 위치를 확인하고, 키블라
+						방위각을 읽은 다음 나침반에서 따라가세요 — 지구상 어떤 위치에서든
+						무료 키블라용 온라인 나침반.
+					</p>
+				</div>
+				<div class="card-soft p-5">
+					<h4 class="text-sm font-medium text-ink mb-1">메카까지의 거리</h4>
+					<p class="text-sm leading-6">
+						방위각과 함께 카바까지의 대원 거리를 제공합니다 — 여행 계획과 거리에 따른
+						방위각 변화를 이해하는 데 유용합니다.
+					</p>
+				</div>
+			</div>
+
+			<h3 class="mt-10 text-display-sm text-ink">위치에 따라 변하는 키블라 방향</h3>
+			<p class="mt-3 leading-7">
+				<strong class="text-ink font-medium">키블라 방향</strong>은 완전히 현재 위치에 따라
+				달라집니다. 도시마다, 심지어 거리마다 변하기 때문에 몇 년 전 다른 나라에서 확인한
+				값이 다른 곳에서는 거의 올바르지 않습니다. 그래서 실시간 계산기가 신뢰할 수 있는
+				선택입니다: 매번 현재 좌표에 대해 새로운 방위각을 계산합니다. 몇백 킬로미터를
+				이동하면 방위각이 몇 도 정도 변할 수 있습니다 — 이 페이지가 자동으로 따라갑니다.
+			</p>
+			<p class="mt-4 leading-7">
+				이 도구는 수동 좌표로도 작동하여 곧 방문할 장소의 방향을 확인하거나 브라우저
+				권한이 꺼져 있을 때 유용합니다. 도시나 좌표를 입력하면 키블라 finder가 동일한
+				정확한 방위각과 거리를 반환합니다. "내 위치에서 키블라를 찾아줘"라는 질문이든,
+				이 페이지가 개인정보를 보호하면서 정확하고 무료로 답을 제공합니다.
+			</p>
+		</div>
+	</section>
+
+	<RelatedTools current="/qibla/" />
+</Layout>

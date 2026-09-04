@@ -1,0 +1,90 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+	title="İletişim"
+	description="True Çevrimiçi Pusula ekibiyle iletişime geçin — geri bildirim, hata raporları ve öneriler."
+	path="/tr/contact/"
+>
+	<div class="mx-auto max-w-3xl px-4 py-16 sm:px-6 md:py-24">
+		<p class="eyebrow">iletişim</p>
+		<h1 class="mt-4 text-display-lg text-ink">Bize ulaşın.</h1>
+		<p class="mt-4 text-body-lg text-body">
+			Bir hata mı buldunuz, bir özellik mi istiyorsunuz, ya da sadece geri bildiriminiz mi var? Her şeyi okuyoruz.
+		</p>
+
+		<form data-contact-form class="card-lg mt-10 p-6 md:p-8 space-y-5">
+			<div class="grid gap-5 sm:grid-cols-2">
+				<label class="block">
+					<span class="eyebrow block mb-1">isim</span>
+					<input data-c-name class="field-input" type="text" autocomplete="name" placeholder="Adınız" />
+				</label>
+				<label class="block">
+					<span class="eyebrow block mb-1">e-posta</span>
+					<input data-c-email class="field-input" type="email" autocomplete="email" placeholder="siz@ornek.com" />
+				</label>
+			</div>
+			<label class="block">
+					<span class="eyebrow block mb-1">mesaj</span>
+				<textarea
+					data-c-message
+					class="field-input h-36 resize-y py-2"
+					placeholder="Aklınızda olanı bize yazın…"
+					required
+				></textarea>
+			</label>
+			<div class="flex items-center gap-3">
+				<button data-c-submit type="submit" class="btn-primary">Mesajı gönder</button>
+				<p data-c-note class="text-xs text-mute"></p>
+			</div>
+		</form>
+
+		<p class="mt-6 text-xs text-mute leading-5">
+			E-posta mı tercih ediyorsunuz? hello@trueonlinecompass.com adresine yazın. Araçlar
+			tamamen tarayıcınızda çalıştığı için, sensör sorunları bildirirken lütfen cihazınızı ve
+			tarayıcınızı ekleyin.
+		</p>
+
+		<div class="card-soft mt-10 p-6">
+			<p class="text-sm font-medium text-ink mb-1">Bu çevrimiçi pusula hakkında</p>
+			<p class="text-sm leading-6">
+				True Çevrimiçi Pusula, ücretsiz, tarayıcı tabanlı bir araç takımıdır: gerçek ve
+				manyetik kuzey ile canlı
+				<a href="/" class="text-link underline decoration-link/30 hover:decoration-link">çevrimiçi pusula</a>,
+				GPS
+				<a href="/tr/location/" class="text-link underline decoration-link/30 hover:decoration-link">koordinatları</a>,
+				bir
+				<a href="/tr/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">Kible bulucu</a>,
+				bir
+				<a href="/tr/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">açı hesaplayıcı</a>
+				ve bir
+				<a href="/tr/sun/" class="text-link underline decoration-link/30 hover:decoration-link">güneş pozisyonu hesaplayıcısı</a>.
+				Her şey yerel olarak çalışır — ücretsiz, gizli, kurulum yok. Daha fazla bilgi için
+				<a href="/tr/about/" class="text-link underline decoration-link/30 hover:decoration-link">hakkında sayfamıza</a>
+				bakın veya
+				<a href="/tr/privacy/" class="text-link underline decoration-link/30 hover:decoration-link">gizlilik politikamızı</a>
+				ve
+				<a href="/tr/terms/" class="text-link underline decoration-link/30 hover:decoration-link">kullanım koşullarımızı</a>
+				okuyun.
+			</p>
+		</div>
+	</div>
+</Layout>
+
+<script>
+	const form = document.querySelector('[data-contact-form]');
+	const note = document.querySelector('[data-c-note]');
+	const submit = document.querySelector('[data-c-submit]');
+
+	form?.addEventListener('submit', (e) => {
+		e.preventDefault();
+		submit.disabled = true;
+		note.textContent = 'Gönderiliyor…';
+		// No backend — this form is a placeholder until an endpoint is configured.
+		setTimeout(() => {
+			submit.disabled = false;
+			note.textContent = 'Bu form henüz bağlı değil. Bunun yerine bize hello@trueonlinecompass.com adresinden e-posta gönderin.';
+		}, 800);
+	});
+</script>

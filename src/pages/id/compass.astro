@@ -1,0 +1,165 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Compass from '../../components/Compass.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="Alat Kompas Online - Heading Utara Sejati & Magnetik Langsung"
+	description="Gunakan alat kompas online gratis ini untuk heading 360° langsung di ponsel Anda. Arah kompas online dengan utara magnetik dan sejati, deklinasi otomatis, umpan balik akurasi, dan panduan kalibrasi."
+	path="/id/compass/"
+	keywords="kompas online, alat kompas online, alat kompas online gratis, kompas online langsung, arah kompas online, kompas online untuk menemukan utara, kompas online gratis"
+>
+	<section class="relative overflow-hidden">
+		<div class="mesh-gradient" aria-hidden="true"></div>
+		<div class="relative">
+			<PageHero
+				eyebrow="kompas langsung"
+				title="Ponsel Anda adalah kompasnya."
+				description="Berikan akses sensor dan halaman ini mengubah ponsel Anda menjadi kompas digital yang presisi - jarum kompas 360°, jarum halus, dan pembacaan utara magnetik serta sejati."
+			>
+				<Compass />
+			</PageHero>
+		</div>
+	</section>
+
+	<section class="border-y border-hairline bg-canvas">
+		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-3">
+			<div>
+				<p class="eyebrow mb-2">cara membacanya</p>
+				<p class="text-sm text-body leading-6">
+					Ujung merah jarum selalu menunjuk utara. Putar tubuh Anda hingga penanda tetap di atas
+					bertemu dengan arah yang Anda inginkan - heading terbaca di bagian atas.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">sejati vs magnetik</p>
+				<p class="text-sm text-body leading-6">
+					Beralihlah antara heading. Utara sejati menerapkan deklinasi magnetik lokasi Anda sehingga
+					peta, navigasi, dan bearing semuanya sejajar.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">akurasi</p>
+				<p class="text-sm text-body leading-6">
+					Indikator status menunjukkan sumber sensor langsung dan drift perkiraan. Jika pembacaan bergoyang,
+				Ikuti langkah kalibrasi di bawah jarum kompas.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">alat kompas online</p>
+			<h2 class="mt-3 text-display-lg text-ink">Temukan utara secara online - secara instan, dari perangkat browser Anda</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				<strong class="text-ink font-medium">Kompas online</strong> adalah kompas digital yang
+				berfungsi langsung di perangkat browser web Anda. Tanpa toko aplikasi, tanpa unduhan, tanpa akun - Anda membuka
+				halaman ini, memberikan akses sensor, dan ponsel Anda menjadi kompas online gratis dengan heading langsung 360°
+				yang terbaca. Ini adalah cara tercepat untuk <strong class="text-ink font-medium">menemukan
+				utara secara online</strong> apakah Anda di rumah, sedang hiking, berkemah, atau hanya mencoba
+				mengetahui arah apartemen Anda menghadap.
+			</p>
+			<p class="mt-4 leading-7">
+				Kompas membaca sensor perangkat Anda secara real time. Ujung merah jarum selalu
+				menunjuk utara - 0° atau 360° di bagian atas jarum kompas - dan heading muncul di bawah dalam
+				derajat bersama titik kompas (N, NE, E, SE, S, SW, W, NW). Saat Anda berputar, jarum kompas
+				berputar bersama Anda, sehingga <strong class="text-ink font-medium">arah kompas online</strong>
+				yang Anda hadapi selalu terlihat sekilas.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Utara sejati vs utara magnetik di kompas online</h3>
+			<p class="mt-3 leading-7">
+				Kebanyakan kompas ponsel menampilkan <strong class="text-ink font-medium">utara magnetik</strong> -
+				tempat jarum ditarik oleh medan magnet Bumi. Tetapi peta, GPS, dan navigasi semuanya
+				menggunakan <strong class="text-ink font-medium">utara sejati</strong>, Kutub Utara geografis.
+				Sudut antara keduanya, yang disebut <strong class="text-ink font-medium">deklinasi
+				magnetik</strong>, bervariasi dari kira-kira −30° hingga +30° tergantung di mana Anda berada di
+				planet ini. Di beberapa kota selisihnya beberapa derajat; di kota lain lebih dari lima belas. Abaikan
+				deklinasi dan bearing Anda bisa meleset cukup jauh.
+			</p>
+			<p class="mt-4 leading-7">
+				Alat kompas online ini menangani hal itu untuk Anda. Alat ini menerapkan Model Magnetik Dunia menggunakan
+				lokasi Anda, sehingga beralih antara utara magnetik dan sejati cukup sekali sentuh. Saat Anda beralih ke
+				utara sejati, heading sejajar dengan grid pada peta - sangat penting untuk navigasi,
+				geocaching, menyejajarkan piringan antena, atau mengikuti bearing yang Anda hitung di tempat lain. Untuk hasil
+				paling akurat, ketuk "Gunakan lokasi untuk deklinasi" agar koreksi dihitung untuk
+				koordinat tepat Anda bukan perkiraan kasar.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Seberapa akurat kompas browser?</h3>
+			<p class="mt-3 leading-7">
+				Ponsel mengandung magnetometer, akselerometer, dan giroskop. Kompas online yang baik menggabungkan
+				sensor-sensor tersebut untuk menghasilkan heading yang dikompensasi kemiringan - artinya tetap cukup stabil
+				bahkan saat Anda tidak memegang ponsel sempurna datar. Halaman ini menunjukkan indikator
+				akurasi dan sumber sensor langsung, sehingga Anda dapat melihat seberapa yakin pembacaannya.
+			</p>
+			<p class="mt-4 leading-7">
+				Untuk hasil terbaik: pegang ponsel datar menjauh dari tubuh Anda, jauhkan dari
+				logam, speaker, dan perangkat elektronik, dan buat gerakan angka delapan beberapa kali jika
+				jarum bergoyang. Kalibrasi hanya butuh beberapa detik dan membuat perbedaan nyata. Di dalam ruangan, perkirakan
+				beberapa derajat goyangan; di luar ruangan, menjauh dari logam, kompas online gratis seperti ini
+				biasanya sesuai dengan kompas fisik dalam satu atau dua derajat.
+			</p>
+
+			<div class="mt-10 grid gap-4 sm:grid-cols-2">
+				<div class="card-soft p-5">
+					<h4 class="text-sm font-medium text-ink mb-1">Kapan Anda membutuhkan alat kompas online gratis</h4>
+					<p class="text-sm leading-6">
+						Mengorientasi peta, menyejajarkan panel surya, memeriksa orientasi jendela untuk tanaman,
+						memverifikasi arah foto, mengajarkan geometri, atau berlatih navigasi -
+						semuanya tanpa membawa kompas fisik.
+					</p>
+				</div>
+				<div class="card-soft p-5">
+					<h4 class="text-sm font-medium text-ink mb-1">Yang membuat kompas ini berbeda</h4>
+					<p class="text-sm leading-6">
+						Tanpa instalasi, tanpa iklan, tanpa pelacakan, dan tidak ada yang diunggah. Semuanya berjalan secara lokal di
+						perangkat Anda, dan pembacaan dikoreksi untuk utara sejati secara otomatis.
+					</p>
+				</div>
+			</div>
+
+			<h3 class="mt-10 text-display-sm text-ink">Setiap cara menggunakan kompas online</h3>
+			<p class="mt-3 leading-7">
+				Kegunaannya melampaui sekadar mengetahui arah utara. Pendaki dan pelari lintas alat menggunakan kompas online
+				untuk mengorientasi peta sebelum berangkat. Fotografer menggunakannya untuk merencanakan di mana matahari
+				akan terbit dan terbenam. Orang berkemah menggunakannya untuk menghadapkan tenda ke arah matahari pagi. Profesional
+				properti memeriksa arah ruangan menghadap, dan tukang kebun menyejajarkan bedengan untuk mendapatkan cahaya
+				maksimum. Siswa menggunakan kompas online geometri ini untuk melihat sudut hidup di
+				jarum kompas. Dan dengan tombol layar penuh, Anda dapat memegang jarum kompas dengan lengan terjulur dan menyejajarkannya dengan
+				tanda jarak yang jauh - persis seperti kompas genggam.
+			</p>
+			<p class="mt-4 leading-7">
+				Karena semuanya dihitung di perangkat browser Anda, Anda dapat menggunakan kompas online langsung ini dari
+				mana saja di dunia - dan kompas mengoreksi deklinasi magnetik di mana pun Anda berada, sehingga
+				utara sejati selalu akurat. Kombinasi kompas online gratis untuk menemukan utara,
+				heading langsung, koreksi deklinasi, dan privasi sulit ditemukan di tempat lain.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Kombinasikan kompas dengan seluruh kumpulan alat</h3>
+			<p class="mt-3 leading-7">
+				Kompas ini adalah bagian dari suite navigasi lengkap. Gunakan
+				<a href="/id/location/" class="text-link underline decoration-link/30 hover:decoration-link">alat koordinat GPS</a>
+				untuk menangkap posisi tepat Anda, 
+				<a href="/id/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">kalkulator bearing</a>
+				untuk merencanakan jalur antara dua titik,
+				<a href="/id/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">pencari Qibla</a>
+				untuk menghadap Ka'bah, dan
+				<a href="/id/sun/" class="text-link underline decoration-link/30 hover:decoration-link">kalkulator posisi matahari</a>
+				untuk melacak jalur surya. Setiap alat bekerja bersama, dan setiap alat bersifat privat, gratis, dan
+				berfungsi di ponsel apa pun dengan browser.
+			</p>
+			<p class="mt-4 leading-7">
+				Siap menemukan utara? Berikan akses sensor di atas, ikuti langkah kalibrasi jika jarum
+				bergoyang, dan nikmati salah satu alat kompas online paling akurat yang tersedia -
+				tanpa menginstal satu hal pun.
+			</p>
+		</div>
+	</section>
+
+	<RelatedTools current="/" />
+</Layout>

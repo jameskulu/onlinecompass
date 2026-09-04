@@ -1,0 +1,52 @@
+---
+import { languages } from '../i18n/ui';
+import { getLangFromUrl } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const currentPath = Astro.url.pathname;
+const segments = currentPath.split('/').filter(Boolean);
+const pathWithoutLang = segments.length > 1 ? '/' + segments.slice(1).join('/') + (segments.length > 1 && !segments[segments.length - 1].endsWith('/') ? '/' : '') : '/';
+---
+
+<div class="relative" data-lang-picker>
+	<button
+		data-lang-toggle
+		class="flex h-8 items-center gap-1.5 rounded-full border border-hairline bg-canvas px-3 text-xs font-medium text-body transition-colors hover:bg-canvas-soft-2 hover:text-ink"
+		aria-label="Select language"
+	>
+		<svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+			<path d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04z" fill="currentColor"/>
+		</svg>
+		{languages[lang]}
+		<svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+			<path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+		</svg>
+	</button>
+	<div data-lang-dropdown class="hidden absolute right-0 top-full z-50 mt-2 w-48 max-h-80 overflow-y-auto rounded-lg border border-hairline bg-canvas shadow-float">
+		{Object.entries(languages).map(([code, label]) => (
+			<a
+				href={`/${code}/${pathWithoutLang}`}
+				class:list={[
+					'block px-4 py-2.5 text-sm transition-colors hover:bg-canvas-soft-2',
+					lang === code ? 'font-medium text-ink bg-canvas-soft' : 'text-body',
+				]}
+			>
+				{label}
+			</a>
+		))}
+	</div>
+</div>
+
+<script>
+	const toggle = document.querySelector('[data-lang-toggle]');
+	const dropdown = document.querySelector('[data-lang-dropdown]');
+
+	toggle?.addEventListener('click', (e) => {
+		e.stopPropagation();
+		dropdown?.classList.toggle('hidden');
+	});
+
+	document.addEventListener('click', () => {
+		dropdown?.classList.add('hidden');
+	});
+</script>

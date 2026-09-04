@@ -1,0 +1,464 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Compass from '../../components/Compass.astro';
+
+const faq = [
+	{
+		q: 'In welche Richtung schaue ich — Online-Kompass?',
+		a: 'Öffnen Sie diese Seite auf Ihrem Smartphone und die live-Anzeige unter der Zifferblatt zeigt den genauen Grad und die Kompassrichtung (N, NO, O, SO, S, SW, W, NW), in die Sie schauen, in Echtzeit aktualisiert, während Sie sich drehen.',
+	},
+	{
+		q: 'Online-Kompass — wo ist Norden?',
+		a: 'Das rote Ende der Nadel zeigt immer nach Norden, der oben auf dem Zifferblatt bei 0°/360° liegt. Schalten Sie auf „Wahren Norden" um, und die Seite korrigiert die magnetische Deklination an Ihrem Standort, sodass der Norden mit Karten übereinstimmt.',
+	},
+	{
+		q: 'In welche Richtung schaue ich — Online-Kompass?',
+		a: 'Halten Sie Ihr Smartphone flach, gewähren Sie den Sensorzugriff, und die Kursanzeige unter dem Zifferblatt zeigt Ihnen die Richtung, in die Sie schauen, sowohl in Grad als auch als Kompasspunkt — zum Beispiel 274° oder W.',
+	},
+	{
+		q: 'Wie erfahre ich die Richtung ohne Kompass online?',
+		a: 'Nutzen Sie die Sonne: gegen Mittag Localzeit steht sie im nördlichen Halbkugel genau im Süden und im südlichen Halbkugel genau im Norden. Das Sonnen-Werkzeug dieser Seite zeigt den genauen Solaren Azimut für jeden Standort, und der Qibla-Finder dient ebenfalls als feste Referenzrichtung.',
+	},
+	{
+		q: 'In welche Richtung schaue ich — Online-Kompass?',
+		a: 'Gewähren Sie den Sensorzugriff, halten Sie das Smartphone flach fern von Metall, und lesen Sie die Kursanzeige ab. Sie wird beim Drehen kontinuierlich aktualisiert, sodass Sie immer wissen, in welche Richtung Sie schauen.',
+	},
+	{
+		q: 'Wie benutzt man einen Online-Kompass?',
+		a: 'Öffnen Sie diese Seite auf einem Smartphone, tippen Sie auf „Live-Kompass aktivieren", halten Sie das Gerät flach und lesen Sie den Kurs ab. Wenn die Nadel driftet, zeichnen Sie einige Male eine Acht, um das Magnetometer zu kalibrieren.',
+	},
+	{
+		q: 'Kann ich mein Smartphone als Kompass benutzen?',
+		a: 'Ja. Moderne Smartphones verfügen über ein Magnetometer, und diese Website macht diesen Sensor direkt in Ihrem Browser zum Kompass — keine App zum Herunterladen, nichts zu installieren.',
+	},
+	{
+		q: 'Wo ist mein Kompass in Google?',
+		a: 'Google Maps zeigt einen kleinen Kompass oben rechts in der Kartenansicht. Für einen live-Kurs in Grad suchen Sie einfach „Online-Kompass" bei Google und öffnen Sie diese Seite — sie wird zum Kompass, sobald Sie den Sensorzugriff gewähren.',
+	},
+	{
+		q: 'Kann mein Smartphone mir sagen, in welche Richtung ich schaue?',
+		a: 'Ja. Das Magnetometer Ihres Smartphones kombiniert mit dieser Seite liefert einen live-Kurs, und die Seite korrigiert automatisch die magnetische Deklination, sodass der Norden mit Ihren Karten übereinstimmt.',
+	},
+	{
+	q: 'Wie kann ich einen Kompass auf dem Handy sehen?',
+		a: 'Öffnen Sie diese Seite auf Ihrem Smartphone, und der Kompass erscheint sofort — keine App nötig. Bei Android zeigt auch Google Maps einen Kompass, und einige Smartphones haben eine integrierte Kompass-App.',
+	},
+	{
+		q: 'Wo ist meine Norden-Richtung?',
+		a: 'Wahrer Norden ist der geografische Nordpol; magnetischer Norden ist die Richtung, in die eine Kompassnadel zeigt. Der Winkel zwischen beiden (Deklination) variiert je nach Standort, und diese Seite korrigiert ihn automatisch.',
+	},
+	{
+		q: 'Wo ist der Kompass auf meinem Smartphone?',
+		a: 'Viele Smartphones haben keine dedizierte Kompass-App — aber der Sensor ist eingebaut. Öffnen Sie diese Website auf Ihrem Smartphone, und sie wird ohne Installation zum Kompass.',
+	},
+	{
+		q: 'Welche Smartphones haben einen Kompass-Sensor?',
+		a: 'Praktisch jedes moderne Smartphone — jedes iPhone seit dem iPhone 3GS und fast alle Android-Smartphones — verfügt über ein Magnetometer, sodass dieser Online-Kompass auf nahezu jedem Gerät funktioniert.',
+	},
+	{
+		q: 'Warum schwankt mein Kurs?',
+		a: 'Nahes Metall und Elektronik verzerren das Magnetometer. Befolgen Sie die Kalibrierungsschritte oben und stellen Sie sicher, dass das Smartphone flach liegt. Eine Drift von wenigen Grad ist normal im Haus.',
+	},
+	{
+		q: 'Was ist der Unterschied zwischen magnetischem und wahrem Norden?',
+		a: 'Magnetischer Norden ist die Richtung, in die Ihre Kompassnadel zeigt. Wahrer Norden ist der geografische Nordpol, den Karten und Navigation verwenden. Der Winkel zwischen beiden — die Deklination — variiert je nach Standort, und dieses Werkzeug korrigiert ihn automatisch.',
+	},
+	{
+		q: 'Warum fragt die Seite nach meinem Standort?',
+		a: 'Der Standort ermöglicht die Berechnung der magnetischen Deklination, des Qibla-Kurses und der Sonnenposition mit hoher Genauigkeit. Er ist optional — jedes Werkzeug funktioniert auch mit manuellen Koordinaten — und er verlässt niemals Ihr Gerät.',
+	},
+	{
+		q: 'Speichern oder verkaufen Sie meinen Standort?',
+		a: 'Nein. Es gibt keine Tracker, kein Analytics und kein Backend. Alle Sensor- und Standortdaten werden lokal in Ihrem Browser verarbeitet und beim Verlassen verworfen.',
+	},
+];
+---
+
+<Layout
+	path="/de/"
+	title="Online-Kompass — Kostenloses Live-Werkzeug, um Norden zu finden"
+	description="Kostenloser Online-Kompass, um Norden von Ihrem Standort zu finden. Live-Kurs mit wahrem und magnetischem Norden, Deklination, Qibla-Finder, Kursrechner und Sonnenposition — keine Installation, funktioniert auf jedem Smartphone."
+	keywords="online kompass, online kompass tool, kostenloser online kompass, online kompass google, online kompass kostenlos, online kompass norden finden, online kompass richtung, online kompass geometrie, online kompass tool geometrie, online kompass geometrie, online kompass mathe, kostenloser online kompass tool, online kompass qibla, online kompass live, online kompass kabba norden vom standort finden, qibla finder online kompass"
+>
+	<!-- Hero -->
+	<section id="compass" class="relative overflow-hidden">
+		<div class="mesh-gradient" aria-hidden="true"></div>
+		<div
+			class="relative mx-auto max-w-[1200px] px-4 pb-20 pt-16 text-center sm:px-6 md:pb-28 md:pt-24"
+		>
+			<div class="badge mx-auto">kostenlos · privat · keine installation</div>
+
+			<h1
+				class="mx-auto mt-6 max-w-3xl text-[36px] leading-[40px] text-ink sm:text-display-xl md:text-[56px] md:leading-[56px]"
+			>
+				Ein Kompass, der zum wahren Norden zeigt, nicht nur zum magnetischen.
+			</h1>
+
+			<p class="mx-auto mt-4 max-w-xl text-body-lg text-body">
+				Echtzeit-Gerätekurs mit automatischer Deklination, GPS-Koordinaten, Qibla-Richtung
+				und Sonnenposition — alles in Ihrem Browser. Nichts zu installieren, nichts wird hochgeladen.
+			</p>
+
+			<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+				<a href="/de/location/" class="btn-primary">Mich lokalisieren</a>
+				<a href="/de/compass/" class="btn-secondary">Kompass öffnen</a>
+			</div>
+
+			<div class="mx-auto mt-12 max-w-xl md:mt-16">
+				<Compass />
+			</div>
+		</div>
+	</section>
+
+	<!-- Feature strip -->
+	<section class="border-y border-hairline bg-canvas">
+		<div
+			class="mx-auto grid max-w-[1200px] grid-cols-1 gap-px overflow-hidden px-4 py-12 sm:grid-cols-3 sm:px-6"
+		>
+			<div class="p-4">
+				<p class="eyebrow mb-2">wahr vs. magnetisch</p>
+				<p class="text-sm text-body leading-6">
+					Die Deklination wird automatisch anhand des Weltmagnetischen Modells berechnet — sehen
+					Sie beide Kurse auf einen Blick.
+				</p>
+			</div>
+			<div class="p-4">
+				<p class="eyebrow mb-2">datenschutz zuerst</p>
+				<p class="text-sm text-body leading-6">
+					Alle Sensorverarbeitung erfolgt auf dem Geräte. Keine Konten, kein Tracking, und nichts
+					verlässt jemals Ihren Browser.
+				</p>
+			</div>
+			<div class="p-4">
+				<p class="eyebrow mb-2">funktioniert überall</p>
+				<p class="text-sm text-body leading-6">
+					Chrome, Safari und Firefox auf iOS und Android, mit GPS-Kurs-Ersatzwert beim Fahren.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- Tools grid -->
+	<section id="tools" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<p class="eyebrow">das werkzeug-set</p>
+			<h2 class="mt-3 max-w-2xl text-display-lg text-ink">
+				Ein Kompass, jede Richtung, die Sie brauchen.
+			</h2>
+			<p class="mt-3 max-w-xl text-body-lg text-body">
+				Fünf spezialisierte Werkzeuge, jedes auf einer eigenen Seite, alle lokal auf Ihrem Gerät.
+			</p>
+
+			<div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+				<a href="/de/compass/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">kompass</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Live-Kurs</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Echtzeit-360°-Zifferblatt mit sanfter Nadel, magnetischem und wahrem Norden sowie
+						live-Genauigkeitsanzeige.
+					</p>
+				</a>
+				<a href="/de/location/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">standort</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">GPS-Koordinaten</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Breitengrad, Längengrad, Höhe und Genauigkeit in Dezimal- und DMS-Format — mit
+						Kopieren, Teilen und in Maps öffnen.
+					</p>
+				</a>
+				<a href="/de/qibla/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">qibla</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Richtung nach Mekka</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Großkreis-Kurs und Entfernung zur Kaaba von Ihren Koordinaten, genau bis auf den Grad.
+					</p>
+				</a>
+				<a href="/de/bearing/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">kurs</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Kursrechner</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Kurs und Großkreis-Entfernung zwischen zwei Punkten — ideal für Navigation
+						und Routenplanung.
+					</p>
+				</a>
+				<a href="/de/sun/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">sonne</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Sonnenposition</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Solarer Azimut und Höhenwinkel, sowie Sonnenaufgang, Sonnenhöchststand und Sonnenuntergang
+						für jeden Standort.
+					</p>
+				</a>
+				<div class="card-soft flex flex-col justify-center p-6">
+					<p class="text-sm text-body leading-6">
+						Keine Konten. Keine Tracker. Jede Berechnung läuft in Ihrem Browser und wird
+						sofort verworfen, wenn Sie die Seite verlassen.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- How it works -->
+	<section id="how-it-works" class="border-y border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<p class="eyebrow">so funktioniert es</p>
+			<h2 class="mt-3 max-w-2xl text-display-lg text-ink">Entwickelt für Genauigkeit.</h2>
+			<p class="mt-3 max-w-xl text-body-lg text-body">
+				Das Magnetometer, Gyroskop und Beschleunigungssensor Ihres Smartphones speisen eine
+				neigungskompensierte Kursberechnung, korrigiert durch das Weltmagnetische Modell.
+			</p>
+
+			<div class="mt-12 grid gap-6 md:grid-cols-3">
+				<div class="card p-6">
+					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
+						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
+							<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" />
+							<path d="M15.5 8.5 13 13l-4.5 2.5L11 11z" fill="var(--color-error)" />
+						</svg>
+					</div>
+					<h3 class="text-display-sm text-ink">Sensorfusion</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Der Kurs wird aus Orientierungs- und Magnetometer-Daten abgeleitet, in Echtzeit
+						geglättet, sodass die Nadel in Ihrer Hand stabil bleibt.
+					</p>
+				</div>
+				<div class="card p-6">
+					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
+						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
+							<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" />
+							<path
+								d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"
+								stroke="currentColor"
+								stroke-width="1.5"
+							/>
+							<circle cx="12" cy="12" r="3" fill="currentColor" />
+						</svg>
+					</div>
+					<h3 class="text-display-sm text-ink">Korrektur auf wahren Norden</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Die Deklination schwankt weltweit zwischen −30° und +30°. Wir wenden das
+						Weltmagnetische Modell an, damit wahrer Norden überall exakt ist.
+					</p>
+				</div>
+				<div class="card p-6">
+					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
+						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
+							<path
+								d="M12 21s7-5.1 7-11a7 7 0 1 0-14 0c0 5.9 7 11 7 11Z"
+								stroke="currentColor"
+								stroke-width="1.5"
+							/>
+							<circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5" />
+						</svg>
+					</div>
+					<h3 class="text-display-sm text-ink">Lokal konzipiert</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Koordinaten, Qibla-Kurs und Solaberechnungen laufen vollständig auf Ihrem Gerät.
+						Ihr Standort verlässt niemals das Gerät.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- About the tool (SEO) -->
+	<section id="about" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow text-center">der kostenlose Online-Kompass</p>
+				<h2 class="mt-3 text-center text-display-lg text-ink">Was ist ein Online-Kompass?</h2>
+				<p class="mt-6 text-body-lg text-body">
+					Ein <strong class="text-ink font-medium">Online-Kompass</strong> ist ein digitaler Kompass,
+					der direkt in Ihrem Webbrowser läuft — keine App zum Herunterladen, keine Installation
+					und nichts zu bezahlen. Öffnen Sie diese Seite auf Ihrem Smartphone und in wenigen
+					Sekunden haben Sie einen kostenlosen Online-Kompass, der Ihren live-Kurs in Grad
+					anzeigt, nach Norden zeigt, von wo auch immer Sie sich befinden, und sogar den
+					Unterschied zwischen magnetischem und wahrem Norden korrigieren kann.
+				</p>
+				<p class="mt-4 text-body text-body leading-7">
+					Da er im Browser läuft, funktioniert er genau gleich, ob Sie zu Hause, im Freien oder
+					im Klassenzimmer sind. Suchen Sie einfach „Online-Kompass" bei Google, öffnen Sie
+					diese Site, und die Sensoren Ihres Smartphones übernehmen. Anders als ein traditioneller
+					Kompass verwendet dieser Online-Kompass das Magnetometer, Gyroskop und den
+					Beschleunigungssensor Ihres Smartphones gemeinsam, was eine stabilere und zuverlässigere
+					<strong class="text-ink font-medium">Online-Kompass-Richtung</strong> liefert als eine
+					Nadel, die ständig gegen Schwerkraft und Drift kämpft.
+				</p>
+				<p class="mt-4 text-body text-body leading-7">
+					Jedes Werkzeug auf dieser Seite ist darauf ausgelegt, <strong class="text-ink font-medium">
+					Norden online zu finden</strong> und vieles mehr: eine Live-Kursanzeige in Grad, Himmels-
+					und Zwischenhimmelsrichtungen (N, NO, O, SO, S, SW, W, NW), ein Fullscreen-Modus mit
+					einem Tap und einen Genauigkeitsindikator, damit Sie immer wissen, wie verlässlich
+					die Anzeige ist. Und da alles lokal verarbeitet wird, verlässt Ihr Standort niemals
+					Ihr Gerät — ein wirklich kostenloser Online-Kompass, kein datensammelnder.
+				</p>
+			</div>
+
+			<div class="mx-auto mt-12 grid max-w-4xl gap-8 md:grid-cols-2">
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">Online-Kompass für Geometrie und Mathe</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Ein <strong class="text-ink font-medium">Online-Kompass-Werkzeug</strong> ist auch
+						ein Hilfsmittel für den Unterricht. In der Geometrie wird ein Kompass zum Zeichnen
+						von Kreisen und Bögen und zum Messen von Entfernungen verwendet; auf dieser Seite
+						funktioniert der Online-Kompass für Geometrie mit der Mathematik statt mit dem
+						Bleistift. Messen Sie den Winkel jeder Richtung, konvertieren Sie zwischen Kursen
+						und Kompasspunkten und nutzen Sie den Kursrechner, um die Richtung und
+						Großkreis-Entfernung zwischen zwei Koordinaten auf der Erde zu finden. Es ist das
+						kostenlose Online-Kompass-Mathematik-Werkzeug, das abstrakte Winkel in einen
+						ablesbaren Kurs auf einem Zifferblatt verwandelt.
+					</p>
+					<p class="mt-3 text-sm text-body leading-6">
+						Schüler können ihre Arbeit mit einem echten magnetischen Kompass überprüfen, und
+						Lehrer können das live-Zifferblatt verwenden, um wahren versus magnetischen Norden
+						mit einem Beispiel zu erklären, das sich dreht, während Sie das Smartphone drehen.
+						Dieses kostenlose Online-Kompass-Werkzeug wird täglich auch für einfache Aufgaben
+						verwendet — Karten ausrichten, Solaranlagen ausrichten oder prüfen, in welche
+						Richtung ein Zimmer zeigt.
+					</p>
+				</div>
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">Online-Kompass für Qibla — Kaaba von meinem Standort finden</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Diese Seite enthält einen dedizierten <strong class="text-ink font-medium">Qibla-Finder
+						Online-Kompass</strong>, der die Richtung zur Kaaba in Mekka von Ihren aktuellen
+						Koordinaten berechnet. Wo auch immer Sie sind, der Qibla-Finder gibt Ihnen einen Kurs
+						in Grad und eine Kompassrichtung sowie die Großkreis-Entfernung nach Mekka. Viele
+						Reisende suchen nach „Online-Kompass Kabba um Norden von meinem Standort zu finden" —
+						und diese Seite beantwortet es: lokalisieren Sie sich, lesen Sie den Qibla-Kurs ab,
+						und folgen Sie ihm auf dem live-Kompass-Zifferblatt.
+					</p>
+					<p class="mt-3 text-sm text-body leading-6">
+						Da der Online-Kompass für Qibla vollständig auf Ihrem Gerät läuft, gibt es keinen
+						Server, kein Konto und keinen irgendwo gespeicherten Standort. Geben Sie Koordinaten
+						manuell ein oder gewähren Sie einmaligen Standortzugriff, und der Kurs wird
+						sofort bis auf einen Bruchteil eines Grades berechnet.
+					</p>
+				</div>
+			</div>
+
+			<div class="mx-auto mt-12 max-w-3xl">
+				<h3 class="text-display-sm text-ink">Warum einen Online-Kompass verwenden?</h3>
+				<p class="mt-3 text-body text-body leading-7">
+					Ein physischer Kompass ist ein wunderbares Instrument, aber ein digitaler Online-Kompass
+					bietet Live-Genauigkeit: Er zeigt nicht nur Norden, sondern den genauen Grad jedes
+					Kurses, korrigiert für magnetische Deklination überall auf der Erde und kann in jeder
+					Position gehalten werden. Das kostenlose Online-Kompass-Werkzeug dieser Seite kombiniert
+					diesen live-Kompass mit allem, was ein Navigator braucht — GPS-Koordinaten in
+					Dezimal- und DMS-Format, die Qibla-Richtung, einen Kursrechner und Sonnenposition
+					für die Tagesorientierung. Es ist schnell, privat und immer bereit, wenn Sie Norden
+					finden müssen.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- Calibration -->
+	<section id="calibration" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="grid gap-10 lg:grid-cols-2 lg:items-start">
+				<div>
+					<p class="eyebrow">kalibrierung</p>
+					<h2 class="mt-3 text-display-lg text-ink">Erzielen Sie die genaueste Ablesung.</h2>
+					<p class="mt-3 text-body-lg text-body">
+						Smartphone-Magnetometer sind empfindlich gegenüber nahem Metall und Magnetfeldern.
+						Ein paar Sekunden Kalibrierung verwandeln eine driftende Nadel in eine verlässliche
+						Kursanzeige.
+					</p>
+				</div>
+				<ol class="card-soft divide-y divide-hairline">
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">01</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Smartphone flach halten</p>
+							<p class="mt-1 text-sm text-body">Halten Sie den Bildschirm parallel zum Boden, in Ihrer Handfläche oder auf einer stabilen Fläche.</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">02</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Eine Acht zeichnen</p>
+							<p class="mt-1 text-sm text-body">Bewegen Sie das Smartphone sanft einige Male in einer Achterbewegung und halten Sie es dann still.</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">03</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Störquellen meiden</p>
+							<p class="mt-1 text-sm text-body">Entfernen Sie sich von Laptops, Smartphones, Magneten und Metalltischen, bevor Sie eine Ablesung vornehmen.</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">04</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Mit der Sonne überprüfen</p>
+							<p class="mt-1 text-sm text-body">Nutzen Sie den Sonnenpositionsmarker auf dem Zifferblatt als unabhängige Probe bei Tageslicht.</p>
+						</div>
+					</li>
+				</ol>
+			</div>
+		</div>
+	</section>
+
+	<!-- FAQ -->
+	<section id="faq" class="border-t border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow text-center">häufige fragen</p>
+			<h2 class="mt-3 text-center text-display-lg text-ink">Fragen, beantwortet.</h2>
+
+			<div class="mt-10 space-y-3">
+				{faq.map((f) => (
+					<details class="card overflow-hidden">
+						<summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-4 text-sm font-medium text-ink">
+							{f.q}
+							<svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0 text-mute" fill="none" aria-hidden="true">
+								<path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+							</svg>
+						</summary>
+						<p class="px-6 pb-5 text-sm text-body leading-6">{f.a}</p>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA band -->
+	<section class="bg-ink text-on-primary">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 text-center sm:px-6 md:py-24">
+			<p class="font-mono text-xs uppercase tracking-[0.08em] text-on-primary/60">bereit, wenn Sie es sind</p>
+			<h2 class="mt-4 text-display-lg text-on-primary">Finden Sie Ihren Kurs.</h2>
+			<p class="mx-auto mt-3 max-w-lg text-body-lg text-on-primary/70">
+				Richten Sie Ihr Smartphone nach Norden, prüfen Sie Ihre Qibla oder planen Sie eine Route — alles in einem kostenlosen Werkzeug.
+			</p>
+			<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+				<a href="/de/compass/" class="btn-primary bg-on-primary text-primary hover:opacity-85">Kompass öffnen</a>
+			</div>
+		</div>
+	</section>
+
+	<script type="application/ld+json" set:html={JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'FAQPage',
+		mainEntity: faq.map((f) => ({
+			'@type': 'Question',
+			name: f.q,
+			acceptedAnswer: {
+				'@type': 'Answer',
+				text: f.a,
+			},
+		})),
+	})} />
+</Layout>
+
+<style>
+	details summary::-webkit-details-marker {
+		display: none;
+	}
+	details[open] summary svg {
+		transform: rotate(180deg);
+	}
+	details summary svg {
+		transition: transform 0.2s ease;
+	}
+</style>

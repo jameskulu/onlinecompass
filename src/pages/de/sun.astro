@@ -1,0 +1,142 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SunPanel from '../../components/SunPanel.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="Sonnenpositionsrechner online — Azimut, Sonnenauf- und Untergang"
+	description="Sonnenposition online berechnen: Azimut, Höhenwinkel, Sonnenaufgang, Sonnenhöchststand und Sonnenuntergang für jeden Standort. Kostenlos und sofort — läuft vollständig in Ihrem Browser."
+	path="/de/sun/"
+	keywords="sonnenpositionsrechner, sonnen azimuth, sonnenaufgang sonnenuntergang zeiten, sonnenrichtung, sonnenposition online"
+>
+	<PageHero
+		eyebrow="sonnenposition"
+		title="Verfolgen Sie die Sonne, präzise."
+		description="Live-Solarer Azimut und Höhenwinkel, plus Sonnenaufgang, Sonnenhöchststand und Sonnenuntergang — berechnet für Ihren Standort oder beliebige Koordinaten."
+	>
+		<SunPanel />
+	</PageHero>
+
+	<section class="border-y border-hairline bg-canvas">
+		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-2">
+			<div>
+				<p class="eyebrow mb-2">was die zahlen bedeuten</p>
+				<p class="text-sm text-body leading-6">
+					Azimut ist die Kompassrichtung der Sonne (0° = Norden, 90° = Osten). Höhenwinkel ist,
+					wie hoch sie über dem Horizont steht — nützlich für Schatten, Solaranlagen und
+					Fotografie.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">kompass überprüfen</p>
+				<p class="text-sm text-body leading-6">
+					Mittags steht die Sonne in der Nähe des wahren Südens auf der nördlichen Halbkugel
+					und des wahren Nordens auf der südlichen — eine zuverlässige Möglichkeit, Ihren Kurs
+					bei Tageslicht zu überprüfen.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">das sonnenpositions-werkzeug</p>
+			<h2 class="mt-3 text-display-lg text-ink">Sonnenposition online berechnen — für jeden Standort</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				Ein <strong class="text-ink font-medium">Sonnenpositionsrechner online</strong> zeigt, wo
+				sich die Sonne am Himmel zu einem bestimmten Zeitpunkt an einem bestimmten Ort befindet.
+				Diese Seite berechnet den aktuellen <strong class="text-ink font-medium">Azimut</strong>
+				der Sonne (ihre Kompassrichtung in Grad) und den <strong class="text-ink font-medium">
+				Höhenwinkel</strong> (ihre Höhe über dem Horizont), zusammen mit Sonnenaufgangs-,
+				Sonnenhöchststands- und Sonnenuntergangszeiten — für Ihren live-Standort oder
+				beliebige Koordinaten, die Sie eingeben. Alles läuft in Ihrem Browser, sodass es
+				schnell, kostenlos und privat ist.
+			</p>
+			<p class="mt-4 leading-7">
+				Die Zahlen aktualisieren sich in Echtzeit, während der Tag vergeht, was dieses Werkzeug
+				für eine überraschend breite Palette von Aufgaben nützlich macht: Platzieren von
+				Solaranlagen, Planen von Fotografie-Licht, Anordnen von Gartenbeeten, Platzieren von
+				Schatten für eine Terrasse oder einfach das Wissen, wann die Sonne das Gebäude
+				gegenüber freisetzen wird.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Azimut und Höhenwinkel — den Himmel ablesen</h3>
+			<p class="mt-3 leading-7">
+				<strong class="text-ink font-medium">Azimut</strong> ist die Richtung der Sonne, im
+				Uhrzeigersinn vom Norden aus gemessen: 0° ist genau Norden, 90° genau Osten, 180° genau
+				Süden und 270° genau Westen. Mittags steht die Sonne bei etwa 180° (genau Süden) auf der
+				nördlichen Halbkugel und bei etwa 0° (genau Norden) auf der südlichen Halbkugel.
+				<strong class="text-ink font-medium">Höhenwinkel</strong> ist der Winkel der Sonne über
+				dem Horizont, von 0° bei Sonnenauf- und Untergang bis zum höchsten Punkt am
+				Sonnenhöchststand. Zusammen beschreiben sie genau, wo sich die Sonne am Himmel
+				befindet — dieselben Koordinaten, die Astronomen und Solarenergie-Ingenieure verwenden.
+			</p>
+			<p class="mt-4 leading-7">
+				Der Pfad der Sonne ändert sich mit Ihrem Breitengrad und mit der Jahreszeit: höher im
+				Sommer, niedriger im Winter, aufgehend im Osten und untergehend im Westen überall auf
+				der Erde. Der Rechner berücksichtigt all dies durch Standard-Sonnenpositions-Algorithmen,
+				sodass der Azimut und Höhenwinkel, den Sie sehen, für Ihr Datum, Ihre Uhrzeit und Ihre
+				Koordinaten genau sind.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Warum die Sonne nützlich ist, um die Richtung zu finden</h3>
+			<p class="mt-3 leading-7">
+				Vor Kompassen und GPS nutzten die Menschen die Sonne zur Orientierung — und das funktioniert
+				heute noch. Um die lokale Mittagszeit steht die Sonne auf der nördlichen Halbkugel genau
+				im Süden und auf der südlichen Halbkugel genau im Norden. Bei Sonnenaufgang steht sie
+				etwa im Osten; bei Sonnenuntergang etwa im Westen. Das sind zuverlässige Faustregeln,
+				und diese Seite verwandelt sie in präzise Zahlen. Wenn Sie bei Tageslicht ohne Kompass
+				draußen sind, prüfen Sie den Azimut hier und orientieren Sie sich entsprechend —
+				und überprüfen Sie es dann mit dem
+				<a href="/" class="text-link underline decoration-link/30 hover:decoration-link">Online-Kompass</a>,
+				wenn Sie wieder an Ihrem Smartphone sind.
+			</p>
+
+			<div class="mt-10 grid gap-4 sm:grid-cols-2">
+				<div class="card-soft p-5">
+					<h4 class="text-sm font-medium text-ink mb-1">Solarenergie</h4>
+					<p class="text-sm leading-6">
+						Paneele ausrichten oder Installationen planen: Der Höhenwinkel am Mittag zeigt die
+						beste Neigung, und der Azimut-Bereich zeigt, wie viel Sonne eine Fläche im
+						Laufe des Tages empfängt.
+					</p>
+				</div>
+				<div class="card-soft p-5">
+					<h4 class="text-sm font-medium text-ink mb-1">Fotografie und Gartenarbeit</h4>
+					<p class="text-sm leading-6">
+						Planen Sie Goldstunden-Shootings, wissen Sie, wann ein Gartenbeet Licht bekommt,
+						oder platzieren Sie eine Terrasse oder einen Sonnensegel für die Nachmittagssonne —
+						alles von Ihrem genauen Standort aus.
+					</p>
+				</div>
+			</div>
+
+			<h3 class="mt-10 text-display-sm text-ink">Sonnenaufgang, Sonnenhöchststand und Sonnenuntergang</h3>
+			<p class="mt-3 leading-7">
+				Das Werkzeug meldet auch die Schlüsselmomente des Tages: <strong class="text-ink font-medium">
+				Sonnenaufgang</strong>, wenn die Sonne erstmals über dem Horizont erscheint;
+				<strong class="text-ink font-medium">Sonnenhöchststand</strong>, wenn sie ihren höchsten
+				Punkt erreicht; und <strong class="text-ink font-medium">Sonnenuntergang</strong>, wenn sie
+				verschwindet. Der Sonnenhöchststand ist der Moment, in dem die Sonne den Meridian
+				kreuzt und den kürzesten Schatten wirft — der Referenzpunkt für den Sonnen-als-Kompass-Trick,
+				der oben erwähnt wurde.
+			</p>
+			<p class="mt-4 leading-7">
+				Da die Berechnungen lokal sind, verschieben sich die Ergebnisse natürlich mit Ihren
+				Koordinaten und dem Datum: nördliche Winter bringen kurze Tage und niedrige Mittagshöhen-
+				winkel, während tropische Standorte die Sonne das ganze Jahr hoch am Himmel stehen
+				sehen. Wo auch immer Sie sind, dieser kostenlose Sonnenpositionsrechner gibt Ihnen den
+				Sonnenpfad auf einen Blick — und passt perfekt zum
+				<a href="/de/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">Kursrechner</a>
+				und zum
+				<a href="/de/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">Qibla-Finder</a>
+				für ein vollständiges Bild des Himmels über Ihnen.
+			</p>
+		</div>
+	</section>
+
+	<RelatedTools current="/sun/" />
+</Layout>

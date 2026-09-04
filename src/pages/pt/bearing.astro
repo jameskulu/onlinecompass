@@ -1,0 +1,130 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BearingCalculator from '../../components/BearingCalculator.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="Calculadora de Rumo Online — Direção e Distância Entre Dois Pontos"
+	description="Ferramenta de bússola online gratuita para calcular rumo e distância ortodrômica entre duas coordenadas. Mostra também direção Qibla, declinação magnética e posição do sol a partir da sua localização."
+	path="/pt/bearing/"
+	keywords="bússola online matemática, bússola online geometria, calculadora de rumo, direção entre dois pontos, distância ortodrômica, calculadora de rumo online"
+>
+	<PageHero
+		eyebrow="calculadora de rumo"
+		title="Trace um curso, grau por grau."
+		description="Calcule o rumo inicial e a distância ortodrômica entre quaisquer dois pontos na Terra — a partir da sua localização ao vivo, coordenadas manuais ou uma rota predefinida."
+	>
+		<BearingCalculator />
+	</PageHero>
+
+	<section class="border-y border-hairline bg-canvas">
+		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-2">
+			<div>
+				<p class="eyebrow mb-2">rumo inicial vs final</p>
+				<p class="text-sm text-body leading-6">
+					Isto retorna o rumo inicial — a direção em que você parte. Em rotas longas o rumo muda
+					ao longo da ortodroma, então correções no meio do caminho são normais.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">use com a bússola</p>
+				<p class="text-sm text-body leading-6">
+					Leve o rumo calculado para a ferramenta de bússola e governe até que o rumo coincida.
+					Altere para o norte verdadeiro para uma direção precisa em relação ao mapa.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">a calculadora de rumo</p>
+			<h2 class="mt-3 text-display-lg text-ink">Calcule o rumo e a distância entre dois pontos</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				Uma <strong class="text-ink font-medium">calculadora de rumo online</strong> encontra a
+				direção e a distância entre quaisquer dois pontos na Terra. Insira dois conjuntos de
+				coordenadas — ou use sua localização ao vivo para uma extremidade — e esta ferramenta
+				retorna o rumo inicial em graus, a direção da bússola e a distância ortodrômica em
+				quilômetros. É a ferramenta essencial de <strong class="text-ink font-medium">bússola
+				online de matemática</strong> para navegação, planejamento de rotas, levantamento e
+				estudo.
+			</p>
+			<p class="mt-4 leading-7">
+				O rumo é o ângulo medido no sentido horário a partir do norte até a direção que você
+				precisa viajar: 0° é norte, 90° leste, 180° sul, 270° oeste. Uma rota de Londres para
+				Nova York, por exemplo, começa com um rumo inicial de cerca de 288° — essa é a direção
+				para apontar a nariz de um avião ou a proa de um navio no momento da partida.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Rumo inicial vs rumo final</h3>
+			<p class="mt-3 leading-7">
+				Porque a Terra é uma esfera, a <strong class="text-ink font-medium">direção entre dois
+				pontos</strong> não é uma linha reta em um mapa. A rota mais curta segue uma ortodroma e,
+				ao longo dessa rota, o rumo muda continuamente. O "rumo inicial" é a direção no seu
+				ponto de partida — aquele que você governa primeiro. Em rotas longas o rumo se desvia
+				conforme você avança, razão pela qual pilotos e navegadores usam waypoints e correções no
+				meio do curso. Esta calculadora informa o rumo inicial e também calcula o rumo final de
+				chegada do caminho ortodrômico.
+			</p>
+			<p class="mt-4 leading-7">
+				Para viagens curtas — uma caminhada, uma viagem pela cidade, um passeio entre dois pontos
+				de mapa — o rumo inicial é praticamente todo o curso. Isso torna esta calculadora de
+				rumo online perfeita para planejamento do dia a dia e também para geometria em sala de
+				aula.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Distância como um navegador mede</h3>
+			<p class="mt-3 leading-7">
+				Além do rumo, você obtém a distância ortodrômica — a menor distância sobre a superfície
+				da Terra entre os dois pontos, calculada com a fórmula do haversine. Diferente de uma
+				régua em um mapa plano, isso leva em conta a curvatura do planeta, para que o resultado
+				coincida com distâncias reais de viagem. É o mesmo cálculo usado para planejamento de
+				voos e navegação marítima.
+			</p>
+			<p class="mt-4 leading-7">
+				A ferramenta vai além de uma calculadora comum. Escolha um destino da lista predefinida —
+				incluindo grandes cidades mundiais e a Caaba em Makkah — e ela calcula o resumo ("Nova
+				York está a 245° OSO de Londres, a 5.570 km de distância") além de quatro leituras extras
+				do ponto A: a
+				<a href="/pt/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">direção da Qibla</a>,
+				a declinação magnética e a
+				<a href="/pt/sun/" class="text-link underline decoration-link/30 hover:decoration-link">posição do sol</a>.
+				Uma única entrada e você vê como sua bússola, Qibla e dados solares se alinham com sua rota.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Use o rumo com a bússola</h3>
+			<p class="mt-3 leading-7">
+				O companheiro natural desta ferramenta é a
+				<a href="/" class="text-link underline decoration-link/30 hover:decoration-link">bússola online</a>.
+				Calcule seu rumo, abra a bússola e gire até que o rumo coincida. Mude a bússola para o
+				norte verdadeiro para que sua direção se alinhe com o norte do mapa — e deixe a bússola
+				aplicar a declinação da sua localização automaticamente. A combinação transforma um número
+				em uma página em um curso que você pode realmente percorrer, navegar ou dirigir.
+			</p>
+			<p class="mt-4 leading-7">
+				Esta calculadora de rumo online é útil para planejamento de rotas antes de uma caminhada,
+				alinhamento de antenas e painéis solares, estimativa de viagem entre dois endereços,
+				confirmar um curso de bússola ou verificar tarefas escolares. Porque tudo roda localmente
+				no seu navegador, é uma ferramenta privada e gratuita de bússola online de geometria na
+				qual você pode confiar em qualquer lugar — sem instalações, sem contas, sem coleta de
+				dados.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Graus, direções e planejamento</h3>
+			<p class="mt-3 leading-7">
+				Rumos em graus são precisos mas abstratos; é por isso que a ferramenta também os converte
+				em direções de bússola claras. 45° se torna NE, 200° se torna SSO e assim por diante —
+				para que você possa responder perguntas como "que direção preciso seguir?" no mesmo
+				idioma que uma bússola ou mapa fala. Insira sua posição atual como ponto A e um destino
+				como ponto B e toda a visão — rumo, direção, distância, Qibla, declinação e sol — se
+				atualiza instantaneamente. Essa é a poder de uma ferramenta de bússola online de
+				matemática construída ao redor das suas coordenadas reais.
+			</p>
+		</div>
+	</section>
+
+	<RelatedTools current="/bearing/" />
+</Layout>

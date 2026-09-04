@@ -1,0 +1,97 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+	title="이용약관"
+	description="트루 온라인 나침반 이용약관 — 무료 브라우저 기반 도구. 자체 판단에 따라 사용; 안전이 중요한 내비게이션에는 적합하지 않음."
+	path="/ko/terms/"
+>
+	<div class="mx-auto max-w-3xl px-4 py-16 sm:px-6 md:py-24">
+		<p class="eyebrow">법적 고지</p>
+		<h1 class="mt-4 text-display-lg text-ink">이용약관</h1>
+		<p class="mt-3 text-sm text-mute">최종 업데이트: {new Date().toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+
+		<div class="mt-10 space-y-8 text-body">
+			<section>
+				<h2 class="text-display-sm text-ink mb-3">동의</h2>
+				<p class="leading-7">
+					trueonlinecompass.com("서비스")을 사용함으로써 귀하는 본 약관에 동의하는 것입니다.
+					동의하지 않는 경우 서비스를 사용하지 마세요.
+				</p>
+			</section>
+
+			<section>
+				<h2 class="text-display-sm text-ink mb-3">서비스</h2>
+				<p class="leading-7">
+					서비스는 나침반, 위치 읽기, 키블라 finder, 방위각 계산기, 태양 위치 계산기를
+					포함한 브라우저 기반 도구를 제공합니다. 도구는 무료로 제공되며 보증이 없습니다.
+				</p>
+			</section>
+
+			<section>
+				<h2 class="text-display-sm text-ink mb-3">안전이 중요한 사용에 적합하지 않음</h2>
+				<p class="leading-7 mb-3">
+					서비스는 소비자 도구이며, 계기 등급 내비게이션 장치가 아닙니다. 센서 정확도는
+					기기와 환경에 따라 다릅니다. 다음 용도로는 사용하지 마세요:
+				</p>
+				<ul class="list-disc space-y-2 pl-5 leading-7">
+					<li>항공, 해양, 또는 오프로드 내비게이션.</li>
+					<li>비상 또는 인명 안전 상황.</li>
+					<li>인증된 정확도가 필요한 측량, 법적 경계, 건축.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2 class="text-display-sm text-ink mb-3">보증 없음</h2>
+				<p class="leading-7">
+					서비스는 "있는 그대로" 및 "사용 가능한 상태로" 제공됩니다. 법률이 허용하는 최대
+					범위에서 가용성, 정확도, 또는 특정 목적에의 적합성에 대한 어떠한 명시적 또는
+					묵시적 보증도 하지 않습니다.
+				</p>
+			</section>
+
+			<section>
+				<h2 class="text-display-sm text-ink mb-3">책임 제한</h2>
+				<p class="leading-7">
+					법률이 허용하는 최대 범위에서 서비스 사용으로 인한 간접적, 부수적, 특별 또는
+					结果的 손해에 대해 책임을 지지 않으며, 출력물에 대한 의존으로 인한 손실도 포함됩니다.
+				</p>
+			</section>
+
+			<section>
+				<h2 class="text-display-sm text-ink mb-3">변경</h2>
+				<p class="leading-7">
+					본 약관은 수시로 업데이트될 수 있습니다. 변경 후에도 서비스를 계속 사용하면
+					업데이트된 약관에 동의하는 것입니다.
+				</p>
+			</section>
+
+			<section>
+				<h2 class="text-display-sm text-ink mb-3">연락처</h2>
+				<p class="leading-7">
+					본 약관에 대한 질문이 있으신가요? <a href="/ko/contact/" class="text-link underline decoration-link/30 hover:decoration-link">연락 페이지</a>로 연락해 주세요.
+				</p>
+			</section>
+
+			<section class="border-t border-hairline pt-8">
+				<h2 class="text-display-sm text-ink mb-3">이 온라인 나침반에 대하여</h2>
+				<p class="leading-7">
+					트루 온라인 나침반은 무료 브라우저 기반 도구 모음입니다: 진북 및 자북을 위한 실시간
+					<a href="/ko/" class="text-link underline decoration-link/30 hover:decoration-link">온라인 나침반</a>,
+					<a href="/ko/location/" class="text-link underline decoration-link/30 hover:decoration-link">GPS 좌표</a>
+					읽기,
+					카바를 향하는
+					<a href="/ko/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">키블라 finder</a>,
+					방향과 거리를 위한
+					<a href="/ko/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">방위각 계산기</a>,
+					<a href="/ko/sun/" class="text-link underline decoration-link/30 hover:decoration-link">태양 위치 계산기</a>.
+					모든 도구는 브라우저에서 완전히 작동합니다 — 무료, 개인정보 보호, 설치 없이
+					모든 휴대폰에서 사용 가능. 자세한 내용은
+					<a href="/ko/about/" class="text-link underline decoration-link/30 hover:decoration-link">소개 페이지</a>를
+					참고하세요.
+				</p>
+			</section>
+		</div>
+	</div>
+</Layout>

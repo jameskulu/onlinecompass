@@ -1,0 +1,462 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Compass from '../../components/Compass.astro';
+
+const faq = [
+	{
+		q: 'Que direção estou enfrentando — bússola online?',
+		a: 'Abra esta página no seu celular e a leitura ao vivo do rumo abaixo da bússola mostra o grau exato e a direção da bússola (N, NE, E, SE, S, SW, W, NW) para onde você está, atualizado em tempo real conforme você gira.',
+	},
+	{
+		q: 'Bússola online — onde fica o norte?',
+		a: 'A ponta vermelha da agulha sempre aponta para o norte, que lê 0°/360° no topo da bússola. Alterne para "Norte verdadeiro" e o site corrige a declinação magnética na sua localização para que o norte coincida com os mapas.',
+	},
+	{
+		q: 'Que direção estou enfrentando — bússola online?',
+		a: 'Segure seu celular na horizontal, permita o acesso aos sensores e o rumo abaixo da bússola indica a direção em que você está tanto em graus quanto em ponto da bússola — por exemplo, 274° ou O.',
+	},
+	{
+		q: 'Como saber a direção sem bússola online?',
+		a: 'Use o sol: por volta do meio-dia local ele fica ao sul no hemisfério norte e ao norte no hemisfério sul. A ferramenta Sol deste site mostra o azimute solar exato para qualquer localidade, e o localizador de Qibla funciona como uma direção de referência fixa.',
+	},
+	{
+		q: 'Que direção estou — bússola online?',
+		a: 'Permita o acesso aos sensores, segure o celular na horizontal longe de metais e leia a indicação do rumo. Ela se atualiza continuamente conforme você gira, para que você sempre saiba para qual direção está.',
+	},
+	{
+		q: 'Como usar uma bússola online?',
+		a: 'Abra esta página em um celular, toque em "Ativar bússola ao vivo", segure o dispositivo na horizontal e leia o rumo. Se a agulha oscilar, faça o movimento de oito algumas vezes para recalibrar o magnetômetro.',
+	},
+	{
+		q: 'Posso usar meu celular como bússola?',
+		a: 'Sim. Os celulares modernos possuem um magnetômetro, e este site transforma esse sensor em uma bússola direto no seu navegador — sem necessidade de baixar um aplicativo ou instalar qualquer coisa.',
+	},
+	{
+		q: 'Onde fica minha bússola no Google?',
+		a: 'O Google Maps mostra uma pequena bússola no canto superior direito da visualização do mapa. Para um rumo ao vivo em graus, basta pesquisar "bússola online" no Google e abrir esta página — ela se torna uma bússola no momento em que você permite o acesso aos sensores.',
+	},
+	{
+		q: 'Meu celular pode me dizer que direção estou?',
+		a: 'Sim. O magnetômetro do seu celular combinado com esta página fornece um rumo ao vivo, e o site corrige automaticamente a declinação magnética para que o norte corresponda aos seus mapas.',
+	},
+	{
+		q: 'Como ver uma bússola no celular?',
+		a: 'Abra esta página no seu celular e a bússola aparece instantaneamente — sem necessidade de aplicativo. No Android, o Google Maps também inclui uma bússola, e alguns celulares já vêm com um aplicativo de bússola integrado.',
+	},
+	{
+		q: 'Qual é minha direção norte?',
+	 a: 'O norte verdadeiro é o Polo Norte geográfico; o norte magnético é onde a agulha da bússola aponta. O ângulo entre os dois (declinação) varia conforme a localização, e este site corrige automaticamente.',
+	},
+	{
+		q: 'Onde fica a bússola no meu celular?',
+		a: 'Muitos celulares não vêm com um aplicativo de bússola dedicado — mas o sensor está integrado. Abra este site no seu celular e ele se torna uma bússola sem necessidade de instalação.',
+	},
+	{
+		q: 'Quais celulares têm sensor de bússola?',
+		a: 'Virturalmente todo smartphone moderno — todo iPhone desde o iPhone 3GS e quase todos os celulares Android — inclui um magnetômetro, então esta bússola online funciona em quase qualquer dispositivo.',
+	},
+	{
+		q: 'Por que meu rumo fica oscilando?',
+		a: 'Metais e eletrônicos próximos distorcem o magnetômetro. Siga os passos de calibração acima e certifique-se de que o celular está na horizontal. Uma oscilação de alguns graus é normal em ambientes internos.',
+	},
+	{
+		q: 'Qual é a diferença entre norte magnético e norte verdadeiro?',
+		a: 'O norte magnético é onde a agulha da bússola aponta. O norte verdadeiro é o Polo Norte geográfico, que é o que os mapas e a navegação utilizam. O ângulo entre eles — a declinação — varia conforme a localização, e esta ferramenta corrige automaticamente.',
+	},
+	{
+		q: 'Por que você pede minha localização?',
+		a: 'A localização permite calcularmos a declinação magnética, o rumo da Qibla e a posição do sol com precisão. É opcional — todas as ferramentas funcionam com coordenadas manuais também — e os dados nunca saem do seu dispositivo.',
+	},
+	{
+		q: 'Vocês armazenam ou vendem minha localização?',
+		a: 'Não. Não há rastreadores, nem analíticos, nem backend. Todos os dados de sensores e localização são processados localmente no seu navegador e descartados quando você sai.',
+	},
+];
+---
+
+<Layout
+	path="/pt/"
+	title="Bússola Online — Ferramenta Gratuita para Encontrar o Norte"
+	description="Bússola online gratuita para encontrar o norte a partir da sua localização. Rumo ao vivo com norte verdadeiro e magnético, declinação, localizador de Qibla, calculadora de rumo e posição do sol — sem instalação, funciona em qualquer celular."
+	keywords="bússola online, ferramenta bússola online, bússola online gratuita, bússola online google, bússola online grátis, bússola online para encontrar norte, bússola online direção, bússola online geometria, ferramenta bússola online geometria, bússola online para geometria, bússola online matemática, ferramenta bússola online gratuita, bússola online para qibla, bússola online ao vivo, bússola online kabba para encontrar norte da minha localização, localizador quibla bússola online"
+>
+	<!-- ─── Hero ─────────────────────────────────────── -->
+	<section id="compass" class="relative overflow-hidden">
+		<div class="mesh-gradient" aria-hidden="true"></div>
+		<div
+			class="relative mx-auto max-w-[1200px] px-4 pb-20 pt-16 text-center sm:px-6 md:pb-28 md:pt-24"
+		>
+			<div class="badge mx-auto">gratuito · privado · sem instalação</div>
+
+			<h1
+				class="mx-auto mt-6 max-w-3xl text-[36px] leading-[40px] text-ink sm:text-display-xl md:text-[56px] md:leading-[56px]"
+			>
+				Uma bússola que aponta para o norte verdadeiro, não apenas o magnético.
+			</h1>
+
+			<p class="mx-auto mt-4 max-w-xl text-body-lg text-body">
+				Rumo ao vivo do dispositivo com declinação automática, coordenadas GPS, direção Qibla
+				e posição do sol — tudo no seu navegador. Nada para instalar, nada enviado.
+			</p>
+
+			<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+				<a href="/pt/location/" class="btn-primary">Me localizar</a>
+				<a href="/pt/compass/" class="btn-secondary">Abrir a bússola</a>
+			</div>
+
+			<div class="mx-auto mt-12 max-w-xl md:mt-16">
+				<Compass />
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Feature strip ───────────────────────────── -->
+	<section class="border-y border-hairline bg-canvas">
+		<div
+			class="mx-auto grid max-w-[1200px] grid-cols-1 gap-px overflow-hidden px-4 py-12 sm:grid-cols-3 sm:px-6"
+		>
+			<div class="p-4">
+				<p class="eyebrow mb-2">verdadeiro vs magnético</p>
+				<p class="text-sm text-body leading-6">
+					A declinação é calculada automaticamente com base no Modelo Magnético Mundial — veja
+					ambos os rumos de uma olhada.
+				</p>
+			</div>
+			<div class="p-4">
+				<p class="eyebrow mb-2">privacidade em primeiro lugar</p>
+				<p class="text-sm text-body leading-6">
+					Todo o processamento de sensores acontece no dispositivo. Sem contas, sem rastreamento,
+					e nada sai do seu navegador.
+				</p>
+			</div>
+			<div class="p-4">
+				<p class="eyebrow mb-2">funciona em todos os lugares</p>
+				<p class="text-sm text-body leading-6">
+					Chrome, Safari e Firefox no iOS e Android, com respaldo de rumo por GPS quando você
+					está em movimento.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Tools grid ──────────────────────────────── -->
+	<section id="tools" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<p class="eyebrow">o kit de ferramentas</p>
+			<h2 class="mt-3 max-w-2xl text-display-lg text-ink">
+				Uma bússola, todos os rumos de que você precisa.
+			</h2>
+			<p class="mt-3 max-w-xl text-body-lg text-body">
+				Cinco ferramentas focadas, cada uma em sua própria página, todas rodando localmente no seu dispositivo.
+			</p>
+
+			<div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+				<a href="/pt/compass/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">bússola</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Rumo ao vivo</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Marcador 360° em tempo real com agulha suave, norte magnético e verdadeiro, e
+						feedback de precisão ao vivo.
+					</p>
+				</a>
+				<a href="/pt/location/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">localização</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Coordenadas GPS</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Latitude, longitude, altitude e precisão em decimal e DMS — com copiar, compartilhar
+						e abrir no Maps.
+					</p>
+				</a>
+				<a href="/pt/qibla/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">qibla</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Direção para Makkah</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Rumo ortodrômico e distância até a Caaba a partir das suas coordenadas, preciso ao
+						grau.
+					</p>
+				</a>
+				<a href="/pt/bearing/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">rumo</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Calculadora de curso</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Rumo e distância ortodrômica entre quaisquer dois pontos — perfeito para navegação
+						e planejamento de rotas.
+					</p>
+				</a>
+				<a href="/pt/sun/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">sol</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Posição do sol</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Azimute e elevação solar no momento, além de nascer, meio-dia solar e pôr do sol
+						para qualquer localidade.
+					</p>
+				</a>
+				<div class="card-soft flex flex-col justify-center p-6">
+					<p class="text-sm text-body leading-6">
+						Sem contas. Sem rastreadores. Todo cálculo roda no seu navegador e é descartado
+						no momento em que você sai.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── How it works ────────────────────────────── -->
+	<section id="how-it-works" class="border-y border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<p class="eyebrow">como funciona</p>
+			<h2 class="mt-3 max-w-2xl text-display-lg text-ink">Projetado para precisão.</h2>
+			<p class="mt-3 max-w-xl text-body-lg text-body">
+				O magnetômetro, giroscópio e acelerômetro do seu celular alimentam um motor de rumo com
+				compensação de inclinação, corrigido pelo Modelo Magnético Mundial.
+			</p>
+
+			<div class="mt-12 grid gap-6 md:grid-cols-3">
+				<div class="card p-6">
+					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
+						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
+							<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" />
+							<path d="M15.5 8.5 13 13l-4.5 2.5L11 11z" fill="var(--color-error)" />
+						</svg>
+					</div>
+					<h3 class="text-display-sm text-ink">Fusão de sensores</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						O rumo é derivado dos dados de orientação e magnetômetro, suavizados em tempo real para
+						que a agulha permaneça firme na sua mão.
+					</p>
+				</div>
+				<div class="card p-6">
+					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
+						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
+							<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" />
+							<path
+								d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"
+								stroke="currentColor"
+								stroke-width="1.5"
+							/>
+							<circle cx="12" cy="12" r="3" fill="currentColor" />
+						</svg>
+					</div>
+					<h3 class="text-display-sm text-ink">Correção de norte verdadeiro</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						A declinação varia de −30° a +30° ao redor do planeta. Aplicamos o Modelo Magnético
+						Mundial para que o norte verdadeiro seja exato, onde quer que você esteja.
+					</p>
+				</div>
+				<div class="card p-6">
+					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
+						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
+							<path
+								d="M12 21s7-5.1 7-11a7 7 0 1 0-14 0c0 5.9 7 11 7 11Z"
+								stroke="currentColor"
+								stroke-width="1.5"
+							/>
+							<circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5" />
+						</svg>
+					</div>
+					<h3 class="text-display-sm text-ink">Local por design</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Coordenadas, rumo da Qibla e cálculos solares rodam inteiramente no seu dispositivo.
+						Sua localização nunca toca um servidor.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── About the tool (SEO) ────────────────────── -->
+	<section id="about" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow text-center">a bússola online gratuita</p>
+				<h2 class="mt-3 text-center text-display-lg text-ink">O que é uma bússola online?</h2>
+				<p class="mt-6 text-body-lg text-body">
+					Uma <strong class="text-ink font-medium">bússola online</strong> é uma bússola digital
+					que roda diretamente no seu navegador — sem precisar baixar um aplicativo, sem
+					instalação e sem custo. Abra esta página no seu celular e, em poucos segundos, você
+					tem uma bússola online gratuita que mostra seu rumo ao vivo em graus, aponta para o
+					norte a partir de onde quer que você esteja, e pode até corrigir automaticamente a
+					diferença entre o norte magnético e o norte verdadeiro.
+				</p>
+				<p class="mt-4 text-body text-body leading-7">
+					Porque funciona no navegador, funciona exatamente da mesma forma esteja você em casa,
+					ao ar livre ou em uma sala de aula. Basta pesquisar "bússola online" no Google, abrir
+					este site e os sensores do seu dispositivo entram em ação. Ao contrário de uma bússola
+					tradicional, esta bússola online usa o magnetômetro, giroscópio e acelerômetro do seu
+					celular em conjunto, o que oferece uma <strong class="text-ink font-medium">direção
+					de bússola online</strong> mais estável e confiável do que uma agulha que sempre luta
+					contra a gravidade e a deriva.
+				</p>
+				<p class="mt-4 text-body text-body leading-7">
+					Toda ferramenta deste site foi projetada para <strong class="text-ink font-medium">
+					encontrar o norte online</strong> e muito mais: uma leitura ao vivo do rumo em graus,
+					direções cardeais e intercardeais (N, NE, E, SE, S, SW, W, NW), modo tela cheia com
+					um toque e um indicador de precisão para que você sempre saiba quão confiável é a
+					leitura. E como tudo é processado localmente, sua localização nunca sai do seu
+					dispositivo — uma bússola online genuinamente gratuita, não uma que coleta dados.
+				</p>
+			</div>
+
+			<div class="mx-auto mt-12 grid max-w-4xl gap-8 md:grid-cols-2">
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">Bússola online para geometria e matemática</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Uma <strong class="text-ink font-medium">ferramenta de bússola online</strong> também
+						é um recurso didático. Na geometria, a bússola é usada para desenhar círculos e arcos
+						e medir distâncias; neste site, a bússola online para geometria trabalha com a
+						matemática em vez do lápis. Meça o ângulo de qualquer direção, converta entre rumos e
+						pontos de bússola e use a calculadora de rumo para encontrar a direção e a distância
+						ortodrômica entre quaisquer duas coordenadas na Terra. É a ferramenta de bússola
+						online de matemática que transforma ângulos abstratos em um rumo que você pode ver em
+						um marcador.
+					</p>
+					<p class="mt-3 text-sm text-body leading-6">
+						Os alunos podem conferir seu trabalho com uma bússola magnética real, e os professores
+						posso usar o marcador ao vivo para explicar norte verdadeiro versus norte magnético com
+						um exemplo que se move conforme você gira o celular. Esta ferramenta gratuita de
+						bússola online também é usada diariamente para tarefas simples — orientar um mapa,
+						alinhar um painel solar ou verificar de que lado um cômodo fica.
+					</p>
+				</div>
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">Bússola online para Qibla — encontrar a Caaba da minha localização</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Este site inclui um <strong class="text-ink font-medium">localizador de quibla
+						bússola online</strong> dedicado que calcula a direção da Caaba em Makkah a partir
+						das suas coordenadas atuais. De onde quer que você esteja, o localizador de Qibla
+						fornece um rumo em graus e uma direção de bússola, além da distância ortodrômica
+						para Makkah. Para muitos viajantes, a frase que pesquisam é "bússola online kabba
+						para encontrar norte da minha localização" — e esta página responde: localize-se,
+						leia o rumo da Qibla e siga-o no marcador da bússola ao vivo.
+					</p>
+					<p class="mt-3 text-sm text-body leading-6">
+						Porque a bússola online para Qibla roda inteiramente no seu dispositivo, não há
+						servidor, nem conta, nem localização armazenada em lugar nenhum. Insira as
+						coordenadas manualmente ou permita o acesso à localização uma vez e o rumo é
+						calculado instantaneamente com fração de grau de precisão.
+					</p>
+				</div>
+			</div>
+
+			<div class="mx-auto mt-12 max-w-3xl">
+				<h3 class="text-display-sm text-ink">Por que escolher uma bússola online?</h3>
+				<p class="mt-3 text-body text-body leading-7">
+					Uma bússola física é um instrumento maravilhoso, mas uma bússola online digital adiciona
+					precisão ao vivo: mostra não apenas o norte, mas o grau exato de qualquer rumo, corrige
+					a declinação magnética em qualquer lugar da Terra e pode ser segurada em qualquer
+					orientação. A ferramenta gratuita de bússola online deste site combina essa bússola ao
+					vivo com tudo que um navegador precisa — coordenadas GPS em decimal e DMS, a direção da
+					Qibla, uma calculadora de rumo e a posição do sol para orientação durante o dia. É
+					rápida, privada e está pronta sempre que você precisar encontrar o norte.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Calibration ─────────────────────────────── -->
+	<section id="calibration" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="grid gap-10 lg:grid-cols-2 lg:items-start">
+				<div>
+					<p class="eyebrow">calibração</p>
+					<h2 class="mt-3 text-display-lg text-ink">Obtenha a leitura mais precisa.</h2>
+					<p class="mt-3 text-body-lg text-body">
+						Os magnetômetros de celular são sensíveis a metais e campos magnéticos próximos.
+						Alguns segundos de calibração transformam uma agulha oscilante em um rumo confiável.
+					</p>
+				</div>
+				<ol class="card-soft divide-y divide-hairline">
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">01</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Segure o celular na horizontal</p>
+							<p class="mt-1 text-sm text-body">Mantenha a tela paralela ao chão, na palma da mão ou em uma superfície estável.</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">02</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Faça o movimento de oito</p>
+							<p class="mt-1 text-sm text-body">Balance o celular suavemente em movimentos de oito algumas vezes e depois fique parado.</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">03</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Afaste-se da interferência</p>
+							<p class="mt-1 text-sm text-body">Afaste-se de laptops, celulares, ímãs e mesas de metal antes de fazer uma leitura.</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">04</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Confirme com o sol</p>
+							<p class="mt-1 text-sm text-body">Use o marcador de posição do sol no mostrador como verificação independente durante o dia.</p>
+						</div>
+					</li>
+				</ol>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── FAQ ─────────────────────────────────────── -->
+	<section id="faq" class="border-t border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow text-center">perguntas frequentes</p>
+			<h2 class="mt-3 text-center text-display-lg text-ink">Perguntas, respondidas.</h2>
+
+			<div class="mt-10 space-y-3">
+				{faq.map((f) => (
+					<details class="card overflow-hidden">
+						<summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-4 text-sm font-medium text-ink">
+							{f.q}
+							<svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0 text-mute" fill="none" aria-hidden="true">
+								<path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+							</svg>
+						</summary>
+						<p class="px-6 pb-5 text-sm text-body leading-6">{f.a}</p>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── CTA band ────────────────────────────────── -->
+	<section class="bg-ink text-on-primary">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 text-center sm:px-6 md:py-24">
+			<p class="font-mono text-xs uppercase tracking-[0.08em] text-on-primary/60">pronto quando você estiver</p>
+			<h2 class="mt-4 text-display-lg text-on-primary">Encontre seu rumo.</h2>
+			<p class="mx-auto mt-3 max-w-lg text-body-lg text-on-primary/70">
+				Aponte seu celular para o norte, verifique sua Qibla ou trace um curso — tudo em uma ferramenta gratuita.
+			</p>
+			<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+				<a href="/pt/compass/" class="btn-primary bg-on-primary text-primary hover:opacity-85">Abrir a bússola</a>
+			</div>
+		</div>
+	</section>
+
+	<script type="application/ld+json" set:html={JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'FAQPage',
+		mainEntity: faq.map((f) => ({
+			'@type': 'Question',
+			name: f.q,
+			acceptedAnswer: {
+				'@type': 'Answer',
+				text: f.a,
+			},
+		})),
+	})} />
+</Layout>
+
+<style>
+	details summary::-webkit-details-marker {
+		display: none;
+	}
+	details[open] summary svg {
+		transform: rotate(180deg);
+	}
+	details summary svg {
+		transition: transform 0.2s ease;
+	}
+</style>

@@ -1,0 +1,136 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BearingCalculator from '../../components/BearingCalculator.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="Kursrechner online — Richtung & Entfernung zwischen zwei Punkten"
+	description="Kostenloses Online-Kompass-Werkzeug zur Berechnung von Kurs und Großkreis-Entfernung zwischen zwei Koordinaten. Zeigt auch Qibla-Richtung, magnetische Deklination und Sonnenposition von Ihrem Standort."
+	path="/de/bearing/"
+	keywords="online kompass mathe, online kompass geometrie, kursrechner, richtung zwischen zwei punkten, großkreis-entfernung, kursrechner online"
+>
+	<PageHero
+		eyebrow="kursrechner"
+		title="Planen Sie eine Route, Grad für Grad."
+		description="Berechnen Sie den Anfangskurs und die Großkreis-Entfernung zwischen zwei Punkten auf der Erde — von Ihrem live-Standort, manuellen Koordinaten oder einer voreingestellten Route."
+	>
+		<BearingCalculator />
+	</PageHero>
+
+	<section class="border-y border-hairline bg-canvas">
+		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-2">
+			<div>
+				<p class="eyebrow mb-2">anfangskurs vs. endkurs</p>
+				<p class="text-sm text-body leading-6">
+					Das Ergebnis ist der Anfangskurs — die Richtung, in der Sie aufbrechen. Auf langen
+					Routen ändert sich der Kurs entlang des Großkreises, sodass Korrekturen unterwegs
+					normal sind.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">zusammen mit dem kompass nutzen</p>
+				<p class="text-sm text-body leading-6">
+					Nehmen Sie den berechneten Kurs in das Kompass-Werkzeug und steuern Sie, bis der
+					Kurs übereinstimmt. Schalten Sie auf wahren Norden für kartengetreues Steuern.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">der kursrechner</p>
+			<h2 class="mt-3 text-display-lg text-ink">Kurs und Entfernung zwischen zwei Punkten berechnen</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				Ein <strong class="text-ink font-medium">Kursrechner online</strong> findet die Richtung
+				und Entfernung zwischen zwei Punkten auf der Erde. Geben Sie zwei Koordinatensätze
+				ein — oder nutzen Sie Ihren live-Standort als einen Endpunkt — und dieses Werkzeug
+				liefert den Anfangskurs in Grad, die Kompassrichtung und die Großkreis-Entfernung in
+				Kilometern. Es ist das essenzielle <strong class="text-ink font-medium">Online-Kompass-
+				Mathematik-Werkzeug</strong> für Navigation, Routenplanung, Vermessung und Studium.
+			</p>
+			<p class="mt-4 leading-7">
+				Der Kurs ist der Winkel, im Uhrzeigersinn vom Norden aus gemessen, in die Richtung,
+				in die Sie reisen müssen: 0° ist Norden, 90° Osten, 180° Süden, 270° Westen. Eine Route
+				von London nach New York beginnt zum Beispiel mit einem Anfangskurs von etwa 288° —
+				das ist die Kompassrichtung, in die Sie die Nase eines Flugzeugs oder den Bug eines
+				Schiffes richten, wenn Sie aufbrechen.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Anfangskurs vs. Endkurs</h3>
+			<p class="mt-3 leading-7">
+				Da die Erde eine Kugel ist, ist die <strong class="text-ink font-medium">Richtung
+				zwischen zwei Punkten</strong> keine gerade Linie auf einer Karte. Die kürzeste Route
+				folgt einem Großkreis, und entlang dieser Route ändert sich der Kurs kontinuierlich.
+				Der „Anfangskurs" ist die Richtung an Ihrem Startpunkt — die, mit der Sie zuerst
+				steuern. Auf langen Routen driftet der Kurs während der Fahrt, weshalb Piloten und
+				Navigationen Wegpunkte und Kurskorrekturen unterwegs verwenden. Dieser Rechner gibt
+				den Anfangskurs an und berechnet auch den Endkurs für das Ankunftsende des
+				Großkreiswegs.
+			</p>
+			<p class="mt-4 leading-7">
+				Für kurze Fahrten — eine Wanderung, eine Fahrt durch die Stadt, ein Fußweg zwischen
+				zwei Kartenpunkten — ist der Anfangskurs im Wesentlichen die gesamte Route. Das macht
+				diesen Kursrechner online perfekt für die alltägliche Planung und für Geometrie im
+				Klassenzimmer.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Entfernung auf die Weise, wie ein Navigator sie misst</h3>
+			<p class="mt-3 leading-7">
+				Neben dem Kurs erhalten Sie die Großkreis-Entfernung — die kürzeste Entfernung über
+				die Erdoberfläche zwischen den beiden Punkten, berechnet mit der Haversine-Formel.
+				Anders als ein Lineal auf einer flachen Karte berücksichtigt dies die Krümmung des
+				Planeten, sodass das Ergebnis mit realen Reiseentfernungen übereinstimmt. Es ist
+				dieselbe Berechnung, die für die Flugplanung und Schifffahrtsnavigation verwendet wird.
+			</p>
+			<p class="mt-4 leading-7">
+				Das Werkzeug geht weiter als ein einfacher Rechner. Wählen Sie ein Ziel aus der
+				Voreinstellungsliste — einschließlich großer Weltstädte und der Kaaba in Mekka — und
+				es berechnet die Zusammenfassung („New York liegt 245° WSW von London, 5.570 km entfernt")
+				plus vier zusätzliche Ablesungen von Punkt A: die
+				<a href="/de/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">Qibla-Richtung</a>,
+				die magnetische Deklination und die
+				<a href="/de/sun/" class="text-link underline decoration-link/30 hover:decoration-link">Sonnenposition</a>.
+				Eine Eingabe, und Sie sehen, wie Ihr Kompass, Qibla- und Sonnen Daten mit Ihrer Route
+				übereinstimmen.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Den Kurs mit einem Kompass verwenden</h3>
+			<p class="mt-3 leading-7">
+				Das natürliche Begleitwerkzeug ist der
+				<a href="/" class="text-link underline decoration-link/30 hover:decoration-link">Online-Kompass</a>.
+				Berechnen Sie Ihren Kurs, öffnen Sie den Kompass und drehen Sie sich, bis Ihr Kurs
+				übereinstimmt. Schalten Sie den Kompass auf wahren Norden, damit Ihr Steuern mit dem
+				Kartennorden übereinstimmt — und lassen Sie den Kompass die Deklination Ihres Standorts
+				automatisch anwenden. Die Kombination verwandelt eine Zahl auf einem Blatt in eine
+				Route, die Sie tatsächlich zu Fuß, mit dem Schiff oder mit dem Auto zurücklegen
+				können.
+			</p>
+			<p class="mt-4 leading-7">
+				Dieser Kursrechner online ist nützlich für die Routenplanung vor einer Wanderung,
+				das Ausrichten von Antennen und Solaranlagen, die Schätzung der Reise zwischen zwei
+				Adressen, das Überprüfen einer Kompassroute oder die Überprüfung von Hausaufgaben.
+				Da alles lokal in Ihrem Browser läuft, ist es ein privates, kostenloses Online-Kompass-
+				Geometrie-Werkzeug, dem Sie überall vertrauen können — keine Installation, keine
+				Konten, keine Datenerfassung.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Grade, Richtungen und Planung</h3>
+			<p class="mt-3 leading-7">
+				Kurse in Grad gelesen sind präzise, aber abstrakt; deshalb konvertiert das Werkzeug
+				sie auch in einfache Kompassrichtungen. 45° wird NO, 200° wird SSW und so weiter —
+				sodass Sie Fragen wie „In welche Richtung muss ich fahren?" in derselben Sprache
+				beantworten können, die ein Kompass oder eine Karte spricht. Geben Sie Ihre aktuelle
+				Position als Punkt A und ein Ziel als Punkt B ein, und das gesamte Bild — Kurs,
+				Richtung, Entfernung, Qibla, Deklination und Sonne — aktualisiert sich sofort.
+				Das ist die Kraft eines Online-Kompass-Mathematik-Werkzeugs, das um Ihre tatsächlichen
+				Koordinaten herum gebaut ist.
+			</p>
+		</div>
+	</section>
+
+	<RelatedTools current="/bearing/" />
+</Layout>

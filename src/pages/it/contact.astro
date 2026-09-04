@@ -1,0 +1,88 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+	title="Contatti"
+	description="Contattate il team di True Online Compass — feedback, segnalazioni di bug e suggerimenti."
+	path="/it/contact/"
+>
+	<div class="mx-auto max-w-3xl px-4 py-16 sm:px-6 md:py-24">
+		<p class="eyebrow">contatti</p>
+		<h1 class="mt-4 text-display-lg text-ink">Mettiti in contatto.</h1>
+		<p class="mt-4 text-body-lg text-body">
+			Hai trovato un bug, vuoi una funzionalità, o hai semplicemente un feedback? Leggiamo tutto.
+		</p>
+
+		<form data-contact-form class="card-lg mt-10 p-6 md:p-8 space-y-5">
+			<div class="grid gap-5 sm:grid-cols-2">
+				<label class="block">
+					<span class="eyebrow block mb-1">nome</span>
+					<input data-c-name class="field-input" type="text" autocomplete="name" placeholder="Il tuo nome" />
+				</label>
+				<label class="block">
+					<span class="eyebrow block mb-1">email</span>
+					<input data-c-email class="field-input" type="email" autocomplete="email" placeholder="tu@esempio.com" />
+				</label>
+			</div>
+			<label class="block">
+				<span class="eyebrow block mb-1">messaggio</span>
+				<textarea
+					data-c-message
+					class="field-input h-36 resize-y py-2"
+					placeholder="Dicci cosa hai in mente…"
+					required
+				></textarea>
+			</label>
+			<div class="flex items-center gap-3">
+				<button data-c-submit type="submit" class="btn-primary">Invia messaggio</button>
+				<p data-c-note class="text-xs text-mute"></p>
+			</div>
+		</form>
+
+		<p class="mt-6 text-xs text-mute leading-5">
+			Prefisci l'email? Scrivi a hello@trueonlinecompass.com. Poiché gli strumenti funzionano
+			interamente nel tuo browser, includi il tuo dispositivo e browser quando segnali problemi
+			ai sensori.
+		</p>
+
+		<div class="card-soft mt-10 p-6">
+			<p class="text-sm font-medium text-ink mb-1">Informazioni su questa bussola online</p>
+			<p class="text-sm leading-6">
+				True Online Compass è un kit gratuito basato sul browser: una
+				<a href="/" class="text-link underline decoration-link/30 hover:decoration-link">bussola online</a>
+				in tempo reale con nord vero e magnetico, coordinate GPS
+				<a href="/it/location/" class="text-link underline decoration-link/30 hover:decoration-link">coordinate</a>,
+				un
+				<a href="/it/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">trovatore Qibla</a>,
+				un
+				<a href="/it/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">calcolatore di rilevamento</a>,
+				e un
+				<a href="/it/sun/" class="text-link underline decoration-link/30 hover:decoration-link">calcolatore della posizione del sole</a>.
+				Tutto viene eseguito localmente — gratuito, privato, senza installazione. Consulta la
+				<a href="/it/about/" class="text-link underline decoration-link/30 hover:decoration-link">pagina chi siamo</a>
+				o la nostra
+				<a href="/it/privacy/" class="text-link underline decoration-link/30 hover:decoration-link">informativa sulla privacy</a>
+				e i
+				<a href="/it/terms/" class="text-link underline decoration-link/30 hover:decoration-link">termini e condizioni</a>.
+			</p>
+		</div>
+	</div>
+</Layout>
+
+<script>
+	const form = document.querySelector('[data-contact-form]');
+	const note = document.querySelector('[data-c-note]');
+	const submit = document.querySelector('[data-c-submit]');
+
+	form?.addEventListener('submit', (e) => {
+		e.preventDefault();
+		submit.disabled = true;
+		note.textContent = 'Invio in corso…';
+		// No backend — this form is a placeholder until an endpoint is configured.
+		setTimeout(() => {
+			submit.disabled = false;
+			note.textContent = 'Questo modulo non è ancora collegato. Invece, scrivici a hello@trueonlinecompass.com';
+		}, 800);
+	});
+</script>

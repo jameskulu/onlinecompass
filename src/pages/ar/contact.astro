@@ -1,0 +1,87 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+	title="اتصل بنا"
+	description="تواصل مع فريق بوصلة أون لاين الحقيقية — ملاحظات وتقارير أخطاء واقتراحات."
+	path="/ar/contact/"
+>
+	<div class="mx-auto max-w-3xl px-4 py-16 sm:px-6 md:py-24">
+		<p class="eyebrow">اتصل بنا</p>
+		<h1 class="mt-4 text-display-lg text-ink">تواصل معنا.</h1>
+		<p class="mt-4 text-body-lg text-body">
+			وجدت خللاً أو تريد ميزة أو لديك ملاحظات فحسب؟ نقرأ كل شيء.
+		</p>
+
+		<form data-contact-form class="card-lg mt-10 p-6 md:p-8 space-y-5">
+			<div class="grid gap-5 sm:grid-cols-2">
+				<label class="block">
+					<span class="eyebrow block mb-1">الاسم</span>
+					<input data-c-name class="field-input" type="text" autocomplete="name" placeholder="اسمك" />
+				</label>
+				<label class="block">
+					<span class="eyebrow block mb-1">البريد الإلكتروني</span>
+					<input data-c-email class="field-input" type="email" autocomplete="email" placeholder="you@example.com" />
+				</label>
+			</div>
+			<label class="block">
+				<span class="eyebrow block mb-1">الرسالة</span>
+				<textarea
+					data-c-message
+					class="field-input h-36 resize-y py-2"
+					placeholder="أخبرنا ما يدور في ذهنك..."
+					required
+				></textarea>
+			</label>
+			<div class="flex items-center gap-3">
+				<button data-c-submit type="submit" class="btn-primary">إرسال الرسالة</button>
+				<p data-c-note class="text-xs text-mute"></p>
+			</div>
+		</form>
+
+		<p class="mt-6 text-xs text-mute leading-5">
+			تفضل البريد الإلكتروني؟ اكتب إلى hello@trueonlinecompass.com. بما أن الأدوات تعمل بالكامل في
+			متصفحك، يُرجى تضمين جهازك ومتصفحك عند الإبلاغ عن مشكلات المستشعرات.
+		</p>
+
+		<div class="card-soft mt-10 p-6">
+			<p class="text-sm font-medium text-ink mb-1">عن بوصلة أون لاين هذه</p>
+			<p class="text-sm leading-6">
+				البوصلة الأون لاين الحقيقية هي حزمة أدوات مجانية تعمل على المتصفح: بوصلة
+				<a href="/" class="text-link underline decoration-link/30 hover:decoration-link">أون لاين</a>
+				حية مع الشمال الحقيقي والمغناطيسي، وإحداثيات GPS
+				<a href="/ar/location/" class="text-link underline decoration-link/30 hover:decoration-link">الموقع</a>،
+				و
+				<a href="/ar/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">محدد قبلة</a>،
+				و
+				<a href="/ar/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">حاسبة اتجاه</a>،
+				و
+				<a href="/ar/sun/" class="text-link underline decoration-link/30 hover:decoration-link">حاسبة موضع شمس</a>.
+				كل شيء يعمل محلياً — مجاني وخاص بدون تثبيت. راجع
+				<a href="/ar/about/" class="text-link underline decoration-link/30 hover:decoration-link">صفحة من نحن</a>
+				أو
+				<a href="/ar/privacy/" class="text-link underline decoration-link/30 hover:decoration-link">سياسة الخصوصية</a>
+				و
+				<a href="/ar/terms/" class="text-link underline decoration-link/30 hover:decoration-link">الشروط والأحكام</a>.
+			</p>
+		</div>
+	</div>
+</Layout>
+
+<script>
+	const form = document.querySelector('[data-contact-form]');
+	const note = document.querySelector('[data-c-note]');
+	const submit = document.querySelector('[data-c-submit]');
+
+	form?.addEventListener('submit', (e) => {
+		e.preventDefault();
+		submit.disabled = true;
+		note.textContent = 'جارٍ الإرسال...';
+		// No backend — this form is a placeholder until an endpoint is configured.
+		setTimeout(() => {
+			submit.disabled = false;
+			note.textContent = 'This form is not wired up yet. Email us instead at hello@trueonlinecompass.com';
+		}, 800);
+	});
+</script>

@@ -8,6 +8,13 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://trueonlinecompass.com',
+	i18n: {
+		defaultLocale: 'en',
+		locales: ['en', 'es', 'ja', 'fr', 'de', 'pt', 'ko', 'it', 'id', 'bn', 'tr', 'ur', 'ar'],
+		routing: {
+			prefixDefaultLocale: true,
+		},
+	},
 	integrations: [
 		sitemap(),
 		{

@@ -1,0 +1,88 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+	title="Kebijakan Privasi"
+	description="Kebijakan privasi True Online Compass. Semua data sensor dan lokasi diproses secara lokal di perangkat browser Anda - kami tidak mengumpulkan data pribadi dan tidak menggunakan pelacak."
+	path="/id/privacy/"
+>
+	<div class="mx-auto max-w-3xl px-4 py-16 sm:px-6 md:py-24">
+		<p class="eyebrow">hukum</p>
+		<h1 class="mt-4 text-display-lg text-ink">Kebijakan Privasi</h1>
+		<p class="mt-3 text-sm text-mute">Terakhir diperbarui: {new Date().toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+
+		<div class="mt-10 space-y-8 text-body">
+			<section>
+				<h2 class="text-display-sm text-ink mb-3">Secara singkat</h2>
+				<p class="leading-7">
+					True Online Compass dirancang untuk bersifat privat secara default. Semua data sensor - orientasi
+					perangkat, magnetometer, dan lokasi - diproses secara lokal di perangkat browser Anda dan
+					tidak pernah ditransmisikan, disimpan, atau dibagikan. Kami tidak menggunakan cookie, pelacak, atau analitik.
+				</p>
+			</section>
+
+			<section>
+				<h2 class="text-display-sm text-ink mb-3">Yang kami kumpulkan</h2>
+				<p class="leading-7 mb-3">Kami tidak mengumpulkan apa pun. Secara spesifik:</p>
+				<ul class="list-disc space-y-2 pl-5 leading-7">
+					<li>Tidak ada akun, pendaftaran, atau email yang diperlukan.</li>
+					<li>Tidak ada informasi pribadi yang diminta atau disimpan.</li>
+					<li>Orientasi perangkat, heading, dan koordinat GPS tidak pernah meninggalkan perangkat Anda.</li>
+					<li>Tidak ada SDK analitik atau periklanan pihak ketiga yang digunakan.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2 class="text-display-sm text-ink mb-3">Izin browser</h2>
+				<p class="leading-7">
+					Alat-alat ini meminta izin sensor dan lokasi melalui browser Anda untuk memberikan
+					pembacaan. Anda mengontrol izin ini kapan saja di browser atau pengaturan
+					sistem operasi Anda. Menolak izin lokasi tetap memungkinkan Anda menggunakan setiap alat dengan
+					koordinat yang dimasukkan secara manual.
+				</p>
+			</section>
+
+			<section>
+				<h2 class="text-display-sm text-ink mb-3">Penyimpanan lokal</h2>
+				<p class="leading-7">
+					Preferensi tema Anda (mode gelap atau terang) disimpan di penyimpanan lokal
+					browser Anda sehingga pilihan Anda bertahan antar kunjungan. Tidak ada data lain yang disimpan.
+				</p>
+			</section>
+
+			<section>
+				<h2 class="text-display-sm text-ink mb-3">Hosting</h2>
+				<p class="leading-7">
+					Situs web itu sendiri di-host dari infrastruktur hosting web standar. Seperti situs web mana pun,
+					penyedia hosting mungkin menyimpan log server rutin (seperti alamat IP dan URL yang diminta)
+					untuk keamanan dan tujuan operasional. Log ini tidak digunakan untuk mengidentifikasi Anda.
+				</p>
+			</section>
+
+			<section>
+				<h2 class="text-display-sm text-ink mb-3">Kontak</h2>
+				<p class="leading-7">
+					Pertanyaan tentang kebijakan ini? Hubungi kami melalui <a href="/id/contact/" class="text-link underline decoration-link/30 hover:decoration-link">halaman kontak</a>.
+				</p>
+			</section>
+
+			<section class="border-t border-hairline pt-8">
+				<h2 class="text-display-sm text-ink mb-3">Tentang kompas online ini</h2>
+				<p class="leading-7">
+					True Online Compass adalah toolkit berbasis browser yang gratis: kompas
+					<a href="/" class="text-link underline decoration-link/30 hover:decoration-link">online langsung</a>
+					yang menampilkan utara sejati dan magnetik dengan deklinasi otomatis, alat
+					<a href="/id/location/" class="text-link underline decoration-link/30 hover:decoration-link">koordinat GPS</a>,
+					<a href="/id/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">pencari Qibla</a>,
+					<a href="/id/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">kalkulator bearing</a>,
+					dan
+					<a href="/id/sun/" class="text-link underline decoration-link/30 hover:decoration-link">kalkulator posisi matahari</a>.
+					Setiap perhitungan berjalan secara lokal di perangkat browser Anda - tidak perlu menginstal, tidak ada yang diunggah,
+					dan tidak perlu akun. Pelajari lebih lanjut di
+					<a href="/id/about/" class="text-link underline decoration-link/30 hover:decoration-link">halaman tentang kami</a>.
+				</p>
+			</section>
+		</div>
+	</div>
+</Layout>

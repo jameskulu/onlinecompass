@@ -1,0 +1,133 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import QiblaFinder from '../../components/QiblaFinder.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="Qibla Finder Online — Direction to Kaaba from My Location"
+	description="Online compass for Qibla — find the direction to the Kaaba from my location. Quibla finder with great-circle bearing and distance to Mecca, computed privately in your browser."
+	path="/en/qibla/"
+	keywords="online compass for qibla, quibla finder online compass, online compass kabba to find north from my location, qibla direction, direction to kaaba, find qibla from my location"
+>
+	<PageHero
+		eyebrow="qibla finder"
+		title="Face the Kaaba, anywhere on Earth."
+		description="The great-circle bearing to Makkah is computed on your device from your coordinates — accurate to the degree, private by design."
+	>
+		<QiblaFinder />
+	</PageHero>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-2">
+			<div>
+				<p class="eyebrow mb-2">how it's calculated</p>
+				<p class="text-sm text-body leading-6">
+					The bearing uses the shortest great-circle path between your location and the Kaaba
+					(21.4225° N, 39.8262° E). It accounts for Earth's curvature, so it differs from a flat
+					compass-rose reading.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">put it into practice</p>
+				<p class="text-sm text-body leading-6">
+					Note the bearing, then open the compass tool and turn until your heading matches it.
+					Or calibrate outside away from metal for the best accuracy.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">the qibla finder</p>
+			<h2 class="mt-3 text-display-lg text-ink">Find the Qibla direction from my location</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				A <strong class="text-ink font-medium">Qibla finder online</strong> tells you the exact
+				direction to face for prayer — the bearing from wherever you are to the Kaaba in Mecca,
+				Saudi Arabia (21.4225° N, 39.8262° E). This page computes that direction from your live
+				location or from any coordinates you enter, showing both the bearing in degrees and the
+				compass direction, plus the great-circle distance to Makkah. No app, no install, no
+				account — open the page and know which way to pray.
+			</p>
+			<p class="mt-4 leading-7">
+				Muslims around the world pray toward the Kaaba five times a day, and getting the
+				direction right matters. Whether you are travelling, new to an area, or simply want to
+				confirm the direction in your home, this free <strong class="text-ink font-medium">quibla
+				finder online compass</strong> gives you an accurate answer in seconds.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">How the direction to the Kaaba is calculated</h3>
+			<p class="mt-3 leading-7">
+				The <strong class="text-ink font-medium">direction to Kaaba from my location</strong> is
+				not a flat-map shortcut. Because Earth is curved, the correct bearing follows the shortest
+				great-circle path between two points. The bearing to Mecca from London is roughly 118°,
+				from New York about 58°, from Jakarta about 295°, and from Sydney about 295° west of
+				north — numbers that surprise many people precisely because they are great-circle
+				bearings, not straight-line map directions. This tool performs the same spherical
+				trigonometry used in aircraft navigation, so the result is accurate to the degree wherever
+				you are on the planet.
+			</p>
+			<p class="mt-4 leading-7">
+				Because the calculation runs entirely in your browser, your coordinates are never sent to
+				a server. Many online Qibla tools quietly log your location; this one cannot. It is an
+				online compass for Qibla that is as private as it is precise.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Putting the Qibla bearing into practice</h3>
+			<p class="mt-3 leading-7">
+				Once you have the bearing, the next step is turning it into a direction you can physically
+				face. The simplest method: note the bearing in degrees, open the
+				<a href="/" class="text-link underline decoration-link/30 hover:decoration-link">live online compass</a>,
+				and turn until your heading matches the Qibla bearing. The compass dial shows your
+				heading in real time, so matching it takes seconds.
+			</p>
+			<p class="mt-4 leading-7">
+				For the best result, tap "Use location" in both tools so declination is corrected and the
+				readings are true-north based. If you do not have a compass handy, you can also orient
+				yourself with the sun: in the northern hemisphere the sun sits due south at local noon, in
+				the southern hemisphere due north — a reliable daytime reference point for working out
+				your general orientation before fine-tuning with the bearing.
+			</p>
+
+			<div class="mt-10 grid gap-4 sm:grid-cols-2">
+				<div class="card-soft p-5">
+					<h4 class="text-sm font-medium text-ink mb-1">Common search: "online compass kabba to find north from my location"</h4>
+					<p class="text-sm leading-6">
+						That phrase is exactly what this tool answers. Locate yourself, read the Qibla
+						bearing, then follow it on the compass — a free online compass for Qibla from any
+						location on Earth.
+					</p>
+				</div>
+				<div class="card-soft p-5">
+					<h4 class="text-sm font-medium text-ink mb-1">Distance to Makkah</h4>
+					<p class="text-sm leading-6">
+						Alongside the bearing you get the great-circle distance to the Kaaba — helpful for
+						planning travel and understanding how the bearing changes with distance.
+					</p>
+				</div>
+			</div>
+
+			<h3 class="mt-10 text-display-sm text-ink">Qibla direction that changes with your location</h3>
+			<p class="mt-3 leading-7">
+				Your <strong class="text-ink font-medium">qibla direction</strong> depends entirely on
+				where you are. It changes from city to city and even street to street, so a value you
+				looked up years ago in one country is rarely right in another. That is why a live
+				calculator is the dependable choice: it computes the bearing fresh for your current
+				coordinates every time. Travel a few hundred kilometres and the bearing can shift several
+				degrees — and this page keeps up automatically.
+			</p>
+			<p class="mt-4 leading-7">
+				The tool works with manual coordinates too, which is handy when you want to check the
+				direction for a place you are about to visit, or when your browser permission is off.
+				Enter a city or coordinates and the Qibla finder returns the same accurate bearing and
+				distance. Wherever the question is "find qibla from my location", this page answers it —
+				privately, precisely, and for free.
+			</p>
+		</div>
+	</section>
+
+	<RelatedTools current="/qibla/" />
+</Layout>

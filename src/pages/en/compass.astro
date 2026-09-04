@@ -1,0 +1,165 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Compass from '../../components/Compass.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="Online Compass Tool — Live True & Magnetic North Heading"
+	description="Use this free online compass tool for a live 360° heading on your phone. Online compass direction with magnetic and true north, automatic declination, accuracy feedback, and calibration guide."
+	path="/en/compass/"
+	keywords="online compass, online compass tool, free online compass tool, online compass live, online compass direction, online compass to find north, online compass free"
+>
+	<section class="relative overflow-hidden">
+		<div class="mesh-gradient" aria-hidden="true"></div>
+		<div class="relative">
+			<PageHero
+				eyebrow="live compass"
+				title="Your phone is the compass."
+				description="Grant sensor access and this page turns your phone into a precise digital compass — 360° dial, smooth needle, and both magnetic and true north readings."
+			>
+				<Compass />
+			</PageHero>
+		</div>
+	</section>
+
+	<section class="border-y border-hairline bg-canvas">
+		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-3">
+			<div>
+				<p class="eyebrow mb-2">how to read it</p>
+				<p class="text-sm text-body leading-6">
+					The needle's red end always points north. Rotate your body until the fixed top
+					marker meets the direction you want — the heading reads at the top.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">true vs magnetic</p>
+				<p class="text-sm text-body leading-6">
+					Toggle between headings. True north applies your location's magnetic declination so
+					maps, navigation, and bearings all line up.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">accuracy</p>
+				<p class="text-sm text-body leading-6">
+					The status pill shows your live sensor source and estimated drift. If readings wobble,
+					follow the calibration steps below the dial.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">the online compass tool</p>
+			<h2 class="mt-3 text-display-lg text-ink">Find north online — instantly, from your browser</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				An <strong class="text-ink font-medium">online compass</strong> is a digital compass that
+				works directly in your web browser. No app store, no download, no account — you open this
+				page, grant sensor access, and your phone becomes a free online compass with a live 360°
+				heading readout. It is the fastest way to <strong class="text-ink font-medium">find
+				north online</strong> whether you are at home, hiking, camping, or just trying to figure
+				out which way your apartment faces.
+			</p>
+			<p class="mt-4 leading-7">
+				The compass reads your device's sensors in real time. The red end of the needle always
+				points north — 0° or 360° at the top of the dial — and the heading appears below in
+				degrees alongside the compass point (N, NE, E, SE, S, SW, W, NW). As you turn, the dial
+				rotates with you, so the <strong class="text-ink font-medium">online compass
+				direction</strong> you are facing is always visible at a glance.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">True north vs magnetic north on an online compass</h3>
+			<p class="mt-3 leading-7">
+				Most phone compasses show <strong class="text-ink font-medium">magnetic north</strong> —
+				where the needle is pulled by Earth's magnetic field. But maps, GPS, and navigation all
+				use <strong class="text-ink font-medium">true north</strong>, the geographic North Pole.
+				The angle between them, called <strong class="text-ink font-medium">magnetic
+				declination</strong>, varies from roughly −30° to +30° depending on where you are on the
+				planet. In some cities the gap is a few degrees; in others it is more than fifteen. Ignore
+				declination and your bearings can be off by a significant margin.
+			</p>
+			<p class="mt-4 leading-7">
+				This online compass tool handles that for you. It applies the World Magnetic Model using
+				your location, so switching between magnetic and true north is one tap. When you toggle to
+				true north, the heading aligns with the grid on a map — essential for navigation,
+				geocaching, aligning a dish, or following a bearing you calculated elsewhere. For the most
+				accurate result, tap "Use location for declination" so the correction is computed for
+				your exact coordinates rather than a rough estimate.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">How accurate is a browser compass?</h3>
+			<p class="mt-3 leading-7">
+				Phones contain a magnetometer, accelerometer, and gyroscope. A good online compass fuses
+				those sensors to produce a tilt-compensated heading — meaning it stays reasonably steady
+				even when you are not holding the phone perfectly level. This page shows an accuracy
+				indicator and the live sensor source, so you can see how confident the reading is.
+			</p>
+			<p class="mt-4 leading-7">
+				To get the best results: hold the phone flat away from your body, keep it away from
+				metal, speakers, and electronic gadgets, and trace a figure-eight motion a few times if
+				the needle drifts. Calibration takes seconds and makes a real difference. Indoors, expect
+				a few degrees of wobble; outside, away from metal, a free online compass like this one
+				routinely agrees with a physical compass within a degree or two.
+			</p>
+
+			<div class="mt-10 grid gap-4 sm:grid-cols-2">
+				<div class="card-soft p-5">
+					<h4 class="text-sm font-medium text-ink mb-1">When you need an online compass free tool</h4>
+					<p class="text-sm leading-6">
+						Orienting a map, aligning solar panels, checking window orientation for plants,
+						sanity-checking a photo direction, teaching geometry, or practicing navigation —
+						all without carrying a physical compass.
+					</p>
+				</div>
+				<div class="card-soft p-5">
+					<h4 class="text-sm font-medium text-ink mb-1">What makes this compass different</h4>
+					<p class="text-sm leading-6">
+						No install, no ads, no tracking, and nothing uploaded. Everything runs locally on
+						your device, and the readings are corrected for true north automatically.
+					</p>
+				</div>
+			</div>
+
+			<h3 class="mt-10 text-display-sm text-ink">Every way to use an online compass</h3>
+			<p class="mt-3 leading-7">
+				The uses go far beyond knowing which way north is. Hikers and trail runners use an online
+				compass to orient a map before they set off. Photographers use it to plan where the sun
+				will rise and set. Campers use it to face their tent for the morning sun. Property
+				professionals check which way a room faces, and gardeners align raised beds for maximum
+				light. Students use this online compass for geometry to see angles come alive on a dial.
+				And with the fullscreen button, you can hold the dial at arm's length and line it up with
+				a distant landmark — exactly like a handheld compass.
+			</p>
+			<p class="mt-4 leading-7">
+				Because everything is computed in your browser, you can use this online compass live from
+				anywhere in the world — and it corrects for magnetic declination wherever you are, so
+				true north is always accurate. That combination of a free online compass to find north,
+				live heading, declination correction, and privacy is hard to find anywhere else.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Combine the compass with the rest of the toolkit</h3>
+			<p class="mt-3 leading-7">
+				This compass is one part of a complete navigation suite. Use the
+				<a href="/en/location/" class="text-link underline decoration-link/30 hover:decoration-link">GPS coordinates tool</a>
+				to capture your exact position, the
+				<a href="/en/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">bearing calculator</a>
+				to plan a course between two points, the
+				<a href="/en/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">Qibla finder</a>
+				to face the Kaaba, and the
+				<a href="/en/sun/" class="text-link underline decoration-link/30 hover:decoration-link">sun position calculator</a>
+				to track the solar path. Every tool works together, and every tool is private, free, and
+				works on any phone with a browser.
+			</p>
+			<p class="mt-4 leading-7">
+				Ready to find north? Grant sensor access above, follow the calibration steps if the
+				needle drifts, and enjoy one of the most accurate online compass tools available —
+				without installing a single thing.
+			</p>
+		</div>
+	</section>
+
+	<RelatedTools current="/" />
+</Layout>

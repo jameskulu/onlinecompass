@@ -1,0 +1,126 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SunPanel from '../../components/SunPanel.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="태양 위치 계산기 온라인 — 방위각, 일출 및 일몰"
+	description="온라인으로 태양 위치를 계산하세요: 어떤 위치에서든 방위각, 고도, 일출, 태양 남중, 일몰. 무료 즉시 — 완전히 브라우저에서 작동."
+	path="/ko/sun/"
+	keywords="태양 위치 계산기, 태양 방위각, 일출 일몰 시간, 태양 방향, 온라인 태양 위치"
+>
+	<PageHero
+		eyebrow="태양 위치"
+		title="태양을 정확하게 추적하세요."
+		description="실시간 태양 방위각과 고도, 일출, 태양 남중, 일몰 — 현재 위치 또는 입력한 좌표에 대해 계산됩니다."
+	>
+		<SunPanel />
+	</PageHero>
+
+	<section class="border-y border-hairline bg-canvas">
+		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-2">
+			<div>
+				<p class="eyebrow mb-2">숫자의 의미</p>
+				<p class="text-sm text-body leading-6">
+					방위각은 태양의 나침반 방향입니다(0° = 북쪽, 90° = 동쪽). 고도는 지평선 위로
+					얼마나 높이 있는지 — 그늘, 태양광 패널, 사진 촬영에 유용합니다.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">나침반 교차 검증</p>
+				<p class="text-sm text-body leading-6">
+					정오 무렵에 태양은 북반구에서 진남쪽 근처, 남반구에서 진북쪽 근처에 있습니다 —
+					낮 시간에 향을 검증하는 신뢰할 수 있는 방법입니다.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">태양 위치 도구</p>
+			<h2 class="mt-3 text-display-lg text-ink">온라인으로 태양 위치를 계산하세요 — 어떤 위치에서든</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				<strong class="text-ink font-medium">태양 위치 계산기 온라인</strong>은 특정 시간에
+				특정 장소에서 하늘의 태양 위치를 보여줍니다. 이 페이지는 현재 태양의
+				<strong class="text-ink font-medium">방위각</strong>(나침반 방향, 도수)과
+				<strong class="text-ink font-medium">고도</strong>(지평선 위 높이), 그리고 일출,
+				태양 남중, 일몰 시간을 계산합니다 — 실시간 위치 또는 입력한 좌표에 대해. 모든 것이
+				브라우저에서 작동하므로 즉시, 무료, 개인정보 보호됩니다.
+			</p>
+			<p class="mt-4 leading-7">
+				숫자는 하루 동안 실시간으로 업데이트되어 놀라울 정도로 다양한 작업에 유용합니다:
+				태양광 패널 배치, 사진 촬영 조명 계획, 화단 배치, 테라스 그늘 위치 설정,
+				또는 건너편 건물에서 태양이 언제 떠오르는지 아는 것.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">방위각과 고도 — 하늘 읽기</h3>
+			<p class="mt-3 leading-7">
+				<strong class="text-ink font-medium">방위각</strong>은 북쪽에서 시계 방향으로 측정된
+				태양의 방향입니다: 0°는 정북, 90°는 정동, 180°는 정남, 270°는 정서입니다. 정오
+				무렵에 북반구에서는 약 180°(정남), 남반구에서는 약 0°(정북)에 있습니다.
+				<strong class="text-ink font-medium">고도</strong>는 지평선에서 태양의 각도로,
+				일출과 일몰에서 0°에서 태양 남중 시 최고점까지 올라갑니다. 이 두 값이 함께 하늘에서
+				태양의 정확한 위치를 묘사합니다 — 천문학자와 태양광 엔지니어가 사용하는 것과 동일한
+				좌표입니다.
+			</p>
+			<p class="mt-4 leading-7">
+				태양의 경로는 위도와 계절에 따라 변합니다: 여름에는 더 높고, 겨울에는 더 낮으며,
+				지구상 어디에서든 동쪽에서 떠서 서쪽에서 집니다. 계산기는 표준 태양 위치 알고리즘을
+				통해 이를 모두 고려하기 때문에, 보이는 방위각과 고도는 현재 날짜, 시간, 좌표에 대해
+				정확합니다.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">태양이 방향 찾기에 유용한 이유</h3>
+			<p class="mt-3 leading-7">
+				나침반과 GPS 이전에 사람들은 방향 잡기에 태양을 사용했으며, 오늘날에도 여전히
+				작동합니다. 현지 정오 무렵에 북반구에서는 태양이 정확히 남쪽, 남반구에서는 정확히
+				북쪽에 있습니다. 일출에는 대략 동쪽, 일몰에는 대략 서쪽에 있습니다. 이들은 신뢰할
+				수 있는 경험적 규칙이며, 이 페이지를 통해 정확한 숫자로 변환합니다. 나침반 없이
+				낮 시간에 야외에 있다면 여기에서 방위각을 확인하고 그에 맞게 방향을 잡으세요 —
+				그런 다음 휴대폰을 사용할 수 있게 되면
+				<a href="/ko/" class="text-link underline decoration-link/30 hover:decoration-link">온라인 나침반</a>으로
+				교차 검증하세요.
+			</p>
+
+			<div class="mt-10 grid gap-4 sm:grid-cols-2">
+				<div class="card-soft p-5">
+					<h4 class="text-sm font-medium text-ink mb-1">태양광 에너지</h4>
+					<p class="text-sm leading-6">
+						패널 정렬 또는 설치 계획: 정오의 고도가 최적의 경사각을 보여주고,
+						방위각 범위가 하루 동안 표면이 받는 햇빛 양을 보여줍니다.
+					</p>
+				</div>
+				<div class="card-soft p-5">
+					<h4 class="text-sm font-medium text-ink mb-1">촬영 및 원예</h4>
+					<p class="text-sm leading-6">
+						황금시간 촬영을 계획하고, 화단에 빛이 드는 시기를 알거나,
+						오후 햇빛을 위한 테라스나 차양帆 위치를 설정하세요 — 모두 정확한 위치에서.
+					</p>
+				</div>
+			</div>
+
+			<h3 class="mt-10 text-display-sm text-ink">일출, 태양 남중, 일몰</h3>
+			<p class="mt-3 leading-7">
+				이 도구는 하루의 주요 순간도 보고합니다: <strong class="text-ink font-medium">일출</strong>,
+				태양이 지평선 위로 처음 떠오를 때; <strong class="text-ink font-medium">태양 남중</strong>,
+				최고점에 도달할 때; <strong class="text-ink font-medium">일몰</strong>,
+				사라질 때. 태양 남중은 태양이 자오선을 지나 가장 짧은 그림자를 드리는 순간 —
+				위에서 언급한 태양-나침반 트릭의 기준점입니다.
+			</p>
+			<p class="mt-4 leading-7">
+				계산이 로컬에서 이루어지기 때문에 결과는 좌표와 날짜에 따라 자연스럽게 변합니다:
+				북반구의 겨울은 짧은 낮과 낮은 정오 고도를带来하며, 열대 지역에서는 태양이 일년
+				내내 높이 올라갑니다. 어디에 있든 이 무료 태양 위치 계산기가 태양 경로를 한눈에
+				보여줍니다 — <a href="/ko/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">방위각
+				계산기</a>와 <a href="/ko/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">키블라
+				finder</a>와 완벽하게 결합하여 머리 위 하늘의 전체 그림을 제공합니다.
+			</p>
+		</div>
+	</section>
+
+	<RelatedTools current="/sun/" />
+</Layout>

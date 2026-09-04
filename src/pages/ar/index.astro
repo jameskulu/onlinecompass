@@ -1,0 +1,449 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Compass from '../../components/Compass.astro';
+
+const faq = [
+	{
+		q: 'أي اتجاه أنا فيه — بوصلة أون لاين؟',
+		a: 'افتح هذه الصفحة على هاتفك وسيعرض القراءة الحية للاتجاه تحت المقياس الدرجة الدقيقة واتجاه البوصلة (شمال، شمال شرق، شرق، جنوب شرق، جنوب، جنوب غرب، غرب، شمال غرب) الذي تواجهه، مع التحديث المستمر أثناء دورانك.',
+	},
+	{
+		q: 'بوصلة أون لاين — أين الشمال؟',
+		a: 'الطرف الأحمر من الإبرة يشير دائماً إلى الشمال، والذي يقرأ 0°/360° في أعلى المقياس. قم بالتبديل إلى "الشمال الحقيقي" وتصحيح الموقع للانحراف المغناطيسي في موقعك بحيث يتطابق الشمال مع الخرائط.',
+	},
+	{
+		q: 'ما الاتجاه الذي أواجهه — بوصلة أون لاين؟',
+		a: 'أمسك هاتفك بشكل مسطح، امنح إذن الوصول للحسّاس، وسيخبرك الاتجاه أسفل المقياس بالاتجاه الذي تواجهه بالدرجات وكتنقطة بوصلة — على سبيل المثال 274° أو غرب.',
+	},
+	{
+		q: 'كيف أعرف الاتجاه بدون بوصلة أون لاين؟',
+		a: 'استخدم الشمس: حوالي الظهيرة المحلية تقع جنوباً في نصف الكرة الشمالي وشمالاً في نصف الكرة الجنوبي. تُظهر أداة الشمس في هذا الموقع الزاوية الشمسية الدقيقة لأي موقع، ومحدد القبلة يعمل كاتجاه مرجعي ثابت أيضاً.',
+	},
+	{
+		q: 'ما الاتجاه الذي أواجهه — بوصلة أون لاين؟',
+		a: 'امنح إذن الوصول للحسّاس، وأمسك الهاتف بشكل مبعد عن المعادن، واقرأ قراءة الاتجاه. يتم تحديثها باستمرار أثناء دورانك، لذا تعرف دائماً في أي اتجاه تواجه.',
+	},
+	{
+		q: 'كيف أستخدم بوصلة أون لاين؟',
+		a: 'افتح هذه الصفحة على الهاتف، اضغط "تفعيل البوصلة الحية"، وأمسك الجهاز بشكل مسطح، واقرأ الاتجاه. إذا انحرفت الإبرة، حرّك الجهاز في شكل ثمانية بضع مرات لإعادة ضبط البوصلة.',
+	},
+	{
+		q: 'هل يمكنني استخدام هاتفي كبوصلة؟',
+		a: 'نعم. تحتوي الهواتف الحديثة على مقياس مغناطيسي، ويحول هذا الموقع ذلك الحسّاس إلى بوصلة مباشرة في متصفحك — بدون تحميل تطبيق أو تثبيت أي شيء.',
+	},
+	{
+		q: 'أين بوصلتي في جوجل؟',
+		a: 'تُظهر خرائط جوجل بوصلة صغيرة في أعلى يمين عرض الخريطة. للحصول على اتجاه حي بالدرجات، فقط ابحث عن "بوصلة أون لاين" في جوجل وافتح هذه الصفحة — تصبح بوصلة في اللحظة التي تمنح فيها إذن الوصول للحسّاس.',
+	},
+	{
+		q: 'هل يمكن لهاتفي أن يخبرني بالاتجاه الذي أواجهه؟',
+		a: 'نعم. مقياس المغناطيسية في هاتفك مع هذه الصفحة يعطي اتجاهاً حياً، ويصحح الموقع تلقائياً للانحراف المغناطيسي بحيث يتطابق الشمال مع خرائطك.',
+	},
+	{
+		q: 'كيف أرى بوصلة على الهاتف المحمول؟',
+	a: 'افتح هذه الصفحة على هاتفك وتظهر البوصلة فوراً — بدون حاجة لتطبيق. على أندرويد، تتضمن خرائط جوجل أيضاً بوصلة، وبعض الهواتف تحتوي على تطبيق بوصلة مدمج.',
+	},
+	{
+		q: 'ما هو اتجاه شماللي؟',
+		a: 'الشمال الحقيقي هو القطب الجغرافي الشمالي؛ الشمال المغناطيسي هو حيث تشير إبرة البوصلة. الزاوية بينهما (الانحراف) تختلف حسب الموقع، ويصحح هذا الموقع لها تلقائياً.',
+	},
+	{
+		q: 'أين البوصلة في هاتفي؟',
+		a: 'كثير من الهواتف لا تحتوي على تطبيق بوصلة مخصص — لكن الحسّاس مدمج. افتح هذا الموقع على هاتفك ويصبح بوصلة بدون تثبيت.',
+	},
+	{
+		q: 'أي الهواتف المحمولة تحتوي على حسّاس بوصلة؟',
+		a: ' تقريباً كل هاتف ذكي حديث — كل 아이فون منذ אייפون 3GS و כמעט جميع هواتف أندرويد — يتضمن مقياس مغناطيسي، لذا تعمل هذه البوصلة الأون لاين على أي جهاز تقريباً.',
+	},
+	{
+		q: 'لماذا يقفز اتجاهي؟',
+		a: 'المعادن والأجهزة الإلكترونية القريبة تشوّه المقياس المغناطيسي. اتبع خطوات الضبط أعلاه، وتأكد من أن الهاتف مسطح. انحراف بضع درجات هو أمر طبيعي في الداخل.',
+	},
+	{
+		q: 'ما الفرق بين الشمال المغناطيسي والشمال الحقيقي؟',
+		a: 'الشمال المغناطيسي هو حيث تشير إبرة البوصلة. الشمال الحقيقي هو القطب الجغرافي الشمالي، وهو ما تستخدمه الخرائط والملاحة. الزاوية بينهما — الانحراف — تختلف حسب الموقع، ويصحح هذا الأداة لها تلقائياً.',
+	},
+	{
+		q: 'لماذا يطلب إذن الموقع؟',
+		a: 'يتيح لنا الموقع حساب الانحراف المغناطيسي واتجاه القبلة وموضع الشمس بدقة. هو اختياري — كل الأدوات تعمل بإحداثيات يدوية أيضاً — ولا يغادر أبداً جهازك.',
+	},
+	{
+		q: 'هل تخزّن أو تبيع موقعي؟',
+		a: 'لا. لا يوجد متتبعين، ولا تحليلات، ولا خادم خلفي. جميع بيانات المستشعر والموقع تُعالج محلياً في متصفحك وتُحذف عند مغادرتك.',
+	},
+];
+---
+
+<Layout
+	path="/ar/"
+	title="بوصلة أون لاين — أداة مجانية حية للعثور على الشمال"
+	description="بوصلة أون لاين مجانية للعثور على الشمال من موقعك. اتجاه حي مع الشمال الحقيقي والمغناطيسي، والانحراف، ومحدد القبلة، وحاسبة الاتجاه، وموضع الشمس — بدون تثبيت، تعمل على أي هاتف."
+	keywords="بوصلة أون لاين, أداة بوصلة أون لاين, بوصلة أون لاين مجانية, بوصلة أون لاين جوجل, بوصلة أون لاين مجاناً, بوصلة أون لاين للعثور على الشمال, اتجاه بوصلة أون لاين, بوصلة أون لاين هندسية, أداة بوصلة أون لاين هندسية, بوصلة أون لاين للهندسة, بوصلة أون لاين رياضيات, أداة بوصلة أون لاين مجانية, بوصلة أون لاين للقبلة, بوصلة أون لاين حية, بوصلة كعبة أون لاين للعثور على الشمال من موقعي, محدد قبلة بوصلة أون لاين"
+>
+	<section id="compass" class="relative overflow-hidden">
+		<div class="mesh-gradient" aria-hidden="true"></div>
+		<div
+			class="relative mx-auto max-w-[1200px] px-4 pb-20 pt-16 text-center sm:px-6 md:pb-28 md:pt-24"
+		>
+			<div class="badge mx-auto">مجاني · خاص · بدون تثبيت</div>
+
+			<h1
+				class="mx-auto mt-6 max-w-3xl text-[36px] leading-[40px] text-ink sm:text-display-xl md:text-[56px] md:leading-[56px]"
+			>
+				بوصلة تشير إلى الشمال الحقيقي، وليس فقط المغناطيسي.
+			</h1>
+
+			<p class="mx-auto mt-4 max-w-xl text-body-lg text-body">
+				اتجاه جهاز فوري مع انحراف مغناطيسي تلقائي، وإحداثيات GPS، واتجاه القبلة،
+				وموضع الشمس — كل ذلك في متصفحك. لا شيء لتثبيته، ولا شيء يتم رفعه.
+			</p>
+
+			<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+				<a href="/ar/location/" class="btn-primary">حدد موقعي</a>
+				<a href="/ar/compass/" class="btn-secondary">افتح البوصلة</a>
+			</div>
+
+			<div class="mx-auto mt-12 max-w-xl md:mt-16">
+				<Compass />
+			</div>
+		</div>
+	</section>
+
+	<section class="border-y border-hairline bg-canvas">
+		<div
+			class="mx-auto grid max-w-[1200px] grid-cols-1 gap-px overflow-hidden px-4 py-12 sm:grid-cols-3 sm:px-6"
+		>
+			<div class="p-4">
+				<p class="eyebrow mb-2">الشمال الحقيقي مقابل المغناطيسي</p>
+				<p class="text-sm text-body leading-6">
+					يتم حساب الانحراف المغناطيسي تلقائياً من النموذج المغناطيسي العالمي — شاهد
+					الاتجاهين بنظرة واحدة.
+				</p>
+			</div>
+			<div class="p-4">
+				<p class="eyebrow mb-2">الخصوصية أولاً</p>
+				<p class="text-sm text-body leading-6">
+					جميع معالجة المستشعرات تحدث على الجهاز. لا حسابات، لا تتبع، ولا شيء يغادر
+					متصفحك أبداً.
+				</p>
+			</div>
+			<div class="p-4">
+				<p class="eyebrow mb-2">تعمل في كل مكان</p>
+				<p class="text-sm text-body leading-6">
+					كروم وسفاري وفايرفوكس على iOS وأندرويد، مع بديل اتجاه GPS عند
+					التحرك.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section id="tools" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<p class="eyebrow">الأدوات</p>
+			<h2 class="mt-3 max-w-2xl text-display-lg text-ink">
+				بوصلة واحدة، كل اتجاه تحتاجه.
+			</h2>
+			<p class="mt-3 max-w-xl text-body-lg text-body">
+				خمسة أدوات متخصصة، كل منها في صفحة خاصة به، تعمل محلياً على جهازك.
+			</p>
+
+			<div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+				<a href="/ar/compass/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">بوصلة</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">اتجاه حي</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						مقياس 360° في الوقت الحقيقي مع إبرة سلسة، والشمال المغناطيسي وال אמיתי،
+						وملاحظات دقة حية.
+					</p>
+				</a>
+				<a href="/ar/location/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">الموقع</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">إحداثيات GPS</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						خط العرض وخط الطول والارتفاع والدقة بالدرجات العشرية وDMS — مع النسخ
+						والمشاركة والفتح في الخرائط.
+					</p>
+				</a>
+				<a href="/ar/qibla/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">القبلة</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">اتجاه مكة</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						اتجاه ومسافة الدائرة الكبرى إلى الكعبة من إحداثياتك، بدقة
+						درجة واحدة.
+					</p>
+				</a>
+				<a href="/ar/bearing/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">الاتجاه</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">حاسبة المسار</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						الاتجاه والمسافة على الدائرة الكبرى بين أي نقطتين — مثالية للملاحة
+						والتخطيط للمسار.
+					</p>
+				</a>
+				<a href="/ar/sun/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">الشمس</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">موضع الشمس</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						الazimuth والارتفاع الشمسي الآن، بالإضافة إلى شروق وغروب الشمس
+					 لأي موقع.
+					</p>
+				</a>
+				<div class="card-soft flex flex-col justify-center p-6">
+					<p class="text-sm text-body leading-6">
+						لا حسابات. لا متتبعين. كل الحسابات تعمل في متصفحك وتُحذف
+						في اللحظة التي تغادرها.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="how-it-works" class="border-y border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<p class="eyebrow">كيف يعمل</p>
+			<h2 class="mt-3 max-w-2xl text-display-lg text-ink">مصمم للدقة.</h2>
+			<p class="mt-3 max-w-xl text-body-lg text-body">
+				مقياس المغناطيسية والجyroscopy والتسارع في هاتفك يغذّيان محرك اتجاه معوّض
+				للميل، مصحّح ضد النموذج المغناطيسي العالمي.
+			</p>
+
+			<div class="mt-12 grid gap-6 md:grid-cols-3">
+				<div class="card p-6">
+					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
+						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
+							<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" />
+							<path d="M15.5 8.5 13 13l-4.5 2.5L11 11z" fill="var(--color-error)" />
+						</svg>
+					</div>
+					<h3 class="text-display-sm text-ink">دمج المستشعرات</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						يُستخرج الاتجاه من بيانات الاتجاه ومقياس المغناطيسية، بتسطيح في الوقت
+						الفوري بحيث تظل الإبرة ثابتة في يدك.
+					</p>
+				</div>
+				<div class="card p-6">
+					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
+						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
+							<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" />
+							<path
+								d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"
+								stroke="currentColor"
+								stroke-width="1.5"
+							/>
+							<circle cx="12" cy="12" r="3" fill="currentColor" />
+						</svg>
+					</div>
+					<h3 class="text-display-sm text-ink">تصحيح الشمال الحقيقي</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						يتراوح الانحراف من -30° إلى +30° حول الكوكب. نطبق النموذج المغناطيسي
+						العالمي بحيث يكون الشمال الحقيقي دقيقاً، أينما كنت.
+					</p>
+				</div>
+				<div class="card p-6">
+					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
+						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
+							<path
+								d="M12 21s7-5.1 7-11a7 7 0 1 0-14 0c0 5.9 7 11 7 11Z"
+								stroke="currentColor"
+								stroke-width="1.5"
+							/>
+							<circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5" />
+						</svg>
+					</div>
+					<h3 class="text-display-sm text-ink">محلي بالتصميم</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						الإحداثيات واتجاه القبلة والحسابات الشمسية تعمل بالكامل على جهازك. موقعك
+						لا يلامس خادماً أبداً.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="about" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow text-center">البوصلة الأون لاين المجانية</p>
+				<h2 class="mt-3 text-center text-display-lg text-ink">ما هي البوصلة الأون لاين؟</h2>
+				<p class="mt-6 text-body-lg text-body">
+					<strong class="text-ink font-medium">البوصلة الأون لاين</strong> هي بوصلة رقمية
+					تعمل مباشرة في متصفح الويب — لا تطبيق لتحميله، ولا شيء لتثبيته، ولا شيء
+					للدفع من أجله. افتح هذه الصفحة على هاتفك وفي ثوانٍ لديك بوصلة أون لاين
+					مجانية تُظهر اتجاهك الحي بالدرجات، وتشير نحو الشمال من أي مكان أنت فيه،
+					ويمكنها حتى تصحيح الفرق بين الشمال المغناطيسي والشمال
+					الحقيقي.
+				</p>
+				<p class="mt-4 text-body text-body leading-7">
+					بما أنها تعمل في المتصفح، فهي تعمل تماماً بنفس الطريقة سواء كنت في المنزل أو
+					في الميدان أو في الفصل الدراسي. فقط ابحث عن "بوصلة أون لاين" في جوجل، وافتح
+					هذا الموقع، وت takeover مستشعرات جهازك. على عكس البوصلة التقليدية، تستخدم هذه
+					البوصلة الأون لاين مقياس المغناطيسية والجyroscopy والتسارع في هاتفك معاً، مما
+					يُعطي <strong class="text-ink font-medium">اتجاه بوصلة
+					أون لاين</strong> أكثر استقراراً وموثوقية من إبرة تت waged دائماً مع الجاذبية
+					والانحراف.
+				</p>
+				<p class="mt-4 text-body text-body leading-7">
+					كل أداة في هذا الموقع مصممة لـ <strong class="text-ink font-medium">العثور
+					على الشمال أون لاين</strong> وأكثر: قراءة اتجاه حية بالدرجات، والاتجاهات
+					الأساسية والفرعية (شمال، شمال شرق، شرق، جنوب شرق، جنوب، جنوب غرب، غرب، شمال
+					غرب)، ووضع ملء الشاشة بنقرة واحدة، ومؤشر دقة لتعلم مدى موثوقية القراءة
+					دائماً. وبما أن كل شيء يُعالج محلياً، موقعك لا يغادر جهازك — بوصلة أون لاين
+					حقيقية مجانية، وليست أداة لجمع البيانات.
+				</p>
+			</div>
+
+			<div class="mx-auto mt-12 grid max-w-4xl gap-8 md:grid-cols-2">
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">بوصلة أون لاين للهندسة والرياضيات</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						<strong class="text-ink font-medium">أداة بوصلة أون لاين</strong> هي أيضاً
+						أداة تعليمية. في الهندسة، تُستخدم البوصلة لرسم الدوائر والأقواس وقياس
+						المسافات؛ في هذا الموقع، تعمل البوصلة الأون لاين للهندسة مع الرياضيات بدلاً
+						من القلم. قِس زاوية أي اتجاه، وحول بين الاتجاهات ونقاط البوصلة، واستخدم
+						حاسبة الاتجاه للعثور على الاتجاه والمسافة على الدائرة الكبرى بين أي
+						إحداثيتين على الأرض. إنها أداة رياضيات بوصلة أون لاين تحوّل الزوايا المجردة
+						إلى اتجاه يمكنك رؤيته على المقياس.
+					</p>
+					<p class="mt-3 text-sm text-body leading-6">
+						يمكن للطلاب التحقق من عملهم مقابل بوصلة مغناطيسية حقيقية، ويمكن للمعلمين
+						استخدام المقياس الحي لشرح الشمال الحقيقي مقابل الشمال المغناطيسي بمثال
+						يتحرك أثناء دوران الهاتف. تُستخدم هذه الأداة المجانية يومياً للمهام البسيطة
+						أيضاً — توجيه خريطة، أو محاذاة لوحة شمسية، أو التحقق من اتجاه غرفة.
+					</p>
+				</div>
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">بوصلة أون لاين للقبلة — العثور على الكعبة من موقعي</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						يتضمن هذا الموقع <strong class="text-ink font-medium">محدد قبلة بوصلة أون
+						لاين</strong> مخصصاً يحسب اتجاه الكعبة في مكة من إحداثياتك الحالية. أينما كنت،
+						يُعطيك محدد القبلة اتجاهاً بالدرجات واتجاه بوصلة، بالإضافة إلى المسافة على
+						الدائرة الكبرى إلى مكة. للعديد من المسافرين، العبارة التي يبحثون عنها هي
+						"بوصلة كعبة أون لاين للعثور على الشمال من موقعي" — وهذه الصفحة تجيب عليه:
+						حدد موقعك، واقرأ اتجاه القبلة، ثم اتبعه على مقياس البوصلة الحي.
+					</p>
+					<p class="mt-3 text-sm text-body leading-6">
+						بما أن بوصلة القبلة الأون لاين تعمل بالكامل على جهازك، لا يوجد خادم،
+						ولا حساب، ولا موقع مخزّن في أي مكان. أدخل الإحداثيات يدوياً، أو امنح إذن
+						موقعي مرة واحدة ويُحسب الاتجاه فوراً بدقة كسر من الدرجة.
+					</p>
+				</div>
+			</div>
+
+			<div class="mx-auto mt-12 max-w-3xl">
+				<h3 class="text-display-sm text-ink">لماذا تختار بوصلة أون لاين؟</h3>
+				<p class="mt-3 text-body text-body leading-7">
+					البوصلة الفيزيائية أداة رائعة، لكن البوصلة الرقمية الأون لاين تُضيف دقة حية:
+					تُظهر ليس فقط الشمال، بل الدرجة الدقيقة لأي اتجاه، وتُصحح للانحراف المغناطيسي
+					في أي مكان على الأرض، ويمكن حملها في أي اتجاه. تجمع أداة البوصلة الأون لاين
+					المجانية في هذا الموقع البوصلة الحية مع كل ما يحتاجه الملاّح — إحداثيات GPS
+					بالدرجات العشرية وDMS، واتجاه القبلة، وحاسبة الاتجاه، وموضع الشمس
+					للتوجه النهاري. إنها سريعة وخاصة وجاهزة متى تحتاج للعثور على الشمال.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section id="calibration" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="grid gap-10 lg:grid-cols-2 lg:items-start">
+				<div>
+					<p class="eyebrow">الضبط</p>
+					<h2 class="mt-3 text-display-lg text-ink">احصل على أكثر قراءة دقة.</h2>
+					<p class="mt-3 text-body-lg text-body">
+						مقياس المغناطيسية في الهاتف حساس للمعادن والحقول المغناطيسية القريبة. بضع
+						ثوانٍ من الضبط تُحوّل إبرة منحرفة إلى اتجاه موثوق.
+					</p>
+				</div>
+				<ol class="card-soft divide-y divide-hairline">
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">01</span>
+						<div>
+							<p class="text-sm font-medium text-ink">أمسك الهاتف بشكل مسطح</p>
+							<p class="mt-1 text-sm text-body">أبقِ الشاشة متوازية مع الأرض، في راحة يدك أو على سطح مستقر.</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">02</span>
+						<div>
+							<p class="text-sm font-medium text-ink">حرّك في شكل ثمانية</p>
+							<p class="mt-1 text-sm text-body">حرّك الهاتف بلطف في حركة ثمانية بضع مرات، ثم ثبّته.</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">03</span>
+						<div>
+							<p class="text-sm font-medium text-ink">ابتعد عن التداخل</p>
+							<p class="mt-1 text-sm text-body">ابتعد عن الحواسيب والم.PERMISSIONS والمغناطيس والطاولات المعدنية قبل أخذ القراءة.</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">04</span>
+						<div>
+							<p class="text-sm font-medium text-ink">تحقق بالشمس</p>
+							<p class="mt-1 text-sm text-body">استخدم علامة موضع الشمس على المقياس كتحقق مستقل في ضوء النهار.</p>
+						</div>
+					</li>
+				</ol>
+			</div>
+		</div>
+	</section>
+
+	<section id="faq" class="border-t border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow text-center">الأسئلة الشائعة</p>
+			<h2 class="mt-3 text-center text-display-lg text-ink">أسئلة، والإجابات.</h2>
+
+			<div class="mt-10 space-y-3">
+				{faq.map((f) => (
+					<details class="card overflow-hidden">
+						<summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-4 text-sm font-medium text-ink">
+							{f.q}
+							<svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0 text-mute" fill="none" aria-hidden="true">
+								<path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+							</svg>
+						</summary>
+						<p class="px-6 pb-5 text-sm text-body leading-6">{f.a}</p>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section class="bg-ink text-on-primary">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 text-center sm:px-6 md:py-24">
+			<p class="font-mono text-xs uppercase tracking-[0.08em] text-on-primary/60">جاهز عندما تكون أنت</p>
+			<h2 class="mt-4 text-display-lg text-on-primary">حدد اتجاهك.</h2>
+			<p class="mx-auto mt-3 max-w-lg text-body-lg text-on-primary/70">
+				وجّه هاتفك نحو الشمال، أو تحقق من القبلة، أو حدد مساراً — كل ذلك في أداة مجانية واحدة.
+			</p>
+			<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+				<a href="/ar/compass/" class="btn-primary bg-on-primary text-primary hover:opacity-85">افتح البوصلة</a>
+			</div>
+		</div>
+	</section>
+
+	<script type="application/ld+json" set:html={JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'FAQPage',
+		mainEntity: faq.map((f) => ({
+			'@type': 'Question',
+			name: f.q,
+			acceptedAnswer: {
+				'@type': 'Answer',
+				text: f.a,
+			},
+		})),
+	})} />
+</Layout>
+
+<style>
+	details summary::-webkit-details-marker {
+		display: none;
+	}
+	details[open] summary svg {
+		transform: rotate(180deg);
+	}
+	details summary svg {
+		transition: transform 0.2s ease;
+	}
+</style>

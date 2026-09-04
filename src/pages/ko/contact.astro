@@ -1,0 +1,83 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+	title="연락처"
+	description="트루 온라인 나침반 팀에 연락하세요 — 피드백, 버그 보고, 제안."
+	path="/ko/contact/"
+>
+	<div class="mx-auto max-w-3xl px-4 py-16 sm:px-6 md:py-24">
+		<p class="eyebrow">연락처</p>
+		<h1 class="mt-4 text-display-lg text-ink">연락하세요.</h1>
+		<p class="mt-4 text-body-lg text-body">
+			버그를 발견했거나, 기능을 원하거나, 피드백이 있으신가요? 모든 메시지를 읽습니다.
+		</p>
+
+		<form data-contact-form class="card-lg mt-10 p-6 md:p-8 space-y-5">
+			<div class="grid gap-5 sm:grid-cols-2">
+				<label class="block">
+					<span class="eyebrow block mb-1">이름</span>
+					<input data-c-name class="field-input" type="text" autocomplete="name" placeholder="이름을 입력하세요" />
+				</label>
+				<label class="block">
+					<span class="eyebrow block mb-1">이메일</span>
+					<input data-c-email class="field-input" type="email" autocomplete="email" placeholder="you@example.com" />
+				</label>
+			</div>
+			<label class="block">
+				<span class="eyebrow block mb-1">메시지</span>
+				<textarea
+					data-c-message
+					class="field-input h-36 resize-y py-2"
+					placeholder="하고 싶은 말을 적어주세요…"
+					required
+				></textarea>
+			</label>
+			<div class="flex items-center gap-3">
+				<button data-c-submit type="submit" class="btn-primary">메시지 보내기</button>
+				<p data-c-note class="text-xs text-mute"></p>
+			</div>
+		</form>
+
+		<p class="mt-6 text-xs text-mute leading-5">
+			이메일이 편하신가요? hello@trueonlinecompass.com으로 보내주세요. 도구가 완전히
+			브라우저에서 작동하므로 센서 문제를 보고할 때 기기와 브라우저 정보를 포함해 주세요.
+		</p>
+
+		<div class="card-soft mt-10 p-6">
+			<p class="text-sm font-medium text-ink mb-1">이 온라인 나침반에 대하여</p>
+			<p class="text-sm leading-6">
+				트루 온라인 나침반은 무료 브라우저 기반 도구 모음입니다: 진북 및 자북을 제공하는 실시간
+				<a href="/ko/" class="text-link underline decoration-link/30 hover:decoration-link">온라인 나침반</a>,
+				GPS
+				<a href="/ko/location/" class="text-link underline decoration-link/30 hover:decoration-link">좌표</a>,
+				<a href="/ko/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">키블라 finder</a>,
+				<a href="/ko/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">방위각 계산기</a>,
+				<a href="/ko/sun/" class="text-link underline decoration-link/30 hover:decoration-link">태양 위치 계산기</a>.
+				모든 것이 로컬에서 작동합니다 — 무료, 개인정보 보호, 설치 불필요. 자세한 내용은
+				<a href="/ko/about/" class="text-link underline decoration-link/30 hover:decoration-link">소개 페이지</a> 또는
+				<a href="/ko/privacy/" class="text-link underline decoration-link/30 hover:decoration-link">개인정보 처리방침</a>과
+				<a href="/ko/terms/" class="text-link underline decoration-link/30 hover:decoration-link">이용약관</a>을
+				확인해 주세요.
+			</p>
+		</div>
+	</div>
+</Layout>
+
+<script>
+	const form = document.querySelector('[data-contact-form]');
+	const note = document.querySelector('[data-c-note]');
+	const submit = document.querySelector('[data-c-submit]');
+
+	form?.addEventListener('submit', (e) => {
+		e.preventDefault();
+		submit.disabled = true;
+		note.textContent = '전송 중…';
+		// 백엔드 없음 — 이 폼은 엔드포인트가 설정될 때까지 자리 표시자입니다.
+		setTimeout(() => {
+			submit.disabled = false;
+			note.textContent = '이 폼은 아직 연결되지 않았습니다. 대신 hello@trueonlinecompass.com으로 이메일을 보내주세요.';
+		}, 800);
+	});
+</script>

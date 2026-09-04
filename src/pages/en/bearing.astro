@@ -1,0 +1,126 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BearingCalculator from '../../components/BearingCalculator.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="Bearing Calculator Online — Direction & Distance Between Two Points"
+	description="Free online compass tool to calculate bearing and great-circle distance between two coordinates. Also shows Qibla direction, magnetic declination, and sun position from your location."
+	path="/en/bearing/"
+	keywords="online compass math, online compass geometry, bearing calculator, direction between two points, great-circle distance, bearing calculator online"
+>
+	<PageHero
+		eyebrow="bearing calculator"
+		title="Plot a course, degree by degree."
+		description="Compute the initial bearing and great-circle distance between any two points on Earth — from your live location, manual coordinates, or a preset route."
+	>
+		<BearingCalculator />
+	</PageHero>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-2">
+			<div>
+				<p class="eyebrow mb-2">initial vs final bearing</p>
+				<p class="text-sm text-body leading-6">
+					This returns the initial bearing — the direction you set off in. On long routes the
+					bearing changes along the great circle, so mid-course corrections are normal.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">use it with the compass</p>
+				<p class="text-sm text-body leading-6">
+					Take your computed bearing into the compass tool and steer until the heading matches.
+					Switch to true north for map-accurate steering.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">the bearing calculator</p>
+			<h2 class="mt-3 text-display-lg text-ink">Calculate bearing and distance between two points</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				A <strong class="text-ink font-medium">bearing calculator online</strong> finds the
+				direction and distance between any two points on Earth. Enter two sets of coordinates —
+				or use your live location for one end — and this tool returns the initial bearing in
+				degrees, the compass direction, and the great-circle distance in kilometres. It is the
+				essential <strong class="text-ink font-medium">online compass math</strong> tool for
+				navigation, route planning, surveying, and study.
+			</p>
+			<p class="mt-4 leading-7">
+				The bearing is the angle measured clockwise from north to the direction you need to
+				travel: 0° is north, 90° east, 180° south, 270° west. A route from London to New York, for
+				example, starts with an initial bearing of about 288° — that is the compass direction you
+				point the nose of a plane or the bow of a ship at the moment you set off.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Initial bearing vs final bearing</h3>
+			<p class="mt-3 leading-7">
+				Because Earth is a sphere, the <strong class="text-ink font-medium">direction between two
+				points</strong> is not a straight line on a map. The shortest route follows a great
+				circle, and along that route the bearing changes continuously. The "initial bearing" is
+				the direction at your starting point — the one you steer on first. On long routes the
+				bearing drifts as you go, which is why pilots and navigators use waypoints and
+				mid-course corrections. This calculator reports the initial bearing and also works out
+				the final bearing for arriving end of the great-circle path.
+			</p>
+			<p class="mt-4 leading-7">
+				For short trips — a hike, a drive across a city, a walk between two map points — the
+				initial bearing is effectively the whole course. That makes this bearing calculator
+				online perfect for everyday planning as well as classroom geometry.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Distance the way a navigator measures it</h3>
+			<p class="mt-3 leading-7">
+				Alongside the bearing you get the great-circle distance — the shortest distance over
+				Earth's surface between the two points, calculated with the haversine formula. Unlike a
+				ruler on a flat map, this accounts for the planet's curvature, so the result matches real
+				travel distances. It is the same calculation used for flight planning and maritime
+				navigation.
+			</p>
+			<p class="mt-4 leading-7">
+				The tool goes further than a plain calculator. Choose a destination from the preset list
+				— including major world cities and the Kaaba in Mecca — and it computes the summary
+				("New York is 245° WSW from London, 5,570 km away") plus four extra readouts from point A:
+				the <a href="/en/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">Qibla direction</a>,
+				magnetic declination, and
+				<a href="/en/sun/" class="text-link underline decoration-link/30 hover:decoration-link">sun position</a>.
+				One entry, and you see how your compass, Qibla, and solar data line up with your route.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Use the bearing with a compass</h3>
+			<p class="mt-3 leading-7">
+				The natural companion to this tool is the
+				<a href="/" class="text-link underline decoration-link/30 hover:decoration-link">online compass</a>.
+				Calculate your bearing, open the compass, and turn until your heading matches. Switch the
+				compass to true north so your steering lines up with map north — and let the compass
+				apply your location's declination automatically. The combination turns a number on a
+				page into a course you can actually walk, sail, or drive.
+			</p>
+			<p class="mt-4 leading-7">
+				This bearing calculator online is useful for route planning before a hike, aligning
+				antennae and solar panels, estimating travel between two addresses, double-checking a
+				compass course, or verifying homework. Because everything runs locally in your browser,
+				it is a private, free online compass geometry tool you can trust anywhere — no
+				installations, no accounts, no data collection.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Degrees, directions, and planning</h3>
+			<p class="mt-3 leading-7">
+				Bearings read in degrees are precise but abstract; that is why the tool also converts them
+				into plain compass directions. 45° becomes NE, 200° becomes SSW, and so on — so you can
+				answer questions like "which way do I need to head?" in the same language a compass or
+				map speaks. Enter your live position as point A and a destination as point B, and the
+				whole picture — bearing, direction, distance, Qibla, declination, and sun — updates
+				instantly. That is the power of an online compass math tool built around your actual
+				coordinates.
+			</p>
+		</div>
+	</section>
+
+	<RelatedTools current="/bearing/" />
+</Layout>

@@ -1,0 +1,125 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import LocationPanel from '../../components/LocationPanel.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="GPS 좌표 온라인 — 위도, 경도 및 DMS"
+	description="온라인으로 내 GPS 좌표를 확인하세요: 위도, 경도, 고도, 소수점 및 DMS 형식의 정확도. 복사, 공유, 구글 지도에서 열기. 설치 없음, 추적 없음."
+	path="/ko/location/"
+	keywords="gps 좌표 온라인, 내 위치 찾기, 위도 경도, dms 좌표, 내 gps 위치"
+>
+	<PageHero
+		eyebrow="gps · 위치"
+		title="정확히 어디에 있는지 확인하세요."
+		description="기기에서 바로 가져오는 실시간 GPS 좌표, 고도, 정확도. 모든 것이 로컬에서 계산됩니다 — 위치 정보는 브라우저 밖으로 나가지 않습니다."
+	>
+		<LocationPanel />
+	</PageHero>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">gps 위치 도구</p>
+			<h2 class="mt-3 text-display-lg text-ink">GPS 좌표를 온라인으로 얻으세요 — 즉시</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				<strong class="text-ink font-medium">온라인으로 내 GPS 좌표를 찾아야</strong> 하나요?
+				이 도구는 기기의 위치를 실시간으로 읽어 소수점 도수와 도-분-초(DMS) 형식으로
+				현재 위도와 경도를 표시하며, 고도와 예상 정확도도 함께 보여줍니다. 한 번 허용하면
+				페이지가 이동하면서 지속적으로 위치를 추적합니다 — 하이킹, 현장 작업, 지오팅,
+				또는 정확한 위치를 공유해야 할 때 유용합니다.
+			</p>
+			<p class="mt-4 leading-7">
+				모든 것이 브라우저에서 로컬로 처리됩니다. 위치는 서버로 전송되지 않고, 저장되거나
+				공유되지 않습니다 — 이 GPS 좌표 온라인 도구는 설계부터 개인정보 보호를 위해 만들어졌으며,
+				페이지를 닫으면 읽기가 즉시 사라집니다.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">위도, 경도, DMS 설명</h3>
+			<p class="mt-3 leading-7">
+				<strong class="text-ink font-medium">위도</strong>는 적도에서 북쪽이나 남쪽으로 얼마나
+				떨어져 있는지 측정합니다(적도에서 0°, 극지방에서 90°)이며,
+				<strong class="text-ink font-medium">경도</strong>는 본초자오선에서 동쪽이나 서쪽으로
+				얼마나 떨어져 있는지 측정합니다. 두 값이 결합되어 지구상 어떤 장소든 미터 단위로
+				정확히 지정하는 격자를 형성합니다. 대부분의 지도 앱은 소수점 도수를 사용합니다
+				(예: 파리의 경우 48.8584, 2.2945)하지만 많은 양식과 내비게이션 매뉴얼은 DMS를 요구합니다
+				(48° 51' 29.6" N, 2° 17' 40.2" E). 이 도구는 <strong class="text-ink font-medium">내
+				위치</strong>를 두 형식 모두로 표시하여 필요한 형식을 복사할 수 있습니다 — 수동 변환은
+				불필요합니다.
+			</p>
+			<p class="mt-4 leading-7">
+				소수점 도수와 DMS는 동일한 위치를 다른 방식으로 표시한 것입니다. 위도 1도는 약
+				111km이고, 1분은 약 1.85km이며, 1초는 약 30m입니다. 단위를 이해하면 좌표가 실제로
+				얼마나 정밀한지 판단할 수 있습니다 — 그리고 현장 내비게이션에서 정확도가 왜 중요한지
+				알 수 있습니다.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">실시간 GPS 좌표를 어디에 사용할 수 있나요?</h3>
+			<div class="mt-4 space-y-3">
+				<p class="leading-7">
+					<strong class="text-ink font-medium">야외 내비게이션.</strong> 트레일, 캠핑장,
+					새로운 도시를 탐험할 때 좌표를 캡처하여 공유하거나 다시 돌아갈 수 있습니다.
+					"지금 내가 어디에 있지?"에 대한 가장 빠른 답입니다.
+				</p>
+				<p class="leading-7">
+					<strong class="text-ink font-medium">촬영 및 계획.</strong> 촬영 위치에 지오태그를
+					달고, 사진 촬영 시 선 위치를 기록하거나, 경로를 계획하기 전 전망대의 고도를
+					확인하세요.
+				</p>
+				<p class="leading-7">
+					<strong class="text-ink font-medium">업무 및 학습.</strong> 측량사, 농부, 현장
+					연구원은 구획과 지점을 표시하기 위해 정확한 좌표를 사용합니다. 학생은 지리학
+					과제와 지도 작업 교차 검증에 사용합니다.
+				</p>
+				<p class="leading-7">
+					<strong class="text-ink font-medium">이 사이트의 다른 도구.</strong> 좌표는
+					키블라 finder, 방위각 계산기, 태양 위치 도구에 직접 전달되어 모든 곳에서
+					정확한 위치를 기반으로 작업할 수 있습니다.
+				</p>
+			</div>
+
+			<h3 class="mt-10 text-display-sm text-ink">GPS 위치의 정확도는?</h3>
+			<p class="mt-3 leading-7">
+				최신 휴대폰은 위성 GPS, Wi-Fi, 기지국 데이터를 결합합니다. 야외에서 맑은 하늘 아래에서는
+				보통 3~10미터 이내의 정확도를 얻을 수 있습니다; 실내에서는 신호가 약해지고 정확도가
+				떨어집니다. 이 도구는 미터 단위로 예상 정확도를 표시하여 읽기를 얼마나 신뢰할 수 있는지
+				알려줍니다. 최상의 수신을 위해 야외에서 잠시 멈춰 서서, 높은 건물과 빽빽한 나뭇가지에서
+				멀리하세요.
+			</p>
+			<p class="mt-4 leading-7">
+				이것은 절대 업로드하지 않는 GPS 좌표 온라인 도구이므로 어떤 곳에서든 안심하고 사용할
+				수 있습니다 — 필요한 정밀도를 제공하는 동시에 내 위치를 찾는 개인정보 보호 방식입니다.
+			</p>
+		<h3 class="mt-10 text-display-sm text-ink">좌표 공유, 복사 및 열기</h3>
+			<p class="mt-3 leading-7">
+				이 도구는 단순한 표시가 아닌 실제 사용을 위해 만들어졌습니다. 필요한 형식으로 좌표를
+				복사하고, 친구와 공유하거나, 구글 지도에서 직접 위치를 열어 주변을 더 넓게 볼 수
+				있습니다. 실시간 정확도 읽기와 결합하여 지금 지점을 기록하고 나중에 다시 돌아올 수
+				있습니다 — 하이킹, 모임, 배달을 위한 편리한 웨이포인트입니다.
+			</p>
+			<p class="mt-4 leading-7">
+				이 GPS 좌표 온라인 도구는 사이트의 나머지 도구와 함께 작동합니다: 현재 위치가
+				<a href="/ko/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">방위각 계산기</a>의
+				시작점이 되고,
+				<a href="/ko/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">키블라 finder</a>의
+				참조점이 되며,
+				<a href="/ko/sun/" class="text-link underline decoration-link/30 hover:decoration-link">태양 위치</a>와
+				<a href="/ko/" class="text-link underline decoration-link/30 hover:decoration-link">실시간 나침반</a>의
+				위치가 됩니다. 하나의 정확한 위치가 잡히면 이 사이트의 모든 방향 도구가 이를 사용합니다.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">왜 좌표를 로컬에서 계산하나요?</h3>
+			<p class="mt-3 leading-7">
+				많은 "내 위치 찾기" 사이트는 좌표를 로드하는 순간 서버로 전송합니다. 이 페이지는
+				반대입니다: GPS 좌표가 브라우저의 지리적 위치 API에서 직접 가져와 어디에도 전송되지
+				않습니다. 추적도 없고, 로그도 없으며, 위치가 사용자의 의사에 반해 저장될 위험도
+				없습니다 — 진정한 개인정보 보호 방식으로 온라인으로 내 GPS 좌표를 찾을 수 있습니다.
+				빠르고, 무료이며, 브라우저가 있는 모든 최신 휴대폰이나 노트북에서 작동합니다.
+			</p>
+		</div>
+	</section>
+
+	<RelatedTools current="/location/" />
+</Layout>

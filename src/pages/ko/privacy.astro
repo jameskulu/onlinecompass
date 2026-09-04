@@ -1,0 +1,87 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+	title="개인정보 처리방침"
+	description="트루 온라인 나침반 개인정보 처리방침. 모든 센서 및 위치 데이터는 브라우저에서 로컬로 처리됩니다 — 개인 데이터를 수집하지 않으며 추적기를 사용하지 않습니다."
+	path="/ko/privacy/"
+>
+	<div class="mx-auto max-w-3xl px-4 py-16 sm:px-6 md:py-24">
+		<p class="eyebrow">법적 고지</p>
+		<h1 class="mt-4 text-display-lg text-ink">개인정보 처리방침</h1>
+		<p class="mt-3 text-sm text-mute">최종 업데이트: {new Date().toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+
+		<div class="mt-10 space-y-8 text-body">
+			<section>
+				<h2 class="text-display-sm text-ink mb-3">요약</h2>
+				<p class="leading-7">
+					트루 온라인 나침반은 기본적으로 개인정보를 보호하도록 설계되었습니다. 모든 센서
+					데이터 — 기기 방향, 자력계, 위치 — 는 브라우저에서 로컬로 처리되며 전송, 저장,
+					공유되지 않습니다. 쿠키, 추적기, 분석 도구를 사용하지 않습니다.
+				</p>
+			</section>
+
+			<section>
+				<h2 class="text-display-sm text-ink mb-3">수집하는 정보</h2>
+				<p class="leading-7 mb-3">아무것도 수집하지 않습니다. 구체적으로:</p>
+				<ul class="list-disc space-y-2 pl-5 leading-7">
+					<li>계정, 가입, 이메일이 필요하지 않습니다.</li>
+					<li>개인 정보를 요청하거나 저장하지 않습니다.</li>
+					<li>기기 방향, 향, GPS 좌표는 기기 밖으로 나가지 않습니다.</li>
+					<li>제3자 분석 도구나 광고 SDK를 사용하지 않습니다.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2 class="text-display-sm text-ink mb-3">브라우저 권한</h2>
+				<p class="leading-7">
+					도구는 읽기를 제공하기 위해 브라우저를 통해 센서 및 위치 권한을 요청합니다.
+					이러한 권한은 언제든지 브라우저 또는 운영체제 설정에서 제어할 수 있습니다.
+					위치 권한을 거부해도 수동으로 입력한 좌표로 모든 도구를 사용할 수 있습니다.
+				</p>
+			</section>
+
+			<section>
+				<h2 class="text-display-sm text-ink mb-3">로컬 저장소</h2>
+				<p class="leading-7">
+					테마 기본값(다크 또는 라이트 모드)이 브라우저의 로컬 저장소에 저장되어 방문
+					간에 선택이 유지됩니다. 다른 데이터는 저장되지 않습니다.
+				</p>
+			</section>
+
+			<section>
+				<h2 class="text-display-sm text-ink mb-3">호스팅</h2>
+				<p class="leading-7">
+					웹사이트 자체는 일반적인 웹 호스팅 인프라에서 제공됩니다. 다른 웹사이트와 마찬가지로,
+					호스팅 제공자는 보안 및 운영 목적으로 일반적인 서버 로그(IP 주소 및 요청된 URL 등)를
+					유지할 수 있습니다. 이 로그는 귀하를 식별하는 데 사용되지 않습니다.
+				</p>
+			</section>
+
+			<section>
+				<h2 class="text-display-sm text-ink mb-3">연락처</h2>
+				<p class="leading-7">
+					이 정책에 대한 질문이 있으신가요? <a href="/ko/contact/" class="text-link underline decoration-link/30 hover:decoration-link">연락 페이지</a>로 연락해 주세요.
+				</p>
+			</section>
+
+			<section class="border-t border-hairline pt-8">
+				<h2 class="text-display-sm text-ink mb-3">이 온라인 나침반에 대하여</h2>
+				<p class="leading-7">
+					트루 온라인 나침반은 무료 브라우저 기반 도구 모음입니다: 자동 자극편위로 진북 및
+					자북을 표시하는 실시간
+					<a href="/ko/" class="text-link underline decoration-link/30 hover:decoration-link">온라인 나침반</a>,
+					<a href="/ko/location/" class="text-link underline decoration-link/30 hover:decoration-link">GPS 좌표</a>
+					도구,
+					<a href="/ko/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">키블라 finder</a>,
+					<a href="/ko/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">방위각 계산기</a>,
+					<a href="/ko/sun/" class="text-link underline decoration-link/30 hover:decoration-link">태양 위치 계산기</a>.
+					모든 계산은 브라우저에서 로컬로 작동합니다 — 설치할 것도, 업로드할 것도, 계정도
+					필요 없습니다. 자세한 내용은 <a href="/ko/about/" class="text-link underline decoration-link/30 hover:decoration-link">소개 페이지</a>를
+					참고하세요.
+				</p>
+			</section>
+		</div>
+	</div>
+</Layout>

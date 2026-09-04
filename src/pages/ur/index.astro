@@ -1,0 +1,405 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Compass from '../../components/Compass.astro';
+
+const faq = [
+	{
+		q: 'میں کس سمت میں کھڑا ہوں — آنلائن کمپاس؟',
+		a: 'اپنے فون پر یہ صفحہ کھولیں اور ڈائل کے نیچے لائیو ہیڈنگ ریڈاؤٹ آپ کی بالکل ڈگری اور کمپاس سمت (شمال، شمال مشرق، مشرق، جنوب مشرق، جنوب، جنوب مغرب، مغرب، شمال مغرب) دکھاتا ہے جو آپ کے گھومنے کے ساتھ ریئل ٹائم میں اپ ڈیٹ ہوتا ہے۔',
+	},
+	{
+		q: 'آنلائن کمپاس — شمال کہاں ہے؟',
+		a: 'سوزن کا سرخ حصہ ہمیشہ شمال کی طرف اشارہ کرتا ہے، جو ڈائل کی چوٹی پر 0°/360° پڑھتا ہے۔ "اصل شمال" پر ٹوگل کریں اور سائٹ آپ کے مقام پر معدنی مائلت کی اصلاح کرتی ہے تاکہ شمال نقشے سے مل جائے۔',
+	},
+	{
+		q: 'میں کس سمت میں کھڑا ہوں — آنلائن کمپاس؟',
+		a: 'اپنا فون سپاٹ پکڑیں، سینسر رسائی دیں، اور ڈائل کے نیچے ہیڈنگ آپ کو سمت بتاتی ہے ڈگریوں میں اور کمپاس پوائنٹ کے طور پر — مثال کے طور پر 274° یا مغرب۔',
+	},
+	{
+		q: 'بغیر کمپاس آنلائن سمت کیسے پتا لگائیں؟',
+		a: 'سورج کا استعمال کریں: مقامی دوپہر کے آس پاس یہ شمالی نصف کرہ میں بالکل جنوب اور جنوبی نصف کرہ میں بالکل شمال میں ہوتا ہے۔ اس سائٹ کا سورج ٹول کسی بھی مقام کا درست شمسی ازموت دکھاتا ہے، اور قبلہ فائنڈر بطور مستقل حوالہ سمت بھی کام کرتا ہے۔',
+	},
+	{
+		q: 'میں کس طرف کھڑا ہوں — آنلائن کمپاس؟',
+		a: 'سینسر رسائی دیں، فون کو سپاٹ اور دھات سے دور پکڑیں، اور ہیڈنگ ریڈاؤٹ پڑھیں۔ یہ آپ کے گھومنے پر مسلسل اپ ڈیٹ ہوتا ہے، تو آپ ہمیشہ جانتے ہیں کہ آپ کس طرف کھڑے ہیں۔',
+	},
+	{
+		q: 'آنلائن کمپاس کیسے استعمال کریں؟',
+		a: 'فون پر یہ صفحہ کھولیں، "لائیو کمپاس فعال کریں" پر ٹیپ کریں، ڈیوائس کو سپاٹ پکڑیں، اور ہیڈنگ پڑھیں۔ اگر سوزن بہتے تو چند بار آٹھ کی شکل میں ہلائیں تاکہ میگنیٹومیٹر کی کیلیبریشن ہو جائے۔',
+	},
+	{
+		q: 'کیا میں اپنے فون کو کمپاس کی طرح استعمال کر سکتا ہوں؟',
+		a: 'جی ہاں۔ جدید فونوں میں میگنیٹومیٹر ہوتا ہے، اور یہ ویب سائٹ اس سینسر کو آپ کے براؤزر میں کمپاس میں بدل دیتی ہے — کوئی ایپ ڈاؤن لوڈ کرنے کی ضرورت نہیں اور کچھ بھی انسٹال کرنے کی ضرورت نہیں۔',
+	},
+	{
+		q: 'گوگل میں میرا کمپاس کہاں ہے؟',
+		a: 'گوگل میپس نقشے کے اوپری دائیں کونے پر ایک چھوٹا کمپاس دکھاتا ہے۔ ڈگریوں میں لائیو ہیڈنگ کے لیے، بس گوگل پر "آنلائن کمپاس" تلاش کریں اور یہ صفحہ کھولیں — جیسے ہی آپ سینسر رسائی دیتے ہیں یہ کمپاس بن جاتا ہے۔',
+	},
+	{
+		q: 'کیا میرا فون مجھے بتا سکتا ہے کہ میں کس سمت میں ہوں؟',
+		a: 'جی ہاں۔ آپ کے فون کا میگنیٹومیٹر اس صفحے کے ساتھ لائیو ہیڈنگ دیتا ہے، اور سائٹ خودکار طور پر معدنی مائلت کی اصلاح کرتی ہے تاکہ شمال آپ کے نقشے سے مل جائے۔',
+	},
+	{
+		q: 'موبائل پر کمپاس کیسے دیکھیں؟',
+		a: 'اپنے فون پر یہ صفحہ کھولیں اور کمپاس فوری نظر آ جاتا ہے — کوئی ایپ کی ضرورت نہیں۔ اینڈروئڈ پر، گوگل میپس میں بھی کمپاس ہوتا ہے، اور کچھ فونوں میں بلٹ ان کمپاس ایپ آتی ہے۔',
+	},
+	{
+		q: 'میرا شمال کی سمت کون سی ہے؟',
+		a: 'اصل شمال جغرافیائی شمالی قطب ہے؛ معدنی شمال وہ ہے جہاں کمپاس کا سوزن اشارہ کرتا ہے۔ دونوں کے درمیان زاویہ (مائلت) مقام کے مطابق مختلف ہوتا ہے، اور یہ سائٹ خودکار طور پر اس کی اصلاح کرتی ہے۔',
+	},
+	{
+		q: 'میرے فون پر کمپاس کہاں ہے؟',
+		a: 'بہت سے فونوں میں الگ کمپاس ایپ نہیں آتی — لیکن سینسر بلٹ ان ہوتا ہے۔ اپنے فون پر یہ ویب سائٹ کھولیں اور یہ بغیر انسٹال کے کمپاس بن جاتا ہے۔',
+	},
+	{
+		q: 'کون سے موبائل فونوں میں کمپاس سینسر ہوتا ہے؟',
+		a: 'تقریباً ہر جدید اسمارٹ فون — iPhone 3GS کے بعد سے ہر iPhone اور تقریباً ہر اینڈروئڈ فون — میں میگنیٹومیٹر ہوتا ہے، تو یہ آنلائن کمپاس تقریباً ہر ڈیوائس پر کام کرتا ہے۔',
+	},
+	{
+		q: 'میری ہیڈنگ کیوں ہلتی ہے؟',
+		a: 'قریبی دھات اور الیکٹرانکس آلات میگنیٹومیٹر کو متاثر کرتے ہیں۔ اوپر دی گئی کیلیبریشن کے اقدامات پر عمل کریں، اور یقینی بنائیں کہ فون سپاٹ ہے۔ اندرونی علاقوں میں چند ڈگریوں کا ہلنا عام ہے۔',
+	},
+	{
+		q: 'معدنی اور اصل شمال میں کیا فرق ہے؟',
+		a: 'معدنی شمال وہ ہے جہاں آپ کے کمپاس کا سوزن اشارہ کرتا ہے۔ اصل شمال جغرافیائی شمالی قطب ہے، جو نقشے اور نیویگیشن استعمال کرتے ہیں۔ ان دونوں کے درمیان زاویہ — مائلت — مقام کے مطابق مختلف ہوتا ہے، اور یہ ٹول خودکار طور پر اس کی اصلاح کرتا ہے۔',
+	},
+	{
+		q: 'یہ میرے مقام کیوں مانگتا ہے؟',
+		a: 'مقام ہمیں معدنی مائلت، قبلہ بیرنگ، اور سورج کی پوزیشن درستگی سے محساب کرنے دیتا ہے۔ یہ اختیاری ہے — ہر ٹول دستی کو辕ینیٹس کے ساتھ بھی کام کرتا ہے — اور یہ آپ کے ڈیوائس سے کبھی نہیں جاتا۔',
+	},
+	{
+		q: 'کیا آپ میرا مقام جمع یا فروخت کرتے ہیں؟',
+		a: 'نہیں۔ کوئی ٹریکرز نہیں، کوئی تجزیات نہیں، اور کوئی باک اینڈ نہیں۔ تمام سینسر اور مقام کا ڈیٹا آپ کے براؤزر میں مقامی طور پر پروسیس ہوتا ہے اور آپ کے جانے پر ڈسکارڈ ہو جاتا ہے۔',
+	},
+];
+---
+
+<Layout
+	path="/ur/"
+	title="آنلائن کمپاس — شمال تلاش کرنے کے لیے مفت لائیو ٹول"
+	description="اپنے مقام سے شمال تلاش کرنے کے لیے مفت آنلائن کمپاس۔ اصل اور معدنی شمال کے ساتھ لائیو ہیڈنگ، مائلت، قبلہ فائنڈر، بیرنگ کیلکیولیٹر، اور سورج کی پوزیشن — کوئی انسٹال نہیں، ہر فون پر کام کرتا ہے۔"
+	keywords="آنلائن کمپاس, آنلائن کمپاس ٹول, مفت آنلائن کمپاس, آنلائن کمپاس گوگل, آنلائن کمپاس مفت, آنلائن کمپاس شمال تلاش کرنا, آنلائن کمپاس سمت, آنلائن کمپاس جیومیٹری, آنلائن کمپاس ٹول جیومیٹری, آنلائن کمپاس جیومیٹری کے لیے, آنلائن کمپاس ریاضی, مفت آنلائن کمپاس ٹول, آنلائن کمپاس قبلہ کے لیے, آنلائن کمپاس لائیو, آنلائن کمپاس کعبہ میرے مقام سے شمال تلاش کرنا, قبلہ فائنڈر آنلائن کمپاس"
+>
+	<!-- ہیرو -->
+	<section id="compass" class="relative overflow-hidden">
+		<div class="mesh-gradient" aria-hidden="true"></div>
+		<div
+			class="relative mx-auto max-w-[1200px] px-4 pb-20 pt-16 text-center sm:px-6 md:pb-28 md:pt-24"
+		>
+			<div class="badge mx-auto">مفت · نجومی · کوئی انسٹال نہیں</div>
+
+			<h1
+				class="mx-auto mt-6 max-w-3xl text-[36px] leading-[40px] text-ink sm:text-display-xl md:text-[56px] md:leading-[56px]"
+			>
+				ایک کمپاس جو اصل شمال کی طرف اشارہ کرتا ہے، صرف معدنی نہیں۔
+			</h1>
+
+			<p class="mx-auto mt-4 max-w-xl text-body-lg text-body">
+				خودکار مائلت، GPS کو辕ینیٹس، قبلہ کی سمت، اور سورج کی پوزیشن کے ساتھ ریئل ٹائم ڈیوائس ہیڈنگ — سب آپ کے براؤزر میں۔ کوئی چیز انسٹال نہیں کرنی، کوئی چیز اپلوڈ نہیں ہوتی۔
+			</p>
+
+			<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+				<a href="/ur/location/" class="btn-primary">میری پوزیشن</a>
+				<a href="/ur/compass/" class="btn-secondary">کمپاس کھولیں</a>
+			</div>
+
+			<div class="mx-auto mt-12 max-w-xl md:mt-16">
+				<Compass />
+			</div>
+		</div>
+	</section>
+
+	<!-- فیچر سٹرپ -->
+	<section class="border-y border-hairline bg-canvas">
+		<div
+			class="mx-auto grid max-w-[1200px] grid-cols-1 gap-px overflow-hidden px-4 py-12 sm:grid-cols-3 sm:px-6"
+		>
+			<div class="p-4">
+				<p class="eyebrow mb-2">اصل بنام معدنی</p>
+				<p class="text-sm text-body leading-6">
+					دنیا کے معدنی ماڈل سے مائلت خودکار طور پر حساب کی جاتی ہے — دونوں ہیڈنگز ایک نظر میں دیکھیں۔
+				</p>
+			</div>
+			<div class="p-4">
+				<p class="eyebrow mb-2">رجوعیت پہلے</p>
+				<p class="text-sm text-body leading-6">
+					تمام سینسر کی پروسیسنگ ڈیوائس پر ہوتی ہے۔ کوئی اکاؤنٹس نہیں، کوئی ٹریکنگ نہیں، اور کچھ بھی آپ کے براؤزر سے باہر نہیں جاتا۔
+				</p>
+			</div>
+			<div class="p-4">
+				<p class="eyebrow mb-2">ہر جگہ کام کرتا ہے</p>
+				<p class="text-sm text-body leading-6">
+					آئیفون اور اینڈروئڈ پر کروم، سفیری اور فائر فاکس، چلتے وقت GPS ہیڈنگ فال بیک کے ساتھ۔
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- ٹولز گرڈ -->
+	<section id="tools" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<p class="eyebrow">ٹول کٹ</p>
+			<h2 class="mt-3 max-w-2xl text-display-lg text-ink">
+				ایک کمپاس، آپ کو ضرورت ہر بیرنگ۔
+			</h2>
+			<p class="mt-3 max-w-xl text-body-lg text-body">
+				پانچ مرکوز ٹولز، ہر ایک اپنے صفحے پر، سب آپ کے ڈیوائس پر مقامی طور پر چلتے ہیں۔
+			</p>
+
+			<div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+				<a href="/ur/compass/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">کمپاس</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">لائیو ہیڈنگ</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						ہموار سوزن، معدنی اور اصل شمال، اور لائیو درستگی ریڈیک کے ساتھ ریئل ٹائم 360° ڈائل۔
+					</p>
+				</a>
+				<a href="/ur/location/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">مقام</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">GPS کو辕ینیٹس</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						عرض، طول، بلندی، اور درستگی ڈیسمل اور DMS میں — کاپی، شیئر، اور میپس میں کھولیں۔
+					</p>
+				</a>
+				<a href="/ur/qibla/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">قبلہ</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">مکہ کی طرف سمت</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						آپ کے کو辕ینیٹس سے کعبہ تک گریٹ سرکل بیرنگ اور فاصلہ، ڈگری تک درست۔
+					</p>
+				</a>
+				<a href="/ur/bearing/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">بیرنگ</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">کورس کیلکیولیٹر</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						کسی بھی دو پوائنٹس کے درمیان بیرنگ اور گریٹ سرکل فاصلہ — نیویگیشن اور روت پلاننگ کے لیے بالکل مناسب۔
+					</p>
+				</a>
+				<a href="/ur/sun/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">سورج</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">سورج کی پوزیشن</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						شمسی ازموت اور بلندی فوری، ساتھ میں طلوع، شمس نماز، اور غروب — کسی بھی مقام کے لیے۔
+					</p>
+				</a>
+				<div class="card-soft flex flex-col justify-center p-6">
+					<p class="text-sm text-body leading-6">
+						کوئی اکاؤنٹس نہیں۔ کوئی ٹریکرز نہیں۔ ہر حساب آپ کے براؤزر میں چلتا ہے اور آپ کے جانے کی لمحے ڈسکارڈ ہو جاتا ہے۔
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- یہ کیسے کام کرتا ہے -->
+	<section id="how-it-works" class="border-y border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<p class="eyebrow">یہ کیسے کام کرتا ہے</p>
+			<h2 class="mt-3 max-w-2xl text-display-lg text-ink">درستگی کے لیے ڈیزائن کیا گیا۔</h2>
+			<p class="mt-3 max-w-xl text-body-lg text-body">
+				آپ کے فون کا میگنیٹومیٹر، جائیروسکوپ، اور ایکسلیرومیٹر ٹلٹ کے مطابق ہیڈنگ انجین کو فیڈ کرتے ہیں، دنیا کے معدنی ماڈل کے خلاف درست کیا جاتا ہے۔
+			</p>
+
+			<div class="mt-12 grid gap-6 md:grid-cols-3">
+				<div class="card p-6">
+					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
+						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
+							<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" />
+							<path d="M15.5 8.5 13 13l-4.5 2.5L11 11z" fill="var(--color-error)" />
+						</svg>
+					</div>
+					<h3 class="text-display-sm text-ink">سینسر فیوژن</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						ہیڈنگ سائیشن اور میگنیٹومیٹر ڈیٹا سے حاصل کی جاتی ہے، ریئل ٹائم میں ہموار کی جاتی ہے تاکہ سوزن آپ کے ہاتھ میں مستحکم رہے۔
+					</p>
+				</div>
+				<div class="card p-6">
+					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
+						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
+							<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" />
+							<path
+								d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"
+								stroke="currentColor"
+								stroke-width="1.5"
+							/>
+							<circle cx="12" cy="12" r="3" fill="currentColor" />
+						</svg>
+					</div>
+					<h3 class="text-display-sm text-ink">اصل شمال کی اصلاح</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						مائلت دنیا بھر میں −30° سے +30° تک مختلف ہوتی ہے۔ ہم دنیا کا معدنی ماڈل لاگو کرتے ہیں تاکہ اصل شمال بالکل درست ہو، آپ کہیں بھی ہوں۔
+					</p>
+				</div>
+				<div class="card p-6">
+					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
+						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
+							<path
+								d="M12 21s7-5.1 7-11a7 7 0 1 0-14 0c0 5.9 7 11 7 11Z"
+								stroke="currentColor"
+								stroke-width="1.5"
+							/>
+							<circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5" />
+						</svg>
+					</div>
+					<h3 class="text-display-sm text-ink">ڈیزائن میں مقامی</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						کو辕ینیٹس، قبلہ بیرنگ، اور شمسی حسابات بالکل آپ کے ڈیوائس پر چلتے ہیں۔ آپ کا مقام کبھی سرور کو نہیں جاتا۔
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ٹول کے بارے میں (SEO) -->
+	<section id="about" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow text-center">مفت آنلائن کمپاس</p>
+				<h2 class="mt-3 text-center text-display-lg text-ink">آنلائن کمپاس کیا ہے؟</h2>
+				<p class="mt-6 text-body-lg text-body">
+					<strong class="text-ink font-medium">آنلائن کمپاس</strong> ایک ڈیجیٹل کمپاس ہے جو براہ رست آپ کے ویب براؤزر میں چلتا ہے — کوئی ایپ ڈاؤن لوڈ نہیں کرنی، کوئی انسٹال نہیں، اور کچھ بھی ادائیگی نہیں۔ اپنے فون پر یہ صفحہ کھولیں اور چند سیکنڈوں میں آپ کے پاس ایک مفت آنلائن کمپاس ہے جو آپ کی لائیو ہیڈنگ ڈگریوں میں دکھاتا ہے، شمال کی طرف اشارہ کرتا ہے اور اصل شمال اور معدنی شمال کے فرق کی اصلاح بھی کر سکتا ہے۔
+				</p>
+				<p class="mt-4 text-body text-body leading-7">
+					کیونکہ یہ براؤزر میں ہے، یہ گھر پر ہوں، فیلڈ میں، یا کلاس روم میں بالکل ایک جیسا کام کرتا ہے۔ بس گوگل پر "آنلائن کمپاس" تلاش کریں، یہ سائٹ کھولیں، اور آپ کے ڈیوائس کے سینسر کام شروع کر دیتے ہیں۔ روایتی کمپاس کے برعکس، یہ آنلائن کمپاس آپ کے فون کے میگنیٹومیٹر، جائیروسکوپ، اور ایکسلیرومیٹر کو مل کر استعمال کرتا ہے، جو <strong class="text-ink font-medium">آنلائن کمپاس سمت</strong> زیادہ مستحکم اور قابل اعتماد دیتا ہے ایک ایسے سوزن سے جو ہمیشہ گریویٹی اور ڈرفٹ سے لڑتا رہتا ہے۔
+				</p>
+				<p class="mt-4 text-body text-body leading-7">
+					اس سائٹ کا ہر ٹول <strong class="text-ink font-medium">آنلائن شمال تلاش کرنے</strong> اور بہت کچھ کے لیے ڈیزائن کیا گیا ہے: ڈگریوں میں لائیو ہیڈنگ ریڈاؤٹ، بنیادی اور انٹر کارڈینل سمتیں (شمال، شمال مشرق، مشرق، جنوب مشرق، جنوب، جنوب مغرب، مغرب، شمال مغرب)، ایک ٹیپ فل سکرین موڈ، اور ایک درستگی اشارہ جو آپ کو ہمیشہ بتاتا ہے کہ ریڈنگ کتنا قابل اعتماد ہے۔ اور کیونکہ سب کچھ مقامی طور پر پروسیس ہوتا ہے، آپ کا مقام کبھی آپ کے ڈیوائس سے باہر نہیں جاتا — ایک حقیقی مفت آنلائن کمپاس، ڈیٹا جمع کرنے والا نہیں۔
+				</p>
+			</div>
+
+			<div class="mx-auto mt-12 grid max-w-4xl gap-8 md:grid-cols-2">
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">جیومیٹری اور ریاضی کے لیے آنلائن کمپاس</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						<strong class="text-ink font-medium">آنلائن کمپاس ٹول</strong> ایک تعلیمی مدد بھی ہے۔ جیومیٹری میں، کمپاس دائرے اور قوسیں بنانے اور فاصلے ناپنے کے لیے استعمال ہوتا ہے؛ اس سائٹ پر، جیومیٹری کے لیے آنلائن کمپاس ریاضی کے ساتھ کام کرتا ہے پنسل کے بجائے۔ کسی بھی سمت کا زاویہ ناپیں، بیرنگز اور کمپاس پوائنٹس کے درمیان تبدیل کریں، اور بیرنگ کیلکیولیٹر استعمال کریں تاکہ زمین پر کسی بھی دو کو辕ینیٹس کے درمیان سمت اور گریٹ سرکل فاصلہ معلوم ہو۔ یہ وہ آنلائن کمپاس ریاضی ٹول ہے جو تجریدی زاویوں کو ایک ایسی ہیڈنگ میں بدل دیتا ہے جو آپ ڈائل پر دیکھ سکتے ہیں۔
+					</p>
+					<p class="mt-3 text-sm text-body leading-6">
+						طلباء اپنے کام کو حقیقی معدنی کمپاس سے چیک کر سکتے ہیں، اور استاد فون کو گھماتے وقت مثال کے ساتھ اصل شمال بمقابلہ معدنی شمال کی وضاحت کے لیے لائیو ڈائل استعمال کر سکتے ہیں۔ یہ مفت آنلائن کمپاس ٹول روزانہ سادہ کاموں کے لیے بھی استعمال ہوتا ہے — نقشے کی سمت کرنا، سولر پینل alignment کرنا، یا چیک کرنا کہ کمرہ کس طرف ہے۔
+					</p>
+				</div>
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">قبلہ کے لیے آنلائن کمپاس — میرے مقام سے کعبہ تلاش کریں</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						اس سائٹ میں ایک خاص <strong class="text-ink font-medium">قبلہ فائنڈر آنلائن کمپاس</strong> شامل ہے جو آپ کے موجودہ کو辕ینیٹس سے مکہ مکرمہ میں کعبہ کی سمت حساب کرتا ہے۔ آپ کہیں بھی ہوں، قبلہ فائنڈر آپ کو ڈگریوں میں بیرنگ اور کمپاس سمت دیتا ہے، ساتھ میں مکہ تک گریٹ سرکل فاصلہ۔ بہت سے مسافروں کے لیے، جو مخصوص تلاش کرتے ہیں وہ ہے "آنلائن کمپاس کعبہ میرے مقام سے شمال تلاش کرنا" — اور یہ صفحہ اس کا جواب دیتا ہے: اپنی پوزیشن معلوم کریں، قبلہ بیرنگ پڑھیں، پھر لائیو کمپاس ڈائل پر اس کی پیروی کریں۔
+					</p>
+					<p class="mt-3 text-sm text-body leading-6">
+						کیونکہ قبلہ کے لیے آنلائن کمپاس بالکل آپ کے ڈیوائس پر چلتا ہے، کوئی سرور نہیں، کوئی اکاؤنٹ نہیں، اور کہیں بھی مقام محفوظ نہیں ہے۔ کو辕ینیٹس دستی طور پر درج کریں، یا ایک بار مقام کی اجازت دیں اور بیرنگ فوری ڈگری کے چند حصوں تک درست حساب ہو جاتا ہے۔
+					</p>
+				</div>
+			</div>
+
+			<div class="mx-auto mt-12 max-w-3xl">
+				<h3 class="text-display-sm text-ink">آنلائن کمپاس کیوں منتخب کریں؟</h3>
+				<p class="mt-3 text-body text-body leading-7">
+					جسمانی کمپاس ایک شاندار آلت ہے، لیکن ڈیجیٹل آنلائن کمپاس لائیو درستگی شامل کرتا ہے: یہ صرف شمال ہی نہیں بلکہ کسی بھی ہیڈنگ کی بالکل ڈگری دکھاتا ہے، زمین پر کہیں بھی معدنی مائلت کی اصلاح کرتا ہے، اور کسی بھی پوزیشن میں پکڑا جا سکتا ہے۔ اس سائٹ کا مفت آنلائن کمپاس ٹول اس لائیو کمپاس کو ہر وہ چیز کے ساتھ پیش کرتا ہے جو نیویگیٹر کو ضرورت ہے — ڈیسمل اور DMS میں GPS کو辕ینیٹس، قبلہ کی سمت، بیرنگ کیلکیولیٹر، اور دن کے وقت orientations کے لیے سورج کی پوزیشن۔ یہ تیز، نجومی، اور ہر وقت تیار ہے جب بھی آپ کو شمال تلاش کرنا ہو۔
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- کیلیبریشن -->
+	<section id="calibration" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="grid gap-10 lg:grid-cols-2 lg:items-start">
+				<div>
+					<p class="eyebrow">کیلیبریشن</p>
+					<h2 class="mt-3 text-display-lg text-ink">سب سے درست ریڈنگ حاصل کریں۔</h2>
+					<p class="mt-3 text-body-lg text-body">
+						فون کے میگنیٹومیٹر قریبی دھات اور معدنی میدانوں سے حساس ہوتے ہیں۔ چند سیکنڈوں کی کیلیبریشن بہنے والے سوزن کو قابل اعتماد ہیڈنگ میں بدل دیتی ہے۔
+					</p>
+				</div>
+				<ol class="card-soft divide-y divide-hairline">
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">01</span>
+						<div>
+							<p class="text-sm font-medium text-ink">فون کو سپاٹ پکڑیں</p>
+							<p class="mt-1 text-sm text-body">سکرین کو زمین کے مساوی رکھیں، ہتھیلی میں یا مستحکم سطح پر۔</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">02</span>
+						<div>
+							<p class="text-sm font-medium text-ink">آٹھ کی شکل بنائیں</p>
+							<p class="mt-1 text-sm text-body">فون کو آہستہ سے آٹھ کی شکل میں چند بار ہلائیں، پھر ساکن ہو کر پکڑیں۔</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">03</span>
+						<div>
+							<p class="text-sm font-medium text-ink">مداخلت سے دور ہو جائیں</p>
+							<p class="mt-1 text-sm text-body">لیپ ٹاپ، فون، مقناطیس، اور دھات کے میزوں سے دور ہو کر ریڈنگ لیں۔</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">04</span>
+						<div>
+							<p class="text-sm font-medium text-ink">سورج سے تصدیق کریں</p>
+							<p class="mt-1 text-sm text-body">دن کی روشنی میں مستقل کراس چیک کے لیے ڈائل پر سورج کی پوزیشن نشان کا استعمال کریں۔</p>
+						</div>
+					</li>
+				</ol>
+			</div>
+		</div>
+	</section>
+
+	<!-- عمومی سوالات -->
+	<section id="faq" class="border-t border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow text-center">عمومی سوالات</p>
+			<h2 class="mt-3 text-center text-display-lg text-ink">سوالات، جوابات۔</h2>
+
+			<div class="mt-10 space-y-3">
+				{faq.map((f) => (
+					<details class="card overflow-hidden">
+						<summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-4 text-sm font-medium text-ink">
+							{f.q}
+							<svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0 text-mute" fill="none" aria-hidden="true">
+								<path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+							</svg>
+						</summary>
+						<p class="px-6 pb-5 text-sm text-body leading-6">{f.a}</p>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA بینڈ -->
+	<section class="bg-ink text-on-primary">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 text-center sm:px-6 md:py-24">
+			<p class="font-mono text-xs uppercase tracking-[0.08em] text-on-primary/60">آپ کے تیار ہونے کا انتظار ہے</p>
+			<h2 class="mt-4 text-display-lg text-on-primary">اپنی سمتیں تلاش کریں۔</h2>
+			<p class="mx-auto mt-3 max-w-lg text-body-lg text-on-primary/70">
+				فون کو شمال کی طرف رکھیں، اپنی قبلہ چیک کریں، یا روت بنائیں — سب ایک مفت ٹول میں۔
+			</p>
+			<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+				<a href="/ur/compass/" class="btn-primary bg-on-primary text-primary hover:opacity-85">کمپاس کھولیں</a>
+			</div>
+		</div>
+	</section>
+
+	<script type="application/ld+json" set:html={JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'FAQPage',
+		mainEntity: faq.map((f) => ({
+			'@type': 'Question',
+			name: f.q,
+			acceptedAnswer: {
+				'@type': 'Answer',
+				text: f.a,
+			},
+		})),
+	})} />
+</Layout>
+
+<style>
+	details summary::-webkit-details-marker {
+		display: none;
+	}
+	details[open] summary svg {
+		transform: rotate(180deg);
+	}
+	details summary svg {
+		transition: transform 0.2s ease;
+	}
+</style>

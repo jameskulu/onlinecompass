@@ -1,0 +1,134 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SunPanel from '../../components/SunPanel.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="Çevrimiçi Güneş Pozisyonu Hesaplayıcı — Azimut, Doğuş ve Batış"
+	description="Çevrimiçi güneş pozisyonunu hesaplayın: herhangi bir konum için azimut, yükseklik, doğuş, öğle ve batış. Ücretsiz ve anında — tamamen tarayıcınızda çalışır."
+	path="/tr/sun/"
+	keywords="güneş pozisyonu hesaplayıcı, güneş azimutu, doğuş batış saatleri, güneş yönü, çevrimiçi güneş pozisyonu"
+>
+	<PageHero
+		eyebrow="güneş pozisyonu"
+		title="Güneşi hassasiyetle takip edin."
+		description="Canlı güneş azimutu ve yüksekliği, artı doğuş, öğle ve batış — konumunuz veya girdiğiniz herhangi bir koordinat için hesaplanır."
+	>
+		<SunPanel />
+	</PageHero>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-2">
+			<div>
+				<p class="eyebrow mb-2">sayılar ne anlama gelir</p>
+				<p class="text-sm text-body leading-6">
+					Azimut, güneşin pusula yönüdür (0° = kuzey, 90° = doğu). Yükseklik, ufkun
+					üzerinde ne kadar yüksek oturduğudur — gölge, güneş panelleri ve fotoğrafçılık
+					için faydalıdır.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">pusulanızı doğrulayın</p>
+				<p class="text-sm text-body leading-6">
+					Öğle vakti güneş kuzey yarımkürede gerçek güneye, güney yarımkürede gerçek
+					kuzeye yakındır — gündüz yönünüzü doğrulamak için güvenilir bir yoldur.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">güneş pozisyonu aracı</p>
+			<h2 class="mt-3 text-display-lg text-ink">Çevrimiçi güneş pozisyonunu hesaplayın — herhangi bir konum için</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				Bir <strong class="text-ink font-medium">çevrimiçi güneş pozisyonu hesaplayıcısı</strong>,
+				belirli bir anda belirli bir yer için güneşin gökyüzünde nerede olduğunu gösterir. Bu
+				sayfa güneşin mevcut <strong class="text-ink font-medium">azimutunu</strong> (derece
+				olarak pusula yönünü) ve <strong class="text-ink font-medium">yüksekliğini</strong>
+				(ufğun üzerindeki açısını), artı doğuş, öğle ve batış zamanlarını hesaplar — canlı
+				konumunuz veya girdiğiniz herhangi bir koordinat için. Her şey tarayıcınızda çalışır,
+				bu yüzden anında, ücretsiz ve gizlidir.
+			</p>
+			<p class="mt-4 leading-7">
+				Sayılar gün ilerledikçe gerçek zamanlı güncellenir, bu da bu aracı şaşırtıcı bir
+				görev yelpazesi için kullanışlı yapar: güneş panelleri yerleştirme, fotoğrafçılık
+				ışığını planlama, bahçe yataklarını düzenleme, veranda için gölge konumlandırma veya
+				sadece güneşin karşıdaki binanın üzerinden ne zaman çıkacağını bilmek.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Azimut ve yükseklik — gökyüzünü okumak</h3>
+			<p class="mt-3 leading-7">
+				<strong class="text-ink font-medium">Azimut</strong>, güneşin kuzeyden saat yönünde
+				ölçülen yönüdür: 0° tam kuzey, 90° tam doğu, 180° tam güney ve 270° tam batı.
+				Öğle vakti güneş kuzey yarımkürede yaklaşık 180°'de (tam güney), güney yarımkürede
+				yaklaşık 0°'de (tam kuzey) oturur. <strong class="text-ink font-medium">Yükseklik</strong>,
+				ufğun üzerindeki açıdır, doğum ve batışta 0°'den öğle vakti en yüksek noktasına
+				kadar. Birlikte, güneşin gökyüzünde tam olarak nerede olduğunu tanımlarlar —
+				gökbilimcilerin ve güneş mühendislerinin kullandığı aynı koordinatlar.
+			</p>
+			<p class="mt-4 leading-7">
+				Güneşin yolu enlem ve mevsimle değişir: yazın daha yüksek, kışın daha düşük,
+				Dünya'nın her yerinde doğudan doğar ve batar. Hesaplayıcı, tüm standart güneş
+				pozisyonu algoritmaları aracılığıyla bunu hesaba katar, böylece gördüğünüz azimut
+				ve yükseklik tarihinize, saatinize ve koordinatlarınıza göredir.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Neden güneş yön bulmada faydalıdır</h3>
+			<p class="mt-3 leading-7">
+				Pusulalardan ve GPS'ten önce, insanlar yön belirlemek için güneşi kullanırdı — ve
+				bugün hala işe yarar. Öğle vakti civarında güneş kuzey yarımkürede tam güneyde,
+				güney yarımkürede tam kuzeydedir. Doğuşta yaklaşık doğuda, batışta yaklaşık
+				batıdadır. Bunlar güvenilir kurallardır ve bu sayfa bunları hassas sayılara
+				dönüştürür. Gündüzleri pusulasız dışarıdaysanız, buradaki azimutu kontrol edin ve
+				buna göre yönlendirin — sonra telefonunuza döndüğünüzde
+				<a href="/" class="text-link underline decoration-link/30 hover:decoration-link">çevrimiçi pusulayla</a>
+				doğrulayın.
+			</p>
+
+			<div class="mt-10 grid gap-4 sm:grid-cols-2">
+				<div class="card-soft p-5">
+					<h4 class="text-sm font-medium text-ink mb-1">Güneş enerjisi</h4>
+					<p class="text-sm leading-6">
+						Panelleri hizalayın veya kurulumları planlayın: öğle vakti yüksekliği en iyi
+						eğimi gösterir ve azimut aralığı bir yüzeyin gün boyunca ne kadar güneş
+						aldığını gösterir.
+					</p>
+				</div>
+				<div class="card-soft p-5">
+					<h4 class="text-sm font-medium text-ink mb-1">Fotoğrafçılık ve bahçe düzeni</h4>
+					<p class="text-sm leading-6">
+						Altın saat çekimlerini planlayın, bahçe yatağının ne zaman ışık aldığını
+						bilin veya veranda veya gölge tente öğleden sonra güneşi için konumlandırın
+						— hepsi tam konumunuzdan.
+					</p>
+				</div>
+			</div>
+
+			<h3 class="mt-10 text-display-sm text-ink">Doğuş, öğle ve batış</h3>
+			<p class="mt-3 leading-7">
+				Araç ayrıca günün önemli anlarını raporlar: <strong class="text-ink font-medium">doğuş</strong>,
+				güneşin ilk kez ufkun üzerinde göründüğü an; <strong class="text-ink font-medium">öğle</strong>,
+				en yüksek noktaya ulaştığı an; ve <strong class="text-ink font-medium">batış</strong>,
+				kaybolduğu an. Öğle vakti, güneşin meridyeni geçtiği ve en kısa gölgeyi_castırdığı
+				andır — yukarıda bahsedilen güneş-pusula hilesi için referans noktasıdır.
+			</p>
+			<p class="mt-4 leading-7">
+				Hesaplamalar yerel olduğu için sonuçlar koordinatlarınız ve tarihinizle doğal olarak
+				değişir: kuzey kışları kısa günler ve düşük öğle yükseklikleri getirir, tropikal
+				konumlar ise yıl boyunca güneşin yükseldiğini görür. Nerede olursanız olun, bu ücretsiz
+				güneş pozisyonu hesaplayıcısı güneş yolunu bir bakışta gösterir — ve mükemmel bir
+				şekilde
+				<a href="/tr/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">açı hesaplayıcısı</a>
+				ve
+				<a href="/tr/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">Kible bulucu</a>
+				ile eşleşir, gökyüzünün tam resmi için.
+			</p>
+		</div>
+	</section>
+
+	<RelatedTools current="/sun/" />
+</Layout>

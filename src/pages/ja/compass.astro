@@ -1,0 +1,112 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Compass from '../../components/Compass.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="オンラインコンパスツール — リアルタイムの真北・磁北方位"
+	description="無料のオンラインコンパスツールでスマートフォン上でリアルタイム360°方位を確認。磁北と真北、自動偏角補正、精度フィードバック、キャリブレーションガイド付き。"
+	path="/ja/compass/"
+	keywords="オンラインコンパス, オンラインコンパスツール, 無料オンラインコンパスツール, オンラインコンパス リアルタイム, オンラインコンパス 方角, オンラインコンパス 北を見つける, オンラインコンパス 無料"
+>
+	<section class="relative overflow-hidden">
+		<div class="mesh-gradient" aria-hidden="true"></div>
+		<div class="relative">
+			<PageHero
+				eyebrow="リアルタイムコンパス"
+				title="あなたのスマートフォンがコンパスに。"
+				description="センサーへのアクセスを許可すると、このページがスマートフォンを高精度なデジタルコンパスに変換します — 360°ダイヤル、滑らかな針、磁北と真北の両方の読み取り。"
+			>
+				<Compass />
+			</PageHero>
+		</div>
+	</section>
+
+	<section class="border-y border-hairline bg-canvas">
+		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-3">
+			<div>
+				<p class="eyebrow mb-2">読み取り方</p>
+				<p class="text-sm text-body leading-6">
+					針の赤い端は常に北を指します。体を回転させて、固定された上部マーカーが目的の方向に一致するまで回すと、上部に方位が表示されます。
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">真北 vs 磁北</p>
+				<p class="text-sm text-body leading-6">
+					方位を切り替え可能です。真北は現在地の磁気偏角を適用するため、地図、ナビゲーション、方位すべてが一致します。
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">精度</p>
+				<p class="text-sm text-body leading-6">
+					ステータス表示でリアルタイムのセンサー源と推定ドリフトが確認できます。読み取りが不安定な場合は、ダイヤル下のキャリブレーション手順に従ってください。
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">オンラインコンパスツール</p>
+			<h2 class="mt-3 text-display-lg text-ink">ブラウザから即座に北を見つける</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				<strong class="text-ink font-medium">オンラインコンパス</strong>は、ウェブブラウザで直接動作するデジタルコンパスです。アプリストアもダウンロードもアカウントも不要 — このページを開いてセンサーへのアクセスを許可するだけで、スマートフォンがリアルタイム360°方位表示付きの無料オンラインコンパスになります。<strong class="text-ink font-medium">オンラインで北を見つける</strong>最も速い方法で、自宅、ハイキング、キャンプ、またはマンションの向きの確認に便利です。
+			</p>
+			<p class="mt-4 leading-7">
+				コンパスはデバイスのセンサーをリアルタイムで読み取ります。針の赤い端は常に北を指し — ダイヤルの一番上で0°または360° — その下に度数と方位点（北、北東、東、南東、南、南西、西、北西）で方位が表示されます。回転するたびにダイヤルも回転するため、<strong class="text-ink font-medium">オンラインコンパスの方向</strong>を一目で確認できます。
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">オンラインコンパス上の真北と磁北</h3>
+			<p class="mt-3 leading-7">
+				ほとんどのスマートフォンのコンパスは<strong class="text-ink font-medium">磁北</strong> — 地球の磁場に引かれる針の方向 — を表示します。しかし、地図、GPS、ナビゲーションはすべて<strong class="text-ink font-medium">真北</strong>（地理的な北極）を使用します。両者の間の角度は<strong class="text-ink font-medium">磁気偏角</strong>と呼ばれ、地球上の場所によって約−30°から+30°まで変化します。都市によっては数度の差もあり、15度以上の場合もあります。偏角を無視すると方位が大きくずれることがあります。
+			</p>
+			<p class="mt-4 leading-7">
+				このオンラインコンパスツールはそれを自動的に処理します。現在地を使用して世界磁気モデルを適用するため、磁北と真北の切り替えはワンタップです。真北に切り替えると、方位が地図のグリッドと一致します — ナビゲーション、ジオキャッシング、アンテナの向き調整、または他の場所で計算した方位の追跡に必須です。最も正確な結果を得るには、「位置情報を使って偏角を補正」をタップして、おおよその推定ではなく正確な座標で補正を計算してください。
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">ブラウザコンパスの精度は？</h3>
+			<p class="mt-3 leading-7">
+				スマートフォンには磁力計、加速度計、ジャイロスコープが内蔵されています。優れたオンラインコンパスはそれらのセンサーを融合させ、傾斜補正された方位を生成します — つまり、スマートフォンを完全に水平に持っていなくても、ある程度安定して動作します。このページには精度インジケーターとリアルタイムのセンサー源が表示されるため、読み取りの信頼性を確認できます。
+			</p>
+			<p class="mt-4 leading-7">
+				最良の結果を得るには：体から離れてスマートフォンを水平に持ち、金属、スピーカー、電子機器から離してください。針が不安定な場合は数字の8の字を数回描いてください。キャリブレーションは数秒で完了し、実際の精度向上につながります。屋内では数度の揺れを想定してください。屋外で金属から離れた場合、この無料オンラインコンパスは物理的なコンパスと1～2度以内に一致することがあります。
+			</p>
+
+			<div class="mt-10 grid gap-4 sm:grid-cols-2">
+				<div class="card-soft p-5">
+					<h4 class="text-sm font-medium text-ink mb-1">無料オンラインコンパスツールが必要な場合</h4>
+					<p class="text-sm leading-6">
+						地図の方向付け、ソーラーパネルの向き調整、植物用の窓の向き確認、写真の方向確認、幾何学の教育、ナビゲーションの練習 — 物理的なコンパスを持たずにすべて実行できます。
+					</p>
+				</div>
+				<div class="card-soft p-5">
+					<h4 class="text-sm font-medium text-ink mb-1">このコンパスの特徴</h4>
+					<p class="text-sm leading-6">
+						インストール不要、広告なし、トラッキングなし、データ送信なし。すべてがデバイス上でローカルに実行され、読み取りは真北に自動補正されます。
+					</p>
+				</div>
+			</div>
+
+			<h3 class="mt-10 text-display-sm text-ink">オンラインコンパスのあらゆる使い方</h3>
+			<p class="mt-3 leading-7">
+				用途は北の方向を知ること far 遠に及きます。ハイカーやトレイルランナーは出発前に地図の方向付けにオンラインコンパスを使います。写真家は日の出日の入りの位置を計画するために使います。キャンパーは朝日の方向にテントを向けるために使います。不動産の専門家は部屋の向きを確認し、庭師は日当たりの最大化のために raised bed の向きを調整します。生徒はこの幾何学用オンラインコンパスで角度をダイヤル上で実際に確認できます。フルスクリーンボタンを使えば、ダイヤルを腕の長さまで伸ばして遠くのランドマークに合わせられます — 手持ちコンパスとまったく同じです。
+			</p>
+			<p class="mt-4 leading-7">
+				すべてがブラウザで計算されるため、世界中どこからでもこのオンラインコンパスをリアルタイムで使用でき、磁気偏角も自動補正されるため、真北は常に正確です。無料のオンラインコンパスで北を見つけ、リアルタイム方位、偏角補正、プライバシーを組み合わせたこの組み合わせは、他の場所ではなかなか見つかりません。
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">他のツールと組み合わせる</h3>
+			<p class="mt-3 leading-7">
+				このコンパスは完全なナビゲーションスイートの一部です。<a href="/ja/location/" class="text-link underline decoration-link/30 hover:decoration-link">GPS座標ツール</a>で正確な位置を取得し、<a href="/ja/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">方位計算機</a>で2点間のコースを計画し、<a href="/ja/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">キブラファインダー</a>でカッバの方を向き、<a href="/ja/sun/" class="text-link underline decoration-link/30 hover:decoration-link">太陽位置計算機</a>で太陽の軌跡を追跡します。すべてのツールは連携動作し、すべてプライバシーを重視し無料で、ブラウザのあるすべてのスマートフォンで動作します。
+			</p>
+			<p class="mt-4 leading-7">
+				北を見つける準備はできましたか？上でセンサーへのアクセスを許可し、針が不安定な場合はキャリブレーション手順に従ってください。インストールなしで利用できる最も正確なオンラインコンパスツールの1つをお楽しみください。
+			</p>
+		</div>
+	</section>
+
+	<RelatedTools current="/" />
+</Layout>

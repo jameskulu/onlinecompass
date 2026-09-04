@@ -1,0 +1,132 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SunPanel from '../../components/SunPanel.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="Calculadora de Posição Solar Online — Azimute, Nascer e Pôr do Sol"
+	description="Calcule a posição do sol online: azimute, elevação, nascer do sol, meio-dia solar e pôr do sol para qualquer localidade. Gratuita e instantânea — roda inteiramente no seu navegador."
+	path="/pt/sun/"
+	keywords="calculadora de posição solar, azimute do sol, horários nascer e pôr do sol, direção do sol, posição solar online"
+>
+	<PageHero
+		eyebrow="posição do sol"
+		title="Rastreie o sol com precisão."
+		description="Azimute e elevação solar ao vivo, além de nascer do sol, meio-dia solar e pôr do sol — calculados para sua localização ou quaisquer coordenadas que você insira."
+	>
+		<SunPanel />
+	</PageHero>
+
+	<section class="border-y border-hairline bg-canvas">
+		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-2">
+			<div>
+				<p class="eyebrow mb-2">o que os números significam</p>
+				<p class="text-sm text-body leading-6">
+					O azimute é a direção da bússola do sol (0° = norte, 90° = leste). A elevação é quão
+					alto ele está acima do horizonte — útil para sombras, painéis solares e fotografia.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">confira sua bússola</p>
+				<p class="text-sm text-body leading-6">
+					Ao meio-dia o sol fica perto do sul verdadeiro no hemisfério norte e do norte
+					verdadeiro no hemisfério sul — uma forma confiável de verificar seu rumo durante o dia.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">a ferramenta de posição solar</p>
+			<h2 class="mt-3 text-display-lg text-ink">Calcule a posição do sol online — para qualquer localidade</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				Uma <strong class="text-ink font-medium">calculadora de posição solar online</strong>
+				mostra onde o sol está no céu em um dado momento para um dado lugar. Esta página calcula
+				o <strong class="text-ink font-medium">azimute</strong> atual do sol (sua direção da
+				bússola em graus) e a <strong class="text-ink font-medium">elevação</strong> (sua altura
+				acima do horizonte), além dos horários de nascer do sol, meio-dia solar e pôr do sol —
+				para sua localização ao vivo ou quaisquer coordenadas que você insira. Tudo roda no seu
+				navegador, para que seja instantâneo, gratuito e privado.
+			</p>
+			<p class="mt-4 leading-7">
+				Os números se atualizam em tempo real conforme o dia avança, o que torna esta ferramenta
+				útil para uma variedade surpreendente de tarefas: posicionar painéis solares, planejar
+				iluminação para fotografia, organizar canteiros de jardim, posicionar sombras para uma
+				varanda ou simplesmente saber quando o sol ultrapassará o prédio da rua oposta.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Azimute e elevação — lendo o céu</h3>
+			<p class="mt-3 leading-7">
+				O <strong class="text-ink font-medium">azimute</strong> é a direção do sol medida no
+				sentido horário a partir do norte: 0° é norte, 90° leste, 180° sul e 270° oeste. Ao
+				meio-dia o sol fica em torno de 180° (ao sul) no hemisfério norte e em torno de 0° (ao
+				norte) no hemisfério sul. A <strong class="text-ink font-medium">elevação</strong> é o
+				ângulo do sol acima do horizonte, de 0° no nascer e pôr do sol até seu ponto mais alto
+				ao meio-dia solar. Juntos, eles descrevem exatamente onde o sol está no céu — as mesmas
+				coordenadas que astrônomos e engenheiros solares utilizam.
+			</p>
+			<p class="mt-4 leading-7">
+				O caminho do sol muda com sua latitude e com a estação: mais alto no verão, mais baixo
+				no inverno, nascendo no leste e se pondo no oeste em todos os lugares da Terra. A
+				calculadora leva tudo isso em conta por meio de algoritmos padrão de posição solar, para
+				que o azimute e a elevação que você vê sejam precisos para sua data, hora e coordenadas.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Por que o sol é útil para encontrar direção</h3>
+			<p class="mt-3 leading-7">
+				Antes das bússolas e do GPS, as pessoas usavam o sol para orientação — e isso ainda
+				funciona hoje. Por volta do meio-dia local, o sol fica ao sul no hemisfério norte e ao
+				norte no hemisfério sul. Ao nascer do sol ele fica aproximadamente a leste; ao pôr do
+				sol, aproximadamente a oeste. Estas são regras práticas confiáveis, e esta página as
+				transforma em números precisos. Se você estiver ao ar livre durante o dia sem uma
+				bússola, confira o azimute aqui e oriente-se de acordo — depois verifique com a
+				<a href="/" class="text-link underline decoration-link/30 hover:decoration-link">bússola online</a>
+				quando estiver de volta ao seu celular.
+			</p>
+
+			<div class="mt-10 grid gap-4 sm:grid-cols-2">
+				<div class="card-soft p-5">
+					<h4 class="text-sm font-medium text-ink mb-1">Energia solar</h4>
+					<p class="text-sm leading-6">
+						Alinhe painéis ou planeje instalações: a elevação ao meio-dia mostra a inclinação
+						ideal e a faixa de azimute mostra quanto sol uma superfície recebe ao longo do dia.
+					</p>
+				</div>
+				<div class="card-soft p-5">
+					<h4 class="text-sm font-medium text-ink mb-1">Fotografia e jardinagem</h4>
+					<p class="text-sm leading-6">
+						Planeje sessões no horário dourado, saiba quando um canteiro recebe luz ou posicione
+						uma varanda ou toldo para o sol da tarde — tudo a partir da sua localização exata.
+					</p>
+				</div>
+			</div>
+
+			<h3 class="mt-10 text-display-sm text-ink">Nascer do sol, meio-dia solar e pôr do sol</h3>
+			<p class="mt-3 leading-7">
+				A ferramenta também relata os momentos-chave do dia: <strong class="text-ink font-medium">nascer
+				do sol</strong>, quando o sol aparece pela primeira vez acima do horizonte; <strong
+				class="text-ink font-medium">meio-dia solar</strong>, quando ele atinge seu ponto mais
+				alto; e <strong class="text-ink font-medium">pôr do sol</strong>, quando ele desaparece.
+				O meio-dia solar é o momento em que o sol cruza o meridiano e projeta a sombra mais curta
+				— o ponto de referência para a dica do sol-como-bússola mencionada acima.
+			</p>
+			<p class="mt-4 leading-7">
+				Porque os cálculos são locais, os resultados mudam naturalmente com suas coordenadas e a
+				data: invernos no norte trazem dias curtos e baixas elevações ao meio-dia, enquanto
+				localidades tropicais veem o sol subir alto durante todo o ano. De onde quer que você
+				esteja, esta calculadora gratuita de posição solar mostra o caminho solar numa olhada — e
+				combina perfeitamente com a
+				<a href="/pt/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">calculadora de rumo</a>
+				e o
+				<a href="/pt/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">localizador de Qibla</a>
+				para ter uma visão completa do céu acima de você.
+			</p>
+		</div>
+	</section>
+
+	<RelatedTools current="/sun/" />
+</Layout>

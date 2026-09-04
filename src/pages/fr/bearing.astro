@@ -1,0 +1,136 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BearingCalculator from '../../components/BearingCalculator.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="Calculateur de Cap en Ligne — Direction et Distance entre Deux Points"
+	description="Outil de boussole en ligne gratuit pour calculer le cap et la distance par grand cercle entre deux coordonnées. Affiche aussi la direction Qibla, la déclinaison magnétique et la position du soleil depuis votre emplacement."
+	path="/fr/bearing/"
+	keywords="mathématiques boussole en ligne, géométrie boussole en ligne, calculateur de cap, direction entre deux points, distance par grand cercle, calculateur de cap en ligne"
+>
+	<PageHero
+		eyebrow="calculateur de cap"
+		title="Tracez un itinéraire, degré par degré."
+		description="Calculez le cap initial et la distance par grand cercle entre n'importe quels deux points sur Terre — depuis votre position en direct, des coordonnées manuelles ou un itinéraire prédéfini."
+	>
+		<BearingCalculator />
+	</PageHero>
+
+	<section class="border-y border-hairline bg-canvas">
+		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-2">
+			<div>
+				<p class="eyebrow mb-2">cap initial vs final</p>
+				<p class="text-sm text-body leading-6">
+					Ceci retourne le cap initial — la direction dans laquelle vous partez. Sur de longs
+					itinéraires, le cap change le long du grand cercle, donc des corrections en cours
+					de route sont normales.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">utilisez-le avec la boussole</p>
+				<p class="text-sm text-body leading-6">
+					Prenez votre cap calculé dans l'outil boussole et guidez-vous jusqu'à ce que le cap
+					corresponde. Passez au nord vrai pour un pilotage précis sur la carte.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">le calculateur de cap</p>
+			<h2 class="mt-3 text-display-lg text-ink">Calculez le cap et la distance entre deux points</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				Un <strong class="text-ink font-medium">calculateur de cap en ligne</strong> trouve la
+				direction et la distance entre n'importe quels deux points sur Terre. Entrez deux
+				ensembles de coordonnées — ou utilisez votre position en direct pour une extrémité —
+				et cet outil retourne le cap initial en degrés, la direction de la boussole et la
+				distance par grand cercle en kilomètres. C'est l'outil de <strong class="text-ink
+				font-medium">mathématiques de boussole en ligne</strong> essentiel pour la navigation,
+				la planification d'itinéraires, l'arpentage et l'étude.
+			</p>
+			<p class="mt-4 leading-7">
+				Le cap est l'angle mesuré dans le sens des aiguilles d'une montre à partir du nord
+				vers la direction dans laquelle vous devez voyager : 0° est le nord, 90° l'est,
+				180° le sud, 270° l'ouest. Un itinéraire de Londres à New York, par exemple, commence
+				avec un cap initial d'environ 288° — c'est la direction de la boussole vers laquelle
+				vous pointez le nez d'un avion ou la proue d'un navire au moment où vous partez.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Cap initial vs cap final</h3>
+			<p class="mt-3 leading-7">
+				Parce que la Terre est une sphère, la <strong class="text-ink font-medium">direction
+				entre deux points</strong> n'est pas une ligne droite sur une carte. L'itinéraire le
+				plus court suit un grand cercle, et le long de cet itinéraire le cap change en continu.
+				Le « cap initial » est la direction à votre point de départ — celle que vous pilotez
+				d'abord. Sur de longs itinéraires, le cap dérive au fur et à mesure, c'est pourquoi
+				les pilotes et les navigateurs utilisent des waypoints et des corrections en cours
+				de route. Ce calculateur indique le cap initial et calcule aussi le cap final pour
+				l'arrivée du chemin par grand cercle.
+			</p>
+			<p class="mt-4 leading-7">
+				Pour les courts trajets — une randonnée, une traversée de ville, une marche entre
+				deux points sur une carte — le cap initial est pratiquement tout l'itinéraire. Cela
+				rend ce calculateur de cap en ligne parfait pour la planification quotidienne ainsi
+				que pour la géométrie en classe.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">La distance telle qu'un navigateur la mesure</h3>
+			<p class="mt-3 leading-7">
+				Avec le cap, vous obtenez la distance par grand cercle — la distance la plus courte
+				sur la surface terrestre entre les deux points, calculée avec la formule de Haversine.
+				Contrairement à une règle sur une carte plate, cela tient compte de la courbure de la
+				planète, le résultat correspond donc aux vraies distances de voyage. C'est le même
+				calcul utilisé pour la planification de vols et la navigation maritime.
+			</p>
+			<p class="mt-4 leading-7">
+				L'outile va plus loin qu'une simple calculatrice. Choisissez une destination dans la
+				liste prédéfinie — y compris les grandes villes du monde et la Kaaba à La Mecque — et
+				il calcule le résumé (« New York est à 245° OSO de Londres, à 5 570 km ») plus quatre
+				autres lectures depuis le point A : la
+				<a href="/fr/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">direction Qibla</a>,
+				la déclinaison magnétique, et la
+				<a href="/fr/sun/" class="text-link underline decoration-link/30 hover:decoration-link">position du soleil</a>.
+				Une seule entrée, et vous voyez comment votre boussole, votre Qibla et vos données
+				solaires s'alignent avec votre itinéraire.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Utilisez le cap avec une boussole</h3>
+			<p class="mt-3 leading-7">
+				Le compagnon naturel de cet outil est la
+				<a href="/" class="text-link underline decoration-link/30 hover:decoration-link">boussole en ligne</a>.
+				Calculez votre cap, ouvrez la boussole et tournez jusqu'à ce que votre cap corresponde.
+				Passez la boussole au nord vrai pour que votre pilotage s'aligne avec le nord de la
+				carte — et laissez la boussole appliquer automatiquement la déclinaison de votre
+				emplacement. La combinaison transforme un chiffre sur une page en un itinéraire que
+				vous pouvez réellement parcourir, naviguer ou conduire.
+			</p>
+			<p class="mt-4 leading-7">
+				Ce calculateur de cap en ligne est utile pour la planification d'itinéraires avant
+				une randonnée, l'alignement d'antennes et de panneaux solaires, l'estimation du
+				voyage entre deux adresses, la vérification d'un cap de boussole, ou la vérification
+				de devoirs. Parce que tout s'exécute localement dans votre navigateur, c'est un outil
+				de géométrie de boussole en ligne privé et gratuit auquel vous pouvez faire confiance
+				partout — pas d'installations, pas de comptes, pas de collecte de données.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Degrés, directions et planification</h3>
+			<p class="mt-3 leading-7">
+				Les caps lus en degrés sont précis mais abstraits ; c'est pourquoi l'outil les
+				convertit aussi en directions de boussole simples. 45° devient NE, 200° devient SSO,
+				etc. — vous pouvez donc répondre à des questions comme « dans quelle direction dois-je
+				me diriger ? » dans le même langage qu'une boussole ou une carte. Entrez votre position
+				en direct comme point A et une destination comme point B, et l'image complète — cap,
+				direction, distance, Qibla, déclinaison et soleil — se met à jour instantanément.
+				C'est la puissance d'un outil de mathématiques de boussole en ligne construit autour
+				de vos coordonnées réelles.
+			</p>
+		</div>
+	</section>
+
+	<RelatedTools current="/bearing/" />
+</Layout>

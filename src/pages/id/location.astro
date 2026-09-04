@@ -1,0 +1,129 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import LocationPanel from '../../components/LocationPanel.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="Koordinat GPS Online - Lintang, Bujur & DMS"
+	description="Temukan koordinat GPS saya secara online: lintang, bujur, ketinggian, dan akurasi dalam format desimal dan DMS. Salin, bagikan, atau buka di Google Maps. Tanpa instalasi, tanpa pelacakan."
+	path="/id/location/"
+	keywords="koordinat GPS online, temukan lokasi saya, lintang bujur, koordinat DMS, lokasi GPS saya"
+>
+	<PageHero
+		eyebrow="gps · lokasi"
+		title="Tahu persis di mana Anda berada."
+		description="Koordinat GPS langsung, ketinggian, dan akurasi langsung dari perangkat Anda. Semuanya dihitung secara lokal - lokasi Anda tidak pernah meninggalkan perangkat browser Anda."
+	>
+		<LocationPanel />
+	</PageHero>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">alat lokasi GPS</p>
+			<h2 class="mt-3 text-display-lg text-ink">Dapatkan koordinat GPS secara online - secara instan</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				Perlu <strong class="text-ink font-medium">menemukan koordinat GPS saya secara online</strong>?
+				Alat ini membaca lokasi perangkat Anda secara real time dan menampilkan lintang dan
+				bujur saat ini dalam format derajat desimal dan derajat-menit-detik (DMS), beserta
+				ketinggian dan akurasi perkiraan. Berikan izin sekali, dan halaman ini secara terus-menerus
+				melacak posisi Anda saat Anda bergerak - berguna untuk hiking, pekerjaan lapangan, geocaching, atau sekadar
+				membagikan lokasi tepat Anda kepada seseorang.
+			</p>
+			<p class="mt-4 leading-7">
+				Semuanya diproses secara lokal di perangkat browser Anda. Lokasi Anda tidak pernah dikirim ke server,
+				disimpan, atau dibagikan - alat koordinat GPS online ini bersifat privat karena desain, dan
+				pembacaan menghilang saat Anda menutup halaman.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Lintang, bujur, dan DMS dijelaskan</h3>
+			<p class="mt-3 leading-7">
+				<strong class="text-ink font-medium">Lintang</strong> mengukur seberapa jauh ke utara atau selatan dari
+				khatulistiwa Anda berada (0° di khatulistiwa, 90° di kutub), sedangkan
+				<strong class="text-ink font-medium">bujur</strong> mengukur seberapa jauh ke timur atau barat dari
+				Garis Greenwich Anda berada. Bersama-sama mereka membentuk grid yang menunjuk setiap tempat di Bumi
+				hingga dalam hitungan meter. Kebanyakan aplikasi pemetaan menggunakan derajat desimal (misalnya 48.8584, 2.2945 untuk
+				Paris), tetapi banyak formulir dan panduan navigasi membutuhkan DMS (48° 51' 29.6" N, 2° 17' 40.2" E).
+				Alat ini menampilkan <strong class="text-ink font-medium">lokasi saya</strong> dalam kedua format
+				sehingga Anda dapat menyalin yang Anda butuhkan - tidak perlu mengonversi manual.
+			</p>
+			<p class="mt-4 leading-7">
+				Derajat desimal dan DMS adalah posisi yang sama, hanya ditulis berbeda. Satu derajat
+				lintang sekitar 111 kilometer; satu menit sekitar 1,85 kilometer; satu detik
+				sekitar 30 meter. Memahami satuan membantu Anda menilai seberapa presisi koordinat sebenarnya
+				- dan mengapa akurasi penting saat Anda navigasi di lapangan.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Di mana Anda bisa menggunakan koordinat GPS langsung?</h3>
+			<div class="mt-4 space-y-3">
+				<p class="leading-7">
+					<strong class="text-ink font-medium">Navigasi luar ruangan.</strong> Saat Anda berada di
+					jalur hiking, area berkemah, atau menjelajahi kota baru, tangkap koordinat Anda agar Anda dapat
+					membagikannya atau kembali ke sana. Ini adalah cara tercepat untuk menjawab "di mana saya sekarang?"
+				</p>
+				<p class="leading-7">
+					<strong class="text-ink font-medium">Fotografi dan perencanaan.</strong> Geo-tag suatu
+					lokasi untuk sesi pemotretan, catat di mana Anda berdiri untuk foto, atau periksa ketinggian suatu
+					titik pandang sebelum merencanakan rute.
+				</p>
+				<p class="leading-7">
+					<strong class="text-ink font-medium">Pekerjaan dan studi.</strong> Surveyor, petani, dan
+					peneliti lapangan menggunakan koordinat presisi untuk menandai plot dan titik. Siswa menggunakannya
+					untuk proyek geografi dan untuk memverifikasi pekerjaan peta.
+				</p>
+				<p class="leading-7">
+					<strong class="text-ink font-medium">Alat lain di situs ini.</strong> Koordinat Anda
+					langsung masuk ke pencari Qibla, kalkulator bearing, dan alat posisi
+					matahari, sehingga Anda dapat bekerja dengan posisi tepat Anda di mana-mana.
+				</p>
+			</div>
+
+			<h3 class="mt-10 text-display-sm text-ink">Seberapa akurat lokasi GPS?</h3>
+			<p class="mt-3 leading-7">
+				Ponsel modern menggabungkan GPS satelit, Wi-Fi, dan data menara seluler. Di luar ruangan dengan langit cerah
+				Anda biasanya bisa mendapatkan akurasi dalam 3-10 meter; di dalam ruangan sinyal melemah dan akurasi
+				menurun. Alat menunjukkan akurasi perkiraan dalam meter sehingga Anda tahu seberapa besar kepercayaan terhadap
+				pembacaan. Untuk hasil terbaik, berdirilah diam beberapa detik di luar ruangan, menjauh dari gedung
+				tinggi dan pepohonan lebat.
+			</p>
+			<p class="mt-4 leading-7">
+				Karena ini adalah alat koordinat GPS online yang tidak pernah mengunggah apa pun, Anda dapat menggunakannya
+				dengan percaya diri di mana-mana - cara privat untuk menemukan lokasi saya yang juga memberikan
+				presisi yang Anda butuhkan.
+			</p>
+		<h3 class="mt-10 text-display-sm text-ink">Bagikan, salin, dan buka koordinat Anda</h3>
+			<p class="mt-3 leading-7">
+				Alat ini dibuat untuk penggunaan nyata, bukan hanya tampilan. Salin koordinat Anda dalam format yang
+				Anda butuhkan, bagikan dengan teman, atau buka posisi Anda langsung di Google Maps untuk tampilan yang lebih luas
+				dari area tersebut. Dikombinasikan dengan pembacaan akurasi langsung, Anda dapat dengan yakin mencatat
+				suatu lokasi sekarang dan kembali nanti - titik jalan yang berguna untuk hiking, pertemuan, atau pengiriman.
+			</p>
+			<p class="mt-4 leading-7">
+				Alat koordinat GPS online ini bekerja bersamaan dengan bagian lain situs: posisi
+				Anda saat ini menjadi titik awal untuk
+				<a href="/id/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">kalkulator bearing</a>,
+				referensi untuk
+				<a href="/id/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">pencari Qibla</a>,
+				dan lokasi untuk
+				<a href="/id/sun/" class="text-link underline decoration-link/30 hover:decoration-link">posisi matahari</a>
+				dan
+				<a href="/" class="text-link underline decoration-link/30 hover:decoration-link">kompas langsung</a>.
+				Satu fix yang akurat, dan setiap alat arah di situs ini menggunakannya.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Mengapa menghitung koordinat secara lokal?</h3>
+			<p class="mt-3 leading-7">
+				Banyak situs "temukan lokasi saya" mengirim koordinat Anda ke server segera setelah Anda memuatnya.
+				Halaman ini melakukan sebaliknya: fix GPS langsung dari API geolokasi
+				browser Anda dan tidak pernah ditransmisikan ke mana pun. Artinya tidak ada pelacakan, tidak ada log, dan tidak ada risiko
+				posisi Anda disimpan tanpa persetujuan Anda - cara yang benar-benar privat untuk menemukan koordinat GPS
+				saya secara online. Alat ini cepat, gratis, dan berfungsi di ponsel atau laptop modern apa pun dengan
+				browser.
+			</p>
+		</div>
+	</section>
+
+	<RelatedTools current="/location/" />
+</Layout>

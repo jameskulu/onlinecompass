@@ -1,0 +1,461 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Compass from '../../components/Compass.astro';
+
+const faq = [
+	{
+		q: 'আমি কোন দিকে তাকিয়ে আছি — অনলাইন কম্পাস?',
+		a: 'আপনার ফোনে এই পৃষ্ঠাটি খুলুন এবং ডায়ালের নিচের লাইভ হেডিং রিডআউট আপনি কোন নির্দিষ্ট ডিগ্রি এবং কম্পাস দিকে (উত্তর, উত্তর-পূর্ব, পূর্ব, দক্ষিণ-পূর্ব, দক্ষিণ, দক্ষিণ-পশ্চিম, পশ্চিম, উত্তর-পশ্চিম) তাকিয়ে আছেন তা দেখায়, আপনি ঘোরালে বাস্তব সময়ে আপডেট হয়।',
+	},
+	{
+		q: 'অনলাইন কম্পাস — উত্তর কোথায়?',
+		a: 'সুচের প্রান্ত সবসময় উত্তর দিকে নির্দেশ করে, যা ডায়ালের শীর্ষে ০°/৩৬০° পড়ে। "প্রকৃত উত্তর" এ টগল করুন এবং সাইটটি আপনার অবস্থানে চৌম্বক বিচ্যুতি সংশোধন করে যাতে উত্তর মানচিত্রের সাথে মেলে।',
+	},
+	{
+		q: 'আমি কোন দিকে তাকিয়ে আছি — অনলাইন কম্পাস?',
+		a: 'আপনার ফোনটিকে সমতল রাখুন, সেন্সর অ্যাক্সেস দিন এবং ডায়ালের নিচের হেডিং আপনি কোন দিকে তাকিয়ে আছেন তা ডিগ্রি এবং কম্পাস পয়েন্ট উভয়ভাবেই বলে — উদাহরণস্বরূপ ২৭৪° বা পশ্চিম।',
+	},
+	{
+		q: 'অনলাইনে কম্পাস ছাড়া দিক কীভাবে জানবেন?',
+		a: 'সূর্য ব্যবহার করুন: স্থানীয় দুপুরের আশেপাশে উত্তর গোলার্ধে তিনি ঠিক দক্ষিণে এবং দক্ষিণ গোলার্ধে ঠিক উত্তরে থাকেন। এই সাইটের সূর্য টুল যেকোনো অবস্থানের জন্য সূর্যের নির্দিষ্ট স্থিতিকোণ দেখায়, এবং কিবলা ফাইন্ডার একটি স্থির রেফারেন্স দিক হিসাবেও কাজ করে।',
+	},
+	{
+		q: 'আমি কোন দিকে মুখ করে আছি — অনলাইন কম্পাস?',
+		a: 'সেন্সর অ্যাক্সেস দিন, ফোনটিকে ধাতব থেকে দূরে সমতল রাখুন এবং হেডিং রিডআউট পড়ুন। আপনি ঘুরলে এটি ধারাবাহিকভাবে আপডেট হয়, তাই আপনি সবসময় জানেন কোন দিকে মুখ করে আছেন।',
+	},
+	{
+		q: 'অনলাইনে কম্পাস কীভাবে ব্যবহার করবেন?',
+		a: 'ফোনে এই পৃষ্ঠাটি খুলুন, "লাইভ কম্পাস সক্রিয় করুন" ট্যাপ করুন, ডিভাইসটি সমতল রাখুন এবং হেডিং পড়ুন। সুচ ডোলে থাকলে, চৌম্বকমিটার পুনরায় ক্যালিব্রেট করতে কয়েকবার আটের আকার ট্রেস করুন।',
+	},
+	{
+		q: 'আমি কি আমার ফোন কম্পাস হিসাবে ব্যবহার করতে পারি?',
+		a: 'হ্যাঁ। আধুনিক ফোনে একটি চৌম্বকমিটার থাকে এবং এই ওয়েবসাইটটি সেই সেন্সরকে আপনার ব্রাউজারেই একটি কম্পাসে রূপান্তরিত করে — ডাউনলোড করার কোনো অ্যাপ নেই এবং ইনস্টল করার কিছু নেই।',
+	},
+	{
+		q: 'গুগলে আমার কম্পাস কোথায়?',
+		a: 'গুগল ম্যাপস মানচিত্র ভিউয়ের উপরে-ডানদিকে একটি ছোট কম্পাস দেখায়। ডিগ্রিতে লাইভ হেডিং জানতে, গুগলে "অনলাইন কম্পাস" সার্চ করুন এবং এই পৃষ্ঠাটি খুলুন — সেন্সর অ্যাক্সেস দেওয়ার সাথে সাথে এটি একটি কম্পাস হয়ে যায়।',
+	},
+	{
+		q: 'আমার ফোন কি আমাকে বলতে পারে আমি কোন দিকে তাকিয়ে আছি?',
+		a: 'হ্যাঁ। আপনার ফোনের চৌম্বকমিটার এই পৃষ্ঠার সাথে মিলিত হয়ে একটি লাইভ হেডিং দেয় এবং সাইটটি স্বয়ংক্রিয়ভাবে চৌম্বক বিচ্যুতি সংশোধন করে যাতে উত্তর আপনার মানচিত্রের সাথে মেলে।',
+	},
+	{
+		q: 'মোবাইলে কম্পাস কীভাবে দেখবেন?',
+		a: 'আপনার ফোনে এই পৃষ্ঠাটি খুলুন এবং কম্পাস তাৎক্ষণিকভাবে আবির্ভূত হয় — কোনো অ্যাপের প্রয়োজন নেই। অ্যান্ড্রয়েডে, গুগল ম্যাপসেও একটি কম্পাস আছে এবং কিছু ফোনে একটি বিল্ট-ইন কম্পাস অ্যাপ থাকে।',
+	},
+	{
+		q: 'আমার উত্তর দিক কোনটি?',
+		a: 'প্রকৃত উত্তর হলো ভৌগোলিক উত্তর মেরু; চৌম্বক উত্তর হলো যেখানে কম্পাসের সুচ নির্দেশ করে। দুটির মধ্যে কোণ (বিচ্যুতি) অবস্থান অনুযায়ী পরিবর্তিত হয় এবং এই সাইটটি এটি স্বয়ংক্রিয়ভাবে সংশোধন করে।',
+	},
+	{
+		q: 'আমার ফোনে কম্পাস কোথায়?',
+		a: 'অনেক ফোনে একটি নির্দিষ্ট কম্পাস অ্যাপ থাকে না — কিন্তু সেন্সরটি বিল্ট-ইন। আপনার ফোনে এই ওয়েবসাইটটি খুলুন এবং এটি ইনস্টল ছাড়াই একটি কম্পাস হয়ে যায়।',
+	},
+	{
+		q: 'কোন মোবাইল ফোনগুলোতে কম্পাস সেন্সর আছে?',
+		a: 'প্রায় প্রতিটি আধুনিক স্মার্টফোন — আইফোন ৩জিএস থেকে প্রতিটি আইফোন এবং প্রায় সব অ্যান্ড্রয়েড ফোন — একটি চৌম্বকমিটার অন্তর্ভুক্ত, তাই এই অনলাইন কম্পাসটি প্রায় প্রতিটি ডিভাইসে কাজ করে।',
+	},
+	{
+		q: 'আমার হেডিং কেন লাফালাফি করে?',
+		a: 'কাছাকাছি ধাতব এবং ইলেকট্রনিক্স চৌম্বকমিটারকে বিকৃত করে। উপরের ক্যালিব্রেশন পদ্ধতি অনুসরণ করুন এবং নিশ্চিত করুন ফোনটি সমতল। ঘরের ভেতরে কয়েক ডিগ্রির ড্রিফ্ট স্বাভাবিক।',
+	},
+	{
+		q: 'চৌম্বক এবং প্রকৃত উত্তরের মধ্যে পার্থক্য কী?',
+		a: 'চৌম্বক উত্তর হলো যেখানে আপনার কম্পাসের সুচ নির্দেশ করে। প্রকৃত উত্তর হলো ভৌগোলিক উত্তর মেরু, যা মানচিত্র এবং নেভিগেশন ব্যবহার করে। দুটির মধ্যে কোণ — বিচ্যুতি — অবস্থান অনুযায়ী পরিবর্তিত হয় এবং এই টুলটি এটি স্বয়ংক্রিয়ভাবে সংশোধন করে।',
+	},
+	{
+		q: 'এটি কেন আমার অবস্থান চায়?',
+		a: 'অবস্থান আমাদের চৌম্বক বিচ্যুতি, কিবলা বেয়ারিং এবং সূর্যের অবস্থান সুনির্দিষ্টভাবে গণনা করতে দেয়। এটি ঐচ্ছিক — প্রতিটি টুল ম্যানুয়াল কো-অর্ডিনেটেও কাজ করে — এবং এটি আপনার ডিভাইস ছাড়ে না।',
+	},
+	{
+		q: 'আপনি কি আমার অবস্থান সংরক্ষণ বা বিক্রি করেন?',
+		a: 'না। কোনো ট্র্যাকার নেই, কোনো অ্যানালিটিক্স নেই এবং কোনো ব্যাকএন্ড নেই। সমস্ত সেন্সর এবং অবস্থানের তথ্য আপনার ব্রাউজারে স্থানীয়ভাবে প্রক্রিয়া করা হয় এবং আপনি চলে গেলে মুছে ফেলা হয়।',
+	},
+];
+---
+
+<Layout
+	path="/bn/"
+	title="অনলাইন কম্পাস — উত্তর খুঁজে বের করার বিনামূল্যের লাইভ টুল"
+	description="আপনার অবস্থান থেকে উত্তর খুঁজে বের করার বিনামূল্যের অনলাইন কম্পাস। প্রকৃত এবং চৌম্বক উত্তর, বিচ্যুতি, কিবলা ফাইন্ডার, বেয়ারিং ক্যালকুলেটর এবং সূর্যের অবস্থান সহ লাইভ হেডিং — ইনস্টল ছাড়াই, যেকোনো ফোনে কাজ করে।"
+	keywords="অনলাইন কম্পাস, অনলাইন কম্পাস টুল, বিনামূল্যের অনলাইন কম্পাস, অনলাইন কম্পাস গুগল, অনলাইন কম্পাস বিনামূল্যে, অনলাইন কম্পাস উত্তর খুঁজে বের করতে, অনলাইন কম্পাস দিক, অনলাইন কম্পাস জ্যামিতি, অনলাইন কম্পাস টুল জ্যামিতি, অনলাইন কম্পাস জ্যামিতির জন্য, অনলাইন কম্পাস গণিত, বিনামূল্যে অনলাইন কম্পাস টুল, কিবলার জন্য অনলাইন কম্পাস, অনলাইন কম্পাস লাইভ, অনলাইন কম্পাস কাব্বা আমার অবস্থান থেকে উত্তর খুঁজে বের করতে, কিবলা ফাইন্ডার অনলাইন কম্পাস"
+>
+	<!-- ─── Hero ─────────────────────────────────────── -->
+	<section id="compass" class="relative overflow-hidden">
+		<div class="mesh-gradient" aria-hidden="true"></div>
+		<div
+			class="relative mx-auto max-w-[1200px] px-4 pb-20 pt-16 text-center sm:px-6 md:pb-28 md:pt-24"
+		>
+			<div class="badge mx-auto">বিনামূল্যে · গোপনীয় · ইনস্টল ছাড়াই</div>
+
+			<h1
+				class="mx-auto mt-6 max-w-3xl text-[36px] leading-[40px] text-ink sm:text-display-xl md:text-[56px] md:leading-[56px]"
+			>
+				একটি কম্পাস যা শুধু চৌম্বক নয়, প্রকৃত উত্তর দেখায়।
+			</h1>
+
+			<p class="mx-auto mt-4 max-w-xl text-body-lg text-body">
+				স্বয়ংক্রিয় বিচ্যুতি সংশোধন, GPS কো-অর্ডিনেট, কিবলা দিক
+				এবং সূর্যের অবস্থান সহ বাস্তব সময়ের ডিভাইস হেডিং — সব আপনার ব্রাউজারে। ইনস্টল করার কিছু নেই, আপলোড কিছু হয়নি।
+			</p>
+
+			<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+				<a href="/bn/location/" class="btn-primary">আমাকে অবস্থান দেখাও</a>
+				<a href="/bn/compass/" class="btn-secondary">কম্পাস খুলুন</a>
+			</div>
+
+			<div class="mx-auto mt-12 max-w-xl md:mt-16">
+				<Compass />
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Feature strip ──────────────────────────────── -->
+	<section class="border-y border-hairline bg-canvas">
+		<div
+			class="mx-auto grid max-w-[1200px] grid-cols-1 gap-px overflow-hidden px-4 py-12 sm:grid-cols-3 sm:px-6"
+		>
+			<div class="p-4">
+				<p class="eyebrow mb-2">প্রকৃত বনাম চৌম্বক</p>
+				<p class="text-sm text-body leading-6">
+					বিচ্যুতি বিশ্ব চৌম্বক মডেল থেকে স্বয়ংক্রিয়ভাবে গণনা করা হয় — উভয়
+					হেডিং একসাথে দেখুন।
+				</p>
+			</div>
+			<div class="p-4">
+				<p class="eyebrow mb-2">গোপনীয়তা প্রথমে</p>
+				<p class="text-sm text-body leading-6">
+					সমস্ত সেন্সর প্রক্রিয়াকরণ ডিভাইসে হয়। কোনো অ্যাকাউন্ট নেই, কোনো ট্র্যাকিং নেই এবং কিছুই
+					আপনার ব্রাউজার ছাড়ে না।
+				</p>
+			</div>
+			<div class="p-4">
+				<p class="eyebrow mb-2">সর্বত্র কাজ করে</p>
+				<p class="text-sm text-body leading-6">
+					iOS এবং অ্যান্ড্রয়েডে Chrome, Safari এবং Firefox, চলার সময় GPS হেডিং ফলব্যাক সহ
+					যাতে আপনি চলছেন।
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Tools grid ──────────────────────────────────── -->
+	<section id="tools" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<p class="eyebrow">টুলকিট</p>
+			<h2 class="mt-3 max-w-2xl text-display-lg text-ink">
+				একটি কম্পাস, আপনার প্রয়োজনীয় প্রতিটি বেয়ারিং।
+			</h2>
+			<p class="mt-3 max-w-xl text-body-lg text-body">
+				পাঁচটি ফোকাসড টুল, প্রতিটি নিজের পৃষ্ঠায়, সব আপনার ডিভাইসে স্থানীয়ভাবে চলছে।
+			</p>
+
+			<div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+				<a href="/bn/compass/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">কম্পাস</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">লাইভ হেডিং</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						মসৃণ সুচ, চৌম্বক এবং প্রকৃত উত্তর এবং লাইভ নির্ভুলতা
+						ফিডব্যাক সহ বাস্তব সময়ের ৩৬০° ডায়াল।
+					</p>
+				</a>
+				<a href="/bn/location/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">অবস্থান</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">GPS কো-অর্ডিনেট</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						ডেসিমাল এবং DMS ফরম্যাটে অক্ষাংশ, দ্রাঘিমাংশ, উচ্চতা এবং নির্ভুলতা — কপি, শেয়ার
+						এবং ম্যাপসে খোলার সাথে।
+					</p>
+				</a>
+				<a href="/bn/qibla/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">কিবলা</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">কাব্বার দিক</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						আপনার কো-অর্ডিনেট থেকে কাব্বার মহাসাগরীয় বেয়ারিং এবং দূরত্ব, ডিগ্রি পর্যন্ত
+						নির্ভুল।
+					</p>
+				</a>
+				<a href="/bn/bearing/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">বেয়ারিং</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">কোর্স ক্যালকুলেটর</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						যেকোনো দুটি বিন্দুর মধ্যে বেয়ারিং এবং মহাসাগরীয় দূরত্ব — নেভিগেশন
+						এবং রুট পরিকল্পনার জন্য নিখুঁত।
+					</p>
+				</a>
+				<a href="/bn/sun/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">সূর্য</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">সূর্যের অবস্থান</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						এই মুহূর্তে সৌর স্থিতিকোণ এবং উন্নতি, যেকোনো
+						অবস্থানের জন্য সূর্যোদয়, সৌর মধ্যাহ্ন এবং সূর্যাস্ত সহ।
+					</p>
+				</a>
+				<div class="card-soft flex flex-col justify-center p-6">
+					<p class="text-sm text-body leading-6">
+						কোনো অ্যাকাউন্ট নেই। কোনো ট্র্যাকার নেই। প্রতিটি গণনা আপনার ব্রাউজারে চলে এবং আপনি
+						চলে গেলে মুছে ফেলা হয়।
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── How it works ────────────────────────────────── -->
+	<section id="how-it-works" class="border-y border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<p class="eyebrow">কীভাবে কাজ করে</p>
+			<h2 class="mt-3 max-w-2xl text-display-lg text-ink">নির্ভুলতার জন্য প্রকৌশলী।</h2>
+			<p class="mt-3 max-w-xl text-body-lg text-body">
+				আপনার ফোনের চৌম্বকমিটার, জাইরোস্কোপ এবং অ্যাক্সেলেরোমিটার একটি টিল্ট-ক্ষতিপূরণ হেডিং
+				ইঞ্জিনকে খাদ্য দেয়, বিশ্ব চৌম্বক মডেলের বিরুদ্ধে সংশোধিত।
+			</p>
+
+			<div class="mt-12 grid gap-6 md:grid-cols-3">
+				<div class="card p-6">
+					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
+						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
+							<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" />
+							<path d="M15.5 8.5 13 13l-4.5 2.5L11 11z" fill="var(--color-error)" />
+						</svg>
+					</div>
+					<h3 class="text-display-sm text-ink">সেন্সর ফিউশন</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						হেডিং অরিয়েন্টেশন এবং চৌম্বকমিটার ডেটা থেকে প্রাপ্ত, বাস্তব সময়ে মসৃণ করা হয় যাতে
+						সুচ আপনার হাতে স্থির থাকে।
+					</p>
+				</div>
+				<div class="card p-6">
+					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
+						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
+							<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" />
+							<path
+								d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"
+								stroke="currentColor"
+								stroke-width="1.5"
+							/>
+							<circle cx="12" cy="12" r="3" fill="currentColor" />
+						</svg>
+					</div>
+					<h3 class="text-display-sm text-ink">প্রকৃত উত্তর সংশোধন</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						গ্রহ জুড়ে বিচ্যুতি −৩০° থেকে +৩০° পরিবর্তিত হয়। আমরা বিশ্ব চৌম্বক
+						মডেল প্রয়োগ করি যাতে প্রকৃত উত্তর সঠিক হয়, আপনি যেখানেই থাকুন।
+					</p>
+				</div>
+				<div class="card p-6">
+					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
+						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
+							<path
+								d="M12 21s7-5.1 7-11a7 7 0 1 0-14 0c0 5.9 7 11 7 11Z"
+								stroke="currentColor"
+								stroke-width="1.5"
+							/>
+							<circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5" />
+						</svg>
+					</div>
+					<h3 class="text-display-sm text-ink">নকশায় স্থানীয়</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						কো-অর্ডিনেট, কিবলা বেয়ারিং এবং সৌর গণনা সম্পূর্ণরূপে আপনার ডিভাইসে চলে। আপনার
+						অবস্থান কখনই সার্ভারে যায় না।
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── About the tool (SEO) ────────────────────────── -->
+	<section id="about" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow text-center">বিনামূল্যের অনলাইন কম্পাস</p>
+				<h2 class="mt-3 text-center text-display-lg text-ink">অনলাইন কম্পাস কী?</h2>
+				<p class="mt-6 text-body-lg text-body">
+					একটি <strong class="text-ink font-medium">অনলাইন কম্পাস</strong> হলো একটি ডিজিটাল কম্পাস
+					যা সরাসরি আপনার ওয়েব ব্রাউজারে চলে — ডাউনলোড করার কোনো অ্যাপ নেই, ইনস্টল নেই এবং
+					কোনো পেমেন্ট নেই। আপনার ফোনে এই পৃষ্ঠাটি খুলুন এবং, কয়েক সেকেন্ডের মধ্যে, আপনার কাছে একটি
+					বিনামূল্যের অনলাইন কম্পাস আছে যা ডিগ্রিতে আপনার লাইভ হেডিং দেখায়, আপনি যেখানেই থাকুন উত্তর
+					দিকে নির্দেশ করে এবং চৌম্বক উত্তর এবং প্রকৃত উত্তরের মধ্যে পার্থক্য নিজেই সংশোধন করতে পারে।
+				</p>
+				<p class="mt-4 text-body text-body leading-7">
+					যেহেতু এটি ব্রাউজারে থাকে, এটি ঠিক একইভাবে কাজ করে আপনি বাড়িতে থাকুন,
+					মাঠে থাকুন বা ক্লাসরুমে থাকুন। শুধু গুগলে "অনলাইন কম্পাস" সার্চ করুন, এই সাইটটি খুলুন
+					এবং আপনার ডিভাইসের সেন্সর কাজ শুরু করবে। একটি ঐতিহ্যবাহী কম্পাসের বিপরীতে, এই অনলাইন
+					কম্পাসটি আপনার ফোনের চৌম্বকমিটার, জাইরোস্কোপ এবং অ্যাক্সেলেরোমিটার একসাথে ব্যবহার করে, যা
+					একটি আরও স্থিতিশীল এবং নির্ভরযোগ্য <strong class="text-ink font-medium">অনলাইন
+					কম্পাস দিক</strong> দেয় একটি সুচের তুলনায় যা সবসময় মাধ্যাকর্ষণ এবং ড্রিফ্টের সাথে লড়াই করে।
+				</p>
+				<p class="mt-4 text-body text-body leading-7">
+					এই সাইটের প্রতিটি টুল <strong class="text-ink font-medium">অনলাইনে উত্তর
+					খুঁজে বের করার</strong> জন্য এবং আরও অনেক কিছুর জন্য ডিজাইন করা হয়েছে: ডিগ্রিতে একটি লাইভ
+					হেডিং রিডআউট, কার্ডিনাল এবং ইন্টারকার্ডিনাল দিক (উত্তর, উত্তর-পূর্ব, পূর্ব, দক্ষিণ-পূর্ব,
+					দক্ষিণ, দক্ষিণ-পশ্চিম, পশ্চিম, উত্তর-পশ্চিম), একটি ট্যাপে ফুলস্ক্রিন মোড এবং একটি নির্ভুলতা
+					নির্দেশক যাতে আপনি সবসময় জানেন রিডিংটি কতটা বিশ্বস্ত। এবং যেহেতু সবকিছু স্থানীয়ভাবে
+					প্রক্রিয়া করা হয়, আপনার অবস্থান কখনই আপনার ডিভাইস ছাড়ে না — একটি সত্যিই বিনামূল্যের
+					অনলাইন কম্পাস, ডেটা-সংগ্রাহক নয়।
+				</p>
+			</div>
+
+			<div class="mx-auto mt-12 grid max-w-4xl gap-8 md:grid-cols-2">
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">জ্যামিতি এবং গণিতের জন্য অনলাইন কম্পাস</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						একটি <strong class="text-ink font-medium">অনলাইন কম্পাস টুল</strong> একটি
+						শিক্ষামূলক সহায়কও। জ্যামিতিতে, একটি কম্পাস বৃত্ত এবং চাপ আঁকতে এবং দূরত্ব পরিমাপ
+						করতে ব্যবহৃত হয়; এই সাইটে, জ্যামিতির জন্য অনলাইন কম্পাস পেন্সিলের পরিবর্তে
+						গণিতের সাথে কাজ করে। যেকোনো দিকের কোণ পরিমাপ করুন, বেয়ারিং এবং কম্পাস পয়েন্টের
+						মধ্যে রূপান্তর করুন, এবং পৃথিবীর যেকোনো দুটি কো-অর্ডিনেটের মধ্যে দিক এবং মহাসাগরীয়
+						দূরত্ব খুঁজে পেতে বেয়ারিং ক্যালকুলেটর ব্যবহার করুন। এটি অনলাইন কম্পাস গণিত
+						টুল যা বিমূর্ত কোণকে একটি হেডিংয়ে রূপান্তরিত করে যা আপনি একটি ডায়ালে দেখতে পারেন।
+					</p>
+					<p class="mt-3 text-sm text-body leading-6">
+						ছাত্ররা একটি প্রকৃত চৌম্বক কম্পাসের সাথে তাদের কাজ পরীক্ষা করতে পারে, এবং শিক্ষকরা
+						ফোন ঘোরানোর সাথে সাথে চলমান একটি উদাহরণ দিয়ে প্রকৃত উত্তর বনাম চৌম্বক উত্তর ব্যাখ্যা
+						করতে লাইভ ডায়াল ব্যবহার করতে পারেন। এই বিনামূল্যের অনলাইন কম্পাস টুল প্রতিদিন
+						সাধারণ কাজের জন্যও ব্যবহৃত হয় — মানচিত্র সাজানো, সৌর প্যানেল সারিবদ্ধ করা, বা একটি ঘর
+						কোন দিকে মুখ করে তা পরীক্ষা করা।
+					</p>
+				</div>
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">কিবলার জন্য অনলাইন কম্পাস — আমার অবস্থান থেকে কাব্বা খুঁজুন</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						এই সাইটে একটি নিবেদিত <strong class="text-ink font-medium">কিবলা ফাইন্ডার
+						অনলাইন কম্পাস</strong> আছে যা আপনার বর্তমান কো-অর্ডিনেট থেকে মক্কায় কাব্বার দিক
+						গণনা করে। আপনি যেখানেই থাকুন, কিবলা ফাইন্ডার আপনাকে ডিগ্রিতে একটি বেয়ারিং এবং একটি
+						কম্পাস দিক দেয়, পাশাপাশি মক্কার সাথে মহাসাগরীয় দূরত্ব। অনেক ভ্রমণকারীর জন্য,
+						তারা যে বাক্যাংশটি খোঁজে তা হলো "অনলাইন কম্পাস কাব্বা আমার অবস্থান থেকে উত্তর খুঁজে
+						বের করতে" — এবং এই পৃষ্ঠাটি এর উত্তর দেয়: নিজেকে অবস্থান করুন, কিবলা বেয়ারিং পড়ুন,
+						তারপর লাইভ কম্পাস ডায়ালে এটি অনুসরণ করুন।
+					</p>
+					<p class="mt-3 text-sm text-body leading-6">
+						যেহেতু কিবলার জন্য অনলাইন কম্পাস সম্পূর্ণরূপে আপনার ডিভাইসে চলে, তাই কোনো
+						সার্ভার নেই, কোনো অ্যাকাউন্ট নেই এবং কোনো অবস্থান কোথাও সংরক্ষিত নেই। ম্যানুয়ালি
+						কো-অর্ডিনেট প্রবেশ করুন, অথবা একবারের অবস্থান অ্যাক্সেস দিন এবং বেয়ারিং একটি ডিগ্রির
+						একাংশের মধ্যে তাৎক্ষণিকভাবে গণনা করা হয়।
+					</p>
+				</div>
+			</div>
+
+			<div class="mx-auto mt-12 max-w-3xl">
+				<h3 class="text-display-sm text-ink">অনলাইন কম্পাস কেন বেছে নেবেন?</h3>
+				<p class="mt-3 text-body text-body leading-7">
+					একটি ভৌতিক কম্পাস একটি চমৎকার যন্ত্র, কিন্তু একটি ডিজিটাল অনলাইন কম্পাস লাইভ নির্ভুলতা
+					যোগ করে: এটি শুধু উত্তরই নয়, প্রতিটি হেডিংয়ের নির্দিষ্ট ডিগ্রি দেখায়, পৃথিবীর যেকোনো
+					স্থানে চৌম্বক বিচ্যুতি সংশোধন করে এবং যেকোনো অরিয়েন্টেশনে ধরা যেতে পারে। এই সাইটের
+					বিনামূল্যের অনলাইন কম্পাস টুল সেই লাইভ কম্পাসকে একটি নেভিগেটরের প্রয়োজনীয় সবকিছুর সাথে
+					বান্ডেল করে — ডেসিমাল এবং DMS-এ GPS কো-অর্ডিনেট, কিবলা দিক, একটি বেয়ারিং ক্যালকুলেটর এবং
+					দিনের বেলায় অরিয়েন্টেশনের জন্য সূর্যের অবস্থান। এটি দ্রুত, গোপনীয় এবং উত্তর খুঁজে
+					বের করার প্রয়োজন হলে প্রস্তুত।
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Calibration ─────────────────────────────────── -->
+	<section id="calibration" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="grid gap-10 lg:grid-cols-2 lg:items-start">
+				<div>
+					<p class="eyebrow">ক্যালিব্রেশন</p>
+					<h2 class="mt-3 text-display-lg text-ink">সবচেয়ে নির্ভুল রিডিং পান।</h2>
+					<p class="mt-3 text-body-lg text-body">
+						ফোনের চৌম্বকমিটার কাছাকাছি ধাতব এবং চৌম্বক ক্ষেত্রের প্রতি সংবেদনশীল। কয়েক
+						সেকেন্ডের ক্যালিব্রেশন একটি ডোলা সুচকে একটি বিশ্বস্ত হেডিংয়ে রূপান্তরিত করে।
+					</p>
+				</div>
+				<ol class="card-soft divide-y divide-hairline">
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">০১</span>
+						<div>
+							<p class="text-sm font-medium text-ink">ফোনটি সমতল রাখুন</p>
+							<p class="mt-1 text-sm text-body">স্ক্রিনটি মাটির সমান্তরাল রাখুন, আপনার হাতের তালুতে বা একটি স্থিতিশীল পৃষ্ঠে।</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">০২</span>
+						<div>
+							<p class="text-sm font-medium text-ink">আটের আকার ট্রেস করুন</p>
+							<p class="mt-1 text-sm text-body">ফোনটি কয়েকবার আটের আকারে আলতোভাবে নাড়ুন, তারপর স্থির রাখুন।</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">০৩</span>
+						<div>
+							<p class="text-sm font-medium text-ink">হস্তক্ষেপ থেকে সরে যান</p>
+							<p class="mt-1 text-sm text-body">রিডিং নেওয়ার আগে ল্যাপটপ, ফোন, চুম্বক এবং ধাতব টেবিল থেকে সরে যান।</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">০৪</span>
+						<div>
+							<p class="text-sm font-medium text-ink">সূর্য দিয়ে নিশ্চিত করুন</p>
+							<p class="mt-1 text-sm text-body">দিনের আলোতে একটি স্বাধীন ক্রস-চেক হিসাবে ডায়ালের সূর্যের অবস্থান চিহ্ন ব্যবহার করুন।</p>
+						</div>
+					</li>
+				</ol>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── FAQ ──────────────────────────────────────────── -->
+	<section id="faq" class="border-t border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow text-center">সচরাচর জিজ্ঞাসা</p>
+			<h2 class="mt-3 text-center text-display-lg text-ink">প্রশ্ন, উত্তরপ্রাপ্ত।</h2>
+
+			<div class="mt-10 space-y-3">
+				{faq.map((f) => (
+					<details class="card overflow-hidden">
+						<summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-4 text-sm font-medium text-ink">
+							{f.q}
+							<svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0 text-mute" fill="none" aria-hidden="true">
+								<path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+							</svg>
+						</summary>
+						<p class="px-6 pb-5 text-sm text-body leading-6">{f.a}</p>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── CTA band ─────────────────────────────────────── -->
+	<section class="bg-ink text-on-primary">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 text-center sm:px-6 md:py-24">
+			<p class="font-mono text-xs uppercase tracking-[0.08em] text-on-primary/60">আপনি প্রস্তুত হলে আমরাও প্রস্তুত</p>
+			<h2 class="mt-4 text-display-lg text-on-primary">আপনার বেয়ারিং খুঁজুন।</h2>
+			<p class="mx-auto mt-3 max-w-lg text-body-lg text-on-primary/70">
+				ফোনটি উত্তরের দিকে ঘোরান, আপনার কিবলা দেখুন, বা একটি কোর্স প্লট করুন — সব একটি
+				বিনামূল্যের টুলে।
+			</p>
+			<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+				<a href="/bn/compass/" class="btn-primary bg-on-primary text-primary hover:opacity-85">কম্পাস খুলুন</a>
+			</div>
+		</div>
+	</section>
+
+	<script type="application/ld+json" set:html={JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'FAQPage',
+		mainEntity: faq.map((f) => ({
+			'@type': 'Question',
+			name: f.q,
+			acceptedAnswer: {
+				'@type': 'Answer',
+				text: f.a,
+			},
+		})),
+	})} />
+</Layout>
+
+<style>
+	details summary::-webkit-details-marker {
+		display: none;
+	}
+	details[open] summary svg {
+		transform: rotate(180deg);
+	}
+	details summary svg {
+		transition: transform 0.2s ease;
+	}
+</style>

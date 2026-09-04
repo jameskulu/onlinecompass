@@ -1,0 +1,126 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BearingCalculator from '../../components/BearingCalculator.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="Kalkulator Bearing Online - Arah & Jarak Antara Dua Titik"
+	description="Alat kompas online gratis untuk menghitung bearing dan jarak lingkaran besar antara dua koordinat. Juga menampilkan arah Qibla, deklinasi magnetik, dan posisi matahari dari lokasi Anda."
+	path="/id/bearing/"
+	keywords="kompas matematika online, kompas geometri online, kalkulator bearing, arah antara dua titik, jarak lingkaran besar, kalkulator bearing online"
+>
+	<PageHero
+		eyebrow="kalkulator bearing"
+		title="Tentukan jalur, derajat demi derajat."
+		description="Hitung bearing awal dan jarak lingkaran besar antara dua titik mana pun di Bumi - dari lokasi langsung Anda, koordinat manual, atau rute yang sudah ditentukan."
+	>
+		<BearingCalculator />
+	</PageHero>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-2">
+			<div>
+				<p class="eyebrow mb-2">bearing awal vs akhir</p>
+				<p class="text-sm text-body leading-6">
+					Alat ini mengembalikan bearing awal - arah Anda berangkat. Di rute panjang
+					bearing berubah sepanjang lingkaran besar, sehingga koreksi perjalanan tengah adalah hal normal.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">gunakan dengan kompas</p>
+				<p class="text-sm text-body leading-6">
+					Bawa bearing yang Anda hitung ke alat kompas dan kendalikan hingga heading cocok.
+					Beralih ke utara sejati untuk kemudi yang sejajar peta.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">kalkulator bearing</p>
+			<h2 class="mt-3 text-display-lg text-ink">Hitung bearing dan jarak antara dua titik</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				<strong class="text-ink font-medium">Kalkulator bearing online</strong> menemukan
+				arah dan jarak antara dua titik mana pun di Bumi. Masukkan dua set koordinat -
+				atau gunakan lokasi langsung Anda untuk salah satu ujung - dan alat ini mengembalikan bearing awal dalam
+				derajat, arah kompas, dan jarak lingkaran besar dalam kilometer. Ini adalah alat
+				<strong class="text-ink font-medium">kompas matematika online</strong> yang penting untuk
+				navigasi, perencanaan rute, pemetaan, dan studi.
+			</p>
+			<p class="mt-4 leading-7">
+				Bearing adalah sudut yang diukur searah jarum jam dari utara ke arah yang perlu
+				Anda tempuh: 0° adalah utara, 90° timur, 180° selatan, 270° barat. Rute dari London ke New York, misalnya,
+				dimulai dengan bearing awal sekitar 288° - itu adalah arah kompas yang
+				Anda tujukan hidung pesawat atau haluan kapal saat Anda berangkat.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Bearing awal vs bearing akhir</h3>
+			<p class="mt-3 leading-7">
+				Karena Bumi adalah bola, <strong class="text-ink font-medium">arah antara dua
+				titik</strong> bukanlah garis lurus pada peta. Rute terpendek mengikuti lingkaran
+				besar, dan sepanjang rute tersebut bearing berubah terus-menerus. "Bearing awal" adalah
+				arah di titik awal Anda - yang Anda kendalikan pertama kali. Di rute panjang
+				bearing bergeser seiring perjalanan, itulah mengapa pilot dan navigator menggunakan titik jalan dan
+				koreksi perjalanan tengah. Kalkulator ini melaporkan bearing awal dan juga menghitung
+				bearing akhir untuk titik akhir jalur lingkaran besar.
+			</p>
+			<p class="mt-4 leading-7">
+				Untuk perjalanan pendek - hiking, berkendara melintasi kota, berjalan antara dua titik pada peta -
+				bearing awal pada dasarnya adalah seluruh jalur. Itu membuat kalkulator bearing
+				online ini sempurna untuk perencanaan sehari-hari maupun geometri kelas.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Jarak seperti yang diukur navigator</h3>
+			<p class="mt-3 leading-7">
+				Bersama bearing, Anda mendapatkan jarak lingkaran besar - jarak terpendek di atas
+				permukaan Bumi antara dua titik, dihitung dengan rumus haversine. Berbeda dari
+				penggaris pada peta datar, perhitungan ini memperhitungkan kelengkungan planet, sehingga hasilnya sesuai jarak
+				perjalanan nyata. Ini adalah perhitungan yang sama yang digunakan untuk perencanaan penerbangan dan navigasi
+				maritim.
+			</p>
+			<p class="mt-4 leading-7">
+				Alat ini lebih dari sekadar kalkulator biasa. Pilih tujuan dari daftar yang sudah ditentukan
+				- termasuk kota-kota besar dunia dan Ka'bah di Makkah - dan alat ini menghitung ringkasan
+				("New York berada 245° WSW dari London, 5.570 km jauhnya") ditambah empat pembacaan tambahan dari titik A:
+				<a href="/id/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">arah Qibla</a>,
+				deklinasi magnetik, dan
+				<a href="/id/sun/" class="text-link underline decoration-link/30 hover:decoration-link">posisi matahari</a>.
+				Satu masukan, dan Anda melihat bagaimana kompas, Qibla, dan data surya sejalan dengan rute Anda.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Gunakan bearing dengan kompas</h3>
+			<p class="mt-3 leading-7">
+				Pendamping alami untuk alat ini adalah
+				<a href="/" class="text-link underline decoration-link/30 hover:decoration-link">kompas online</a>.
+				Hitung bearing Anda, buka kompas, dan putar hingga heading cocok. Beralih kompas ke
+				utara sejati sehingga kemudi Anda sejajar dengan utara peta - dan biarkan kompas
+				menerapkan deklinasi lokasi Anda secara otomatis. Kombinasi ini mengubah angka di
+				halaman menjadi jalur yang benar-benar dapat Anda tempuh, sail, atau kendarai.
+			</p>
+			<p class="mt-4 leading-7">
+				Kalkulator bearing online ini berguna untuk perencanaan rute sebelum hiking, menyejajarkan
+				antena dan panel surya, memperkirakan perjalanan antara dua alamat, memeriksa ulang
+				jalur kompas, atau memverifikasi pekerjaan rumah. Karena semuanya berjalan secara lokal di perangkat browser Anda,
+				ini adalah alat kompas geometri online yang privat dan gratis yang dapat Anda percaya di mana-mana - tanpa
+				instalasi, tanpa akun, tanpa pengumpulan data.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Derajat, arah, dan perencanaan</h3>
+			<p class="mt-3 leading-7">
+				Bearing yang dibaca dalam derajat presisi tetapi abstrak; itulah mengapa alat ini juga mengubahnya
+				menjadi arah kompas yang sederhana. 45° menjadi NE, 200° menjadi SSW, dan seterusnya - sehingga Anda dapat
+				menjawab pertanyaan seperti "ke arah mana saya harus pergi?" dengan bahasa yang sama dengan kompas atau
+				peta. Masukkan posisi langsung Anda sebagai titik A dan tujuan sebagai titik B, dan
+			gambaran lengkapnya - bearing, arah, jarak, Qibla, deklinasi, dan matahari - diperbarui
+			 secara instan. Itulah kekuatan alat kompas matematika online yang dibangun di sekitar koordinat
+				nyata Anda.
+			</p>
+		</div>
+	</section>
+
+	<RelatedTools current="/bearing/" />
+</Layout>

@@ -1,0 +1,397 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Compass from '../../components/Compass.astro';
+
+const faq = [
+	{
+		q: '今どこの方角を向いている？— オンラインコンパス',
+		a: 'スマートフォンでこのページを開くと、ダイヤルの下にリアルタイムで正確な度数と方位（北、北東、東、南東、南、南西、西、北西）が表示され、回転に合わせてリアルタイムで更新されます。',
+	},
+	{
+		q: 'オンラインコンパス — 北はどこ？',
+		a: '針の赤い端は常に北を指し、ダイヤルの一番上で0°/360°と表示されます。True northに切り替えると、現在地の磁気偏角を補正し、地図の北と一致させることができます。',
+	},
+	{
+		q: 'どこの方角を向いている？— オンラインコンパス',
+		a: 'スマートフォンを水平に持ち、センサーへのアクセスを許可すると、ダイヤルの下に度数と方位で方角が表示されます（例：274° または W）。',
+	},
+	{
+		q: 'コンパスなしでオンラインで方角を知る方法は？',
+		a: '太陽を利用する方法があります：地方の正午付近では、北半球では真南に、南半球では真北に位置します。このサイトの太陽ツールは、任意の場所での正確な太陽方位角を表示し、キブラファインダーも固定の基準方向として機能します。',
+	},
+	{
+		q: 'どこの方角を向いている？— オンラインコンパス',
+		a: 'センサーへのアクセスを許可し、金属から離れてスマートフォンを水平に持ち、方位を確認します。回転するたびに連続的に更新されるため、常にどの方向を向いているかわかります。',
+	},
+	{
+		q: 'オンラインコンパスの使い方は？',
+		a: 'スマートフォンでこのページを開き、「リアルタイムコンパスを有効にする」をタップし、デバイスを水平に保持して方位を読み取ります。針が不安定な場合は、数字の8の字を数回描いて磁力計を再キャリブレーションしてください。',
+	},
+	{
+		q: 'スマートフォンをコンパスとして使用できますか？',
+		a: 'はい。最近のスマートフォンには磁力計が内蔵されており、このウェブサイトがそのセンサーをブラウザ内のコンパスに変換します。アプリのダウンロードもインストールも不要です。',
+	},
+	{
+		q: 'Googleのコンパスはどこにある？',
+		a: 'Googleマップの地図ビューの右上には小さなコンパスが表示されます。度数でリアルタイムの方位を確認したい場合は、「オンラインコンパス」をGoogleで検索してこのページを開くだけで、センサーへのアクセスを許可した瞬間にコンパスになります。',
+	},
+	{
+		q: 'スマートフォンでどの方向を向いているか教えてもらえますか？',
+		a: 'はい。スマートフォンの磁力計とこのページを組み合わせることで、リアルタイムの方位が得られ、サイトは磁気偏角を自動的に補正するため、北は地図と一致します。',
+	},
+	{
+		q: 'スマートフォンでコンパスを見るにはどうすればいい？',
+		a: 'スマートフォンでこのページを開くと、コンパスがすぐに表示されます。アプリは不要です。AndroidではGoogleマップにもコンパスが含まれており、一部のスマートフォンにはコンパスアプリがプリインストールされています。',
+	},
+	{
+		q: '私の北の方向はどこ？',
+		a: '真北は地理的な北極です。磁北はコンパスの針が指す場所です。両者の間の角度（偏角）は場所によって異なり、このサイトはそれを自動的に補正します。',
+	},
+	{
+		q: 'スマートフォンのコンパスはどこにある？',
+		a: '多くのスマートフォンには専用のコンパスアプリがプリインストールされていませんが、センサーは内蔵されています。スマートフォンでこのウェブサイトを開くだけで、インストールなしでコンパスとして機能します。',
+	},
+	{
+		q: 'コンパスセンサーを搭載しているスマートフォンは？',
+		a: 'ほぼすべての最近のスマートフォン（iPhone 3GS以降のすべてのiPhoneとほぼすべてのAndroidスマートフォン）に磁力計が内蔵されているため、このオンラインコンパスはほぼすべてのデバイスで動作します。',
+	},
+	{
+		q: 'なぜ方位が不安定になるの？',
+		a: '近くの金属や電子機器が磁力計を歪めます。上記のキャリブレーション手順に従い、スマートフォンが水平であることを確認してください。屋内での数度の揺れは正常です。',
+	},
+	{
+		q: '磁北と真北の違いは何？',
+		a: '磁北はコンパスの針が指す方向です。真北は地理的な北極で、地図やナビゲーションで使用されるものです。両者の間の角度（偏角）は場所によって異なり、このツールはそれを自動的に補正します。',
+	},
+	{
+		q: 'なぜ位置情報が必要なの？',
+		a: '位置情報があることで、磁気偏角、キブラ方位、太陽位置を高精度で計算できます。オプションであり、すべてのツールは手動座標でも動作します。データはデバイスの外に出ることはありません。',
+	},
+	{
+		q: '位置情報を保存または販売していますか？',
+		a: 'いいえ。トラッカーも分析ツールもバックエンドもありません。すべてのセンサーおよび位置データはブラウザ内でローカルに処理され、ページを離れると削除されます。',
+	},
+];
+---
+
+<Layout
+	path="/ja/"
+	title="オンラインコンパス — 北を見つけるための無料リアルタイムツール"
+	description="現在地から北を見つけるための無料オンラインコンパス。真北と磁北によるリアルタイム方位、磁気偏角、キブラファインダー、方位計算機、太陽位置 — インストール不要、すべてのスマートフォンで動作。"
+	keywords="オンラインコンパス, オンラインコンパスツール, 無料オンラインコンパス, オンラインコンパス Google, オンラインコンパス 無料, オンラインコンパス 北を見つける, オンラインコンパス 方角, オンラインコンパス 幾何学, オンラインコンパスツール 幾何学, オンラインコンパス 幾何学用, オンラインコンパス 数学, 無料オンラインコンパスツール, オンラインコンパス キブラ, オンラインコンパス リアルタイム, オンラインコンパス カッバ 現在地から北を見つける, キブラファインダー オンラインコンパス"
+>
+	<section id="compass" class="relative overflow-hidden">
+		<div class="mesh-gradient" aria-hidden="true"></div>
+		<div
+			class="relative mx-auto max-w-[1200px] px-4 pb-20 pt-16 text-center sm:px-6 md:pb-28 md:pt-24"
+		>
+			<div class="badge mx-auto">無料・プライバシー重視・インストール不要</div>
+
+			<h1
+				class="mx-auto mt-6 max-w-3xl text-[36px] leading-[40px] text-ink sm:text-display-xl md:text-[56px] md:leading-[56px]"
+			>
+				真北を指すコンパス。磁気だけではありません。
+			</h1>
+
+			<p class="mx-auto mt-4 max-w-xl text-body-lg text-body">
+				自動偏角補正、GPS座標、キブラ方向、太陽位置をリアルタイムで表示 — すべてブラウザ内で完結。インストール不要、データ送信なし。
+			</p>
+
+			<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+				<a href="/ja/location/" class="btn-primary">位置情報を取得</a>
+				<a href="/ja/compass/" class="btn-secondary">コンパスを開く</a>
+			</div>
+
+			<div class="mx-auto mt-12 max-w-xl md:mt-16">
+				<Compass />
+			</div>
+		</div>
+	</section>
+
+	<section class="border-y border-hairline bg-canvas">
+		<div
+			class="mx-auto grid max-w-[1200px] grid-cols-1 gap-px overflow-hidden px-4 py-12 sm:grid-cols-3 sm:px-6"
+		>
+			<div class="p-4">
+				<p class="eyebrow mb-2">真北 vs 磁北</p>
+				<p class="text-sm text-body leading-6">
+					偏角は世界磁気モデルから自動的に計算され、両方の方位を一目で確認できます。
+				</p>
+			</div>
+			<div class="p-4">
+				<p class="eyebrow mb-2">プライバシー重視</p>
+				<p class="text-sm text-body leading-6">
+					すべてのセンサー処理はデバイス上で実行されます。アカウント不要、トラッキングなし、ブラウザの外にデータが送出されることはありません。
+				</p>
+			</div>
+			<div class="p-4">
+				<p class="eyebrow mb-2">どこでも動作</p>
+				<p class="text-sm text-body leading-6">
+					iOSとAndroidのChrome、Safari、Firefoxに対応。移動中はGPS方位フォールバックも利用可能です。
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section id="tools" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<p class="eyebrow">ツールキット</p>
+			<h2 class="mt-3 max-w-2xl text-display-lg text-ink">
+				1つのコンパスで、必要なすべての方位をカバー。
+			</h2>
+			<p class="mt-3 max-w-xl text-body-lg text-body">
+				5つの専門ツール、それぞれ専用ページで、すべてデバイス上でローカルに実行されます。
+			</p>
+
+			<div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+				<a href="/ja/compass/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">コンパス</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">リアルタイム方位</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						滑らかな針付き360°リアルタイムダイヤル、磁北と真北、リアルタイム精度フィードバック。
+					</p>
+				</a>
+				<a href="/ja/location/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">位置情報</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">GPS座標</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						緯度、経度、標高、精度を10進数とDMSで表示 — コピー、共有、マップで開く機能付き。
+					</p>
+				</a>
+				<a href="/ja/qibla/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">キブラ</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">メッカへの方向</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						現在の座標からカッバへの大圏方位と距離を度数単位で高精度に計算。
+					</p>
+				</a>
+				<a href="/ja/bearing/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">方位計算機</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">コース計算機</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						任意の2点間の大圏方位と距離を計算 — ナビゲーションや経路計画に最適。
+					</p>
+				</a>
+				<a href="/ja/sun/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">太陽</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">太陽位置</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						リアルタイムの太陽方位角と高度、日出、正午、日没を任意の場所で表示。
+					</p>
+				</a>
+				<div class="card-soft flex flex-col justify-center p-6">
+					<p class="text-sm text-body leading-6">
+						アカウント不要、トラッキングなし。すべての計算はブラウザ内で実行され、ページを離れると削除されます。
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="how-it-works" class="border-y border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<p class="eyebrow">仕組み</p>
+			<h2 class="mt-3 max-w-2xl text-display-lg text-ink">精度のために設計された。</h2>
+			<p class="mt-3 max-w-xl text-body-lg text-body">
+				スマートフォンの磁力計、ジャイロスコープ、加速度計が傾斜補正方位エンジンを駆動し、世界磁気モデルで修正されます。
+			</p>
+
+			<div class="mt-12 grid gap-6 md:grid-cols-3">
+				<div class="card p-6">
+					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
+						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
+							<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" />
+							<path d="M15.5 8.5 13 13l-4.5 2.5L11 11z" fill="var(--color-error)" />
+						</svg>
+					</div>
+					<h3 class="text-display-sm text-ink">センサーフュージョン</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						方位は方位データと磁力計データから導き出され、リアルタイムでスムージングされ、針が手の中で安定して動作します。
+					</p>
+				</div>
+				<div class="card p-6">
+					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
+						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
+							<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" />
+							<path
+								d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"
+								stroke="currentColor"
+								stroke-width="1.5"
+							/>
+							<circle cx="12" cy="12" r="3" fill="currentColor" />
+						</svg>
+					</div>
+					<h3 class="text-display-sm text-ink">真北補正</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						偏角は地球全体で−30°から+30°まで変化します。世界磁気モデルを適用することで、どこにいても真北が正確に表示されます。
+					</p>
+				</div>
+				<div class="card p-6">
+					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
+						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
+							<path
+								d="M12 21s7-5.1 7-11a7 7 0 1 0-14 0c0 5.9 7 11 7 11Z"
+								stroke="currentColor"
+								stroke-width="1.5"
+							/>
+							<circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5" />
+						</svg>
+					</div>
+					<h3 class="text-display-sm text-ink">プライバシー設計</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						座標、キブラ方位、太陽位置の計算はすべてデバイス上で完結。位置情報がサーバーに送信されることはありません。
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="about" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow text-center">無料オンラインコンパス</p>
+				<h2 class="mt-3 text-center text-display-lg text-ink">オンラインコンパスとは？</h2>
+				<p class="mt-6 text-body-lg text-body">
+					<strong class="text-ink font-medium">オンラインコンパス</strong>は、ウェブブラウザで直接動作するデジタルコンパスです。アプリのダウンロードもインストールも、費用もかかりません。スマートフォンでこのページを開くと、数秒で無料のオンラインコンパスが完成し、現在の方位を度数でリアルタイム表示、北を指し示し、磁北と真北の差を自動補正することもできます。
+				</p>
+				<p class="mt-4 text-body text-body leading-7">
+					ブラウザで動作するため、自宅でもフィールドでも教室でもまったく同じように使えます。Googleで「オンラインコンパス」を検索してこのサイトを開くだけです。デバイスのセンサーが自動的に有効になります。従来のコンパスとは異なり、このオンラインコンパスはスマートフォンの磁力計、ジャイロスコープ、加速度計を組み合わせて使用するため、常に重力やドリフトと戦う針よりも、より安定した信頼性の高い<strong class="text-ink font-medium">オンラインコンパスの方向</strong>を提供します。
+				</p>
+				<p class="mt-4 text-body text-body leading-7">
+					このサイトのすべてのツールは、<strong class="text-ink font-medium">オンラインで北を見つける</strong>ことと、さらに多くのことを実現するように設計されています。度数によるリアルタイム方位表示、方位点（北、北東、東、南東、南、南西、西、北西北）、ワンタップのフルスクリーンモード、精度インジケーターなど。すべてがローカルで処理されるため、位置情報がデバイスの外に出ることはありません。真正に無料のオンラインコンパスであり、データ収集を行うものではありません。
+				</p>
+			</div>
+
+			<div class="mx-auto mt-12 grid max-w-4xl gap-8 md:grid-cols-2">
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">幾何学と数学のためのオンラインコンパス</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						<strong class="text-ink font-medium">オンラインコンパスツール</strong>は教材としても活用できます。幾何学では、コンパスは円や弧を描いたり距離を測定したりするために使われます。このサイトの幾何学用オンラインコンパスは、鉛筆の代わりに数学で動作します。あらゆる方向の角度を測定し、方位と方位点を変換し、方位計算機を使って地球上の任意の2座標間の方向と大圏距離を計算できます。抽象的な角度をダイヤル上で確認できる<strong class="text-ink font-medium">オンラインコンパス数学ツール</strong>です。
+					</p>
+					<p class="mt-3 text-sm text-body leading-6">
+						生徒は実際の磁気コンパスで自分の作業を確認でき、教師はスマートフォンを回転しながら動く実例で真北と磁北を説明できます。この無料オンラインコンパスは地図の方向付け、ソーラーパネルの向き調整、部屋の向きの確認など、日常の簡単な作業にも每天使われています。
+					</p>
+				</div>
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">キブラ用オンラインコンパス — 現在地からカッバを見つける</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						このサイトには、現在の座標からメッカのカッバへの方向を計算する専用の<strong class="text-ink font-medium">キブラファインダーオンラインコンパス</strong>が含まれています。どこにいても、キブラファインダーは度数と方位で方位を表示し、メッカへの大圏距離も表示します。多くの旅行者が検索するフレーズは「オンラインコンパス カッバ 現在地から北を見つける」です。このページはそれに答えます。位置情報を取得し、キブラ方位を読み取り、リアルタイムコンパスダイヤルでそれに従ってください。
+					</p>
+					<p class="mt-3 text-sm text-body leading-6">
+						キブラ用オンラインコンパスはデバイス上で完結するため、サーバーもアカウントも保存された位置情報もありません。座標を手動入力するか、一時的な位置情報へのアクセスを許可するだけで、度数の一部単位以内の精度で即座に計算されます。
+					</p>
+				</div>
+			</div>
+
+			<div class="mx-auto mt-12 max-w-3xl">
+				<h3 class="text-display-sm text-ink">なぜオンラインコンパスを選ぶの？</h3>
+				<p class="mt-3 text-body text-body leading-7">
+					物理的なコンパスは素晴らしい道具ですが、デジタルのオンラインコンパスにはリアルタイムの精度が加わります。北だけでなく、任意の方位の正確な度数を表示し、地球上のどこでも磁気偏角を補正し、あらゆる向きで使用できます。このサイトの無料オンラインコンパスツールは、そのリアルタイムコンパスに、ナビゲーターに必要なすべてをまとめています。10進数とDMSのGPS座標、キブラ方向、方位計算機、そして日中の方向確認のための太陽位置。高速でプライバシーを重視し、北を見つける必要があるときにいつでも利用可能です。
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section id="calibration" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="grid gap-10 lg:grid-cols-2 lg:items-start">
+				<div>
+					<p class="eyebrow">キャリブレーション</p>
+					<h2 class="mt-3 text-display-lg text-ink">最も正確な読み取りを実現。</h2>
+					<p class="mt-3 text-body-lg text-body">
+						スマートフォンの磁力計は、近くの金属や磁場に敏感です。数秒のキャリブレーションで、不安定な針を信頼できる方位に変えます。
+					</p>
+				</div>
+				<ol class="card-soft divide-y divide-hairline">
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">01</span>
+						<div>
+							<p class="text-sm font-medium text-ink">スマートフォンを水平に持つ</p>
+							<p class="mt-1 text-sm text-body">画面を地面と平行にし、手のひらや安定した表面上に置いてください。</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">02</span>
+						<div>
+							<p class="text-sm font-medium text-ink">8の字を描く</p>
+							<p class="mt-1 text-sm text-body">スマートフォンを優しく8の字に数回振ってから、静かに保持してください。</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">03</span>
+						<div>
+							<p class="text-sm font-medium text-ink">干渉から離れる</p>
+							<p class="mt-1 text-sm text-body">読み取り前に、ノートパソコン、スマートフォン、磁石、金属のテーブルから離れてください。</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">04</span>
+						<div>
+							<p class="text-sm font-medium text-ink">太陽で確認</p>
+							<p class="mt-1 text-sm text-body">日中はダイヤル上の太陽位置マーカーを独立したクロスチェックとして利用してください。</p>
+						</div>
+					</li>
+				</ol>
+			</div>
+		</div>
+	</section>
+
+	<section id="faq" class="border-t border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow text-center">よくある質問</p>
+			<h2 class="mt-3 text-center text-display-lg text-ink">質問に回答します。</h2>
+
+			<div class="mt-10 space-y-3">
+				{faq.map((f) => (
+					<details class="card overflow-hidden">
+						<summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-4 text-sm font-medium text-ink">
+							{f.q}
+							<svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0 text-mute" fill="none" aria-hidden="true">
+								<path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+							</svg>
+						</summary>
+						<p class="px-6 pb-5 text-sm text-body leading-6">{f.a}</p>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section class="bg-ink text-on-primary">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 text-center sm:px-6 md:py-24">
+			<p class="font-mono text-xs uppercase tracking-[0.08em] text-on-primary/60">準備完了</p>
+			<h2 class="mt-4 text-display-lg text-on-primary">方角を確認しましょう。</h2>
+			<p class="mx-auto mt-3 max-w-lg text-body-lg text-on-primary/70">
+				スマートフォンを北に向けて、キブラを確認し、コースを計画 — すべて1つの無料ツールで。
+			</p>
+			<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+				<a href="/ja/compass/" class="btn-primary bg-on-primary text-primary hover:opacity-85">コンパスを開く</a>
+			</div>
+		</div>
+	</section>
+
+	<script type="application/ld+json" set:html={JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'FAQPage',
+		mainEntity: faq.map((f) => ({
+			'@type': 'Question',
+			name: f.q,
+			acceptedAnswer: {
+				'@type': 'Answer',
+				text: f.a,
+			},
+		})),
+	})} />
+</Layout>
+
+<style>
+	details summary::-webkit-details-marker {
+		display: none;
+	}
+	details[open] summary svg {
+		transform: rotate(180deg);
+	}
+	details summary svg {
+		transition: transform 0.2s ease;
+	}
+</style>

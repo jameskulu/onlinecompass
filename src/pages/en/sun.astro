@@ -1,0 +1,130 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SunPanel from '../../components/SunPanel.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="Sun Position Calculator Online — Azimuth, Sunrise & Sunset"
+	description="Calculate sun position online: azimuth, elevation, sunrise, solar noon, and sunset for any location. Free and instant — runs entirely in your browser."
+	path="/en/sun/"
+	keywords="sun position calculator, sun azimuth, sunrise sunset times, sun direction, solar position online"
+>
+	<PageHero
+		eyebrow="sun position"
+		title="Track the sun, precisely."
+		description="Live solar azimuth and elevation, plus sunrise, solar noon, and sunset — computed for your location or any coordinates you enter."
+	>
+		<SunPanel />
+	</PageHero>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-2">
+			<div>
+				<p class="eyebrow mb-2">what the numbers mean</p>
+				<p class="text-sm text-body leading-6">
+					Azimuth is the sun's compass direction (0° = north, 90° = east). Elevation is how
+					high it sits above the horizon — useful for shade, solar panels, and photography.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">cross-check your compass</p>
+				<p class="text-sm text-body leading-6">
+					At midday the sun sits near true south in the northern hemisphere and true north in
+					the southern — a reliable way to sanity-check your heading in daylight.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">the sun position tool</p>
+			<h2 class="mt-3 text-display-lg text-ink">Calculate sun position online — for any location</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				A <strong class="text-ink font-medium">sun position calculator online</strong> shows where
+				the sun is in the sky at a given moment for a given place. This page computes the sun's
+				current <strong class="text-ink font-medium">azimuth</strong> (its compass direction in
+				degrees) and <strong class="text-ink font-medium">elevation</strong> (its height above the
+				horizon), along with sunrise, solar noon, and sunset times — for your live location or any
+				coordinates you enter. Everything runs in your browser, so it is instant, free, and
+				private.
+			</p>
+			<p class="mt-4 leading-7">
+				The numbers update in real time as the day progresses, which makes this tool useful for a
+				surprising range of tasks: placing solar panels, planning photography light, arranging
+				garden beds, positioning shade for a patio, or simply knowing when the sun will clear the
+				building across the street.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Azimuth and elevation — reading the sky</h3>
+			<p class="mt-3 leading-7">
+				<strong class="text-ink font-medium">Azimuth</strong> is the sun's direction measured
+				clockwise from north: 0° is due north, 90° due east, 180° due south, and 270° due west. At
+				midday the sun sits around 180° (due south) in the northern hemisphere and around 0° (due
+				north) in the southern hemisphere. <strong class="text-ink font-medium">Elevation</strong>
+				is the angle of the sun above the horizon, from 0° at sunrise and sunset up to its highest
+				point at solar noon. Together they describe exactly where the sun is in the sky — the same
+				coordinates astronomers and solar engineers use.
+			</p>
+			<p class="mt-4 leading-7">
+				The sun's path changes with your latitude and with the season: higher in summer, lower in
+				winter, rising in the east and setting in the west everywhere on Earth. The calculator
+				accounts for all of this through standard solar-position algorithms, so the azimuth and
+				elevation you see are accurate for your date, time, and coordinates.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Why the sun is useful for finding direction</h3>
+			<p class="mt-3 leading-7">
+				Before compasses and GPS, people used the sun for orientation — and it still works today.
+				Around local noon the sun is due south in the northern hemisphere and due north in the
+				southern hemisphere. At sunrise it is roughly east; at sunset, roughly west. These are
+				reliable rules of thumb, and this page turns them into precise numbers. If you are out in
+				daylight without a compass, check the azimuth here and orient yourself accordingly — then
+				cross-check with the
+				<a href="/" class="text-link underline decoration-link/30 hover:decoration-link">online compass</a>
+				when you are back on your phone.
+			</p>
+
+			<div class="mt-10 grid gap-4 sm:grid-cols-2">
+				<div class="card-soft p-5">
+					<h4 class="text-sm font-medium text-ink mb-1">Solar energy</h4>
+					<p class="text-sm leading-6">
+						Align panels or plan installations: elevation at noon shows the best tilt, and the
+						azimuth range shows how much sun a surface receives through the day.
+					</p>
+				</div>
+				<div class="card-soft p-5">
+					<h4 class="text-sm font-medium text-ink mb-1">Photography and gardening</h4>
+					<p class="text-sm leading-6">
+						Plan golden-hour shoots, know when a garden bed gets light, or position a patio or
+						shade sail for the afternoon sun — all from your exact location.
+					</p>
+				</div>
+			</div>
+
+			<h3 class="mt-10 text-display-sm text-ink">Sunrise, solar noon, and sunset</h3>
+			<p class="mt-3 leading-7">
+				The tool also reports the key moments of the day: <strong class="text-ink font-medium">sunrise</strong>,
+				when the sun first appears above the horizon; <strong class="text-ink font-medium">solar noon</strong>,
+				when it reaches its highest point; and <strong class="text-ink font-medium">sunset</strong>,
+				when it disappears. Solar noon is the moment the sun crosses the meridian and casts the
+				shortest shadow — the reference point for the sun-as-compass trick mentioned above.
+			</p>
+			<p class="mt-4 leading-7">
+				Because the calculations are local, results shift naturally with your coordinates and the
+				date: northern winters bring short days and low noon elevations, while tropical locations
+				see the sun climb high all year. Wherever you are, this free sun position calculator gives
+				you the solar path at a glance — and pairs perfectly with the
+				<a href="/en/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">bearing calculator</a>
+				and the
+				<a href="/en/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">Qibla finder</a>
+				for full picture of the sky above you.
+			</p>
+		</div>
+	</section>
+
+	<RelatedTools current="/sun/" />
+</Layout>

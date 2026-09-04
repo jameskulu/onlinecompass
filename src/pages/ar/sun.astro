@@ -1,0 +1,130 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SunPanel from '../../components/SunPanel.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="حاسبة موضع الشمس أون لاين — الazimuth والشروق والغروب"
+	description="احسب موضع الشمس أون لاين: الazimuth والارتفاع وشروق وغروب الشمس لأي موقع. مجانية وفورية — تعمل بالكامل في متصفحك."
+	path="/ar/sun/"
+	keywords="حاسبة موضع الشمس, azimuth الشمس, أوقات شروق وغروب الشمس, اتجاه الشمس, موضع الشمس أون لاين"
+>
+	<PageHero
+		eyebrow="موضع الشمس"
+		title="تتبع الشمس بدقة."
+		description="الazimuth والارتفاع الشمسي الحي، بالإضافة إلى شروق وغروب الشمس — محسوب لموقعك أو أي إحداثيات تدخلها."
+	>
+		<SunPanel />
+	</PageHero>
+
+	<section class="border-y border-hairline bg-canvas">
+		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-2">
+			<div>
+				<p class="eyebrow mb-2">ماذا تعني الأرقام</p>
+				<p class="text-sm text-body leading-6">
+					الazimuth هو اتجاه البوصلة للشمس (0° = شمالاً، 90° = شرقاً). الارتفاع هو مدى
+					ارتفاعها فوق الأفق — مفيد للظلال والألواح الشمسية والتصوير.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">تحقق من بوصلتك</p>
+				<p class="text-sm text-body leading-6">
+					عند الظهيرة تقع الشمس قريبة من الجنوب الحقيقي في نصف الكرة الشمالي والشمال
+					الحقيقي في نصف الكرة الجنوبي — طريقة موثوقة للتحقق من اتجاهك في ضوء النهار.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">أداة موضع الشمس</p>
+			<h2 class="mt-3 text-display-lg text-ink">احسب موضع الشمس أون لاين — لأي موقع</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				<strong class="text-ink font-medium">حاسبة موضع الشمس الأون لاين</strong> تُظهر
+				أين الشمس في السماء في لحظة معينة لمكان معين. تحسب هذه الصفحة
+				<strong class="text-ink font-medium">الazimuth</strong> الحالي للشمس (اتجاهها بالبوصلة
+				بالدرجات) و<strong class="text-ink font-medium">ارتفاعها</strong> (ارتفاعها فوق الأفق)،
+				بالإضافة إلى أوقات شروق الشمس وظهرها وغروبها — لموقعك الحي أو أي
+				إحداثيات تدخلها. كل شيء يعمل في متصفحك، لذا إنه فوري ومجاني
+				وخاص.
+			</p>
+			<p class="mt-4 leading-7">
+				تتحدث الأرقام في الوقت الحقيقي مع مرور اليوم، مما يجعل هذه الأداة مفيدة
+				لمجموعة مفاجئة من المهام: تركيب الألواح الشمسية، وتخطيط إضاءة التصوير، وترتيب
+				أسرّة الحديقة، وتحديد ظل للشرفة، أو ببساطة معرفة متى ستنقذ الشمس
+				المبنى المقابل.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">الazimuth والارتفاع — قراءة السماء</h3>
+			<p class="mt-3 leading-7">
+				<strong class="text-ink font-medium">الazimuth</strong> هو اتجاه الشمس المقاس
+				clockwise من الشمال: 0° شمالاً، 90° شرقاً، 180° جنوباً، 270° غرباً. عند
+				الظهيرة تقع الشمس حول 180° (جنوباً) في نصف الكرة الشمالي وحول 0° (شمالاً)
+				في نصف الكرة الجنوبي. <strong class="text-ink font-medium">الارتفاع</strong>
+				هو زاوية الشمس فوق الأفق، من 0° عند الشروق والغروب إلى أعلى نقطة
+				عند الظهيرة الشمسية. معاً يصفان بالضبط أين الشمس في السماء — نفس
+				الإحداثيات التي يستخدمها الفلكيون والمهندسون الشمسيون.
+			</p>
+			<p class="mt-4 leading-7">
+				يتغير مسار الشمس مع خط عرضك والموسم: أعلى في الصيف، وأدنى في
+				الشتاء، تشرق في الشرق وتغرب في الغرب في كل مكان على الأرض. تأخذ
+				الحاسبة في الاعتبار كل ذلك من خوارزميات موضع الشمس المعيارية، لذا الazimuth
+				والارتفاع اللذان تريهما دقيقان لتاريخك ووقتك وإحداثياتك.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">لماذا الشمس مفيدة لإيجاد الاتجاه</h3>
+			<p class="mt-3 leading-7">
+				قبل البوصلات وGPS، استخدم الناس الشمس للتوجه — ولا تزال تعمل اليوم.
+				حوال الظهيرة المحلية الشمس جنوباً في نصف الكرة الشمالي وشمالاً في نصف
+				الكرة الجنوبي. عند الشروق تقريباً شرقاً؛ عند الغروب تقريباً غرباً. هذه
+				قواعد عملية موثوقة، وتُحوّل هذه الصفحة إلى أرقام دقيقة. إذا كنت في الخارج
+				في ضوء النهار بدون بوصلة، تحقق من الazimuth هنا وحدد اتجاهك وفقاً لذلك — ثم
+				تحقق بـ
+				<a href="/" class="text-link underline decoration-link/30 hover:decoration-link">البوصلة الأون لاين</a>
+				عند عودتك إلى هاتفك.
+			</p>
+
+			<div class="mt-10 grid gap-4 sm:grid-cols-2">
+				<div class="card-soft p-5">
+					<h4 class="text-sm font-medium text-ink mb-1">الطاقة الشمسية</h4>
+					<p class="text-sm leading-6">
+						حاذا الألواح أوخطط التثبيتات: الارتفاع عند الظهيرة يُظهر أفضل ميل، ومدى
+						الazimuth يُظهر كم تتلقاه السطح من شمس خلال اليوم.
+					</p>
+				</div>
+				<div class="card-soft p-5">
+					<h4 class="text-sm font-medium text-ink mb-1">التصوير و الحديقة</h4>
+					<p class="text-sm leading-6">
+						خطط لتصوير ساعة الذهبية، واعرف متى تتلقى سرير الحديقة الضوء، أو حدد موضع شرفة أو
+						شراع ظل لشمسبعد الظهر — كل ذلك من موقعك الدقيق.
+					</p>
+				</div>
+			</div>
+
+			<h3 class="mt-10 text-display-sm text-ink">الشروق والظهيرة الشمسية والغروب</h3>
+			<p class="mt-3 leading-7">
+				تُبلغ الأداة أيضاً عن لحظات اليوم الرئيسية: <strong class="text-ink font-medium">الشروق</strong>,
+				عندما تظهر الشمس لأول مرة فوق الأفق؛ <strong class="text-ink font-medium">الظهيرة الشمسية</strong>
+				عندما تصل إلى أعلى نقطة؛ و<strong class="text-ink font-medium">الغروب</strong>
+				عندما تختفي. الظهيرة الشمسية هي لحظة عبور الشمس خط الزوال وتقع
+				أقصر ظل — النقطة المرجعية لحيلة الشمس كبوصلة المذكورة أعلاه.
+			</p>
+			<p class="mt-4 leading-7">
+				بما أن الحسابات محلية، تتshift النتائج طبيعياً مع إحداثياتك والتاريخ:
+				الشتاء الشمالي يجلب أياماً قصيرة وارتفاع ظهيرة منخفضة، بينما الأماكن
+				المستعرضة ترى الشمس تتسلق عالية طوال العام. أينما كنت، تُعطيك حاسبة موضع الشمس المجانية
+				هذه المسار الشمسي بنظرة واحدة — وتتناسب بشكل مثالي مع
+				<a href="/ar/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">حاسبة الاتجاه</a>
+				و
+				<a href="/ar/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">محدد القبلة</a>
+				للحصول على صورة كاملة للسماء فوقك.
+			</p>
+		</div>
+	</section>
+
+	<RelatedTools current="/sun/" />
+</Layout>

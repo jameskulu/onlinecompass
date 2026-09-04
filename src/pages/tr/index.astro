@@ -1,0 +1,464 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Compass from '../../components/Compass.astro';
+
+const faq = [
+	{
+		q: 'Hangi yöne bakıyorum — çevrimiçi pusula?',
+		a: 'Bu sayfayı telefonunuzda açın ve kadranın altındaki canlı yön gösterimi, döndükçe gerçek zamanlı olarak güncellenen tam derece ve pusula yönünü (K, KD, D, GD, G, GB, B, KB) gösterir.',
+	},
+	{
+		q: 'Çevrimiçi pusula — kuzey nerede?',
+		a: 'İğnenin kırmızı ucu her zaman kuzeyi gösterir, kadranın tepesinde 0°/360° olarak okunur. "Gerçek kuzey" seçeneğine geçtiğinizde site, konumunuzd manyetik sapmayı düzeltir böylece kuzey haritalarla uyumlu olur.',
+	},
+	{
+		q: 'Hangi yöne bakıyorum — çevrimiçi pusula?',
+		a: 'Telefonunuzu düz tutun, sensör erişimine izin verin ve kadranın altındaki yön gösterisi, baktığınız yönü hem derece hem de pusula noktası olarak (örneğin 274° veya B) söyler.',
+	},
+	{
+		q: 'Pusula olmadan çevrimiçi olarak yön nasıl anlaşılır?',
+		a: 'Güneşi kullanın: öğle saatlerinde kuzey yarımkürede tam güneyde, güney yarımkürede tam kuzeyde bulunur. Bu sitenin Güneş aracı her konum için tam güneş azimutunu gösterir ve Kible bulucu sabit bir referans yönü olarak da çalışır.',
+	},
+	{
+		q: 'Hangi yöne bakıyorum — çevrimiçi pusula?',
+		a: 'Sensör erişimine izin verin, telefonu metalden uzak düz tutun ve yön göstemesini okuyun. Döndükçe sürekli güncellenir, böylece her zaman hangi yöne baktığınızı bilirsiniz.',
+	},
+	{
+		q: 'Çevrimiçi pusula nasıl kullanılır?',
+		a: 'Bu sayfayı telefonunuzda açın, "Canlı pusulayı etkinleştir" seçeneğine dokunun, cihazı düz tutun ve yönü okuyun. İğne sallanırsa, manyetometreyi yeniden kalibre etmek için birkaç kez sekiz çizerek hareket yapın.',
+	},
+	{
+		q: 'Telefonumu pusula olarak kullanabilir miyim?',
+		a: 'Evet. Modern telefonlarda bir manyetometre bulunur ve bu web sitesi bu sensörü tarayıcınızda doğrudan bir pusulaya dönüştürür — indirilecek uygulama yok, kurulum gerekmez.',
+	},
+	{
+		q: 'Google\'da pusulam nerede?',
+		a: 'Google Haritalar, harita görüntüsünün sağ üst köşesinde küçük bir pusula gösterir. Derece olarak canlı bir yön için, Google\'da "çevrimiçi pusula" aratın ve bu sayfayı açın — sensör erişimine izin verdiğiniz anda pusulaya dönüşür.',
+	},
+	{
+		q: 'Telefonum bana hangi yöne baktığımı söyleyebilir mi?',
+		a: 'Evet. Telefonunuzun manyetometresi bu sayfayla birleştirildiğinde canlı bir yön verir ve site manyetik sapmayı otomatik olarak düzeltir böylece kuzey haritalarınızla eşleşir.',
+	},
+	{
+		q: 'Mobilde pusula nasıl görülür?',
+		a: 'Bu sayfayı telefonunuzda açın ve pusula anında görünür — uygulama gerekmez. Android\'de Google Haritalar da bir pusula içerir ve bazı telefonlar yerleşik pusula uygulamasıyla gelir.',
+	},
+	{
+		q: 'Kuzey yönüm hangisi?',
+		a: 'Gerçek kuzey coğrafi Kuzey Kutbu\'dur; manyetik kuzey pusula iğnesinin işaret ettiği yerdir. İkisi arasındaki açı (sapma) konuma göre değişir ve bu site bunu otomatik olarak düzeltir.',
+	},
+	{
+		q: 'Telefonumdaki pusula nerede?',
+		a: 'Birçok telefon özel bir pusula uygulamasıyla gelmez — ancak sensör yerleşiktir. Telefonunuzda bu web sitesini açın ve kurulum gerektirmeden pusulaya dönüşür.',
+	},
+	{
+		q: 'Hangi cep telefonlarında pusula sensörü var?',
+		a: 'Neredeyse tüm modern akıllı telefonlar — iPhone 3GS\'den beri her iPhone ve neredeyse tüm Android telefonlar — bir manyetometre içerir, bu yüzden bu çevrimiçi pusula neredeyse her cihazda çalışır.',
+	},
+	{
+		q: 'Yönüm neden sürekli değişiyor?',
+		a: 'Yakındaki metal ve elektronik cihazlar manyetometreyi bozar. Yukarıdaki kalibrasyon adımlarını izleyin ve telefonun düz olduğundan emin olun. İç mekanlarda birkaç derecelik sapma normaldir.',
+	},
+	{
+		q: 'Manyetik ve gerçek kuzey arasındaki fark nedir?',
+		a: 'Manyetik kuzey pusula iğnenizin işaret ettiği yerdir. Gerçek kuzey coğrafi Kuzey Kutbu\'dur; haritalar ve navigasyon tarafından kullanılır. İkisi arasındaki açı — sapma — konuma göre değişir ve bu araç bunu otomatik olarak düzeltir.',
+	},
+	{
+		q: 'Konumumu neden istiyor?',
+		a: 'Konum, manyetik sapmayı, Kible yönünü ve güneş pozisyonunu hassasiyetle hesaplamamızı sağlar. İsteğe bağlıdır — her araç manuel koordinatlarla da çalışır — ve cihazınızdan asla çıkmaz.',
+	},
+	{
+		q: 'Konumumu saklıyor veya satıyor musunuz?',
+		a: 'Hayır. İzleyici yok, analitik yok ve arka ucumuz yok. Tüm sensör ve konum verileri tarayıcınızda yerel olarak işlenir ve sayfadan ayrıldığınızda silinir.',
+	},
+];
+---
+
+<Layout
+	path="/tr/"
+	title="Çevrimiçi Pusula — Kuzeyi Bulmak İçin Ücretsiz Canlı Araç"
+	description="Konumunuzdan kuzeyi bulmak için ücretsiz çevrimiçi pusula. Gerçek ve manyetik kuzey ile canlı yön, sapma, Kible bulucu, açı hesaplayıcı ve güneş pozisyonu — kurulum gerekmez, her telefonda çalışır."
+	keywords="çevrimiçi pusula, çevrimiçi pusula aracı, ücretsiz çevrimiçi pusula, çevrimiçi pusula google, çevrimiçi pusula ücretsiz, kuzeyi bulmak için çevrimiçi pusula, çevrimiçi pusula yönü, çevrimiçi pusula geometri, çevrimiçi pusula aracı geometri, geometri için çevrimiçi pusula, çevrimiçi pusula matematik, ücretsiz çevrimiçi pusula aracı, kible için çevrimiçi pusula, canlı çevrimiçi pusula, konumumdan kuzeyi bulmak için çevrimiçi pusula kabe, çevrimiçi pusula kible bulucu"
+>
+	<!-- ─── Kahraman ─────────────────────────── -->
+	<section id="compass" class="relative overflow-hidden">
+		<div class="mesh-gradient" aria-hidden="true"></div>
+		<div
+			class="relative mx-auto max-w-[1200px] px-4 pb-20 pt-16 text-center sm:px-6 md:pb-28 md:pt-24"
+		>
+			<div class="badge mx-auto">ücretsiz · gizli · kurulum yok</div>
+
+			<h1
+				class="mx-auto mt-6 max-w-3xl text-[36px] leading-[40px] text-ink sm:text-display-xl md:text-[56px] md:leading-[56px]"
+			>
+				Sadece manyetik değil, gerçek kuzeyi gösteren bir pusula.
+			</h1>
+
+			<p class="mx-auto mt-4 max-w-xl text-body-lg text-body">
+				Otomatik sapma düzeltmeli, GPS koordinatları, Kible yönü ve güneş pozisyonu ile
+				cihazınızda gerçek zamanlı yön — hepsi tarayıcınızda. Kurulum yok, yükleme yok.
+			</p>
+
+			<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+				<a href="/tr/location/" class="btn-primary">Konumumu bul</a>
+				<a href="/tr/compass/" class="btn-secondary">Pusulayı aç</a>
+			</div>
+
+			<div class="mx-auto mt-12 max-w-xl md:mt-16">
+				<Compass />
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Özellik şeridi ─────────────────────────── -->
+	<section class="border-y border-hairline bg-canvas">
+		<div
+			class="mx-auto grid max-w-[1200px] grid-cols-1 gap-px overflow-hidden px-4 py-12 sm:grid-cols-3 sm:px-6"
+		>
+			<div class="p-4">
+				<p class="eyebrow mb-2">gerçek vs manyetik</p>
+				<p class="text-sm text-body leading-6">
+					Sapma, Dünya Manyetik Modeli kullanılarak otomatik olarak hesaplanır — her iki
+					yönü de bir bakışta görün.
+				</p>
+			</div>
+			<div class="p-4">
+				<p class="eyebrow mb-2">öncelik gizlilik</p>
+				<p class="text-sm text-body leading-6">
+					Tüm sensör işleme cihazınızda gerçekleşir. Hesap yok, izleme yok ve hiçbir şey
+					tarayıcınızdan çıkmaz.
+				</p>
+			</div>
+			<div class="p-4">
+				<p class="eyebrow mb-2">her yerde çalışır</p>
+				<p class="text-sm text-body leading-6">
+					iOS ve Android'de Chrome, Safari ve Firefox; hareket halindeyken GPS yön yedeklemesi
+					ile.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Araçlar ızgarası ─────────────────────────── -->
+	<section id="tools" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<p class="eyebrow">araç takımı</p>
+			<h2 class="mt-3 max-w-2xl text-display-lg text-ink">
+				Bir pusula, ihtiyacınız olan her yön.
+			</h2>
+			<p class="mt-3 max-w-xl text-body-lg text-body">
+				Beş odaklı araç, her biri kendi sayfasında, cihazınızda yerel olarak çalışır.
+			</p>
+
+			<div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+				<a href="/tr/compass/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">pusula</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Canlı yön</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Programlı iğne, manyetik ve gerçek kuzey ile gerçek zamanlı 360° kadran ve
+						canlı doğruluk geri bildirimi.
+					</p>
+				</a>
+				<a href="/tr/location/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">konum</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">GPS koordinatları</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Ondalık ve DMS formatında enlem, boylam, irtifa ve doğruluk — kopyalama,
+						paylaşma ve Haritalarda açma ile.
+					</p>
+				</a>
+				<a href="/tr/qibla/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">kible</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Mekke yönü</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Koordinatlarınızdan Kabe'ye büyük çember açısı ve mesafesi, dereceye kadar
+						hassas.
+					</p>
+				</a>
+				<a href="/tr/bearing/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">açı</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Yol hesaplayıcı</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Herhangi iki nokta arasındaki açı ve büyük çember mesafesi — navigasyon ve rota
+						planlama için mükemmeldir.
+					</p>
+				</a>
+				<a href="/tr/sun/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">güneş</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Güneş pozisyonu</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Şu anki güneş azimutu ve yüksekliği, ayrıca her konum için doğum, öğle ve
+						batma zamanları.
+					</p>
+				</a>
+				<div class="card-soft flex flex-col justify-center p-6">
+					<p class="text-sm text-body leading-6">
+						Hesap yok. İzleyici yok. Her hesaplama tarayıcınızda çalışır ve sayfadan
+						ayrıldığınız anda silinir.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Nasıl çalışır ─────────────────────────── -->
+	<section id="how-it-works" class="border-y border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<p class="eyebrow">nasıl çalışır</p>
+			<h2 class="mt-3 max-w-2xl text-display-lg text-ink">Doğruluk için tasarlandı.</h2>
+			<p class="mt-3 max-w-xl text-body-lg text-body">
+				Telefonunuzun manyetometresi, jiroskopu ve ivmeölçeri eğim telafili bir yön motorunu
+				besler; Dünya Manyetik Modeli ile düzeltilir.
+			</p>
+
+			<div class="mt-12 grid gap-6 md:grid-cols-3">
+				<div class="card p-6">
+					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
+						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
+							<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" />
+							<path d="M15.5 8.5 13 13l-4.5 2.5L11 11z" fill="var(--color-error)" />
+						</svg>
+					</div>
+					<h3 class="text-display-sm text-ink">Sensör füzyonu</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Yön, orientasyon ve manyetometre verilerinden türetilir, gerçek zamanlı olarak
+						düzleştirilir böylece iğne elinizde sabit kalır.
+					</p>
+				</div>
+				<div class="card p-6">
+					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
+						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
+							<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" />
+							<path
+								d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"
+								stroke="currentColor"
+								stroke-width="1.5"
+							/>
+							<circle cx="12" cy="12" r="3" fill="currentColor" />
+						</svg>
+					</div>
+					<h3 class="text-display-sm text-ink">Gerçek kuzey düzeltmesi</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Sapma gezegen genelinde −30° ile +30° arasında değişir. Nerede olursanız olun
+						gerçek kuzeyin tam olması için Dünya Manyetik Modeli'ni uyguluyoruz.
+					</p>
+				</div>
+				<div class="card p-6">
+					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
+						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
+							<path
+								d="M12 21s7-5.1 7-11a7 7 0 1 0-14 0c0 5.9 7 11 7 11Z"
+								stroke="currentColor"
+								stroke-width="1.5"
+							/>
+							<circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5" />
+						</svg>
+					</div>
+					<h3 class="text-display-sm text-ink">Tasarımda yerel</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Koordinatlar, Kible açısı ve güneş hesaplamaları tamamen cihazınızda çalışır.
+						Konumunuz asla bir sunucuya ulaşmaz.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Araç hakkında (SEO) ─────────────────────────── -->
+	<section id="about" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow text-center">ücretsiz çevrimiçi pusula</p>
+				<h2 class="mt-3 text-center text-display-lg text-ink">Çevrimiçi pusula nedir?</h2>
+				<p class="mt-6 text-body-lg text-body">
+					Bir <strong class="text-ink font-medium">çevrimiçi pusula</strong>, doğrudan web
+					tarayıcınızda çalışan dijital bir pusuladır — indirilecek uygulama yok, kurulum yok
+					ve ücret yok. Bu sayfayı telefonunuzda açın ve birkaç saniye içinde, bulunduğunuz
+					yerden kuzeyi gösteren, canlı yönü derece olarak gösteren ve manyetik kuzey ile
+					gerçek kuzey arasındaki farkı düzeltebilen ücretsiz bir çevrimiçi pusulanız
+					olur.
+				</p>
+				<p class="mt-4 text-body text-body leading-7">
+					Tarayıcıda yaşadığı için ister evde olun, ister açık alanda, ister bir sınıfta
+					olsun aynı şekilde çalışır. Google'da "çevrimiçi pusula" aratın, bu siteyi açın ve
+					cihazınızın sensörleri devreye girer. Geleneksel bir pusuladan farklı olarak, bu
+					çevrimiçi pusula telefonunuzun manyetometresini, jiroskopunu ve ivmeölçerini birlikte
+					kullanır; bu da yerçekimi ve sapmayla sürekli mücadele eden bir iğneden daha
+					<strong class="text-ink font-medium">güvenilir bir çevrimiçi pusula yönü</strong>
+					sağlar.
+				</p>
+				<p class="mt-4 text-body text-body leading-7">
+					Bu sitedeki her araç <strong class="text-ink font-medium">çevrimiçi olarak kuzeyi
+					bulmayı</strong> ve çok daha fazlasını sağlamak için tasarlanmıştır: derece olarak
+					canlı yön gösterisi, ana ve ara yönler (K, KD, D, GD, G, GB, B, KB), tek dokunuşla
+					ekranı tam kaplama modu ve okumanın ne kadar güvenilir olduğunu bilmenizi sağlayan
+					bir doğruluk göstergesi. Ve çünkü her şey yerel olarak işlenir, konumunuz
+					Hiçbir zaman cihazınızdan çıkmaz — gerçekten ücretsiz bir çevrimiçi pusula, veri
+					toplayan bir pusula değil.
+				</p>
+			</div>
+
+			<div class="mx-auto mt-12 grid max-w-4xl gap-8 md:grid-cols-2">
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">Geometri ve matematik için çevrimiçi pusula</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Bir <strong class="text-ink font-medium">çevrimiçi pusula aracı</strong> aynı
+						zamanda bir öğretim yardımıdır. Geometride pusula daireler ve kemerler çizmek
+						ve mesafeleri ölçmek için kullanılır; bu sitede geometri için çevrimiçi pusula
+						kalem yerine matematikle çalışır. Herhangi bir yönün açısını ölçün, yönler ve
+						pusula noktaları arasında dönüştürme yapın ve iki koordinat arasındaki yönü ve
+						büyük çember mesafesini bulmak için açı hesaplayıcısını kullanın. Soyut açıları
+						kadran üzerinde görebileceğiniz bir yöne dönüştüren çevrimiçi pusula
+						matematik aracıdır.
+					</p>
+					<p class="mt-3 text-sm text-body leading-6">
+						Öğrenciler çalışmalarını gerçek bir manyetik pusulayla kontrol edebilir ve
+						öğretmenler canlı kadranı telefonu döndürdükçe hareket eden bir örnekle gerçek
+						kuzey ile manyetik kuzeyi açıklamak için kullanabilir. Bu ücretsiz çevrimiçi
+						pusula aracı basit görevler için de günlük olarak kullanılır — harita
+						yönlendirmesi, güneş paneli hizalama veya bir odanın hangi yöne baktığını
+						kontrol etme.
+					</p>
+				</div>
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">Kible için çevrimiçi pusula — konumumdan Kabe'yi bul</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Bu site, mevcut koordinatlarınızdan Mekke'deki Kabe yönünü hesaplayan özel bir
+						<strong class="text-ink font-medium">çevrimiçi pusula kible bulucu</strong>
+						içerir. Nerede olursanız olun, Kible bulucu size derece olarak bir açı ve pusula
+						yönü, artı Mekke'ye olan büyük çember mesafesini verir. Birçok gezgin için
+						aradıkları ifade "konumumdan kuzeyi bulmak için çevrimiçi pusula kabe"dir — ve
+						bu sayfa bunu yanıtlar: konumunuzu belirleyin, Kible yönünü okuyun, ardından
+						canlı pusula kadranında takip edin.
+					</p>
+					<p class="mt-3 text-sm text-body leading-6">
+						Kible için çevrimiçi pusula tamamen cihazınızda çalıştığı için sunucu, hesap veya
+						herhangi bir yerde saklanan konum yoktur. Koordinatları manuel olarak girin veya
+						tek seferlik konum erişimi verin, açı bir derecenin kesri kadar hassasiyetle anında
+						hesaplanır.
+					</p>
+				</div>
+			</div>
+
+			<div class="mx-auto mt-12 max-w-3xl">
+				<h3 class="text-display-sm text-ink">Neden çevrimiçi pusula seçmelisiniz?</h3>
+				<p class="mt-3 text-body text-body leading-7">
+					Fiziksel bir pusula harika bir alettir, ancak dijital bir çevrimiçi pusula canlı
+					doğruluk ekler: sadece kuzeyi değil, herhangi bir yönün tam derecesini gösterir,
+					Dünya'nın her yerinde manyetik sapmayı düzeltir ve herhangi bir yönde tutulabilir.
+					Bu sitin ücretsiz çevrimiçi pusula aracı, bu canlı pusulayı bir gezginin ihtiyacı
+					olan her şeyle birleştirir — onalık ve DMS formatında GPS koordinatları, Kible
+					yönü, açı hesaplayıcı ve gündüz yön belirleme için güneş pozisyonu. Hızlı,
+					gizlidir ve kuzeyi bulmanız gerektiğinde hazırdır.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Kalibrasyon ─────────────────────────── -->
+	<section id="calibration" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="grid gap-10 lg:grid-cols-2 lg:items-start">
+				<div>
+					<p class="eyebrow">kalibrasyon</p>
+					<h2 class="mt-3 text-display-lg text-ink">En doğru okumayı elde edin.</h2>
+					<p class="mt-3 text-body-lg text-body">
+						Telefon manyetometreleri yakındaki metal ve manyetik alanlara duyarlıdır.
+						Birkaç saniyelik kalibrasyon, sallanan bir iğneyi güvenilir bir yöne dönüştürür.
+					</p>
+				</div>
+				<ol class="card-soft divide-y divide-hairline">
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">01</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Telefonu düz tutun</p>
+							<p class="mt-1 text-sm text-body">Ekranı avucunuzda veya stabil bir yüzeyde yere paralel tutun.</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">02</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Sekiz çizerek hareket yapın</p>
+							<p class="mt-1 text-sm text-body">Telefonu hafifçe sekiz çizerek hareketle birkaç kez sallayın, sonra sabit tutun.</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">03</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Parazitten uzaklaşın</p>
+							<p class="mt-1 text-sm text-body">Okuma yapmadan önce dizüstü bilgisayarlardan, telefonlardan, manyetlerden ve metal masalardan uzaklaşın.</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">04</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Güneşle doğrulayın</p>
+							<p class="mt-1 text-sm text-body">Gündüzleri bağımsız bir çapraz kontrol için kadrandaki güneş konumu işaretini kullanın.</p>
+						</div>
+					</li>
+				</ol>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── SSS ─────────────────────────── -->
+	<section id="faq" class="border-t border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow text-center">sss</p>
+			<h2 class="mt-3 text-center text-display-lg text-ink">Sorular, cevaplandı.</h2>
+
+			<div class="mt-10 space-y-3">
+				{faq.map((f) => (
+					<details class="card overflow-hidden">
+						<summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-4 text-sm font-medium text-ink">
+							{f.q}
+							<svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0 text-mute" fill="none" aria-hidden="true">
+								<path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+							</svg>
+						</summary>
+						<p class="px-6 pb-5 text-sm text-body leading-6">{f.a}</p>
+					</details>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── CTA bandı ─────────────────────────── -->
+	<section class="bg-ink text-on-primary">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 text-center sm:px-6 md:py-24">
+			<p class="font-mono text-xs uppercase tracking-[0.08em] text-on-primary/60">hazırız, siz hazır olduğunuzda</p>
+			<h2 class="mt-4 text-display-lg text-on-primary">Yönlerinizi bulun.</h2>
+			<p class="mx-auto mt-3 max-w-lg text-body-lg text-on-primary/70">
+				Telefonunuzu kuzeye çevirin, Kibenizi kontrol edin veya bir rota çizin — hepsi tek bir ücretsiz araçta.
+			</p>
+			<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+				<a href="/tr/compass/" class="btn-primary bg-on-primary text-primary hover:opacity-85">Pusulayı aç</a>
+			</div>
+		</div>
+	</section>
+
+	<script type="application/ld+json" set:html={JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'FAQPage',
+		mainEntity: faq.map((f) => ({
+			'@type': 'Question',
+			name: f.q,
+			acceptedAnswer: {
+				'@type': 'Answer',
+				text: f.a,
+			},
+		})),
+	})} />
+</Layout>
+
+<style>
+	details summary::-webkit-details-marker {
+		display: none;
+	}
+	details[open] summary svg {
+		transform: rotate(180deg);
+	}
+	details summary svg {
+		transition: transform 0.2s ease;
+	}
+</style>

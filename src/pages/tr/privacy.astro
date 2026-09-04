@@ -1,0 +1,94 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+	title="Gizlilik Politikası"
+	description="True Çevrimiçi Pusula gizlilik politikası. Tüm sensör ve konum verileri tarayıcınızda yerel olarak işlenir — kişisel veri toplamıyoruz ve izleyici kullanmıyoruz."
+	path="/tr/privacy/"
+>
+	<div class="mx-auto max-w-3xl px-4 py-16 sm:px-6 md:py-24">
+		<p class="eyebrow">yönetmelik</p>
+		<h1 class="mt-4 text-display-lg text-ink">Gizlilik Politikası</h1>
+		<p class="mt-3 text-sm text-mute">Son güncelleme: {new Date().toLocaleDateString('tr-TR', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+
+		<div class="mt-10 space-y-8 text-body">
+			<section>
+				<h2 class="text-display-sm text-ink mb-3">Özetle</h2>
+				<p class="leading-7">
+					True Çevrimiçi Pusula varsayılan olarak gizli olacak şekilde tasarlanmıştır. Tüm
+					sensör verileri — cihaz orientasyonu, manyetometre ve konum — tarayıcınızda yerel
+					olarak işlenir ve hiçbir zaman iletilmez, saklanmaz veya paylaşılmaz. Çerez,
+					izleyici veya analitik kullanmıyoruz.
+				</p>
+			</section>
+
+			<section>
+				<h2 class="text-display-sm text-ink mb-3">Ne topluyoruz</h2>
+				<p class="leading-7 mb-3">Hiçbir şey toplamıyoruz. Özellikle:</p>
+				<ul class="list-disc space-y-2 pl-5 leading-7">
+					<li>Hesap, kayıt veya e-posta gerekmez.</li>
+					<li>Kişisel bilgi istenmez veya saklanmaz.</li>
+					<li>Cihaz orientasyonu, yönü ve GPS koordinatları cihazınızdan asla çıkmaz.</li>
+					<li>Üçüncü taraf analitik veya reklam SDK'ları kullanılmaz.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2 class="text-display-sm text-ink mb-3">Tarayıcı izinleri</h2>
+				<p class="leading-7">
+					Araçlar, okumalar sağlamak için tarayıcınız aracılığıyla sensör ve konum izinleri
+					ister. Bu izinleri istediğiniz zaman tarayıcınızın veya işletim sisteminizin
+					ayarlarından kontrol edebilirsiniz. Konum iznini reddetmek, her aracı manuel
+					olarak girilen koordinatlarla kullanmaya devam etmenizi sağlar.
+				</p>
+			</section>
+
+			<section>
+				<h2 class="text-display-sm text-ink mb-3">Yerel depolama</h2>
+				<p class="leading-7">
+					Tema tercihiniz (karanlık veya aydınlık mod), ziyaretler arasında seçiminizin
+					sürmesi için tarayıcınızın yerel deposunda saklanır. Başka veri saklanmaz.
+				</p>
+			</section>
+
+			<section>
+				<h2 class="text-display-sm text-ink mb-3">Barındırma</h2>
+				<p class="leading-7">
+					Web sitesi standart web barındırma altyapısından sunulur. Herhangi bir web sitesi
+					gibi, barındırma sağlayıcısı güvenlik ve operational amaçlarla rutin sunucu
+					günlükleri tutabilir (IP adresleri ve istenen URL'ler gibi). Bu günlükler sizi
+					tanımlamak için kullanılmaz.
+				</p>
+			</section>
+
+			<section>
+				<h2 class="text-display-sm text-ink mb-3">İletişim</h2>
+				<p class="leading-7">
+					Bu politika hakkında sorularınız mı var? <a href="/tr/contact/" class="text-link underline decoration-link/30 hover:decoration-link">İletişim sayfamızdan</a> bize ulaşın.
+				</p>
+			</section>
+
+			<section class="border-t border-hairline pt-8">
+				<h2 class="text-display-sm text-ink mb-3">Bu çevrimiçi pusula hakkında</h2>
+				<p class="leading-7">
+					True Çevrimiçi Pusula, ücretsiz, tarayıcı tabanlı bir araç takımıdır: otomatik
+					sapma ile gerçek ve manyetik kuzey gösteren canlı
+					<a href="/" class="text-link underline decoration-link/30 hover:decoration-link">çevrimiçi pusula</a>,
+					bir
+					<a href="/tr/location/" class="text-link underline decoration-link/30 hover:decoration-link">GPS koordinatları</a>
+					aracı, bir
+					<a href="/tr/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">Kible bulucu</a>,
+					bir
+					<a href="/tr/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">açı hesaplayıcı</a>
+					ve bir
+					<a href="/tr/sun/" class="text-link underline decoration-link/30 hover:decoration-link">güneş pozisyonu hesaplayıcısı</a>.
+					Her hesaplama tarayıcınızda yerel olarak çalışır — kurulum yok, yükleme yok ve
+					hesap gerekmez. Daha fazla bilgi için
+					<a href="/tr/about/" class="text-link underline decoration-link/30 hover:decoration-link">hakkında sayfamıza</a>
+					bakın.
+				</p>
+			</section>
+		</div>
+	</div>
+</Layout>

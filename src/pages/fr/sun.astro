@@ -1,0 +1,143 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SunPanel from '../../components/SunPanel.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="Calculateur de Position Solaire en Ligne — Azimut, Lever et Coucher du Soleil"
+	description="Calculez la position du soleil en ligne : azimut, élévation, lever, midi solaire et coucher pour n'importe quel emplacement. Gratuit et instantanément — s'exécute entièrement dans votre navigateur."
+	path="/fr/sun/"
+	keywords="calculateur de position solaire, azimut du soleil, heures lever et coucher du soleil, direction du soleil, position solaire en ligne"
+>
+	<PageHero
+		eyebrow="position du soleil"
+		title="Suivez le soleil, avec précision."
+		description="Azimut et élévation solaires en direct, ainsi que lever, midi solaire et coucher — calculés pour votre emplacement ou n'importe quelles coordonnées que vous entrez."
+	>
+		<SunPanel />
+	</PageHero>
+
+	<section class="border-y border-hairline bg-canvas">
+		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-2">
+			<div>
+				<p class="eyebrow mb-2">ce que signifient les chiffres</p>
+				<p class="text-sm text-body leading-6">
+					L'azimut est la direction de la boussole du soleil (0° = nord, 90° = est). L'élévation
+					est la hauteur à laquelle il se situe au-dessus de l'horizon — utile pour l'ombre, les
+					panneaux solaires et la photographie.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">vérifiez votre boussole</p>
+				<p class="text-sm text-body leading-6">
+					Au milieu de la journée, le soleil se trouve près du vrai sud dans l'hémisphère nord
+					et du vrai nord dans l'hémisphère sud — un moyen fiable de vérifier votre cap en
+					plein jour.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">l'outil de position solaire</p>
+			<h2 class="mt-3 text-display-lg text-ink">Calculez la position du soleil en ligne — pour n'importe quel emplacement</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				Un <strong class="text-ink font-medium">calculateur de position solaire en ligne</strong>
+				indique où se trouve le soleil dans le ciel à un moment donné pour un lieu donné. Cette
+				page calcule l'<strong class="text-ink font-medium">azimut</strong> actuel du soleil
+				(sa direction de boussole en degrés) et son <strong class="text-ink font-medium">élévation</strong>
+				(sa hauteur au-dessus de l'horizon), ainsi que les heures de lever, midi solaire et
+				coucher — pour votre emplacement en direct ou n'importe quelles coordonnées que vous
+				entrez. Tout s'exécute dans votre navigateur, c'est donc instantané, gratuit et
+				privé.
+			</p>
+			<p class="mt-4 leading-7">
+				Les chiffres se mettent à jour en temps réel au fur et à mesure que la journée avance,
+				ce qui rend cet outil utile pour un étonnant éventail de tâches : installer des panneaux
+				solaires, planifier la lumière photographique, organiser les plates-banes du jardin,
+				positionner l'ombre pour une terrasse, ou simplement savoir quand le soleil dépassera
+				le bâtiment de l'autre côté de la rue.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Azimut et élévation — lire le ciel</h3>
+			<p class="mt-3 leading-7">
+				L'<strong class="text-ink font-medium">azimut</strong> est la direction du soleil mesurée
+				dans le sens des aiguilles d'une montre à partir du nord : 0° est le nord, 90° l'est,
+				180° le sud et 270° l'ouest. Au milieu de la journée, le soleil se trouve autour de 180°
+				(pile au sud) dans l'hémisphère nord et autour de 0° (pile au nord) dans l'hémisphère
+				sud. L'<strong class="text-ink font-medium">élévation</strong> est l'angle du soleil
+				au-dessus de l'horizon, de 0° au lever et au coucher jusqu'à son point le plus haut au
+				midi solaire. Ensemble, ils décrivent exactement où se trouve le soleil dans le ciel —
+				les mêmes coordonnées que les astronomes et ingénieurs solaires utilisent.
+			</p>
+			<p class="mt-4 leading-7">
+				La trajectoire du soleil change avec votre latitude et la saison : plus haute en été,
+				basse en hiver, se levant à l'est et se couchant à l'ouest partout sur Terre. Le
+				calculateur tient compte de tout cela grâce à des algorithmes standard de position
+				solaire, l'azimut et l'élévation que vous voyez sont donc précis pour votre date,
+				heure et coordonnées.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Pourquoi le soleil est utile pour trouver la direction</h3>
+			<p class="mt-3 leading-7">
+				Avant les boussoles et le GPS, les gens utilisaient le soleil pour s'orienter — et cela
+				fonctionne encore aujourd'hui. Vers midi solaire, le soleil se trouve pile au sud dans
+				l'hémisphère nord et pile au nord dans l'hémisphère sud. Au lever, il est approximativement
+				à l'est ; au coucher, approximativement à l'ouest. Ce sont des règles fiables, et cette
+				page les transforme en chiffres précis. Si vous êtes à l'extérieur en plein jour sans
+				boussole, vérifiez l'azimut ici et orientez-vous en conséquence — puis vérifiez avec
+				la
+				<a href="/" class="text-link underline decoration-link/30 hover:decoration-link">boussole en ligne</a>
+				quand vous êtes de retour sur votre téléphone.
+			</p>
+
+			<div class="mt-10 grid gap-4 sm:grid-cols-2">
+				<div class="card-soft p-5">
+					<h4 class="text-sm font-medium text-ink mb-1">Énergie solaire</h4>
+					<p class="text-sm leading-6">
+						Alignez les panneaux ou planifiez les installations : l'élévation à midi indique
+						l'inclinaison optimale, et la plage d'azimut montre la quantité de soleil qu'une
+						surface reçoit pendant la journée.
+					</p>
+				</div>
+				<div class="card-soft p-5">
+					<h4 class="text-sm font-medium text-ink mb-1">Photographie et jardinage</h4>
+					<p class="text-sm leading-6">
+						Planifiez les shootings à l'heure dorée, savez quand une plate-bane du jardin
+						reçoit la lumière, ou positionnez une terrasse ou un store d'ombrage pour le
+						soleil de l'après-midi — tout depuis votre position exacte.
+					</p>
+				</div>
+			</div>
+
+			<h3 class="mt-10 text-display-sm text-ink">Lever, midi solaire et coucher</h3>
+			<p class="mt-3 leading-7">
+				L'outil indique aussi les moments clés de la journée : le <strong class="text-ink font-medium">lever</strong>,
+				quand le soleil apparaît pour la première fois au-dessus de l'horizon ; le <strong
+				class="text-ink font-medium">midi solaire</strong>, quand il atteint son point le plus
+				haut ; et le <strong class="text-ink font-medium">coucher</strong>, quand il disparaît.
+				Le midi solaire est le moment où le soleil traverse le méridien et projette l'ombre la
+				plus courte — le point de référence pour l'astuce de la boussole solaire mentionnée
+				ci-dessus.
+			</p>
+			<p class="mt-4 leading-7">
+				Parce que les calculs sont locaux, les résultats évoluent naturellement avec vos
+				coordonnées et la date : les hivers nordiques apportent des journées courtes et des
+				élévations de midi basses, tandis que les emplacements tropicaux voient le soleil
+				monter haut toute l'année. Où que vous soyez, ce calculateur de position solaire
+				gratuit vous montre la trajectoire solaire en un coup d'œil — et se marie parfaitement
+				avec le
+				<a href="/fr/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">calculateur de cap</a>
+				et le
+				<a href="/fr/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">trouvateur de Qibla</a>
+				pour une vue complète du ciel au-dessus de vous.
+			</p>
+		</div>
+	</section>
+
+	<RelatedTools current="/sun/" />
+</Layout>

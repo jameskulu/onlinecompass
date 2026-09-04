@@ -1,0 +1,176 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Compass from '../../components/Compass.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="Outil Boussole en Ligne — Cap Nord Vrai et Magnétique en Direct"
+	description="Utilisez cet outil de boussole en ligne gratuit pour un cap 360° en direct sur votre téléphone. Direction boussole en ligne avec nord magnétique et vrai, déclinaison automatique, retour d'exactitude et guide de calibration."
+	path="/fr/compass/"
+	keywords="boussole en ligne, outil boussole en ligne, boussole en ligne gratuite, boussole en ligne en direct, direction boussole en ligne, boussole en ligne pour trouver le nord, boussole en ligne gratuite"
+>
+	<section class="relative overflow-hidden">
+		<div class="mesh-gradient" aria-hidden="true"></div>
+		<div class="relative">
+			<PageHero
+				eyebrow="boussole en direct"
+				title="Votre téléphone est la boussole."
+				description="Accordez l'accès aux capteurs et cette page transforme votre téléphone en une boussole numérique précise — cadran 360°, aiguille fluide et lectures nord magnétique et vrai."
+			>
+				<Compass />
+			</PageHero>
+		</div>
+	</section>
+
+	<section class="border-y border-hairline bg-canvas">
+		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-3">
+			<div>
+				<p class="eyebrow mb-2">comment lire</p>
+				<p class="text-sm text-body leading-6">
+					L'extrémité rouge de l'aiguille pointe toujours vers le nord. Tournez votre corps jusqu'à
+					ce que le repère fixe du haut corresponde à la direction souhaitée — le cap s'affiche
+					en haut.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">vrai vs magnétique</p>
+				<p class="text-sm text-body leading-6">
+					Basculez entre les caps. Le nord vrai applique la déclinaison magnétique de votre
+					emplacement pour que cartes, navigation et caps s'alignent.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">exactitude</p>
+				<p class="text-sm text-body leading-6">
+					Le pilule de statut indique votre source de capteur en direct et la dérive estimée.
+					Si les lectures oscillent, suivez les étapes de calibration sous le cadran.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">l'outil boussole en ligne</p>
+			<h2 class="mt-3 text-display-lg text-ink">Trouvez le nord en ligne — instantanément, depuis votre navigateur</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				Une <strong class="text-ink font-medium">boussole en ligne</strong> est une boussole numérique
+				qui fonctionne directement dans votre navigateur. Pas de magasin d'applications, pas de
+				téléchargement, pas de compte — vous ouvrez cette page, accordez l'accès aux capteurs et votre
+				téléphone devient une boussole en ligne gratuite avec un affichage de cap 360° en direct.
+				C'est le moyen le plus rapide de <strong class="text-ink font-medium">trouver le nord en
+				ligne</strong> que vous soyez à la maison, en randonnée, en camping ou simplement en train
+				d'essayer de savoir dans quelle direction fait face votre appartement.
+			</p>
+			<p class="mt-4 leading-7">
+				La boussole lit les capteurs de votre appareil en temps réel. L'extrémité rouge de l'aiguille
+				pointe toujours vers le nord — 0° ou 360° en haut du cadran — et le cap apparaît en dessous
+				en degrés avec le point de boussole (N, NE, E, SE, S, SW, W, NW). Au fur et à mesure que
+				vous tournez, le cadran pivote avec vous, de sorte que la <strong class="text-ink font-medium">direction
+				de boussole en ligne</strong> dans laquelle vous êtes orienté est toujours visible en un
+				coup d'œil.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Nord vrai vs nord magnétique sur une boussole en ligne</h3>
+			<p class="mt-3 leading-7">
+				La plupart des boussoles de téléphone affichent le <strong class="text-ink font-medium">nord
+				magnétique</strong> — là où l'aiguille est attirée par le champ magnétique terrestre.
+				Mais les cartes, le GPS et la navigation utilisent tous le <strong class="text-ink
+				font-medium">nord vrai</strong>, le pôle Nord géographique. L'angle entre les deux, appelé
+				<strong class="text-ink font-medium">déclinaison magnétique</strong>, varie d'environ
+				−30° à +30° selon votre position sur la planète. Dans certaines villes, l'écart est de
+				quelques degrés ; dans d'autres, il dépasse les quinze. Ignorer la déclinaison peut
+				éloigner vos caps de manière significative.
+			</p>
+			<p class="mt-4 leading-7">
+				Cet outil de boussole en ligne s'en occupe pour vous. Il applique le Modèle Magnétique
+				Mondial en utilisant votre emplacement, donc passer du nord magnétique au vrai se fait en
+				un seul tap. Lorsque vous basculez sur le nord vrai, le cap s'aligne avec la grille d'une
+				carte — essentiel pour la navigation, le géocaching, l'alignement d'un antenne ou le
+				suivi d'un cap calculé ailleurs. Pour un résultat plus précis, appuyez sur « Utiliser
+				l'emplacement pour la déclinaison » afin que la correction soit calculée pour vos
+				coordonnées exactes plutôt qu'une estimation approximative.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Quelle est la précision d'une boussole de navigateur ?</h3>
+			<p class="mt-3 leading-7">
+				Les téléphones contiennent un magnétomètre, un accéléromètre et un gyroscope. Une bonne
+				boussole en ligne fusionne ces capteurs pour produire un cap compensé en tangage — ce qui
+				signifie qu'il reste raisonnablement stable même lorsque vous ne tenez pas le téléphone
+				 parfaitement de niveau. Cette page affiche un indicateur de précision et la source du
+				capteur en direct, vous pouvez donc voir le niveau de confiance de la lecture.
+			</p>
+			<p class="mt-4 leading-7">
+				Pour les meilleurs résultats : tenez le téléphone à plat, éloigné de votre corps, gardez-le
+				éloigné des métaux, haut-parleurs et appareils électroniques, et décrivez un mouvement
+				en huit quelques fois si l'aiguille dérive. La calibration prend quelques secondes et
+				fait une vraie différence. En intérieur, attendez-vous à quelques degrés d'oscillation ;
+				à l'extérieur, éloigné des métaux, une boussole en ligne gratuite comme celle-ci est
+				régulièrement d'accord avec une boussole physique à un ou deux degrés près.
+			</p>
+
+			<div class="mt-10 grid gap-4 sm:grid-cols-2">
+				<div class="card-soft p-5">
+					<h4 class="text-sm font-medium text-ink mb-1">Quand vous avez besoin d'une boussole en ligne gratuite</h4>
+					<p class="text-sm leading-6">
+						Orienter une carte, aligner des panneaux solaires, vérifier l'orientation d'une fenêtre
+						pour les plantes, vérifier la direction d'une photo, enseigner la géométrie ou
+						s'entraîner à la navigation — tout sans porter une boussole physique.
+					</p>
+				</div>
+				<div class="card-soft p-5">
+					<h4 class="text-sm font-medium text-ink mb-1">Ce qui rend cette boussole différente</h4>
+					<p class="text-sm leading-6">
+						Pas d'installation, pas de publicité, pas de traque, et rien n'est envoyé. Tout
+						s'exécute localement sur votre appareil, et les lectures sont corrigées pour le
+						nord vrai automatiquement.
+					</p>
+				</div>
+			</div>
+
+			<h3 class="mt-10 text-display-sm text-ink">Toutes les façons d'utiliser une boussole en ligne</h3>
+			<p class="mt-3 leading-7">
+				Les usages vont bien au-delà de savoir où se trouve le nord. Les randonneurs et trail
+				runners utilisent une boussole en ligne pour orienter une carte avant de partir. Les
+				photographes l'utilisent pour planifier où le soleil se lèvera et se couchera. Les
+				campeurs l'utilisent pour orienter leur tente vers le soleil du matin. Les professionnels
+				de l'immobilier vérifient dans quelle direction fait face une pièce, et les jardiniers
+				alignent les plates-banes pour un éclairage maximal. Les étudiants utilisent cette
+				boussole en ligne pour la géométrie pour voir les angles prendre vie sur un cadran.
+				Et avec le bouton plein écran, vous pouvez tenir le cadran à bout de bras et l'aligner
+				avec un point de repère lointain — exactement comme une boussole portable.
+			</p>
+			<p class="mt-4 leading-7">
+				Parce que tout est calculé dans votre navigateur, vous pouvez utiliser cette boussole en
+				ligne en direct depuis n'importe quel endroit du monde — et elle corrige la déclinaison
+				magnétique où que vous soyez, le nord vrai est donc toujours précis. Cette combinaison
+				d'une boussole en ligne gratuite pour trouver le nord, cap en direct, correction de
+				déclinaison et confidentialité est difficile à trouver ailleurs.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Combiner la boussole avec le reste de la boîte à outils</h3>
+			<p class="mt-3 leading-7">
+				Cette boussole est une partie d'une suite de navigation complète. Utilisez l'
+				<a href="/fr/location/" class="text-link underline decoration-link/30 hover:decoration-link">outil de coordonnées GPS</a>
+				pour capturer votre position exacte, le
+				<a href="/fr/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">calculateur de cap</a>
+				pour planifier un itinéraire entre deux points, le
+				<a href="/fr/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">trouvateur de Qibla</a>
+				pour faire face à la Kaaba, et le
+				<a href="/fr/sun/" class="text-link underline decoration-link/30 hover:decoration-link">calculateur de position solaire</a>
+				pour suivre la trajectoire du soleil. Chaque outil fonctionne ensemble, et chaque outil
+				est privé, gratuit et fonctionne sur tout téléphone avec un navigateur.
+			</p>
+			<p class="mt-4 leading-7">
+				Prêt à trouver le nord ? Accordez l'accès aux capteurs ci-dessus, suivez les étapes de
+				calibration si l'aiguille dérive, et profitez de l'un des outils de boussole en ligne
+				les plus précis disponibles — sans rien installer.
+			</p>
+		</div>
+	</section>
+
+	<RelatedTools current="/" />
+</Layout>

@@ -1,0 +1,129 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import LocationPanel from '../../components/LocationPanel.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="GPS Coordinates Online — Latitude, Longitude & DMS"
+	description="Find my GPS coordinates online: latitude, longitude, altitude, and accuracy in decimal and DMS format. Copy, share, or open in Google Maps. No install, no tracking."
+	path="/en/location/"
+	keywords="gps coordinates online, find my location, latitude longitude, dms coordinates, my gps location"
+>
+	<PageHero
+		eyebrow="gps · location"
+		title="Know exactly where you are."
+		description="Live GPS coordinates, altitude, and accuracy straight from your device. Everything is computed locally — your location never leaves your browser."
+	>
+		<LocationPanel />
+	</PageHero>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">the gps location tool</p>
+			<h2 class="mt-3 text-display-lg text-ink">Get GPS coordinates online — instantly</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				Need to <strong class="text-ink font-medium">find my GPS coordinates online</strong>?
+				This tool reads your device's location in real time and shows your current latitude and
+				longitude in both decimal degrees and degrees-minutes-seconds (DMS) format, along with
+				your altitude and estimated accuracy. Grant permission once, and the page continuously
+				tracks your position as you move — useful for hiking, field work, geocaching, or simply
+				sharing exactly where you are with someone.
+			</p>
+			<p class="mt-4 leading-7">
+				Everything is processed locally in your browser. Your location is never sent to a server,
+				stored, or shared — this GPS coordinates online tool is private by design, and the
+				reading disappears the moment you close the page.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Latitude, longitude, and DMS explained</h3>
+			<p class="mt-3 leading-7">
+				<strong class="text-ink font-medium">Latitude</strong> measures how far north or south of
+				the equator you are (0° at the equator, 90° at the poles), while
+				<strong class="text-ink font-medium">longitude</strong> measures how far east or west of
+				the Prime Meridian you are. Together they form a grid that pinpoints any place on Earth
+				to within meters. Most mapping apps use decimal degrees (for example 48.8584, 2.2945 for
+				Paris), but many forms and navigation manuals expect DMS (48° 51' 29.6" N, 2° 17' 40.2" E).
+				This tool shows <strong class="text-ink font-medium">my location</strong> in both formats
+				so you can copy whichever one you need — no converting by hand.
+			</p>
+			<p class="mt-4 leading-7">
+				Decimal degrees and DMS are the same position, just written differently. One degree of
+				latitude is about 111 kilometres; one minute is about 1.85 kilometres; one second is
+				about 30 metres. Understanding the units helps you judge how precise a coordinate really
+				is — and why accuracy matters when you are navigating in the field.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Where can you use live GPS coordinates?</h3>
+			<div class="mt-4 space-y-3">
+				<p class="leading-7">
+					<strong class="text-ink font-medium">Outdoor navigation.</strong> When you are on a
+					trail, at a campsite, or exploring a new city, capture your coordinates so you can
+					share them or navigate back. It is the fastest way to answer "where am I right now?"
+				</p>
+				<p class="leading-7">
+					<strong class="text-ink font-medium">Photography and planning.</strong> Geo-tag a
+					location for a shoot, record where you stood for a photo, or check the altitude of a
+					viewpoint before you plan a route.
+				</p>
+				<p class="leading-7">
+					<strong class="text-ink font-medium">Work and study.</strong> Surveyors, farmers, and
+					field researchers use precise coordinates for marking plots and points. Students use
+					them for geography projects and to cross-check map work.
+				</p>
+				<p class="leading-7">
+					<strong class="text-ink font-medium">Other tools on this site.</strong> Your
+					coordinates feed directly into the Qibla finder, bearing calculator, and sun position
+					tool, so you can work with your exact position everywhere.
+				</p>
+			</div>
+
+			<h3 class="mt-10 text-display-sm text-ink">How accurate is the GPS location?</h3>
+			<p class="mt-3 leading-7">
+				Modern phones combine satellite GPS, Wi-Fi, and cell-tower data. Outdoors with a clear sky
+				you can usually get accuracy within 3–10 metres; indoors the signal weakens and accuracy
+				drops. The tool shows your estimated accuracy in metres so you know how much to trust the
+				reading. For the best fix, stand still for a few seconds outdoors, away from tall
+				buildings and dense tree cover.
+			</p>
+			<p class="mt-4 leading-7">
+				Because this is a GPS coordinates online tool that never uploads anything, you can use it
+				with confidence anywhere — a private way to find my location that also gives you the
+				precision you need.
+			</p>
+		<h3 class="mt-10 text-display-sm text-ink">Share, copy, and open your coordinates</h3>
+			<p class="mt-3 leading-7">
+				The tool is built for real use, not just display. Copy your coordinates in the format you
+				need, share them with a friend, or open your position directly in Google Maps for a wider
+				view of the area. Combined with the live accuracy reading, you can confidently record a
+				spot now and return to it later — a handy waypoint for hikes, meetings, or deliveries.
+			</p>
+			<p class="mt-4 leading-7">
+				This GPS coordinates online tool works alongside the rest of the site: your current
+				position becomes the starting point for the
+				<a href="/en/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">bearing calculator</a>,
+				the reference for the
+				<a href="/en/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">Qibla finder</a>,
+				and the location for the
+				<a href="/en/sun/" class="text-link underline decoration-link/30 hover:decoration-link">sun position</a>
+				and
+				<a href="/" class="text-link underline decoration-link/30 hover:decoration-link">live compass</a>.
+				One accurate fix, and every direction tool on this site uses it.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Why compute coordinates locally?</h3>
+			<p class="mt-3 leading-7">
+				Many "find my location" sites send your coordinates to a server the moment you load them.
+				This page does the opposite: the GPS fix comes straight from your browser's geolocation
+				API and is never transmitted anywhere. That means no tracking, no logs, and no risk of
+				your position being stored against your wishes — a genuinely private way to find my GPS
+				coordinates online. It is fast, free, and works on any modern phone or laptop with a
+				browser.
+			</p>
+		</div>
+	</section>
+
+	<RelatedTools current="/location/" />
+</Layout>

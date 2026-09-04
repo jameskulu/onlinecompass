@@ -1,0 +1,131 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BearingCalculator from '../../components/BearingCalculator.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="Calculadora de rumbo en línea — Dirección y distancia entre dos puntos"
+	description="Herramienta gratuita de brújula en línea para calcular el rumbo y la distancia de círculo máximo entre dos coordenadas. También muestra la dirección de la Qibla, la declinación magnética y la posición del sol desde tu ubicación."
+	path="/es/bearing/"
+	keywords="brújula en línea matemáticas, brújula en línea geometría, calculadora de rumbo, dirección entre dos puntos, distancia de círculo máximo, calculadora de rumbo en línea"
+>
+	<PageHero
+		eyebrow="calculadora de rumbo"
+		title="Traza un curso, grado a grado."
+		description="Calcula el rumbo inicial y la distancia de círculo máximo entre dos puntos en la Tierra — desde tu ubicación en vivo, coordenadas manuales o una ruta predefinida."
+	>
+		<BearingCalculator />
+	</PageHero>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-2">
+			<div>
+				<p class="eyebrow mb-2">rumbo inicial vs final</p>
+				<p class="text-sm text-body leading-6">
+					Esto devuelve el rumbo inicial — la dirección en la que comienzas. En rutas largas el
+					rumbo cambia a lo largo del círculo máximo, por lo que las correcciones a mitad de
+					camino son normales.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">úsalo con la brújula</p>
+				<p class="text-sm text-body leading-6">
+					Lleva tu rumbo calculado a la herramienta de brújula y gira hasta que el rumbo coincida.
+					Cambia al norte verdadero para una conducción precisa según el mapa.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">la calculadora de rumbo</p>
+			<h2 class="mt-3 text-display-lg text-ink">Calcula el rumbo y la distancia entre dos puntos</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				Una <strong class="text-ink font-medium">calculadora de rumbo en línea</strong> encuentra la
+				dirección y distancia entre dos puntos en la Tierra. Ingresa dos conjuntos de coordenadas
+				— o usa tu ubicación en vivo para un extremo — y esta herramienta devuelve el rumbo inicial
+				en grados, la dirección de brújula y la distancia de círculo máximo en kilómetros. Es la
+				herramienta esencial de <strong class="text-ink font-medium">matemáticas de brújula en
+				línea</strong> para navegación, planificación de rutas, topografía y estudio.
+			</p>
+			<p class="mt-4 leading-7">
+				El rumbo es el ángulo medido en sentido horario desde el norte hasta la dirección en la que
+				necesitas viajar: 0° es el norte, 90° el este, 180° el sur, 270° el oeste. Una ruta de
+				Londres a Nueva York, por ejemplo, comienza con un rumbo inicial de unos 288° — esa es la
+				dirección de brújula en la que apuntas la nariz de un avión o la proa de un barco en el
+				momento en que zarpas.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Rumbo inicial vs rumbo final</h3>
+			<p class="mt-3 leading-7">
+				Debido a que la Tierra es una esfera, la <strong class="text-ink font-medium">dirección entre
+				dos puntos</strong> no es una línea recta en un mapa. La ruta más corta sigue un círculo
+				máximo, y a lo largo de esa ruta el rumbo cambia continuamente. El "rumbo inicial" es la
+				dirección en tu punto de partida — el que sigues primero. En rutas largas el rumbo se
+				desvía a medida que avanzas, por lo que los pilotos y navegantes usan puntos de referencia
+				y correcciones a mitad de camino. Esta calculadora reporta el rumbo inicial y también calcula
+				el rumbo final para el punto de llegada de la ruta de círculo máximo.
+			</p>
+			<p class="mt-4 leading-7">
+				Para viajes cortos — una excursión, una conducción por la ciudad, un camino entre dos puntos
+				de un mapa — el rumbo inicial es efectivamente todo el curso. Eso hace que esta calculadora
+				de rumbo en línea sea perfecta para la planificación cotidiana así como para la geometría
+				en el aula.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">La distancia tal como la mide un navegante</h3>
+			<p class="mt-3 leading-7">
+				Junto con el rumbo obtienes la distancia de círculo máximo — la distancia más corta sobre
+				la superficie de la Tierra entre los dos puntos, calculada con la fórmula del haversine.
+				A diferencia de una regla en un mapa plano, esto tiene en cuenta la curvatura del planeta,
+				por lo que el resultado coincide con las distancias de viaje reales. Es el mismo cálculo
+				que se usa para la planificación de vuelos y la navegación marítima.
+			</p>
+			<p class="mt-4 leading-7">
+				La herramienta va más allá de una calculadora simple. Elige un destino de la lista
+				predefinida — que incluye las principales ciudades mundiales y la Kaaba en La Meca — y
+				calcula el resumen ("Nueva York está a 245° ESO de Londres, a 5.570 km de distancia") más
+				cuatro lecturas adicionales desde el punto A: la
+				<a href="/es/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">dirección de la Qibla</a>,
+				la declinación magnética y la
+				<a href="/es/sun/" class="text-link underline decoration-link/30 hover:decoration-link">posición del sol</a>.
+				Un solo ingreso y ves cómo tu brújula, Qibla y datos solares se alinean con tu ruta.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Usa el rumbo con la brújula</h3>
+			<p class="mt-3 leading-7">
+				El compañero natural de esta herramienta es la
+				<a href="/" class="text-link underline decoration-link/30 hover:decoration-link">brújula en línea</a>.
+				Calcula tu rumbo, abre la brújula y gira hasta que tu rumbo coincida. Cambia la brújula al
+				norte verdadero para que tu conducción se alinee con el norte del mapa — y deja que la
+				brújula aplique la declinación de tu ubicación automáticamente. La combinación convierte
+				un número en una hoja en un curso que puedes caminar, navegar o conducir realmente.
+			</p>
+			<p class="mt-4 leading-7">
+				Esta calculadora de rumbo en línea es útil para la planificación de rutas antes de una
+				excursión, alinear antenas y paneles solares, estimar el viaje entre dos direcciones,
+				verificar un curso de brújula o comprobar tareas. Porque todo se ejecuta localmente en
+				tu navegador, es una herramienta privada y gratuita de geometría de brújula en línea en
+				la que puedes confiar en cualquier lugar — sin instalaciones, sin cuentas, sin recopilación
+				de datos.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Grados, direcciones y planificación</h3>
+			<p class="mt-3 leading-7">
+				Los rumbos leídos en grados son precisos pero abstractos; por eso la herramienta también
+				los convierte en direcciones de brújula claras. 45° se convierte en NE, 200° en SSO, y así
+				sucesivamente — para que puedas responder preguntas como "¿hacia dónde necesito dirigirme?"
+				en el mismo idioma que habla una brújula o un mapa. Ingresa tu posición en vivo como punto A
+				y un destino como punto B, y toda la imagen — rumbo, dirección, distancia, Qibla, declinación
+				y sol — se actualiza al instante. Esa es la poder de una herramienta de matemáticas de brújula
+				en línea construida alrededor de tus coordenadas reales.
+			</p>
+		</div>
+	</section>
+
+	<RelatedTools current="/bearing/" />
+</Layout>

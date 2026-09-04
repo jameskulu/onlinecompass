@@ -1,0 +1,94 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+	title="Política de Privacidade"
+	description="Política de privacidade do True Online Compass. Todos os dados de sensores e localização são processados localmente no seu navegador — não coletamos dados pessoais e não usamos rastreadores."
+	path="/pt/privacy/"
+>
+	<div class="mx-auto max-w-3xl px-4 py-16 sm:px-6 md:py-24">
+		<p class="eyebrow">jurídico</p>
+		<h1 class="mt-4 text-display-lg text-ink">Política de Privacidade</h1>
+		<p class="mt-3 text-sm text-mute">Última atualização: {new Date().toLocaleDateString('pt-BR', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+
+		<div class="mt-10 space-y-8 text-body">
+			<section>
+				<h2 class="text-display-sm text-ink mb-3">Resumindo</h2>
+				<p class="leading-7">
+					O True Online Compass foi projetado para ser privado por padrão. Todos os dados do
+					sensor — orientação do dispositivo, magnetômetro e localização — são processados
+					localmente no seu navegador e nunca são transmitidos, armazenados ou
+					compartilhados. Não usamos cookies, rastreadores ou analíticos.
+				</p>
+			</section>
+
+			<section>
+				<h2 class="text-display-sm text-mb-3">O que coletamos</h2>
+				<p class="leading-7 mb-3">Não coletamos nada. Especificamente:</p>
+				<ul class="list-disc space-y-2 pl-5 leading-7">
+					<li>Nenhuma conta, cadastro ou e-mail é necessário.</li>
+					<li>Nenhuma informação pessoal é solicitada ou armazenada.</li>
+					<li>Orientação do dispositivo, rumo e coordenadas GPS nunca saem do seu dispositivo.</li>
+					<li>Nenhum SDK de analíticos ou publicidade de terceiros é utilizado.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2 class="text-display-sm text-ink mb-3">Permissões do navegador</h2>
+				<p class="leading-7">
+					As ferramentas solicitam permissões de sensores e localização através do seu navegador
+					para fornecer leituras. Você controla essas permissões a qualquer momento nas
+					configurações do seu navegador ou sistema operacional. Negar a permissão de localização
+					ainda permite usar todas as ferramentas com coordenadas inseridas manualmente.
+				</p>
+			</section>
+
+			<section>
+				<h2 class="text-display-sm text-ink mb-3">Armazenamento local</h2>
+				<p class="leading-7">
+					Sua preferência de tema (modo escuro ou claro) é armazenada no armazenamento local do
+					seu navegador para que sua escolha persista entre visitas. Nenhum outro dado é
+					armazenado.
+				</p>
+			</section>
+
+			<section>
+				<h2 class="text-display-sm text-ink mb-3">Hospedagem</h2>
+				<p class="leading-7">
+					O site em si é servido a partir de infraestrutura padrão de hospedagem web. Como
+					qualquer site, o provedor de hospedagem pode manter registros de servidor rotineiros
+					(como endereços IP e URLs solicitadas) para fins de segurança e operação. Esses
+					registros não são usados para identificá-lo.
+				</p>
+			</section>
+
+			<section>
+				<h2 class="text-display-sm text-ink mb-3">Contato</h2>
+				<p class="leading-7">
+					Dúvidas sobre esta política? Entre em contato pela <a href="/pt/contact/" class="text-link underline decoration-link/30 hover:decoration-link">página de contato</a>.
+				</p>
+			</section>
+
+			<section class="border-t border-hairline pt-8">
+				<h2 class="text-display-sm text-ink mb-3">Sobre esta bússola online</h2>
+				<p class="leading-7">
+					O True Online Compass é um kit de ferramentas gratuito e baseado em navegador: uma
+					<a href="/" class="text-link underline decoration-link/30 hover:decoration-link">bússola online</a>
+					ao vivo que mostra o norte verdadeiro e magnético com declinação automática, uma
+					ferramenta de
+					<a href="/pt/location/" class="text-link underline decoration-link/30 hover:decoration-link">coordenadas GPS</a>,
+					um
+					<a href="/pt/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">localizador de Qibla</a>,
+					uma
+					<a href="/pt/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">calculadora de rumo</a>
+					e um
+					<a href="/pt/sun/" class="text-link underline decoration-link/30 hover:decoration-link">calculador de posição solar</a>.
+					Todo cálculo roda localmente no seu navegador — nada para instalar, nada enviado e
+					nenhuma conta necessária. Saiba mais na
+					<a href="/pt/about/" class="text-link underline decoration-link/30 hover:decoration-link">página sobre</a>.
+				</p>
+			</section>
+		</div>
+	</div>
+</Layout>

@@ -1,0 +1,139 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import LocationPanel from '../../components/LocationPanel.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="Coordinate GPS Online — Latitudine, Longitudine e DMS"
+	description="Trova le mie coordinate GPS online: latitudine, longitudine, altitudine e precisione in formato decimale e DMS. Copia, condividi o apri in Google Maps. Nessuna installazione, nessun tracciamento."
+	path="/it/location/"
+	keywords="coordinate gps online, trova la mia posizione, latitudine longitudine, coordinate dms, la mia posizione gps"
+>
+	<PageHero
+		eyebrow="gps · posizione"
+		title="Sai esattamente dove ti trovi."
+		description="Coordinate GPS, altitudine e precisione in tempo reale direttamente dal tuo dispositivo. Tutto viene elaborato localmente — la tua posizione non lascia mai il tuo browser."
+	>
+		<LocationPanel />
+	</PageHero>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">lo strumento posizione gps</p>
+			<h2 class="mt-3 text-display-lg text-ink">Ottieni coordinate GPS online — istantaneamente</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				Hai bisogno di <strong class="text-ink font-medium">trovare le mie coordinate GPS
+				online</strong>? Questo strumento legge la posizione del tuo dispositivo in tempo
+				reale e mostra la tua latitudine e longitudine attuali sia in gradi decimali che in
+				formato gradi-minuti-secondi (DMS), insieme alla tua altitudine e precisione stimata.
+				Concedi il permesso una volta, e la pagina traccia continuamente la tua posizione
+				mentre ti muovi — utile per escursioni, lavori sul campo, geocaching, o semplicemente
+				condividere esattamente dove ti trovi con qualcuno.
+			</p>
+			<p class="mt-4 leading-7">
+				Tutto viene elaborato localmente nel tuo browser. La tua posizione non viene mai
+				inviata a un server, archiviata o condivisa — questo strumento di coordinate GPS
+				online è privato per progetto, e la lettura scompare nel momento in cui chiudi
+				la pagina.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Latitudine, longitudine e DMS spiegati</h3>
+			<p class="mt-3 leading-7">
+				La <strong class="text-ink font-medium">latitudine</strong> misura quanto sei a nord
+				o a sud dell'equatore (0° all'equatore, 90° ai poli), mentre la <strong
+				class="text-ink font-medium">longitudine</strong> misura quanto sei a est o a ovest
+				del meridiano di Greenwich. Insieme formano una griglia che individua qualsiasi
+				luogo sulla Terra con precisione metri. La maggior parte delle app di mappe usa
+				gradi decimali (ad esempio 48.8584, 2.2945 per Parigi), ma molti moduli e manuali
+				di navigazione richiedono DMS (48° 51' 29.6" N, 2° 17' 40.2" E). Questo strumento
+				mostra la <strong class="text-ink font-medium">mia posizione</strong> in entrambi i
+				formati così puoi copiare quello che ti serve — nessuna conversione manuale.
+			</p>
+			<p class="mt-4 leading-7">
+				Gradi decimali e DMS sono la stessa posizione, solo scritti in modo diverso. Un
+				 grado di latitudine è circa 111 chilometri; un minuto è circa 1,85 chilometri;
+				un secondo è circa 30 metri. Capire le unità ti aiuta a valutare quanto è precisa
+				una coordinate realmente — e perché la precisione conta quando navighi sul campo.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Dove puoi usare le coordinate GPS in tempo reale?</h3>
+			<div class="mt-4 space-y-3">
+				<p class="leading-7">
+					<strong class="text-ink font-medium">Navigazione all'aperto.</strong> Quando sei
+					su un sentiero, in un campeggio, o stai esplorando una nuova città, cattura le
+					tue coordinate così puoi condividerle o tornare indietro. È il modo più velocio
+					per rispondere "dove sono adesso?"
+				</p>
+				<p class="leading-7">
+					<strong class="text-ink font-medium">Fotografia e pianificazione.</strong> Geolocalizza
+					una posizione per uno scatto, registra dove ti sei fermato per una foto, o controlla
+					l'altitudine di un punto panoramico prima di planificare un percorso.
+				</p>
+				<p class="leading-7">
+					<strong class="text-ink font-medium">Lavoro e studio.</strong> Geometri, agricoltori
+					e ricercatori sul campo usano coordinate precise per contrassegnare appezzamenti e
+					punti. Gli studenti le usano per progetti di geografia e per verificare lavori
+					su mappe.
+				</p>
+				<p class="leading-7">
+					<strong class="text-ink font-medium">Altri strumenti su questo sito.</strong> Le
+					tue coordinate alimentano direttamente il trovatore Qibla, il calcolatore di
+					rilevamento e lo strumento della posizione del sole, così puoi lavorare con
+					la tua posizione esatta ovunque.
+				</p>
+			</div>
+
+			<h3 class="mt-10 text-display-sm text-ink">Quanto è precisa la posizione GPS?</h3>
+			<p class="mt-3 leading-7">
+				I telefoni moderni combinano GPS satellitare, Wi-Fi e dati delle torri cellulai.
+				All'aperto con cielo libero di solito puoi ottenere una precisione entro 3–10 metri;
+				al chiuso il segnale si indebolisce e la precisione diminuisce. Lo strumento mostra
+				la tua precisione stimata in metri così sai quanto fidarti della lettura. Per il
+				miglior segnale, resta fermo per qualche secondo all'aperto, lontano da edifici
+				alti e copertura arborea densa.
+			</p>
+			<p class="mt-4 leading-7">
+				Poiché questo è uno strumento di coordinate GPS online che non carica mai nulla,
+				puoi usarlo con fiducia ovunque — un modo privato per trovare la mia posizione che
+				ti dà anche la precisione di cui hai bisogno.
+			</p>
+		<h3 class="mt-10 text-display-sm text-ink">Condividi, copia e apri le tue coordinate</h3>
+			<p class="mt-3 leading-7">
+				Lo strumento è costruito per un uso reale, non solo per la visualizzazione. Copia
+				le tue coordinate nel formato che ti serve, condividile con un amico, o apri la tua
+				posizione direttamente in Google Maps per una vista più ampia dell'area. Combinato
+				con la lettura della precisione in tempo reale, puoi registrare un punto con
+				fiducia ora e tornarci dopo — un waypoint comodo per escursioni, incontri o
+				spedizioni.
+			</p>
+			<p class="mt-4 leading-7">
+				Questo strumento di coordinate GPS online funziona insieme al resto del sito: la
+				tua posizione attuale diventa il punto di partenza per il
+				<a href="/it/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">calcolatore di rilevamento</a>,
+				la referencia per il
+				<a href="/it/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">trovatore Qibla</a>,
+				e la posizione per la
+				<a href="/it/sun/" class="text-link underline decoration-link/30 hover:decoration-link">posizione del sole</a>
+				e la
+				<a href="/" class="text-link underline decoration-link/30 hover:decoration-link">bussola in tempo reale</a>.
+				Un punto fisso preciso, e ogni strumento di direzione su questo sito lo usa.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Perché calcolare le coordinate localmente?</h3>
+			<p class="mt-3 leading-7">
+				Molti siti di "trova la mia posizione" inviano le tue coordinate a un server nel
+				momento in cui le carichi. Questa pagina fa il contrario: il segnale GPS arriva
+				direttamente dall'API di geolocalizzazione del tuo browser e non viene mai trasmesso
+				da nessuna parte. Ciò significa nessun tracciamento, nessun log e nessun rischio
+				che la tua posizione venga archiviata contro la tua volontà — un modo veramente
+				privato per trovare le mie coordinate GPS online. È veloce, gratuito e funziona
+				su qualsiasi telefono o portatile moderno con un browser.
+			</p>
+		</div>
+	</section>
+
+	<RelatedTools current="/location/" />
+</Layout>

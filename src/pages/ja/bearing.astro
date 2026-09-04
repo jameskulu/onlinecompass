@@ -1,0 +1,83 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BearingCalculator from '../../components/BearingCalculator.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="方位計算機オンライン — 2点間の方向と距離"
+	description="2座標間の大圏方位と距離を計算する無料オンラインコンパスツール。キブラ方向、磁気偏角、太陽位置も表示。"
+	path="/ja/bearing/"
+	keywords="オンラインコンパス 数学, オンラインコンパス 幾何学, 方位計算機, 2点間の方向, 大圏距離, 方位計算機 オンライン"
+>
+	<PageHero
+		eyebrow="方位計算機"
+		title="度数ごとにコースを計画。"
+		description="地球上の任意の2点間の初期方位と大圏距離を計算 — リアルタイムの現在地、手動座標、またはプリセットルートから。"
+	>
+		<BearingCalculator />
+	</PageHero>
+
+	<section class="border-y border-hairline bg-canvas">
+		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-2">
+			<div>
+				<p class="eyebrow mb-2">初期方位 vs 最終方位</p>
+				<p class="text-sm text-body leading-6">
+					これは初期方位 — 出発時の方向を返します。長距離ルートでは大圏に沿って方位が変化するため、途中での修正は一般的です。
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">コンパスと組み合わせる</p>
+				<p class="text-sm text-body leading-6">
+					計算した方位をコンパスツールに入力し、方位が一致するまでステアリングします。地図と一致する方位には真北に切り替えてください。
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">方位計算機</p>
+			<h2 class="mt-3 text-display-lg text-ink">2点間の大圏方位と距離を計算</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				<strong class="text-ink font-medium">方位計算機オンライン</strong>は、地球上の任意の2点間の方向と距離を求めるツールです。2組の座標を入力 — または片方の端にリアルタイムの現在地を使用 — すると、このツールは度数で初期方位、方位、キロメートル単位の大圏距離を返します。ナビゲーション、ルート計画、測量、学習に不可欠な<strong class="text-ink font-medium">オンラインコンパス数学</strong>ツールです。
+			</p>
+			<p class="mt-4 leading-7">
+				方位は北から時計回りに測定される角度で、移動すべき方向を示します：0°が北、90°が東、180°が南、270°が西。ロンドンからニューヨークへのルートは、初期方位約288°から始まります — それは出発時に飛行機の機首や船の船首を向ける方位です。
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">初期方位 vs 最終方位</h3>
+			<p class="mt-3 leading-7">
+				地球は球体であるため、<strong class="text-ink font-medium">2点間の方向</strong>は地図上の直線ではありません。最短ルートは大圏に沿っており、そのルートに沿って方位は連続的に変化します。「初期方位」は出発地点での方向 — 最初にステアリングする方向です。長距離ルートでは方位がシフトするため、パイロットやナビゲーターはウェイポイントと途中修正を使用します。この計算機は初期方位を報告し、大圏パスの到着時の最終方位も計算します。
+			</p>
+			<p class="mt-4 leading-7">
+				短距離の移動 — ハイキング、都市内のドライブ、2つのマップポイント間のウォーキング — では、初期方位が事実上全体のコースとなります。このため、この方位計算機オンラインは日常の計画にも教室の幾何学にも最適です。
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">ナビゲーターが測定する距離</h3>
+			<p class="mt-3 leading-7">
+				方位と一緒に大圏距離 — 2点間の地球表面上の最短距離 — をハバーサイン公式で計算します。平面マップ上の定規とは異なり、地球の曲率を考慮しているため、実際の移動距離と一致します。フライトプランニングや海事ナビゲーションと同じ計算です。
+			</p>
+			<p class="mt-4 leading-7">
+				このツールは単なる計算機以上の機能を持ちます。プリセットリストから目的地を選択 — 主要世界都市とメッカのカッバを含む — するとサマリーを計算します（「ニューヨークはロンドンから245° WSW、5,570 km離れている」）。さらに、出発点Aからの4つの追加読み取り：<a href="/ja/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">キブラ方向</a>、磁気偏角、<a href="/ja/sun/" class="text-link underline decoration-link/30 hover:decoration-link">太陽位置</a>。1回の入力で、コンパス、キブラ、太陽データがルートとどう連携するかを確認できます。
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">方位をコンパスで使用する</h3>
+			<p class="mt-3 leading-7">
+				このツールの自然なパートナーは<a href="/" class="text-link underline decoration-link/30 hover:decoration-link">オンラインコンパス</a>です。方位を計算し、コンパスを開いて方位が一致するまで回転させます。コンパスを真北に切り替えてステアリングが地図の北と一致するようにし、コンパスが現在地の偏角を自動的に適用します。この組み合わせで、紙上の数字を実際に歩いたり、航海したり、運転したりできるコースに変えます。
+			</p>
+			<p class="mt-4 leading-7">
+				この方位計算機オンラインは、ハイキング前のルート計画、アンテナやソーラーパネルの向き調整、2つの住所間の移動距離の推定、コンパスコースの二重確認、宿題の確認に便利です。すべてがブラウザ上でローカルに実行されるため、プライバシーを重視した無料のオンラインコンパス幾何学ツールで、どこでも信頼できます。インストール不要、アカウント不要、データ収集なし。
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">度数、方向、計画</h3>
+			<p class="mt-3 leading-7">
+				度数で読む方位は正確ですが抽象的です。そのため、このツールは方位を分かりやすいコンパス方向にも変換します。45°は北東、200°は南南西 — 這樣、コンパスや地図と同じ言語で「どの方向に進むべきか」という質問に答えられます。現在地をポイントA、目的地をポイントBとして入力すると、方位、方向、距離、キブラ、偏角、太陽 — すべてが即座に更新されます。これが実際の座標を中心に構築されたオンラインコンパス数学ツールの力です。
+			</p>
+		</div>
+	</section>
+
+	<RelatedTools current="/bearing/" />
+</Layout>

@@ -1,0 +1,82 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+	title="رابطہ"
+	description="اصل آنلائن کمپاس ٹیم سے رابطہ کریں — رائے، بگ رپورٹس، اور تجاویز۔"
+	path="/ur/contact/"
+>
+	<div class="mx-auto max-w-3xl px-4 py-16 sm:px-6 md:py-24">
+		<p class="eyebrow">رابطہ</p>
+		<h1 class="mt-4 text-display-lg text-ink">ہم سے رابطہ کریں۔</h1>
+		<p class="mt-4 text-body-lg text-body">
+			کوئی بگ ملا، کوئی فیچر چاہیے، یا صرف رائے ہے؟ ہم ہر چیز پڑھتے ہیں۔
+		</p>
+
+		<form data-contact-form class="card-lg mt-10 p-6 md:p-8 space-y-5">
+			<div class="grid gap-5 sm:grid-cols-2">
+				<label class="block">
+					<span class="eyebrow block mb-1">نام</span>
+					<input data-c-name class="field-input" type="text" autocomplete="name" placeholder="آپ کا نام" />
+				</label>
+				<label class="block">
+					<span class="eyebrow block mb-1">ای میل</span>
+					<input data-c-email class="field-input" type="email" autocomplete="email" placeholder="you@example.com" />
+				</label>
+			</div>
+			<label class="block">
+				<span class="eyebrow block mb-1">پیغام</span>
+				<textarea
+					data-c-message
+					class="field-input h-36 resize-y py-2"
+					placeholder="ہمیں بتائیں آپ کے ذہن میں کیا ہے..."
+					required
+				></textarea>
+			</label>
+			<div class="flex items-center gap-3">
+				<button data-c-submit type="submit" class="btn-primary">پیغام بھیجیں</button>
+				<p data-c-note class="text-xs text-mute"></p>
+			</div>
+		</form>
+
+		<p class="mt-6 text-xs text-mute leading-5">
+			ای میل ترجیح ہے؟ ہمیں لکھیں hello@trueonlinecompass.com۔ کیونکہ ٹولز بالکل آپ کے براؤزر میں چلتے ہیں، سینسر کے مسائل کی اطلاع دیتے وقت براہ کرم اپنا ڈیوائس اور براؤزر شامل کریں۔
+		</p>
+
+		<div class="card-soft mt-10 p-6">
+			<p class="text-sm font-medium text-ink mb-1">اس آنلائن کمپاس کے بارے میں</p>
+			<p class="text-sm leading-6">
+				اصل آنلائن کمپاس ایک مفت، براؤزر پر مبنی ٹول کٹ ہے: ایک لائیو
+				<a href="/" class="text-link underline decoration-link/30 hover:decoration-link">آنلائن کمپاس</a>
+				اصل اور معدنی شمال کے ساتھ، GPS
+				<a href="/ur/location/" class="text-link underline decoration-link/30 hover:decoration-link">کو辕ینیٹس</a>، ایک
+				<a href="/ur/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">قبلہ فائنڈر</a>، ایک
+				<a href="/ur/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">بیرنگ کیلکیولیٹر</a>، اور ایک
+				<a href="/ur/sun/" class="text-link underline decoration-link/30 hover:decoration-link">سورج کی پوزیشن کیلکیولیٹر</a>۔ سب کچھ مقامی طور پر چلتا ہے — مفت، نجومی، کوئی انسٹال نہیں۔ دیکھیں
+				<a href="/ur/about/" class="text-link underline decoration-link/30 hover:decoration-link">ہمارے بارے میں صفحہ</a>
+				یا ہماری
+				<a href="/ur/privacy/" class="text-link underline decoration-link/30 hover:decoration-link">رجوعیت کی پالیسی</a>
+				اور
+				<a href="/ur/terms/" class="text-link underline decoration-link/30 hover:decoration-link">شرائط و ضوابط</a>۔
+			</p>
+		</div>
+	</div>
+</Layout>
+
+<script>
+	const form = document.querySelector('[data-contact-form]');
+	const note = document.querySelector('[data-c-note]');
+	const submit = document.querySelector('[data-c-submit]');
+
+	form?.addEventListener('submit', (e) => {
+		e.preventDefault();
+		submit.disabled = true;
+		note.textContent = 'بھیجا جا رہا ہے...';
+		// No backend — this form is a placeholder until an endpoint is configured.
+		setTimeout(() => {
+			submit.disabled = false;
+			note.textContent = 'یہ فورم ابھی جڑا نہیں ہے۔ ہمیں ای میل کریں hello@trueonlinecompass.com';
+		}, 800);
+	});
+</script>
