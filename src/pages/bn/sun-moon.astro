@@ -6,18 +6,18 @@ import RelatedTools from '../../components/RelatedTools.astro';
 ---
 
 <Layout
-	title="Sun & Moon Direction on the Compass — Live Azimuth"
-	description="Find the sun and moon direction from the compass diagram. Live sensor heading with the sun's azimuth and the moon's azimuth plotted on the dial for any location."
+	title="কম্পাসে সূর্য ও চাঁদের দিক — লাইভ অজিমুথ"
+	description="কম্পাস ডায়াগ্রাম থেকে সূর্য ও চাঁদের দিক খুঁজে বের করুন। যেকোনো অবস্থানের জন্য ডায়ালে আঁকা সূর্যের অজিমুথ এবং চাঁদের অজিমুথসহ সেন্সরের লাইভ হেডিং।"
 	path="/bn/sun-moon/"
-	keywords="sun direction, moon direction, sun azimuth, moon azimuth, find sun on compass, sun position, moon position"
+	keywords="সূর্যের দিক, চাঁদের দিক, সূর্যের অজিমুথ, চাঁদের অজিমুথ, কম্পাসে সূর্য খুঁজে বের করা, সূর্যের অবস্থান, চাঁদের অবস্থান"
 >
 	<section class="relative overflow-hidden">
 		<div class="mesh-gradient" aria-hidden="true"></div>
 		<div class="relative">
 			<PageHero
-				eyebrow="sun & moon direction"
-				title="Watch the sun and moon on the compass."
-				description="A live phone compass with the sun's azimuth and the moon's azimuth plotted straight onto the dial. Face the marker, and you're looking at the sun or moon — no guessing."
+				eyebrow="সূর্য ও চাঁদের দিক"
+				title="কম্পাসে সূর্য ও চাঁদ দেখুন।"
+				description="সূর্যের অজিমুথ এবং চাঁদের অজিমুথ সরাসরি ডায়ালে আঁকা একটি লাইভ ফোন কম্পাস। মার্কারের দিকে মুখ করুন এবং আপনি সূর্য বা চাঁদের দিকেই তাকিয়ে আছেন — আন্দাজ করার দরকার নেই।"
 			>
 				<SunMoonCompass />
 			</PageHero>
@@ -27,24 +27,25 @@ import RelatedTools from '../../components/RelatedTools.astro';
 	<section class="border-y border-hairline bg-canvas">
 		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-3">
 			<div>
-				<p class="eyebrow mb-2">how to read it</p>
+				<p class="eyebrow mb-2">যেভাবে পড়বেন</p>
 				<p class="text-sm text-body leading-6">
-					The red needle points north. Two colored dots on the dial show the compass direction
-					of the sun (amber) and the moon (blue). Turn until you face a dot to look straight at it.
+					লাল কাঁটা উত্তর দিকে নির্দেশ করে। ডায়ালের দুইটি রঙিন বিন্দু সূর্য (অ্যাম্বার) ও চাঁদের (নীল)
+					কম্পাসের দিক দেখায়। একটি বিন্দুর দিকে মুখ না করা পর্যন্ত ঘুরুন যাতে সরাসরি সেটির দিকে তাকাতে
+					পারেন।
 				</p>
 			</div>
 			<div>
-				<p class="eyebrow mb-2">live updates</p>
+				<p class="eyebrow mb-2">লাইভ আপডেট</p>
 				<p class="text-sm text-body leading-6">
-					The sun and moon markers reposition automatically as the day and night progress. Use
-					your location so the azimuths match the sky above you.
+					দিন ও রাত এগোনোর সঙ্গে সঙ্গে সূর্য ও চাঁদের মার্কার স্বয়ংক্রিয়ভাবে নতুন অবস্থানে সরে যায়।
+					অজিমুথগুলো আপনার মাথার উপরের আকাশের সঙ্গে মিলিয়ে নিতে নিজের অবস্থান ব্যবহার করুন।
 				</p>
 			</div>
 			<div>
-				<p class="eyebrow mb-2">direction, not just numbers</p>
+				<p class="eyebrow mb-2">শুধু সংখ্যা নয়, দিক</p>
 				<p class="text-sm text-body leading-6">
-					Azimuths are absolute directions. The dial overlays them on your real heading, so you
-					can find the sun or moon instantly, even behind the clouds.
+					অজিমুথ হলো পরম দিক। ডায়াল সেগুলো আপনার প্রকৃত হেডিংয়ের উপর বসায়, তাই মেঘের আড়ালেও আপনি
+					সূর্য বা চাঁদ তাৎক্ষণিকভাবে খুঁজে পেতে পারেন।
 				</p>
 			</div>
 		</div>
@@ -52,53 +53,48 @@ import RelatedTools from '../../components/RelatedTools.astro';
 
 	<section class="border-t border-hairline bg-canvas">
 		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
-			<p class="eyebrow">the sun & moon direction tool</p>
-			<h2 class="mt-3 text-display-lg text-ink">Find the sun and moon direction from the compass diagram</h2>
+			<p class="eyebrow">সূর্য ও চাঁদের দিক নির্ণয় টুল</p>
+			<h2 class="mt-3 text-display-lg text-ink">কম্পাস ডায়াগ্রাম থেকে সূর্য ও চাঁদের দিক খুঁজে বের করুন</h2>
 
 			<p class="mt-6 text-body-lg text-body">
-				This page puts the
-				<strong class="text-ink font-medium">sun direction</strong> and
-				<strong class="text-ink font-medium">moon direction</strong> directly onto a live compass
-				diagram. Wherever the amber or blue marker sits on the dial is the compass direction you
-				should face to look at the sun or the moon. It is the fastest way to
-				<strong class="text-ink font-medium">find the sun on a compass</strong> or spot the moon
-				in daylight — no astronomy knowledge required.
+				এই পৃষ্ঠাটি <strong class="text-ink font-medium">সূর্যের দিক</strong> এবং
+				<strong class="text-ink font-medium">চাঁদের দিক</strong> সরাসরি একটি লাইভ কম্পাস ডায়াগ্রামের
+				উপরে স্থাপন করে। অ্যাম্বার বা নীল মার্কার যেখানেই থাকে সেটিই সূর্য বা চাঁদ দেখতে যে দিকে ঘুরতে
+				হবে সেই কম্পাসের দিক। জ্যোতির্বিজ্ঞান সম্পর্কে জ্ঞান ছাড়াই
+				<strong class="text-ink font-medium">কম্পাসে সূর্য খুঁজে বের করার</strong> দ্রুততম উপায় এটি।
 			</p>
 			<p class="mt-4 leading-7">
-				Azimuth is measured clockwise from true north: 0° is north, 90° east, 180° south, and
-				270° west. The tool computes the live azimuth of both bodies for your coordinates and
-				draws them on the dial alongside your real device heading, so the diagram always points
-				you in the right direction.
+				অজিমুথ প্রকৃত উত্তরের ঘড়ির কাঁটার দিকে পরিমাপ করা হয়: 0° উত্তর, 90° পূর্ব, 180° দক্ষিণ এবং 270°
+				পশ্চিম। টুলটি আপনার স্থানাঙ্কের জন্য দুই বস্তুর লাইভ অজিমুথ গণনা করে এবং আপনার প্রকৃত হেডিংয়ের
+				পাশে ডায়ালে এঁকে দেয়, যাতে ডায়াগ্রাম সবসময় সঠিক দিক দেখায়।
 			</p>
 
-			<h3 class="mt-10 text-display-sm text-ink">Reading the sun and moon on the dial</h3>
+			<h3 class="mt-10 text-display-sm text-ink">ডায়ালে সূর্য ও চাঁদ পড়া</h3>
 			<p class="mt-3 leading-7">
-				The <strong class="text-ink font-medium">amber marker</strong> is the sun and the
-				<strong class="text-ink font-medium">blue marker</strong> is the moon. Each shows the
-				body's compass bearing in degrees and as a compass point, along with its elevation above
-				the horizon. When a marker points off the dial or reads a low elevation, that body is
-				below the horizon — it is under your feet, not in view.
+				<strong class="text-ink font-medium">অ্যাম্বার মার্কার</strong> হলো সূর্য এবং
+				<strong class="text-ink font-medium">নীল মার্কার</strong> হলো চাঁদ। প্রত্যেকটি বস্তুটির হেডিং
+				ডিগ্রি ও মূলদিক হিসেবে দেখায়, সাথে দিগন্তের ওপর এর উচ্চতাও দেখায়। কোনো মার্কার যখন ডায়ালের বাইরে
+				নির্দেশ করে বা কম উচ্চতা দেখায়, তখন সেই বস্তুটি দিগন্তের নিচে — মানে আপনার পায়ের নিচে, দৃশ্যমান নয়।
 			</p>
 			<p class="mt-4 leading-7">
-				The sun rises in the east and sets in the west, so its marker sweeps across the northern
-				half of the dial (in the northern hemisphere) from morning to evening. The moon follows a
-				similar path but shifts roughly 12 degrees later each day, which is why its position on
-				the compass changes from one day to the next.
+				সূর্য পূর্ব দিকে ওঠে এবং পশ্চিম দিকে অস্ত যায়, তাই (উত্তর গোলার্ধে) সকাল থেকে বিকেল এর মার্কার
+				ডায়ালের উত্তর অর্ধ বৃত্ত অতিক্রম করে। চাঁদ একই রকম পথ ধরে তবে প্রতি দিন প্রায় ১২ ডিগ্রি পিছিয়ে
+				যায়, তাই কম্পাসে এর অবস্থান দিনে দিনে বদলে যায়।
 			</p>
 
-			<h3 class="mt-10 text-display-sm text-ink">Why use the compass to find the sun and moon</h3>
+			<h3 class="mt-10 text-display-sm text-ink">সূর্য ও চাঁদ খুঁজতে কম্পাস কেন ব্যবহার করবেন</h3>
 			<p class="mt-3 leading-7">
-				A compass direction is far more practical than a set of sky coordinates. Whether you are
-				photographing, planning shade, aligning a satellite dish, checking where light will fall,
-				or just curious which way the moon is tonight, seeing the direction as a point on the
-				compass makes it instantly actionable — turn, and there it is.
+				কম্পাসের দিক আকাশের স্থানাঙ্কের সেটের চেয়ে অনেক বেশি কার্যকর। আপনি ছবি তুলছেন, ছায়ার পরিকল্পনা
+				করছেন, স্যাটেলাইট ডিশ সারিবদ্ধ করছেন, আলো কোথায় পড়বে তা দেখছেন, বা আজ রাতে চাঁদ কোথায় সেটাই
+				শুধু জানতে চান না কেন — দিকটিকে কম্পাসের একটি বিন্দু হিসেবে দেখা এটিকে সঙ্গে সঙ্গেই কার্যকর করে
+				তোলে: ঘুরুন, আর দেখে নিন।
 			</p>
 			<p class="mt-4 leading-7">
-				Everything runs locally in your browser and no data is uploaded. Combined with the
-				<a href="/bn/sun/" class="text-link underline decoration-link/30 hover:decoration-link">sun position calculator</a>
-				and the
-				<a href="/bn/compass/" class="text-link underline decoration-link/30 hover:decoration-link">online compass</a>,
-				this gives you the full picture of what is above you, wherever you are.
+				সবকিছু আপনার ব্রাউজারে স্থানীয়ভাবে চলে এবং কোনো ডেটা আপলোড হয় না।
+				<a href="/bn/sun/" class="text-link underline decoration-link/30 hover:decoration-link">সূর্যের অবস্থান ক্যালকুলেটর</a>
+				এবং
+				<a href="/bn/compass/" class="text-link underline decoration-link/30 hover:decoration-link">অনলাইন কম্পাস</a>
+				এর সাথে মিলিয়ে যে যেখানেই থাকুন, মাথার উপরে কী রয়েছে তার পূর্ণ চিত্র পেয়ে যাবেন।
 			</p>
 		</div>
 	</section>

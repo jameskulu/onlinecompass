@@ -6,18 +6,18 @@ import RelatedTools from '../../components/RelatedTools.astro';
 ---
 
 <Layout
-	title="Sun & Moon Direction on the Compass — Live Azimuth"
-	description="Find the sun and moon direction from the compass diagram. Live sensor heading with the sun's azimuth and the moon's azimuth plotted on the dial for any location."
+	title="Richtung von Sonne und Mond auf dem Kompass — Live-Azimut"
+	description="Finde die Richtung von Sonne und Mond anhand des Kompassdiagramms. Live-Sensorkurs mit Azimut der Sonne und Azimut des Mondes, auf die Skala für jeden Standort gezeichnet."
 	path="/de/sun-moon/"
-	keywords="sun direction, moon direction, sun azimuth, moon azimuth, find sun on compass, sun position, moon position"
+	keywords="Sonnenrichtung, Mondrichtung, Azimut der Sonne, Azimut des Mondes, Sonne auf dem Kompass finden, Sonnenposition, Mondposition"
 >
 	<section class="relative overflow-hidden">
 		<div class="mesh-gradient" aria-hidden="true"></div>
 		<div class="relative">
 			<PageHero
-				eyebrow="sun & moon direction"
-				title="Watch the sun and moon on the compass."
-				description="A live phone compass with the sun's azimuth and the moon's azimuth plotted straight onto the dial. Face the marker, and you're looking at the sun or moon — no guessing."
+				eyebrow="Richtung von Sonne und Mond"
+				title="Beobachte Sonne und Mond auf dem Kompass."
+				description="Ein Live-Handy-Kompass mit dem Azimut von Sonne und Mond direkt auf der Skala. Zeige auf den Marker und du schaust auf die Sonne oder den Mond — ohne Raten."
 			>
 				<SunMoonCompass />
 			</PageHero>
@@ -27,24 +27,25 @@ import RelatedTools from '../../components/RelatedTools.astro';
 	<section class="border-y border-hairline bg-canvas">
 		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-3">
 			<div>
-				<p class="eyebrow mb-2">how to read it</p>
+				<p class="eyebrow mb-2">so liest du ihn</p>
 				<p class="text-sm text-body leading-6">
-					The red needle points north. Two colored dots on the dial show the compass direction
-					of the sun (amber) and the moon (blue). Turn until you face a dot to look straight at it.
+					Die rote Nadel zeigt nach Norden. Zwei farbige Punkte auf der Skala zeigen die Kompassrichtung
+					der Sonne (gelb) und des Mondes (blau). Drehe dich, bis du einem Punkt zugewandt bist, um ihn
+					direkt anzusehen.
 				</p>
 			</div>
 			<div>
-				<p class="eyebrow mb-2">live updates</p>
+				<p class="eyebrow mb-2">Live-Aktualisierungen</p>
 				<p class="text-sm text-body leading-6">
-					The sun and moon markers reposition automatically as the day and night progress. Use
-					your location so the azimuths match the sky above you.
+					Die Marker für Sonne und Mond werden im Laufe des Tages und der Nacht automatisch neu
+					positioniert. Nutze deinen Standort, damit die Azimute zum Himmel über dir passen.
 				</p>
 			</div>
 			<div>
-				<p class="eyebrow mb-2">direction, not just numbers</p>
+				<p class="eyebrow mb-2">Richtung, nicht nur Zahlen</p>
 				<p class="text-sm text-body leading-6">
-					Azimuths are absolute directions. The dial overlays them on your real heading, so you
-					can find the sun or moon instantly, even behind the clouds.
+					Azimute sind absolute Richtungen. Die Skala legt sie über deinen tatsächlichen Kurs, sodass du
+					die Sonne oder den Mond sofort findest, sogar hinter den Wolken.
 				</p>
 			</div>
 		</div>
@@ -52,53 +53,52 @@ import RelatedTools from '../../components/RelatedTools.astro';
 
 	<section class="border-t border-hairline bg-canvas">
 		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
-			<p class="eyebrow">the sun & moon direction tool</p>
-			<h2 class="mt-3 text-display-lg text-ink">Find the sun and moon direction from the compass diagram</h2>
+			<p class="eyebrow">das Werkzeug für die Richtung von Sonne und Mond</p>
+			<h2 class="mt-3 text-display-lg text-ink">Finde die Richtung von Sonne und Mond anhand des Kompassdiagramms</h2>
 
 			<p class="mt-6 text-body-lg text-body">
-				This page puts the
-				<strong class="text-ink font-medium">sun direction</strong> and
-				<strong class="text-ink font-medium">moon direction</strong> directly onto a live compass
-				diagram. Wherever the amber or blue marker sits on the dial is the compass direction you
-				should face to look at the sun or the moon. It is the fastest way to
-				<strong class="text-ink font-medium">find the sun on a compass</strong> or spot the moon
-				in daylight — no astronomy knowledge required.
+				Diese Seite setzt die <strong class="text-ink font-medium">Sonnenrichtung</strong> und die
+				<strong class="text-ink font-medium">Mondrichtung</strong> direkt auf ein Live-Kompassdiagramm.
+				Wo auch immer der gelbe oder blaue Marker auf der Skala steht, ist die Kompassrichtung, in die du
+				dich wenden musst, um die Sonne oder den Mond zu sehen. So findest du am schnellsten
+				<strong class="text-ink font-medium">die Sonne auf dem Kompass</strong> — oder den Mond am Tag —
+				ohne astronomisches Vorwissen.
 			</p>
 			<p class="mt-4 leading-7">
-				Azimuth is measured clockwise from true north: 0° is north, 90° east, 180° south, and
-				270° west. The tool computes the live azimuth of both bodies for your coordinates and
-				draws them on the dial alongside your real device heading, so the diagram always points
-				you in the right direction.
+				Der Azimut wird im Uhrzeigersinn vom geografischen Norden gemessen: 0° Norden, 90° Osten, 180°
+				Süden und 270° Westen. Das Werkzeug berechnet den Live-Azimut beider Himmelskörper für deine
+				Koordinaten und zeichnet sie zusammen mit deinem tatsächlichen Kurs auf die Skala, sodass das
+				Diagramm dir immer die richtige Richtung zeigt.
 			</p>
 
-			<h3 class="mt-10 text-display-sm text-ink">Reading the sun and moon on the dial</h3>
+			<h3 class="mt-10 text-display-sm text-ink">Sonne und Mond auf der Skala ablesen</h3>
 			<p class="mt-3 leading-7">
-				The <strong class="text-ink font-medium">amber marker</strong> is the sun and the
-				<strong class="text-ink font-medium">blue marker</strong> is the moon. Each shows the
-				body's compass bearing in degrees and as a compass point, along with its elevation above
-				the horizon. When a marker points off the dial or reads a low elevation, that body is
-				below the horizon — it is under your feet, not in view.
+				Der <strong class="text-ink font-medium">gelbe Marker</strong> ist die Sonne und der
+				<strong class="text-ink font-medium">blaue Marker</strong> ist der Mond. Jeder zeigt den Kurs des
+				Himmelskörpers in Grad und als Himmelsrichtung sowie seine Höhe über dem Horizont. Zeigt ein
+				Marker über die Skala hinaus oder eine geringe Höhe an, dann steht dieser Himmelskörper unter dem
+				Horizont — er ist unter deinen Füßen und nicht sichtbar.
 			</p>
 			<p class="mt-4 leading-7">
-				The sun rises in the east and sets in the west, so its marker sweeps across the northern
-				half of the dial (in the northern hemisphere) from morning to evening. The moon follows a
-				similar path but shifts roughly 12 degrees later each day, which is why its position on
-				the compass changes from one day to the next.
+				Die Sonne geht im Osten auf und im Westen unter, also wandert ihr Marker in der nördlichen
+				Hemisphäre im Laufe des Tages über die Nordhälfte der Skala. Der Mond folgt einem ähnlichen Weg,
+				verspätet sich aber jeden Tag um etwa 12 Grad, weshalb sich seine Position auf dem Kompass von Tag
+				zu Tag ändert.
 			</p>
 
-			<h3 class="mt-10 text-display-sm text-ink">Why use the compass to find the sun and moon</h3>
+			<h3 class="mt-10 text-display-sm text-ink">Warum den Kompass nutzen, um Sonne und Mond zu finden</h3>
 			<p class="mt-3 leading-7">
-				A compass direction is far more practical than a set of sky coordinates. Whether you are
-				photographing, planning shade, aligning a satellite dish, checking where light will fall,
-				or just curious which way the moon is tonight, seeing the direction as a point on the
-				compass makes it instantly actionable — turn, and there it is.
+				Eine Kompassrichtung ist viel praktischer als eine Reihe von Himmelskoordinaten. Ob du
+				fotografierst, Schatten planst, eine Satellitenschüssel ausrichtest, prüfst, wo das Licht hinfällt,
+				oder einfach neugierig bist, wo der Mond heute Nacht steht — die Richtung als Punkt auf dem Kompass
+				zu sehen, macht sie sofort nützlich: Dreh dich, und da ist er.
 			</p>
 			<p class="mt-4 leading-7">
-				Everything runs locally in your browser and no data is uploaded. Combined with the
-				<a href="/de/sun/" class="text-link underline decoration-link/30 hover:decoration-link">sun position calculator</a>
-				and the
-				<a href="/de/compass/" class="text-link underline decoration-link/30 hover:decoration-link">online compass</a>,
-				this gives you the full picture of what is above you, wherever you are.
+				Alles läuft lokal in deinem Browser, es werden keine Daten hochgeladen. Zusammen mit dem
+				<a href="/de/sun/" class="text-link underline decoration-link/30 hover:decoration-link">Sonnenpositionsrechner</a>
+				und dem
+				<a href="/de/compass/" class="text-link underline decoration-link/30 hover:decoration-link">Online-Kompass</a>
+				erhältst du ein vollständiges Bild dessen, was über dir ist, egal wo du dich befindest.
 			</p>
 		</div>
 	</section>

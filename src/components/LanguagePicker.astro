@@ -5,7 +5,7 @@ import { getLangFromUrl } from '../i18n/utils';
 const lang = getLangFromUrl(Astro.url);
 const currentPath = Astro.url.pathname;
 const segments = currentPath.split('/').filter(Boolean);
-const pathWithoutLang = segments.length > 1 ? '/' + segments.slice(1).join('/') + (segments.length > 1 && !segments[segments.length - 1].endsWith('/') ? '/' : '') : '/';
+const pathWithoutLang = segments.length > 1 ? '/' + segments.slice(1).join('/') : '';
 ---
 
 <div class="relative" data-lang-picker>

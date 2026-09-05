@@ -6,18 +6,18 @@ import RelatedTools from '../../components/RelatedTools.astro';
 ---
 
 <Layout
-	title="Sun & Moon Direction on the Compass — Live Azimuth"
-	description="Find the sun and moon direction from the compass diagram. Live sensor heading with the sun's azimuth and the moon's azimuth plotted on the dial for any location."
+	title="Direção do sol e da lua na bússola — Azimute ao vivo"
+	description="Encontre a direção do sol e da lua a partir do diagrama da bússola. Rumo ao vivo dos sensores com o azimute do sol e o azimute da lua desenhados no mostrador para qualquer localização."
 	path="/pt/sun-moon/"
-	keywords="sun direction, moon direction, sun azimuth, moon azimuth, find sun on compass, sun position, moon position"
+	keywords="direção do sol, direção da lua, azimute do sol, azimute da lua, encontrar o sol na bússola, posição do sol, posição da lua"
 >
 	<section class="relative overflow-hidden">
 		<div class="mesh-gradient" aria-hidden="true"></div>
 		<div class="relative">
 			<PageHero
-				eyebrow="sun & moon direction"
-				title="Watch the sun and moon on the compass."
-				description="A live phone compass with the sun's azimuth and the moon's azimuth plotted straight onto the dial. Face the marker, and you're looking at the sun or moon — no guessing."
+				eyebrow="direção do sol e da lua"
+				title="Observe o sol e a lua na bússola."
+				description="Uma bússola de celular ao vivo com o azimute do sol e da lua desenhados diretamente no mostrador. Vire-se para o marcador e você estará olhando para o sol ou para a lua — sem adivinhar."
 			>
 				<SunMoonCompass />
 			</PageHero>
@@ -27,24 +27,25 @@ import RelatedTools from '../../components/RelatedTools.astro';
 	<section class="border-y border-hairline bg-canvas">
 		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-3">
 			<div>
-				<p class="eyebrow mb-2">how to read it</p>
+				<p class="eyebrow mb-2">como ler</p>
 				<p class="text-sm text-body leading-6">
-					The red needle points north. Two colored dots on the dial show the compass direction
-					of the sun (amber) and the moon (blue). Turn until you face a dot to look straight at it.
+					A agulha vermelha aponta para o norte. Dois pontos coloridos no mostrador mostram a direção
+					da bússola do sol (âmbar) e da lua (azul). Gire até encarar um ponto para olhar diretamente
+					para ele.
 				</p>
 			</div>
 			<div>
-				<p class="eyebrow mb-2">live updates</p>
+				<p class="eyebrow mb-2">atualizações ao vivo</p>
 				<p class="text-sm text-body leading-6">
-					The sun and moon markers reposition automatically as the day and night progress. Use
-					your location so the azimuths match the sky above you.
+					Os marcadores do sol e da lua se reposicionam automaticamente conforme o dia e a noite
+					avançam. Use sua localização para que os azimutes correspondam ao céu acima de você.
 				</p>
 			</div>
 			<div>
-				<p class="eyebrow mb-2">direction, not just numbers</p>
+				<p class="eyebrow mb-2">direção, não apenas números</p>
 				<p class="text-sm text-body leading-6">
-					Azimuths are absolute directions. The dial overlays them on your real heading, so you
-					can find the sun or moon instantly, even behind the clouds.
+					Os azimutes são direções absolutas. O mostrador os sobrepõe ao seu rumo real, para que você
+					encontre o sol ou a lua instantaneamente, mesmo atrás das nuvens.
 				</p>
 			</div>
 		</div>
@@ -52,53 +53,50 @@ import RelatedTools from '../../components/RelatedTools.astro';
 
 	<section class="border-t border-hairline bg-canvas">
 		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
-			<p class="eyebrow">the sun & moon direction tool</p>
-			<h2 class="mt-3 text-display-lg text-ink">Find the sun and moon direction from the compass diagram</h2>
+			<p class="eyebrow">a ferramenta de direção do sol e da lua</p>
+			<h2 class="mt-3 text-display-lg text-ink">Encontre a direção do sol e da lua a partir do diagrama da bússola</h2>
 
 			<p class="mt-6 text-body-lg text-body">
-				This page puts the
-				<strong class="text-ink font-medium">sun direction</strong> and
-				<strong class="text-ink font-medium">moon direction</strong> directly onto a live compass
-				diagram. Wherever the amber or blue marker sits on the dial is the compass direction you
-				should face to look at the sun or the moon. It is the fastest way to
-				<strong class="text-ink font-medium">find the sun on a compass</strong> or spot the moon
-				in daylight — no astronomy knowledge required.
+				Esta página coloca a <strong class="text-ink font-medium">direção do sol</strong> e a
+				<strong class="text-ink font-medium">direção da lua</strong> diretamente sobre um diagrama de
+				bússola ao vivo. Onde quer que o marcador âmbar ou azul esteja no mostrador é a direção da bússola
+				para a qual você deve se virar para ver o sol ou a lua. É a maneira mais rápida de
+				<strong class="text-ink font-medium">encontrar o sol na bússola</strong> ou localizar a lua
+				durante o dia — sem conhecimento de astronomia.
 			</p>
 			<p class="mt-4 leading-7">
-				Azimuth is measured clockwise from true north: 0° is north, 90° east, 180° south, and
-				270° west. The tool computes the live azimuth of both bodies for your coordinates and
-				draws them on the dial alongside your real device heading, so the diagram always points
-				you in the right direction.
+				O azimute é medido no sentido horário a partir do norte verdadeiro: 0° norte, 90° leste, 180° sul
+				e 270° oeste. A ferramenta calcula o azimute ao vivo de ambos os corpos para suas coordenadas e os
+				desenha no mostrador ao lado do seu rumo real, para que o diagrama sempre aponte a direção correta.
 			</p>
 
-			<h3 class="mt-10 text-display-sm text-ink">Reading the sun and moon on the dial</h3>
+			<h3 class="mt-10 text-display-sm text-ink">Lendo o sol e a lua no mostrador</h3>
 			<p class="mt-3 leading-7">
-				The <strong class="text-ink font-medium">amber marker</strong> is the sun and the
-				<strong class="text-ink font-medium">blue marker</strong> is the moon. Each shows the
-				body's compass bearing in degrees and as a compass point, along with its elevation above
-				the horizon. When a marker points off the dial or reads a low elevation, that body is
-				below the horizon — it is under your feet, not in view.
+				O <strong class="text-ink font-medium">marcador âmbar</strong> é o sol e o
+				<strong class="text-ink font-medium">marcador azul</strong> é a lua. Cada um mostra o rumo do
+				corpo em graus e como ponto cardeal, além da sua elevação acima do horizonte. Quando um marcador
+				aponta para fora do mostrador ou indica uma elevação baixa, esse corpo está abaixo do horizonte —
+				está sob seus pés, não visível.
 			</p>
 			<p class="mt-4 leading-7">
-				The sun rises in the east and sets in the west, so its marker sweeps across the northern
-				half of the dial (in the northern hemisphere) from morning to evening. The moon follows a
-				similar path but shifts roughly 12 degrees later each day, which is why its position on
-				the compass changes from one day to the next.
+				O sol nasce no leste e se põe no oeste, então seu marcador percorre a metade norte do mostrador
+				(no hemisfério norte) da manhã à tarde. A lua segue um caminho semelhante, mas se atrasa cerca de
+				12 graus por dia, por isso sua posição na bússola muda de um dia para o outro.
 			</p>
 
-			<h3 class="mt-10 text-display-sm text-ink">Why use the compass to find the sun and moon</h3>
+			<h3 class="mt-10 text-display-sm text-ink">Por que usar a bússola para encontrar o sol e a lua</h3>
 			<p class="mt-3 leading-7">
-				A compass direction is far more practical than a set of sky coordinates. Whether you are
-				photographing, planning shade, aligning a satellite dish, checking where light will fall,
-				or just curious which way the moon is tonight, seeing the direction as a point on the
-				compass makes it instantly actionable — turn, and there it is.
+				Uma direção da bússola é muito mais prática do que um conjunto de coordenadas celestes. Esteja você
+				fotografando, planejando sombras, alinhando uma antena parabólica, verificando onde a luz vai cair
+				ou simplesmente curioso sobre onde a lua está esta noite, ver a direção como um ponto na bússola a
+				torna imediatamente útil — gire e lá está.
 			</p>
 			<p class="mt-4 leading-7">
-				Everything runs locally in your browser and no data is uploaded. Combined with the
-				<a href="/pt/sun/" class="text-link underline decoration-link/30 hover:decoration-link">sun position calculator</a>
-				and the
-				<a href="/pt/compass/" class="text-link underline decoration-link/30 hover:decoration-link">online compass</a>,
-				this gives you the full picture of what is above you, wherever you are.
+				Tudo roda localmente no seu navegador e nenhum dado é enviado. Combinado com o
+				<a href="/pt/sun/" class="text-link underline decoration-link/30 hover:decoration-link">calculador de posição solar</a>
+				e a
+				<a href="/pt/compass/" class="text-link underline decoration-link/30 hover:decoration-link">Bússola online</a>,
+				você tem o quadro completo do que está acima de você, onde quer que esteja.
 			</p>
 		</div>
 	</section>
