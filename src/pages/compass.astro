@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Compass from '../components/Compass.astro';
-import PageHero from '../components/PageHero.astro';
 import RelatedTools from '../components/RelatedTools.astro';
 ---
 
@@ -13,14 +12,13 @@ import RelatedTools from '../components/RelatedTools.astro';
 >
 	<section class="relative overflow-hidden">
 		<div class="mesh-gradient" aria-hidden="true"></div>
-		<div class="relative">
-			<PageHero
-				eyebrow="live compass"
-				title="Your phone is the compass."
-				description="Grant sensor access and this page turns your phone into a precise digital compass — 360° dial, smooth needle, and both magnetic and true north readings."
-			>
-				<Compass />
-			</PageHero>
+		<div class="relative flex flex-col items-center justify-center px-4 pt-12 pb-8 sm:pt-16 sm:pb-10 md:pt-20 md:pb-12">
+			<Compass />
+			<div class="mt-10 max-w-2xl text-center md:mt-14">
+				<p class="eyebrow">live compass</p>
+				<h1 class="mt-4 text-display-lg text-ink md:text-[40px] md:leading-[48px]">Your phone is the compass.</h1>
+				<p class="mt-4 text-body-lg text-body">Grant sensor access and this page turns your phone into a precise digital compass — 360° dial, smooth needle, and both magnetic and true north readings.</p>
+			</div>
 		</div>
 	</section>
 

@@ -118,8 +118,10 @@ export function sunPosition(date, lat, lng) {
   const d = toDays(date);
   const c = sunCoords(d);
   const H = siderealTime(d, lw) - c.ra;
+  // azimuth() uses the astronomical convention (0=due south, +toward west).
+  // Convert to a compass bearing measured clockwise from north (+180°).
   return {
-    azimuth: normalize((azimuth(H, phi, c.dec) * 180) / Math.PI),
+    azimuth: normalize((azimuth(H, phi, c.dec) * 180) / Math.PI + 180),
     altitude: altitude(H, phi, c.dec) * (180 / Math.PI),
   };
 }
@@ -183,7 +185,7 @@ export function moonPosition(date, lat, lng) {
   const az = azimuth(H, phi, c.dec);
   const alt = altitude(H, phi, c.dec);
   return {
-    azimuth: normalize((az * 180) / Math.PI),
+    azimuth: normalize((az * 180) / Math.PI + 180),
     altitude: alt * (180 / Math.PI),
     distance: c.dist,
   };

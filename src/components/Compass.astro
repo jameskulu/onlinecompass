@@ -4,10 +4,23 @@ import QRCode from 'qrcode';
 const pageUrl = new URL(Astro.url.pathname, Astro.site).toString();
 const qrDataUrl = import.meta.env.PROD ? await QRCode.toDataURL(pageUrl, { margin: 1, width: 240 }) : null;
 ---
-<div class="compass-root relative w-full max-w-xl mx-auto select-none">
+<div class="compass-root relative w-full max-w-2xl mx-auto select-none">
   <!-- Live compass -->
-  <div data-live-view class="flex flex-col items-center gap-8">
-    <div class="relative w-full max-w-[360px] aspect-square">
+  <div data-live-view class="flex flex-col items-center gap-6">
+    <!-- Enable compass — primary CTA shown before the dial -->
+    <div data-perm-card class="hidden w-full max-w-md flex-col items-center gap-4 rounded-2xl border border-hairline bg-canvas p-6 text-center shadow-float">
+      <div>
+        <p class="text-display-sm text-ink mb-1">Enable the live compass</p>
+        <p class="text-sm text-body leading-5">
+          Tap the button below to let this page read your device's sensors — then hold your
+          phone flat and the dial comes alive.
+        </p>
+      </div>
+      <button data-perm-btn class="btn-primary w-full">Enable live compass</button>
+      <p class="text-xs text-mute">Your location stays on your device.</p>
+    </div>
+
+    <div class="relative w-full max-w-[480px] aspect-square">
       <div data-dial-svg class="absolute inset-0"></div>
 
       <!-- status pill -->
@@ -35,12 +48,12 @@ const qrDataUrl = import.meta.env.PROD ? await QRCode.toDataURL(pageUrl, { margi
     </div>
 
     <!-- Heading readout -->
-    <div class="text-center -mt-4">
+    <div class="text-center -mt-2">
       <div class="flex items-end justify-center gap-2">
-        <span data-heading-deg class="text-[64px] leading-none font-semibold text-ink tracking-tight tabular-nums">
+        <span data-heading-deg class="text-[80px] leading-none font-semibold text-ink tracking-tight tabular-nums">
           0°
         </span>
-        <span data-heading-dir class="text-display-md text-body mb-1">N</span>
+        <span data-heading-dir class="text-display-md text-body mb-1.5">N</span>
       </div>
       <p class="eyebrow mt-3" data-heading-desc>heading</p>
 
@@ -71,7 +84,6 @@ const qrDataUrl = import.meta.env.PROD ? await QRCode.toDataURL(pageUrl, { margi
       <div class="text-left">
         <p class="text-sm font-medium text-ink mb-1">Demo mode</p>
         <p data-demo-text class="text-xs text-body leading-5"></p>
-        <button data-perm-btn class="btn-primary mt-3 hidden">Enable live compass</button>
         <div data-demo-share class="hidden mt-4 flex-col items-stretch gap-4 border-t border-hairline pt-4 sm:items-center sm:flex-row" data-page-url={pageUrl} data-qr={qrDataUrl ? 'yes' : 'no'}>
           <img
             data-demo-qr
@@ -110,6 +122,7 @@ const qrDataUrl = import.meta.env.PROD ? await QRCode.toDataURL(pageUrl, { margi
 
   const $ = (sel) => root.querySelector(sel);
   const svgHost = $('[data-dial-svg]');
+  const permCard = $('[data-perm-card]');
   const permBtn = $('[data-perm-btn]');
   const degEl = $('[data-heading-deg]');
   const dirEl = $('[data-heading-dir]');
@@ -154,7 +167,7 @@ let mode = 'true';
   /* ---------------- dial ---------------- */
 
   const NS = 'http://www.w3.org/2000/svg';
-  const SIZE = 320;
+  const SIZE = 480;
   const C = SIZE / 2;
 
   const svg = document.createElementNS(NS, 'svg');
@@ -188,7 +201,7 @@ let mode = 'true';
   }
 
   function buildDial() {
-    const R = 148;
+    const R = 222;
     const ink = 'var(--color-ink)';
     const body = 'var(--color-body)';
     const mute = 'var(--color-mute)';
@@ -209,9 +222,9 @@ let mode = 'true';
       const a = ((i - 90) * Math.PI) / 180;
       const major = i % 30 === 0;
       const minor = i % 10 === 0 && !major;
-      const inner = major ? R - 18 : minor ? R - 10 : R - 6;
-      const outer = R - 2;
-      const w = major ? 2 : minor ? 1.6 : 1;
+      const inner = major ? R - 27 : minor ? R - 15 : R - 9;
+      const outer = R - 3;
+      const w = major ? 2.5 : minor ? 2 : 1.2;
       const col = major ? ink : body;
       rose.appendChild(
         line(
@@ -225,7 +238,7 @@ let mode = 'true';
       );
       if (major) {
         const deg = i % 360 === 0 ? '0' : String(i);
-        const label = text(C + (R - 32) * Math.cos(a), C + (R - 32) * Math.sin(a), deg, '', 11);
+        const label = text(C + (R - 48) * Math.cos(a), C + (R - 48) * Math.sin(a), deg, '', 16);
         label.setAttribute('fill', mute);
         rose.appendChild(label);
       }
@@ -233,18 +246,18 @@ let mode = 'true';
 
     // cardinal + intercardinal labels
     const cards = [
-      [0, 'N', 26, 'var(--color-error)'],
-      [90, 'E', 20, body],
-      [180, 'S', 20, body],
-      [270, 'W', 20, body],
-      [45, 'NE', 13, mute],
-      [135, 'SE', 13, mute],
-      [225, 'SW', 13, mute],
-      [315, 'NW', 13, mute],
+      [0, 'N', 39, 'var(--color-error)'],
+      [90, 'E', 30, body],
+      [180, 'S', 30, body],
+      [270, 'W', 30, body],
+      [45, 'NE', 20, mute],
+      [135, 'SE', 20, mute],
+      [225, 'SW', 20, mute],
+      [315, 'NW', 20, mute],
     ];
     for (const [deg, label, size, fill] of cards) {
       const a = ((deg - 90) * Math.PI) / 180;
-      const t = text(C + (R - 56) * Math.cos(a), C + (R - 56) * Math.sin(a), label, '', size);
+      const t = text(C + (R - 84) * Math.cos(a), C + (R - 84) * Math.sin(a), label, '', size);
       t.setAttribute('fill', fill);
       t.setAttribute('font-weight', deg === 0 ? '600' : '400');
       rose.appendChild(t);
@@ -252,12 +265,12 @@ let mode = 'true';
 
     // needle — north (red) + south (gray)
     const north = document.createElementNS(NS, 'polygon');
-    north.setAttribute('points', `${C},${C - R + 34} ${C - 9},${C} ${C + 9},${C}`);
+    north.setAttribute('points', `${C},${C - R + 51} ${C - 14},${C} ${C + 14},${C}`);
     north.setAttribute('fill', 'var(--color-error)');
     rose.appendChild(north);
 
     const south = document.createElementNS(NS, 'polygon');
-    south.setAttribute('points', `${C},${C + R - 26} ${C - 7},${C} ${C + 7},${C}`);
+    south.setAttribute('points', `${C},${C + R - 39} ${C - 11},${C} ${C + 11},${C}`);
     south.setAttribute('fill', body);
     rose.appendChild(south);
 
@@ -265,7 +278,7 @@ let mode = 'true';
     const cap = document.createElementNS(NS, 'circle');
     cap.setAttribute('cx', C);
     cap.setAttribute('cy', C);
-    cap.setAttribute('r', 10);
+    cap.setAttribute('r', 15);
     cap.setAttribute('fill', 'var(--color-canvas)');
     cap.setAttribute('stroke', hairline);
     rose.appendChild(cap);
@@ -274,7 +287,7 @@ let mode = 'true';
     const qibla = document.createElementNS(NS, 'g');
     qibla.setAttribute('data-marker', 'qibla');
     qibla.style.display = 'none';
-    const qArrow = line(C, C - R + 40, C, C - R + 60, 'var(--color-link)', 3);
+    const qArrow = line(C, C - R + 60, C, C - R + 90, 'var(--color-link)', 3);
     qibla.appendChild(qArrow);
     rose.appendChild(qibla);
 
@@ -282,7 +295,7 @@ let mode = 'true';
     const sun = document.createElementNS(NS, 'g');
     sun.setAttribute('data-marker', 'sun');
     sun.style.display = 'none';
-    const sArrow = line(C, C - R + 40, C, C - R + 60, 'var(--color-amber)', 3);
+    const sArrow = line(C, C - R + 60, C, C - R + 90, 'var(--color-amber)', 3);
     sun.appendChild(sArrow);
     rose.appendChild(sun);
   }
@@ -329,6 +342,13 @@ let mode = 'true';
 
   compass.subscribe((r) => {
     latest = mode === 'true' ? (r.trueHeading ?? r.magnetic) : (r.magnetic ?? r.trueHeading);
+    // Once the first real reading arrives on iOS/Android, retire the
+    // intro/demo card so the dial becomes the full focus.
+    if (noticeLive && latest != null && r.source != null) {
+      noticeLive = false;
+      demoNotice.classList.add('hidden');
+      demoNotice.classList.remove('flex');
+    }
     if (r.source != null) {
       srcEl.textContent = r.source;
     }
@@ -453,6 +473,8 @@ let mode = 'true';
       return;
     }
     permBtn.textContent = 'Live';
+    permCard.classList.add('hidden');
+    permCard.classList.remove('flex');
     compass.start();
   });
 
@@ -518,10 +540,10 @@ let mode = 'true';
 
   if (needsPermission) {
     // iOS (iPhone/iPad) — sensors are gated behind an explicit user gesture.
-    // The dial stays still until the user enables it.
-    permBtn.classList.remove('hidden');
+    // Show the enable card ahead of the dial until the user taps it.
+    permCard.classList.remove('hidden');
+    permCard.classList.add('flex');
     noticeLive = true;
-    enterDemo('Live heading needs your device sensors. Tap "Enable live compass" to start.');
   } else if (isMobile) {
     // Android phone/tablet — no prompt required; attach listeners and see what fires.
     permBtn.classList.add('hidden');

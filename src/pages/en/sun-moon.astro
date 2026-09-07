@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import SunMoonCompass from '../../components/SunMoonCompass.astro';
-import PageHero from '../../components/PageHero.astro';
+
 import RelatedTools from '../../components/RelatedTools.astro';
 ---
 
@@ -13,14 +13,13 @@ import RelatedTools from '../../components/RelatedTools.astro';
 >
 	<section class="relative overflow-hidden">
 		<div class="mesh-gradient" aria-hidden="true"></div>
-		<div class="relative">
-			<PageHero
-				eyebrow="sun & moon direction"
-				title="Watch the sun and moon on the compass."
-				description="A live phone compass with the sun's azimuth and the moon's azimuth plotted straight onto the dial. Face the marker, and you're looking at the sun or moon — no guessing."
-			>
-				<SunMoonCompass />
-			</PageHero>
+		<div class="relative flex flex-col items-center justify-center px-4 pt-12 pb-8 sm:pt-16 sm:pb-10 md:pt-20 md:pb-12">
+			<SunMoonCompass />
+			<div class="mt-10 max-w-2xl text-center md:mt-14">
+				<p class="eyebrow">sun & moon direction</p>
+				<h1 class="mt-4 text-display-lg text-ink md:text-[40px] md:leading-[48px]">Watch the sun and moon on the compass.</h1>
+				<p class="mt-4 text-body-lg text-body">A live phone compass with the sun's azimuth and the moon's azimuth plotted straight onto the dial. Face the marker, and you're looking at the sun or moon — no guessing.</p>
+			</div>
 		</div>
 	</section>
 

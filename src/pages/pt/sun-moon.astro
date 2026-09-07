@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import SunMoonCompass from '../../components/SunMoonCompass.astro';
-import PageHero from '../../components/PageHero.astro';
+
 import RelatedTools from '../../components/RelatedTools.astro';
 ---
 
@@ -13,14 +13,13 @@ import RelatedTools from '../../components/RelatedTools.astro';
 >
 	<section class="relative overflow-hidden">
 		<div class="mesh-gradient" aria-hidden="true"></div>
-		<div class="relative">
-			<PageHero
-				eyebrow="direção do sol e da lua"
-				title="Observe o sol e a lua na bússola."
-				description="Uma bússola de celular ao vivo com o azimute do sol e da lua desenhados diretamente no mostrador. Vire-se para o marcador e você estará olhando para o sol ou para a lua — sem adivinhar."
-			>
-				<SunMoonCompass />
-			</PageHero>
+		<div class="relative flex flex-col items-center justify-center px-4 pt-12 pb-8 sm:pt-16 sm:pb-10 md:pt-20 md:pb-12">
+			<SunMoonCompass />
+			<div class="mt-10 max-w-2xl text-center md:mt-14">
+				<p class="eyebrow">direção do sol e da lua</p>
+				<h1 class="mt-4 text-display-lg text-ink md:text-[40px] md:leading-[48px]">Observe o sol e a lua na bússola.</h1>
+				<p class="mt-4 text-body-lg text-body">Uma bússola de celular ao vivo com o azimute do sol e da lua desenhados diretamente no mostrador. Vire-se para o marcador e você estará olhando para o sol ou para a lua — sem adivinhar.</p>
+			</div>
 		</div>
 	</section>
 

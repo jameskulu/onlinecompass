@@ -1,7 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Compass from '../../components/Compass.astro';
-import PageHero from '../../components/PageHero.astro';
 import RelatedTools from '../../components/RelatedTools.astro';
 ---
 
@@ -13,14 +12,13 @@ import RelatedTools from '../../components/RelatedTools.astro';
 >
 	<section class="relative overflow-hidden">
 		<div class="mesh-gradient" aria-hidden="true"></div>
-		<div class="relative">
-			<PageHero
-				eyebrow="실시간 나침반"
-				title="당신의 휴대폰이 나침반입니다."
-				description="센서 접근을 허용하면 이 페이지가 휴대폰을 정밀한 디지털 나침반으로 변환합니다 — 360° 다이얼, 매끄러운 바늘, 자북 및 진북 읽기."
-			>
-				<Compass />
-			</PageHero>
+		<div class="relative flex flex-col items-center justify-center px-4 pt-12 pb-8 sm:pt-16 sm:pb-10 md:pt-20 md:pb-12">
+			<Compass />
+			<div class="mt-10 max-w-2xl text-center md:mt-14">
+				<p class="eyebrow">실시간 나침반</p>
+				<h1 class="mt-4 text-display-lg text-ink md:text-[40px] md:leading-[48px]">당신의 휴대폰이 나침반입니다.</h1>
+				<p class="mt-4 text-body-lg text-body">센서 접근을 허용하면 이 페이지가 휴대폰을 정밀한 디지털 나침반으로 변환합니다 — 360° 다이얼, 매끄러운 바늘, 자북 및 진북 읽기.</p>
+			</div>
 		</div>
 	</section>
 

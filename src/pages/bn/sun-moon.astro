@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import SunMoonCompass from '../../components/SunMoonCompass.astro';
-import PageHero from '../../components/PageHero.astro';
+
 import RelatedTools from '../../components/RelatedTools.astro';
 ---
 
@@ -13,14 +13,13 @@ import RelatedTools from '../../components/RelatedTools.astro';
 >
 	<section class="relative overflow-hidden">
 		<div class="mesh-gradient" aria-hidden="true"></div>
-		<div class="relative">
-			<PageHero
-				eyebrow="সূর্য ও চাঁদের দিক"
-				title="কম্পাসে সূর্য ও চাঁদ দেখুন।"
-				description="সূর্যের অজিমুথ এবং চাঁদের অজিমুথ সরাসরি ডায়ালে আঁকা একটি লাইভ ফোন কম্পাস। মার্কারের দিকে মুখ করুন এবং আপনি সূর্য বা চাঁদের দিকেই তাকিয়ে আছেন — আন্দাজ করার দরকার নেই।"
-			>
-				<SunMoonCompass />
-			</PageHero>
+		<div class="relative flex flex-col items-center justify-center px-4 pt-12 pb-8 sm:pt-16 sm:pb-10 md:pt-20 md:pb-12">
+			<SunMoonCompass />
+			<div class="mt-10 max-w-2xl text-center md:mt-14">
+				<p class="eyebrow">সূর্য ও চাঁদের দিক</p>
+				<h1 class="mt-4 text-display-lg text-ink md:text-[40px] md:leading-[48px]">কম্পাসে সূর্য ও চাঁদ দেখুন।</h1>
+				<p class="mt-4 text-body-lg text-body">সূর্যের অজিমুথ এবং চাঁদের অজিমুথ সরাসরি ডায়ালে আঁকা একটি লাইভ ফোন কম্পাস। মার্কারের দিকে মুখ করুন এবং আপনি সূর্য বা চাঁদের দিকেই তাকিয়ে আছেন — আন্দাজ করার দরকার নেই।</p>
+			</div>
 		</div>
 	</section>
 

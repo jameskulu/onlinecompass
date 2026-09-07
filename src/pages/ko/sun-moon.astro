@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import SunMoonCompass from '../../components/SunMoonCompass.astro';
-import PageHero from '../../components/PageHero.astro';
+
 import RelatedTools from '../../components/RelatedTools.astro';
 ---
 
@@ -13,14 +13,13 @@ import RelatedTools from '../../components/RelatedTools.astro';
 >
 	<section class="relative overflow-hidden">
 		<div class="mesh-gradient" aria-hidden="true"></div>
-		<div class="relative">
-			<PageHero
-				eyebrow="태양과 달의 방향"
-				title="나침반에서 태양과 달을 관찰하세요."
-				description="태양 방위각과 달 방위각이 다이얼에 직접 그려진 실시간 휴대전화 나침반입니다. 표시기를 향해 돌면 바로 태양이나 달을 바라보게 됩니다 — 짐작할 필요가 없습니다."
-			>
-				<SunMoonCompass />
-			</PageHero>
+		<div class="relative flex flex-col items-center justify-center px-4 pt-12 pb-8 sm:pt-16 sm:pb-10 md:pt-20 md:pb-12">
+			<SunMoonCompass />
+			<div class="mt-10 max-w-2xl text-center md:mt-14">
+				<p class="eyebrow">태양과 달의 방향</p>
+				<h1 class="mt-4 text-display-lg text-ink md:text-[40px] md:leading-[48px]">나침반에서 태양과 달을 관찰하세요.</h1>
+				<p class="mt-4 text-body-lg text-body">태양 방위각과 달 방위각이 다이얼에 직접 그려진 실시간 휴대전화 나침반입니다. 표시기를 향해 돌면 바로 태양이나 달을 바라보게 됩니다 — 짐작할 필요가 없습니다.</p>
+			</div>
 		</div>
 	</section>
 

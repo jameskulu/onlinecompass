@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import SunMoonCompass from '../../components/SunMoonCompass.astro';
-import PageHero from '../../components/PageHero.astro';
+
 import RelatedTools from '../../components/RelatedTools.astro';
 ---
 
@@ -13,14 +13,13 @@ import RelatedTools from '../../components/RelatedTools.astro';
 >
 	<section class="relative overflow-hidden">
 		<div class="mesh-gradient" aria-hidden="true"></div>
-		<div class="relative">
-			<PageHero
-				eyebrow="Richtung von Sonne und Mond"
-				title="Beobachte Sonne und Mond auf dem Kompass."
-				description="Ein Live-Handy-Kompass mit dem Azimut von Sonne und Mond direkt auf der Skala. Zeige auf den Marker und du schaust auf die Sonne oder den Mond — ohne Raten."
-			>
-				<SunMoonCompass />
-			</PageHero>
+		<div class="relative flex flex-col items-center justify-center px-4 pt-12 pb-8 sm:pt-16 sm:pb-10 md:pt-20 md:pb-12">
+			<SunMoonCompass />
+			<div class="mt-10 max-w-2xl text-center md:mt-14">
+				<p class="eyebrow">Richtung von Sonne und Mond</p>
+				<h1 class="mt-4 text-display-lg text-ink md:text-[40px] md:leading-[48px]">Beobachte Sonne und Mond auf dem Kompass.</h1>
+				<p class="mt-4 text-body-lg text-body">Ein Live-Handy-Kompass mit dem Azimut von Sonne und Mond direkt auf der Skala. Zeige auf den Marker und du schaust auf die Sonne oder den Mond — ohne Raten.</p>
+			</div>
 		</div>
 	</section>
 
