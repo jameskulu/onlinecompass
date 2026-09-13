@@ -1,0 +1,43 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const sites = [
+	{
+		href: 'https://simpletallycounter.com',
+		label: 'Tally Counter',
+		desc: 'A free online tally counter for counting anything — counts, scores, and tallies, right in your browser.',
+	},
+	{
+		href: 'https://simplesketchpad.com',
+		label: 'Sketch Pad',
+		desc: 'A simple, fast online drawing pad for quick sketches, doodles, and notes — no install needed.',
+	},
+	{
+		href: 'https://proteinintakecalc.com',
+		label: 'Protein Intake Calculator',
+		desc: 'Estimate your daily protein needs based on your weight, activity, and fitness goals.',
+	},
+];
+---
+
+<section>
+	<h2 class="text-display-sm text-ink mb-3">{t('more.heading')}</h2>
+	<ul class="list-disc space-y-2 pl-5 leading-7">
+		{sites.map((s) => (
+			<li>
+				<a
+					href={s.href}
+					target="_blank"
+					rel="noopener"
+					class="text-link underline decoration-link/30 hover:decoration-link"
+				>
+					{s.label}
+				</a>
+				<p class="text-sm text-body leading-6">{s.desc}</p>
+			</li>
+		))}
+	</ul>
+</section>
