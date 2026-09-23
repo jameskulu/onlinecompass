@@ -12,3 +12,8 @@ export function useTranslations(lang: Lang) {
 		return key in localizedUI ? localizedUI[key] : ui[defaultLang][key];
 	};
 }
+
+export function localizePath(lang: Lang, path: string): string {
+	if (lang === defaultLang) return path;
+	return `/${lang}${path}`;
+}

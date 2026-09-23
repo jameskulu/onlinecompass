@@ -438,7 +438,7 @@ export const ui = {
 		'sunmoon.fsLabel': '전체 화면 전환',
 	},
 	it: {
-		'nav.compass': 'Bussola',
+		'nav.compass': 'Bussola online',
 		'nav.location': 'Posizione',
 		'nav.qibla': 'Qibla',
 		'nav.bearing': 'Rotta',
@@ -450,7 +450,7 @@ export const ui = {
 		'footer.tools': 'strumenti',
 		'footer.learn': 'imparare',
 		'footer.company': 'azienda',
-		'footer.compass': 'Bussola',
+		'footer.compass': 'Bussola online',
 		'footer.location': 'Posizione',
 		'footer.qibla': 'Findatore di Qibla',
 		'footer.bearing': 'Calcolatore di rotta',

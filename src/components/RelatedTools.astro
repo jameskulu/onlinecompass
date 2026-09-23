@@ -1,5 +1,5 @@
 ---
-import { getLangFromUrl } from '../i18n/utils';
+import { getLangFromUrl, localizePath } from '../i18n/utils';
 import { languages } from '../i18n/ui';
 
 interface Props {
@@ -53,18 +53,21 @@ const toolPaths: Record<string, string> = {
 	sunmoon: '/sun-moon/',
 };
 
-const tools = [
-	{ href: `/${lang}/`, name: names.compass, desc: descs.compass },
-	{ href: `/${lang}/location/`, name: names.location, desc: descs.location },
-	{ href: `/${lang}/qibla/`, name: names.qibla, desc: descs.qibla },
-	{ href: `/${lang}/bearing/`, name: names.bearing, desc: descs.bearing },
-	{ href: `/${lang}/sun/`, name: names.sun, desc: descs.sun },
-	{ href: `/${lang}/sun-moon/`, name: names.sunmoon, desc: descs.sunmoon },
-].filter((t) => {
-	const currentSlug = current?.replace(/^\//, '').replace(/\/$/, '');
-	const toolSlug = t.href.replace(`/${lang}/`, '').replace(/\/$/, '');
-	return toolSlug !== currentSlug;
-});
+const toolEntries = [
+	{ slug: 'compass', name: names.compass, desc: descs.compass },
+	{ slug: 'location', name: names.location, desc: descs.location },
+	{ slug: 'qibla', name: names.qibla, desc: descs.qibla },
+	{ slug: 'bearing', name: names.bearing, desc: descs.bearing },
+	{ slug: 'sun', name: names.sun, desc: descs.sun },
+	{ slug: 'sunmoon', name: names.sunmoon, desc: descs.sunmoon },
+];
+
+const tools = toolEntries
+	.map((t) => ({ ...t, href: localizePath(lang, toolPaths[t.slug]) }))
+	.filter((t) => {
+		const currentSlug = current?.replace(/^\//, '').replace(/\/$/, '');
+		return t.slug !== currentSlug;
+	});
 
 const moreLabel: Record<string, string> = {
 	en: 'more tools', es: 'más herramientas', ja: 'その他のツール', fr: 'plus d\'outils',

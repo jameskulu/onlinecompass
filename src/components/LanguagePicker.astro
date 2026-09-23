@@ -1,11 +1,16 @@
 ---
-import { languages } from '../i18n/ui';
+import { languages, defaultLang } from '../i18n/ui';
 import { getLangFromUrl } from '../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const currentPath = Astro.url.pathname;
 const segments = currentPath.split('/').filter(Boolean);
-const pathWithoutLang = segments.length > 1 ? '/' + segments.slice(1).join('/') : '';
+const pathWithoutLang =
+	lang === defaultLang
+		? '/' + segments.join('/')
+		: '/' + segments.slice(1).join('/');
+const hrefFor = (code: string) =>
+	code === defaultLang ? pathWithoutLang || '/' : `/${code}${pathWithoutLang}`;
 ---
 
 <div class="relative" data-lang-picker>
@@ -25,7 +30,7 @@ const pathWithoutLang = segments.length > 1 ? '/' + segments.slice(1).join('/') 
 	<div data-lang-dropdown class="hidden absolute right-0 top-full z-50 mt-2 w-48 max-h-80 overflow-y-auto rounded-lg border border-hairline bg-canvas shadow-float">
 		{Object.entries(languages).map(([code, label]) => (
 			<a
-				href={`/${code}/${pathWithoutLang}`}
+				href={hrefFor(code)}
 				class:list={[
 					'block px-4 py-2.5 text-sm transition-colors hover:bg-canvas-soft-2',
 					lang === code ? 'font-medium text-ink bg-canvas-soft' : 'text-body',
