@@ -4,72 +4,127 @@ import Compass from '../../components/Compass.astro';
 
 const faq = [
 	{
-		q: '¿Hacia qué dirección estoy mirando — brújula en línea?',
-		a: 'Abre esta página en tu teléfono y la lectura del rumbo en vivo debajo del dial muestra el grado exacto y la dirección de la brújula (N, NE, E, SE, S, SW, W, NW) hacia la que estás mirando, actualizada en tiempo real a medida que giras.',
+		q: '¿Qué es una brújula en línea?',
+		a: 'Una brújula en línea es una brújula digital que funciona dentro de tu navegador web en lugar de como una aplicación aparte. Lee el magnetómetro, el acelerómetro y el giroscopio de tu teléfono y los convierte en un rumbo en vivo en grados — sin necesidad de descargar nada. Abres una página como esta, concedes acceso a los sensores y el dial se actualiza en tiempo real a medida que giras.',
 	},
 	{
-		q: 'Brújula en línea — ¿dónde está el norte?',
-		a: 'El extremo rojo de la aguja siempre apunta al norte, que marca 0°/360° en la parte superior del dial. Activa el "Norte verdadero" y el sitio corrige la declinación magnética en tu ubicación para que el norte coincida con los mapas.',
+		q: '¿Cómo uso una brújula en línea en mi teléfono?',
+		a: 'Abre esta página en tu teléfono, toca "Activar brújula en vivo" y sostén el dispositivo plano en la palma de la mano. El rumbo aparece debajo del dial en grados y como punto cardinal. Para obtener los resultados más precisos, traza un movimiento de ocho para calibrar el magnetómetro y mantén el teléfono alejado de metales e imanes.',
 	},
 	{
-		q: '¿Hacia qué dirección estoy mirando — brújula en línea?',
-		a: 'Sostén tu teléfono plano, concede acceso a los sensores y el rumbo debajo del dial te indica la dirección hacia la que miras tanto en grados como en punto cardinal — por ejemplo, 274° u O.',
+		q: '¿Es precisa una brújula en línea?',
+		a: 'Una brújula de teléfono calibrada suele ser precisa dentro de un margen de entre 1 y 5 grados en exteriores. El magnetómetro es sensible, y los metales, los aparatos electrónicos o una funda con imán cercanos pueden desviarlo. Una vez que calibres y te alejes de las interferencias, las lecturas suelen coincidir con una brújula física dentro de un par de grados.',
 	},
 	{
-		q: '¿Cómo saber la dirección sin brújula en línea?',
-		a: 'Usa el sol: alrededor del mediodía local se encuentra exactamente al sur en el hemisferio norte y exactamente al norte en el hemisferio sur. La herramienta de Sol de este sitio muestra el azimut solar exacto para cualquier ubicación, y el buscador de Qibla funciona como una dirección de referencia fija.',
+		q: '¿Cuál es la diferencia entre el norte verdadero y el norte magnético?',
+		a: 'El norte magnético es la dirección hacia la que apunta el magnetómetro de tu teléfono — sigue el campo magnético de la Tierra, que cambia cada año. El norte verdadero es el Polo Norte geográfico que usan los mapas. El ángulo entre ambos se llama declinación magnética, y esta herramienta lo corrige automáticamente para que tu rumbo coincida con un mapa.',
 	},
 	{
-		q: '¿Hacia dónde estoy mirando — brújula en línea?',
-		a: 'Concede acceso a los sensores, sostén el teléfono plano y alejado de metales, y lee la indicación del rumbo. Se actualiza continuamente mientras giras, así que siempre sabes hacia dónde estás mirando.',
+		q: '¿Qué es la declinación magnética?',
+		a: 'La declinación magnética es el ángulo entre el norte magnético y el norte verdadero en un lugar determinado. Oscila aproximadamente entre −30° y +30° en todo el mundo y cambia lentamente con el tiempo. En Londres es cercana a cero, mientras que en algunas zonas de Canadá puede superar los 15°. Como varía según el lugar, una corrección de declinación precisa por GPS importa siempre que sigas un rumbo.',
 	},
 	{
-		q: '¿Cómo usar una brújula en línea?',
-		a: 'Abre esta página en un teléfono, toca "Activar brújula en vivo", sostén el dispositivo plano y lee el rumbo. Si la aguja se desvía, traza un movimiento de ocho unas cuantas veces para recalibrar el magnetómetro.',
+		q: '¿Por qué la aguja de mi brújula salta o gira sin parar?',
+		a: 'Un magnetómetro es un instrumento sensible. Las fundas con imanes, los altavoces, los portátiles, las mesas metálicas, los salpicaderos de los coches y los edificios con estructura de acero deforman el campo magnético a tu alrededor. Aléjate de ellos, sostén el teléfono plano y traza un ocho para recalibrar. Un movimiento de unos pocos grados en interiores es normal.',
+	},
+	{
+		q: '¿Cómo calibro la brújula de mi teléfono?',
+		a: 'Sostén el teléfono plano y gíralo despacio trazando un ocho varias veces, manteniendo la pantalla hacia arriba. Así el magnetómetro obtiene un rango completo de lecturas con las que calibrarse. Termina manteniéndolo quieto un segundo. Repítelo siempre que el rumbo parezca inestable.',
+	},
+	{
+		q: '¿Funciona una brújula en línea sin conexión y en un portátil?',
+		a: 'El dial sigue funcionando sin conexión una vez que la página se ha cargado, porque el rumbo se genera en tu dispositivo. Sin embargo, un portátil o un ordenador de sobremesa no sirven para rumbos en vivo: la mayoría no tiene magnetómetro, así que no hay nada que leer. Usa un teléfono o una tableta; un ordenador seguirá mostrando el dial de demostración y los datos del sol y la luna.',
+	},
+	{
+		q: '¿Pide mi ubicación una brújula en línea y es privada?',
+		a: 'La ubicación es opcional y solo se usa para calcular la declinación magnética, el rumbo de la Qibla y la posición del sol. Todos los cálculos se ejecutan localmente en tu navegador — no hay cuenta, ni servidor, ni analíticas. Tus coordenadas nunca salen de tu dispositivo, y siempre puedes introducirlas manualmente.',
+	},
+	{
+		q: '¿Puedo usar una brújula en línea para encontrar la Qibla?',
+		a: 'Sí. El buscador de Qibla usa tus coordenadas para calcular el rumbo de círculo máximo hacia la Kaaba en La Meca, con precisión al grado, además de la distancia. Luego puedes seguir ese rumbo en el dial de la brújula en vivo para orientarte hacia ella.',
+	},
+	{
+		q: '¿Cómo puedo encontrar el norte sin brújula?',
+		a: 'En el hemisferio norte, el sol está exactamente al sur al mediodía local, por lo que proyecta sombras que apuntan al norte. De noche, la Estrella Polar se sitúa casi exactamente sobre el norte verdadero. La herramienta de posición del sol de este sitio da el azimut solar exacto para tu ubicación y hora, una verificación fiable para cualquier brújula.',
+	},
+	{
+		q: '¿Necesito instalar una aplicación para usar esta brújula?',
+		a: 'No. Todo funciona en el navegador, así que no hay nada que descargar, ni tienda de aplicaciones, ni registro, ni actualizaciones que gestionar. Funciona igual en iPhone, Android y la mayoría de las tabletas.',
+	},
+	{
+		q: '¿Es gratuita esta brújula en línea?',
+		a: 'Sí, es completamente gratuita y no hay planes premium ni muros de pago. Todas las herramientas del sitio — brújula, coordenadas GPS, buscador de Qibla, calculadora de rumbo, posición del sol y dirección del sol y la luna — son de uso gratuito.',
+	},
+	{
+		q: '¿Hacia qué dirección está orientada mi casa o mi ventana?',
+		a: 'Colócate en la ventana mirando hacia fuera, sostén el teléfono plano y lee el rumbo. El norte es 0°, el este 90°, el sur 180° y el oeste 270°. Los jardineros lo usan para planificar la luz solar, y los fotógrafos para predecir por dónde sale y se pone el sol.',
 	},
 	{
 		q: '¿Puedo usar mi teléfono como brújula?',
-		a: 'Sí. Los teléfonos modernos contienen un magnetómetro y este sitio web convierte ese sensor en una brújula directamente en tu navegador — sin descargar aplicaciones ni instalar nada.',
+		a: 'Sí. Prácticamente todos los teléfonos inteligentes modernos incluyen un magnetómetro, y esta brújula en línea lo convierte en un rumbo en vivo directamente en tu navegador, sin descargar aplicaciones ni instalar nada.',
 	},
 	{
-		q: '¿Dónde está mi brújula en Google?',
-		a: 'Google Maps muestra una pequeña brújula en la parte superior derecha de la vista del mapa. Para un rumbo en vivo en grados, simplemente busca "brújula en línea" en Google y abre esta página — se convierte en una brújula en el momento en que concedes acceso a los sensores.',
+		q: '¿Dónde está la brújula en Google Maps?',
+		a: 'Google Maps muestra una pequeña brújula en la esquina superior derecha de la vista del mapa. Para un rumbo en vivo en grados, busca "brújula en línea" en Google y abre esta página: se convierte en una brújula en cuanto concedes acceso a los sensores.',
+	},
+];
+
+const declinationExamples = [
+	{ place: 'Londres, Reino Unido', value: '≈ 0°' },
+	{ place: 'París, Francia', value: '≈ +1° este' },
+	{ place: 'Nueva York, Estados Unidos', value: '≈ −13° oeste' },
+	{ place: 'Toronto, Canadá', value: '≈ −11° oeste' },
+	{ place: 'Los Ángeles, Estados Unidos', value: '≈ +12° este' },
+	{ place: 'Anchorage, Estados Unidos', value: '≈ +15° este' },
+	{ place: 'Sídney, Australia', value: '≈ +12° este' },
+	{ place: 'São Paulo, Brasil', value: '≈ −23° oeste' },
+	{ place: 'Ciudad del Cabo, Sudáfrica', value: '≈ −25° oeste' },
+	{ place: 'Tokio, Japón', value: '≈ −8° oeste' },
+];
+
+const compassRose = [
+	{ point: 'N', deg: '0°' },
+	{ point: 'NNE', deg: '22.5°' },
+	{ point: 'NE', deg: '45°' },
+	{ point: 'ENE', deg: '67.5°' },
+	{ point: 'E', deg: '90°' },
+	{ point: 'ESE', deg: '112.5°' },
+	{ point: 'SE', deg: '135°' },
+	{ point: 'SSE', deg: '157.5°' },
+	{ point: 'S', deg: '180°' },
+	{ point: 'SSW', deg: '202.5°' },
+	{ point: 'SW', deg: '225°' },
+	{ point: 'WSW', deg: '247.5°' },
+	{ point: 'W', deg: '270°' },
+	{ point: 'WNW', deg: '292.5°' },
+	{ point: 'NW', deg: '315°' },
+	{ point: 'NNW', deg: '337.5°' },
+];
+
+const compassTypes = [
+	{
+		type: 'Brújula magnética tradicional',
+		measures: 'El campo magnético terrestre mediante una aguja flotante',
+		best: 'Fiabilidad sin conexión, cero pilas, enseñanza',
+		limitation: 'Necesita una superficie nivelada, sin corrección de declinación, un solo sensor',
 	},
 	{
-		q: '¿Puede mi teléfono decirme hacia qué dirección estoy mirando?',
-		a: 'Sí. El magnetómetro de tu teléfono combinado con esta página proporciona un rumbo en vivo, y el sitio corrige automáticamente la declinación magnética para que el norte coincida con tus mapas.',
+		type: 'Brújula de sensor del teléfono (este sitio)',
+		measures: 'Magnetómetro, acelerómetro y giroscopio fusionados',
+		best: 'Rumbo en vivo en grados, compensación de inclinación, alineación con el mapa',
+		limitation: 'Sensible al metal y a los imanes cercanos',
 	},
 	{
-		q: '¿Cómo ver una brújula en el móvil?',
-		a: 'Abre esta página en tu teléfono y la brújula aparece al instante — sin necesidad de aplicaciones. En Android, Google Maps también incluye una brújula, y algunos teléfonos vienen con una aplicación de brújula incorporada.',
+		type: 'Brújula de rumbo GPS',
+		measures: 'La dirección de desplazamiento a partir de los cambios de posición GPS',
+		best: 'Navegación en movimiento, funciona sin magnetómetro',
+		limitation: 'Solo funciona en movimiento; inútil estando quieto',
 	},
 	{
-		q: '¿Cuál es mi dirección norte?',
-		a: 'El norte verdadero es el Polo Norte geográfico; el norte magnético es donde apunta la aguja de una brújula. El ángulo entre ambos (declinación) varía según la ubicación, y este sitio lo corrige automáticamente.',
-	},
-	{
-		q: '¿Dónde está la brújula en mi teléfono?',
-		a: 'Muchos teléfonos no incluyen una aplicación de brújula dedicada, pero el sensor está incorporado. Abre este sitio web en tu teléfono y se convierte en una brújula sin necesidad de instalar nada.',
-	},
-	{
-		q: '¿Qué teléfonos móviles tienen un sensor de brújula?',
-		a: 'Prácticamente todos los teléfonos inteligentes modernos — cada iPhone desde el iPhone 3GS y casi todos los teléfonos Android — incluyen un magnetómetro, por lo que esta brújula en línea funciona en casi cualquier dispositivo.',
-	},
-	{
-		q: '¿Por qué mi rumbo se mueve?',
-		a: 'Los metales y dispositivos electrónicos cercanos distorsionan el magnetómetro. Sigue los pasos de calibración que se indican y asegúrate de que el teléfono esté plano. Una desviación de unos pocos grados es normal en interiores.',
-	},
-	{
-		q: '¿Cuál es la diferencia entre el norte magnético y el verdadero?',
-		a: 'El norte magnético es donde apunta la aguja de tu brújula. El norte verdadero es el Polo Norte geográfico, que es lo que utilizan los mapas y la navegación. El ángulo entre ambos — la declinación — varía según la ubicación, y esta herramienta lo corrige automáticamente.',
-	},
-	{
-		q: '¿Por qué pide mi ubicación?',
-		a: 'La ubicación nos permite calcular la declinación magnética, el rumbo de la Qibla y la posición del sol con precisión. Es opcional — todas las herramientas funcionan con coordenadas manuales también — y nunca abandona tu dispositivo.',
-	},
-	{
-		q: '¿Almacenan o venden mi ubicación?',
-		a: 'No. No hay rastreadores, ni análisis, ni servidor. Todos los datos de sensores y ubicación se procesan localmente en tu navegador y se eliminan cuando abandonas la página.',
+		type: 'Girocompás',
+		measures: 'La rotación de la Tierra mediante giroscopios de giro rápido',
+		best: 'Barcos y aeronaves, no le afectan los campos magnéticos',
+		limitation: 'Grande, caro, lento en estabilizarse',
 	},
 ];
 ---
@@ -80,7 +135,7 @@ const faq = [
 	description="Brújula en línea gratuita para encontrar el norte desde tu ubicación. Rumbo en vivo con norte verdadero y magnético, declinación, buscador de Qibla, calculadora de rumbo y posición del sol — sin instalar, funciona en cualquier teléfono."
 	keywords="brújula en línea, herramienta de brújula en línea, brújula en línea gratuita, brújula en línea google, brújula en línea gratis, brújula en línea para encontrar el norte, dirección de brújula en línea, brújula en línea geometría, herramienta brújula en línea geometría, brújula en línea para geometría, brújula en línea matemáticas, herramienta gratuita de brújula en línea, brújula en línea para qibla, brújula en línea en vivo, brújula en línea kabba para encontrar el norte desde mi ubicación, buscador quibla brújula en línea"
 >
-	<!-- ——— Hero ——— -->
+	<!-- ─── Hero ───────────────────────────────────────────── -->
 	<section id="compass" class="relative overflow-hidden">
 		<div class="mesh-gradient" aria-hidden="true"></div>
 		<div class="relative mx-auto max-w-[1200px] px-4 pt-12 pb-20 text-center sm:px-6 md:pt-20 md:pb-28">
@@ -94,14 +149,14 @@ const faq = [
 				de la Qibla y posición del sol — todo en tu navegador. Nada que instalar, nada que subir.</p>
 
 				<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
-					<a href="/es/location/" class="btn-primary">Ubicarme</a>
+					<a href="#how-to-use" class="btn-primary">Cómo usarla</a>
 					<a href="/es/compass/" class="btn-secondary">Abrir la brújula</a>
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<!-- ——— Feature strip ——— -->
+	<!-- ─── Feature strip ──────────────────────────────────── -->
 	<section class="border-y border-hairline bg-canvas">
 		<div
 			class="mx-auto grid max-w-[1200px] grid-cols-1 gap-px overflow-hidden px-4 py-12 sm:grid-cols-3 sm:px-6"
@@ -109,28 +164,28 @@ const faq = [
 			<div class="p-4">
 				<p class="eyebrow mb-2">verdadero vs magnético</p>
 				<p class="text-sm text-body leading-6">
-					La declinación se calcula automáticamente a partir del Modelo Magnético Mundial — ve
+					La declinación se calcula automáticamente a partir del Modelo Magnético Mundial — consulta
 					ambos rumbos de un vistazo.
 				</p>
 			</div>
 			<div class="p-4">
 				<p class="eyebrow mb-2">privacidad primero</p>
 				<p class="text-sm text-body leading-6">
-					Todo el procesamiento de sensores ocurre en el dispositivo. Sin cuentas, sin
-					rastreo y nada nunca abandona tu navegador.
+					Todo el procesamiento de sensores ocurre en el dispositivo. Sin cuentas, sin rastreo y nada
+					abandona jamás tu navegador.
 				</p>
 			</div>
 			<div class="p-4">
 				<p class="eyebrow mb-2">funciona en todas partes</p>
 				<p class="text-sm text-body leading-6">
-					Chrome, Safari y Firefox en iOS y Android, con un respaldo de rumbo GPS cuando estás
+					Chrome, Safari y Firefox en iOS y Android, con un respaldo de rumbo por GPS cuando estás
 					en movimiento.
 				</p>
 			</div>
 		</div>
 	</section>
 
-	<!-- ——— Tools grid ——— -->
+	<!-- ─── Tools grid ─────────────────────────────────────── -->
 	<section id="tools" class="scroll-mt-16">
 		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
 			<p class="eyebrow">el conjunto de herramientas</p>
@@ -138,7 +193,7 @@ const faq = [
 				Una brújula, cada rumbo que necesitarás.
 			</h2>
 			<p class="mt-3 max-w-xl text-body-lg text-body">
-				Cinco herramientas enfocadas, cada una en su propia página, todas ejecutándose localmente en tu dispositivo.
+				Seis herramientas enfocadas, cada una en su propia página, todas ejecutándose localmente en tu dispositivo.
 			</p>
 
 			<div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -146,23 +201,23 @@ const faq = [
 					<p class="eyebrow mb-2">brújula</p>
 					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Rumbo en vivo</h3>
 					<p class="mt-2 text-sm text-body leading-6">
-						Dial de 360° en tiempo real con aguja suave, norte magnético y verdadero, y
-retroalimentación de precisión en vivo.
+						Dial de 360° en tiempo real con una aguja fluida, norte magnético y verdadero, y
+						retroalimentación de precisión en vivo.
 					</p>
 				</a>
 				<a href="/es/location/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
 					<p class="eyebrow mb-2">ubicación</p>
 					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Coordenadas GPS</h3>
 					<p class="mt-2 text-sm text-body leading-6">
-						Latitud, longitud, altitud y precisión en decimal y DMS — con copiar, compartir
-						y abrir en Mapas.
+						Latitud, longitud, altitud y precisión en decimal y DMS — con opciones para copiar,
+						compartir y abrir en Mapas.
 					</p>
 				</a>
 				<a href="/es/qibla/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
 					<p class="eyebrow mb-2">qibla</p>
-					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Dirección a la Meca</h3>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Dirección a La Meca</h3>
 					<p class="mt-2 text-sm text-body leading-6">
-						Rumbo de círculo máximo y distancia a la Kaaba desde tus coordenadas, preciso al
+						Rumbo de círculo máximo y distancia a la Kaaba desde tus coordenadas, con precisión al
 						grado.
 					</p>
 				</a>
@@ -170,36 +225,44 @@ retroalimentación de precisión en vivo.
 					<p class="eyebrow mb-2">rumbo</p>
 					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Calculadora de curso</h3>
 					<p class="mt-2 text-sm text-body leading-6">
-						Rumbo y distancia de círculo máximo entre dos puntos — perfecto para navegación
-						y planificación de rutas.
+						Rumbo y distancia de círculo máximo entre dos puntos — perfecto para la navegación
+						y la planificación de rutas.
 					</p>
 				</a>
 				<a href="/es/sun/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
 					<p class="eyebrow mb-2">sol</p>
 					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Posición del sol</h3>
 					<p class="mt-2 text-sm text-body leading-6">
-						Azimut y elevación solar en este momento, además de amanecer, mediodía solar y atardecer
-						para cualquier ubicación.
+						Azimut y elevación solar en este momento, además del amanecer, el mediodía solar y el
+						atardecer para cualquier ubicación.
+					</p>
+				</a>
+				<a href="/es/sun-moon/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">sol y luna</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Dirección del sol y la luna</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Azimut del sol y la luna trazados directamente sobre el dial de la brújula en vivo, para
+						que encuentres cualquiera de los dos en el cielo girando hasta el marcador.
 					</p>
 				</a>
 				<div class="card-soft flex flex-col justify-center p-6">
 					<p class="text-sm text-body leading-6">
-						Sin cuentas. Sin rastreadores. Cada cálculo se ejecuta en tu navegador y se elimina
-						en el momento en que abandonas la página.
+						Sin cuentas. Sin rastreadores. Cada cálculo se ejecuta en tu navegador y se descarta
+						en el momento en que sales.
 					</p>
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<!-- ——— How it works ——— -->
+	<!-- ─── How it works ───────────────────────────────────── -->
 	<section id="how-it-works" class="border-y border-hairline bg-canvas scroll-mt-16">
 		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
 			<p class="eyebrow">cómo funciona</p>
 			<h2 class="mt-3 max-w-2xl text-display-lg text-ink">Diseñado para la precisión.</h2>
 			<p class="mt-3 max-w-xl text-body-lg text-body">
-				El magnetómetro, giroscopio y acelerómetro de tu teléfono alimentan un motor de rumbo
-				compensado por inclinación, corregido contra el Modelo Magnético Mundial.
+				El magnetómetro, el giroscopio y el acelerómetro de tu teléfono alimentan un motor de rumbo
+				con compensación de inclinación, corregido según el Modelo Magnético Mundial.
 			</p>
 
 			<div class="mt-12 grid gap-6 md:grid-cols-3">
@@ -212,8 +275,8 @@ retroalimentación de precisión en vivo.
 					</div>
 					<h3 class="text-display-sm text-ink">Fusión de sensores</h3>
 					<p class="mt-2 text-sm text-body leading-6">
-						El rumbo se obtiene de los datos de orientación y magnetómetro, suavizados en
-						tiempo real para que la aguja se mantena estable en tu mano.
+						El rumbo se obtiene de los datos de orientación y del magnetómetro, suavizados en
+						tiempo real para que la aguja se mantenga estable en tu mano.
 					</p>
 				</div>
 				<div class="card p-6">
@@ -230,8 +293,8 @@ retroalimentación de precisión en vivo.
 					</div>
 					<h3 class="text-display-sm text-ink">Corrección de norte verdadero</h3>
 					<p class="mt-2 text-sm text-body leading-6">
-						La declinación varía de −30° a +30° en todo el planeta. Aplicamos el Modelo
-						Magnético Mundial para que el norte verdadero sea exacto, dondequiera que estés.
+						La declinación varía de −30° a +30° en todo el planeta. Aplicamos el Modelo Magnético
+						Mundial para que el norte verdadero sea exacto, estés donde estés.
 					</p>
 				</div>
 				<div class="card p-6">
@@ -247,15 +310,15 @@ retroalimentación de precisión en vivo.
 					</div>
 					<h3 class="text-display-sm text-ink">Local por diseño</h3>
 					<p class="mt-2 text-sm text-body leading-6">
-						Las coordenadas, el rumbo de la Qibla y los cálculos solares se ejecutan
-						totalmente en tu dispositivo. Tu ubicación nunca toca un servidor.
+						Las coordenadas, el rumbo de la Qibla y los cálculos solares se ejecutan por completo
+						en tu dispositivo. Tu ubicación nunca toca un servidor.
 					</p>
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<!-- ——— About the tool (SEO) ——— -->
+	<!-- ─── What is an online compass (SEO / value) ───────── -->
 	<section id="about" class="scroll-mt-16">
 		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
 			<div class="mx-auto max-w-3xl">
@@ -263,101 +326,260 @@ retroalimentación de precisión en vivo.
 				<h2 class="mt-3 text-center text-display-lg text-ink">¿Qué es una brújula en línea?</h2>
 				<p class="mt-6 text-body-lg text-body">
 					Una <strong class="text-ink font-medium">brújula en línea</strong> es una brújula digital
-					que funciona directamente en tu navegador web — sin descargar aplicaciones, sin instalar
-					nada y sin costo. Abre esta página en tu teléfono y, en pocos segundos, tienes una
-					brújula en línea gratuita que muestra tu rumbo en vivo en grados, apunta hacia el norte
-					desde donde estás y puede incluso corregirse para la diferencia entre el norte magnético
-					y el norte verdadero.
+					que funciona directamente en tu navegador web — sin aplicaciones que descargar, sin instalar
+					nada y sin nada que pagar. Abre esta página en tu teléfono y, en unos segundos, tendrás una
+					brújula en línea gratuita que muestra tu rumbo en vivo en grados, apunta hacia el norte desde
+					donde estés y puede corregirse para la diferencia entre el norte magnético y el norte
+					verdadero.
 				</p>
-				<p class="mt-4 text-body text-body leading-7">
-					Porque vive en el navegador, funciona exactamente igual tanto si estás en casa, en el
-					campo o en un aula. Simplemente busca "brújula en línea" en Google, abre este sitio y
-					los sensores de tu dispositivo se encargan del resto. A diferencia de una brújula
-					tradicional, esta brújula en línea usa el magnetómetro, el giroscopio y el
-					acelerómetro de tu teléfono juntos, lo que proporciona una <strong class="text-ink
-					font-medium">dirección de brújula en línea</strong> más estable y confiable que una
-					aguja que siempre lucha contra la gravedad y la deriva.
+				<p class="mt-4 text-body leading-7">
+					Como vive en el navegador, se comporta igual estés en casa, en el campo o en un aula. Busca
+					"brújula en línea" en Google, abre este sitio y los sensores de tu dispositivo toman el
+					relevo. A diferencia de una brújula tradicional con una aguja que lucha contra la gravedad
+					y la deriva, una brújula en línea combina el magnetómetro, el giroscopio y el acelerómetro
+					de tu teléfono para producir una
+					<strong class="text-ink font-medium">dirección de brújula en línea</strong> más estable y
+					fiable.
 				</p>
-				<p class="mt-4 text-body text-body leading-7">
-					Cada herramienta en este sitio está diseñada para <strong class="text-ink font-medium">
-					encontrar el norte en línea</strong> y mucho más: una lectura de rumbo en vivo en
-					grados, direcciones cardinales e intercardinales (N, NE, E, SE, S, SW, O, NO), un modo
-					pantalla completa con un toque, y un indicador de precisión para que siempre sepas cuán
-					fiable es la lectura. Y porque todo se procesa localmente, tu ubicación nunca abandona
-					tu dispositivo — una brújula en línea genuinamente gratuita, no una que recolecte datos.
+				<p class="mt-4 text-body leading-7">
+					Aquí cada herramienta gira en torno a una única misión — ayudarte a orientarte y
+					<strong class="text-ink font-medium">encontrar el norte en línea</strong> — y a su
+					alrededor se despliega un completo conjunto de navegación: una lectura de rumbo en vivo en
+					grados, direcciones cardinales e intercardinales, un modo de pantalla completa con un toque
+					y un indicador de precisión para que siempre sepas cuánto puedes fiarte de la lectura. Como
+					todo se procesa localmente, tu ubicación nunca sale de tu dispositivo.
 				</p>
 			</div>
 
-			<div class="mx-auto mt-12 grid max-w-4xl gap-8 md:grid-cols-2">
+			<div class="mx-auto mt-12 grid max-w-5xl gap-6 md:grid-cols-3">
 				<div class="card p-6">
-					<h3 class="text-display-sm text-ink">Brújula en línea para geometría y matemáticas</h3>
+					<h3 class="text-display-sm text-ink">Cómo funciona una brújula en línea</h3>
 					<p class="mt-2 text-sm text-body leading-6">
-						Una <strong class="text-ink font-medium">herramienta de brújula en línea</strong>
-						también es un recurso didáctico. En geometría, una brújula se usa para dibujar
-						círculos y arcos y para medir distancias; en este sitio, la brújula en línea para
-						geometría funciona con las matemáticas en lugar del lápiz. Mide el ángulo de
-						cualquier dirección, convierte entre rumbos y puntos de brújula, y usa la calculadora
-						de rumbo para encontrar la dirección y la distancia de círculo máximo entre dos
-						coordenadas en la Tierra. Es la herramienta de matemáticas de brújula en línea que
-						transforma ángulos abstractos en un rumbo que puedes ver en un dial.
-					</p>
-					<p class="mt-3 text-sm text-body leading-6">
-						Los estudiantes pueden verificar su trabajo con una brújula magnética real, y los
-						profesores pueden usar el dial en vivo para explicar el norte verdadero frente al
-						norte magnético con un ejemplo que se mueve a medida que giras el teléfono. Esta
-						herramienta gratuita de brújula en línea también se usa diariamente para tareas
-						simples — orientar un mapa, alinear un panel solar o verificar hacia dónde mira
-						una habitación.
+						<strong class="text-ink font-medium">Tres sensores</strong> hacen el trabajo: un
+						magnetómetro mide el campo magnético terrestre, un acelerómetro detecta hacia dónde queda
+						abajo y un giroscopio registra la rotación. El navegador los fusiona en un único rumbo,
+						y la compensación de inclinación lo mantiene correcto aunque el teléfono no esté plano.
 					</p>
 				</div>
 				<div class="card p-6">
-					<h3 class="text-display-sm text-ink">Brújula en línea para la Qibla — encuentra la Kaaba desde mi ubicación</h3>
+					<h3 class="text-display-sm text-ink">Brújula en línea frente a una brújula tradicional</h3>
 					<p class="mt-2 text-sm text-body leading-6">
-						Este sitio incluye un <strong class="text-ink font-medium">buscador de quibla
-						bralíjula en línea</strong> dedicado que calcula la dirección a la Kaaba en La Meca
-						desde tus coordenadas actuales. Dondequiera que estés, el buscador de Qibla te
-						da un rumbo en grados y una dirección de brújula, además de la distancia de
-						círculo máximo a La Meca. Para muchos viajeros, la frase que buscan es "brújula
-						en línea kabba para encontrar el norte desde mi ubicación" — y esta página lo
-						responde: ubícate, lee el rumbo de la Qibla, luego síguelo en el dial de la
-						brújula en vivo.
+						Una brújula de aguja es sencilla, pero debe estar nivelada y siempre apunta al norte
+						magnético — no al norte de tu mapa. Una brújula en línea añade el grado exacto de tu
+						rumbo, la corrección automática de la declinación y una pantalla que puedes leer a
+						oscuras.
 					</p>
-					<p class="mt-3 text-sm text-body leading-6">
-						Porque la brújula en línea para la Qibla se ejecuta totalmente en tu dispositivo,
-						no hay servidor, ni cuenta, ni ubicación almacenada en ningún lugar. Ingresa
-						coordenadas manualmente o concede acceso de ubicación una sola vez y el rumbo se
-						calculará al instante con una fracción de grado de precisión.
+				</div>
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">¿Por qué usar una brújula de navegador?</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Se abre con un solo toque desde un marcador o una búsqueda, sin nada que instalar y sin
+						cuenta. Si tu teléfono tiene una aplicación de brújula que casi nunca abres, una brújula
+						de navegador es la que de verdad usarás.
 					</p>
 				</div>
 			</div>
+		</div>
+	</section>
 
-			<div class="mx-auto mt-12 max-w-3xl">
-				<h3 class="text-display-sm text-ink">¿Por qué elegir una brújula en línea?</h3>
-				<p class="mt-3 text-body text-body leading-7">
-					Una brújula física es un instrumento maravilloso, pero una brújula en línea digital
-					añade precisión en vivo: muestra no solo el norte, sino el grado exacto de cualquier
-					rumbo, se corrige para la declinación magnética en cualquier parte de la Tierra y
-					puede mantenerse en cualquier orientación. La herramienta gratuita de brújula en línea
-					de este sitio combina esa brújula en vivo con todo lo que un navegador necesita —
-					coordenadas GPS en decimal y DMS, la dirección de la Qibla, una calculadora de rumbo
-					y la posición del sol para la orientación diurna. Es rápida, privada y está lista
-					cuando necesites encontrar el norte.
+	<!-- ─── How to use, step by step ───────────────────────── -->
+	<section id="how-to-use" class="border-y border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="grid gap-10 lg:grid-cols-2 lg:items-start">
+				<div>
+					<p class="eyebrow">primeros pasos</p>
+					<h2 class="mt-3 text-display-lg text-ink">Cómo usar una brújula en línea.</h2>
+					<p class="mt-3 text-body-lg text-body">
+						Cinco pasos te llevan desde abrir la página hasta tener un rumbo fiable. Todo el proceso
+						dura menos de un minuto y puedes repetir la calibración siempre que la lectura se
+						desvíe. Para una guía más detallada, lee nuestra
+						<a href="/blog/how-to-use-online-compass/" class="text-link underline decoration-link/30 hover:decoration-link">guía paso a paso de la brújula en línea</a>.
+					</p>
+					<p class="mt-4 text-sm text-body leading-6">
+						El factor que más influye en la precisión no es el software — es dónde te encuentras y
+						qué hay cerca de tu teléfono. Tenlo presente en cada paso.
+					</p>
+				</div>
+				<ol class="card-soft divide-y divide-hairline">
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">01</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Abre la brújula en tu teléfono</p>
+							<p class="mt-1 text-sm text-body">Carga esta página en Safari, Chrome o Firefox en un teléfono o tableta con magnetómetro.</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">02</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Activa la brújula en vivo</p>
+							<p class="mt-1 text-sm text-body">Toca "Activar brújula en vivo" y permite el acceso al movimiento y la orientación cuando tu navegador lo solicite.</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">03</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Sostén el teléfono plano y lejos del metal</p>
+							<p class="mt-1 text-sm text-body">Apóyalo en la palma de la mano, con la pantalla hacia arriba, y mantenlo alejado de portátiles, altavoces y fundas magnéticas.</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">04</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Lee tu rumbo y calibra</p>
+							<p class="mt-1 text-sm text-body">El marcador superior muestra la dirección a la que miras. Traza un ocho si el número oscila.</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">05</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Cambia al norte verdadero</p>
+							<p class="mt-1 text-sm text-body">Activa la declinación para que el rumbo coincida con los mapas y con cualquier rumbo que planees seguir.</p>
+						</div>
+					</li>
+				</ol>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── True vs magnetic north ─────────────────────────── -->
+	<section id="true-north" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">norte verdadero vs magnético</p>
+				<h2 class="mt-3 text-display-lg text-ink">Por qué la declinación decide si aciertas.</h2>
+				<p class="mt-3 text-body-lg text-body">
+					La aguja de una brújula no apunta a la parte superior del mapa. Apunta al norte magnético,
+					un punto móvil en el Ártico. La diferencia entre este y el norte verdadero es la declinación
+					— la causa más común de que una lectura de brújula parezca "incorrecta".
+				</p>
+				<p class="mt-4 text-body leading-7">
+					La declinación no es un número fijo que puedas memorizar. Depende de dónde te encuentres en
+					el planeta y se desplaza una fracción de grado cada año a medida que se mueve el núcleo
+					fundido de la Tierra. En Londres ambos nortes han permanecido casi alineados durante años,
+					por lo que los mapas británicos suelen ignorar la diferencia; en algunas zonas de Canadá y
+					Sudáfrica pueden estar a 20° o más de distancia — la diferencia entre llegar a tu coche o
+					girar por la calle equivocada.
+				</p>
+				<p class="mt-4 text-body leading-7">
+					Esto es precisamente lo que una brújula sin corregir hace mal. Nuestra brújula en línea
+					aplica el Modelo Magnético Mundial para tus coordenadas, así que al activar el
+					<strong class="text-ink font-medium">norte verdadero</strong> el rumbo se alinea con la
+					cuadrícula de un mapa. La tabla siguiente muestra aproximadamente cuánto vale la corrección
+					en lugares conocidos; toca <em>"Usar ubicación para la declinación"</em> en el dial para
+					obtener el valor exacto donde te encuentras.
+				</p>
+			</div>
+
+			<div class="mx-auto mt-10 max-w-3xl overflow-x-auto">
+				<table class="w-full border-collapse text-sm">
+					<caption class="sr-only">Declinación magnética aproximada por ciudad</caption>
+					<thead>
+						<tr class="border-b border-hairline-strong text-left">
+							<th scope="col" class="py-3 pr-4 font-medium text-ink">Ubicación</th>
+							<th scope="col" class="py-3 font-medium text-ink">Declinación aproximada</th>
+						</tr>
+					</thead>
+					<tbody>
+						{declinationExamples.map((d) => (
+							<tr class="border-b border-hairline">
+								<td class="py-3 pr-4 text-body">{d.place}</td>
+								<td class="py-3 text-body">{d.value}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+				<p class="mt-3 text-xs text-mute">
+					Valores aproximados de mediados de la década de 2020, solo a título ilustrativo. La
+					declinación cambia cada año y según la ubicación exacta — usa siempre la corrección en vivo
+					de la herramienta.
 				</p>
 			</div>
 		</div>
 	</section>
 
-	<!-- ——— Calibration ——— -->
-	<section id="calibration" class="scroll-mt-16">
+	<!-- ─── How to read a compass ──────────────────────────── -->
+	<section id="reading" class="border-y border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">leer el dial</p>
+				<h2 class="mt-3 text-display-lg text-ink">Rumbos, demoras y la rosa de los vientos.</h2>
+				<p class="mt-3 text-body-lg text-body">
+					Una vez que el dial está activo, la única habilidad que queda es leerlo.
+				</p>
+				<div class="mt-8 grid gap-4 sm:grid-cols-2">
+					<div class="card-soft p-5">
+						<h3 class="text-sm font-medium text-ink mb-1">Rumbo</h3>
+						<p class="text-sm leading-6">La dirección a la que miras en este momento, en grados en sentido horario desde el norte. Mirar al este es 90°, al sur 180°, al oeste 270°.</p>
+					</div>
+					<div class="card-soft p-5">
+						<h3 class="text-sm font-medium text-ink mb-1">Demora</h3>
+						<p class="text-sm leading-6">La dirección de un punto a otro. Usa la <a href="/es/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">calculadora de rumbo</a> para obtenerla entre dos coordenadas.</p>
+					</div>
+					<div class="card-soft p-5">
+						<h3 class="text-sm font-medium text-ink mb-1">Azimut</h3>
+						<p class="text-sm leading-6">Una demora expresada como un ángulo de 0° a 360°. La <a href="/es/sun/" class="text-link underline decoration-link/30 hover:decoration-link">herramienta del sol</a> da el azimut del sol para tu ubicación.</p>
+					</div>
+					<div class="card-soft p-5">
+						<h3 class="text-sm font-medium text-ink mb-1">Demora inversa</h3>
+						<p class="text-sm leading-6">La dirección opuesta — la demora de B de vuelta a A. Suma 180° si la demora directa es menor de 180°; de lo contrario, réstale 180°.</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="mx-auto mt-12 max-w-3xl">
+				<h3 class="text-display-sm text-ink">La rosa de los vientos de 16 puntos</h3>
+				<p class="mt-2 text-sm text-body leading-6">
+					Entre los cuatro puntos cardinales se sitúan puntos intermedios. Una rosa de 16 puntos divide
+					el círculo en segmentos de 22.5° — la resolución que usan la mayoría de los informes de
+					navegación y meteorología.
+				</p>
+				<div class="mt-5 grid grid-cols-2 gap-x-6 sm:grid-cols-4">
+					{compassRose.map((c) => (
+						<div class="flex items-baseline justify-between border-b border-hairline py-2">
+							<span class="font-mono text-sm text-ink">{c.point}</span>
+							<span class="font-mono text-xs text-mute">{c.deg}</span>
+						</div>
+					))}
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Accuracy ───────────────────────────────────────── -->
+	<section id="accuracy" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">precisión</p>
+				<h2 class="mt-3 text-display-lg text-ink">¿Qué precisión tiene la brújula de un teléfono?</h2>
+				<p class="mt-3 text-body-lg text-body">
+					Bien usada, la brújula de un teléfono es precisa dentro de uno o dos grados. Usada con
+					descuido, puede desviarse veinte. La diferencia es casi por completo ambiental.
+				</p>
+				<p class="mt-4 text-body leading-7">
+					El magnetómetro mide la intensidad del campo en microteslas y está concebido para la
+					navegación, no para la topografía: sirve para seguir un sendero o alinear un panel solar,
+					pero no iguala a un instrumento profesional. Lo que importa es el indicador de precisión
+					del dial — fíate de una lectura estable y muévete cuando salte decenas de grados, porque el
+					campo a tu alrededor está distorsionado. En interiores, espera unos pocos grados de deriva
+					por el cableado y los muebles; en exteriores, lejos de un coche o una barandilla, las
+					lecturas son fiables. Si la precisión importa, promedia varias lecturas y compáralas con la
+					<a href="/es/sun/" class="text-link underline decoration-link/30 hover:decoration-link">posición del sol</a>.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Calibration ────────────────────────────────────── -->
+	<section id="calibration" class="border-y border-hairline bg-canvas scroll-mt-16">
 		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
 			<div class="grid gap-10 lg:grid-cols-2 lg:items-start">
 				<div>
 					<p class="eyebrow">calibración</p>
-					<h2 class="mt-3 text-display-lg text-ink">Obtén la lectura más precisa.</h2>
+					<h2 class="mt-3 text-display-lg text-ink">Consigue la lectura más precisa.</h2>
 					<p class="mt-3 text-body-lg text-body">
-						Los magnetómetros de los teléfonos son sensibles a los metales y campos magnéticos
-						cercanos. Unos pocos segundos de calibración convierten una aguja errática en un
-						rumbo confiable.
+						Los magnetómetros de los teléfonos son sensibles al metal y a los campos magnéticos
+						cercanos. Unos segundos de calibración convierten una aguja a la deriva en un rumbo
+						fiable.
 					</p>
 				</div>
 				<ol class="card-soft divide-y divide-hairline">
@@ -371,22 +593,22 @@ retroalimentación de precisión en vivo.
 					<li class="flex gap-4 p-5">
 						<span class="font-mono text-sm text-mute">02</span>
 						<div>
-							<p class="text-sm font-medium text-ink">Trazar un ocho</p>
-							<p class="mt-1 text-sm text-body">Agita el teléfono suavemente en un movimiento de ocho unas cuantas veces, luego mantenlo quieto.</p>
+							<p class="text-sm font-medium text-ink">Traza un ocho</p>
+							<p class="mt-1 text-sm text-body">Agita el teléfono suavemente describiendo un ocho unas cuantas veces y luego mantenlo quieto.</p>
 						</div>
 					</li>
 					<li class="flex gap-4 p-5">
 						<span class="font-mono text-sm text-mute">03</span>
 						<div>
-							<p class="text-sm font-medium text-ink">Aléjate de interferencias</p>
-							<p class="mt-1 text-sm text-body">Aléjate de portátiles, teléfonos, imanes y mesas metálicas antes de tomar una lectura.</p>
+							<p class="text-sm font-medium text-ink">Aléjate de las interferencias</p>
+							<p class="mt-1 text-sm text-body">Apártate de portátiles, teléfonos, imanes y mesas metálicas antes de tomar una lectura.</p>
 						</div>
 					</li>
 					<li class="flex gap-4 p-5">
 						<span class="font-mono text-sm text-mute">04</span>
 						<div>
 							<p class="text-sm font-medium text-ink">Confirma con el sol</p>
-							<p class="mt-1 text-sm text-body">Usa el marcador de posición del sol en el dial como una verificación independiente durante el día.</p>
+							<p class="mt-1 text-sm text-body">Usa el marcador de posición del sol en el dial como verificación independiente durante el día.</p>
 						</div>
 					</li>
 				</ol>
@@ -394,7 +616,140 @@ retroalimentación de precisión en vivo.
 		</div>
 	</section>
 
-	<!-- ——— FAQ ——— -->
+	<!-- ─── Compare compass types ──────────────────────────── -->
+	<section id="compare" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">tipos de brújula</p>
+				<h2 class="mt-3 text-display-lg text-ink">No todas las brújulas funcionan igual.</h2>
+				<p class="mt-3 text-body-lg text-body">
+					Saber qué tecnología sostienes explica sus virtudes, sus límites y por qué la brújula de un
+					teléfono se comporta de forma distinta a la de latón que guardas en un cajón.
+				</p>
+			</div>
+			<div class="mt-10 overflow-x-auto">
+				<table class="w-full border-collapse text-sm">
+					<caption class="sr-only">Comparación de tipos de brújula</caption>
+					<thead>
+						<tr class="border-b border-hairline-strong text-left">
+							<th scope="col" class="py-3 pr-4 font-medium text-ink">Tipo</th>
+							<th scope="col" class="py-3 pr-4 font-medium text-ink">Qué mide</th>
+							<th scope="col" class="py-3 pr-4 font-medium text-ink">Ideal para</th>
+							<th scope="col" class="py-3 font-medium text-ink">Limitaciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						{compassTypes.map((c) => (
+							<tr class="border-b border-hairline align-top">
+								<td class="py-3 pr-4 font-medium text-ink">{c.type}</td>
+								<td class="py-3 pr-4 text-body">{c.measures}</td>
+								<td class="py-3 pr-4 text-body">{c.best}</td>
+								<td class="py-3 text-body">{c.limitation}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Uses ───────────────────────────────────────────── -->
+	<section id="uses" class="border-y border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">usos cotidianos</p>
+			<h2 class="mt-3 max-w-2xl text-display-lg text-ink">Quién usa realmente una brújula en línea.</h2>
+			<p class="mt-3 max-w-2xl text-body-lg text-body">
+				Más allá del obvio caso del senderismo, un rumbo rápido resuelve un número sorprendente de
+				pequeños problemas reales.
+			</p>
+			<div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">Senderismo y navegación por senderos</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Orienta un mapa de papel antes de partir, toma una demora inversa para deshacer tu ruta
+						y confirma la dirección bajo la cubierta arbórea, donde el GPS tarda en estabilizarse.
+					</p>
+				</div>
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">Fotografía y vídeo</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Planifica una sesión de hora dorada comprobando hacia dónde mira un lugar, y predice por
+						dónde saldrá y se pondrá el sol con la <a href="/es/sun/" class="text-link underline decoration-link/30 hover:decoration-link">herramienta del sol</a>.
+					</p>
+				</div>
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">Jardinería y energía solar</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Averigua hacia dónde mira un jardín o un balcón para colocar plantas amantes del sol, y
+						orienta los paneles solares hacia el sur o el norte verdadero para obtener el máximo
+						rendimiento.
+					</p>
+				</div>
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">Hogar e inmuebles</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Comprueba la orientación de una habitación para la luz y la calefacción, describe con
+						precisión la orientación de una vivienda y resuelve en segundos la pregunta "¿hacia
+						dónde da el salón?".
+					</p>
+				</div>
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">Viajes y la Qibla</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Encuentra la dirección de la oración en cualquier lugar con el
+						<a href="/es/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">buscador de Qibla</a>,
+						y ubícate en una ciudad desconocida antes de que la aplicación de mapas reaccione.
+					</p>
+				</div>
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">Educación y STEM</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Profesores y estudiantes pueden ver cómo los ángulos, las demoras y la diferencia entre
+						el norte verdadero y el magnético cobran vida en un dial que responde a un instrumento
+						real.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Troubleshooting ────────────────────────────────── -->
+	<section id="troubleshooting" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">solución de problemas</p>
+				<h2 class="mt-3 text-display-lg text-ink">Cuando tu brújula apunta en la dirección equivocada.</h2>
+				<p class="mt-3 text-body-lg text-body">
+					Una brújula que se comporta mal casi siempre es un problema de interferencias, no un sensor
+					averiado. Revisa estos puntos en orden.
+				</p>
+				<div class="mt-8 space-y-4">
+					<div class="card-soft p-5">
+						<h3 class="text-sm font-medium text-ink mb-1">El dial gira o el número sube sin parar</h3>
+						<p class="text-sm leading-6">Estás cerca de una fuente magnética potente. Retira las fundas MagSafe y los soportes magnéticos, aléjate de altavoces, motores y metal, y vuelve a calibrar.</p>
+					</div>
+					<div class="card-soft p-5">
+						<h3 class="text-sm font-medium text-ink mb-1">La lectura es estable pero parece desviada unos grados</h3>
+						<p class="text-sm leading-6">Normalmente es la declinación. Activa el norte verdadero y habilita la ubicación para que la corrección se aplique a tus coordenadas exactas.</p>
+					</div>
+					<div class="card-soft p-5">
+						<h3 class="text-sm font-medium text-ink mb-1">No ocurre nada al tocar el botón</h3>
+						<p class="text-sm leading-6">El acceso a los sensores requiere una página HTTPS segura y un dispositivo con magnetómetro. Comprueba que has concedido permiso de movimiento y orientación para este sitio.</p>
+					</div>
+					<div class="card-soft p-5">
+						<h3 class="text-sm font-medium text-ink mb-1">Funciona en mi teléfono pero no en mi portátil</h3>
+						<p class="text-sm leading-6">La mayoría de los portátiles no tiene magnetómetro, así que no hay nada que leer. Usa el teléfono para rumbos en vivo; el ordenador seguirá mostrando el dial de demostración y los datos del sol y la luna.</p>
+					</div>
+					<div class="card-soft p-5">
+						<h3 class="text-sm font-medium text-ink mb-1">La aguja va con retraso cuando giro rápido</h3>
+						<p class="text-sm leading-6">El suavizado mantiene estable la lectura, así que se queda un poco atrás en giros rápidos. Baja el ritmo un momento y el número se estabilizará.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── FAQ ────────────────────────────────────────────── -->
 	<section id="faq" class="border-t border-hairline bg-canvas scroll-mt-16">
 		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
 			<p class="eyebrow text-center">preguntas frecuentes</p>
@@ -416,16 +771,17 @@ retroalimentación de precisión en vivo.
 		</div>
 	</section>
 
-	<!-- ——— CTA band ——— -->
+	<!-- ─── CTA band ───────────────────────────────────────── -->
 	<section class="bg-ink text-on-primary">
 		<div class="mx-auto max-w-[1200px] px-4 py-20 text-center sm:px-6 md:py-24">
 			<p class="font-mono text-xs uppercase tracking-[0.08em] text-on-primary/60">listo cuando tú lo estés</p>
 			<h2 class="mt-4 text-display-lg text-on-primary">Encuentra tu rumbo.</h2>
 			<p class="mx-auto mt-3 max-w-lg text-body-lg text-on-primary/70">
-				Apunta tu teléfono al norte, verifica tu Qibla o traza un curso — todo en una herramienta gratuita.
+				Apunta tu teléfono al norte, comprueba tu Qibla o traza un rumbo — todo en una herramienta gratuita.
 			</p>
 			<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
 				<a href="/es/compass/" class="btn-primary bg-on-primary text-primary hover:opacity-85">Abrir la brújula</a>
+				<a href="/blog/how-to-use-online-compass/" class="btn-secondary">Lee la guía completa</a>
 			</div>
 		</div>
 	</section>

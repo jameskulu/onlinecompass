@@ -1,0 +1,206 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	return posts.map((post) => ({
+		params: { slug: post.id },
+		props: { post },
+	}));
+}
+
+interface Props {
+	post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const dateFmt = new Intl.DateTimeFormat('en-GB', {
+	year: 'numeric',
+	month: 'long',
+	day: 'numeric',
+});
+
+const published = dateFmt.format(post.data.pubDate);
+const updated = post.data.updatedDate ? dateFmt.format(post.data.updatedDate) : null;
+---
+
+<Layout
+	title={`${post.data.title} — True Online Compass`}
+	description={post.data.description}
+	path={`/blog/${post.id}/`}
+	keywords={post.data.keywords.join(', ')}
+>
+	<article>
+		<header class="relative overflow-hidden border-b border-hairline">
+			<div class="mesh-gradient" aria-hidden="true"></div>
+			<div class="relative mx-auto max-w-3xl px-4 py-16 sm:px-6 md:py-24">
+				<a href="/blog/" class="text-sm text-mute transition-colors hover:text-ink">← All guides</a>
+				<p class="eyebrow mt-6">blog</p>
+				<h1 class="mt-4 text-display-lg text-ink md:text-[40px] md:leading-[48px]">
+					{post.data.title}
+				</h1>
+				<div class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-mute">
+					<time datetime={post.data.pubDate.toISOString()}>{published}</time>
+					<span aria-hidden="true">·</span>
+					<span>{post.data.author}</span>
+					{updated && (
+						<>
+							<span aria-hidden="true">·</span>
+							<span>Updated {updated}</span>
+						</>
+					)}
+				</div>
+			</div>
+		</header>
+
+		<div class="mx-auto max-w-3xl px-4 py-12 sm:px-6 md:py-16">
+			<div class="blog-content">
+				<Content />
+			</div>
+
+			<hr class="my-12 border-hairline" />
+
+			<div class="flex flex-wrap items-center justify-between gap-4">
+				<a href="/blog/" class="text-link text-sm font-medium">← Back to all guides</a>
+				<a href="/compass/" class="btn-primary">Open the compass</a>
+			</div>
+		</div>
+	</article>
+
+	<script
+		type="application/ld+json"
+		set:html={JSON.stringify({
+			'@context': 'https://schema.org',
+			'@type': 'BlogPosting',
+			headline: post.data.title,
+			description: post.data.description,
+			datePublished: post.data.pubDate.toISOString(),
+			dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+			author: { '@type': 'Organization', name: post.data.author },
+			publisher: {
+				'@type': 'Organization',
+				name: 'True Online Compass',
+				url: 'https://trueonlinecompass.com',
+			},
+			mainEntityOfPage: new URL(`/blog/${post.id}/`, Astro.site).href,
+		})}
+	/>
+</Layout>
+
+<style is:global>
+	.blog-content {
+		color: var(--color-body);
+		font-size: 1.0625rem;
+		line-height: 1.75;
+	}
+	.blog-content > * + * {
+		margin-top: 1.1rem;
+	}
+	.blog-content h2 {
+		margin-top: 2.5rem;
+		margin-bottom: 0.5rem;
+		font-size: 1.5rem;
+		line-height: 2rem;
+		font-weight: 600;
+		letter-spacing: -0.96px;
+		color: var(--color-ink);
+	}
+	.blog-content h3 {
+		margin-top: 1.75rem;
+		margin-bottom: 0.25rem;
+		font-size: 1.25rem;
+		line-height: 1.75rem;
+		font-weight: 600;
+		letter-spacing: -0.6px;
+		color: var(--color-ink);
+	}
+	.blog-content h4 {
+		margin-top: 1.5rem;
+		font-size: 1rem;
+		font-weight: 600;
+		color: var(--color-ink);
+	}
+	.blog-content p {
+		line-height: 1.75;
+	}
+	.blog-content a {
+		color: var(--color-link);
+		text-decoration: underline;
+		text-decoration-color: color-mix(in oklab, var(--color-link) 30%, transparent);
+	}
+	.blog-content a:hover {
+		text-decoration-color: var(--color-link);
+	}
+	.blog-content strong {
+		color: var(--color-ink);
+		font-weight: 600;
+	}
+	.blog-content ul,
+	.blog-content ol {
+		padding-left: 1.5rem;
+	}
+	.blog-content ul {
+		list-style: disc;
+	}
+	.blog-content ol {
+		list-style: decimal;
+	}
+	.blog-content li {
+		margin-top: 0.4rem;
+	}
+	.blog-content li::marker {
+		color: var(--color-mute);
+	}
+	.blog-content blockquote {
+		border-left: 3px solid var(--color-hairline-strong);
+		padding-left: 1rem;
+		color: var(--color-mute);
+	}
+	.blog-content code {
+		font-family: var(--font-mono);
+		font-size: 0.875em;
+		background-color: var(--color-canvas-soft-2);
+		padding: 0.125rem 0.35rem;
+		border-radius: 4px;
+		color: var(--color-ink);
+	}
+	.blog-content pre {
+		background-color: var(--color-canvas-soft-2);
+		box-shadow: var(--shadow-card);
+		border-radius: 8px;
+		padding: 1rem;
+		overflow-x: auto;
+	}
+	.blog-content pre code {
+		background: none;
+		padding: 0;
+	}
+	.blog-content hr {
+		margin-top: 2rem;
+		margin-bottom: 2rem;
+		border-color: var(--color-hairline);
+	}
+	.blog-content img {
+		border-radius: 8px;
+		box-shadow: var(--shadow-card);
+	}
+	.blog-content table {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 0.9375rem;
+	}
+	.blog-content th,
+	.blog-content td {
+		border: 1px solid var(--color-hairline);
+		padding: 0.5rem 0.75rem;
+		text-align: left;
+	}
+	.blog-content th {
+		color: var(--color-ink);
+		font-weight: 600;
+	}
+</style>

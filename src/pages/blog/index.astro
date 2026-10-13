@@ -1,0 +1,59 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const dateFmt = new Intl.DateTimeFormat('en-GB', {
+	year: 'numeric',
+	month: 'long',
+	day: 'numeric',
+});
+---
+
+<Layout
+	title="Blog — Guides for the Online Compass"
+	description="Guides and notes for getting the most from your online compass: calibration, true vs magnetic north, bearings, and navigation tips."
+	path="/blog/"
+	keywords="online compass blog, online compass guide, how to use an online compass, compass calibration"
+>
+	<section class="relative overflow-hidden">
+		<div class="mesh-gradient" aria-hidden="true"></div>
+		<div class="relative mx-auto max-w-[1200px] px-4 pt-16 pb-12 sm:px-6 md:pt-24 md:pb-16">
+			<p class="eyebrow">blog</p>
+			<h1 class="mt-4 max-w-2xl text-display-lg text-ink md:text-[40px] md:leading-[48px]">
+				Guides from the compass.
+			</h1>
+			<p class="mt-4 max-w-2xl text-body-lg text-body">
+				Practical, no-fluff guides for getting an accurate heading — calibration, true north,
+				bearings, and everyday ways to use your online compass.
+			</p>
+		</div>
+	</section>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-[1200px] px-4 py-16 sm:px-6 md:py-20">
+			{posts.length === 0 ? (
+				<p class="text-body">No posts yet — check back soon.</p>
+			) : (
+				<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+					{posts.map((post) => (
+						<a
+							href={`/blog/${post.id}/`}
+							class="card-lg group flex flex-col p-6 transition-shadow hover:shadow-modal"
+						>
+							<p class="eyebrow mb-2">{dateFmt.format(post.data.pubDate)}</p>
+							<h2 class="text-display-sm text-ink transition-colors group-hover:text-link">
+								{post.data.title}
+							</h2>
+							<p class="mt-2 text-sm leading-6 text-body">{post.data.description}</p>
+							<span class="mt-4 text-sm font-medium text-link">Read the guide →</span>
+						</a>
+					))}
+				</div>
+			)}
+		</div>
+	</section>
+</Layout>

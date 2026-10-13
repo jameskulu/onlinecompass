@@ -4,72 +4,119 @@ import Compass from '../components/Compass.astro';
 
 const faq = [
 	{
-		q: 'Which direction am I facing — online compass?',
-		a: 'Open this page on your phone and the live heading readout below the dial shows the exact degree and compass direction (N, NE, E, SE, S, SW, W, NW) you are facing, updated in real time as you turn.',
+		q: 'What is an online compass?',
+		a: 'An online compass is a digital compass that runs inside your web browser instead of as a separate app. It reads the magnetometer, accelerometer, and gyroscope in your phone and turns them into a live heading in degrees — no download required. You open a page like this one, grant sensor access, and the dial updates in real time as you turn.',
 	},
 	{
-		q: 'Online compass — where is north?',
-		a: 'The red end of the needle always points north, which reads 0°/360° at the top of the dial. Toggle to "True north" and the site corrects for magnetic declination at your location so north lines up with maps.',
+		q: 'How do I use an online compass on my phone?',
+		a: 'Open this page on your phone, tap "Enable live compass", and hold the device flat in your palm. The heading appears below the dial in degrees and as a compass point. For the most accurate results, trace a figure-eight motion to calibrate the magnetometer and keep the phone away from metal and magnets.',
 	},
 	{
-		q: 'What direction am I facing — online compass?',
-		a: 'Hold your phone flat, grant sensor access, and the heading below the dial tells you the direction you are facing both in degrees and as a compass point — for example 274° or W.',
+		q: 'Is an online compass accurate?',
+		a: 'A calibrated phone compass is typically accurate to within about 1–5 degrees outdoors. The magnetometer itself is sensitive, and nearby metal, electronics, or a magnetic phone case can throw it off. Once you calibrate and step away from interference, readings usually agree with a physical compass within a couple of degrees.',
 	},
 	{
-		q: 'How to know direction without a compass online?',
-		a: "Use the sun: around local noon it sits due south in the northern hemisphere and due north in the southern hemisphere. This site's Sun tool shows the exact solar azimuth for any location, and the Qibla finder works as a fixed reference direction too.",
+		q: 'What is the difference between true north and magnetic north?',
+		a: 'Magnetic north is the direction your phone\'s magnetometer points — it follows Earth\'s magnetic field, which shifts every year. True north is the geographic North Pole that maps use. The angle between the two is called magnetic declination, and this tool corrects for it automatically so your heading lines up with a map.',
 	},
 	{
-		q: 'What way am I facing — online compass?',
-		a: 'Grant sensor access, hold the phone flat away from metal, and read the heading readout. It updates continuously as you rotate, so you always know which way you are facing.',
+		q: 'What is magnetic declination?',
+		a: 'Magnetic declination is the angle between magnetic north and true north at a given location. It ranges from roughly −30° to +30° around the world and changes slowly over time. In London it is near zero, while in parts of Canada it can exceed 15°. Because it varies by place, a GPS-accurate declination correction matters whenever you follow a bearing.',
 	},
 	{
-		q: 'How to use an online compass?',
-		a: 'Open this page on a phone, tap "Enable live compass", hold the device flat, and read the heading. If the needle drifts, trace a figure-eight motion a few times to recalibrate the magnetometer.',
+		q: 'Why does my compass needle jump around or spin?',
+		a: 'A magnetometer is a sensitive instrument. Phone cases with magnets, speakers, laptops, metal tables, car dashboards, and steel-framed buildings all bend the magnetic field around you. Move away from these, hold the phone flat, and trace a figure-eight to recalibrate. A few degrees of movement indoors is normal.',
 	},
 	{
-		q: 'Can I use my phone as a compass?',
-		a: 'Yes. Modern phones contain a magnetometer, and this website turns that sensor into a compass right in your browser — no app to download and nothing to install.',
+		q: 'How do I calibrate my phone\'s compass?',
+		a: 'Hold the phone flat, then rotate it slowly through a figure-eight several times while keeping the screen facing up. This gives the magnetometer a full range of readings to calibrate against. Finish by holding still for a second. Repeat any time the heading looks unstable.',
 	},
 	{
-		q: 'Where is my compass in Google?',
-		a: 'Google Maps shows a small compass at the top-right of the map view. For a live heading in degrees, just search "online compass" on Google and open this page — it becomes a compass the moment you grant sensor access.',
+		q: 'Does an online compass work offline, and on a laptop?',
+		a: 'The dial keeps working offline once the page has loaded, because the heading is generated on your device. A laptop or desktop will not work for live headings, though — most have no magnetometer, so there is nothing to read. Use a phone or tablet; a computer still shows the demo dial and the sun and moon data.',
 	},
 	{
-		q: "Can my phone tell me what direction I'm facing?",
-		a: "Yes. Your phone's magnetometer combined with this page gives a live heading, and the site automatically corrects for magnetic declination so north matches your maps.",
+		q: 'Does an online compass ask for my location, and is it private?',
+		a: 'Location is optional and only used to compute magnetic declination, the Qibla bearing, and sun position. All of the maths runs locally in your browser — there is no account, no backend, and no analytics. Your coordinates never leave your device, and you can always enter coordinates manually instead.',
 	},
 	{
-		q: 'How to see a compass on mobile?',
-		a: 'Open this page on your phone and the compass appears instantly — no app needed. On Android, Google Maps also includes a compass, and some phones ship a built-in compass app.',
+		q: 'Can I use an online compass to find the Qibla?',
+		a: 'Yes. The Qibla finder uses your coordinates to compute the great-circle bearing to the Kaaba in Makkah, accurate to the degree, plus the distance. You can then follow that bearing on the live compass dial to face it.',
 	},
 	{
-		q: 'Which is my north direction?',
-		a: 'True north is the geographic North Pole; magnetic north is where a compass needle points. The angle between the two (declination) varies by location, and this site corrects for it automatically.',
+		q: 'How can I find north without a compass?',
+		a: 'In the northern hemisphere the sun is due south at local noon, so it casts shadows pointing north. At night, Polaris (the North Star) sits almost exactly above true north. This site\'s sun position tool gives the exact solar azimuth for your location and time, which is a reliable cross-check for any compass.',
 	},
 	{
-		q: 'Where is the compass on my phone?',
-		a: 'Many phones do not ship a dedicated compass app — but the sensor is built in. Open this website on your phone and it becomes a compass with no install.',
+		q: 'Do I need to install an app to use this compass?',
+		a: 'No. Everything runs in the browser, so there is nothing to download, no app store, no sign-up, and no updates to manage. It works the same on iPhone, Android, and most tablets.',
 	},
 	{
-		q: 'Which mobile phones have a compass sensor?',
-		a: 'Virtually every modern smartphone — every iPhone since the iPhone 3GS and almost all Android phones — includes a magnetometer, so this online compass works on nearly any device.',
+		q: 'Is this online compass free?',
+		a: 'Yes, it is completely free and there are no premium tiers or paywalls. Every tool on the site — compass, GPS coordinates, Qibla finder, bearing calculator, sun position, and sun & moon direction — is free to use.',
 	},
 	{
-		q: 'Why does my heading jump around?',
-		a: 'Nearby metal and electronics distort the magnetometer. Follow the calibration steps above, and make sure the phone is flat. Drift of a few degrees is normal indoors.',
+		q: 'Which direction is my house or window facing?',
+		a: 'Stand at the window facing outward, hold your phone flat, and read the heading. North is 0°, east 90°, south 180°, and west 270°. Gardeners use this to plan sunlight, and photographers use it to predict where the sun rises and sets.',
+	},
+];
+
+const declinationExamples = [
+	{ place: 'London, United Kingdom', value: '≈ 0°' },
+	{ place: 'Paris, France', value: '≈ +1° east' },
+	{ place: 'New York, United States', value: '≈ −13° west' },
+	{ place: 'Toronto, Canada', value: '≈ −11° west' },
+	{ place: 'Los Angeles, United States', value: '≈ +12° east' },
+	{ place: 'Anchorage, United States', value: '≈ +15° east' },
+	{ place: 'Sydney, Australia', value: '≈ +12° east' },
+	{ place: 'São Paulo, Brazil', value: '≈ −23° west' },
+	{ place: 'Cape Town, South Africa', value: '≈ −25° west' },
+	{ place: 'Tokyo, Japan', value: '≈ −8° west' },
+];
+
+const compassRose = [
+	{ point: 'N', deg: '0°' },
+	{ point: 'NNE', deg: '22.5°' },
+	{ point: 'NE', deg: '45°' },
+	{ point: 'ENE', deg: '67.5°' },
+	{ point: 'E', deg: '90°' },
+	{ point: 'ESE', deg: '112.5°' },
+	{ point: 'SE', deg: '135°' },
+	{ point: 'SSE', deg: '157.5°' },
+	{ point: 'S', deg: '180°' },
+	{ point: 'SSW', deg: '202.5°' },
+	{ point: 'SW', deg: '225°' },
+	{ point: 'WSW', deg: '247.5°' },
+	{ point: 'W', deg: '270°' },
+	{ point: 'WNW', deg: '292.5°' },
+	{ point: 'NW', deg: '315°' },
+	{ point: 'NNW', deg: '337.5°' },
+];
+
+const compassTypes = [
+	{
+		type: 'Traditional magnetic compass',
+		measures: 'Earth\'s magnetic field with a floating needle',
+		best: 'Offline reliability, zero batteries, teaching',
+		limitation: 'Needs a level surface, no declination correction, single sensor',
 	},
 	{
-		q: "What's the difference between magnetic and true north?",
-		a: 'Magnetic north is where your compass needle points. True north is the geographic North Pole, which is what maps and navigation use. The angle between them — the declination — varies by location, and this tool corrects for it automatically.',
+		type: 'Phone sensor compass (this site)',
+		measures: 'Magnetometer plus accelerometer and gyroscope, fused',
+		best: 'Live heading in degrees, tilt compensation, map alignment',
+		limitation: 'Sensitive to nearby metal and magnets',
 	},
 	{
-		q: 'Why does it ask for my location?',
-		a: 'Location lets us compute magnetic declination, Qibla bearing, and sun position with precision. It is optional — every tool works with manual coordinates too — and it never leaves your device.',
+		type: 'GPS course compass',
+		measures: 'Direction of travel from GPS position changes',
+		best: 'Navigation while moving, works without a magnetometer',
+		limitation: 'Only works when moving; useless standing still',
 	},
 	{
-		q: 'Do you store or sell my location?',
-		a: 'No. There are no trackers, no analytics, and no backend. All sensor and location data is processed locally in your browser and discarded when you leave.',
+		type: 'Gyrocompass',
+		measures: 'Earth\'s rotation with fast-spinning gyroscopes',
+		best: 'Ships and aircraft, unaffected by magnetic fields',
+		limitation: 'Large, expensive, slow to settle',
 	},
 ];
 ---
@@ -94,7 +141,7 @@ const faq = [
 				and sun position — all in your browser. Nothing to install, nothing uploaded.</p>
 
 				<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
-					<a href="/location/" class="btn-primary">Locate me</a>
+					<a href="#how-to-use" class="btn-primary">How to use it</a>
 					<a href="/compass/" class="btn-secondary">Open the compass</a>
 				</div>
 			</div>
@@ -263,7 +310,7 @@ const faq = [
 		</div>
 	</section>
 
-	<!-- ─── About the tool (SEO) ──────────────────────────── -->
+	<!-- ─── What is an online compass (SEO / value) ───────── -->
 	<section id="about" class="scroll-mt-16">
 		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
 			<div class="mx-auto max-w-3xl">
@@ -274,83 +321,242 @@ const faq = [
 					that runs directly in your web browser — no app to download, no install, and nothing
 					to pay for. Open this page on your phone and, in a few seconds, you have a free online
 					compass that shows your live heading in degrees, points toward north from wherever you
-					are, and can even correct itself for the difference between magnetic north and true
-					north.
+					are, and can correct itself for the difference between magnetic north and true north.
 				</p>
-				<p class="mt-4 text-body text-body leading-7">
-					Because it lives in the browser, it works exactly the same whether you are at home, in
-					the field, or in a classroom. Just search "online compass" on Google, open this site,
-					and your device's sensors take over. Unlike a traditional compass, this online compass
-					uses your phone's magnetometer, gyroscope, and accelerometer together, which gives a
-					more stable and reliable <strong class="text-ink font-medium">online compass
-					direction</strong> than a needle that is always fighting gravity and drift.
+				<p class="mt-4 text-body leading-7">
+					Because it lives in the browser, it behaves the same whether you are at home, in the
+					field, or in a classroom. Search "online compass" on Google, open this site, and your
+					device's sensors take over. Unlike a traditional compass with a needle fighting gravity
+					and drift, an online compass combines your phone's magnetometer, gyroscope, and
+					accelerometer to produce a more stable and reliable
+					<strong class="text-ink font-medium">online compass direction</strong>.
 				</p>
-				<p class="mt-4 text-body text-body leading-7">
-					Every tool on this site is designed to <strong class="text-ink font-medium">find
-					north online</strong> and much more: a live heading readout in degrees, cardinal and
-					intercardinal directions (N, NE, E, SE, S, SW, W, NW), a one-tap fullscreen mode, and
-					an accuracy indicator so you always know how trustworthy the reading is. And because
-					everything is processed locally, your location never leaves your device — a genuinely
-					free online compass, not a data-harvesting one.
+				<p class="mt-4 text-body leading-7">
+					Every tool here is built around one job — helping you orient yourself and
+					<strong class="text-ink font-medium">find north online</strong> — and around it sits a
+					full navigation toolkit: a live heading readout in degrees, cardinal and intercardinal
+					directions, a one-tap fullscreen mode, and an accuracy indicator so you always know how
+					much to trust the reading. Because everything is processed locally, your location never
+					leaves your device.
 				</p>
 			</div>
 
-			<div class="mx-auto mt-12 grid max-w-4xl gap-8 md:grid-cols-2">
+			<div class="mx-auto mt-12 grid max-w-5xl gap-6 md:grid-cols-3">
 				<div class="card p-6">
-					<h3 class="text-display-sm text-ink">Online compass for geometry and math</h3>
+					<h3 class="text-display-sm text-ink">How an online compass works</h3>
 					<p class="mt-2 text-sm text-body leading-6">
-						An <strong class="text-ink font-medium">online compass tool</strong> is also a
-						teaching aid. In geometry, a compass is used to draw circles and arcs and to measure
-						distances; on this site, the online compass for geometry works with the math instead
-						of the pencil. Measure the angle of any direction, convert between bearings and
-						compass points, and use the bearing calculator to find the direction and
-						great-circle distance between any two coordinates on Earth. It is the online compass
-						math tool that turns abstract angles into a heading you can see on a dial.
-					</p>
-					<p class="mt-3 text-sm text-body leading-6">
-						Students can check their work against a real magnetic compass, and teachers can use
-						the live dial to explain true north versus magnetic north with an example that moves
-						as you turn the phone. This online compass free tool is used daily for simple tasks
-						too — orienting a map, aligning a solar panel, or checking which way a room faces.
+						<strong class="text-ink font-medium">Three sensors</strong> do the work: a
+						magnetometer measures Earth's magnetic field, an accelerometer detects which way is
+						down, and a gyroscope tracks rotation. The browser fuses them into a single heading,
+						and tilt compensation keeps it correct even when the phone is not flat.
 					</p>
 				</div>
 				<div class="card p-6">
-					<h3 class="text-display-sm text-ink">Online compass for Qibla — find the Kaaba from my location</h3>
+					<h3 class="text-display-sm text-ink">Online compass vs. a traditional compass</h3>
 					<p class="mt-2 text-sm text-body leading-6">
-						This site includes a dedicated <strong class="text-ink font-medium">quibla finder
-						online compass</strong> that computes the direction to the Kaaba in Mecca from your
-						current coordinates. Wherever you are, the Qibla finder gives you a bearing in
-						degrees and a compass direction, plus the great-circle distance to Makkah. For many
-						travellers, the phrase they search for is "online compass kabba to find north from
-						my location" — and this page answers it: locate yourself, read the Qibla bearing,
-						then follow it on the live compass dial.
+						A needle compass is simple but must sit level, and it always points to magnetic north
+						— not the north on your map. An online compass adds the exact degree of your heading,
+						automatic declination correction, and a display you can read in the dark.
 					</p>
-					<p class="mt-3 text-sm text-body leading-6">
-						Because the online compass for Qibla runs entirely on your device, there is no
-						server, no account, and no location stored anywhere. Enter coordinates manually, or
-						grant one-time location access and the bearing is calculated instantly to within a
-						fraction of a degree.
+				</div>
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">Why use a browser compass at all?</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						It opens in one tap from a bookmark or a search, with nothing to install and no
+						account. If your phone has a compass app you rarely open, a browser compass is the one
+						you will actually use.
 					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── How to use, step by step ───────────────────────── -->
+	<section id="how-to-use" class="border-y border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="grid gap-10 lg:grid-cols-2 lg:items-start">
+				<div>
+					<p class="eyebrow">getting started</p>
+					<h2 class="mt-3 text-display-lg text-ink">How to use an online compass.</h2>
+					<p class="mt-3 text-body-lg text-body">
+						Five steps take you from opening the page to a heading you can trust. The whole
+						process takes less than a minute, and you can repeat the calibration whenever the
+						reading drifts. For a deeper walkthrough, read our
+						<a href="/blog/how-to-use-online-compass/" class="text-link underline decoration-link/30 hover:decoration-link">step-by-step online compass guide</a>.
+					</p>
+					<p class="mt-4 text-sm text-body leading-6">
+						The single biggest factor in accuracy is not the software — it is where you stand and
+						what is near your phone. Keep that in mind through every step.
+					</p>
+				</div>
+				<ol class="card-soft divide-y divide-hairline">
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">01</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Open the compass on your phone</p>
+							<p class="mt-1 text-sm text-body">Load this page in Safari, Chrome, or Firefox on a phone or tablet with a magnetometer.</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">02</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Enable the live compass</p>
+							<p class="mt-1 text-sm text-body">Tap "Enable live compass" and allow motion and orientation access when your browser asks.</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">03</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Hold the phone flat, away from metal</p>
+							<p class="mt-1 text-sm text-body">Rest it in your palm, screen up, and keep it clear of laptops, speakers, and magnetic cases.</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">04</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Read your heading and calibrate</p>
+							<p class="mt-1 text-sm text-body">The top marker shows the direction you face. Trace a figure-eight if the number wobbles.</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">05</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Switch to true north</p>
+							<p class="mt-1 text-sm text-body">Enable declination so the heading matches maps and any bearing you plan to follow.</p>
+						</div>
+					</li>
+				</ol>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── True vs magnetic north ─────────────────────────── -->
+	<section id="true-north" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">true vs magnetic north</p>
+				<h2 class="mt-3 text-display-lg text-ink">Why declination decides whether you're right.</h2>
+				<p class="mt-3 text-body-lg text-body">
+					A compass needle does not point to the top of the map. It points to magnetic north, a
+					moving spot in the Arctic. The gap between that and true north is declination — the most
+					common reason a compass reading seems "wrong".
+				</p>
+				<p class="mt-4 text-body leading-7">
+					Declination is not a fixed number you can memorise. It depends on where you are on the
+					planet, and it drifts by a fraction of a degree each year as Earth's molten core moves.
+					In London the two norths have stayed nearly aligned for years, which is why British maps
+					often ignore the difference; in parts of Canada and South Africa they can be 20° or more
+					apart — the difference between reaching your car and turning down the wrong street.
+				</p>
+				<p class="mt-4 text-body leading-7">
+					This is exactly what an uncorrected compass gets wrong. Our online compass applies the
+					World Magnetic Model for your coordinates, so toggling to
+					<strong class="text-ink font-medium">true north</strong> lines the heading up with a map
+					grid. The table below shows roughly how large the correction is in well-known places;
+					tap <em>"Use location for declination"</em> on the dial for the exact value where you
+					are.
+				</p>
+			</div>
+
+			<div class="mx-auto mt-10 max-w-3xl overflow-x-auto">
+				<table class="w-full border-collapse text-sm">
+					<caption class="sr-only">Approximate magnetic declination by city</caption>
+					<thead>
+						<tr class="border-b border-hairline-strong text-left">
+							<th scope="col" class="py-3 pr-4 font-medium text-ink">Location</th>
+							<th scope="col" class="py-3 font-medium text-ink">Approximate declination</th>
+						</tr>
+					</thead>
+					<tbody>
+						{declinationExamples.map((d) => (
+							<tr class="border-b border-hairline">
+								<td class="py-3 pr-4 text-body">{d.place}</td>
+								<td class="py-3 text-body">{d.value}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+				<p class="mt-3 text-xs text-mute">
+					Approximate mid-2020s values for illustration only. Declination changes every year and
+					by exact location — always use the live correction in the tool.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── How to read a compass ──────────────────────────── -->
+	<section id="reading" class="border-y border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">reading the dial</p>
+				<h2 class="mt-3 text-display-lg text-ink">Headings, bearings, and the compass rose.</h2>
+				<p class="mt-3 text-body-lg text-body">
+					Once the dial is live, the only skill left is reading it.
+				</p>
+				<div class="mt-8 grid gap-4 sm:grid-cols-2">
+					<div class="card-soft p-5">
+						<h3 class="text-sm font-medium text-ink mb-1">Heading</h3>
+						<p class="text-sm leading-6">The direction you are currently facing, in degrees clockwise from north. Facing east is 90°, south 180°, west 270°.</p>
+					</div>
+					<div class="card-soft p-5">
+						<h3 class="text-sm font-medium text-ink mb-1">Bearing</h3>
+						<p class="text-sm leading-6">The direction from one point to another. Use the <a href="/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">bearing calculator</a> to get it between two coordinates.</p>
+					</div>
+					<div class="card-soft p-5">
+						<h3 class="text-sm font-medium text-ink mb-1">Azimuth</h3>
+						<p class="text-sm leading-6">A bearing expressed as an angle from 0° to 360°. The <a href="/sun/" class="text-link underline decoration-link/30 hover:decoration-link">sun tool</a> gives the sun's azimuth for your location.</p>
+					</div>
+					<div class="card-soft p-5">
+						<h3 class="text-sm font-medium text-ink mb-1">Back bearing</h3>
+						<p class="text-sm leading-6">The reverse direction — the bearing from B back to A. Add 180° if the forward bearing is under 180°, otherwise subtract 180°.</p>
+					</div>
 				</div>
 			</div>
 
 			<div class="mx-auto mt-12 max-w-3xl">
-				<h3 class="text-display-sm text-ink">Why choose an online compass?</h3>
-				<p class="mt-3 text-body text-body leading-7">
-					A physical compass is a wonderful instrument, but a digital online compass adds live
-					accuracy: it shows not just north, but the exact degree of any heading, corrects for
-					magnetic declination anywhere on Earth, and can be held in any orientation. This site's
-					free online compass tool bundles that live compass with everything a navigator needs —
-					GPS coordinates in decimal and DMS, the Qibla direction, a bearing calculator, and sun
-					position for daytime orientation. It is fast, private, and ready whenever you need to
-					find north.
+				<h3 class="text-display-sm text-ink">The 16-point compass rose</h3>
+				<p class="mt-2 text-sm text-body leading-6">
+					Between the four cardinal points sit intermediate points. A 16-point rose divides the
+					circle into 22.5° segments — the resolution most navigation and weather reports use.
+				</p>
+				<div class="mt-5 grid grid-cols-2 gap-x-6 sm:grid-cols-4">
+					{compassRose.map((c) => (
+						<div class="flex items-baseline justify-between border-b border-hairline py-2">
+							<span class="font-mono text-sm text-ink">{c.point}</span>
+							<span class="font-mono text-xs text-mute">{c.deg}</span>
+						</div>
+					))}
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Accuracy ───────────────────────────────────────── -->
+	<section id="accuracy" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">accuracy</p>
+				<h2 class="mt-3 text-display-lg text-ink">How accurate is a phone compass?</h2>
+				<p class="mt-3 text-body-lg text-body">
+					Used well, a phone compass is accurate to within a degree or two. Used carelessly, it
+					can be off by twenty. The difference is almost entirely environmental.
+				</p>
+				<p class="mt-4 text-body leading-7">
+					The magnetometer measures field strength in microteslas and is built for navigation, not
+					surveying: fine for following a trail or aligning a solar panel, but no match for a
+					professional instrument. What matters is the accuracy indicator on the dial — trust a
+					steady reading, and move when it jumps by tens of degrees, because the field around you
+					is distorted. Indoors, expect a few degrees of drift from wiring and furniture; outdoors,
+					clear of a car or railing, readings are reliable. If precision matters, average a few
+					readings and cross-check against the
+					<a href="/sun/" class="text-link underline decoration-link/30 hover:decoration-link">sun's position</a>.
 				</p>
 			</div>
 		</div>
 	</section>
 
 	<!-- ─── Calibration ────────────────────────────────────── -->
-	<section id="calibration" class="scroll-mt-16">
+	<section id="calibration" class="border-y border-hairline bg-canvas scroll-mt-16">
 		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
 			<div class="grid gap-10 lg:grid-cols-2 lg:items-start">
 				<div>
@@ -395,6 +601,136 @@ const faq = [
 		</div>
 	</section>
 
+	<!-- ─── Compare compass types ──────────────────────────── -->
+	<section id="compare" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">compass types</p>
+				<h2 class="mt-3 text-display-lg text-ink">Not all compasses work the same way.</h2>
+				<p class="mt-3 text-body-lg text-body">
+					Knowing which technology you are holding explains its strengths, its limits, and why a
+					phone compass behaves differently from the brass one in a drawer.
+				</p>
+			</div>
+			<div class="mt-10 overflow-x-auto">
+				<table class="w-full border-collapse text-sm">
+					<caption class="sr-only">Comparison of compass types</caption>
+					<thead>
+						<tr class="border-b border-hairline-strong text-left">
+							<th scope="col" class="py-3 pr-4 font-medium text-ink">Type</th>
+							<th scope="col" class="py-3 pr-4 font-medium text-ink">What it measures</th>
+							<th scope="col" class="py-3 pr-4 font-medium text-ink">Best for</th>
+							<th scope="col" class="py-3 font-medium text-ink">Limitations</th>
+						</tr>
+					</thead>
+					<tbody>
+						{compassTypes.map((c) => (
+							<tr class="border-b border-hairline align-top">
+								<td class="py-3 pr-4 font-medium text-ink">{c.type}</td>
+								<td class="py-3 pr-4 text-body">{c.measures}</td>
+								<td class="py-3 pr-4 text-body">{c.best}</td>
+								<td class="py-3 text-body">{c.limitation}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Uses ───────────────────────────────────────────── -->
+	<section id="uses" class="border-y border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">everyday uses</p>
+			<h2 class="mt-3 max-w-2xl text-display-lg text-ink">Who actually uses an online compass.</h2>
+			<p class="mt-3 max-w-2xl text-body-lg text-body">
+				Beyond the obvious hiking case, a quick heading solves a surprising number of small,
+				real problems.
+			</p>
+			<div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">Hiking and trail navigation</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Orient a paper map before you set off, take a back bearing to retrace your route, and
+						confirm direction under tree cover where GPS is slow to settle.
+					</p>
+				</div>
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">Photography and video</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Plan a golden-hour shoot by checking which way a location faces, and predict where the
+						sun will rise and set using the <a href="/sun/" class="text-link underline decoration-link/30 hover:decoration-link">sun tool</a>.
+					</p>
+				</div>
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">Gardening and solar</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Find which way a garden or balcony faces to place sun-loving plants, and align solar
+						panels toward true south or north for maximum yield.
+					</p>
+				</div>
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">Home and property</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Check a room's orientation for light and heating, describe a property's aspect
+						accurately, and settle the "which way does the living room face?" question in seconds.
+					</p>
+				</div>
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">Travel and the Qibla</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Find the direction of prayer anywhere with the
+						<a href="/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">Qibla finder</a>,
+						and get your bearings in an unfamiliar city before the map app catches up.
+					</p>
+				</div>
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">Education and STEM</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Teachers and students can watch angles, bearings, and the difference between true and
+						magnetic north come alive on a dial that responds to a real instrument.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Troubleshooting ────────────────────────────────── -->
+	<section id="troubleshooting" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">troubleshooting</p>
+				<h2 class="mt-3 text-display-lg text-ink">When your compass points the wrong way.</h2>
+				<p class="mt-3 text-body-lg text-body">
+					A misbehaving compass is almost always an interference problem, not a broken sensor.
+					Work through these checks in order.
+				</p>
+				<div class="mt-8 space-y-4">
+					<div class="card-soft p-5">
+						<h3 class="text-sm font-medium text-ink mb-1">The dial spins or the number climbs nonstop</h3>
+						<p class="text-sm leading-6">You are near a strong magnetic source. Remove MagSafe cases and magnetic mounts, move away from speakers, motors, and metal, then recalibrate.</p>
+					</div>
+					<div class="card-soft p-5">
+						<h3 class="text-sm font-medium text-ink mb-1">The reading is steady but seems a few degrees off</h3>
+						<p class="text-sm leading-6">That is usually declination. Toggle on true north and enable location so the correction applies to your exact coordinates.</p>
+					</div>
+					<div class="card-soft p-5">
+						<h3 class="text-sm font-medium text-ink mb-1">Nothing happens when I tap the button</h3>
+						<p class="text-sm leading-6">Sensor access requires a secure HTTPS page and a device with a magnetometer. Check that you granted motion and orientation permission for this site.</p>
+					</div>
+					<div class="card-soft p-5">
+						<h3 class="text-sm font-medium text-ink mb-1">It works on my phone but not my laptop</h3>
+						<p class="text-sm leading-6">Most laptops have no magnetometer, so there is nothing to read. Use your phone for live headings; the computer still shows the demo dial and sun and moon data.</p>
+					</div>
+					<div class="card-soft p-5">
+						<h3 class="text-sm font-medium text-ink mb-1">The needle lags when I turn quickly</h3>
+						<p class="text-sm leading-6">Smoothing keeps the reading stable, so it trails fast spins slightly. Slow down for a moment and the number will settle.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
 	<!-- ─── FAQ ────────────────────────────────────────────── -->
 	<section id="faq" class="border-t border-hairline bg-canvas scroll-mt-16">
 		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
@@ -427,6 +763,7 @@ const faq = [
 			</p>
 			<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
 				<a href="/compass/" class="btn-primary bg-on-primary text-primary hover:opacity-85">Open the compass</a>
+				<a href="/blog/how-to-use-online-compass/" class="btn-secondary">Read the full guide</a>
 			</div>
 		</div>
 	</section>

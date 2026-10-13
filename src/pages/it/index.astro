@@ -4,72 +4,127 @@ import Compass from '../../components/Compass.astro';
 
 const faq = [
 	{
-		q: 'In che direzione sto guardando — bussola online?',
-		a: 'Apri questa pagina sul tuo telefono e la lettura dell\'intestazione in tempo reale sotto il quadrante mostra il grado esatto e la direzione della bussola (N, NE, E, SE, S, SW, W, NW) in cui stai guardando, aggiornata in tempo reale mentre ti giri.',
+		q: 'Cos\'è una bussola online?',
+		a: 'Una bussola online è una bussola digitale che funziona dentro il tuo browser web invece che come app separata. Legge il magnetometro, l\'accelerometro e il giroscopio del tuo telefono e li trasforma in un\'intestazione in tempo reale in gradi — senza alcun download. Apri una pagina come questa, concedi l\'accesso ai sensori e il quadrante si aggiorna in tempo reale mentre ruoti.',
 	},
 	{
-		q: 'Bussola online — dov\'è il nord?',
-		a: 'L\'estremità rossa dell\'ago punta sempre verso nord, che legge 0°/360° nella parte superiore del quadrante. Passa al "Nord vero" e il sito corregge la declinazione magnetica nella tua posizione così il nord si allinea con le mappe.',
+		q: 'Come si usa una bussola online sul telefono?',
+		a: 'Apri questa pagina sul telefono, tocca "Abilita bussola in tempo reale" e tieni il dispositivo piatto nel palmo. L\'intestazione appare sotto il quadrante in gradi e come punto della bussola. Per i risultati più accurati, traccia un movimento a otto per calibrare il magnetometro e tieni il telefono lontano da metalli e magneti.',
 	},
 	{
-		q: 'In che direzione sto guardando — bussola online?',
-		a: 'Tieni il telefono piatto, concedi l\'accesso ai sensori, e l\'intestazione sotto il quadrante ti indica la direzione in cui stai guardando sia in gradi che come punto della bussola — ad esempio 274° o W.',
+		q: 'Una bussola online è precisa?',
+		a: 'Una bussola del telefono calibrata è di norma precisa entro circa 1–5 gradi all\'aperto. Il magnetometro stesso è sensibile, e metalli, elettronica o una custodia magnetica nelle vicinanze possono falsarla. Una volta calibrata e allontanatoti dalle interferenze, le letture di solito concordano con una bussola fisica entro un paio di gradi.',
 	},
 	{
-		q: 'Come conoscere la direzione senza bussola online?',
-		a: 'Usa il sole: a mezzogiorno locale si trova a sud nell\'emisfero nord e a nord nell\'emisfero sud. Lo strumento Sole di questo sito mostra l\'azimut solare esatto per qualsiasi posizione, e il trovatore Qibla funziona anche come direzione di riferimento fissa.',
+		q: 'Qual è la differenza tra nord vero e nord magnetico?',
+		a: 'Il nord magnetico è la direzione verso cui punta il magnetometro del tuo telefono — segue il campo magnetico terrestre, che si sposta ogni anno. Il nord vero è il Polo Nord geografico usato dalle mappe. L\'angolo tra i due si chiama declinazione magnetica, e questo strumento la corregge automaticamente così la tua intestazione è allineata con la mappa.',
 	},
 	{
-		q: 'In che direzione sto guardando — bussola online?',
-		a: 'Concedi l\'accesso ai sensori, tieni il telefono piatto lontano dai metalli, e leggi la lettura dell\'intestazione. Si aggiorna continuamente mentre ruoti, così sai sempre in che direzione stai guardando.',
+		q: 'Cos\'è la declinazione magnetica?',
+		a: 'La declinazione magnetica è l\'angolo tra il nord magnetico e il nord vero in una data posizione. Nel mondo va all\'incirca da −30° a +30° e cambia lentamente nel tempo. A Londra è vicina allo zero, mentre in alcune zone del Canada può superare i 15°. Poiché varia da luogo a luogo, una correzione della declinazione precisa al GPS conta ogni volta che segui un rilevamento.',
 	},
 	{
-		q: 'Come usare una bussola online?',
-		a: 'Apri questa pagina su un telefono, tocca "Abilita bussola in tempo reale", tieni il dispositivo piatto, e leggi l\'intestazione. Se l\'ago devia, traccia un movimento a otto per alcune volte per ricalibrare il magnetometro.',
+		q: 'Perché l\'ago della bussola salta o gira su se stesso?',
+		a: 'Il magnetometro è uno strumento sensibile. Custodie con magneti, altoparlanti, portatili, tavoli metallici, cruscotti delle auto e palazzi con struttura in acciaio deformano il campo magnetico intorno a te. Allontanati da questi elementi, tieni il telefono piatto e traccia un otto per ricalibrare. Qualche grado di movimento al chiuso è normale.',
+	},
+	{
+		q: 'Come calibro la bussola del telefono?',
+		a: 'Tieni il telefono piatto, poi ruotalo lentamente tracciando un otto diverse volte mantenendo lo schermo rivolto verso l\'alto. Questo dà al magnetometro una gamma completa di letture su cui calibrarsi. Concludi restando fermo per un secondo. Ripeti ogni volta che l\'intestazione sembra instabile.',
+	},
+	{
+		q: 'Una bussola online funziona offline e su un portatile?',
+		a: 'Il quadrante continua a funzionare offline una volta caricata la pagina, perché l\'intestazione viene generata sul tuo dispositivo. Un portatile o un desktop, però, non funzionerà per le intestazioni in tempo reale — la maggior parte non ha un magnetometro, quindi non c\'è nulla da leggere. Usa un telefono o un tablet; il computer mostra comunque il quadrante dimostrativo e i dati di sole e luna.',
+	},
+	{
+		q: 'Una bussola online chiede la mia posizione ed è privata?',
+		a: 'La posizione è facoltativa e serve solo a calcolare la declinazione magnetica, il rilevamento Qibla e la posizione del sole. Tutti i calcoli avvengono localmente nel tuo browser — nessun account, nessun backend e nessun analytics. Le tue coordinate non lasciano mai il tuo dispositivo, e puoi sempre inserirle manualmente.',
+	},
+	{
+		q: 'Posso usare una bussola online per trovare la Qibla?',
+		a: 'Sì. Il trovatore Qibla usa le tue coordinate per calcolare il rilevamento ortodromico verso la Kaaba alla Mecca, preciso al grado, più la distanza. Puoi poi seguire quel rilevamento sul quadrante della bussola in tempo reale per orientarti.',
+	},
+	{
+		q: 'Come posso trovare il nord senza bussola?',
+		a: 'Nell\'emisfero nord il sole si trova esattamente a sud a mezzogiorno locale, quindi proietta ombre che puntano verso nord. Di notte la Polare (la stella polare) si trova quasi esattamente sopra il nord vero. Lo strumento per la posizione del sole di questo sito dà l\'azimut solare esatto per la tua posizione e il tuo orario, un controllo affidabile per qualsiasi bussola.',
+	},
+	{
+		q: 'Devo installare un\'app per usare questa bussola?',
+		a: 'No. Tutto funziona nel browser, quindi non c\'è nulla da scaricare, nessuno store, nessuna registrazione e nessun aggiornamento da gestire. Funziona allo stesso modo su iPhone, Android e sulla maggior parte dei tablet.',
+	},
+	{
+		q: 'Questa bussola online è gratuita?',
+		a: 'Sì, è completamente gratuita e non ci sono livelli premium né paywall. Ogni strumento del sito — bussola, coordinate GPS, trovatore Qibla, calcolatore di rilevamento, posizione del sole e direzione di sole e luna — è gratuito.',
+	},
+	{
+		q: 'In che direzione è rivolta la mia casa o la mia finestra?',
+		a: 'Mettiti alla finestra guardando verso l\'esterno, tieni il telefono piatto e leggi l\'intestazione. Il nord è 0°, est 90°, sud 180° e ovest 270°. I giardinieri lo usano per pianificare l\'esposizione al sole, e i fotografi per prevedere dove sorge e tramonta il sole.',
 	},
 	{
 		q: 'Posso usare il mio telefono come bussola?',
-		a: 'Sì. I telefoni moderni contengono un magnetometro, e questo sito web trasforma quel sensore in una bussola direttamente nel tuo browser — nessuna app da scaricare e nulla da installare.',
+		a: 'Sì. I telefoni moderni contengono un magnetometro, e questa bussola online lo trasforma in una bussola funzionante direttamente nel tuo browser — nessuna app da scaricare e nulla da installare.',
 	},
 	{
-		q: 'Dov\'è la mia bussola in Google?',
-		a: 'Google Maps mostra una piccola bussola nell\'angolo in alto a destra della vista della mappa. Per un\'intestazione in tempo reale in gradi, cerca semplicemente "bussola online" su Google e apri questa pagina — diventa una bussola nel momento in cui concedi l\'accesso ai sensori.',
-	},
-	{
-		q: 'Il mio telefono può dirmi in che direzione sto guardando?',
-		a: 'Sì. Il magnetometro del tuo telefono combinato con questa pagina fornisce un\'intestazione in tempo reale, e il sito corregge automaticamente la declinazione magnetica così il nord corrisponde alle tue mappe.',
-	},
-	{
-		q: 'Come vedere una bussola su mobile?',
-		a: 'Apri questa pagina sul tuo telefono e la bussola appare istantaneamente — nessuna app necessaria. Su Android, Google Maps include anche una bussola, e alcuni telefoni hanno una bussola integrata.',
-	},
-	{
-		q: 'Qual è la mia direzione nord?',
-		a: 'Il nord vero è il Polo Nord geografico; il nord magnetico è dove punta l\'ago di una bussola. L\'angolo tra i due (declinazione) varia in base alla posizione, e questo sito lo corregge automaticamente.',
-	},
-	{
-		q: 'Dov\'è la bussola sul mio telefono?',
-		a: 'Molti telefoni non hanno un\'app bussola dedicata — ma il sensore è integrato. Apri questo sito web sul tuo telefono e diventa una bussola senza installazioni.',
-	},
-	{
-		q: 'Quali telefoni cellulari hanno un sensore bussola?',
+		q: 'Quali telefoni hanno una bussola?',
 		a: 'Praticamente ogni smartphone moderno — ogni iPhone dal 3GS in poi e quasi tutti i telefoni Android — include un magnetometro, quindi questa bussola online funziona su quasi qualsiasi dispositivo.',
 	},
+];
+
+const declinationExamples = [
+	{ place: 'Londra, Regno Unito', value: '≈ 0°' },
+	{ place: 'Parigi, Francia', value: '≈ +1° est' },
+	{ place: 'New York, Stati Uniti', value: '≈ −13° ovest' },
+	{ place: 'Toronto, Canada', value: '≈ −11° ovest' },
+	{ place: 'Los Angeles, Stati Uniti', value: '≈ +12° est' },
+	{ place: 'Anchorage, Stati Uniti', value: '≈ +15° est' },
+	{ place: 'Sydney, Australia', value: '≈ +12° est' },
+	{ place: 'San Paolo, Brasile', value: '≈ −23° ovest' },
+	{ place: 'Città del Capo, Sudafrica', value: '≈ −25° ovest' },
+	{ place: 'Tokyo, Giappone', value: '≈ −8° ovest' },
+];
+
+const compassRose = [
+	{ point: 'N', deg: '0°' },
+	{ point: 'NNE', deg: '22.5°' },
+	{ point: 'NE', deg: '45°' },
+	{ point: 'ENE', deg: '67.5°' },
+	{ point: 'E', deg: '90°' },
+	{ point: 'ESE', deg: '112.5°' },
+	{ point: 'SE', deg: '135°' },
+	{ point: 'SSE', deg: '157.5°' },
+	{ point: 'S', deg: '180°' },
+	{ point: 'SSW', deg: '202.5°' },
+	{ point: 'SW', deg: '225°' },
+	{ point: 'WSW', deg: '247.5°' },
+	{ point: 'W', deg: '270°' },
+	{ point: 'WNW', deg: '292.5°' },
+	{ point: 'NW', deg: '315°' },
+	{ point: 'NNW', deg: '337.5°' },
+];
+
+const compassTypes = [
 	{
-		q: 'Perché la mia intestazione salta?',
-		a: 'I metalli e l\'elettronica vicini distorcono il magnetometro. Segui i passaggi di calibrazione sopra e assicurati che il telefono sia piatto. Una deriva di qualche grado è normale al chiuso.',
+		type: 'Bussola magnetica tradizionale',
+		measures: 'Misura il campo magnetico terrestre con un ago galleggiante',
+		best: 'Affidabilità offline, zero batterie, didattica',
+		limitation: 'Richiede una superficie in piano, nessuna correzione della declinazione, sensore unico',
 	},
 	{
-		q: 'Qual è la differenza tra nord magnetico e nord vero?',
-		a: 'Il nord magnetico è dove punta l\'ago della bussola. Il nord vero è il Polo Nord geografico, che è quello che usano mappe e navigazione. L\'angolo tra di essi — la declinazione — varia in base alla posizione, e questo strumento lo corregge automaticamente.',
+		type: 'Bussola a sensori del telefono (questo sito)',
+		measures: 'Magnetometro più accelerometro e giroscopio, fusi insieme',
+		best: 'Intestazione in tempo reale in gradi, compensazione dell\'inclinazione, allineamento alla mappa',
+		limitation: 'Sensibile a metalli e magneti vicini',
 	},
 	{
-		q: 'Perché chiede la mia posizione?',
-		a: 'La posizione ci permette di calcolare la declinazione magnetica, la direzione Qibla e la posizione del sole con precisione. È facoltativa — ogni strumento funziona anche con coordinate manuali — e non lascia mai il tuo dispositivo.',
+		type: 'Bussola a rotta GPS',
+		measures: 'Direzione di movimento dai cambiamenti di posizione GPS',
+		best: 'Navigazione in movimento, funziona senza magnetometro',
+		limitation: 'Funziona solo in movimento; inutile da fermo',
 	},
 	{
-		q: 'Archiviate o vendete la mia posizione?',
-		a: 'No. Non ci sono tracker, né analytics, né backend. Tutti i dati dei sensori e della posizione vengono elaborati localmente nel tuo browser e cancellati quando esci.',
+		type: 'Girobussola',
+		measures: 'Rotazione terrestre con giroscopi ad alta velocità',
+		best: 'Navi e aerei, immune ai campi magnetici',
+		limitation: 'Grande, costosa, lenta a stabilizzarsi',
 	},
 ];
 ---
@@ -80,7 +135,7 @@ const faq = [
 	description="Bussola online gratuita: trova il nord in tempo reale dalla tua posizione. Intestazione dal vivo con nord vero e magnetico, declinazione automatica, trovatore Qibla, calcolatore di rilevamento e posizione del sole — senza installazioni, funziona su qualsiasi telefono."
 	keywords="bussola online, strumento bussola online, bussola online gratuita, bussola online google, bussola online gratis, bussola online per trovare il nord, direzione bussola online, geometria bussola online, strumento geometria bussola online, bussola online per geometria, bussola online matematica, strumento bussola online gratuito, bussola online per qibla, bussola online in tempo reale, bussola online kabba per trovare nord dalla mia posizione, trovatore quibla bussola online"
 >
-	<!-- ─── Hero ─────────────────────────────── -->
+	<!-- ─── Hero ───────────────────────────────────────────── -->
 	<section id="compass" class="relative overflow-hidden">
 		<div class="mesh-gradient" aria-hidden="true"></div>
 		<div class="relative mx-auto max-w-[1200px] px-4 pt-12 pb-20 text-center sm:px-6 md:pt-20 md:pb-28">
@@ -102,7 +157,7 @@ const faq = [
 		</div>
 	</section>
 
-	<!-- ─── Feature strip ──────────────────── -->
+	<!-- ─── Feature strip ──────────────────────────────────── -->
 	<section class="border-y border-hairline bg-canvas">
 		<div
 			class="mx-auto grid max-w-[1200px] grid-cols-1 gap-px overflow-hidden px-4 py-12 sm:grid-cols-3 sm:px-6"
@@ -117,20 +172,21 @@ const faq = [
 			<div class="p-4">
 				<p class="eyebrow mb-2">privacy prima di tutto</p>
 				<p class="text-sm text-body leading-6">
-					Tutto l'elaborazione dei sensori avviene sul dispositivo. Nessun account, nessun tracciamento,
+					Tutta l'elaborazione dei sensori avviene sul dispositivo. Nessun account, nessun tracciamento,
 					e nulla esce mai dal tuo browser.
 				</p>
 			</div>
 			<div class="p-4">
 				<p class="eyebrow mb-2">funziona ovunque</p>
 				<p class="text-sm text-body leading-6">
-					Chrome, Safari e Firefox su iOS e Android, con un fallback GPS quando ti muovi.
+					Chrome, Safari e Firefox su iOS e Android, con un'intestazione GPS di riserva quando sei in
+					movimento.
 				</p>
 			</div>
 		</div>
 	</section>
 
-	<!-- ─── Tools grid ─────────────────────── -->
+	<!-- ─── Tools grid ─────────────────────────────────────── -->
 	<section id="tools" class="scroll-mt-16">
 		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
 			<p class="eyebrow">il kit di strumenti</p>
@@ -138,7 +194,7 @@ const faq = [
 				Una bussola, ogni rilevamento di cui avrai bisogno.
 			</h2>
 			<p class="mt-3 max-w-xl text-body-lg text-body">
-				Cinque strumenti dedicati, ognuno nella sua pagina, tutti in esecuzione localmente sul tuo dispositivo.
+				Sei strumenti dedicati, ognuno nella sua pagina, tutti in esecuzione localmente sul tuo dispositivo.
 			</p>
 
 			<div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -182,6 +238,14 @@ const faq = [
 						e tramonto per qualsiasi posizione.
 					</p>
 				</a>
+				<a href="/it/sun-moon/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
+					<p class="eyebrow mb-2">sole & luna</p>
+					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Direzione di sole e luna</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						L'azimut del sole e della luna tracciato direttamente sul quadrante della
+						bussola, così puoi trovarli nel cielo girandoti verso il marcatore.
+					</p>
+				</a>
 				<div class="card-soft flex flex-col justify-center p-6">
 					<p class="text-sm text-body leading-6">
 						Nessun account. Nessun tracker. Ogni calcolo viene eseguito nel tuo browser e cancellato
@@ -192,14 +256,14 @@ const faq = [
 		</div>
 	</section>
 
-	<!-- ─── How it works ───────────────────── -->
+	<!-- ─── How it works ───────────────────────────────────── -->
 	<section id="how-it-works" class="border-y border-hairline bg-canvas scroll-mt-16">
 		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
 			<p class="eyebrow">come funziona</p>
 			<h2 class="mt-3 max-w-2xl text-display-lg text-ink">Progettato per la precisione.</h2>
 			<p class="mt-3 max-w-xl text-body-lg text-body">
 				Il magnetometro, il giroscopio e l'accelerometro del tuo telefono alimentano un motore
-				di intestazione compensato inclinazione, corretto con il Modello Magnetico Mondiale.
+				di intestazione compensato per l'inclinazione, corretto con il Modello Magnetico Mondiale.
 			</p>
 
 			<div class="mt-12 grid gap-6 md:grid-cols-3">
@@ -230,7 +294,7 @@ const faq = [
 					</div>
 					<h3 class="text-display-sm text-ink">Correzione del nord vero</h3>
 					<p class="mt-2 text-sm text-body leading-6">
-						La declinazione varia da -30° a +30° sul pianeta. Applichiamo il Modello Magnetico
+						La declinazione varia da −30° a +30° sul pianeta. Applichiamo il Modello Magnetico
 						Mondiale così il nord vero è esatto, ovunque tu sia.
 					</p>
 				</div>
@@ -255,7 +319,7 @@ const faq = [
 		</div>
 	</section>
 
-	<!-- ─── About the tool (SEO) ───────────── -->
+	<!-- ─── What is an online compass (SEO / value) ───────── -->
 	<section id="about" class="scroll-mt-16">
 		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
 			<div class="mx-auto max-w-3xl">
@@ -266,91 +330,251 @@ const faq = [
 					che funziona direttamente nel tuo browser web — nessuna app da scaricare, nessuna
 					installazione e nulla da pagare. Apri questa pagina sul tuo telefono e, in pochi
 					secondi, hai una bussola online gratuita che mostra la tua intestazione in tempo
-					reale in gradi, punta verso nord da dove ti trovi, e può anche correggere la
-					differenza tra nord magnetico e nord vero.
+					reale in gradi, punta verso nord da dove ti trovi e può correggersi per la differenza
+					tra nord magnetico e nord vero.
 				</p>
-				<p class="mt-4 text-body text-body leading-7">
-					Poiché vive nel browser, funziona esattamente allo stesso modo sia che tu sia a casa,
-					sul campo, o in aula. Basta cercare "bussola online" su Google, aprire questo sito,
-					e i sensori del tuo dispositivo prendono il controllo. A differenza di una bussola
-					tradizionale, questa bussola online usa il magnetometro, il giroscopio e
-					l'accelerometro del tuo telefono insieme, il che fornisce una <strong
-					class="text-ink font-medium">direzione di bussola online</strong> più stabile e
-					affidabile rispetto a un ago che lotta costantemente con gravità e deriva.
+				<p class="mt-4 text-body leading-7">
+					Poiché vive nel browser, si comporta allo stesso modo sia che tu sia a casa, sul campo
+					o in aula. Cerca "bussola online" su Google, apri questo sito e i sensori del tuo
+					dispositivo prendono il controllo. A differenza di una bussola tradizionale con un ago
+					che lotta contro la gravità e la deriva, una bussola online combina il magnetometro,
+					il giroscopio e l'accelerometro del tuo telefono per produrre una più stabile e
+					affidabile <strong class="text-ink font-medium">direzione della bussola online</strong>.
 				</p>
-				<p class="mt-4 text-body text-body leading-7">
-					Ogni strumento su questo sito è progettato per <strong class="text-ink font-medium">
-					trovare il nord online</strong> e molto altro: una lettura dell'intestazione in
-					tempo reale in gradi, direzioni cardinali e intercardinali (N, NE, E, SE, S, SW, W,
-					NW), una modalità schermo intero con un tocco, e un indicatore di precisione così
-					sai sempre quanto è affidabile la lettura. E poiché tutto viene elaborato localmente,
-					la tua posizione non lascia mai il tuo dispositivo — una bussola online
-					veramente gratuita, non una che raccoglie dati.
+				<p class="mt-4 text-body leading-7">
+					Ogni strumento qui è costruito attorno a un unico compito — aiutarti a orientarti e a
+					<strong class="text-ink font-medium">trovare il nord online</strong> — e attorno ad
+					esso c'è un kit di navigazione completo: una lettura dell'intestazione in tempo reale
+					in gradi, direzioni cardinali e intercardinali, una modalità a schermo intero con un
+					tocco e un indicatore di precisione così sai sempre quanto fidarti della lettura.
+					Poiché tutto viene elaborato localmente, la tua posizione non lascia mai il tuo
+					dispositivo.
 				</p>
 			</div>
 
-			<div class="mx-auto mt-12 grid max-w-4xl gap-8 md:grid-cols-2">
+			<div class="mx-auto mt-12 grid max-w-5xl gap-6 md:grid-cols-3">
 				<div class="card p-6">
-					<h3 class="text-display-sm text-ink">Bussola online per geometria e matematica</h3>
+					<h3 class="text-display-sm text-ink">Come funziona una bussola online</h3>
 					<p class="mt-2 text-sm text-body leading-6">
-						Uno <strong class="text-ink font-medium">strumento bussola online</strong> è anche
-						un ausilio didattico. In geometria, una bussola viene usata per disegnare cerchi
-						e archi e per misurare distanze; su questo sito, la bussola online per geometria
-						funziona con la matematica invece che con la matita. Misura l'angolo di qualsiasi
-						direzione, converti tra rilevamenti e punti della bussola, e usa il calcolatore
-						di rilevamento per trovare la direzione e la distanza sferica tra qualsiasi
-						coordinata sulla Terra. È lo strumento di matematica della bussola online che
-					 trasforma angoli astratti in un'intestazione visibile sul quadrante.
-					</p>
-					<p class="mt-3 text-sm text-body leading-6">
-						Gli studenti possono verificare i loro lavori con una bussola magnetica reale, e
-						i docenti possono usare il quadrante in tempo reale per spiegare il nord vero
-						versus il nord magnetico con un esempio che si muove mentre giri il telefono.
-						Questo strumento gratuito di bussola online viene usato quotidianamente anche
-						per compiti semplici — orientare una mappa, allineare un pannello solare, o
-						controllare verso che direzione guarda una stanza.
+						<strong class="text-ink font-medium">Tre sensori</strong> fanno il lavoro: un
+						magnetometro misura il campo magnetico terrestre, un accelerometro rileva quale
+						lato è rivolto verso il basso e un giroscopio traccia la rotazione. Il browser li
+						fonde in un'unica intestazione, e la compensazione dell'inclinazione la mantiene
+						corretta anche quando il telefono non è piatto.
 					</p>
 				</div>
 				<div class="card p-6">
-					<h3 class="text-display-sm text-ink">Bussola online per Qibla — trova la Kaaba dalla mia posizione</h3>
+					<h3 class="text-display-sm text-ink">Bussola online vs. una bussola tradizionale</h3>
 					<p class="mt-2 text-sm text-body leading-6">
-						Questo sito include un <strong class="text-ink font-medium">trovatore quibla
-						bussola online</strong> dedicato che calcola la direzione verso la Kaaba alla
-						Mecca dalle tue coordinate attuali. Ovunque tu sia, il trovatore Qibla ti dà
-						un rilevamento in gradi e una direzione della bussola, oltre alla distanza
-						sferica verso La Mecca. Per molti viaggiatori, la frase che cercano è "bussola
-						online kabba per trovare nord dalla mia posizione" — e questa pagina risponde:
-						localizzati, leggi il rilevamento Qibla, poi seguilo sul quadrante della
-						bussola in tempo reale.
+						Una bussola ad ago è semplice ma deve restare in piano, e punta sempre verso il nord
+						magnetico — non verso il nord della tua mappa. Una bussola online aggiunge il grado
+						esatto della tua intestazione, la correzione automatica della declinazione e un
+						display che puoi leggere al buio.
 					</p>
-					<p class="mt-3 text-sm text-body leading-6">
-						Poiché la bussola online per Qibla funziona interamente sul tuo dispositivo,
-						non c'è server, non c'è account, e la posizione non viene archiviata da nessuna
-						parte. Inserisci le coordinate manualmente, oppure concedi l'accesso alla posizione
-						una tantum e il rilevamento viene calcolato istantaneamente a una frazione
-						di grado.
+				</div>
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">Perché usare una bussola del browser?</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Si apre con un tocco da un segnalibro o da una ricerca, senza nulla da installare e
+						senza account. Se il tuo telefono ha un'app bussola che apri raramente, una bussola
+						del browser è quella che userai davvero.
 					</p>
 				</div>
 			</div>
+		</div>
+	</section>
 
-			<div class="mx-auto mt-12 max-w-3xl">
-				<h3 class="text-display-sm text-ink">Perché scegliere una bussola online?</h3>
-				<p class="mt-3 text-body text-body leading-7">
-					Una bussola fisica è uno strumento meraviglioso, ma una bussola digitale online aggiunge
-					precisione in tempo reale: mostra non solo il nord, ma il grado esatto di qualsiasi
-					intestazione, corregge la declinazione magnetica ovunque sulla Terra, e può essere
-					tenuta in qualsiasi orientamento. Lo strumento gratuito di bussola online di questo
-					sito unisce quella bussola in tempo reale con tutto ciò di cui un navigatore ha
-					bisogno — coordinate GPS in decimali e DMS, la direzione Qibla, un calcolatore
-					di rilevamento e la posizione del sole per l'orientamento diurno. È veloce, privato
-					e pronto ogni volta che devi trovare il nord.
+	<!-- ─── How to use, step by step ───────────────────────── -->
+	<section id="how-to-use" class="border-y border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="grid gap-10 lg:grid-cols-2 lg:items-start">
+				<div>
+					<p class="eyebrow">per iniziare</p>
+					<h2 class="mt-3 text-display-lg text-ink">Come usare una bussola online.</h2>
+					<p class="mt-3 text-body-lg text-body">
+						Cinque passi ti portano dall'apertura della pagina a un'intestazione di cui fidarti.
+						L'intero processo richiede meno di un minuto, e puoi ripetere la calibrazione ogni
+						volta che la lettura si discosta. Per una guida più approfondita, leggi la nostra
+						<a href="/blog/how-to-use-online-compass/" class="text-link underline decoration-link/30 hover:decoration-link">guida passo passo alla bussola online</a>.
+					</p>
+					<p class="mt-4 text-sm text-body leading-6">
+						Il fattore più importante per la precisione non è il software — è dove ti trovi e
+						cosa c'è vicino al tuo telefono. Tienilo a mente in ogni passaggio.
+					</p>
+				</div>
+				<ol class="card-soft divide-y divide-hairline">
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">01</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Apri la bussola sul tuo telefono</p>
+							<p class="mt-1 text-sm text-body">Carica questa pagina in Safari, Chrome o Firefox su un telefono o tablet con un magnetometro.</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">02</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Abilita la bussola in tempo reale</p>
+							<p class="mt-1 text-sm text-body">Tocca "Abilita bussola in tempo reale" e consenti l'accesso a movimento e orientamento quando il browser lo chiede.</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">03</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Tieni il telefono piatto, lontano dai metalli</p>
+							<p class="mt-1 text-sm text-body">Appoggialo nel palmo, schermo verso l'alto, e tienilo lontano da portatili, altoparlanti e custodie magnetiche.</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">04</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Leggi la tua intestazione e calibra</p>
+							<p class="mt-1 text-sm text-body">L'indicatore in alto mostra la direzione verso cui guardi. Traccia un otto se il numero oscilla.</p>
+						</div>
+					</li>
+					<li class="flex gap-4 p-5">
+						<span class="font-mono text-sm text-mute">05</span>
+						<div>
+							<p class="text-sm font-medium text-ink">Passa al nord vero</p>
+							<p class="mt-1 text-sm text-body">Abilita la declinazione così l'intestazione corrisponde alle mappe e a qualsiasi rilevamento che intendi seguire.</p>
+						</div>
+					</li>
+				</ol>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── True vs magnetic north ─────────────────────────── -->
+	<section id="true-north" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">vero vs nord magnetico</p>
+				<h2 class="mt-3 text-display-lg text-ink">Perché la declinazione decide se hai ragione.</h2>
+				<p class="mt-3 text-body-lg text-body">
+					L'ago di una bussola non punta verso la parte superiore della mappa. Punta verso il
+					nord magnetico, un punto mobile nell'Artico. Il divario tra questo e il nord vero è la
+					declinazione — la ragione più comune per cui una lettura della bussola sembra
+					"sbagliata".
+				</p>
+				<p class="mt-4 text-body leading-7">
+					La declinazione non è un numero fisso che puoi memorizzare. Dipende da dove ti trovi
+					sul pianeta, e si sposta di una frazione di grado ogni anno man mano che il nucleo
+					fuso della Terra si muove. A Londra i due nord sono rimasti quasi allineati per anni,
+					motivo per cui le mappe britanniche spesso ignorano la differenza; in parti del Canada
+					e del Sudafrica possono distare 20° o più — la differenza tra raggiungere la tua auto
+					e svoltare nella strada sbagliata.
+				</p>
+				<p class="mt-4 text-body leading-7">
+					È esattamente ciò che sbaglia una bussola non corretta. La nostra bussola online
+					applica il Modello Magnetico Mondiale per le tue coordinate, così passando al
+					<strong class="text-ink font-medium">nord vero</strong> l'intestazione si allinea con
+					la griglia della mappa. La tabella sotto mostra all'incirca quanto è grande la
+					correzione in luoghi ben noti; tocca <em>"Usa la posizione per la declinazione"</em>
+					sul quadrante per il valore esatto dove ti trovi.
+				</p>
+			</div>
+
+			<div class="mx-auto mt-10 max-w-3xl overflow-x-auto">
+				<table class="w-full border-collapse text-sm">
+					<caption class="sr-only">Declinazione magnetica approssimativa per città</caption>
+					<thead>
+						<tr class="border-b border-hairline-strong text-left">
+							<th scope="col" class="py-3 pr-4 font-medium text-ink">Località</th>
+							<th scope="col" class="py-3 font-medium text-ink">Declinazione approssimativa</th>
+						</tr>
+					</thead>
+					<tbody>
+						{declinationExamples.map((d) => (
+							<tr class="border-b border-hairline">
+								<td class="py-3 pr-4 text-body">{d.place}</td>
+								<td class="py-3 text-body">{d.value}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+				<p class="mt-3 text-xs text-mute">
+					Valori approssimativi di metà anni 2020, solo a scopo illustrativo. La declinazione
+					cambia ogni anno e in base alla posizione esatta — usa sempre la correzione in tempo
+					reale nello strumento.
 				</p>
 			</div>
 		</div>
 	</section>
 
-	<!-- ─── Calibration ────────────────────── -->
-	<section id="calibration" class="scroll-mt-16">
+	<!-- ─── How to read a compass ──────────────────────────── -->
+	<section id="reading" class="border-y border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">leggere il quadrante</p>
+				<h2 class="mt-3 text-display-lg text-ink">Intestazioni, rilevamenti e la rosa dei venti.</h2>
+				<p class="mt-3 text-body-lg text-body">
+					Una volta che il quadrante è attivo, l'unica abilità che resta è leggerlo.
+				</p>
+				<div class="mt-8 grid gap-4 sm:grid-cols-2">
+					<div class="card-soft p-5">
+						<h3 class="text-sm font-medium text-ink mb-1">Intestazione</h3>
+						<p class="text-sm leading-6">La direzione verso cui stai attualmente guardando, in gradi in senso orario dal nord. Guardare a est è 90°, sud 180°, ovest 270°.</p>
+					</div>
+					<div class="card-soft p-5">
+						<h3 class="text-sm font-medium text-ink mb-1">Rilevamento</h3>
+						<p class="text-sm leading-6">La direzione da un punto a un altro. Usa il <a href="/it/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">calcolatore di rilevamento</a> per ottenerla tra due coordinate.</p>
+					</div>
+					<div class="card-soft p-5">
+						<h3 class="text-sm font-medium text-ink mb-1">Azimut</h3>
+						<p class="text-sm leading-6">Un rilevamento espresso come angolo da 0° a 360°. Lo <a href="/it/sun/" class="text-link underline decoration-link/30 hover:decoration-link">strumento del sole</a> dà l'azimut del sole per la tua posizione.</p>
+					</div>
+					<div class="card-soft p-5">
+						<h3 class="text-sm font-medium text-ink mb-1">Rilevamento inverso</h3>
+						<p class="text-sm leading-6">La direzione opposta — il rilevamento da B di nuovo ad A. Aggiungi 180° se il rilevamento in avanti è inferiore a 180°, altrimenti sottrai 180°.</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="mx-auto mt-12 max-w-3xl">
+				<h3 class="text-display-sm text-ink">La rosa dei venti a 16 punti</h3>
+				<p class="mt-2 text-sm text-body leading-6">
+					Tra i quattro punti cardinali si trovano i punti intermedi. Una rosa a 16 punti divide
+					il cerchio in segmenti di 22,5° — la risoluzione usata dalla maggior parte della
+					navigazione e dei bollettini meteo.
+				</p>
+				<div class="mt-5 grid grid-cols-2 gap-x-6 sm:grid-cols-4">
+					{compassRose.map((c) => (
+						<div class="flex items-baseline justify-between border-b border-hairline py-2">
+							<span class="font-mono text-sm text-ink">{c.point}</span>
+							<span class="font-mono text-xs text-mute">{c.deg}</span>
+						</div>
+					))}
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Accuracy ───────────────────────────────────────── -->
+	<section id="accuracy" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">precisione</p>
+				<h2 class="mt-3 text-display-lg text-ink">Quanto è precisa una bussola del telefono?</h2>
+				<p class="mt-3 text-body-lg text-body">
+					Usata bene, una bussola del telefono è precisa entro un grado o due. Usata con
+					noncuranza, può sbagliare di venti. La differenza è quasi interamente ambientale.
+				</p>
+				<p class="mt-4 text-body leading-7">
+					Il magnetometro misura l'intensità del campo in microtesla ed è costruito per la
+					navigazione, non per il rilevamento topografico: va bene per seguire un sentiero o
+					allineare un pannello solare, ma non è all'altezza di uno strumento professionale.
+					Ciò che conta è l'indicatore di precisione sul quadrante — fidati di una lettura
+					stabile, e spostati quando salta di decine di gradi, perché il campo intorno a te è
+					distorto. Al chiuso, aspettati qualche grado di deriva da cablaggi e mobili; all'aperto,
+					lontano da un'auto o da una ringhiera, le letture sono affidabili. Se la precisione
+					conta, fai la media di alcune letture e verifica incrociata con la
+					<a href="/it/sun/" class="text-link underline decoration-link/30 hover:decoration-link">posizione del sole</a>.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Calibration ────────────────────────────────────── -->
+	<section id="calibration" class="border-y border-hairline bg-canvas scroll-mt-16">
 		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
 			<div class="grid gap-10 lg:grid-cols-2 lg:items-start">
 				<div>
@@ -358,7 +582,8 @@ const faq = [
 					<h2 class="mt-3 text-display-lg text-ink">Ottieni la lettura più precisa.</h2>
 					<p class="mt-3 text-body-lg text-body">
 						I magnetometri dei telefoni sono sensibili ai metalli e ai campi magnetici vicini.
-						Alcuni secondi di calibrazione trasformano un ago instabile in un'intestazione affidabile.
+						Alcuni secondi di calibrazione trasformano un ago instabile in un'intestazione
+						affidabile.
 					</p>
 				</div>
 				<ol class="card-soft divide-y divide-hairline">
@@ -395,7 +620,141 @@ const faq = [
 		</div>
 	</section>
 
-	<!-- ─── FAQ ────────────────────────────── -->
+	<!-- ─── Compare compass types ──────────────────────────── -->
+	<section id="compare" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">tipi di bussola</p>
+				<h2 class="mt-3 text-display-lg text-ink">Non tutte le bussole funzionano allo stesso modo.</h2>
+				<p class="mt-3 text-body-lg text-body">
+					Sapere quale tecnologia tieni in mano spiega i suoi punti di forza, i suoi limiti e
+					perché una bussola del telefono si comporta diversamente da quella in ottone nel
+					cassetto.
+				</p>
+			</div>
+			<div class="mt-10 overflow-x-auto">
+				<table class="w-full border-collapse text-sm">
+					<caption class="sr-only">Confronto tra i tipi di bussola</caption>
+					<thead>
+						<tr class="border-b border-hairline-strong text-left">
+							<th scope="col" class="py-3 pr-4 font-medium text-ink">Tipo</th>
+							<th scope="col" class="py-3 pr-4 font-medium text-ink">Cosa misura</th>
+							<th scope="col" class="py-3 pr-4 font-medium text-ink">Migliore per</th>
+							<th scope="col" class="py-3 font-medium text-ink">Limiti</th>
+						</tr>
+					</thead>
+					<tbody>
+						{compassTypes.map((c) => (
+							<tr class="border-b border-hairline align-top">
+								<td class="py-3 pr-4 font-medium text-ink">{c.type}</td>
+								<td class="py-3 pr-4 text-body">{c.measures}</td>
+								<td class="py-3 pr-4 text-body">{c.best}</td>
+								<td class="py-3 text-body">{c.limitation}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Uses ───────────────────────────────────────────── -->
+	<section id="uses" class="border-y border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">usi quotidiani</p>
+			<h2 class="mt-3 max-w-2xl text-display-lg text-ink">Chi usa davvero una bussola online.</h2>
+			<p class="mt-3 max-w-2xl text-body-lg text-body">
+				Oltre al caso ovvio dell'escursionismo, un rilevamento rapido risolve un numero
+				sorprendente di piccoli problemi reali.
+			</p>
+			<div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">Escursionismo e navigazione sui sentieri</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Orienta una mappa cartacea prima di partire, prendi un rilevamento inverso per
+						ripercorrere il tuo tragitto e conferma la direzione sotto la copertura degli
+						alberi, dove il GPS impiega a stabilizzarsi.
+					</p>
+				</div>
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">Fotografia e video</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Pianifica uno scatto durante l'ora d'oro controllando verso quale direzione guarda
+						un luogo, e prevedi dove sorgerà e tramonterà il sole con lo <a href="/it/sun/" class="text-link underline decoration-link/30 hover:decoration-link">strumento del sole</a>.
+					</p>
+				</div>
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">Giardinaggio e solare</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Scopri verso quale direzione guarda un giardino o un balcone per posizionare piante
+						amanti del sole, e allinea i pannelli solari verso il sud o il nord vero per la
+						massima resa.
+					</p>
+				</div>
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">Casa e immobili</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Controlla l'orientamento di una stanza per luce e riscaldamento, descrivi
+						accuratamente l'esposizione di un immobile e risolvi in pochi secondi la domanda
+						"in che direzione guarda il soggiorno?".
+					</p>
+				</div>
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">Viaggi e Qibla</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Trova la direzione della preghiera ovunque con il
+						<a href="/it/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">trovatore Qibla</a>,
+						e orientati in una città sconosciuta prima che l'app di mappe si aggiorni.
+					</p>
+				</div>
+				<div class="card p-6">
+					<h3 class="text-display-sm text-ink">Istruzione e STEM</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Insegnanti e studenti possono vedere angoli, rilevamenti e la differenza tra nord
+						vero e magnetico prendere vita su un quadrante che risponde a uno strumento reale.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Troubleshooting ────────────────────────────────── -->
+	<section id="troubleshooting" class="scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">risoluzione dei problemi</p>
+				<h2 class="mt-3 text-display-lg text-ink">Quando la tua bussola punta nella direzione sbagliata.</h2>
+				<p class="mt-3 text-body-lg text-body">
+					Una bussola che si comporta male è quasi sempre un problema di interferenze, non un
+					sensore rotto. Segui questi controlli in ordine.
+				</p>
+				<div class="mt-8 space-y-4">
+					<div class="card-soft p-5">
+						<h3 class="text-sm font-medium text-ink mb-1">Il quadrante gira o il numero sale senza fermarsi</h3>
+						<p class="text-sm leading-6">Sei vicino a una forte fonte magnetica. Rimuovi custodie MagSafe e supporti magnetici, allontanati da altoparlanti, motori e metalli, poi ricalibra.</p>
+					</div>
+					<div class="card-soft p-5">
+						<h3 class="text-sm font-medium text-ink mb-1">La lettura è stabile ma sembra sbagliata di qualche grado</h3>
+						<p class="text-sm leading-6">Di solito è la declinazione. Attiva il nord vero e abilita la posizione così la correzione si applica alle tue coordinate esatte.</p>
+					</div>
+					<div class="card-soft p-5">
+						<h3 class="text-sm font-medium text-ink mb-1">Non succede nulla quando tocco il pulsante</h3>
+						<p class="text-sm leading-6">L'accesso ai sensori richiede una pagina HTTPS sicura e un dispositivo con magnetometro. Verifica di aver concesso il permesso di movimento e orientamento per questo sito.</p>
+					</div>
+					<div class="card-soft p-5">
+						<h3 class="text-sm font-medium text-ink mb-1">Funziona sul telefono ma non sul portatile</h3>
+						<p class="text-sm leading-6">La maggior parte dei portatili non ha un magnetometro, quindi non c'è nulla da leggere. Usa il telefono per le intestazioni in tempo reale; il computer mostra comunque il quadrante dimostrativo e i dati di sole e luna.</p>
+					</div>
+					<div class="card-soft p-5">
+						<h3 class="text-sm font-medium text-ink mb-1">L'ago è in ritardo quando giro velocemente</h3>
+						<p class="text-sm leading-6">Il livellamento mantiene stabile la lettura, quindi segue con un leggero ritardo le rotazioni rapide. Rallenta un momento e il numero si stabilizzerà.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── FAQ ────────────────────────────────────────────── -->
 	<section id="faq" class="border-t border-hairline bg-canvas scroll-mt-16">
 		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
 			<p class="eyebrow text-center">faq</p>
@@ -417,16 +776,17 @@ const faq = [
 		</div>
 	</section>
 
-	<!-- ─── CTA band ──────────────────────── -->
+	<!-- ─── CTA band ───────────────────────────────────────── -->
 	<section class="bg-ink text-on-primary">
 		<div class="mx-auto max-w-[1200px] px-4 py-20 text-center sm:px-6 md:py-24">
 			<p class="font-mono text-xs uppercase tracking-[0.08em] text-on-primary/60">pronto quando lo sei</p>
 			<h2 class="mt-4 text-display-lg text-on-primary">Trova i tuoi punti cardinali.</h2>
 			<p class="mx-auto mt-3 max-w-lg text-body-lg text-on-primary/70">
-				Punta il tuo telefono a nord, controlla il tuo Qibla, o traccia un percorso — tutto in un unico strumento gratuito.
+				Punta il tuo telefono a nord, controlla la tua Qibla o traccia un percorso — tutto in un unico strumento gratuito.
 			</p>
 			<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
 				<a href="/it/compass/" class="btn-primary bg-on-primary text-primary hover:opacity-85">Apri la bussola</a>
+				<a href="/blog/how-to-use-online-compass/" class="btn-secondary">Leggi la guida completa</a>
 			</div>
 		</div>
 	</section>

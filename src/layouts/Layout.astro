@@ -25,6 +25,11 @@ const canonical = new URL(path, Astro.site).href;
 const current = Astro.url.pathname;
 const ogImage = new URL('/og.png', Astro.site).href;
 
+const isActive = (href: string) =>
+	current === href ||
+	current === href + '/' ||
+	(href === '/blog/' && current.startsWith('/blog/'));
+
 const navLinks = [
 	{ href: localizePath(lang, '/'), label: t('nav.compass') },
 	{ href: localizePath(lang, '/location/'), label: t('nav.location') },
@@ -32,6 +37,7 @@ const navLinks = [
 	{ href: localizePath(lang, '/bearing/'), label: t('nav.bearing') },
 	{ href: localizePath(lang, '/sun/'), label: t('nav.sun') },
 	{ href: localizePath(lang, '/sun-moon/'), label: t('nav.sunmoon') },
+	{ href: '/blog/', label: t('nav.blog') },
 ];
 
 const siteName = 'True Online Compass';
@@ -159,11 +165,11 @@ const ogLocaleMap: Record<string, string> = {
 							href={l.href}
 							class:list={[
 								'whitespace-nowrap rounded-full px-3 py-1.5 text-sm transition-colors',
-								current === l.href || current === l.href + '/'
+								isActive(l.href)
 									? 'bg-ink text-on-primary'
 									: 'text-body hover:text-ink hover:bg-canvas-soft-2',
 							]}
-							aria-current={current === l.href || current === l.href + '/' ? 'page' : undefined}
+							aria-current={isActive(l.href) ? 'page' : undefined}
 							>{l.label}</a
 						>
 					))}
@@ -224,11 +230,11 @@ const ogLocaleMap: Record<string, string> = {
 								href={l.href}
 								class:list={[
 									'rounded-lg px-4 py-3 text-sm transition-colors',
-									current === l.href || current === l.href + '/'
+									isActive(l.href)
 										? 'bg-ink font-medium text-on-primary'
 										: 'text-body hover:bg-canvas-soft-2 hover:text-ink',
 								]}
-								aria-current={current === l.href || current === l.href + '/' ? 'page' : undefined}
+								aria-current={isActive(l.href) ? 'page' : undefined}
 								>{l.label}</a
 							>
 						))}
@@ -286,6 +292,7 @@ const ogLocaleMap: Record<string, string> = {
 					<p class="eyebrow mb-3">{t('footer.company')}</p>
 					<ul class="space-y-2 text-sm">
 						<li><a class="text-body hover:text-ink transition-colors" href={localizePath(lang, '/about/')}>{t('footer.about')}</a></li>
+						<li><a class="text-body hover:text-ink transition-colors" href="/blog/">{t('footer.blog')}</a></li>
 						<li><a class="text-body hover:text-ink transition-colors" href={localizePath(lang, '/contact/')}>{t('footer.contact')}</a></li>
 						<li><a class="text-body hover:text-ink transition-colors" href={localizePath(lang, '/privacy/')}>{t('footer.privacy')}</a></li>
 						<li><a class="text-body hover:text-ink transition-colors" href={localizePath(lang, '/terms/')}>{t('footer.terms')}</a></li>
