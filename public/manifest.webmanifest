@@ -1,0 +1,64 @@
+{
+  "id": "/",
+  "name": "True Online Compass",
+  "short_name": "Online Compass",
+  "description": "Free, privacy-first online compass with real-time true and magnetic north headings, Qibla finder, GPS location, and bearing calculator.",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "categories": ["utilities", "navigation", "travel"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Live Compass",
+      "short_name": "Compass",
+      "description": "Open the live digital compass",
+      "url": "/compass/",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Qibla Finder",
+      "short_name": "Qibla",
+      "description": "Find accurate Qibla direction to the Kaaba",
+      "url": "/qibla/",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Bearing Calculator",
+      "short_name": "Bearings",
+      "description": "Calculate compass bearing between coordinates",
+      "url": "/bearing/",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "GPS Location",
+      "short_name": "Location",
+      "description": "View live latitude, longitude, and elevation",
+      "url": "/location/",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
+

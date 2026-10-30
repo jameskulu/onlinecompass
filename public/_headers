@@ -1,2 +1,10 @@
 https://onlinecompass.pages.dev/*
   X-Robots-Tag: noindex
+
+/sw.js
+  Cache-Control: no-cache, no-store, must-revalidate
+  Service-Worker-Allowed: /
+
+/manifest.webmanifest
+  Content-Type: application/manifest+json; charset=utf-8
+  Cache-Control: public, max-age=86400

@@ -1,10 +1,34 @@
 ---
 import QRCode from 'qrcode';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { defaultLang } from '../i18n/ui';
+
+const lang = Astro.props.lang ?? getLangFromUrl(Astro.url) ?? defaultLang;
+const t = useTranslations(lang);
 
 const pageUrl = new URL(Astro.url.pathname, Astro.site).toString();
 const qrDataUrl = import.meta.env.PROD ? await QRCode.toDataURL(pageUrl, { margin: 1, width: 240 }) : null;
+
+const fsLabel = t('compass.fsLabel');
+const fsEnter = t('compass.fsEnter');
+const fsExit = t('compass.fsExit');
 ---
-<div class="compass-root relative w-full max-w-2xl mx-auto select-none">
+<div class="compass-root relative w-full max-w-2xl mx-auto select-none" data-lang={lang}>
+  <!-- Floating exit fullscreen button -->
+  <button
+    data-fs-exit
+    type="button"
+    class="hidden fixed top-3 right-3 z-[1000000] items-center gap-1.5 rounded-full border border-hairline bg-canvas/90 backdrop-blur px-3.5 py-1.5 text-xs font-medium text-ink shadow-float hover:bg-canvas-soft-2 transition-colors cursor-pointer"
+    aria-label={fsExit}
+    title={fsExit}
+  >
+    <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+    <span>{fsExit}</span>
+  </button>
+
   <!-- Live compass -->
   <div data-live-view class="flex flex-col items-center gap-6">
     <!-- Enable compass — primary CTA shown before the dial -->
@@ -20,7 +44,40 @@ const qrDataUrl = import.meta.env.PROD ? await QRCode.toDataURL(pageUrl, { margi
       <p class="text-xs text-mute">Your location stays on your device.</p>
     </div>
 
-    <div class="relative w-full max-w-[480px] aspect-square">
+    <!-- Sensor error notice (shown when no gyro / orientation sensor exists) -->
+    <div data-sensor-error class="hidden w-full max-w-md flex-col items-center gap-3 rounded-2xl border border-error/40 bg-error/5 p-6 text-center shadow-float">
+      <div class="flex h-12 w-12 items-center justify-center rounded-full bg-error/15 text-error">
+        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+      </div>
+      <div>
+        <p data-sensor-error-title class="text-display-sm text-ink mb-1 font-semibold">No gyroscope sensor detected</p>
+        <p data-sensor-error-desc class="text-sm text-body leading-5">
+          This device does not have a gyroscope or orientation sensor (common on computers, laptops, and some budget tablets). The compass needs hardware motion sensors to detect rotation in real time.
+        </p>
+      </div>
+      <div data-sensor-error-share class="mt-2 flex w-full flex-col items-stretch gap-4 border-t border-hairline pt-4 sm:flex-row sm:items-center" data-page-url={pageUrl} data-qr={qrDataUrl ? 'yes' : 'no'}>
+        <img
+          data-sensor-error-qr
+          alt="QR code to open this page on your phone"
+          class="hidden w-28 h-28 shrink-0 mx-auto rounded-xl border border-hairline bg-white p-2 shadow-card sm:mx-0"
+          src={qrDataUrl ?? ''}
+        />
+        <div class="text-left">
+          <p class="text-xs font-semibold text-ink mb-1">Open on your phone for live heading:</p>
+          <p class="inline-block text-xs text-body font-mono break-all leading-5 mb-2 bg-canvas-soft rounded-lg px-2.5 py-1.5 border border-hairline">{pageUrl}</p>
+          <div>
+            <button data-sensor-error-copy type="button" class="btn-ghost text-xs">Copy link</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Compass dial container -->
+    <div data-dial-box class="relative w-full max-w-[480px] aspect-square">
       <div data-dial-svg class="absolute inset-0"></div>
 
       <!-- status pill -->
@@ -31,24 +88,25 @@ const qrDataUrl = import.meta.env.PROD ? await QRCode.toDataURL(pageUrl, { margi
         </span>
       </div>
 
-      <!-- fullscreen -->
+      <!-- fullscreen corner toggle -->
       <button
         data-fs-btn
-        class="absolute top-2 right-2 z-10 flex h-8 w-8 items-center justify-center rounded-full border border-hairline bg-canvas text-ink transition-colors hover:bg-canvas-soft-2"
-        aria-label="Toggle fullscreen"
-        title="Toggle fullscreen"
+        type="button"
+        class="absolute top-2 right-2 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-hairline bg-canvas text-ink transition-colors hover:bg-canvas-soft-2 shadow-sm"
+        aria-label={fsLabel}
+        title={fsLabel}
       >
-        <svg data-fs-open class="h-4 w-4" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+        <svg data-fs-open class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" />
         </svg>
-        <svg data-fs-close class="hidden h-4 w-4" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+        <svg data-fs-close class="hidden h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" />
         </svg>
       </button>
     </div>
 
-    <!-- Heading readout -->
-    <div class="text-center -mt-2">
+    <!-- Heading readout and compass data -->
+    <div data-readout class="text-center -mt-2">
       <div class="flex items-end justify-center gap-2">
         <span data-heading-deg class="text-[80px] leading-none font-semibold text-ink tracking-tight tabular-nums">
           0°
@@ -57,22 +115,34 @@ const qrDataUrl = import.meta.env.PROD ? await QRCode.toDataURL(pageUrl, { margi
       </div>
       <p class="eyebrow mt-3" data-heading-desc>heading</p>
 
-      <div class="mt-6 inline-flex items-center gap-1 rounded-full border border-hairline bg-canvas p-1">
+      <div class="mt-6 inline-flex items-center gap-1 rounded-full border border-hairline bg-canvas p-1 shadow-sm">
         <button data-mode="true" class="rounded-full px-3 py-1 text-xs font-medium text-body hover:text-ink transition-colors">True north</button>
         <button data-mode="mag" class="rounded-full px-3 py-1 text-xs font-medium text-body hover:text-ink transition-colors">Magnetic</button>
+        <button
+          data-fs-toggle
+          type="button"
+          class="rounded-full px-3 py-1 text-xs font-medium text-body hover:text-ink transition-colors inline-flex items-center gap-1.5"
+          aria-label={fsLabel}
+          title={fsLabel}
+        >
+          <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" />
+          </svg>
+          <span data-fs-toggle-text>{fsEnter}</span>
+        </button>
       </div>
 
-      <div class="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-mute font-mono">
+      <div data-telemetry-row class="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-mute font-mono">
         <span>decl <span data-decl>0.0°</span></span>
         <span>·</span>
         <span>src <span data-src>—</span></span>
         <span>·</span>
         <span>±<span data-accuracy>—</span>°</span>
-        <span>·</span>
-        <span data-telemetry>— Hz</span>
+        <span data-hz-item>·</span>
+        <span data-hz-item data-telemetry>— Hz</span>
       </div>
 
-      <div class="mt-3 flex flex-col items-center gap-2">
+      <div data-loc-wrap class="mt-3 flex flex-col items-center gap-2">
         <button data-loc-btn class="btn-ghost text-xs">Use location for declination</button>
         <p data-loc-coords class="hidden text-xs text-mute font-mono"></p>
       </div>
@@ -116,14 +186,24 @@ const qrDataUrl = import.meta.env.PROD ? await QRCode.toDataURL(pageUrl, { margi
 <script>
   import { Compass } from '../lib/compass.js';
   import { normalize, headingDiff, directionName } from '../lib/geo.js';
+  import { ui, defaultLang } from '../i18n/ui.js';
 
   const root = document.querySelector('.compass-root');
   if (!root) throw new Error('compass root missing');
+
+  const langParam = (root.dataset.lang || defaultLang) in ui ? root.dataset.lang : defaultLang;
+  const t = (key) => (ui[langParam] && key in ui[langParam]) ? ui[langParam][key] : ui[defaultLang][key];
 
   const $ = (sel) => root.querySelector(sel);
   const svgHost = $('[data-dial-svg]');
   const permCard = $('[data-perm-card]');
   const permBtn = $('[data-perm-btn]');
+  const sensorErrorCard = $('[data-sensor-error]');
+  const sensorErrorTitle = $('[data-sensor-error-title]');
+  const sensorErrorDesc = $('[data-sensor-error-desc]');
+  const sensorErrorShare = $('[data-sensor-error-share]');
+  const sensorErrorQr = $('[data-sensor-error-qr]');
+  const sensorErrorCopy = $('[data-sensor-error-copy]');
   const degEl = $('[data-heading-deg]');
   const dirEl = $('[data-heading-dir]');
   const descEl = $('[data-heading-desc]');
@@ -135,6 +215,9 @@ const qrDataUrl = import.meta.env.PROD ? await QRCode.toDataURL(pageUrl, { margi
   const fsBtn = $('[data-fs-btn]');
   const fsOpenIcon = $('[data-fs-open]');
   const fsCloseIcon = $('[data-fs-close]');
+  const fsToggleBtn = $('[data-fs-toggle]');
+  const fsToggleText = $('[data-fs-toggle-text]');
+  const fsExitBtn = $('[data-fs-exit]');
   const locBtn = $('[data-loc-btn]');
   const locCoords = $('[data-loc-coords]');
   const demoNotice = $('[data-demo-notice]');
@@ -149,20 +232,21 @@ const qrDataUrl = import.meta.env.PROD ? await QRCode.toDataURL(pageUrl, { margi
 
   const compass = new Compass();
 
-let mode = 'true';
+  let mode = 'true';
   let magnetic = null;
   let trueHeading = null;
   let lastDecl = 0;
-  let latest = null; // newest sensor heading (mutable; sensor events only set this)
-  let currentAngle = 0; // dial rotation; accumulates so shortest-arc moves never wrap badly
-  let lastFrameTime = 0; // for rAF dt calculation
-  let lastTextDeg = 0; // last rounded degree shown in readout
-  let noticeLive = false; // hide the notice once live readings arrive
-  let telemAt = 0; // telemetry timestamp
+  let latest = null;
+  let currentAngle = 0;
+  let lastFrameTime = 0;
+  let lastTextDeg = 0;
+  let noticeLive = false;
+  let telemAt = 0;
   let qiblaBearing = null;
   let sunAzimuth = null;
   let evtN = 0;
   let rafId = 0;
+  let isFullscreen = false;
 
   /* ---------------- dial ---------------- */
 
@@ -174,7 +258,7 @@ let mode = 'true';
   svg.setAttribute('viewBox', `0 0 ${SIZE} ${SIZE}`);
   svg.classList.add('w-full', 'h-full');
 
-  const rose = document.createElementNS(NS, 'g'); // rotates
+  const rose = document.createElementNS(NS, 'g');
   svg.appendChild(rose);
 
   function line(x1, y1, x2, y2, stroke, width) {
@@ -189,15 +273,15 @@ let mode = 'true';
   }
 
   function text(x, y, str, cls, size) {
-    const t = document.createElementNS(NS, 'text');
-    t.setAttribute('x', x);
-    t.setAttribute('y', y);
-    t.setAttribute('text-anchor', 'middle');
-    t.setAttribute('dominant-baseline', 'central');
-    t.setAttribute('font-size', size);
-    t.setAttribute('fill', 'currentColor');
-    t.textContent = str;
-    return t;
+    const tNode = document.createElementNS(NS, 'text');
+    tNode.setAttribute('x', x);
+    tNode.setAttribute('y', y);
+    tNode.setAttribute('text-anchor', 'middle');
+    tNode.setAttribute('dominant-baseline', 'central');
+    tNode.setAttribute('font-size', size);
+    tNode.setAttribute('fill', 'currentColor');
+    tNode.textContent = str;
+    return tNode;
   }
 
   function buildDial() {
@@ -257,10 +341,10 @@ let mode = 'true';
     ];
     for (const [deg, label, size, fill] of cards) {
       const a = ((deg - 90) * Math.PI) / 180;
-      const t = text(C + (R - 84) * Math.cos(a), C + (R - 84) * Math.sin(a), label, '', size);
-      t.setAttribute('fill', fill);
-      t.setAttribute('font-weight', deg === 0 ? '600' : '400');
-      rose.appendChild(t);
+      const tNode = text(C + (R - 84) * Math.cos(a), C + (R - 84) * Math.sin(a), label, '', size);
+      tNode.setAttribute('fill', fill);
+      tNode.setAttribute('font-weight', deg === 0 ? '600' : '400');
+      rose.appendChild(tNode);
     }
 
     // needle — north (red) + south (gray)
@@ -301,16 +385,13 @@ let mode = 'true';
   }
 
   function setMarker(el, bearing) {
+    if (!el) return;
     el.setAttribute('transform', `rotate(${bearing} ${C} ${C})`);
     el.style.display = bearing == null ? 'none' : '';
   }
 
   buildDial();
   svgHost.appendChild(svg);
-  // The dial is rotated once per sensor event; this transition interpolates
-  // between events so motion stays continuous at the display refresh rate.
-  // willChange promotes the host to its own compositor layer so the
-  // per-event rotation never re-rasterizes the SVG.
   svgHost.style.transformOrigin = '50% 50%';
   svgHost.style.willChange = 'transform';
   svgHost.style.transition = 'none';
@@ -320,7 +401,8 @@ let mode = 'true';
   const STATUS = {
     starting: ['starting…', 'bg-mute'],
     live: ['live', 'bg-success'],
-    unsupported: ['no sensor', 'bg-mute'],
+    unsupported: ['no sensor', 'bg-error'],
+    'no-gyro': ['no gyro sensor', 'bg-error'],
     denied: ['permission denied', 'bg-error'],
     insecure: ['requires https', 'bg-warning'],
   };
@@ -331,10 +413,52 @@ let mode = 'true';
     statusDot.className = `inline-block w-1.5 h-1.5 rounded-full ${cls}`;
   }
 
+  function showSensorError(title, desc) {
+    if (title && sensorErrorTitle) sensorErrorTitle.textContent = title;
+    if (desc && sensorErrorDesc) sensorErrorDesc.textContent = desc;
+    if (sensorErrorCard) {
+      sensorErrorCard.classList.remove('hidden');
+      sensorErrorCard.classList.add('flex');
+    }
+    if (sensorErrorQr && sensorErrorShare?.dataset.qr === 'yes') {
+      sensorErrorQr.classList.remove('hidden');
+    }
+    permCard.classList.add('hidden');
+    permCard.classList.remove('flex');
+    demoNotice.classList.add('hidden');
+    demoNotice.classList.remove('flex');
+    permBtn.disabled = false;
+    permBtn.textContent = 'No gyro sensor detected';
+    setStatus('no-gyro');
+  }
+
+  function hideSensorError() {
+    if (sensorErrorCard) {
+      sensorErrorCard.classList.add('hidden');
+      sensorErrorCard.classList.remove('flex');
+    }
+  }
+
   compass.onStatus = setStatus;
+  compass.onError = (code) => {
+    if (code === 'no-gyro' || code === 'unsupported') {
+      showSensorError(
+        'No gyroscope sensor detected',
+        'This device does not have a gyroscope or orientation sensor (common on computers, laptops, and some budget tablets). The compass cannot detect rotation without hardware motion sensors.'
+      );
+    } else if (code === 'insecure') {
+      showSensorError(
+        'HTTPS required',
+        'Motion and orientation sensors require a secure HTTPS connection. Please reload this page over HTTPS.'
+      );
+    }
+  };
   compass.onPermission = (state) => {
     if (state === 'denied') {
-      enterDemo('Permission was denied. Enable motion & orientation sensors for this site in your browser settings, then reload.');
+      showSensorError(
+        'Permission denied',
+        'Permission was denied. Enable motion & orientation sensors for this site in your browser settings, then reload.'
+      );
     }
   };
 
@@ -342,12 +466,15 @@ let mode = 'true';
 
   compass.subscribe((r) => {
     latest = mode === 'true' ? (r.trueHeading ?? r.magnetic) : (r.magnetic ?? r.trueHeading);
-    // Once the first real reading arrives on iOS/Android, retire the
-    // intro/demo card so the dial becomes the full focus.
-    if (noticeLive && latest != null && r.source != null) {
-      noticeLive = false;
-      demoNotice.classList.add('hidden');
-      demoNotice.classList.remove('flex');
+    if (latest != null && r.source != null) {
+      if (noticeLive) {
+        noticeLive = false;
+        demoNotice.classList.add('hidden');
+        demoNotice.classList.remove('flex');
+      }
+      permCard.classList.add('hidden');
+      permCard.classList.remove('flex');
+      hideSensorError();
     }
     if (r.source != null) {
       srcEl.textContent = r.source;
@@ -359,14 +486,12 @@ let mode = 'true';
       lastDecl = r.declination;
       declEl.textContent = `${lastDecl >= 0 ? '+' : ''}${lastDecl.toFixed(1)}°`;
     }
-    // Throttled degree text: only update when the rounded degree changes
     const degNow = Math.round(normalize(latest));
     if (degNow !== lastTextDeg) {
       lastTextDeg = degNow;
       degEl.textContent = `${degNow}°`;
       dirEl.textContent = directionName(latest);
     }
-    // calibration heuristic - only update if accuracy materially changed
     if (r.accuracy != null && r.accuracy > 8) {
       calibrationText.textContent =
         'Readings are drifting. Hold the device flat and trace a figure-eight motion until the needle steadies.';
@@ -375,7 +500,6 @@ let mode = 'true';
     } else if (r.accuracy == null || r.accuracy <= 8) {
       calibrationBox.classList.add('hidden');
     }
-    // Telemetry: event rate once per second
     const now = performance.now();
     if (now - telemAt >= 1000) {
       telemAt = now;
@@ -385,18 +509,8 @@ let mode = 'true';
     evtN++;
   });
 
-/* ---------------- dial rendering ---------------- */
+  /* ---------------- dial rendering ---------------- */
 
-  // Interpolate the dial rotation toward the latest sensor heading.
-  // Sensor events only set `latest`; this loop runs once per frame
-  // and provides smooth, responsive motion using a time-based exponential.
-  //
-  // The dial is rotated by -heading (not +heading): as you turn right,
-  // the rose needs to spin left underneath the fixed N/E/S/W labels so
-  // that "N" keeps pointing at true north on screen. This must match the
-  // hard-snap convention used in setMode() below, or the animation loop
-  // fights the snapped value every time you flip modes — which is what
-  // was causing both the wrong-looking heading and the jittery lag.
   function tick() {
     const now = performance.now();
     const dt = lastFrameTime ? Math.min((now - lastFrameTime) / 1000, 0.1) : 1 / 60;
@@ -411,21 +525,16 @@ let mode = 'true';
         else target += 360;
       }
       const diff = target - currentAngle;
-      // Smoothing time-constant: small enough to feel immediate, large
-      // enough to absorb sensor jitter so the needle doesn't shudder.
       const tau = 0.08;
       const k = 1 - Math.exp(-dt / tau);
       currentAngle += diff * k;
-      // GPU-friendly transform with translateZ(0) for layer promotion.
       svgHost.style.transform = `rotate(${currentAngle}deg) translateZ(0)`;
     }
 
     rafId = requestAnimationFrame(tick);
   }
 
-  
-
-/* ---------------- mode toggle ---------------- */
+  /* ---------------- mode toggle ---------------- */
 
   function setMode(next) {
     mode = next;
@@ -438,11 +547,10 @@ let mode = 'true';
           : 'text-body hover:text-ink'
       }`;
     });
-    // Snap the dial to the new mode's heading instantly.
     const h = mode === 'true' ? (trueHeading ?? magnetic) : (magnetic ?? trueHeading);
     if (h != null) {
       latest = h;
-      currentAngle += headingDiff(-h, currentAngle); // hard snap
+      currentAngle += headingDiff(-h, currentAngle);
       svgHost.style.transform = `rotate(${currentAngle}deg) translateZ(0)`;
       degEl.textContent = `${Math.round(normalize(h))}°`;
       dirEl.textContent = directionName(h);
@@ -453,7 +561,7 @@ let mode = 'true';
   root.querySelectorAll('[data-mode]').forEach((b) => b.addEventListener('click', () => setMode(b.dataset.mode)));
   setMode('true');
 
-  /* ---------------- notices (never rotate the dial here) ---------------- */
+  /* ---------------- notices ---------------- */
 
   function enterDemo(text) {
     demoTextEl.textContent = text;
@@ -466,15 +574,13 @@ let mode = 'true';
   permBtn.addEventListener('click', async () => {
     permBtn.disabled = true;
     permBtn.textContent = 'Starting…';
+    hideSensorError();
     const ok = await compass.requestPermission();
     if (!ok) {
       permBtn.disabled = false;
       permBtn.textContent = 'Enable live compass';
       return;
     }
-    permBtn.textContent = 'Live';
-    permCard.classList.add('hidden');
-    permCard.classList.remove('flex');
     compass.start();
   });
 
@@ -510,74 +616,101 @@ let mode = 'true';
 
   /* ---------------- fullscreen ---------------- */
 
-  const fsRoot = document.documentElement;
-  const supportsFullscreen =
-    !!fsRoot.requestFullscreen || !!fsRoot.webkitRequestFullscreen;
+  function updateFullscreenUI(active) {
+    isFullscreen = active;
+    root.classList.toggle('is-fullscreen', active);
+    fsOpenIcon.classList.toggle('hidden', active);
+    fsCloseIcon.classList.toggle('hidden', !active);
 
-  function updateFsIcon() {
-    const fs = !!(document.fullscreenElement || document.webkitFullscreenElement);
-    fsOpenIcon.classList.toggle('hidden', fs);
-    fsCloseIcon.classList.toggle('hidden', !fs);
+    if (active) {
+      document.documentElement.classList.add('compass-fs-active');
+      document.body.classList.add('compass-fs-active');
+    } else {
+      document.documentElement.classList.remove('compass-fs-active');
+      document.body.classList.remove('compass-fs-active');
+    }
   }
 
-  if (!supportsFullscreen) {
-    fsBtn.classList.add('hidden');
-  } else {
-    fsBtn.addEventListener('click', () => {
-      const fs = !!(document.fullscreenElement || document.webkitFullscreenElement);
-      if (fs) {
-        (document.exitFullscreen || document.webkitExitFullscreen)?.call(document);
-      } else {
-        (fsRoot.requestFullscreen || fsRoot.webkitRequestFullscreen).call(fsRoot);
+  async function toggleFullscreen(force) {
+    const next = force !== undefined ? force : !isFullscreen;
+    updateFullscreenUI(next);
+
+    const hasNativeFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+    if (next) {
+      if (!hasNativeFs) {
+        try {
+          const req = root.requestFullscreen || root.webkitRequestFullscreen;
+          if (req) {
+            await req.call(root);
+          }
+        } catch (_) {}
       }
-    });
-    document.addEventListener('fullscreenchange', updateFsIcon);
-    document.addEventListener('webkitfullscreenchange', updateFsIcon);
-    updateFsIcon();
+    } else {
+      if (hasNativeFs) {
+        try {
+          const exit = document.exitFullscreen || document.webkitExitFullscreen;
+          if (exit) await exit.call(document);
+        } catch (_) {}
+      }
+    }
   }
+
+  fsBtn?.addEventListener('click', () => toggleFullscreen());
+  fsToggleBtn?.addEventListener('click', () => toggleFullscreen());
+  fsExitBtn?.addEventListener('click', () => toggleFullscreen(false));
+
+  function onNativeFsChange() {
+    const nativeActive = !!(document.fullscreenElement || document.webkitFullscreenElement);
+    if (!nativeActive && isFullscreen) {
+      updateFullscreenUI(false);
+    }
+  }
+  document.addEventListener('fullscreenchange', onNativeFsChange);
+  document.addEventListener('webkitfullscreenchange', onNativeFsChange);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isFullscreen) {
+      toggleFullscreen(false);
+    }
+  });
 
   const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
 
   if (needsPermission) {
-    // iOS (iPhone/iPad) — sensors are gated behind an explicit user gesture.
-    // Show the enable card ahead of the dial until the user taps it.
     permCard.classList.remove('hidden');
     permCard.classList.add('flex');
     noticeLive = true;
   } else if (isMobile) {
-    // Android phone/tablet — no prompt required; attach listeners and see what fires.
-    permBtn.classList.add('hidden');
     noticeLive = true;
-    enterDemo('Looking for your device sensors…');
     compass.start();
-    setTimeout(() => {
-      if (compass.source === 'none') {
-        setStatus('unsupported');
-        enterDemo("Sensors aren't responding. Try moving the device, or check that motion & orientation access is allowed for this site.");
-      }
-    }, 3000);
   } else {
-    // Desktop / laptop — no magnetometer to read. Point them at a phone.
-    permBtn.classList.add('hidden');
-    demoShare.classList.remove('hidden');
-    demoShare.classList.add('flex');
-    if (demoShare.dataset.qr === 'yes') {
-      demoQr.classList.remove('hidden');
-    } else {
-      demoUrlEl.classList.add('font-medium');
-    }
-    setStatus('unsupported');
-    enterDemo('The live compass needs a magnetometer, which most computers do not have. Open this page on your phone to get real headings — the location, Qibla, bearing, and sun tools all work here.');
+    setStatus('no-gyro');
+    showSensorError(
+      'No gyroscope sensor detected',
+      'The live compass needs a gyroscope and magnetometer, which most desktop computers and laptops do not have. Open this page on your phone to get real headings — the location, Qibla, bearing, and sun tools all work here.'
+    );
   }
 
   demoCopy?.addEventListener('click', () => {
-    const url = demoShare.dataset.pageUrl;
+    const url = demoShare?.dataset.pageUrl;
     if (!url) return;
     navigator.clipboard
       .writeText(url)
       .then(() => {
         demoCopy.textContent = 'Copied ✓';
         setTimeout(() => (demoCopy.textContent = 'Copy link'), 1500);
+      })
+      .catch(() => {});
+  });
+
+  sensorErrorCopy?.addEventListener('click', () => {
+    const url = sensorErrorShare?.dataset.pageUrl;
+    if (!url) return;
+    navigator.clipboard
+      .writeText(url)
+      .then(() => {
+        sensorErrorCopy.textContent = 'Copied ✓';
+        setTimeout(() => (sensorErrorCopy.textContent = 'Copy link'), 1500);
       })
       .catch(() => {});
   });
@@ -605,5 +738,105 @@ let mode = 'true';
   }
   .compass-root svg text {
     user-select: none;
+  }
+
+  /* Full screen mode — ONLY the compass dial and related data are visible */
+  .compass-root.is-fullscreen,
+  .compass-root:fullscreen,
+  .compass-root:-webkit-full-screen {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 999999 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    margin: 0 !important;
+    padding: max(env(safe-area-inset-top), 16px) max(env(safe-area-inset-right), 16px) max(env(safe-area-inset-bottom), 16px) max(env(safe-area-inset-left), 16px) !important;
+    background: var(--color-canvas) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: space-evenly !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  .compass-root.is-fullscreen [data-live-view],
+  .compass-root:fullscreen [data-live-view],
+  .compass-root:-webkit-full-screen [data-live-view] {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: space-evenly !important;
+    gap: 0.5rem !important;
+  }
+
+  .compass-root.is-fullscreen [data-dial-box],
+  .compass-root:fullscreen [data-dial-box],
+  .compass-root:-webkit-full-screen [data-dial-box] {
+    width: min(84vw, 54vh, 500px) !important;
+    max-width: min(84vw, 54vh, 500px) !important;
+    height: min(84vw, 54vh, 500px) !important;
+    aspect-ratio: 1 / 1 !important;
+    margin: 0 auto !important;
+    flex-shrink: 0 !important;
+  }
+
+  .compass-root.is-fullscreen [data-readout],
+  .compass-root:fullscreen [data-readout],
+  .compass-root:-webkit-full-screen [data-readout] {
+    margin-top: 0 !important;
+    flex-shrink: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 0.25rem !important;
+  }
+
+  .compass-root.is-fullscreen [data-heading-deg],
+  .compass-root:fullscreen [data-heading-deg],
+  .compass-root:-webkit-full-screen [data-heading-deg] {
+    font-size: clamp(3.5rem, 8.5vh, 5.5rem) !important;
+    line-height: 1 !important;
+  }
+
+  /* Hide everything except the compass and its related data */
+  .compass-root.is-fullscreen [data-perm-card],
+  .compass-root:fullscreen [data-perm-card],
+  .compass-root:-webkit-full-screen [data-perm-card],
+  .compass-root.is-fullscreen [data-sensor-error],
+  .compass-root:fullscreen [data-sensor-error],
+  .compass-root:-webkit-full-screen [data-sensor-error],
+  .compass-root.is-fullscreen [data-demo-notice],
+  .compass-root:fullscreen [data-demo-notice],
+  .compass-root:-webkit-full-screen [data-demo-notice],
+  .compass-root.is-fullscreen [data-calibration],
+  .compass-root:fullscreen [data-calibration],
+  .compass-root:-webkit-full-screen [data-calibration],
+  .compass-root.is-fullscreen [data-loc-wrap],
+  .compass-root:fullscreen [data-loc-wrap],
+  .compass-root:-webkit-full-screen [data-loc-wrap],
+  .compass-root.is-fullscreen [data-fs-toggle],
+  .compass-root:fullscreen [data-fs-toggle],
+  .compass-root:-webkit-full-screen [data-fs-toggle],
+  .compass-root.is-fullscreen [data-hz-item],
+  .compass-root:fullscreen [data-hz-item],
+  .compass-root:-webkit-full-screen [data-hz-item] {
+    display: none !important;
+  }
+
+  .compass-root.is-fullscreen [data-fs-exit],
+  .compass-root:fullscreen [data-fs-exit],
+  .compass-root:-webkit-full-screen [data-fs-exit] {
+    display: inline-flex !important;
+  }
+
+  :global(html.compass-fs-active),
+  :global(body.compass-fs-active) {
+    overflow: hidden !important;
   }
 </style>

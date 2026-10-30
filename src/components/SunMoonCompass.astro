@@ -23,9 +23,26 @@ const STRINGS = {
 	enableLive: t('sunmoon.enableLive'),
 	demoIos: t('sunmoon.demoIos'),
 	fsLabel: t('sunmoon.fsLabel'),
+	fsEnter: t('sunmoon.fsEnter') || 'Full screen',
+	fsExit: t('sunmoon.fsExit') || 'Exit full screen',
 };
 ---
 <div class="sunmoon-root relative w-full max-w-2xl mx-auto select-none" data-lang={lang}>
+  <!-- Floating exit fullscreen button -->
+  <button
+    data-fs-exit
+    type="button"
+    class="hidden fixed top-3 right-3 z-[1000000] items-center gap-1.5 rounded-full border border-hairline bg-canvas/90 backdrop-blur px-3.5 py-1.5 text-xs font-medium text-ink shadow-float hover:bg-canvas-soft-2 transition-colors cursor-pointer"
+    aria-label={STRINGS.fsExit}
+    title={STRINGS.fsExit}
+  >
+    <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+    <span>{STRINGS.fsExit}</span>
+  </button>
+
   <!-- Live compass -->
   <div data-live-view class="flex flex-col items-center gap-6">
     <!-- Enable compass — primary CTA shown before the dial -->
@@ -39,20 +56,10 @@ const STRINGS = {
       <button data-perm-btn class="btn-primary w-full">{STRINGS.enableLive}</button>
     </div>
 
-    <div class="relative w-full max-w-[480px] aspect-square">
-      <!-- fixed outer casing ring -->
-      <div class="absolute inset-0 rounded-full border border-hairline-strong/60" aria-hidden="true"></div>
-
-      <!-- rotating dial (scaled inward to leave room for the outer markers) -->
-      <div data-dial-svg class="absolute inset-[12%]"></div>
-
-      <!-- Sun & Moon images positioned around the dial on the outer ring -->
-      <div data-sun-icon class="absolute z-20 pointer-events-none" aria-hidden="true">
-        <svg data-sun-art width="56" height="56" viewBox="0 0 48 48"></svg>
-      </div>
-      <div data-moon-icon class="absolute z-20 pointer-events-none" aria-hidden="true">
-        <svg data-moon-art width="56" height="56" viewBox="0 0 48 48"></svg>
-      </div>
+    <!-- Dial container — exact same size as homepage compass -->
+    <div data-dial-box class="relative w-full max-w-[480px] aspect-square">
+      <!-- Dial SVG fills the full container (inset-0) -->
+      <div data-dial-svg class="absolute inset-0"></div>
 
       <!-- status pill -->
       <div class="absolute top-2 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
@@ -62,24 +69,25 @@ const STRINGS = {
         </span>
       </div>
 
-      <!-- fullscreen -->
+      <!-- fullscreen corner toggle -->
       <button
         data-fs-btn
-        class="absolute top-2 right-2 z-10 flex h-8 w-8 items-center justify-center rounded-full border border-hairline bg-canvas text-ink transition-colors hover:bg-canvas-soft-2"
+        type="button"
+        class="absolute top-2 right-2 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-hairline bg-canvas text-ink transition-colors hover:bg-canvas-soft-2 shadow-sm"
         aria-label={STRINGS.fsLabel}
         title={STRINGS.fsLabel}
       >
-        <svg data-fs-open class="h-4 w-4" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+        <svg data-fs-open class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" />
         </svg>
-        <svg data-fs-close class="hidden h-4 w-4" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+        <svg data-fs-close class="hidden h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" />
         </svg>
       </button>
     </div>
 
-    <!-- Heading readout -->
-    <div class="text-center -mt-2">
+    <!-- Heading readout and compass data -->
+    <div data-readout class="text-center -mt-2">
       <div class="flex items-end justify-center gap-2">
         <span data-heading-deg class="text-[80px] leading-none font-semibold text-ink tracking-tight tabular-nums">
           0°
@@ -88,9 +96,21 @@ const STRINGS = {
       </div>
       <p class="eyebrow mt-3" data-heading-desc>{STRINGS.heading}</p>
 
-      <div class="mt-6 inline-flex items-center gap-1 rounded-full border border-hairline bg-canvas p-1">
+      <div class="mt-6 inline-flex items-center gap-1 rounded-full border border-hairline bg-canvas p-1 shadow-sm">
         <button data-mode="true" class="rounded-full px-3 py-1 text-xs font-medium text-body hover:text-ink transition-colors">{STRINGS.modeTrue}</button>
         <button data-mode="mag" class="rounded-full px-3 py-1 text-xs font-medium text-body hover:text-ink transition-colors">{STRINGS.modeMag}</button>
+        <button
+          data-fs-toggle
+          type="button"
+          class="rounded-full px-3 py-1 text-xs font-medium text-body hover:text-ink transition-colors inline-flex items-center gap-1.5"
+          aria-label={STRINGS.fsLabel}
+          title={STRINGS.fsLabel}
+        >
+          <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" />
+          </svg>
+          <span data-fs-toggle-text>{STRINGS.fsEnter}</span>
+        </button>
       </div>
 
       <div class="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-mute font-mono">
@@ -99,14 +119,14 @@ const STRINGS = {
         <span>{STRINGS.src} <span data-src>—</span></span>
       </div>
 
-      <div class="mt-3 flex flex-col items-center gap-2">
+      <div data-loc-wrap class="mt-3 flex flex-col items-center gap-2">
         <button data-loc-btn class="btn-ghost text-xs">{STRINGS.useLocation}</button>
         <p data-loc-coords class="hidden text-xs text-mute font-mono"></p>
       </div>
     </div>
 
     <!-- Sun & Moon markers readout -->
-    <div class="grid w-full max-w-md grid-cols-1 gap-3 sm:grid-cols-2">
+    <div data-bodies-grid class="grid w-full max-w-md grid-cols-1 gap-3 sm:grid-cols-2">
       <div class="card-soft p-4">
         <p class="eyebrow mb-1 flex items-center gap-1.5">
           <span class="inline-block h-2 w-2 rounded-full bg-amber shadow-[0_0_0_3px] shadow-amber/30"></span>
@@ -126,7 +146,7 @@ const STRINGS = {
     </div>
 
     <!-- Legend -->
-    <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-1 text-xs text-body">
+    <div data-legend class="flex flex-wrap items-center justify-center gap-x-5 gap-y-1 text-xs text-body">
       <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-amber"></span> {STRINGS.legendSun}</span>
       <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-link"></span> {STRINGS.legendMoon}</span>
       <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-sm bg-error"></span> {STRINGS.legendNorth}</span>
@@ -156,10 +176,6 @@ const STRINGS = {
 
   const $ = (sel) => root.querySelector(sel);
   const svgHost = $('[data-dial-svg]');
-  const sunIconHost = $('[data-sun-icon]');
-  const moonIconHost = $('[data-moon-icon]');
-  const sunArtEl = $('[data-sun-art]');
-  const moonArtEl = $('[data-moon-art]');
   const permBtn = $('[data-perm-btn]');
   const permCard = $('[data-perm-card]');
   const degEl = $('[data-heading-deg]');
@@ -172,6 +188,9 @@ const STRINGS = {
   const fsBtn = $('[data-fs-btn]');
   const fsOpenIcon = $('[data-fs-open]');
   const fsCloseIcon = $('[data-fs-close]');
+  const fsToggleBtn = $('[data-fs-toggle]');
+  const fsToggleText = $('[data-fs-toggle-text]');
+  const fsExitBtn = $('[data-fs-exit]');
   const locBtn = $('[data-loc-btn]');
   const locCoords = $('[data-loc-coords]');
   const demoNotice = $('[data-demo-notice]');
@@ -194,6 +213,7 @@ const STRINGS = {
   let lastTextDeg = 0;
   let rafId = 0;
   let noticeLive = false;
+  let isFullscreen = false;
 
   let lat = null;
   let lng = null;
@@ -213,11 +233,6 @@ const STRINGS = {
   const rose = document.createElementNS(NS, 'g');
   svg.appendChild(rose);
 
-  // Where the sun/moon icons sit on the fixed outer ring, as a percentage of
-  // the container width from its centre (dial is scaled to inset-[12%], so the
-  // ring between ~38% and ~50% is free for the icons).
-  const OUTER_R_PCT = 43;
-
   function line(x1, y1, x2, y2, stroke, width) {
     const l = document.createElementNS(NS, 'line');
     l.setAttribute('x1', x1);
@@ -230,15 +245,15 @@ const STRINGS = {
   }
 
   function text(x, y, str, cls, size) {
-    const t = document.createElementNS(NS, 'text');
-    t.setAttribute('x', x);
-    t.setAttribute('y', y);
-    t.setAttribute('text-anchor', 'middle');
-    t.setAttribute('dominant-baseline', 'central');
-    t.setAttribute('font-size', size);
-    t.setAttribute('fill', 'currentColor');
-    t.textContent = str;
-    return t;
+    const tNode = document.createElementNS(NS, 'text');
+    tNode.setAttribute('x', x);
+    tNode.setAttribute('y', y);
+    tNode.setAttribute('text-anchor', 'middle');
+    tNode.setAttribute('dominant-baseline', 'central');
+    tNode.setAttribute('font-size', size);
+    tNode.setAttribute('fill', 'currentColor');
+    tNode.textContent = str;
+    return tNode;
   }
 
   function circleNode(cx, cy, r, fill) {
@@ -255,6 +270,61 @@ const STRINGS = {
     p.setAttribute('points', points);
     p.setAttribute('fill', fill);
     return p;
+  }
+
+  function buildCelestialMarker(kind) {
+    const g = document.createElementNS(NS, 'g');
+    g.style.display = 'none';
+
+    // Marker center placed on rose tick perimeter: radius 202 from center
+    const cy = C - 202;
+    const amber = 'var(--color-amber, #f59e0b)';
+    const link = 'var(--color-link, #0284c7)';
+    const color = kind === 'sun' ? amber : link;
+
+    const drop = document.createElementNS(NS, 'g');
+    drop.style.filter = 'drop-shadow(0px 2px 3px rgba(0,0,0,0.4))';
+    g.appendChild(drop);
+
+    if (kind === 'sun') {
+      const disc = circleNode(C, cy, 10.5, color);
+      disc.setAttribute('stroke', '#ffffff');
+      disc.setAttribute('stroke-width', '1.5');
+      drop.appendChild(disc);
+
+      for (let i = 0; i < 8; i++) {
+        const a = (i * 45 * Math.PI) / 180;
+        const ray = line(
+          C + 13.5 * Math.cos(a),
+          cy + 13.5 * Math.sin(a),
+          C + 18.5 * Math.cos(a),
+          cy + 18.5 * Math.sin(a),
+          color,
+          2.2
+        );
+        ray.setAttribute('stroke-linecap', 'round');
+        drop.appendChild(ray);
+      }
+
+      drop.appendChild(circleNode(C - 2.5, cy - 2.5, 2.5, 'rgba(255,255,255,0.75)'));
+      drop.appendChild(line(C, cy + 12, C, cy + 22, color, 2.5));
+      drop.appendChild(polygonNode(`${C - 5.5},${cy + 20} ${C + 5.5},${cy + 20} ${C},${cy + 28}`, color));
+    } else {
+      const disc = circleNode(C, cy, 10.5, color);
+      disc.setAttribute('stroke', '#ffffff');
+      disc.setAttribute('stroke-width', '1.5');
+      drop.appendChild(disc);
+
+      drop.appendChild(circleNode(C - 3, cy - 2.5, 2, 'rgba(255,255,255,0.65)'));
+      drop.appendChild(circleNode(C + 3, cy + 2.5, 1.5, 'rgba(255,255,255,0.55)'));
+      drop.appendChild(circleNode(C + 0.5, cy - 4, 1.2, 'rgba(255,255,255,0.45)'));
+      drop.appendChild(circleNode(C + 2.5, cy + 1, 6, 'rgba(0,0,0,0.18)'));
+
+      drop.appendChild(line(C, cy + 12, C, cy + 22, color, 2.5));
+      drop.appendChild(polygonNode(`${C - 5.5},${cy + 20} ${C + 5.5},${cy + 20} ${C},${cy + 28}`, color));
+    }
+
+    return g;
   }
 
   function buildDial() {
@@ -311,10 +381,10 @@ const STRINGS = {
     ];
     for (const [deg, label, size, fill] of cards) {
       const a = ((deg - 90) * Math.PI) / 180;
-      const t = text(C + (R - 84) * Math.cos(a), C + (R - 84) * Math.sin(a), label, '', size);
-      t.setAttribute('fill', fill);
-      t.setAttribute('font-weight', deg === 0 ? '600' : '400');
-      rose.appendChild(t);
+      const tNode = text(C + (R - 84) * Math.cos(a), C + (R - 84) * Math.sin(a), label, '', size);
+      tNode.setAttribute('fill', fill);
+      tNode.setAttribute('font-weight', deg === 0 ? '600' : '400');
+      rose.appendChild(tNode);
     }
 
     const north = document.createElementNS(NS, 'polygon');
@@ -334,6 +404,25 @@ const STRINGS = {
     cap.setAttribute('fill', 'var(--color-canvas)');
     cap.setAttribute('stroke', hairline);
     rose.appendChild(cap);
+
+    // Sun & Moon markers attached directly to rose, rotating with heading
+    const sunMarker = buildCelestialMarker('sun');
+    sunMarker.setAttribute('data-marker', 'sun');
+    rose.appendChild(sunMarker);
+
+    const moonMarker = buildCelestialMarker('moon');
+    moonMarker.setAttribute('data-marker', 'moon');
+    rose.appendChild(moonMarker);
+  }
+
+  function setMarker(el, bearing) {
+    if (!el) return;
+    if (bearing == null || isNaN(bearing)) {
+      el.style.display = 'none';
+      return;
+    }
+    el.setAttribute('transform', `rotate(${bearing} ${C} ${C})`);
+    el.style.display = '';
   }
 
   buildDial();
@@ -342,16 +431,13 @@ const STRINGS = {
   svgHost.style.willChange = 'transform';
   svgHost.style.transition = 'none';
 
-  // Realistic sun & moon images that sit on the fixed outer ring.
-  sunArtEl.appendChild(buildCelestialIcon('sun'));
-  moonArtEl.appendChild(buildCelestialIcon('moon'));
-
   /* ---------------- status ---------------- */
 
   const STATUS = {
     starting: [t('sunmoon.status.starting'), 'bg-mute'],
     live: [t('sunmoon.status.live'), 'bg-success'],
-    unsupported: [t('sunmoon.status.unsupported'), 'bg-mute'],
+    unsupported: [t('sunmoon.status.unsupported'), 'bg-error'],
+    'no-gyro': [t('sunmoon.status.noGyro') || t('sunmoon.status.unsupported'), 'bg-error'],
     denied: [t('sunmoon.status.denied'), 'bg-error'],
     insecure: [t('sunmoon.status.insecure'), 'bg-warning'],
   };
@@ -363,6 +449,16 @@ const STRINGS = {
   }
 
   compass.onStatus = setStatus;
+  compass.onError = (code) => {
+    if (code === 'no-gyro' || code === 'unsupported') {
+      setStatus('no-gyro');
+      permCard.classList.add('hidden');
+      permCard.classList.remove('flex');
+      permBtn.disabled = false;
+      permBtn.textContent = t('sunmoon.status.noGyro') || t('sunmoon.status.unsupported');
+      enterDemo(t('sunmoon.noGyroDesc') || t('sunmoon.demoSensors'));
+    }
+  };
 
   /* ---------------- coordinate / celestial update ---------------- */
 
@@ -379,72 +475,25 @@ const STRINGS = {
     moonAzEl.textContent = `${Math.round(mp.azimuth)}°`;
     moonDirEl.textContent = directionName(mp.azimuth, false);
     moonElevEl.textContent = `${mp.altitude.toFixed(1)}`;
-    placeIcon(sunIconHost, sp.azimuth);
-    placeIcon(moonIconHost, mp.azimuth);
-  }
 
-  // Place a celestial icon on the fixed outer ring of the compass at its world
-  // bearing. Bearing 0° = top of the dial (north); clockwise increases.
-  // The icon is rotated to the bearing so its built-in arrow points outward,
-  // i.e. directly at that body's direction from the centre.
-  function placeIcon(el, bearing) {
-    const rad = (bearing * Math.PI) / 180;
-    const x = 50 + OUTER_R_PCT * Math.sin(rad);
-    const y = 50 - OUTER_R_PCT * Math.cos(rad);
-    el.style.left = `${x.toFixed(2)}%`;
-    el.style.top = `${y.toFixed(2)}%`;
-    el.style.transform = `translate(-50%, -50%) rotate(${bearing}deg)`;
-  }
-
-  // Build a realistic celestial icon (48x48 viewBox) with a small arrow that
-  // points "down" (toward the dial centre). When the host element is rotated to
-  // the body's bearing, the arrow points inward from the outer ring toward the
-  // centre of the dial, indicating the direction of the body.
-  function buildCelestialIcon(kind) {
-    const svgElem = document.createElementNS(NS, 'svg');
-    if (kind === 'sun') {
-      const amber = 'var(--color-amber)';
-      // disc
-      svgElem.appendChild(circleNode(24, 24, 10, amber));
-      // rays
-      for (let i = 0; i < 8; i++) {
-        const a = (i * 45 * Math.PI) / 180;
-        const ray = line(24 + 14 * Math.cos(a), 24 + 14 * Math.sin(a), 24 + 20 * Math.cos(a), 24 + 20 * Math.sin(a), amber, 2.5);
-        ray.setAttribute('stroke-linecap', 'round');
-        svgElem.appendChild(ray);
-      }
-      // highlight
-      svgElem.appendChild(circleNode(21.5, 20.5, 3, 'rgba(255,255,255,0.55)'));
-      // direction arrow pointing down/toward the dial centre
-      svgElem.appendChild(line(24, 44, 24, 39, amber, 2.5));
-      svgElem.appendChild(polygonNode('19 41 29 41 24 33', amber));
-    } else {
-      const link = 'var(--color-link)';
-      // disc
-      svgElem.appendChild(circleNode(24, 24, 10, link));
-      // craters
-      svgElem.appendChild(circleNode(21, 20.5, 2.2, 'rgba(255,255,255,0.6)'));
-      svgElem.appendChild(circleNode(27, 26, 1.6, 'rgba(255,255,255,0.5)'));
-      svgElem.appendChild(circleNode(24.5, 19, 1.3, 'rgba(255,255,255,0.4)'));
-      // terminator shadow
-      svgElem.appendChild(circleNode(26.5, 22, 6, 'rgba(0,0,0,0.14)'));
-      // direction arrow pointing down/toward the dial centre
-      svgElem.appendChild(line(24, 44, 24, 39, link, 2.5));
-      svgElem.appendChild(polygonNode('19 41 29 41 24 33', link));
-    }
-    return svgElem;
+    const sunMarker = rose.querySelector('[data-marker="sun"]');
+    const moonMarker = rose.querySelector('[data-marker="moon"]');
+    setMarker(sunMarker, sp.azimuth);
+    setMarker(moonMarker, mp.azimuth);
   }
 
   /* ---------------- readings ---------------- */
 
   compass.subscribe((r) => {
     latest = mode === 'true' ? (r.trueHeading ?? r.magnetic) : (r.magnetic ?? r.trueHeading);
-    // Once the first real reading arrives on iOS/Android, retire the intro
-    // card so the dial becomes the full focus.
-    if (noticeLive && latest != null && r.source != null) {
-      noticeLive = false;
-      demoNotice.classList.add('hidden');
-      demoNotice.classList.remove('flex');
+    if (latest != null && r.source != null) {
+      if (noticeLive) {
+        noticeLive = false;
+        demoNotice.classList.add('hidden');
+        demoNotice.classList.remove('flex');
+      }
+      permCard.classList.add('hidden');
+      permCard.classList.remove('flex');
     }
     if (r.source != null) srcEl.textContent = r.source;
     if (r.declination != null) declEl.textContent = `${r.declination >= 0 ? '+' : ''}${r.declination.toFixed(1)}°`;
@@ -525,9 +574,6 @@ const STRINGS = {
       permBtn.textContent = t('sunmoon.enableLive');
       return;
     }
-    permBtn.textContent = t('sunmoon.live');
-    permCard.classList.add('hidden');
-    permCard.classList.remove('flex');
     compass.start();
   });
 
@@ -591,52 +637,76 @@ const STRINGS = {
 
   /* ---------------- fullscreen ---------------- */
 
-  const fsRoot = document.documentElement;
-  const supportsFullscreen = !!fsRoot.requestFullscreen || !!fsRoot.webkitRequestFullscreen;
+  function updateFullscreenUI(active) {
+    isFullscreen = active;
+    root.classList.toggle('is-fullscreen', active);
+    fsOpenIcon.classList.toggle('hidden', active);
+    fsCloseIcon.classList.toggle('hidden', !active);
 
-  function updateFsIcon() {
-    const fs = !!(document.fullscreenElement || document.webkitFullscreenElement);
-    fsOpenIcon.classList.toggle('hidden', fs);
-    fsCloseIcon.classList.toggle('hidden', !fs);
+    if (active) {
+      document.documentElement.classList.add('compass-fs-active');
+      document.body.classList.add('compass-fs-active');
+    } else {
+      document.documentElement.classList.remove('compass-fs-active');
+      document.body.classList.remove('compass-fs-active');
+    }
   }
 
-  if (!supportsFullscreen) {
-    fsBtn.classList.add('hidden');
-  } else {
-    fsBtn.addEventListener('click', () => {
-      const fs = !!(document.fullscreenElement || document.webkitFullscreenElement);
-      if (fs) {
-        (document.exitFullscreen || document.webkitExitFullscreen)?.call(document);
-      } else {
-        (fsRoot.requestFullscreen || fsRoot.webkitRequestFullscreen).call(fsRoot);
+  async function toggleFullscreen(force) {
+    const next = force !== undefined ? force : !isFullscreen;
+    updateFullscreenUI(next);
+
+    const hasNativeFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+    if (next) {
+      if (!hasNativeFs) {
+        try {
+          const req = root.requestFullscreen || root.webkitRequestFullscreen;
+          if (req) {
+            await req.call(root);
+          }
+        } catch (_) {}
       }
-    });
-    document.addEventListener('fullscreenchange', updateFsIcon);
-    document.addEventListener('webkitfullscreenchange', updateFsIcon);
-    updateFsIcon();
+    } else {
+      if (hasNativeFs) {
+        try {
+          const exit = document.exitFullscreen || document.webkitExitFullscreen;
+          if (exit) await exit.call(document);
+        } catch (_) {}
+      }
+    }
   }
+
+  fsBtn?.addEventListener('click', () => toggleFullscreen());
+  fsToggleBtn?.addEventListener('click', () => toggleFullscreen());
+  fsExitBtn?.addEventListener('click', () => toggleFullscreen(false));
+
+  function onNativeFsChange() {
+    const nativeActive = !!(document.fullscreenElement || document.webkitFullscreenElement);
+    if (!nativeActive && isFullscreen) {
+      updateFullscreenUI(false);
+    }
+  }
+  document.addEventListener('fullscreenchange', onNativeFsChange);
+  document.addEventListener('webkitfullscreenchange', onNativeFsChange);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isFullscreen) {
+      toggleFullscreen(false);
+    }
+  });
 
   const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
 
   if (needsPermission) {
-    // iOS (iPhone/iPad) — sensors are gated behind an explicit user gesture.
-    // Show the enable card ahead of the dial until the user taps it.
     permCard.classList.remove('hidden');
     permCard.classList.add('flex');
     noticeLive = true;
   } else if (isMobile) {
     noticeLive = true;
-    enterDemo(t('sunmoon.demoLooking'));
     compass.start();
-    setTimeout(() => {
-      if (compass.source === 'none') {
-        setStatus('unsupported');
-        enterDemo(t('sunmoon.demoSensors'));
-      }
-    }, 3000);
   } else {
-    setStatus('unsupported');
-    enterDemo(t('sunmoon.demoDesktop'));
+    setStatus('no-gyro');
+    enterDemo(t('sunmoon.noGyroDesc') || t('sunmoon.demoDesktop'));
   }
 
   tick();
@@ -648,5 +718,140 @@ const STRINGS = {
   }
   .sunmoon-root svg text {
     user-select: none;
+  }
+
+  /* Full screen mode — ONLY the compass dial and related data are visible */
+  .sunmoon-root.is-fullscreen,
+  .sunmoon-root:fullscreen,
+  .sunmoon-root:-webkit-full-screen {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 999999 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    margin: 0 !important;
+    padding: max(env(safe-area-inset-top), 16px) max(env(safe-area-inset-right), 16px) max(env(safe-area-inset-bottom), 16px) max(env(safe-area-inset-left), 16px) !important;
+    background: var(--color-canvas) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: space-evenly !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  .sunmoon-root.is-fullscreen [data-live-view],
+  .sunmoon-root:fullscreen [data-live-view],
+  .sunmoon-root:-webkit-full-screen [data-live-view] {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: space-evenly !important;
+    gap: 0.5rem !important;
+  }
+
+  .sunmoon-root.is-fullscreen [data-dial-box],
+  .sunmoon-root:fullscreen [data-dial-box],
+  .sunmoon-root:-webkit-full-screen [data-dial-box] {
+    width: min(84vw, 52vh, 480px) !important;
+    max-width: min(84vw, 52vh, 480px) !important;
+    height: min(84vw, 52vh, 480px) !important;
+    aspect-ratio: 1 / 1 !important;
+    margin: 0 auto !important;
+    flex-shrink: 0 !important;
+  }
+
+  .sunmoon-root.is-fullscreen [data-readout],
+  .sunmoon-root:fullscreen [data-readout],
+  .sunmoon-root:-webkit-full-screen [data-readout] {
+    margin-top: 0 !important;
+    flex-shrink: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 0.25rem !important;
+  }
+
+  .sunmoon-root.is-fullscreen [data-heading-deg],
+  .sunmoon-root:fullscreen [data-heading-deg],
+  .sunmoon-root:-webkit-full-screen [data-heading-deg] {
+    font-size: clamp(3.5rem, 8vh, 5rem) !important;
+    line-height: 1 !important;
+  }
+
+  /* Compact sun/moon azimuth badges in fullscreen */
+  .sunmoon-root.is-fullscreen [data-bodies-grid],
+  .sunmoon-root:fullscreen [data-bodies-grid],
+  .sunmoon-root:-webkit-full-screen [data-bodies-grid] {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    width: auto !important;
+    max-width: 94vw !important;
+    margin-top: 0.25rem !important;
+    flex-shrink: 0 !important;
+  }
+
+  .sunmoon-root.is-fullscreen [data-bodies-grid] > div,
+  .sunmoon-root:fullscreen [data-bodies-grid] > div,
+  .sunmoon-root:-webkit-full-screen [data-bodies-grid] > div {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    padding: 0.35rem 0.75rem !important;
+    border-radius: 9999px !important;
+  }
+
+  .sunmoon-root.is-fullscreen [data-bodies-grid] .eyebrow,
+  .sunmoon-root:fullscreen [data-bodies-grid] .eyebrow,
+  .sunmoon-root:-webkit-full-screen [data-bodies-grid] .eyebrow {
+    margin-bottom: 0 !important;
+    font-size: 0.75rem !important;
+  }
+
+  .sunmoon-root.is-fullscreen [data-bodies-grid] .text-display-md,
+  .sunmoon-root:fullscreen [data-bodies-grid] .text-display-md,
+  .sunmoon-root:-webkit-full-screen [data-bodies-grid] .text-display-md {
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    line-height: 1 !important;
+  }
+
+  /* Hide everything except the compass and its related data */
+  .sunmoon-root.is-fullscreen [data-perm-card],
+  .sunmoon-root:fullscreen [data-perm-card],
+  .sunmoon-root:-webkit-full-screen [data-perm-card],
+  .sunmoon-root.is-fullscreen [data-demo-notice],
+  .sunmoon-root:fullscreen [data-demo-notice],
+  .sunmoon-root:-webkit-full-screen [data-demo-notice],
+  .sunmoon-root.is-fullscreen [data-legend],
+  .sunmoon-root:fullscreen [data-legend],
+  .sunmoon-root:-webkit-full-screen [data-legend],
+  .sunmoon-root.is-fullscreen [data-loc-wrap],
+  .sunmoon-root:fullscreen [data-loc-wrap],
+  .sunmoon-root:-webkit-full-screen [data-loc-wrap],
+  .sunmoon-root.is-fullscreen [data-fs-toggle],
+  .sunmoon-root:fullscreen [data-fs-toggle],
+  .sunmoon-root:-webkit-full-screen [data-fs-toggle] {
+    display: none !important;
+  }
+
+  .sunmoon-root.is-fullscreen [data-fs-exit],
+  .sunmoon-root:fullscreen [data-fs-exit],
+  .sunmoon-root:-webkit-full-screen [data-fs-exit] {
+    display: inline-flex !important;
+  }
+
+  :global(html.compass-fs-active),
+  :global(body.compass-fs-active) {
+    overflow: hidden !important;
   }
 </style>

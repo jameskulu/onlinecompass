@@ -1,0 +1,271 @@
+---
+// PWA Install Prompt Component
+---
+
+<div
+  id="pwa-install-prompt"
+  class="fixed bottom-4 left-4 right-4 z-50 mx-auto max-w-md transform transition-all duration-300 ease-out translate-y-8 opacity-0 pointer-events-none sm:bottom-6 sm:right-6 sm:left-auto sm:w-[380px]"
+  role="dialog"
+  aria-labelledby="pwa-title"
+  aria-describedby="pwa-desc"
+  aria-hidden="true"
+>
+  <div class="rounded-2xl border border-hairline bg-canvas/95 p-4 sm:p-5 shadow-modal backdrop-blur-md">
+    <!-- Header with Icon & Close Button -->
+    <div class="flex items-start justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <img
+          src="/icon-192.png"
+          alt="True Online Compass Icon"
+          class="h-12 w-12 shrink-0 rounded-xl border border-hairline bg-canvas object-cover shadow-sm"
+          width="48"
+          height="48"
+        />
+        <div>
+          <h3 id="pwa-title" class="text-sm font-semibold text-ink sm:text-base">
+            Install Online Compass
+          </h3>
+          <p id="pwa-desc" class="text-xs text-mute mt-0.5 leading-snug sm:text-xs">
+            Fast, one-tap access & offline-ready navigation
+          </p>
+        </div>
+      </div>
+
+      <button
+        id="pwa-close-btn"
+        type="button"
+        class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-mute transition-colors hover:bg-canvas-soft-2 hover:text-ink"
+        aria-label="Close install prompt"
+      >
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Features / Value Prop -->
+    <div class="mt-3.5 space-y-1.5 text-xs text-body border-t border-hairline/80 pt-3">
+      <div class="flex items-center gap-2">
+        <svg class="h-3.5 w-3.5 text-success shrink-0" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+        </svg>
+        <span>Full-screen live 360° compass dial</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <svg class="h-3.5 w-3.5 text-success shrink-0" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+        </svg>
+        <span>Works offline in remote areas</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <svg class="h-3.5 w-3.5 text-success shrink-0" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+        </svg>
+        <span>Zero install size, private & no tracking</span>
+      </div>
+    </div>
+
+    <!-- Standard (Chromium / Android / Desktop) Action Buttons -->
+    <div id="pwa-standard-actions" class="mt-4 flex items-center gap-2">
+      <button
+        id="pwa-install-btn"
+        type="button"
+        class="btn-primary flex-1 py-2 text-xs font-medium sm:text-sm shadow-sm"
+      >
+        Install App
+      </button>
+      <button
+        id="pwa-dismiss-btn"
+        type="button"
+        class="btn-ghost py-2 px-3 text-xs text-mute hover:text-ink sm:text-sm"
+      >
+        Not now
+      </button>
+    </div>
+
+    <!-- iOS Safari Instructions Panel (hidden by default, shown when on iOS) -->
+    <div id="pwa-ios-instructions" class="hidden mt-3.5 border-t border-hairline/80 pt-3 text-xs text-body">
+      <p class="font-medium text-ink mb-1.5 flex items-center gap-1.5">
+        <span>To install on iPhone or iPad:</span>
+      </p>
+      <ol class="space-y-1.5 pl-4 list-decimal leading-relaxed">
+        <li>
+          Tap the <strong class="text-ink">Share</strong> button
+          <span class="inline-flex items-center text-link font-medium">
+            <svg class="inline h-3.5 w-3.5 mx-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+              <polyline points="16 6 12 2 8 6"></polyline>
+              <line x1="12" y1="2" x2="12" y2="15"></line>
+            </svg>
+          </span>
+          at the bottom of Safari
+        </li>
+        <li>
+          Scroll down and tap <strong class="text-ink">Add to Home Screen</strong>
+          <span class="inline-block text-ink font-semibold">⊞</span>
+        </li>
+      </ol>
+      <div class="mt-3 flex justify-end">
+        <button
+          id="pwa-ios-gotit-btn"
+          type="button"
+          class="btn-primary w-full py-1.5 text-xs font-medium"
+        >
+          Got it
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let deferredPrompt = null;
+  const STORAGE_KEY_DISMISSED = 'compass-pwa-dismissed-until';
+  const STORAGE_KEY_INSTALLED = 'compass-pwa-installed';
+  const DISMISS_DAYS = 7;
+
+  const promptEl = document.getElementById('pwa-install-prompt');
+  const installBtn = document.getElementById('pwa-install-btn');
+  const dismissBtn = document.getElementById('pwa-dismiss-btn');
+  const closeBtn = document.getElementById('pwa-close-btn');
+  const standardActions = document.getElementById('pwa-standard-actions');
+  const iosInstructions = document.getElementById('pwa-ios-instructions');
+  const iosGotItBtn = document.getElementById('pwa-ios-gotit-btn');
+
+  // Check if currently running as an installed PWA (standalone display mode)
+  function isRunningStandalone() {
+    return (
+      window.matchMedia('(display-mode: standalone)').matches ||
+      window.navigator.standalone === true ||
+      document.referrer.includes('android-app://')
+    );
+  }
+
+  // Check if user has already installed or recently dismissed
+  function shouldSuppressPrompt() {
+    if (isRunningStandalone()) return true;
+
+    try {
+      if (localStorage.getItem(STORAGE_KEY_INSTALLED) === 'true') return true;
+      const dismissedUntil = localStorage.getItem(STORAGE_KEY_DISMISSED);
+      if (dismissedUntil && Number(dismissedUntil) > Date.now()) {
+        return true;
+      }
+    } catch {
+      /* ignore storage errors */
+    }
+
+    return false;
+  }
+
+  // Check if current browser is iOS Safari
+  function isIosSafari() {
+    const ua = window.navigator.userAgent;
+    const isIos = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+    const isSafari = /Safari/i.test(ua) && !/Chrome|CriOS|FxiOS|EdgiOS/i.test(ua);
+    return isIos && isSafari;
+  }
+
+  function showPrompt(isIos = false) {
+    if (!promptEl || shouldSuppressPrompt()) return;
+
+    if (isIos) {
+      if (standardActions) standardActions.classList.add('hidden');
+      if (iosInstructions) iosInstructions.classList.remove('hidden');
+    } else {
+      if (standardActions) standardActions.classList.remove('hidden');
+      if (iosInstructions) iosInstructions.classList.add('hidden');
+    }
+
+    promptEl.classList.remove('pointer-events-none', 'translate-y-8', 'opacity-0');
+    promptEl.classList.add('pointer-events-auto', 'translate-y-0', 'opacity-100');
+    promptEl.setAttribute('aria-hidden', 'false');
+  }
+
+  function hidePrompt(rememberDismissal = false) {
+    if (!promptEl) return;
+
+    promptEl.classList.add('pointer-events-none', 'translate-y-8', 'opacity-0');
+    promptEl.classList.remove('pointer-events-auto', 'translate-y-0', 'opacity-100');
+    promptEl.setAttribute('aria-hidden', 'true');
+
+    if (rememberDismissal) {
+      try {
+        const until = Date.now() + DISMISS_DAYS * 24 * 60 * 60 * 1000;
+        localStorage.setItem(STORAGE_KEY_DISMISSED, String(until));
+      } catch {}
+    }
+  }
+
+  // Capture Chromium / Android / Desktop beforeinstallprompt
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+
+    if (!shouldSuppressPrompt()) {
+      // Show prompt after a slight delay so user can view initial compass
+      setTimeout(() => {
+        showPrompt(false);
+      }, 2500);
+    }
+  });
+
+  // Handle successful install
+  window.addEventListener('appinstalled', () => {
+    hidePrompt(false);
+    deferredPrompt = null;
+    try {
+      localStorage.setItem(STORAGE_KEY_INSTALLED, 'true');
+    } catch {}
+  });
+
+  // Install button click
+  installBtn?.addEventListener('click', async () => {
+    if (deferredPrompt) {
+      try {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+          hidePrompt(false);
+          try {
+            localStorage.setItem(STORAGE_KEY_INSTALLED, 'true');
+          } catch {}
+        } else {
+          hidePrompt(true);
+        }
+      } catch (err) {
+        console.warn('Install prompt error:', err);
+      } finally {
+        deferredPrompt = null;
+      }
+    } else if (isIosSafari()) {
+      showPrompt(true);
+    }
+  });
+
+  // Dismiss buttons
+  dismissBtn?.addEventListener('click', () => hidePrompt(true));
+  closeBtn?.addEventListener('click', () => hidePrompt(true));
+  iosGotItBtn?.addEventListener('click', () => hidePrompt(true));
+
+  // iOS Safari detection & fallback prompt
+  if (isIosSafari() && !shouldSuppressPrompt()) {
+    setTimeout(() => {
+      showPrompt(true);
+    }, 3500);
+  }
+
+  // Listen for custom trigger to open install prompt manually (e.g. from nav or footer)
+  window.addEventListener('pwa:show-prompt', () => {
+    if (deferredPrompt) {
+      showPrompt(false);
+    } else if (isIosSafari()) {
+      showPrompt(true);
+    } else {
+      // In unsupported environments, trigger standard prompt if available
+      showPrompt(false);
+    }
+  });
+</script>
+

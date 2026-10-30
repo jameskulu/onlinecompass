@@ -36,6 +36,7 @@ export class Compass {
     this.listeners = new Set();
     this.onStatus = null;
     this.onPermission = null;
+    this.onError = null;
     this.lat = null;
     this.lng = null;
     this.declination = 0;
@@ -44,6 +45,8 @@ export class Compass {
     this._running = false;
     this._history = [];
     this._smoothed = null;
+    this._sensorTimer = null;
+    this._onDeviceOrientation = null;
   }
 
   subscribe(fn) {
@@ -67,6 +70,17 @@ export class Compass {
 
   _setPermission(state) {
     if (this.onPermission) this.onPermission(state);
+  }
+
+  _clearSensorTimer() {
+    if (this._sensorTimer) {
+      clearTimeout(this._sensorTimer);
+      this._sensorTimer = null;
+    }
+  }
+
+  _setError(code, message) {
+    if (this.onError) this.onError(code, message);
   }
 
   _estimateAccuracy(heading) {
@@ -124,40 +138,73 @@ export class Compass {
     this._running = true;
     this._smoothed = null;
     this._history = [];
+    this.source = 'none';
 
     if (!isSecure() && !('webkitCompassHeading' in (window.DeviceOrientationEvent?.prototype ?? {}))) {
       this._setStatus('insecure');
+      this._setError('insecure', 'Sensors require a secure HTTPS connection.');
       return;
     }
+
+    const hasAbsolute = typeof window !== 'undefined' && 'ondeviceorientationabsolute' in window;
+    const hasOrientation = typeof window !== 'undefined' && 'ondeviceorientation' in window;
+
+    if (!hasAbsolute && !hasOrientation) {
+      this._setStatus('no-gyro');
+      this._setError('no-gyro', 'No gyroscope or orientation sensor detected on this device.');
+      return;
+    }
+
+    this._setStatus('starting');
+
+    // Timeout: if no valid sensor event arrives within 2.5 seconds, signal no-gyro
+    this._clearSensorTimer();
+    this._sensorTimer = setTimeout(() => {
+      if (this._running && this.source === 'none') {
+        this._setStatus('no-gyro');
+        this._setError('no-gyro', 'No gyroscope or orientation sensor detected on this device.');
+      }
+    }, 2500);
 
     // Chromium/Android must use `deviceorientationabsolute` to get a
     // North-referenced reading; plain `deviceorientation` there is relative to
     // the page-load pose, which makes the dial drift and spin the wrong way.
     // iOS has no absolute event but delivers webkitCompassHeading on the plain
     // `deviceorientation` event.
-    if ('ondeviceorientationabsolute' in window) {
-      this._onDeviceOrientation = this._makeHandler();
+    this._onDeviceOrientation = this._makeHandler();
+    if (hasAbsolute) {
       window.addEventListener('deviceorientationabsolute', this._onDeviceOrientation, true);
-      this._setStatus('live');
-      return;
-    }
-    if ('ondeviceorientation' in window) {
-      this._onDeviceOrientation = this._makeHandler();
+    } else {
       window.addEventListener('deviceorientation', this._onDeviceOrientation, true);
-      this._setStatus('live');
-      return;
     }
-    this._setStatus('unsupported');
   }
 
   stop() {
     this._running = false;
-    window.removeEventListener('deviceorientationabsolute', this._onDeviceOrientation, true);
-    window.removeEventListener('deviceorientation', this._onDeviceOrientation, true);
+    this._clearSensorTimer();
+    if (this._onDeviceOrientation) {
+      window.removeEventListener('deviceorientationabsolute', this._onDeviceOrientation, true);
+      window.removeEventListener('deviceorientation', this._onDeviceOrientation, true);
+      this._onDeviceOrientation = null;
+    }
   }
 
   _makeHandler() {
     return (event) => {
+      // Check if event fired with all null axes (explicit indicator that device has no gyro/orientation sensor)
+      const isNullEvent =
+        (event.alpha === null || event.alpha === undefined) &&
+        (event.beta === null || event.beta === undefined) &&
+        (event.gamma === null || event.gamma === undefined) &&
+        (event.webkitCompassHeading === null || event.webkitCompassHeading === undefined);
+
+      if (isNullEvent && this.source === 'none') {
+        this._clearSensorTimer();
+        this._setStatus('no-gyro');
+        this._setError('no-gyro', 'No gyroscope or orientation sensor detected on this device.');
+        return;
+      }
+
       let headingMagnetic = null;
       let acc = null;
       let calibrated = false;
@@ -198,6 +245,13 @@ export class Compass {
       }
 
       if (headingMagnetic == null) return;
+
+      // Valid sensor reading received: cancel fallback timer and transition status to live
+      this._clearSensorTimer();
+      if (this.source === 'none') {
+        this._setStatus('live');
+      }
+
       const headingTrue = normalize(headingMagnetic + this.declination);
       this._reading({
         magnetic: normalize(headingMagnetic),

@@ -3,6 +3,7 @@ import '../styles/global.css';
 import { languages, defaultLang } from '../i18n/ui';
 import { getLangFromUrl, localizePath, useTranslations } from '../i18n/utils';
 import LanguagePicker from '../components/LanguagePicker.astro';
+import InstallPrompt from '../components/InstallPrompt.astro';
 
 interface Props {
 	title: string;
@@ -54,6 +55,9 @@ const ogLocaleMap: Record<string, string> = {
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/manifest.webmanifest" />
 		<link rel="canonical" href={canonical} />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
@@ -61,9 +65,11 @@ const ogLocaleMap: Record<string, string> = {
 		{keywords && <meta name="keywords" content={keywords} />}
 		<meta name="theme-color" media="(prefers-color-scheme: light)" content="#fafafa" />
 		<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0a0a0a" />
+		<meta name="mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="default" />
 		<meta name="apple-mobile-web-app-title" content={siteName} />
+		<meta name="application-name" content={siteName} />
 
 		<!-- Open Graph -->
 		<meta property="og:type" content="website" />
@@ -135,6 +141,17 @@ const ogLocaleMap: Record<string, string> = {
 					document.documentElement.classList.toggle('dark', dark);
 				} catch (e) {}
 			})();
+		</script>
+
+		<!-- PWA Service Worker Registration -->
+		<script is:inline>
+			if ('serviceWorker' in navigator) {
+				window.addEventListener('load', function () {
+					navigator.serviceWorker.register('/sw.js').catch(function (err) {
+						console.warn('ServiceWorker registration failed: ', err);
+					});
+				});
+			}
 		</script>
 	</head>
 	<body class="min-h-screen antialiased">
@@ -238,6 +255,18 @@ const ogLocaleMap: Record<string, string> = {
 								>{l.label}</a
 							>
 						))}
+						<button
+							type="button"
+							data-pwa-trigger
+							class="flex items-center gap-2.5 rounded-lg px-4 py-3 text-left text-sm font-medium text-link transition-colors hover:bg-canvas-soft-2 cursor-pointer"
+						>
+							<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+								<polyline points="7 10 12 15 17 10"></polyline>
+								<line x1="12" y1="15" x2="12" y2="3"></line>
+							</svg>
+							<span>Install App</span>
+						</button>
 					</div>
 					<div class="mt-3 border-t border-hairline pt-3">
 						<LanguagePicker />
@@ -285,6 +314,15 @@ const ogLocaleMap: Record<string, string> = {
 					<li><a class="text-body hover:text-ink transition-colors" href={localizePath(lang, '/') + '#how-it-works'}>{t('footer.how')}</a></li>
 					<li><a class="text-body hover:text-ink transition-colors" href={localizePath(lang, '/') + '#calibration'}>{t('footer.calibration')}</a></li>
 					<li><a class="text-body hover:text-ink transition-colors" href={localizePath(lang, '/') + '#faq'}>{t('footer.faq')}</a></li>
+					<li>
+						<button
+							type="button"
+							data-pwa-trigger
+							class="text-body hover:text-ink transition-colors cursor-pointer"
+						>
+							Install app
+						</button>
+					</li>
 				</ul>
 			</nav>
 
@@ -347,6 +385,16 @@ const ogLocaleMap: Record<string, string> = {
 			mobileMenu?.querySelectorAll('a').forEach((a) => {
 				a.addEventListener('click', () => setMenu(false));
 			});
+
+			/* Manual PWA prompt trigger */
+			document.querySelectorAll('[data-pwa-trigger]').forEach((btn) => {
+				btn.addEventListener('click', () => {
+					window.dispatchEvent(new CustomEvent('pwa:show-prompt'));
+					setMenu(false);
+				});
+			});
 		</script>
+
+		<InstallPrompt />
 	</body>
 </html>
