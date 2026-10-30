@@ -84,7 +84,7 @@ Before using the result, confirm that the map and compass use the same north ref
 
 A bearing only tells you a direction, not how far away the destination is or what lies between you and it. A straight-line bearing is not turn-by-turn navigation, and phone compass readings can be unreliable indoors or near magnetic interference.
 
-For better results, check your location, use a map that shows paths and terrain, and take another bearing as you approach intermediate landmarks. If the compass reading is unstable, move to an open area and recalibrate. For a basic orientation check, the [online compass guide](/blog/how-to-use-online-compass/) explains sensor permissions, calibration, and heading accuracy.
+For better results, check your location, use a map that shows paths and terrain, and take another bearing as you approach intermediate landmarks. If you are navigating across off-trail terrain, thick woods, or low visibility, continue with our complete guide on [how to walk in a straight line with a compass](/blog/how-to-walk-a-straight-line-compass/) to master pace counting, obstacle boxing, and deliberate aiming off. For a basic orientation check, the [online compass guide](/blog/how-to-use-online-compass/) explains sensor permissions, calibration, and heading accuracy.
 
 ## A quick example
 

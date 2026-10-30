@@ -103,7 +103,7 @@ Keep a thumb on your last confirmed position. Identify the next junction or land
 
 Turning your body can turn the paper too. Reorient the map after a stop or change of direction instead of assuming it stayed aligned.
 
-Orienting the map does not make every straight line across it a usable route. A direct line may cross steep ground, water, or private land. Choose a route using the map's terrain and access information. If you need to travel on a measured direction, continue with [how to take and follow a compass bearing](/blog/how-to-take-a-compass-bearing/).
+Orienting the map does not make every straight line across it a usable route. A direct line may cross steep ground, water, or private land. Choose a route using the map's terrain and access information. If you need to travel on a measured direction, continue with [how to take and follow a compass bearing](/blog/how-to-take-a-compass-bearing/) and our guide on [how to walk in a straight line with a compass](/blog/how-to-walk-a-straight-line-compass/).
 
 ## Common problems and their fixes
 
