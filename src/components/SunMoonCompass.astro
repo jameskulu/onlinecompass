@@ -209,8 +209,10 @@ const STRINGS = {
   let trueHeading = null;
   let latest = null;
   let currentAngle = 0;
+  let velocity = 0;
+  let hasInitializedAngle = false;
+  let lastDisplayedDeg = null;
   let lastFrameTime = 0;
-  let lastTextDeg = 0;
   let rafId = 0;
   let noticeLive = false;
   let isFullscreen = false;
@@ -457,6 +459,8 @@ const STRINGS = {
   svgHost.style.transformOrigin = '50% 50%';
   svgHost.style.willChange = 'transform';
   svgHost.style.transition = 'none';
+  svgHost.style.backfaceVisibility = 'hidden';
+  svgHost.style.webkitBackfaceVisibility = 'hidden';
 
   /* ---------------- status ---------------- */
 
@@ -512,6 +516,8 @@ const STRINGS = {
   /* ---------------- readings ---------------- */
 
   compass.subscribe((r) => {
+    magnetic = r.magnetic;
+    trueHeading = r.trueHeading;
     latest = mode === 'true' ? (r.trueHeading ?? r.magnetic) : (r.magnetic ?? r.trueHeading);
     if (latest != null && r.source != null) {
       if (noticeLive) {
@@ -524,34 +530,61 @@ const STRINGS = {
     }
     if (r.source != null) srcEl.textContent = r.source;
     if (r.declination != null) declEl.textContent = `${r.declination >= 0 ? '+' : ''}${r.declination.toFixed(1)}°`;
-    const degNow = Math.round(normalize(latest));
-    if (degNow !== lastTextDeg) {
-      lastTextDeg = degNow;
-      degEl.textContent = `${degNow}°`;
-      dirEl.textContent = directionName(latest);
-    }
   });
 
-  /* ---------------- dial rendering ---------------- */
+  /* ---------------- dial rendering & physics ---------------- */
+
+  const OMEGA = 16.0; // Natural frequency (rad/s) — crisp, authentic iPhone responsiveness
+  const DAMPING = 32.0; // Critical damping (2 * OMEGA) for zero overshoot and butter-smooth settle
 
   function tick() {
     const now = performance.now();
-    const dt = lastFrameTime ? Math.min((now - lastFrameTime) / 1000, 0.1) : 1 / 60;
+    const dt = lastFrameTime ? Math.min((now - lastFrameTime) / 1000, 0.05) : 1 / 60;
     lastFrameTime = now;
 
     if (latest != null) {
       const desired = -latest;
-      let target = desired;
-      const rawDiff = desired - currentAngle;
-      if (Math.abs(rawDiff) > 180) {
-        if (rawDiff > 0) target -= 360;
-        else target += 360;
+
+      if (!hasInitializedAngle) {
+        currentAngle = desired;
+        velocity = 0;
+        hasInitializedAngle = true;
+      } else {
+        // Multi-substep semi-implicit Euler integration for rock-solid stability at 60Hz/120Hz/throttled frames
+        const steps = dt > 0.02 ? 2 : 1;
+        const stepDt = dt / steps;
+        for (let s = 0; s < steps; s++) {
+          let diff = (desired - currentAngle) % 360;
+          if (diff < -180) diff += 360;
+          if (diff > 180) diff -= 360;
+
+          // Deadband: eliminate sensor noise micro-tremors when resting stationary
+          if (Math.abs(diff) < 0.1 && Math.abs(velocity) < 0.3) {
+            velocity = 0;
+          } else {
+            const accel = OMEGA * OMEGA * diff - DAMPING * velocity;
+            velocity += accel * stepDt;
+            currentAngle += velocity * stepDt;
+          }
+        }
       }
-      const diff = target - currentAngle;
-      const tau = 0.08;
-      const k = 1 - Math.exp(-dt / tau);
-      currentAngle += diff * k;
-      svgHost.style.transform = `rotate(${currentAngle}deg) translateZ(0)`;
+
+      svgHost.style.transform = `rotate(${currentAngle.toFixed(3)}deg) translateZ(0)`;
+
+      // Smooth visual heading readout with 0.5° hysteresis to eliminate 1-degree flickering
+      const visualHeading = normalize(-currentAngle);
+      let targetDeg = Math.round(visualHeading);
+      if (lastDisplayedDeg !== null) {
+        const delta = headingDiff(visualHeading, lastDisplayedDeg);
+        if (Math.abs(delta) < 0.5) {
+          targetDeg = lastDisplayedDeg;
+        }
+      }
+      if (targetDeg !== lastDisplayedDeg) {
+        lastDisplayedDeg = targetDeg;
+        degEl.textContent = `${lastDisplayedDeg}°`;
+        dirEl.textContent = directionName(lastDisplayedDeg);
+      }
     }
 
     rafId = requestAnimationFrame(tick);
@@ -571,11 +604,6 @@ const STRINGS = {
     const h = mode === 'true' ? (trueHeading ?? magnetic) : (magnetic ?? trueHeading);
     if (h != null) {
       latest = h;
-      currentAngle += headingDiff(-h, currentAngle);
-      svgHost.style.transform = `rotate(${currentAngle}deg) translateZ(0)`;
-      degEl.textContent = `${Math.round(normalize(h))}°`;
-      dirEl.textContent = directionName(h);
-      lastTextDeg = Math.round(normalize(h));
     }
   }
 

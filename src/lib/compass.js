@@ -1,4 +1,4 @@
-import { normalize, magneticDeclination } from './geo.js';
+import { normalize, headingDiff, magneticDeclination } from './geo.js';
 
 const isSecure = () => typeof window !== 'undefined' && window.isSecureContext === true;
 
@@ -13,12 +13,12 @@ const screenAngle = () => {
   return 0;
 };
 
-// Small per-event filter applied ONLY to the alpha-derived path (Android and
+// Source-side filter applied ONLY to the alpha-derived path (Android and
 // other W3C browsers) where the raw magnetometer is visibly jittery. It runs in
-// the SENSOR handler — never in the render loop — so it tames input noise
-// without adding rendering latency. iOS's webkitCompassHeading is already
+// the SENSOR handler — never in the render loop — so it tames sensor bus spikes
+// without adding noticeable latency. iOS's webkitCompassHeading is already
 // OS-fused/smoothed and is passed through untouched.
-const ALPHA_SMOOTHING = 0.35;
+const ALPHA_SMOOTHING = 0.45;
 
 /**
  * Compass engine.
@@ -233,8 +233,8 @@ export class Compass {
           if (this._smoothed == null) {
             this._smoothed = heading;
           } else {
-            const d = normalize(heading - this._smoothed);
-            this._smoothed = normalize(this._smoothed + ALPHA_SMOOTHING * (d > 180 ? d - 360 : d));
+            const d = headingDiff(heading, this._smoothed);
+            this._smoothed = normalize(this._smoothed + ALPHA_SMOOTHING * d);
           }
           headingMagnetic = this._smoothed;
         } else {
