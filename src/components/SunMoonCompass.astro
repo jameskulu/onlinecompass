@@ -56,24 +56,24 @@ const STRINGS = {
       <button data-perm-btn class="btn-primary w-full">{STRINGS.enableLive}</button>
     </div>
 
-    <!-- Dial container — exact same size as homepage compass -->
-    <div data-dial-box class="relative w-full max-w-[480px] aspect-square">
-      <!-- Dial SVG fills the full container (inset-0) -->
-      <div data-dial-svg class="absolute inset-0"></div>
+    <!-- Status pill positioned clearly above dial so it never obstructs orbiting markers -->
+    <div data-status-wrapper class="flex items-center justify-center z-10 -mb-2">
+      <span class="badge">
+        <span data-status-dot class="inline-block w-1.5 h-1.5 rounded-full bg-mute"></span>
+        <span data-status-text>{STRINGS.statusStarting}</span>
+      </span>
+    </div>
 
-      <!-- status pill -->
-      <div class="absolute top-2 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
-        <span class="badge">
-          <span data-status-dot class="inline-block w-1.5 h-1.5 rounded-full bg-mute"></span>
-          <span data-status-text>{STRINGS.statusStarting}</span>
-        </span>
-      </div>
+    <!-- Dial container: dial has same size as homepage compass, with Sun & Moon orbiting OUTSIDE the dial -->
+    <div data-dial-box class="relative w-full max-w-[540px] aspect-square">
+      <!-- Dial SVG containing 456px compass dial and 540px outer orbit zone -->
+      <div data-dial-svg class="absolute inset-0"></div>
 
       <!-- fullscreen corner toggle -->
       <button
         data-fs-btn
         type="button"
-        class="absolute top-2 right-2 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-hairline bg-canvas text-ink transition-colors hover:bg-canvas-soft-2 shadow-sm"
+        class="absolute top-2 right-2 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-hairline bg-canvas text-ink transition-colors hover:bg-canvas-soft-2 shadow-sm cursor-pointer"
         aria-label={STRINGS.fsLabel}
         title={STRINGS.fsLabel}
       >
@@ -223,8 +223,9 @@ const STRINGS = {
   /* ---------------- dial ---------------- */
 
   const NS = 'http://www.w3.org/2000/svg';
-  const SIZE = 480;
-  const C = SIZE / 2;
+  // SIZE 540 provides 42px on all sides around the 456px dial face for the Sun & Moon to orbit OUTSIDE
+  const SIZE = 540;
+  const C = SIZE / 2; // 270
 
   const svg = document.createElementNS(NS, 'svg');
   svg.setAttribute('viewBox', `0 0 ${SIZE} ${SIZE}`);
@@ -272,33 +273,37 @@ const STRINGS = {
     return p;
   }
 
+  // Build celestial body (Sun or Moon) positioned completely OUTSIDE the dial face (radius 250px vs face 228px)
   function buildCelestialMarker(kind) {
     const g = document.createElementNS(NS, 'g');
     g.style.display = 'none';
 
-    // Marker center placed on rose tick perimeter: radius 202 from center
-    const cy = C - 202;
+    // Center of body is placed at y = 20 (radius 250 from center C=270). Face edge is at y = 42 (radius 228).
+    // The entire body disc and rays sit outside y = 42, with only the arrow pointer touching the dial rim.
+    const cy = 20;
     const amber = 'var(--color-amber, #f59e0b)';
     const link = 'var(--color-link, #0284c7)';
     const color = kind === 'sun' ? amber : link;
 
     const drop = document.createElementNS(NS, 'g');
-    drop.style.filter = 'drop-shadow(0px 2px 3px rgba(0,0,0,0.4))';
+    drop.style.filter = 'drop-shadow(0px 2px 4px rgba(0,0,0,0.45))';
     g.appendChild(drop);
 
     if (kind === 'sun') {
+      // Sun disc outside the dial
       const disc = circleNode(C, cy, 10.5, color);
       disc.setAttribute('stroke', '#ffffff');
       disc.setAttribute('stroke-width', '1.5');
       drop.appendChild(disc);
 
+      // Sun radiant rays
       for (let i = 0; i < 8; i++) {
         const a = (i * 45 * Math.PI) / 180;
         const ray = line(
           C + 13.5 * Math.cos(a),
           cy + 13.5 * Math.sin(a),
-          C + 18.5 * Math.cos(a),
-          cy + 18.5 * Math.sin(a),
+          C + 17.5 * Math.cos(a),
+          cy + 17.5 * Math.sin(a),
           color,
           2.2
         );
@@ -306,34 +311,52 @@ const STRINGS = {
         drop.appendChild(ray);
       }
 
+      // Disc highlight
       drop.appendChild(circleNode(C - 2.5, cy - 2.5, 2.5, 'rgba(255,255,255,0.75)'));
-      drop.appendChild(line(C, cy + 12, C, cy + 22, color, 2.5));
-      drop.appendChild(polygonNode(`${C - 5.5},${cy + 20} ${C + 5.5},${cy + 20} ${C},${cy + 28}`, color));
+
+      // Direction pointer arrow pointing inward from outside toward the dial face rim (y=42)
+      drop.appendChild(line(C, cy + 12, C, cy + 20, color, 2.5));
+      drop.appendChild(polygonNode(`${C - 5},${cy + 19} ${C + 5},${cy + 19} ${C},${cy + 25}`, color));
     } else {
+      // Moon disc outside the dial
       const disc = circleNode(C, cy, 10.5, color);
       disc.setAttribute('stroke', '#ffffff');
       disc.setAttribute('stroke-width', '1.5');
       drop.appendChild(disc);
 
+      // Craters and surface detail
       drop.appendChild(circleNode(C - 3, cy - 2.5, 2, 'rgba(255,255,255,0.65)'));
       drop.appendChild(circleNode(C + 3, cy + 2.5, 1.5, 'rgba(255,255,255,0.55)'));
       drop.appendChild(circleNode(C + 0.5, cy - 4, 1.2, 'rgba(255,255,255,0.45)'));
+
+      // Terminator shadow
       drop.appendChild(circleNode(C + 2.5, cy + 1, 6, 'rgba(0,0,0,0.18)'));
 
-      drop.appendChild(line(C, cy + 12, C, cy + 22, color, 2.5));
-      drop.appendChild(polygonNode(`${C - 5.5},${cy + 20} ${C + 5.5},${cy + 20} ${C},${cy + 28}`, color));
+      // Direction pointer arrow pointing inward from outside toward the dial face rim (y=42)
+      drop.appendChild(line(C, cy + 12, C, cy + 20, color, 2.5));
+      drop.appendChild(polygonNode(`${C - 5},${cy + 19} ${C + 5},${cy + 19} ${C},${cy + 25}`, color));
     }
 
     return g;
   }
 
   function buildDial() {
+    // R = 222 gives exactly a 456px diameter dial face (R + 6 = 228), identical to the homepage compass
     const R = 222;
     const ink = 'var(--color-ink)';
     const body = 'var(--color-body)';
     const mute = 'var(--color-mute)';
     const hairline = 'var(--color-hairline)';
 
+    // Outer orbital guide track outside the dial (radius 250)
+    const orbitTrack = circleNode(C, C, 250, 'none');
+    orbitTrack.setAttribute('stroke', hairline);
+    orbitTrack.setAttribute('stroke-width', '1');
+    orbitTrack.setAttribute('stroke-dasharray', '2 4');
+    orbitTrack.setAttribute('opacity', '0.6');
+    rose.appendChild(orbitTrack);
+
+    // Compass face (identical diameter to homepage compass)
     const face = document.createElementNS(NS, 'circle');
     face.setAttribute('cx', C);
     face.setAttribute('cy', C);
@@ -343,6 +366,7 @@ const STRINGS = {
     face.setAttribute('stroke-width', '1');
     rose.appendChild(face);
 
+    // Ticks
     for (let i = 0; i < 360; i += 2) {
       const a = ((i - 90) * Math.PI) / 180;
       const major = i % 30 === 0;
@@ -369,6 +393,7 @@ const STRINGS = {
       }
     }
 
+    // Cardinal and intercardinal labels
     const cards = [
       [0, 'N', 39, 'var(--color-error)'],
       [90, 'E', 30, body],
@@ -387,6 +412,7 @@ const STRINGS = {
       rose.appendChild(tNode);
     }
 
+    // Needle
     const north = document.createElementNS(NS, 'polygon');
     north.setAttribute('points', `${C},${C - R + 51} ${C - 14},${C} ${C + 14},${C}`);
     north.setAttribute('fill', 'var(--color-error)');
@@ -397,6 +423,7 @@ const STRINGS = {
     south.setAttribute('fill', body);
     rose.appendChild(south);
 
+    // Center cap
     const cap = document.createElementNS(NS, 'circle');
     cap.setAttribute('cx', C);
     cap.setAttribute('cy', C);
@@ -405,7 +432,7 @@ const STRINGS = {
     cap.setAttribute('stroke', hairline);
     rose.appendChild(cap);
 
-    // Sun & Moon markers attached directly to rose, rotating with heading
+    // Sun & Moon markers attached to rose OUTSIDE the dial face, rotating with heading
     const sunMarker = buildCelestialMarker('sun');
     sunMarker.setAttribute('data-marker', 'sun');
     rose.appendChild(sunMarker);
@@ -758,9 +785,9 @@ const STRINGS = {
   .sunmoon-root.is-fullscreen [data-dial-box],
   .sunmoon-root:fullscreen [data-dial-box],
   .sunmoon-root:-webkit-full-screen [data-dial-box] {
-    width: min(84vw, 52vh, 480px) !important;
-    max-width: min(84vw, 52vh, 480px) !important;
-    height: min(84vw, 52vh, 480px) !important;
+    width: min(84vw, 54vh, 500px) !important;
+    max-width: min(84vw, 54vh, 500px) !important;
+    height: min(84vw, 54vh, 500px) !important;
     aspect-ratio: 1 / 1 !important;
     margin: 0 auto !important;
     flex-shrink: 0 !important;
