@@ -2,6 +2,11 @@
 import { languages, defaultLang } from '../i18n/ui';
 import { getLangFromUrl } from '../i18n/utils';
 
+interface Props {
+	variant?: 'header' | 'menu';
+}
+
+const { variant = 'header' } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const currentPath = Astro.url.pathname;
 const segments = currentPath.split('/').filter(Boolean);
@@ -13,45 +18,165 @@ const hrefFor = (code: string) =>
 	code === defaultLang ? pathWithoutLang || '/' : `/${code}${pathWithoutLang}`;
 ---
 
-<div class="relative" data-lang-picker>
-	<button
-		data-lang-toggle
-		class="flex h-8 items-center gap-1.5 rounded-full border border-hairline bg-canvas px-3 text-xs font-medium text-body transition-colors hover:bg-canvas-soft-2 hover:text-ink"
-		aria-label="Select language"
-	>
-		<svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-			<path d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04z" fill="currentColor"/>
-		</svg>
-		{languages[lang]}
-		<svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-			<path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-		</svg>
-	</button>
-	<div data-lang-dropdown class="hidden absolute right-0 top-full z-50 mt-2 w-48 max-h-80 overflow-y-auto rounded-lg border border-hairline bg-canvas shadow-float">
-		{Object.entries(languages).map(([code, label]) => (
-			<a
-				href={hrefFor(code)}
-				class:list={[
-					'block px-4 py-2.5 text-sm transition-colors hover:bg-canvas-soft-2',
-					lang === code ? 'font-medium text-ink bg-canvas-soft' : 'text-body',
-				]}
-			>
-				{label}
-			</a>
-		))}
+{variant === 'header' ? (
+	<div class="relative" data-lang-picker data-variant="header">
+		<button
+			type="button"
+			data-lang-toggle
+			class="flex h-8 items-center gap-1.5 rounded-full border border-hairline bg-canvas px-2.5 sm:px-3 text-xs font-medium text-body transition-colors hover:bg-canvas-soft-2 hover:text-ink cursor-pointer select-none active:scale-95"
+			aria-label="Select language"
+			aria-haspopup="true"
+			aria-expanded="false"
+		>
+			<svg class="h-3.5 w-3.5 shrink-0 text-body" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+				<path d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04z" fill="currentColor"/>
+			</svg>
+			<span class="sm:hidden font-semibold uppercase">{lang}</span>
+			<span class="hidden sm:inline">{languages[lang]}</span>
+			<svg data-lang-chevron class="h-3 w-3 shrink-0 text-mute transition-transform duration-150" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+				<path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+			</svg>
+		</button>
+		<div
+			data-lang-menu
+			class="hidden absolute right-0 top-full z-[100] mt-2 w-52 max-h-[70vh] overflow-y-auto rounded-xl border border-hairline bg-canvas/98 backdrop-blur-md shadow-modal py-1 scroll-smooth"
+		>
+			{Object.entries(languages).map(([code, label]) => (
+				<a
+					href={hrefFor(code)}
+					class:list={[
+						'flex items-center justify-between px-3.5 py-2.5 text-sm transition-colors hover:bg-canvas-soft-2 active:bg-canvas-soft-2 cursor-pointer',
+						lang === code ? 'font-semibold text-ink bg-canvas-soft' : 'text-body',
+					]}
+				>
+					<span>{label}</span>
+					{lang === code && (
+						<svg class="h-4 w-4 text-emerald-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+							<polyline points="20 6 9 17 4 12"></polyline>
+						</svg>
+					)}
+				</a>
+			))}
+		</div>
 	</div>
-</div>
+) : (
+	<div class="w-full" data-lang-picker data-variant="menu">
+		<button
+			type="button"
+			data-lang-toggle
+			class="flex w-full h-11 items-center justify-between rounded-lg border border-hairline bg-canvas-soft/60 px-4 text-sm font-medium text-ink transition-colors hover:bg-canvas-soft-2 active:bg-canvas-soft-2 cursor-pointer select-none"
+			aria-label="Select language"
+			aria-haspopup="true"
+			aria-expanded="false"
+		>
+			<div class="flex items-center gap-2.5">
+				<svg class="h-4 w-4 shrink-0 text-body" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+					<path d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04z" fill="currentColor"/>
+				</svg>
+				<span class="text-body text-xs font-mono uppercase tracking-wide">Language:</span>
+				<span class="font-semibold text-ink">{languages[lang]}</span>
+			</div>
+			<svg data-lang-chevron class="h-4 w-4 shrink-0 text-mute transition-transform duration-200" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+				<path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+			</svg>
+		</button>
+		<div
+			data-lang-menu
+			class="hidden mt-2 grid grid-cols-2 gap-1.5 rounded-lg border border-hairline bg-canvas p-2 shadow-xs"
+		>
+			{Object.entries(languages).map(([code, label]) => (
+				<a
+					href={hrefFor(code)}
+					class:list={[
+						'flex items-center justify-between rounded-md px-3 py-2 text-xs font-medium transition-colors hover:bg-canvas-soft-2 cursor-pointer',
+						lang === code ? 'bg-ink text-on-primary font-semibold' : 'text-body',
+					]}
+				>
+					<span>{label}</span>
+					{lang === code && (
+						<svg class="h-3.5 w-3.5 shrink-0 text-on-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+							<polyline points="20 6 9 17 4 12"></polyline>
+						</svg>
+					)}
+				</a>
+			))}
+		</div>
+	</div>
+)}
 
 <script>
-	const toggle = document.querySelector('[data-lang-toggle]');
-	const dropdown = document.querySelector('[data-lang-dropdown]');
+	function setupLanguagePickers() {
+		document.querySelectorAll('[data-lang-picker]').forEach((picker) => {
+			if ((picker as HTMLElement).dataset.bound === 'true') return;
+			(picker as HTMLElement).dataset.bound = 'true';
 
-	toggle?.addEventListener('click', (e) => {
-		e.stopPropagation();
-		dropdown?.classList.toggle('hidden');
+			const toggle = picker.querySelector('[data-lang-toggle]');
+			const menu = picker.querySelector('[data-lang-menu]');
+			const chevron = picker.querySelector('[data-lang-chevron]');
+			if (!toggle || !menu) return;
+
+			toggle.addEventListener('click', (e) => {
+				e.stopPropagation();
+				e.preventDefault();
+
+				const isHidden = menu.classList.contains('hidden');
+
+				// Close other language pickers
+				document.querySelectorAll('[data-lang-picker]').forEach((other) => {
+					if (other !== picker) {
+						other.querySelector('[data-lang-menu]')?.classList.add('hidden');
+						other.querySelector('[data-lang-toggle]')?.setAttribute('aria-expanded', 'false');
+						other.querySelector('[data-lang-chevron]')?.classList.remove('rotate-180');
+					}
+				});
+
+				if (isHidden) {
+					menu.classList.remove('hidden');
+					toggle.setAttribute('aria-expanded', 'true');
+					chevron?.classList.add('rotate-180');
+				} else {
+					menu.classList.add('hidden');
+					toggle.setAttribute('aria-expanded', 'false');
+					chevron?.classList.remove('rotate-180');
+				}
+			});
+
+			menu.addEventListener('click', (e) => {
+				const link = (e.target as HTMLElement).closest('a');
+				if (link) {
+					menu.classList.add('hidden');
+					toggle.setAttribute('aria-expanded', 'false');
+					chevron?.classList.remove('rotate-180');
+				} else {
+					e.stopPropagation();
+				}
+			});
+		});
+	}
+
+	// Global document click closes dropdowns
+	document.addEventListener('click', (e) => {
+		const target = e.target as HTMLElement;
+		if (!target.closest('[data-lang-picker]')) {
+			document.querySelectorAll('[data-lang-menu]').forEach((m) => m.classList.add('hidden'));
+			document.querySelectorAll('[data-lang-toggle]').forEach((btn) => btn.setAttribute('aria-expanded', 'false'));
+			document.querySelectorAll('[data-lang-chevron]').forEach((ch) => ch.classList.remove('rotate-180'));
+		}
 	});
 
-	document.addEventListener('click', () => {
-		dropdown?.classList.add('hidden');
+	// ESC key closes dropdowns
+	document.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape') {
+			document.querySelectorAll('[data-lang-menu]').forEach((m) => m.classList.add('hidden'));
+			document.querySelectorAll('[data-lang-toggle]').forEach((btn) => btn.setAttribute('aria-expanded', 'false'));
+			document.querySelectorAll('[data-lang-chevron]').forEach((ch) => ch.classList.remove('rotate-180'));
+		}
 	});
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', setupLanguagePickers);
+	} else {
+		setupLanguagePickers();
+	}
+	document.addEventListener('astro:page-load', setupLanguagePickers);
 </script>

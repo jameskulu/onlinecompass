@@ -1,0 +1,50 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BubbleLevel from '../../components/BubbleLevel.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="オンラインデジタル水準器 — 無料の傾斜計・水平器ツール"
+	description="スマートフォンのジャイロセンサーを活用した無料のオンラインデジタル水準器・傾斜計。ピッチ・ロール・傾斜角度をリアルタイム計測。気泡管・丸型円形水準器、ゼロ点校正機能付き。"
+	path="/ja/level/"
+	keywords="デジタル水準器, オンライン水準器, 傾斜計無料, スマホ水平器, 角度測定"
+>
+	<PageHero
+		eyebrow="水準器 · 傾斜計"
+		title="ブラウザで高精度な水平・傾斜測定。"
+		description="スマートフォンやタブレットが高精度のデジタル水準器に早変わり。平面の水平出しや壁・柱の垂直測定をハプティック振動とゼロ点校正で手軽に行えます。"
+	>
+		<BubbleLevel />
+	</PageHero>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">水準器 · 傾斜計</p>
+			<h2 class="mt-3 text-display-lg text-ink">デジタル水準器と傾斜計の仕組み</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				デジタル水準器は、スマートフォン内部のMEMS（微小電気機械システム）加速度センサーとジャイロスコープを使用して、地球の重力加速度ベクトルに対する傾斜角度を0.1度単位で算出します。
+			</p>
+
+			<h3 class="mt-14 text-display-sm text-ink">FAQ</h3>
+			<div class="mt-6 space-y-6 text-sm divide-y divide-hairline">
+				<div class="pt-6 first:pt-0">
+					<h4 class="font-semibold text-ink text-base">スマホの水準器はどのくらい正確ですか？</h4>
+					<p class="mt-2 text-body leading-6">近年のスマートフォンに内蔵された加速度センサーは0.1度単位の傾斜を検出可能で、家庭用DIYや家具の組み立てには十分な精度を備えています。</p>
+				</div>
+				<div class="pt-6">
+					<h4 class="font-semibold text-ink text-base">なぜiOSでセンサー許可が必要なのですか？</h4>
+					<p class="mt-2 text-body leading-6">iOS Safariではプライバシー保護のため、モーションセンサーへのアクセスにユーザーの明示的な許可が必要です。データが外部に送信されることはありません。</p>
+				</div>
+				<div class="pt-6">
+					<h4 class="font-semibold text-ink text-base">オフラインでも利用できますか？</h4>
+					<p class="mt-2 text-body leading-6">はい。PWA（プログレッシブウェブアプリ）対応のため、一度読み込めば電波の届かない場所でもオフラインで利用可能です。</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<RelatedTools current="/level/" />
+</Layout>

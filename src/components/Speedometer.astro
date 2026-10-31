@@ -1,0 +1,616 @@
+---
+// GPS Speedometer & High-Accuracy Altimeter component
+import { getLangFromUrl } from '../i18n/utils';
+import { defaultLang } from '../i18n/ui';
+import { getToolStrings } from '../i18n/tools-i18n';
+
+interface Props {
+  lang?: string;
+}
+
+const { lang: propLang } = Astro.props;
+const lang = propLang ?? getLangFromUrl(Astro.url) ?? defaultLang;
+const strings = getToolStrings(lang).speedometer;
+---
+
+<section class="speedometer-tool card-lg p-6 md:p-8" id="speedometer-tool" data-lang={lang} data-strings={JSON.stringify(strings)}>
+  <!-- Top Header & GPS Status -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+    <div>
+      <div class="flex items-center gap-2">
+        <span class="inline-flex h-2.5 w-2.5 rounded-full bg-mute" data-gps-indicator></span>
+        <p class="eyebrow">{strings.eyebrow}</p>
+      </div>
+      <h3 class="text-display-sm text-ink mt-1">{strings.title}</h3>
+    </div>
+
+    <!-- Unit Selector & Controls -->
+    <div class="flex flex-wrap items-center gap-2">
+      <div class="inline-flex rounded-lg border border-hairline bg-canvas-soft p-1 text-xs font-medium" role="group" aria-label="Speed unit selector">
+        <button
+          type="button"
+          data-unit-btn="kmh"
+          class="rounded-md px-3 py-1.5 transition-colors bg-ink text-on-primary font-semibold shadow-xs"
+        >
+          km/h
+        </button>
+        <button
+          type="button"
+          data-unit-btn="mph"
+          class="rounded-md px-3 py-1.5 transition-colors text-body hover:text-ink"
+        >
+          mph
+        </button>
+        <button
+          type="button"
+          data-unit-btn="knots"
+          class="rounded-md px-3 py-1.5 transition-colors text-body hover:text-ink"
+        >
+          knots
+        </button>
+        <button
+          type="button"
+          data-unit-btn="ms"
+          class="rounded-md px-3 py-1.5 transition-colors text-body hover:text-ink"
+        >
+          m/s
+        </button>
+      </div>
+
+      <button
+        type="button"
+        data-btn-demo
+        class="btn-nav btn-nav-white border border-hairline px-3 py-1.5 text-xs font-medium"
+        title="Test gauge animation"
+      >
+        <span>{strings.btnDemo}</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Speedometer Gauge Viewport -->
+  <div class="relative flex flex-col items-center justify-center min-h-[420px] rounded-xl border border-hairline bg-canvas-soft/60 p-6 overflow-hidden">
+    <!-- Sensor Error Overlay (shown when device has no GPS / location sensor) -->
+    <div
+      data-gps-error-overlay
+      class="hidden absolute inset-0 z-30 flex flex-col items-center justify-center bg-canvas/95 backdrop-blur-md p-6 text-center"
+    >
+      <div class="max-w-md flex flex-col items-center gap-3">
+        <div class="flex h-14 w-14 items-center justify-center rounded-full bg-error/15 text-error shadow-card">
+          <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+        </div>
+        <div>
+          <h4 data-gps-error-title class="text-display-sm text-ink font-semibold">{strings.errTitle}</h4>
+          <p data-gps-error-desc class="text-sm text-body mt-2 leading-6">{strings.errDesc}</p>
+          <p class="text-xs text-mute mt-1.5">
+            {strings.errMobileHint}
+          </p>
+        </div>
+        <div class="flex flex-wrap items-center justify-center gap-2 mt-3">
+          <button
+            type="button"
+            data-btn-gps-try-demo
+            class="btn-primary text-xs h-9 px-4"
+          >{strings.btnTryDemo}</button>
+          <button
+            type="button"
+            data-btn-gps-copy-url
+            class="btn-nav btn-nav-white border border-hairline text-xs font-medium h-9 px-4"
+          >{strings.btnCopy}</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SVG Radial Arc Gauge -->
+    <div class="relative w-full max-w-[360px] aspect-square flex items-center justify-center">
+      <svg class="w-full h-full -rotate-90 select-none overflow-visible" viewBox="0 0 280 280">
+        <defs>
+          <linearGradient id="gaugeTrackGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#38bdf8" />
+            <stop offset="60%" stop-color="#10b981" />
+            <stop offset="100%" stop-color="#f59e0b" />
+          </linearGradient>
+          <filter id="needleGlow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
+        </defs>
+
+        <!-- Background Track Arc (240 degrees sweep from 150° to 390°) -->
+        <!-- Center (140, 140), Radius 110. Circumference = 2 * PI * 110 ≈ 691.15. 240 deg = (240/360)*691.15 ≈ 460.77 -->
+        <circle
+          cx="140"
+          cy="140"
+          r="110"
+          fill="none"
+          stroke="var(--color-hairline)"
+          stroke-width="12"
+          stroke-linecap="round"
+          stroke-dasharray="460.77 691.15"
+          stroke-dashoffset="0"
+          transform="rotate(150 140 140)"
+        />
+
+        <!-- Active Illuminated Arc -->
+        <circle
+          data-gauge-progress
+          cx="140"
+          cy="140"
+          r="110"
+          fill="none"
+          stroke="url(#gaugeTrackGradient)"
+          stroke-width="12"
+          stroke-linecap="round"
+          stroke-dasharray="460.77 691.15"
+          stroke-dashoffset="460.77"
+          transform="rotate(150 140 140)"
+          class="transition-all duration-300 ease-out"
+        />
+
+        <!-- Dial Center Hub -->
+        <circle cx="140" cy="140" r="14" fill="var(--color-canvas)" stroke="var(--color-hairline-strong)" stroke-width="2" />
+        <circle cx="140" cy="140" r="6" fill="var(--color-ink)" />
+
+        <!-- Gauge Needle (Points up in SVG space, rotated around 140, 140) -->
+        <g data-gauge-needle class="transition-transform duration-300 ease-out will-change-transform" style="transform: rotate(-120deg); transform-origin: 140px 140px;">
+          <line
+            x1="140"
+            y1="140"
+            x2="140"
+            y2="42"
+            stroke="var(--color-ink)"
+            stroke-width="3"
+            stroke-linecap="round"
+            filter="url(#needleGlow)"
+          />
+          <polygon points="137,44 143,44 140,32" fill="#ef4444" />
+        </g>
+      </svg>
+
+      <!-- Center Large Digital Speed HUD Overlay -->
+      <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none mt-10">
+        <span data-val-speed class="text-[5rem] sm:text-[5.5rem] font-bold font-mono tracking-tighter text-ink leading-none tabular-nums select-none">
+          0
+        </span>
+        <div class="flex items-center gap-1.5 mt-1">
+          <span data-label-unit class="text-sm font-semibold font-mono tracking-wider uppercase text-body px-2 py-0.5 rounded bg-canvas border border-hairline shadow-xs">
+            km/h
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Status / Accuracy Pill -->
+    <div class="mt-6 flex flex-wrap items-center justify-center gap-2">
+      <div
+        data-gps-status-badge
+        class="inline-flex items-center gap-2 rounded-full border border-hairline bg-canvas px-4 py-1.5 text-xs font-mono font-medium shadow-xs transition-colors"
+      >
+        <span data-status-dot class="h-2 w-2 rounded-full bg-amber-500 animate-pulse"></span>
+        <span data-status-text class="text-ink">{strings.statusSearching}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Real-Time Kinematics & Altimeter Cards -->
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+    <!-- Altitude above sea level -->
+    <div class="card-soft p-4">
+      <div class="flex items-center justify-between mb-1">
+        <p class="eyebrow">{strings.cardElevation}</p>
+        <span data-val-alt-acc class="text-[11px] font-mono text-mute">±0 m</span>
+      </div>
+      <p data-val-altitude class="text-display-md text-ink font-mono tabular-nums">—</p>
+      <p class="text-xs text-body mt-1">{strings.cardElevationDesc}</p>
+    </div>
+
+    <!-- Peak Speed -->
+    <div class="card-soft p-4">
+      <div class="flex items-center justify-between mb-1">
+        <p class="eyebrow">{strings.cardPeak}</p>
+        <span class="text-[11px] font-mono text-mute">{strings.cardPeakSub}</span>
+      </div>
+      <p data-val-max-speed class="text-display-md text-ink font-mono tabular-nums">0.0</p>
+      <p class="text-xs text-body mt-1">{strings.cardPeakDesc}</p>
+    </div>
+
+    <!-- Trip Odometer -->
+    <div class="card-soft p-4">
+      <div class="flex items-center justify-between mb-1">
+        <p class="eyebrow">{strings.cardTrip}</p>
+        <span class="text-[11px] font-mono text-mute">{strings.cardTripSub}</span>
+      </div>
+      <p data-val-distance class="text-display-md text-ink font-mono tabular-nums">0.00 km</p>
+      <p class="text-xs text-body mt-1">{strings.cardTripDesc}</p>
+    </div>
+
+    <!-- Trip Timer & Avg Speed -->
+    <div class="card-soft p-4">
+      <div class="flex items-center justify-between mb-1">
+        <p class="eyebrow">{strings.cardTime}</p>
+        <span data-val-avg-speed class="text-[11px] font-mono text-mute">avg: 0.0</span>
+      </div>
+      <p data-val-timer class="text-display-md text-ink font-mono tabular-nums">00:00:00</p>
+      <div class="flex items-center gap-2 mt-1">
+        <button type="button" data-btn-timer-toggle class="text-xs text-link font-medium hover:underline">{strings.btnPause}</button>
+        <span class="text-mute text-xs">·</span>
+        <button type="button" data-btn-trip-reset class="text-xs text-body hover:text-ink font-medium">{strings.btnReset}</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- GPS Coordinates & Heading Bar -->
+  <div class="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-hairline bg-canvas-soft/40 px-4 py-3 text-xs font-mono text-body">
+    <div class="flex items-center gap-2">
+      <span class="font-semibold text-ink">{strings.barCoords}:</span>
+      <span data-coords-text class="tabular-nums">{strings.barAcquiring}</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <span class="font-semibold text-ink">{strings.barHeading}:</span>
+      <span data-heading-text class="tabular-nums">—</span>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { haversine } from '../lib/geo.js';
+
+  (function initSpeedometer() {
+    const root = document.getElementById('speedometer-tool');
+    if (!root) return;
+
+    const strings = JSON.parse(root.dataset.strings || "{}");
+    const $ = (sel) => root.querySelector(sel);
+    const $$ = (sel) => root.querySelectorAll(sel);
+
+    // Elements
+    const gaugeNeedle = $('[data-gauge-needle]');
+    const gaugeProgress = $('[data-gauge-progress]');
+    const valSpeed = $('[data-val-speed]');
+    const labelUnit = $('[data-label-unit]');
+    const gpsIndicator = $('[data-gps-indicator]');
+    const statusDot = $('[data-status-dot]');
+    const statusText = $('[data-status-text]');
+    const valAltitude = $('[data-val-altitude]');
+    const valAltAcc = $('[data-val-alt-acc]');
+    const valMaxSpeed = $('[data-val-max-speed]');
+    const valDistance = $('[data-val-distance]');
+    const valAvgSpeed = $('[data-val-avg-speed]');
+    const valTimer = $('[data-val-timer]');
+    const btnTimerToggle = $('[data-btn-timer-toggle]');
+    const btnTripReset = $('[data-btn-trip-reset]');
+    const coordsText = $('[data-coords-text]');
+    const headingText = $('[data-heading-text]');
+    const btnDemo = $('[data-btn-demo]');
+
+    const gpsErrorOverlay = $('[data-gps-error-overlay]');
+    const btnGpsTryDemo = $('[data-btn-gps-try-demo]');
+    const btnGpsCopyUrl = $('[data-btn-gps-copy-url]');
+
+    // Unit settings: 'kmh' | 'mph' | 'knots' | 'ms'
+    let currentUnit = localStorage.getItem('speedometer_unit') || 'kmh';
+
+    // Unit conversions from m/s
+    const CONVERSIONS = {
+      kmh: { factor: 3.6, label: 'km/h', maxScale: 180, distLabel: 'km', distFactor: 0.001 },
+      mph: { factor: 2.23694, label: 'mph', maxScale: 120, distLabel: 'mi', distFactor: 0.000621371 },
+      knots: { factor: 1.94384, label: 'knots', maxScale: 100, distLabel: 'NM', distFactor: 0.000539957 },
+      ms: { factor: 1.0, label: 'm/s', maxScale: 50, distLabel: 'km', distFactor: 0.001 },
+    };
+
+    // State
+    let currentSpeedMs = 0;
+    let maxSpeedMs = 0;
+    let totalDistanceMeters = 0;
+    let lastPosition = null;
+    let watchId = null;
+
+    // Trip Timer State
+    let isTimerRunning = true;
+    let elapsedSeconds = 0;
+    let timerInterval = null;
+
+    // Demo animation state
+    let isDemoRunning = false;
+    let demoSpeed = 0;
+    let demoDirection = 1;
+
+    // ARC Geometry
+    const ARC_LENGTH = 460.77;
+
+    function showGpsError(title, desc) {
+      if (gpsErrorOverlay) gpsErrorOverlay.classList.remove('hidden');
+      if (title && $('[data-gps-error-title]')) $('[data-gps-error-title]').textContent = title;
+      if (desc && $('[data-gps-error-desc]')) $('[data-gps-error-desc]').textContent = desc;
+      if (gpsIndicator) gpsIndicator.className = 'inline-flex h-2.5 w-2.5 rounded-full bg-error';
+      if (statusDot) statusDot.className = 'h-2 w-2 rounded-full bg-error';
+      if (statusText) statusText.textContent = strings.statusNoGps || 'No GPS sensor detected for this tool';
+    }
+
+    btnGpsTryDemo?.addEventListener('click', () => {
+      if (gpsErrorOverlay) gpsErrorOverlay.classList.add('hidden');
+      btnDemo?.click();
+    });
+
+    btnGpsCopyUrl?.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        const orig = btnGpsCopyUrl.textContent;
+        btnGpsCopyUrl.textContent = strings.copied || 'Copied ✓';
+        setTimeout(() => (btnGpsCopyUrl.textContent = orig), 1800);
+      } catch (_) {}
+    });
+
+    function updateUnitUI() {
+      $$('[data-unit-btn]').forEach((btn) => {
+        const u = btn.dataset.unitBtn;
+        if (u === currentUnit) {
+          btn.className = 'rounded-md px-3 py-1.5 transition-colors bg-ink text-on-primary font-semibold shadow-xs';
+        } else {
+          btn.className = 'rounded-md px-3 py-1.5 transition-colors text-body hover:text-ink';
+        }
+      });
+      if (labelUnit) labelUnit.textContent = CONVERSIONS[currentUnit].label;
+      updateGauge(currentSpeedMs);
+      updateDistanceUI();
+      updateMaxSpeedUI();
+    }
+
+    $$('[data-unit-btn]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        currentUnit = btn.dataset.unitBtn;
+        localStorage.setItem('speedometer_unit', currentUnit);
+        updateUnitUI();
+      });
+    });
+
+    // Update gauge needle & progress arc
+    function updateGauge(speedMs) {
+      const cfg = CONVERSIONS[currentUnit];
+      const displaySpeed = Math.max(0, speedMs * cfg.factor);
+
+      if (valSpeed) {
+        valSpeed.textContent = displaySpeed < 100 ? displaySpeed.toFixed(displaySpeed < 10 ? 1 : 0) : Math.round(displaySpeed);
+      }
+
+      // Needle angle: sweeps 240 degrees from -120deg to +120deg
+      const fraction = Math.min(1, Math.max(0, displaySpeed / cfg.maxScale));
+      const needleDeg = -120 + fraction * 240;
+
+      if (gaugeNeedle) {
+        gaugeNeedle.style.transform = `rotate(${needleDeg.toFixed(1)}deg)`;
+      }
+
+      // Progress Arc dashoffset
+      if (gaugeProgress) {
+        const dashOffset = ARC_LENGTH * (1 - fraction);
+        gaugeProgress.style.strokeDashoffset = dashOffset.toFixed(1);
+      }
+    }
+
+    function updateMaxSpeedUI() {
+      if (!valMaxSpeed) return;
+      const cfg = CONVERSIONS[currentUnit];
+      valMaxSpeed.textContent = (maxSpeedMs * cfg.factor).toFixed(1);
+    }
+
+    function updateDistanceUI() {
+      if (!valDistance) return;
+      const cfg = CONVERSIONS[currentUnit];
+      const dist = totalDistanceMeters * cfg.distFactor;
+      valDistance.textContent = `${dist.toFixed(2)} ${cfg.distLabel}`;
+
+      if (valAvgSpeed) {
+        const avgMs = elapsedSeconds > 0 ? totalDistanceMeters / elapsedSeconds : 0;
+        valAvgSpeed.textContent = `avg: ${(avgMs * cfg.factor).toFixed(1)}`;
+      }
+    }
+
+    // Trip Timer
+    function startTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        if (!isTimerRunning) return;
+        elapsedSeconds++;
+        const hrs = String(Math.floor(elapsedSeconds / 3600)).padStart(2, '0');
+        const mins = String(Math.floor((elapsedSeconds % 3600) / 60)).padStart(2, '0');
+        const secs = String(elapsedSeconds % 60).padStart(2, '0');
+        if (valTimer) valTimer.textContent = `${hrs}:${mins}:${secs}`;
+        updateDistanceUI();
+      }, 1000);
+    }
+
+    btnTimerToggle?.addEventListener('click', () => {
+      isTimerRunning = !isTimerRunning;
+      if (btnTimerToggle) btnTimerToggle.textContent = isTimerRunning ? (strings.btnPause || 'Pause') : (strings.btnResume || 'Resume');
+    });
+
+    btnTripReset?.addEventListener('click', () => {
+      totalDistanceMeters = 0;
+      maxSpeedMs = 0;
+      elapsedSeconds = 0;
+      if (valTimer) valTimer.textContent = '00:00:00';
+      updateDistanceUI();
+      updateMaxSpeedUI();
+    });
+
+    // Handle Geolocation Position
+    function handlePosition(pos) {
+      if (isDemoRunning) return;
+      if (gpsErrorOverlay) gpsErrorOverlay.classList.add('hidden');
+      const coords = pos.coords;
+
+      // GPS Status & Accuracy
+      const acc = coords.accuracy || 0;
+      if (statusDot && statusText) {
+        if (gpsIndicator) gpsIndicator.className = 'inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse';
+        if (acc < 10) {
+          statusDot.className = 'h-2 w-2 rounded-full bg-emerald-500';
+          statusText.textContent = `${strings.statusLocked || 'GPS Locked'} (±${Math.round(acc)}m)`;
+        } else if (acc < 30) {
+          statusDot.className = 'h-2 w-2 rounded-full bg-amber-500';
+          statusText.textContent = `${strings.statusConnected || 'GPS Connected'} (±${Math.round(acc)}m)`;
+        } else {
+          statusDot.className = 'h-2 w-2 rounded-full bg-orange-500';
+          statusText.textContent = `${strings.statusLow || 'GPS Low Accuracy'} (±${Math.round(acc)}m)`;
+        }
+      }
+
+      // Speed calculation
+      let speed = coords.speed;
+      if (speed === null || speed === undefined || Number.isNaN(speed)) {
+        if (lastPosition && lastPosition.timestamp) {
+          const dt = (pos.timestamp - lastPosition.timestamp) / 1000;
+          if (dt > 0.5 && dt < 15) {
+            const d = haversine(
+              lastPosition.coords.latitude,
+              lastPosition.coords.longitude,
+              coords.latitude,
+              coords.longitude
+            ) * 1000;
+            if (d > 2 && d < 500) {
+              speed = d / dt;
+            } else {
+              speed = 0;
+            }
+          }
+        }
+      }
+
+      currentSpeedMs = Math.max(0, speed || 0);
+      if (currentSpeedMs > maxSpeedMs) {
+        maxSpeedMs = currentSpeedMs;
+        updateMaxSpeedUI();
+      }
+      updateGauge(currentSpeedMs);
+
+      // Odometer trip accumulation
+      if (lastPosition && isTimerRunning) {
+        const stepDist = haversine(
+          lastPosition.coords.latitude,
+          lastPosition.coords.longitude,
+          coords.latitude,
+          coords.longitude
+        ) * 1000;
+
+        if (stepDist > 3 && acc <= 35) {
+          totalDistanceMeters += stepDist;
+          updateDistanceUI();
+        }
+      }
+
+      lastPosition = pos;
+
+      // Altitude
+      if (coords.altitude !== null && coords.altitude !== undefined) {
+        const altMetric = coords.altitude;
+        const altAccMetric = coords.altitudeAccuracy || 0;
+        const isImperial = currentUnit === 'mph';
+        if (isImperial) {
+          const altFt = Math.round(altMetric * 3.28084);
+          const accFt = Math.round(altAccMetric * 3.28084);
+          if (valAltitude) valAltitude.textContent = `${altFt} ft`;
+          if (valAltAcc) valAltAcc.textContent = `±${accFt} ft`;
+        } else {
+          if (valAltitude) valAltitude.textContent = `${Math.round(altMetric)} m`;
+          if (valAltAcc) valAltAcc.textContent = `±${Math.round(altAccMetric)} m`;
+        }
+      } else {
+        if (valAltitude) valAltitude.textContent = '—';
+        if (valAltAcc) valAltAcc.textContent = strings.noLock || 'No 3D lock';
+      }
+
+      // Coordinates & Course Heading
+      if (coordsText) {
+        coordsText.textContent = `${coords.latitude.toFixed(5)}°, ${coords.longitude.toFixed(5)}°`;
+      }
+      if (headingText) {
+        if (coords.heading !== null && coords.heading !== undefined && !Number.isNaN(coords.heading)) {
+          headingText.textContent = `${Math.round(coords.heading)}°`;
+        } else {
+          headingText.textContent = strings.barStationary || 'Stationary';
+        }
+      }
+    }
+
+    function handleError(err) {
+      if (statusDot && statusText) {
+        statusDot.className = 'h-2 w-2 rounded-full bg-error';
+        if (gpsIndicator) gpsIndicator.className = 'inline-flex h-2.5 w-2.5 rounded-full bg-error';
+        if (err.code === 1) {
+          statusText.textContent = 'Location permission denied by user';
+          showGpsError(
+            'Location Permission Denied',
+            'Location permission was denied. The speedometer cannot measure speed without location access. Please enable location permissions for this site in your browser settings.'
+          );
+        } else if (err.code === 2) {
+          statusText.textContent = 'No GPS sensor detected or position unavailable';
+          showGpsError(
+            'No GPS sensor detected on this device',
+            'This device has no GPS or satellite location sensor for this tool. Real-time speed and altitude tracking require a hardware GPS/GNSS receiver.'
+          );
+        } else {
+          statusText.textContent = 'GPS connection timeout';
+        }
+      }
+    }
+
+    // Start geolocation watcher
+    if (navigator.geolocation) {
+      watchId = navigator.geolocation.watchPosition(handlePosition, handleError, {
+        enableHighAccuracy: true,
+        maximumAge: 1000,
+        timeout: 20000,
+      });
+    } else {
+      showGpsError(
+        'No GPS sensor detected on this device',
+        'This device has no sensor for this tool. Geolocation and satellite tracking are not supported on this browser or hardware.'
+      );
+    }
+
+    startTimer();
+    updateUnitUI();
+
+    // Demo Mode for testing and desktop evaluation
+    let demoInterval = null;
+    btnDemo?.addEventListener('click', () => {
+      isDemoRunning = !isDemoRunning;
+      if (isDemoRunning) {
+        if (gpsErrorOverlay) gpsErrorOverlay.classList.add('hidden');
+        btnDemo.classList.add('bg-ink', 'text-on-primary');
+        if (statusText) statusText.textContent = strings.statusDemo || 'Running Demo…';
+        if (statusDot) statusDot.className = 'h-2 w-2 rounded-full bg-cyan-400 animate-ping';
+        if (gpsIndicator) gpsIndicator.className = 'inline-flex h-2.5 w-2.5 rounded-full bg-cyan-400 animate-ping';
+        demoInterval = setInterval(() => {
+          demoSpeed += demoDirection * 1.5;
+          if (demoSpeed >= 38) demoDirection = -1; // ~136 km/h
+          if (demoSpeed <= 0) {
+            demoSpeed = 0;
+            demoDirection = 1;
+          }
+          currentSpeedMs = demoSpeed;
+          if (currentSpeedMs > maxSpeedMs) {
+            maxSpeedMs = currentSpeedMs;
+            updateMaxSpeedUI();
+          }
+          totalDistanceMeters += demoSpeed * 0.1;
+          updateGauge(demoSpeed);
+          updateDistanceUI();
+        }, 100);
+      } else {
+        btnDemo.classList.remove('bg-ink', 'text-on-primary');
+        clearInterval(demoInterval);
+        currentSpeedMs = 0;
+        updateGauge(0);
+        if (statusText) statusText.textContent = strings.statusDemoStopped || 'Demo stopped';
+        if (statusDot) statusDot.className = 'h-2 w-2 rounded-full bg-mute';
+        if (gpsIndicator) gpsIndicator.className = 'inline-flex h-2.5 w-2.5 rounded-full bg-mute';
+      }
+    });
+  })();
+</script>

@@ -1,0 +1,154 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Speedometer from '../components/Speedometer.astro';
+import PageHero from '../components/PageHero.astro';
+import RelatedTools from '../components/RelatedTools.astro';
+---
+
+<Layout
+	title="GPS Speedometer Online — Free Speed & Altitude Tracker"
+	description="Free online GPS speedometer and high-accuracy altimeter. Track real-time speed in km/h, mph, knots, or m/s, elevation above sea level, trip distance odometer, and peak speed directly in your browser."
+	path="/speedometer/"
+	keywords="gps speedometer online, online speedometer, altimeter online, real time speed tracker, elevation finder, bike speedometer, trip odometer"
+>
+	<PageHero
+		eyebrow="gps speedometer · altimeter"
+		title="Accurate speed and elevation on any device."
+		description="Measure your true ground speed and elevation above sea level using high-accuracy satellite positioning. Features multi-unit conversion, trip odometer, session peak speed, and an analog arc gauge."
+	>
+		<Speedometer />
+	</PageHero>
+
+	<!-- Highlights Grid -->
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-3">
+			<div>
+				<p class="eyebrow mb-2">true ground speed</p>
+				<p class="text-sm text-body leading-6">
+					Bypasses tire wear and vehicle speedometer inflation to calculate true kinematic velocity via GNSS satellite signals and Doppler shift.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">high-accuracy altimeter</p>
+				<p class="text-sm text-body leading-6">
+					Measures current elevation above mean sea level according to the WGS84 geodetic reference model with real-time vertical accuracy margins.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">integrated trip odometer</p>
+				<p class="text-sm text-body leading-6">
+					Tracks cumulative trip distance and average moving speed with built-in stationary jitter filters to eliminate false drift while stopped.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- Comprehensive SEO & Educational Guide -->
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">satellite kinematics & geodesy</p>
+			<h2 class="mt-3 text-display-lg text-ink">How Online GPS Speedometers and Altimeters Work</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				A <strong class="text-ink font-medium">GPS speedometer online</strong> is a browser-based utility that calculates real-time velocity and geographical elevation by communicating directly with the Global Navigation Satellite System (GNSS) hardware built into your mobile phone, tablet, or GPS-enabled laptop. Unlike vehicle mechanical instruments that measure driveshaft revolutions, GPS velocity measurement calculates true <strong class="text-ink font-medium">ground speed</strong> across Earth's surface.
+			</p>
+			<p class="mt-4 leading-7">
+				When you enable location tracking on this page, your device invokes the HTML5 Geolocation API with <code class="font-mono text-xs bg-canvas-soft px-1.5 py-0.5 rounded border border-hairline">enableHighAccuracy: true</code>. The underlying mobile operating system receives radio signals from constellations including GPS (USA), GLONASS (Russia), Galileo (European Union), and BeiDou (China). By computing the time of flight for radio signals traveling at the speed of light from at least four separate satellites, the receiver determines your 3D latitude, longitude, and elevation.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Why GPS Speed Differs from Your Car's Dashboard Speedometer</h3>
+			<p class="mt-3 leading-7">
+				Drivers frequently notice that a GPS speedometer reads 2 to 5 mph (3 to 8 km/h) slower than their vehicle's dashboard speedometer. There are two primary engineering reasons for this discrepancy:
+			</p>
+			<ul class="mt-4 space-y-3 pl-5 list-disc text-body text-sm leading-6">
+				<li>
+					<strong class="text-ink">Regulatory Calibration Standards:</strong> International automotive regulations (such as UNECE Regulation 39 in Europe and similar FMVSS rules in North America) legally mandate that vehicle speedometers must <em>never indicate a speed lower than the actual speed</em>, and may indicate up to 10% + 4 km/h higher than reality. Automakers intentionally calibrate factory speedometers to read slightly fast to avoid speeding liabilities.
+				</li>
+				<li>
+					<strong class="text-ink">Tire Wear and Inflation:</strong> Mechanical speedometers calculate speed by counting wheel revolutions. Underinflated tires, worn tire treads, or aftermarket wheels alter the outer rolling circumference of the tire, introducing errors into the vehicle's odometer and speedometer. GPS measurements are immune to wheel size and mechanical wear because they calculate velocity directly from spatial displacement.
+				</li>
+				<li>
+					<strong class="text-ink">Doppler Shift Velocity:</strong> Modern GNSS chipset architectures determine speed using the Doppler frequency shift of incoming satellite carrier waves (<span class="font-mono text-xs">L1 / L5 signals</span>). This provides near-instantaneous velocity updates with an accuracy margin typically within &plusmn;0.1 m/s (0.36 km/h) under clear skies.
+				</li>
+			</ul>
+
+			<h3 class="mt-10 text-display-sm text-ink">GPS Altimetry vs. Barometric Altimeters</h3>
+			<p class="mt-3 leading-7">
+				Measuring height above the ground is one of the most challenging aspects of satellite navigation. This tool reports altitude using the <strong class="text-ink font-medium">WGS84 ellipsoidal model</strong>:
+			</p>
+			<p class="mt-4 leading-7">
+				Because Earth is an oblate spheroid (flattened at the poles and bulging at the equator) rather than a perfect sphere, GPS receivers calculate elevation relative to a mathematical reference ellipsoid. While barometric altimeters in aircraft and hiking watches infer altitude changes from atmospheric pressure (which fluctuates constantly with weather systems and cold fronts), GPS elevation provides an absolute geometric altitude that does not drift when weather barometric pressure drops.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Speed Units Explained: When to Use Which</h3>
+			<div class="mt-4 grid gap-4 sm:grid-cols-2 text-sm text-body">
+				<div class="card-soft p-4">
+					<h4 class="font-semibold text-ink mb-1">km/h (Kilometres per Hour)</h4>
+					<p class="leading-5">The global international standard for road transit used throughout Europe, Asia, Latin America, Australia, and Africa. Ideal for driving, cycling, and train travel.</p>
+				</div>
+				<div class="card-soft p-4">
+					<h4 class="font-semibold text-ink mb-1">mph (Miles per Hour)</h4>
+					<p class="leading-5">Standard automotive speed unit in the United States, United Kingdom, and select territories. 1 mph equals approximately 1.60934 km/h.</p>
+				</div>
+				<div class="card-soft p-4">
+					<h4 class="font-semibold text-ink mb-1">knots (Nautical Miles per Hour)</h4>
+					<p class="leading-5">The universal maritime and aviation standard. One knot equals exactly 1 nautical mile (1,852 meters) per hour, corresponding to one minute of latitude on a marine navigational chart.</p>
+				</div>
+				<div class="card-soft p-4">
+					<h4 class="font-semibold text-ink mb-1">m/s (Metres per Second)</h4>
+					<p class="leading-5">The fundamental SI unit for physics, ballistics, meteorology (wind speed), and athletics (sprint velocity tracking).</p>
+				</div>
+			</div>
+
+			<h3 class="mt-10 text-display-sm text-ink">Trip Odometer & Stationary Jitter Filtering</h3>
+			<p class="mt-3 leading-7">
+				When a phone sits stationary on a table, minor atmospheric variations and multi-path satellite reflections can cause reported GPS coordinates to jitter slightly by 2 to 5 meters. Without filtering, this noise would falsely accumulate distance on a trip odometer while parked at a red light.
+			</p>
+			<p class="mt-4 leading-7">
+				Our custom odometer algorithm integrates a <strong class="text-ink font-medium">kinematic jitter filter</strong>: consecutive location fixes are only added to your cumulative trip odometer if your speed exceeds 0.3 m/s (approx. 1 km/h) and the step displacement exceeds the horizontal accuracy threshold. This ensures your recorded trip distance, peak speed, and average velocity accurately mirror real-world movement.
+			</p>
+
+			<!-- Comprehensive FAQ Section -->
+			<h3 class="mt-14 text-display-sm text-ink">Frequently Asked Questions</h3>
+			<div class="mt-6 space-y-6 text-sm divide-y divide-hairline">
+				<div class="pt-6 first:pt-0">
+					<h4 class="font-semibold text-ink text-base">How accurate is this browser GPS speedometer?</h4>
+					<p class="mt-2 text-body leading-6">
+						Under an open sky with a strong satellite lock (accuracy margin &lt; 5 meters), this web-based speedometer is typically accurate to within &plusmn;0.2 mph (0.3 km/h). In vehicles, on boats, or while cycling outdoors, it provides precision equivalent to dedicated handheld GPS navigation units.
+					</p>
+				</div>
+
+				<div class="pt-6">
+					<h4 class="font-semibold text-ink text-base">Why doesn't the speedometer work indoors or in tunnels?</h4>
+					<p class="mt-2 text-body leading-6">
+						GPS satellites orbit approximately 20,200 km above Earth and transmit relatively low-power radio signals that cannot penetrate thick concrete roofs, deep tunnels, or metal structures. For reliable readings, ensure your device has a direct line of sight to the sky, such as near a car windshield or outdoors.
+					</p>
+				</div>
+
+				<div class="pt-6">
+					<h4 class="font-semibold text-ink text-base">Does this speedometer drain my battery?</h4>
+					<p class="mt-2 text-body leading-6">
+						Operating your device's GNSS radio in continuous high-accuracy mode consumes more power than passive web browsing. If you are using the speedometer for long road trips, boat voyages, or cycling tours, keeping your phone plugged into a charger or power bank is recommended.
+					</p>
+				</div>
+
+				<div class="pt-6">
+					<h4 class="font-semibold text-ink text-base">Is my location data private and secure?</h4>
+					<p class="mt-2 text-body leading-6">
+						Yes, 100%. All geolocation coordinate parsing, velocity calculations, and trip odometer accumulations occur entirely client-side inside your browser engine. We never transmit, store, or log your coordinates or travel history to any remote server or third party.
+					</p>
+				</div>
+
+				<div class="pt-6">
+					<h4 class="font-semibold text-ink text-base">Can I use this tool offline as a PWA?</h4>
+					<p class="mt-2 text-body leading-6">
+						Yes! Our website works offline as an installable Progressive Web App (PWA). Once installed to your device's home screen, the application loads from local cache, and satellite positioning functions without active mobile data or Wi-Fi, making it ideal for offshore boating or off-grid mountain biking.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<RelatedTools current="/speedometer/" />
+</Layout>
+

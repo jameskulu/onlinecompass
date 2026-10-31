@@ -1,0 +1,50 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BubbleLevel from '../../components/BubbleLevel.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="Nível de Bolha Digital Online — Inclinômetro e Nível de Mão Grátis"
+	description="Nível de bolha digital e inclinômetro online gratuito. Meça inclinação, inclinação lateral (roll) e frontal (pitch) em tempo real com o giroscópio do celular. Calibração zero, modos circular e tubular."
+	path="/pt/level/"
+	keywords="nível de bolha digital, inclinômetro online, nível de mão grátis, medir ângulo celular"
+>
+	<PageHero
+		eyebrow="nível de bolha · inclinômetro"
+		title="Nivelamento de superfícies com precisão no navegador."
+		description="Transforme seu smartphone em um nível de bolha digital de alta precisão. Meça o nivelamento de mesas, prateleiras e bancadas com feedback tátil e calibração de zero."
+	>
+		<BubbleLevel />
+	</PageHero>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">nível de bolha · inclinômetro</p>
+			<h2 class="mt-3 text-display-lg text-ink">Como funcionam os níveis de bolha digitais e inclinômetros</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				O nível de bolha digital lê os sensores MEMS (acelerômetro de 3 eixos) do dispositivo móvel para determinar a orientação espacial em relação à gravidade terrestre.
+			</p>
+
+			<h3 class="mt-14 text-display-sm text-ink">FAQ</h3>
+			<div class="mt-6 space-y-6 text-sm divide-y divide-hairline">
+				<div class="pt-6 first:pt-0">
+					<h4 class="font-semibold text-ink text-base">Qual é a precisão do nível no celular?</h4>
+					<p class="mt-2 text-body leading-6">Acelerômetros modernos detectam variações de até 0,1 grau, oferecendo precisão comparável à de níveis de bolha físicos para carpintaria e bricolagem.</p>
+				</div>
+				<div class="pt-6">
+					<h4 class="font-semibold text-ink text-base">Por que o iOS pede permissão de sensores?</h4>
+					<p class="mt-2 text-body leading-6">O Safari no iOS exige consentimento explícito do usuário para acessar dados de movimento. Nenhuma informação pessoal é coletada.</p>
+				</div>
+				<div class="pt-6">
+					<h4 class="font-semibold text-ink text-base">Funciona sem internet (offline)?</h4>
+					<p class="mt-2 text-body leading-6">Sim! Como Progressive Web App (PWA), a ferramenta fica salva no cache do seu navegador e funciona normalmente sem conexão de rede.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<RelatedTools current="/level/" />
+</Layout>

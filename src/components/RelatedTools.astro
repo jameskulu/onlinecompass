@@ -10,23 +10,23 @@ const { current } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 
 const toolNames: Record<string, Record<string, string>> = {
-	en: { compass: 'Compass', location: 'Location', qibla: 'Qibla', bearing: 'Bearing', sun: 'Sun', sunmoon: 'Sun & Moon' },
-	es: { compass: 'Brújula', location: 'Ubicación', qibla: 'Qibla', bearing: 'Rumbo', sun: 'Sol', sunmoon: 'Sol y Luna' },
-	ja: { compass: 'コンパス', location: '位置情報', qibla: 'キブラ', bearing: '方位', sun: '太陽', sunmoon: '太陽と月' },
-	fr: { compass: 'Boussole', location: 'Position', qibla: 'Qibla', bearing: 'Cap', sun: 'Soleil', sunmoon: 'Soleil et Lune' },
-	de: { compass: 'Kompass', location: 'Standort', qibla: 'Qibla', bearing: 'Kurs', sun: 'Sonne', sunmoon: 'Sonne & Mond' },
-	pt: { compass: 'Bússola', location: 'Localização', qibla: 'Qibla', bearing: 'Rumbo', sun: 'Sol', sunmoon: 'Sol e Lua' },
-	ko: { compass: '나침반', location: '위치', qibla: '키블라', bearing: '방위각', sun: '태양', sunmoon: '태양과 달' },
-	it: { compass: 'Bussola', location: 'Posizione', qibla: 'Qibla', bearing: 'Rotta', sun: 'Sole', sunmoon: 'Sole e Luna' },
-	id: { compass: 'Kompas', location: 'Lokasi', qibla: 'Qibla', bearing: 'Arah', sun: 'Matahari', sunmoon: 'Matahari & Bulan' },
-	bn: { compass: 'কম্পাস', location: 'অবস্থান', qibla: 'কিবলা', bearing: 'বেয়ারিং', sun: 'সূর্য', sunmoon: 'সূর্য ও চাঁদ' },
-	tr: { compass: 'Pusula', location: 'Konum', qibla: 'Kıble', bearing: 'Yön', sun: 'Güneş', sunmoon: 'Güneş ve Ay' },
-	ur: { compass: 'کمپاس', location: 'مقام', qibla: 'قبلہ', bearing: 'ہدایت', sun: 'سورج', sunmoon: 'سورج اور چاند' },
-	ar: { compass: 'بوصلة', location: 'الموقع', qibla: 'القبلة', bearing: 'الاتجاه', sun: 'الشمس', sunmoon: 'الشمس والقمر' },
+	en: { compass: 'Compass', level: 'Bubble Level', speedometer: 'Speedometer', location: 'Location', qibla: 'Qibla', bearing: 'Bearing', sun: 'Sun', sunmoon: 'Sun & Moon' },
+	es: { compass: 'Brújula', level: 'Nivel de Burbuja', speedometer: 'Velocímetro', location: 'Ubicación', qibla: 'Qibla', bearing: 'Rumbo', sun: 'Sol', sunmoon: 'Sol y Luna' },
+	ja: { compass: 'コンパス', level: 'デジタル水準器、傾斜計、ピッチとロール。', speedometer: 'リアルタイムGPS速度、高度、トリップメーター。', level: '水準器', speedometer: 'スピードメーター', location: '位置情報', qibla: 'キブラ', bearing: '方位', sun: '太陽', sunmoon: '太陽と月' },
+	fr: { compass: 'Boussole', level: 'Niveau à bulle numérique, inclinomètre, tangage et roulis.', speedometer: 'Vitesse GPS en direct, altitude et odomètre de trajet.', level: 'Niveau à bulle', speedometer: 'Tachymètre', location: 'Position', qibla: 'Qibla', bearing: 'Cap', sun: 'Soleil', sunmoon: 'Soleil et Lune' },
+	de: { compass: 'Kompass', level: 'Digitale Wasserwaage, Neigungsmesser, Pitch & Roll.', speedometer: 'Echtzeit-GPS-Geschwindigkeit, Höhe und Tageskilometerzähler.', level: 'Wasserwaage', speedometer: 'Tachometer', location: 'Standort', qibla: 'Qibla', bearing: 'Kurs', sun: 'Sonne', sunmoon: 'Sonne & Mond' },
+	pt: { compass: 'Bússola', level: 'Nível de bolha digital, inclinômetro, inclinação lateral e frontal.', speedometer: 'Velocidade GPS em tempo real, altitude e hodômetro.', level: 'Nível de bolha', speedometer: 'Velocímetro', location: 'Localização', qibla: 'Qibla', bearing: 'Rumbo', sun: 'Sol', sunmoon: 'Sol e Lua' },
+	ko: { compass: '나침반', level: '디지털 수평계, 경사계, 피치 및 롤 각도.', speedometer: '실시간 GPS 속도, 고도 및 트립 거리.', level: '수평계', speedometer: '속도계', location: '위치', qibla: '키블라', bearing: '방위각', sun: '태양', sunmoon: '태양과 달' },
+	it: { compass: 'Bussola', level: 'Livella a bolla digitale, inclinometro, beccheggio e rollio.', speedometer: 'Velocità GPS in tempo reale, altitudine e contachilometri.', level: 'Livella a bolla', speedometer: 'Tachimetro', location: 'Posizione', qibla: 'Qibla', bearing: 'Rotta', sun: 'Sole', sunmoon: 'Sole e Luna' },
+	id: { compass: 'Kompas', level: 'Waterpass digital, inclinometer, pitch & roll.', speedometer: 'Kecepatan GPS real-time, elevasi, dan odometer trip.', level: 'Waterpass', speedometer: 'Speedometer', location: 'Lokasi', qibla: 'Qibla', bearing: 'Arah', sun: 'Matahari', sunmoon: 'Matahari & Bulan' },
+	bn: { compass: 'কম্পাস', level: 'ডিজিটাল বাবল লেভেল, ইনক্লিনোমিটার, পিচ ও রোল।', speedometer: 'রিয়েল-টাইম জিপিএস গতি, উচ্চতা ও দূরত্ব পরিমাপ।', level: 'বাবল লেভেল', speedometer: 'স্পিডোমিটার', location: 'অবস্থান', qibla: 'কিবলা', bearing: 'বেয়ারিং', sun: 'সূর্য', sunmoon: 'সূর্য ও চাঁদ' },
+	tr: { compass: 'Pusula', level: 'Dijital su terazisi, eğimölçer, yunuslama ve yuvarlanma.', speedometer: 'Canlı GPS hızı, rakım ve seyahat sayacı.', level: 'Su Terazisi', speedometer: 'Hız Göstergesi', location: 'Konum', qibla: 'Kıble', bearing: 'Yön', sun: 'Güneş', sunmoon: 'Güneş ve Ay' },
+	ur: { compass: 'کمپاس', level: 'ڈیجیٹل ببل لیول، انکلینومیٹر، پچ اور رول۔', speedometer: 'لائیو جی پی ایس اسپیڈ، بلندی اور اوڈومیٹر۔', level: 'ببل لیول', speedometer: 'اسپیڈومیٹر', location: 'مقام', qibla: 'قبلہ', bearing: 'ہدایت', sun: 'سورج', sunmoon: 'سورج اور چاند' },
+	ar: { compass: 'بوصلة', level: 'ميزان مائي رقمي ومقياس ميل وزوايا الانحدار.', speedometer: 'سرعة GPS في الوقت الفعلي والارتفاع وعداد المسافات.', level: 'ميزان مائي', speedometer: 'عداد السرعة', location: 'الموقع', qibla: 'القبلة', bearing: 'الاتجاه', sun: 'الشمس', sunmoon: 'الشمس والقمر' },
 };
 
 const toolDescs: Record<string, Record<string, string>> = {
-	en: { compass: 'Real-time heading, true & magnetic north.', location: 'GPS coordinates, altitude, and accuracy.', qibla: 'Direction and distance to Makkah.', bearing: 'Bearing between two coordinates.', sun: 'Azimuth, elevation, sunrise and sunset.', sunmoon: 'Sun and moon direction on the compass.' },
+	en: { compass: 'Real-time heading, true & magnetic north.', level: 'Digital spirit level, inclinometer, pitch & roll.', speedometer: 'Live GPS speed, elevation, and trip odometer.', location: 'GPS coordinates, altitude, and accuracy.', qibla: 'Direction and distance to Makkah.', bearing: 'Bearing between two coordinates.', sun: 'Azimuth, elevation, sunrise and sunset.', sunmoon: 'Sun and moon direction on the compass.' },
 	es: { compass: 'Rumbo en tiempo real, norte magnético y verdadero.', location: 'Coordenadas GPS, altitud y precisión.', qibla: 'Dirección y distancia a la Meca.', bearing: 'Rumbo entre dos coordenadas.', sun: 'Acimut, elevación, amanecer y atardecer.', sunmoon: 'Dirección del sol y la luna en la brújula.' },
 	ja: { compass: 'リアルタイム方位、真北と磁北。', location: 'GPS座標、標高、精度。', qibla: 'メッカへの方位と距離。', bearing: '2点間の方位。', sun: '方位角、高度、日の出と日没。', sunmoon: 'コンパス上の太陽と月の方向。' },
 	fr: { compass: 'Cap en temps réel, nord vrai et magnétique.', location: 'Coordonnées GPS, altitude et précision.', qibla: 'Direction et distance vers La Mecque.', bearing: 'Cap entre deux coordonnées.', sun: 'Azimut, élévation, lever et coucher du soleil.', sunmoon: 'Direction du soleil et de la lune sur la boussole.' },
@@ -46,6 +46,8 @@ const descs = toolDescs[lang] || toolDescs.en;
 
 const toolPaths: Record<string, string> = {
 	compass: '/',
+	level: '/level/',
+	speedometer: '/speedometer/',
 	location: '/location/',
 	qibla: '/qibla/',
 	bearing: '/bearing/',
@@ -55,6 +57,8 @@ const toolPaths: Record<string, string> = {
 
 const toolEntries = [
 	{ slug: 'compass', name: names.compass, desc: descs.compass },
+	{ slug: 'level', name: names.level || 'Bubble Level', desc: descs.level || 'Digital spirit level, inclinometer, pitch & roll.' },
+	{ slug: 'speedometer', name: names.speedometer || 'Speedometer', desc: descs.speedometer || 'Live GPS speed, elevation, and trip odometer.' },
 	{ slug: 'location', name: names.location, desc: descs.location },
 	{ slug: 'qibla', name: names.qibla, desc: descs.qibla },
 	{ slug: 'bearing', name: names.bearing, desc: descs.bearing },

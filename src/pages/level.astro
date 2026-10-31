@@ -1,0 +1,169 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BubbleLevel from '../components/BubbleLevel.astro';
+import PageHero from '../components/PageHero.astro';
+import RelatedTools from '../components/RelatedTools.astro';
+---
+
+<Layout
+	title="Digital Bubble Level Online — Free Spirit Level & Inclinometer"
+	description="Free online digital bubble level and spirit level inclinometer. Measure surface pitch, roll, and angle tilt in real time using your phone's gyroscope. Zero calibration, dual tubular & bullseye modes."
+	path="/level/"
+	keywords="digital bubble level, online spirit level, inclinometer online, surface level tool, phone bubble level, pitch and roll meter, angle tilt measurement"
+>
+	<PageHero
+		eyebrow="bubble level · inclinometer"
+		title="Precision surface leveling in your browser."
+		description="Turn your smartphone or tablet into a high-precision spirit level and inclinometer. Measure horizontal surface flatness and vertical edge tilt with visual alignment snapping, haptic feedback, and zero calibration."
+	>
+		<BubbleLevel />
+	</PageHero>
+
+	<!-- Quick Feature Callouts -->
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-3">
+			<div>
+				<p class="eyebrow mb-2">dual visual modes</p>
+				<p class="text-sm text-body leading-6">
+					Switch effortlessly between a circular bullseye level for 360° flat surface leveling and dual-axis tubular vials for vertical edge alignment and carpentry.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">zero calibration</p>
+				<p class="text-sm text-body leading-6">
+					Measure relative angles and slopes. Tap "Set Zero" to calibrate against any reference surface, countertop, or ramp for differential grade measurements.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">haptic & visual cues</p>
+				<p class="text-sm text-body leading-6">
+					The fluid bubble illuminates neon emerald and pulses when aligned within ±0.5° of true level, accompanied by a subtle tactile vibration pulse.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- Comprehensive SEO & Educational Guide -->
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">engineering & sensor science</p>
+			<h2 class="mt-3 text-display-lg text-ink">How Digital Bubble Levels and Inclinometers Work</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				A <strong class="text-ink font-medium">digital bubble level</strong> (also known as a digital spirit level or inclinometer) is an essential measurement tool designed to determine whether a surface is perfectly horizontal (level) or vertical (plumb). While traditional spirit levels rely on an alcohol-filled glass vial containing a buoyant air bubble, modern web-based inclinometers harness the micro-electro-mechanical systems (MEMS) sensors embedded within your mobile device to calculate spatial orientation with sub-degree accuracy.
+			</p>
+			<p class="mt-4 leading-7">
+				When you open this online spirit level on a smartphone or tablet, the browser queries the device's internal three-axis accelerometer and gyroscope via the W3C <code class="font-mono text-xs bg-canvas-soft px-1.5 py-0.5 rounded border border-hairline">DeviceOrientationEvent</code> API. By measuring the acceleration vector of Earth's gravity (<span class="font-mono text-sm">1g ≈ 9.80665 m/s²</span>) relative to the device chassis, our algorithm computes real-time angular displacement across all spatial axes.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">Understanding Pitch, Roll, and Compound Tilt Angle</h3>
+			<p class="mt-3 leading-7">
+				Orientation in three-dimensional space is mathematically described through Euler angles. When using a digital inclinometer, two primary rotational axes dictate surface levelness:
+			</p>
+			<ul class="mt-4 space-y-3 pl-5 list-disc text-body text-sm leading-6">
+				<li>
+					<strong class="text-ink">Pitch (Beta &beta;):</strong> The front-to-back tilt of the device around its lateral X-axis. Tilting the top edge of your phone upward yields a positive pitch angle, while tilting downward yields a negative angle.
+				</li>
+				<li>
+					<strong class="text-ink">Roll (Gamma &gamma;):</strong> The left-to-right tilt of the device around its longitudinal Y-axis. Tilting the device toward the right side produces a positive roll reading.
+				</li>
+				<li>
+					<strong class="text-ink">Compound Inclination Angle (&theta;):</strong> The true three-dimensional geometric tilt relative to the horizontal plane. While simple apps approximate tilt by adding pitch and roll, this tool calculates the exact 3D inclination vector using the spherical trigonometric formula:
+					<div class="my-3 p-3 rounded-lg bg-canvas-soft border border-hairline font-mono text-xs text-ink overflow-x-auto text-center">
+						&theta; = arccos( clamp( cos(&beta;) &times; cos(&gamma;), -1, 1 ) ) &times; (180 / &pi;)
+					</div>
+					This ensures mathematically precise readings regardless of how the phone is oriented on a table.
+				</li>
+				<li>
+					<strong class="text-ink">Slope Grade Percentage:</strong> Calculated as <span class="font-mono text-xs">tan(&theta;) &times; 100%</span>, grade indicates the rise over run, which is critical for civil engineering, ADA ramp compliance, plumbing drainage slopes, and roofing pitches.
+				</li>
+			</ul>
+
+			<h3 class="mt-10 text-display-sm text-ink">Bullseye Surface vs. Tubular Dual-Axis Leveling</h3>
+			<p class="mt-3 leading-7">
+				Different DIY and trade tasks require different visual representations:
+			</p>
+			<p class="mt-4 leading-7">
+				<strong class="text-ink font-medium">1. Circular Bullseye Level (Surface Mode):</strong> Modeled after precision circular spirit levels used in surveying tripods, turntable setups, and telescope mounts. Laying the phone flat on its back allows the 2D floating bubble to move in all 360 degrees simultaneously. The concentric rings represent 5°, 10°, and 15° deflection thresholds. When the compound tilt enters the center circle (within &plusmn;0.5°), the entire gauge snaps and glows emerald green, confirming a true planar balance.
+			</p>
+			<p class="mt-4 leading-7">
+				<strong class="text-ink font-medium">2. Tubular Dual-Axis Level (Edge & Plumb Mode):</strong> Modeled after classic carpenter's beam levels. This view displays isolated horizontal and vertical vials. It is ideal for placing the long edge of the phone against picture frames, kitchen shelves, wall studs, tiles, or door frames to ensure true horizontal alignment or vertical plumb.
+			</p>
+
+			<h3 class="mt-10 text-display-sm text-ink">How to Calibrate and Set a Relative Zero Baseline</h3>
+			<p class="mt-3 leading-7">
+				Modern smartphones often feature protruding camera bumps that prevent the phone from resting perfectly flat on a bare surface. To overcome this, our tool includes a dedicated <strong class="text-ink font-medium">Set Zero (Calibration)</strong> feature:
+			</p>
+			<ol class="mt-4 space-y-3 pl-5 list-decimal text-body text-sm leading-6">
+				<li>
+					<strong class="text-ink">Relative Slope Measurements:</strong> If you are installing a drainage pipe that requires a 2% slope relative to an existing concrete floor, place the phone on the floor, tap <em>"Set Zero"</em>, and then place it on the pipe. The level will display the exact angle relative to your base floor.
+				</li>
+				<li>
+					<strong class="text-ink">True Flatness Calibration:</strong> To eliminate camera bump bias on a flat table, place your phone down and observe the reading. Rotate the phone 180 degrees in place. The true level midpoint lies exactly halfway between the two readings. Setting zero on a known flat surface ensures pinpoint accuracy for all subsequent measurements.
+				</li>
+			</ol>
+
+			<h3 class="mt-10 text-display-sm text-ink">Practical Everyday Uses</h3>
+			<div class="mt-4 grid gap-4 sm:grid-cols-2 text-sm text-body">
+				<div class="card-soft p-4">
+					<h4 class="font-semibold text-ink mb-1">Home Improvement & DIY</h4>
+					<p class="leading-5">Hang artwork, mirrors, wall-mounted TVs, and shelving units without needing to fetch a bulky physical level from the garage.</p>
+				</div>
+				<div class="card-soft p-4">
+					<h4 class="font-semibold text-ink mb-1">RV & Campervan Leveling</h4>
+					<p class="leading-5">Place your phone on the camper floor or countertop while adjusting leveling blocks to ensure comfortable sleeping and proper refrigerator operation.</p>
+				</div>
+				<div class="card-soft p-4">
+					<h4 class="font-semibold text-ink mb-1">Turntable & Audio Calibration</h4>
+					<p class="leading-5">Level vinyl record player platters to minimize needle wear, prevent distortion, and ensure balanced stereo tracking force.</p>
+				</div>
+				<div class="card-soft p-4">
+					<h4 class="font-semibold text-ink mb-1">Appliance Installation</h4>
+					<p class="leading-5">Level washing machines, dryers, and dishwashers to prevent severe drum vibration, noise, and premature mechanical wear.</p>
+				</div>
+			</div>
+
+			<!-- Comprehensive FAQ Section -->
+			<h3 class="mt-14 text-display-sm text-ink">Frequently Asked Questions</h3>
+			<div class="mt-6 space-y-6 text-sm divide-y divide-hairline">
+				<div class="pt-6 first:pt-0">
+					<h4 class="font-semibold text-ink text-base">How accurate is a phone bubble level compared to a hardware spirit level?</h4>
+					<p class="mt-2 text-body leading-6">
+						Modern smartphone MEMS accelerometers are capable of resolving angular changes down to 0.1 degrees. In controlled tests, a properly calibrated phone spirit level matches or exceeds the visual readout precision of a standard 9-inch torpedo level. For long spans (such as framing a 10-foot wall), a 6-foot carpenter's level is still recommended to span surface irregularities, but for everyday tasks, your phone provides laboratory-grade inclinometry.
+					</p>
+				</div>
+
+				<div class="pt-6">
+					<h4 class="font-semibold text-ink text-base">Why does iOS ask for permission to use motion sensors?</h4>
+					<p class="mt-2 text-body leading-6">
+						Starting in iOS 13 and Safari 13, Apple introduced privacy safeguards requiring explicit user permission before websites can access accelerometer and gyroscope streams via <code class="font-mono text-xs bg-canvas-soft px-1 rounded">DeviceOrientationEvent.requestPermission()</code>. Tapping the "Enable Motion Sensors" button grants temporary permission for this session without storing or transmitting any personal data.
+					</p>
+				</div>
+
+				<div class="pt-6">
+					<h4 class="font-semibold text-ink text-base">What if my phone has a camera bump on the back?</h4>
+					<p class="mt-2 text-body leading-6">
+						Camera bumps can cause a 1° to 3° resting tilt if the phone is placed face-up. You can either: (1) place the phone face-down with the screen resting on a clean cloth or phone case, (2) use the long flat side edge of the phone in tubular mode, or (3) use the "Set Zero" calibration button on a known level surface to subtract out the camera bump offset.
+					</p>
+				</div>
+
+				<div class="pt-6">
+					<h4 class="font-semibold text-ink text-base">Does this online bubble level work offline?</h4>
+					<p class="mt-2 text-body leading-6">
+						Yes! Our website is fully configured as a Progressive Web App (PWA). Once you visit this page or install it to your home screen, all HTML, CSS, and mathematical sensor logic are cached locally by your browser's service worker, allowing you to use the level in remote areas, basements, or campgrounds without cell signal or Wi-Fi.
+					</p>
+				</div>
+
+				<div class="pt-6">
+					<h4 class="font-semibold text-ink text-base">Can I use this tool on a desktop computer?</h4>
+					<p class="mt-2 text-body leading-6">
+						Desktop PCs and laptops lack internal 3D motion accelerometers. When opened on a computer, our tool automatically detects the absence of hardware sensors and presents an interactive simulation panel with Pitch and Roll sliders, enabling you to test angle calculations, grade formulas, and visual leveling cues.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<RelatedTools current="/level/" />
+</Layout>
+

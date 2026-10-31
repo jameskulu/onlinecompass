@@ -1,0 +1,50 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BubbleLevel from '../../components/BubbleLevel.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="Nivel de burbuja digital en línea — Inclinómetro y nivel de gota gratis"
+	description="Nivel de burbuja digital e inclinómetro en línea gratis. Mide cabeceo, balanceo y ángulo de inclinación en tiempo real con el giroscopio de tu teléfono. Calibración a cero, modos tubular y circular."
+	path="/es/level/"
+	keywords="nivel de burbuja digital, inclinómetro en línea, nivel de agua gratis, medir inclinación teléfono, nivel torpedo digital"
+>
+	<PageHero
+		eyebrow="nivel de burbuja · inclinómetro"
+		title="Nivelación de precisión en tu navegador."
+		description="Convierte tu teléfono o tableta en un nivel de burbuja e inclinómetro de alta precisión. Mide la horizontalidad de superficies planas y la verticalidad de paredes y estantes."
+	>
+		<BubbleLevel />
+	</PageHero>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">nivel de burbuja · inclinómetro</p>
+			<h2 class="mt-3 text-display-lg text-ink">Cómo funcionan los niveles de burbuja digitales y los inclinómetros</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				Un nivel de burbuja digital (también conocido como inclinómetro o nivel de gota) es una herramienta de medición diseñada para determinar si una superficie está perfectamente horizontal (a nivel) o vertical (a plomo). Utiliza los sensores MEMS (acelerómetro y giroscopio) de tu dispositivo móvil para calcular la inclinación con precisión de décimas de grado.
+			</p>
+
+			<h3 class="mt-14 text-display-sm text-ink">FAQ</h3>
+			<div class="mt-6 space-y-6 text-sm divide-y divide-hairline">
+				<div class="pt-6 first:pt-0">
+					<h4 class="font-semibold text-ink text-base">¿Qué tan preciso es el nivel de burbuja del teléfono?</h4>
+					<p class="mt-2 text-body leading-6">Los acelerómetros MEMS de los smartphones modernos resuelven cambios angulares de hasta 0,1 grados. En pruebas controladas, un teléfono calibrado iguala o supera la precisión visual de un nivel de torpedo convencional.</p>
+				</div>
+				<div class="pt-6">
+					<h4 class="font-semibold text-ink text-base">¿Por qué iOS solicita permiso de sensores?</h4>
+					<p class="mt-2 text-body leading-6">En Safari para iOS se requiere el permiso del usuario para acceder a los datos de orientación mediante DeviceOrientationEvent. El acceso es local y nunca se comparte ningún dato.</p>
+				</div>
+				<div class="pt-6">
+					<h4 class="font-semibold text-ink text-base">¿Funciona sin conexión?</h4>
+					<p class="mt-2 text-body leading-6">Sí. Este sitio está configurado como una Progressive Web App (PWA) y se almacena en caché en tu navegador para funcionar sin internet ni cobertura móvil.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<RelatedTools current="/level/" />
+</Layout>

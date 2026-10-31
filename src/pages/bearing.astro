@@ -6,33 +6,37 @@ import RelatedTools from '../components/RelatedTools.astro';
 ---
 
 <Layout
-	title="Bearing Calculator Online — Direction & Distance Between Two Points"
-	description="Free online compass tool to calculate bearing and great-circle distance between two coordinates. Also shows Qibla direction, magnetic declination, and sun position from your location."
+	title="Bearing Calculator & Coordinate Converter Online — DD, DMS, UTM"
+	description="Free online bearing calculator and universal coordinate format converter. Compute great-circle distance and forward azimuth between points. Convert bi-directionally between Decimal Degrees (DD), DMS, UTM, and Plus Codes."
 	path="/bearing/"
-	keywords="online compass math, online compass geometry, bearing calculator, direction between two points, great-circle distance, bearing calculator online"
+	keywords="bearing calculator, coordinate converter, dd to dms, utm converter, great circle distance, forward azimuth, plus code converter, gps coordinates conversion"
 >
 	<PageHero
-		eyebrow="bearing calculator"
-		title="Plot a course, degree by degree."
-		description="Compute the initial bearing and great-circle distance between any two points on Earth — from your live location, manual coordinates, or a preset route."
+		eyebrow="bearing calculator · coordinate converter"
+		title="Plot courses and convert coordinates with ease."
+		description="Compute the initial and final bearing, great-circle distance, and visual directional course between any two points. Convert seamlessly between Decimal Degrees (DD), Degrees Minutes Seconds (DMS), UTM, and Google Plus Codes."
 	>
 		<BearingCalculator />
 	</PageHero>
 
 	<section class="border-t border-hairline bg-canvas">
-		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-2">
+		<div class="mx-auto max-w-[1200px] grid gap-6 px-4 py-16 sm:px-6 md:grid-cols-3">
 			<div>
-				<p class="eyebrow mb-2">initial vs final bearing</p>
+				<p class="eyebrow mb-2">geodesic navigation</p>
 				<p class="text-sm text-body leading-6">
-					This returns the initial bearing — the direction you set off in. On long routes the
-					bearing changes along the great circle, so mid-course corrections are normal.
+					Calculates the true great-circle course vector and distance with the Haversine spherical formula, including both initial departure heading and final arrival back azimuth.
 				</p>
 			</div>
 			<div>
-				<p class="eyebrow mb-2">use it with the compass</p>
+				<p class="eyebrow mb-2">universal coordinate converter</p>
 				<p class="text-sm text-body leading-6">
-					Take your computed bearing into the compass tool and steer until the heading matches.
-					Switch to true north for map-accurate steering.
+					Zero external API dependencies. Converts instantly between Decimal Degrees (DD), traditional Degrees Minutes Seconds (DMS), military UTM grid zones, and Open Location Codes.
+				</p>
+			</div>
+			<div>
+				<p class="eyebrow mb-2">departure telemetry</p>
+				<p class="text-sm text-body leading-6">
+					Provides instant local navigation telemetry from your point of origin, including local magnetic declination, Qibla alignment, and solar compass position.
 				</p>
 			</div>
 		</div>
@@ -40,85 +44,104 @@ import RelatedTools from '../components/RelatedTools.astro';
 
 	<section class="border-t border-hairline bg-canvas">
 		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
-			<p class="eyebrow">the bearing calculator</p>
-			<h2 class="mt-3 text-display-lg text-ink">Calculate bearing and distance between two points</h2>
+			<p class="eyebrow">geodetic principles & navigation math</p>
+			<h2 class="mt-3 text-display-lg text-ink">Great-Circle Bearings and Coordinate Systems Explained</h2>
 
 			<p class="mt-6 text-body-lg text-body">
-				A <strong class="text-ink font-medium">bearing calculator online</strong> finds the
-				direction and distance between any two points on Earth. Enter two sets of coordinates —
-				or use your live location for one end — and this tool returns the initial bearing in
-				degrees, the compass direction, and the great-circle distance in kilometres. It is the
-				essential <strong class="text-ink font-medium">online compass math</strong> tool for
-				navigation, route planning, surveying, and study.
+				Navigating across Earth's curved surface requires understanding two fundamental disciplines: <strong class="text-ink font-medium">geodetic coordinate representation</strong> and <strong class="text-ink font-medium">spherical trigonometry</strong>. This dual-purpose utility combines an industrial-grade Great-Circle Bearing Calculator with a Universal Coordinate Format Converter, allowing you to plot courses, convert map coordinates, and calculate geodesic vectors without installing specialized GIS software.
 			</p>
 			<p class="mt-4 leading-7">
-				The bearing is the angle measured clockwise from north to the direction you need to
-				travel: 0° is north, 90° east, 180° south, 270° west. A route from London to New York, for
-				example, starts with an initial bearing of about 288° — that is the compass direction you
-				point the nose of a plane or the bow of a ship at the moment you set off.
+				A <strong class="text-ink font-medium">bearing</strong> is the horizontal angle measured clockwise from True North (0°) to a destination waypoint: 90° corresponds to East, 180° to South, and 270° to West. For example, departing from London toward New York requires setting an initial compass course of approximately 288° (WNW).
 			</p>
 
-			<h3 class="mt-10 text-display-sm text-ink">Initial bearing vs final bearing</h3>
+			<h3 class="mt-10 text-display-sm text-ink">Initial Bearing vs. Final Bearing (Back Azimuth)</h3>
 			<p class="mt-3 leading-7">
-				Because Earth is a sphere, the <strong class="text-ink font-medium">direction between two
-				points</strong> is not a straight line on a map. The shortest route follows a great
-				circle, and along that route the bearing changes continuously. The "initial bearing" is
-				the direction at your starting point — the one you steer on first. On long routes the
-				bearing drifts as you go, which is why pilots and navigators use waypoints and
-				mid-course corrections. This calculator reports the initial bearing and also works out
-				the final bearing for arriving end of the great-circle path.
+				On a flat Mercator projection map, a straight line between two points represents a <strong class="text-ink font-medium">rhumb line</strong> (loxodrome) — a path of constant compass heading. However, because Earth is an oblate sphere, the shortest geometric path over the surface is a <strong class="text-ink font-medium">great-circle route</strong> (orthodrome).
 			</p>
 			<p class="mt-4 leading-7">
-				For short trips — a hike, a drive across a city, a walk between two map points — the
-				initial bearing is effectively the whole course. That makes this bearing calculator
-				online perfect for everyday planning as well as classroom geometry.
+				Along a great-circle route, the true compass heading changes continuously at every mile of travel. For this reason, marine navigators and airline pilots distinguish between two key vectors:
+			</p>
+			<ul class="mt-4 space-y-3 pl-5 list-disc text-body text-sm leading-6">
+				<li>
+					<strong class="text-ink">Initial Bearing (&alpha;₁):</strong> The forward azimuth at the moment of departure. This is the heading you steer when setting out from Point A. It is derived using spherical trigonometry:
+					<div class="my-3 p-3 rounded-lg bg-canvas-soft border border-hairline font-mono text-xs text-ink overflow-x-auto text-center">
+						&alpha;₁ = atan2( sin(&Delta;&lambda;) &times; cos(&phi;₂), cos(&phi;₁) &times; sin(&phi;₂) - sin(&phi;₁) &times; cos(&phi;₂) &times; cos(&Delta;&lambda;) )
+					</div>
+				</li>
+				<li>
+					<strong class="text-ink">Final Bearing (&alpha;₂):</strong> The heading of the great circle as it arrives at Point B. For transoceanic voyages, &alpha;₂ can differ from &alpha;₁ by tens of degrees. For example, a flight from London to New York begins at 288° and arrives at 231° (SW).
+				</li>
+				<li>
+					<strong class="text-ink">Back Azimuth:</strong> The exact reverse heading pointing from Point B back toward Point A, calculated as <span class="font-mono text-xs">(Initial Bearing + 180°) mod 360°</span>.
+				</li>
+			</ul>
+
+			<h3 class="mt-10 text-display-sm text-ink">Universal Coordinate Formats: DD, DMS, UTM, and Plus Codes</h3>
+			<p class="mt-3 leading-7">
+				Different mapping disciplines and industries employ distinct coordinate notation systems. Our built-in format converter translates bi-directionally across the four most prominent standards:
 			</p>
 
-			<h3 class="mt-10 text-display-sm text-ink">Distance the way a navigator measures it</h3>
-			<p class="mt-3 leading-7">
-				Alongside the bearing you get the great-circle distance — the shortest distance over
-				Earth's surface between the two points, calculated with the haversine formula. Unlike a
-				ruler on a flat map, this accounts for the planet's curvature, so the result matches real
-				travel distances. It is the same calculation used for flight planning and maritime
-				navigation.
-			</p>
-			<p class="mt-4 leading-7">
-				The tool goes further than a plain calculator. Choose a destination from the preset list
-				— including major world cities and the Kaaba in Mecca — and it computes the summary
-				("New York is 245° WSW from London, 5,570 km away") plus four extra readouts from point A:
-				the <a href="/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">Qibla direction</a>,
-				magnetic declination, and
-				<a href="/sun/" class="text-link underline decoration-link/30 hover:decoration-link">sun position</a>.
-				One entry, and you see how your compass, Qibla, and solar data line up with your route.
-			</p>
+			<div class="mt-4 space-y-4 text-sm text-body">
+				<div class="card-soft p-4">
+					<h4 class="font-semibold text-ink text-base">1. Decimal Degrees (DD) — e.g. 40.712800°, -74.006000°</h4>
+					<p class="mt-1 leading-6">
+						The modern digital standard used by web map APIs (Google Maps, Leaflet, Mapbox) and GPS receivers. North and East are represented by positive values; South and West are represented by negative values. Six decimal places provide pinpoint resolution down to approximately 11 centimeters.
+					</p>
+				</div>
 
-			<h3 class="mt-10 text-display-sm text-ink">Use the bearing with a compass</h3>
-			<p class="mt-3 leading-7">
-				The natural companion to this tool is the
-				<a href="/" class="text-link underline decoration-link/30 hover:decoration-link">online compass</a>.
-				Calculate your bearing, open the compass, and turn until your heading matches. Switch the
-				compass to true north so your steering lines up with map north — and let the compass
-				apply your location's declination automatically. The combination turns a number on a
-				page into a course you can actually walk, sail, or drive.
-			</p>
-			<p class="mt-4 leading-7">
-				This bearing calculator online is useful for route planning before a hike, aligning
-				antennae and solar panels, estimating travel between two addresses, double-checking a
-				compass course, or verifying homework. Because everything runs locally in your browser,
-				it is a private, free online compass geometry tool you can trust anywhere — no
-				installations, no accounts, no data collection.
-			</p>
+				<div class="card-soft p-4">
+					<h4 class="font-semibold text-ink text-base">2. Degrees Minutes Seconds (DMS) — e.g. 40° 42' 46.1" N, 74° 0' 21.6" W</h4>
+					<p class="mt-1 leading-6">
+						The traditional astronomical and maritime format dating back to ancient sexagesimal geometry. One degree equals 60 arcminutes (1 minute of latitude ≈ 1 nautical mile ≈ 1.852 km); one arcminute equals 60 arcseconds (1 second ≈ 30.8 meters). Widely used in nautical charts, military firing tables, and topographical land deeds.
+					</p>
+				</div>
 
-			<h3 class="mt-10 text-display-sm text-ink">Degrees, directions, and planning</h3>
-			<p class="mt-3 leading-7">
-				Bearings read in degrees are precise but abstract; that is why the tool also converts them
-				into plain compass directions. 45° becomes NE, 200° becomes SSW, and so on — so you can
-				answer questions like "which way do I need to head?" in the same language a compass or
-				map speaks. Enter your live position as point A and a destination as point B, and the
-				whole picture — bearing, direction, distance, Qibla, declination, and sun — updates
-				instantly. That is the power of an online compass math tool built around your actual
-				coordinates.
-			</p>
+				<div class="card-soft p-4">
+					<h4 class="font-semibold text-ink text-base">3. Universal Transverse Mercator (UTM) — e.g. 18T 583959m E 4507351m N</h4>
+					<p class="mt-1 leading-6">
+						A metric grid projection that divides Earth into 60 longitudinal zones, each 6 degrees wide, using the WGS84 datum. Positions are expressed as linear meters of <em>Easting</em> (relative to a 500,000m central meridian) and <em>Northing</em> (distance from the equator). Because UTM uses standard meters rather than angular degrees, it is the primary standard for search and rescue (SAR), wilderness orienteering, forestry, and military tactical operations.
+					</p>
+				</div>
+
+				<div class="card-soft p-4">
+					<h4 class="font-semibold text-ink text-base">4. Google Plus Codes (Open Location Code / OLC) — e.g. 87G8P2X7+9P</h4>
+					<p class="mt-1 leading-6">
+						A free, open-source geocoding system developed by Google that converts latitude and longitude into concise alphanumeric strings. Plus Codes function as digital street addresses for rural settlements, remote islands, hiking trails, and disaster relief zones lacking conventional postal addresses.
+					</p>
+				</div>
+			</div>
+
+			<!-- Comprehensive FAQ Section -->
+			<h3 class="mt-14 text-display-sm text-ink">Frequently Asked Questions</h3>
+			<div class="mt-6 space-y-6 text-sm divide-y divide-hairline">
+				<div class="pt-6 first:pt-0">
+					<h4 class="font-semibold text-ink text-base">How do I convert between Decimal Degrees and DMS manually?</h4>
+					<p class="mt-2 text-body leading-6">
+						To convert DMS to Decimal: divide seconds by 3,600, divide minutes by 60, and add them to the whole degrees: <span class="font-mono text-xs">Degrees + (Minutes / 60) + (Seconds / 3600)</span>. For South latitude or West longitude, make the resulting number negative. To convert Decimal to DMS: the whole number is the degree; multiply the remaining decimal fraction by 60 to get minutes; multiply that remaining fraction by 60 to get seconds. Our online converter automates this instantly.
+					</p>
+				</div>
+
+				<div class="pt-6">
+					<h4 class="font-semibold text-ink text-base">What is the difference between Haversine distance and map distance?</h4>
+					<p class="mt-2 text-body leading-6">
+						Measuring distance with a ruler on a flat paper map introduces severe scale distortions (the Greenland problem on Mercator projections). The <strong class="text-ink font-medium">Haversine formula</strong> applies spherical trigonometry across Earth's mean volumetric radius (6,371.0088 km) to compute true great-circle surface distance, matching real-world airline flight miles.
+					</p>
+				</div>
+
+				<div class="pt-6">
+					<h4 class="font-semibold text-ink text-base">How do I steer with the calculated bearing using my compass?</h4>
+					<p class="mt-2 text-body leading-6">
+						Calculate the initial bearing between your departure point and destination. Next, open our <a href="/" class="text-link underline">online digital compass</a>. If your compass is set to True North, rotate yourself until the red lubber heading indicator matches your calculated bearing number. If steering with a magnetic compass, apply the magnetic declination offset displayed in the telemetry panel.
+					</p>
+				</div>
+
+				<div class="pt-6">
+					<h4 class="font-semibold text-ink text-base">Are coordinate conversions performed on a server?</h4>
+					<p class="mt-2 text-body leading-6">
+						No. All mathematical transformations — including the Redfearn series equations for UTM forward and inverse projection, Plus Code base-20 encoding, and spherical geodesics — execute 100% client-side in your browser's JavaScript engine. Your coordinates are never sent across the internet, ensuring total privacy.
+					</p>
+				</div>
+			</div>
 		</div>
 	</section>
 

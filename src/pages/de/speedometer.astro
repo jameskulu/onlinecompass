@@ -1,0 +1,50 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Speedometer from '../../components/Speedometer.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="GPS-Tachometer online — Kostenloser Geschwindigkeitsmesser & Höhenmesser"
+	description="Kostenloser Online-GPS-Tachometer und präziser Höhenmesser. Echtzeit-Geschwindigkeit in km/h, mph, Knoten oder m/s, Meereshöhe, Tageskilometerzähler und Höchstgeschwindigkeit im Browser."
+	path="/de/speedometer/"
+	keywords="gps tachometer online, geschwindigkeitsmesser online, höhenmesser kostenlos, echtzeit geschwindigkeit kmh, tageskilometerzähler"
+>
+	<PageHero
+		eyebrow="gps-tachometer · höhenmesser"
+		title="Echte Geschwindigkeit und Höhe auf jedem Gerät."
+		description="Messen Sie Ihre reale Geschwindigkeit über Grund und Höhe über dem Meeresspiegel via Satellitenortung mit Einheitenwahl und digitalem Tagesstreckenzähler."
+	>
+		<Speedometer />
+	</PageHero>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">gps-tachometer · höhenmesser</p>
+			<h2 class="mt-3 text-display-lg text-ink">So funktionieren Online-GPS-Tachometer und Höhenmesser</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				Ein GPS-Tachometer ermittelt Ihre reale Geschwindigkeit über Grund (Ground Speed) durch Doppler-Frequenzverschiebung der Satellitensignale, unabhängig von Reifengröße oder Tacho-Vorlauf des Fahrzeugs.
+			</p>
+
+			<h3 class="mt-14 text-display-sm text-ink">FAQ</h3>
+			<div class="mt-6 space-y-6 text-sm divide-y divide-hairline">
+				<div class="pt-6 first:pt-0">
+					<h4 class="font-semibold text-ink text-base">Warum zeigt der Autotacho mehr an als das GPS?</h4>
+					<p class="mt-2 text-body leading-6">Gesetzliche Vorgaben wie die ECE-Regelung 39 schreiben vor, dass Kfz-Tachometer niemals zu wenig anzeigen dürfen, weshalb Automobilhersteller sie bewusst 2 bis 5 km/h vorgehen lassen.</p>
+				</div>
+				<div class="pt-6">
+					<h4 class="font-semibold text-ink text-base">Funktioniert der Tacho in Tunneln oder Gebäuden?</h4>
+					<p class="mt-2 text-body leading-6">GPS-Signale aus dem Weltall erfordern freie Sicht zum Himmel und können dicke Betondecken oder Bergtunnel nicht durchdringen.</p>
+				</div>
+				<div class="pt-6">
+					<h4 class="font-semibold text-ink text-base">Sind meine Standortdaten geschützt?</h4>
+					<p class="mt-2 text-body leading-6">Ja, zu 100 %. Alle Berechnungen laufen lokal in Ihrem Browser ab. Es werden keinerlei Geodaten an Server übertragen.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<RelatedTools current="/speedometer/" />
+</Layout>

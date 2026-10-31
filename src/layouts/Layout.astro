@@ -33,9 +33,11 @@ const isActive = (href: string) =>
 
 const navLinks = [
 	{ href: localizePath(lang, '/'), label: t('nav.compass') },
+	{ href: localizePath(lang, '/level/'), label: t('nav.level') },
+	{ href: localizePath(lang, '/speedometer/'), label: t('nav.speedometer') },
+	{ href: localizePath(lang, '/bearing/'), label: t('nav.bearing') },
 	{ href: localizePath(lang, '/location/'), label: t('nav.location') },
 	{ href: localizePath(lang, '/qibla/'), label: t('nav.qibla') },
-	{ href: localizePath(lang, '/bearing/'), label: t('nav.bearing') },
 	{ href: localizePath(lang, '/sun/'), label: t('nav.sun') },
 	{ href: localizePath(lang, '/sun-moon/'), label: t('nav.sunmoon') },
 	{ href: '/blog/', label: t('nav.blog') },
@@ -181,7 +183,7 @@ const ogLocaleMap: Record<string, string> = {
 						<a
 							href={l.href}
 							class:list={[
-								'whitespace-nowrap rounded-full px-3 py-1.5 text-sm transition-colors',
+								'whitespace-nowrap rounded-full px-2.5 py-1 text-xs lg:text-sm lg:px-3 lg:py-1.5 transition-colors',
 								isActive(l.href)
 									? 'bg-ink text-on-primary'
 									: 'text-body hover:text-ink hover:bg-canvas-soft-2',
@@ -193,9 +195,7 @@ const ogLocaleMap: Record<string, string> = {
 				</div>
 
 				<div class="flex items-center gap-1.5">
-					<div class="hidden md:block">
-						<LanguagePicker />
-					</div>
+					<LanguagePicker variant="header" />
 
 					<button
 						data-theme-toggle
@@ -269,7 +269,7 @@ const ogLocaleMap: Record<string, string> = {
 						</button>
 					</div>
 					<div class="mt-3 border-t border-hairline pt-3">
-						<LanguagePicker />
+						<LanguagePicker variant="menu" />
 					</div>
 				</div>
 			</div>
@@ -300,6 +300,8 @@ const ogLocaleMap: Record<string, string> = {
 				<p class="eyebrow mb-3">{t('footer.tools')}</p>
 				<ul class="space-y-2 text-sm">
 					<li><a class="text-body hover:text-ink transition-colors" href={localizePath(lang, '/')}>{t('footer.compass')}</a></li>
+					<li><a class="text-body hover:text-ink transition-colors" href={localizePath(lang, '/level/')}>{t('footer.level')}</a></li>
+					<li><a class="text-body hover:text-ink transition-colors" href={localizePath(lang, '/speedometer/')}>{t('footer.speedometer')}</a></li>
 					<li><a class="text-body hover:text-ink transition-colors" href={localizePath(lang, '/location/')}>{t('footer.location')}</a></li>
 					<li><a class="text-body hover:text-ink transition-colors" href={localizePath(lang, '/qibla/')}>{t('footer.qibla')}</a></li>
 					<li><a class="text-body hover:text-ink transition-colors" href={localizePath(lang, '/bearing/')}>{t('footer.bearing')}</a></li>

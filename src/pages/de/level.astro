@@ -1,0 +1,50 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BubbleLevel from '../../components/BubbleLevel.astro';
+import PageHero from '../../components/PageHero.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+---
+
+<Layout
+	title="Digitale Wasserwaage online — Kostenloser Neigungsmesser & Inklinometer"
+	description="Kostenlose digitale Wasserwaage und Neigungsmesser im Browser. Neigung, Steigung und Kippwinkel in Echtzeit mit Gyroskopsensoren messen. Nullpunkt-Kalibrierung, Dosen- und Röhrenlibelle."
+	path="/de/level/"
+	keywords="digitale wasserwaage online, neigungsmesser kostenlos, inklinometer smartphone, winkelmessung online"
+>
+	<PageHero
+		eyebrow="wasserwaage · neigungsmesser"
+		title="Präzises Nivellieren direkt im Browser."
+		description="Verwandeln Sie Ihr Smartphone oder Tablet in eine hochpräzise digitale Wasserwaage. Messen Sie ebene Flächen und senkrechte Kanten mit haptischem Feedback und Null-Kalibrierung."
+	>
+		<BubbleLevel />
+	</PageHero>
+
+	<section class="border-t border-hairline bg-canvas">
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
+			<p class="eyebrow">wasserwaage · neigungsmesser</p>
+			<h2 class="mt-3 text-display-lg text-ink">Funktionsweise digitaler Wasserwaagen und Neigungsmesser</h2>
+
+			<p class="mt-6 text-body-lg text-body">
+				Eine digitale Wasserwaage nutzt die integrierten MEMS-Beschleunigungssensoren Ihres Smartphones, um die Neigungswinkel Neigung (Pitch) und Rollung (Roll) bezüglich des Erdschwerefelds zu ermitteln.
+			</p>
+
+			<h3 class="mt-14 text-display-sm text-ink">FAQ</h3>
+			<div class="mt-6 space-y-6 text-sm divide-y divide-hairline">
+				<div class="pt-6 first:pt-0">
+					<h4 class="font-semibold text-ink text-base">Wie genau ist die Wasserwaage auf dem Handy?</h4>
+					<p class="mt-2 text-body leading-6">Moderne MEMS-Sensoren in Smartphones erfassen Winkeländerungen bis auf 0,1 Grad genau und reichen für Heimwerker- und Montagearbeiten vollkommen aus.</p>
+				</div>
+				<div class="pt-6">
+					<h4 class="font-semibold text-ink text-base">Warum verlangt iOS eine Sensorfreigabe?</h4>
+					<p class="mt-2 text-body leading-6">Apple Safari verlangt aus Datenschutzgründen eine explizite Genehmigung vor dem Auslesen von Bewegungs- und Orientierungssensoren.</p>
+				</div>
+				<div class="pt-6">
+					<h4 class="font-semibold text-ink text-base">Funktioniert das Tool auch offline?</h4>
+					<p class="mt-2 text-body leading-6">Ja, als Progressive Web App (PWA) wird die Anwendung im Browser zwischengespeichert und funktioniert auch ohne Internetverbindung im Freien.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<RelatedTools current="/level/" />
+</Layout>
