@@ -4,650 +4,767 @@ import Compass from '../../components/Compass.astro';
 
 const faq = [
 	{
-		q: 'Qu\'est-ce qu\'une boussole en ligne ?',
-		a: 'Une boussole en ligne est une boussole numérique qui s\'exécute dans votre navigateur web plutôt que comme une application distincte. Elle lit le magnétomètre, l\'accéléromètre et le gyroscope de votre téléphone et les transforme en un cap en direct en degrés — sans aucun téléchargement. Vous ouvrez une page comme celle-ci, accordez l\'accès aux capteurs, et le cadran se met à jour en temps réel à mesure que vous tournez.',
+		"q": "Qu'est-ce qu'une boussole numérique en ligne et comment fonctionne-t-elle dans un navigateur ?",
+		"a": "Une boussole numérique en ligne est une application web qui accède directement aux capteurs physiques MEMS (magnétomètre, accéléromètre et gyroscope) de votre appareil via l'API DeviceOrientation du W3C. Elle effectue une compensation d'inclinaison trigonométrique en temps réel en JavaScript pour délivrer un cap précis de 0° à 360° sans installation d'application."
 	},
 	{
-		q: 'Comment utiliser une boussole en ligne sur mon téléphone ?',
-		a: 'Ouvrez cette page sur votre téléphone, appuyez sur « Activer la boussole en direct » et maintenez l\'appareil à plat dans votre paume. Le cap apparaît sous le cadran en degrés et sous forme de point de boussole. Pour des résultats plus précis, décrivez un mouvement en huit pour calibrer le magnétomètre et tenez le téléphone à l\'écart des métaux et des aimants.',
+		"q": "Quelle est la différence entre le nord vrai et le nord magnétique ?",
+		"a": "Le nord vrai pointe le long de l'axe de rotation de la Terre vers le pôle Nord géographique où convergent les méridiens. Le nord magnétique est le point mouvant de l'Arctique où les lignes du champ géomagnétique pénètrent verticalement dans le globe. L'écart angulaire entre les deux est la déclinaison magnétique."
 	},
 	{
-		q: 'Une boussole en ligne est-elle précise ?',
-		a: 'Une boussole de téléphone calibrée est généralement précise à environ 1 à 5 degrés en extérieur. Le magnétomètre lui-même est sensible, et le métal, l\'électronique ou une coque magnétique à proximité peuvent le fausser. Une fois calibré et éloigné des interférences, les relevés concordent habituellement avec une boussole physique à quelques degrés près.',
+		"q": "Qu'est-ce que la déclinaison magnétique et pourquoi est-elle indispensable pour naviguer ?",
+		"a": "La déclinaison magnétique est l'angle horizontal entre le nord magnétique et le nord vrai à vos coordonnées. À New York, elle est d'environ −13° Ouest ; à Los Angeles, +12° Est. Notre boussole intègre le modèle WMM de la NOAA pour corriger automatiquement ce décalage et caler votre cap sur les cartes topographiques."
 	},
 	{
-		q: 'Quelle est la différence entre le nord vrai et le nord magnétique ?',
-		a: 'Le nord magnétique est la direction que pointe le magnétomètre de votre téléphone — il suit le champ magnétique terrestre, qui se déplace chaque année. Le nord vrai est le pôle Nord géographique utilisé par les cartes. L\'angle entre les deux s\'appelle la déclinaison magnétique, et cet outil la corrige automatiquement pour que votre cap s\'aligne sur une carte.',
+		"q": "Comment calibrer la boussole de mon smartphone pour une précision maximale ?",
+		"a": "Tenez votre smartphone à plat et tracez un huit (∞) fluide et continu dans l'espace pendant 5 à 10 secondes. Ce geste expose le magnétomètre triaxial au champ terrestre sous tous les angles, permettant au filtre de fusion d'annuler les perturbations magnétiques internes fer doux et fer dur de l'appareil."
 	},
 	{
-		q: 'Qu\'est-ce que la déclinaison magnétique ?',
-		a: 'La déclinaison magnétique est l\'angle entre le nord magnétique et le nord vrai à un endroit donné. Elle va d\'environ −30° à +30° à travers le monde et évolue lentement avec le temps. À Londres, elle est proche de zéro, tandis que dans certaines régions du Canada, elle peut dépasser 15°. Comme elle varie selon le lieu, une correction de déclinaison précise est importante chaque fois que vous suivez un relèvement.',
+		"q": "Pourquoi l'aiguille de ma boussole sautille-t-elle ou tourne-t-elle de façon instable ?",
+		"a": "Des relevés erratiques indiquent la présence d'interférences électromagnétiques à proximité. Éloignez-vous d'au moins deux mètres des objets métalliques, coques MagSafe ou magnétiques, ordinateurs portables, fers à béton et tableaux de bord de voiture, puis répétez le calibrage en huit."
 	},
 	{
-		q: 'Pourquoi l\'aiguille de ma boussole saute-t-elle ou tourne-t-elle sans cesse ?',
-		a: 'Un magnétomètre est un instrument sensible. Les coques de téléphone aimantées, les enceintes, les ordinateurs portables, les tables métalliques, les tableaux de bord de voiture et les bâtiments à charpente en acier courbent tous le champ magnétique autour de vous. Éloignez-vous-en, tenez le téléphone à plat et décrivez un huit pour recalibrer. Quelques degrés de mouvement en intérieur sont normaux.',
+		"q": "Quelle est la précision d'une boussole de smartphone face à une boussole de plaquette ?",
+		"a": "Une fois calibré et hors perturbations métalliques, le magnétomètre MEMS d'un smartphone atteint une précision de ±1° à ±3° en extérieur, égalant les boussoles récréatives à bain d'huile. Les smartphones offrent en prime la compensation d'inclinaison et la correction du nord vrai, bien que les boussoles mécaniques restent la réserve infaillible en haute montagne."
 	},
 	{
-		q: 'Comment calibrer la boussole de mon téléphone ?',
-		a: 'Tenez le téléphone à plat, puis faites-le tourner lentement en décrivant un huit plusieurs fois, en gardant l\'écran vers le haut. Cela donne au magnétomètre une gamme complète de relevés pour se calibrer. Terminez en restant immobile une seconde. Répétez dès que le cap semble instable.',
+		"q": "Cette boussole en ligne fonctionne-t-elle hors ligne et en mode avion ?",
+		"a": "Oui. L'application est conçue comme une Progressive Web App (PWA) fonctionnant en priorité hors ligne. Tout le code et les tables géomagnétiques sont mis en cache dans le Service Worker de votre navigateur. Une fois chargée, elle reste pleinement opérationnelle en pleine nature sans réseau ni Wi-Fi."
 	},
 	{
-		q: 'Une boussole en ligne fonctionne-t-elle hors ligne, et sur un ordinateur portable ?',
-		a: 'Le cadran continue de fonctionner hors ligne une fois la page chargée, car le cap est généré sur votre appareil. Un ordinateur portable ou de bureau ne fonctionnera toutefois pas pour les caps en direct — la plupart n\'ont pas de magnétomètre, il n\'y a donc rien à lire. Utilisez un téléphone ou une tablette ; un ordinateur affiche tout de même le cadran de démonstration ainsi que les données du soleil et de la lune.',
+		"q": "Pourquoi la boussole affiche-t-elle un cadran de démonstration sur ordinateur portable ?",
+		"a": "Le calcul du cap en temps réel nécessite un composant physique magnétomètre. Alors que les smartphones et tablettes en sont dotés, les ordinateurs portables et de bureau en sont dépourvus. Sur ordinateur, l'application présente un simulateur interactif accompagné des utilitaires d'orientation solaire et géodésique."
 	},
 	{
-		q: 'Une boussole en ligne demande-t-elle ma position, et est-elle privée ?',
-		a: 'La position est facultative et ne sert qu\'à calculer la déclinaison magnétique, le cap de la Qibla et la position du soleil. Tous les calculs s\'exécutent localement dans votre navigateur — aucun compte, aucun serveur et aucune analyse. Vos coordonnées ne quittent jamais votre appareil, et vous pouvez toujours saisir les coordonnées manuellement.',
+		"q": "Comment le chercheur de Qibla calcule-t-il la direction exacte vers La Mecque ?",
+		"a": "L'outil résout l'azimut géodésique de grand cercle (orthodromie) depuis vos coordonnées vers la Kaaba à La Mecque (21° 25' 21\" N, 39° 49' 34\" E) par la loi trigonométrique des cosinus sphériques. Un marqueur vert émeraude sur le cadran vous guide pour vous orienter avec précision."
 	},
 	{
-		q: 'Puis-je utiliser une boussole en ligne pour trouver la Qibla ?',
-		a: 'Oui. Le trouvateur de Qibla utilise vos coordonnées pour calculer le cap du grand cercle vers la Kaaba à La Mecque, précis au degré près, ainsi que la distance. Vous pouvez ensuite suivre ce cap sur le cadran de la boussole en direct pour vous tourner vers elle.',
-	},
-	{
-		q: 'Comment trouver le nord sans boussole ?',
-		a: 'Dans l\'hémisphère nord, le soleil est plein sud à midi solaire local, il projette donc des ombres pointant vers le nord. La nuit, l\'étoile Polaire se trouve presque exactement au-dessus du nord vrai. L\'outil de position du soleil de ce site donne l\'azimut solaire exact pour votre emplacement et votre heure, un recoupement fiable pour toute boussole.',
-	},
-	{
-		q: 'Dois-je installer une application pour utiliser cette boussole ?',
-		a: 'Non. Tout s\'exécute dans le navigateur, il n\'y a donc rien à télécharger, pas de boutique d\'applications, pas d\'inscription et aucune mise à jour à gérer. Cela fonctionne de la même façon sur iPhone, Android et la plupart des tablettes.',
-	},
-	{
-		q: 'Cette boussole en ligne est-elle gratuite ?',
-		a: 'Oui, elle est entièrement gratuite et ne comporte ni formules premium ni paywalls. Chaque outil du site — boussole, coordonnées GPS, trouvateur de Qibla, calculateur de relèvement, position du soleil, ainsi que direction du soleil et de la lune — est gratuit à utiliser.',
-	},
-	{
-		q: 'Dans quelle direction ma maison ou ma fenêtre est-elle orientée ?',
-		a: 'Placez-vous à la fenêtre en regardant vers l\'extérieur, tenez votre téléphone à plat et lisez le cap. Le nord correspond à 0°, l\'est à 90°, le sud à 180° et l\'ouest à 270°. Les jardiniers s\'en servent pour planifier l\'ensoleillement, et les photographes pour prévoir où le soleil se lève et se couche.',
-	},
-	{
-		q: 'Où trouver une boussole en ligne dans Google ?',
-		a: 'Google Maps affiche une petite boussole en haut à droite de la carte, mais pour un cap en direct en degrés, cherchez simplement « boussole en ligne » sur Google et ouvrez cette page — elle devient une boussole dès que vous accordez l\'accès aux capteurs.',
-	},
+		"q": "Vers quelle direction ma maison, mon balcon ou mon jardin est-il orienté ?",
+		"a": "Placez-vous face à votre fenêtre ou porte extérieure en tenant votre téléphone à plat. Une lecture entre 315° et 45° indique une exposition Nord. L'exposition Sud (135°–225°) garantit un ensoleillement optimal toute l'année, l'Est capte la lumière du matin et l'Ouest les rayons chauds de l'après-midi."
+	}
 ];
 
 const declinationExamples = [
-	{ place: 'Londres, Royaume-Uni', value: '≈ 0°' },
-	{ place: 'Paris, France', value: '≈ +1° est' },
-	{ place: 'New York, États-Unis', value: '≈ −13° ouest' },
-	{ place: 'Toronto, Canada', value: '≈ −11° ouest' },
-	{ place: 'Los Angeles, États-Unis', value: '≈ +12° est' },
-	{ place: 'Anchorage, États-Unis', value: '≈ +15° est' },
-	{ place: 'Sydney, Australie', value: '≈ +12° est' },
-	{ place: 'São Paulo, Brésil', value: '≈ −23° ouest' },
-	{ place: 'Le Cap, Afrique du Sud', value: '≈ −25° ouest' },
-	{ place: 'Tokyo, Japon', value: '≈ −8° ouest' },
+	{
+		"place": "Londres, Royaume-Uni",
+		"value": "≈ +0.2° Est",
+		"impact": "Divergence cartographique négligeable"
+	},
+	{
+		"place": "New York, États-Unis",
+		"value": "≈ −12.8° Ouest",
+		"impact": "Élevé : 225 m de décalage par kilomètre"
+	},
+	{
+		"place": "Los Angeles, États-Unis",
+		"value": "≈ +11.6° Est",
+		"impact": "Élevé : 205 m de décalage par kilomètre"
+	},
+	{
+		"place": "Sydney, Australie",
+		"value": "≈ +12.5° Est",
+		"impact": "Forte déviation vers l'est"
+	},
+	{
+		"place": "Le Cap, Afrique du Sud",
+		"value": "≈ −25.4° Ouest",
+		"impact": "Extrême : 450 m de décalage par kilomètre"
+	},
+	{
+		"place": "Tokyo, Japon",
+		"value": "≈ −8.2° Ouest",
+		"impact": "Correction constante vers l'ouest"
+	}
 ];
 
 const compassRose = [
-	{ point: 'N', deg: '0°' },
-	{ point: 'NNE', deg: '22.5°' },
-	{ point: 'NE', deg: '45°' },
-	{ point: 'ENE', deg: '67.5°' },
-	{ point: 'E', deg: '90°' },
-	{ point: 'ESE', deg: '112.5°' },
-	{ point: 'SE', deg: '135°' },
-	{ point: 'SSE', deg: '157.5°' },
-	{ point: 'S', deg: '180°' },
-	{ point: 'SSW', deg: '202.5°' },
-	{ point: 'SW', deg: '225°' },
-	{ point: 'WSW', deg: '247.5°' },
-	{ point: 'W', deg: '270°' },
-	{ point: 'WNW', deg: '292.5°' },
-	{ point: 'NW', deg: '315°' },
-	{ point: 'NNW', deg: '337.5°' },
+	{
+		"point": "N",
+		"deg": "0.0°",
+		"name": "Nord",
+		"quadrant": "Cardinal"
+	},
+	{
+		"point": "NNE",
+		"deg": "22.5°",
+		"name": "Nord-Nord-Est",
+		"quadrant": "Intercardinal secondaire"
+	},
+	{
+		"point": "NE",
+		"deg": "45.0°",
+		"name": "Nord-Est",
+		"quadrant": "Intercardinal"
+	},
+	{
+		"point": "ENE",
+		"deg": "67.5°",
+		"name": "Est-Nord-Est",
+		"quadrant": "Intercardinal secondaire"
+	},
+	{
+		"point": "E",
+		"deg": "90.0°",
+		"name": "Est",
+		"quadrant": "Cardinal"
+	},
+	{
+		"point": "ESE",
+		"deg": "112.5°",
+		"name": "Est-Sud-Est",
+		"quadrant": "Intercardinal secondaire"
+	},
+	{
+		"point": "SE",
+		"deg": "135.0°",
+		"name": "Sud-Est",
+		"quadrant": "Intercardinal"
+	},
+	{
+		"point": "SSE",
+		"deg": "157.5°",
+		"name": "Sud-Sud-Est",
+		"quadrant": "Intercardinal secondaire"
+	},
+	{
+		"point": "S",
+		"deg": "180.0°",
+		"name": "Sud",
+		"quadrant": "Cardinal"
+	},
+	{
+		"point": "SSW",
+		"deg": "202.5°",
+		"name": "Sud-Sud-Ouest",
+		"quadrant": "Intercardinal secondaire"
+	},
+	{
+		"point": "SW",
+		"deg": "225.0°",
+		"name": "Sud-Ouest",
+		"quadrant": "Intercardinal"
+	},
+	{
+		"point": "WSW",
+		"deg": "247.5°",
+		"name": "Ouest-Sud-Ouest",
+		"quadrant": "Intercardinal secondaire"
+	},
+	{
+		"point": "W",
+		"deg": "270.0°",
+		"name": "Ouest",
+		"quadrant": "Cardinal"
+	},
+	{
+		"point": "WNW",
+		"deg": "292.5°",
+		"name": "Ouest-Nord-Ouest",
+		"quadrant": "Intercardinal secondaire"
+	},
+	{
+		"point": "NW",
+		"deg": "315.0°",
+		"name": "Nord-Ouest",
+		"quadrant": "Intercardinal"
+	},
+	{
+		"point": "NNW",
+		"deg": "337.5°",
+		"name": "Nord-Nord-Ouest",
+		"quadrant": "Intercardinal secondaire"
+	}
 ];
 
-const compassTypes = [
+const compassTechComparison = [
 	{
-		type: 'Boussole magnétique traditionnelle',
-		measures: 'Le champ magnétique terrestre avec une aiguille flottante',
-		best: 'Fiabilité hors ligne, zéro pile, enseignement',
-		limitation: 'Nécessite une surface plane, pas de correction de déclinaison, capteur unique',
+		"tech": "Boussole Navigateur MEMS (Fusion de Capteurs)",
+		"operatingPrinciple": "Magnétomètre triaxial à effet Hall fusionné avec accéléromètre et gyroscope de vitesse",
+		"accuracy": "±1.0° à ±2.5° (compensation d'inclinaison et correction de déclinaison automatiques)",
+		"advantages": "Sans téléchargement, alignement automatique sur carte, affichage tête haute nuit, Qibla et coordonnées",
+		"limitations": "Nécessite un composant magnétomètre matériel ; sensible aux masses métalliques proches"
 	},
 	{
-		type: 'Boussole à capteurs de téléphone (ce site)',
-		measures: 'Magnétomètre fusionné avec accéléromètre et gyroscope',
-		best: 'Cap en direct en degrés, compensation d\'inclinaison, alignement sur la carte',
-		limitation: 'Sensible aux métaux et aimants à proximité',
+		"tech": "Boussole Magnétique Traditionnelle à Bain d'Huile",
+		"operatingPrinciple": "Aiguille en acier aimanté suspendue dans un liquide alignée sur les lignes de flux magnétique",
+		"accuracy": "±2.0° à ±5.0° (selon l'amortissement du fluide et la mise à niveau manuelle)",
+		"advantages": "Zéro pile nécessaire, insensibilité absolue aux anomalies logicielles",
+		"limitations": "Pointe uniquement le nord magnétique ; nécessite un calcul manuel ; formation de bulles en altitude"
 	},
 	{
-		type: 'Boussole de cap GPS',
-		measures: 'Direction de déplacement à partir des changements de position GPS',
-		best: 'Navigation en mouvement, fonctionne sans magnétomètre',
-		limitation: 'Ne fonctionne qu\'en déplacement ; inutile à l\'arrêt',
+		"tech": "Compas Cinématique Satellite GPS (COG)",
+		"operatingPrinciple": "Décalage Doppler des micro-ondes porteuses et vecteurs de positionnement GNSS séquentiels",
+		"accuracy": "±0.5° à ±1.0° (en déplacement continu supérieur à 3 km/h)",
+		"advantages": "Insensible aux interférences magnétiques de coque métallique et gisements de minerai",
+		"limitations": "Totalement inopérant à l'arrêt ; perte de signal en tunnel ou canopée forestière dense"
 	},
 	{
-		type: 'Gyrocompas',
-		measures: 'La rotation de la Terre avec des gyroscopes à rotation rapide',
-		best: 'Navires et aéronefs, insensible aux champs magnétiques',
-		limitation: 'Encombrant, coûteux, long à se stabiliser',
-	},
+		"tech": "Gyrocompas Maritime et Aéronautique",
+		"operatingPrinciple": "Précession de gyroscopes électriques ultra-rapides asservis à l'axe de rotation terrestre",
+		"accuracy": "±0.1° à ±0.3° (référence géographique vraie pure)",
+		"advantages": "Indique directement le Nord Vrai sans aucune déviation magnétique à bord des navires en acier",
+		"limitations": "Poids élevé, requiert une alimentation électrique continue et plusieurs heures de stabilisation"
+	}
 ];
 ---
 
 <Layout
 	path="/fr/"
-	title="Boussole en ligne — Outil Gratuit pour Trouver le Nord"
-	description="Boussole en ligne gratuite pour trouver le nord depuis votre emplacement. Cap en direct avec nord vrai et magnétique, déclinaison, trouvateur de Qibla, calculateur de cap et position du soleil — sans installation, fonctionne sur tout téléphone."
-	keywords="boussole en ligne, outil boussole en ligne, boussole en ligne gratuite, boussole en ligne google, boussole en ligne gratuite, boussole en ligne pour trouver le nord, direction boussole en ligne, boussole en ligne géométrie, boussole en ligne mathématiques, boussole en ligne qibla, boussole en ligne en direct"
+	title="Boussole en Ligne — Navigation Géodésique, Niveau à Bulle & Tachymètre GPS"
+	description="Boussole numérique gratuite de haute précision avec nord vrai et magnétique, déclinaison WMM, niveau à bulle, tachymètre GPS et recherche de Qibla."
+	keywords="boussole en ligne, boussole numérique gratuite, nord vrai vs magnétique, déclinaison magnétique, niveau à bulle en ligne, tachymètre gps en ligne, calcul relèvement, direction qibla"
 >
-	<!-- ─── Hero ───────────────────────────────────────────── -->
+	<!-- ─── Hero Section ───────────────────────────────────── -->
 	<section id="compass" class="relative overflow-hidden">
 		<div class="mesh-gradient" aria-hidden="true"></div>
-		<div class="relative mx-auto max-w-[1200px] px-4 pt-12 pb-20 text-center sm:px-6 md:pt-20 md:pb-28">
+		<div class="relative mx-auto max-w-[1200px] px-4 pt-12 pb-16 text-center sm:px-6 md:pt-20 md:pb-24">
 			<Compass />
 			<div class="mx-auto mt-10 max-w-3xl md:mt-14">
-				<div class="badge mx-auto">gratuit · privé · sans installation</div>
+				<div class="badge mx-auto">navigateur web · zéro installation · privé & prêt hors ligne</div>
 
-				<h1 class="mx-auto mt-6 max-w-3xl text-[36px] leading-[40px] text-ink sm:text-display-xl md:text-[56px] md:leading-[56px]">Une boussole qui pointe vers le nord vrai, pas seulement le magnétique.</h1>
+				<h1 class="mx-auto mt-6 max-w-4xl text-[34px] leading-[40px] font-bold text-ink sm:text-display-xl md:text-[54px] md:leading-[60px]">
+					Navigation Géodésique & Orientation de Précision dans votre Navigateur.
+				</h1>
 
-				<p class="mx-auto mt-4 max-w-xl text-body-lg text-body">Cap de l'appareil en temps réel avec déclinaison automatique, coordonnées GPS, direction Qibla
-				et position du soleil — tout dans votre navigateur. Rien à installer, rien à envoyer.</p>
+				<p class="mx-auto mt-4 max-w-2xl text-body-lg text-body">
+					Cap en direct avec déclinaison magnétique WMM automatique, télémétrie GPS, azimut de Qibla et éphémérides solaires et lunaires. Sans téléchargement, sans pistage et avec architecture PWA hors ligne.
+				</p>
 
 				<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
-					<a href="/fr/location/" class="btn-primary">Me localiser</a>
-					<a href="/fr/compass/" class="btn-secondary">Ouvrir la boussole</a>
+					<a href="#engineering" class="btn-primary">Architecture des Capteurs</a>
+					<a href="/fr/compass/" class="btn-secondary">Ouvrir la Boussole Plein Écran</a>
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<!-- ─── Bandeau de fonctionnalités ─────────────────────── -->
+	<!-- ─── Feature Highlights Strip ───────────────────────── -->
 	<section class="border-y border-hairline bg-canvas">
-		<div
-			class="mx-auto grid max-w-[1200px] grid-cols-1 gap-px overflow-hidden px-4 py-12 sm:grid-cols-3 sm:px-6"
-		>
+		<div class="mx-auto grid max-w-[1200px] grid-cols-1 gap-px overflow-hidden px-4 py-12 sm:grid-cols-3 sm:px-6">
 			<div class="p-4">
-				<p class="eyebrow mb-2">vrai vs magnétique</p>
+				<p class="eyebrow mb-2">nord vrai vs magnétique</p>
 				<p class="text-sm text-body leading-6">
-					La déclinaison est calculée automatiquement à partir du Modèle Magnétique Mondial —
-					visualisez les deux caps en un coup d'œil.
+					Déclinaison calculée en temps réel via le modèle magnétique mondial NOAA/BGS pour faire coïncider votre cap avec les cartes topographiques partout sur le globe.
 				</p>
 			</div>
 			<div class="p-4">
-				<p class="eyebrow mb-2">confidentialité d'abord</p>
+				<p class="eyebrow mb-2">100% confidentialité sur l'appareil</p>
 				<p class="text-sm text-body leading-6">
-					Tout le traitement des capteurs se fait sur l'appareil. Aucun compte, aucune traque, et rien
-					ne quitte jamais votre navigateur.
+					Toute la fusion de capteurs, le calibrage magnétomètre et les calculs géodésiques s'exécutent localement dans le moteur JavaScript. Aucun compte, aucun cookie, aucun suivi serveur.
 				</p>
 			</div>
 			<div class="p-4">
-				<p class="eyebrow mb-2">fonctionne partout</p>
+				<p class="eyebrow mb-2">pwa utilisable hors ligne</p>
 				<p class="text-sm text-body leading-6">
-					Chrome, Safari et Firefox sur iOS et Android, avec un repli sur le cap GPS lorsque vous
-					vous déplacez.
+					S'installe directement sur votre écran d'accueil via le cache Service Worker. La boussole, l'inclinomètre et les convertisseurs fonctionnent sans réseau mobile en pleine nature.
 				</p>
 			</div>
 		</div>
 	</section>
 
-	<!-- ─── Grille d'outils ────────────────────────────────── -->
+	<!-- ─── Complete Navigation Toolkit Grid (All 8 Tools) ─── -->
 	<section id="tools" class="scroll-mt-16">
 		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
-			<p class="eyebrow">la boîte à outils</p>
-			<h2 class="mt-3 max-w-2xl text-display-lg text-ink">
-				Une boussole, tous les caps dont vous aurez besoin.
+			<p class="eyebrow">la suite complète de navigation</p>
+			<h2 class="mt-3 max-w-3xl text-display-lg text-ink">
+				Huit Outils Géodésiques Dédiés. Une Plateforme Unifiée.
 			</h2>
-			<p class="mt-3 max-w-xl text-body-lg text-body">
-				Six outils spécialisés, chacun sur sa propre page, tous fonctionnant localement sur votre appareil.
+			<p class="mt-3 max-w-2xl text-body-lg text-body">
+				Chaque outil est optimisé pour une exécution immédiate dans le navigateur, sans dépendance externe, avec une latence minimale et une précision algorithmique professionnelle.
 			</p>
 
-			<div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-				<a href="/fr/compass/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
-					<p class="eyebrow mb-2">boussole</p>
-					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Cap en direct</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						Cadran 360° en temps réel avec aiguille fluide, nord magnétique et vrai, et retour
-						d'exactitude en direct.
-					</p>
+			<div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+				<!-- Tool 1: Digital Compass -->
+				<a href="/fr/compass/" class="card-lg group p-6 transition-shadow hover:shadow-modal flex flex-col justify-between">
+					<div>
+						<div class="flex items-center justify-between mb-3">
+							<span class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-hairline bg-canvas-soft text-ink group-hover:border-ink transition-colors">
+								<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+									<circle cx="12" cy="12" r="10"></circle>
+									<polygon points="12 4 15 12 12 20 9 12" fill="currentColor"></polygon>
+								</svg>
+							</span>
+							<span class="eyebrow">boussole</span>
+						</div>
+						<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Boussole Numérique</h3>
+						<p class="mt-2 text-xs text-body leading-5">
+							Cadran 360° réactif avec aiguille fluide, affichage des degrés en temps réel, 16 points cardinaux, compensation d'inclinaison et bascule nord vrai.
+						</p>
+					</div>
+					<span class="mt-4 text-xs font-medium text-link group-hover:underline">Lancer la boussole →</span>
 				</a>
-				<a href="/fr/location/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
-					<p class="eyebrow mb-2">position</p>
-					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Coordonnées GPS</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						Latitude, longitude, altitude et précision en format décimal et DMS — avec
-						copie, partage et ouverture dans Google Maps.
-					</p>
+
+				<!-- Tool 2: Bubble Level / Inclinometer -->
+				<a href="/fr/level/" class="card-lg group p-6 transition-shadow hover:shadow-modal flex flex-col justify-between">
+					<div>
+						<div class="flex items-center justify-between mb-3">
+							<span class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-hairline bg-canvas-soft text-ink group-hover:border-ink transition-colors">
+								<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+									<circle cx="12" cy="12" r="9"></circle>
+									<circle cx="12" cy="12" r="3" fill="currentColor"></circle>
+								</svg>
+							</span>
+							<span class="eyebrow">inclinomètre</span>
+						</div>
+						<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Niveau à Bulle</h3>
+						<p class="mt-2 text-xs text-body leading-5">
+							Niveau circulaire en œil-de-bœuf et fioles tubulaires mesurant tangage, roulis, angle combiné et pourcentage de pente avec zéro relatif et retour haptique.
+						</p>
+					</div>
+					<span class="mt-4 text-xs font-medium text-link group-hover:underline">Lancer le niveau →</span>
 				</a>
-				<a href="/fr/qibla/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
-					<p class="eyebrow mb-2">qibla</p>
-					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Direction vers La Mecque</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						Cap et distance par le grand cercle vers la Kaaba depuis vos coordonnées, précis
-						au degré près.
-					</p>
+
+				<!-- Tool 3: GPS Speedometer & Altimeter -->
+				<a href="/fr/speedometer/" class="card-lg group p-6 transition-shadow hover:shadow-modal flex flex-col justify-between">
+					<div>
+						<div class="flex items-center justify-between mb-3">
+							<span class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-hairline bg-canvas-soft text-ink group-hover:border-ink transition-colors">
+								<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+									<path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+								</svg>
+							</span>
+							<span class="eyebrow">vitesse & alt</span>
+						</div>
+						<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Tachymètre GPS</h3>
+						<p class="mt-2 text-xs text-body leading-5">
+							Mesure de vitesse cinématique par effet Doppler satellite avec sélection d'unités (km/h, mph, nœuds, m/s), altitude WGS84 et compteur kilométrique.
+						</p>
+					</div>
+					<span class="mt-4 text-xs font-medium text-link group-hover:underline">Lancer le compteur →</span>
 				</a>
-				<a href="/fr/bearing/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
-					<p class="eyebrow mb-2">cap</p>
-					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Calculateur d'itinéraire</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						Cap et distance par grand cercle entre deux points — idéal pour la navigation
-						et la planification d'itinéraires.
-					</p>
+
+				<!-- Tool 4: Coordinate Converter & Bearing Calculator -->
+				<a href="/fr/bearing/" class="card-lg group p-6 transition-shadow hover:shadow-modal flex flex-col justify-between">
+					<div>
+						<div class="flex items-center justify-between mb-3">
+							<span class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-hairline bg-canvas-soft text-ink group-hover:border-ink transition-colors">
+								<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+									<line x1="2" y1="12" x2="22" y2="12"></line>
+									<polyline points="12 2 22 12 12 22"></polyline>
+								</svg>
+							</span>
+							<span class="eyebrow">navigation</span>
+						</div>
+						<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Cap & Relèvement</h3>
+						<p class="mt-2 text-xs text-body leading-5">
+							Calcul d'azimut orthodromique, cap inverse et distance de Haversine avec conversion universelle de coordonnées entre Degrés Décimaux, DMS, UTM et Plus Codes.
+						</p>
+					</div>
+					<span class="mt-4 text-xs font-medium text-link group-hover:underline">Lancer le calcul →</span>
 				</a>
-				<a href="/fr/sun/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
-					<p class="eyebrow mb-2">soleil</p>
-					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Position du soleil</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						Azimut et élévation solaires en direct, ainsi que lever, midi solaire et coucher pour
-						n'importe quel emplacement.
-					</p>
+
+				<!-- Tool 5: GPS Location & Telemetry -->
+				<a href="/fr/location/" class="card-lg group p-6 transition-shadow hover:shadow-modal flex flex-col justify-between">
+					<div>
+						<div class="flex items-center justify-between mb-3">
+							<span class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-hairline bg-canvas-soft text-ink group-hover:border-ink transition-colors">
+								<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+									<circle cx="12" cy="12" r="3"></circle>
+									<path d="M12 2v3M12 19v3M2 12h3M19 12h3"></path>
+								</svg>
+							</span>
+							<span class="eyebrow">position</span>
+						</div>
+						<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Coordonnées GPS</h3>
+						<p class="mt-2 text-xs text-body leading-5">
+							Latitude, longitude géodésique de haute précision, altitude au-dessus du niveau de la mer et rayon d'incertitude avec copie en un clic et routage cartographique.
+						</p>
+					</div>
+					<span class="mt-4 text-xs font-medium text-link group-hover:underline">Voir les coordonnées →</span>
 				</a>
-				<a href="/fr/sun-moon/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
-					<p class="eyebrow mb-2">soleil & lune</p>
-					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Direction du soleil et de la lune</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						L'azimut du soleil et de la lune tracé directement sur le cadran de la boussole, pour
-						les repérer dans le ciel en vous tournant vers le repère.
-					</p>
+
+				<!-- Tool 6: Direction to Makkah (Qibla) -->
+				<a href="/fr/qibla/" class="card-lg group p-6 transition-shadow hover:shadow-modal flex flex-col justify-between">
+					<div>
+						<div class="flex items-center justify-between mb-3">
+							<span class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-hairline bg-canvas-soft text-ink group-hover:border-ink transition-colors">
+								<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+									<rect x="4" y="4" width="16" height="16" rx="2"></rect>
+									<line x1="12" y1="4" x2="12" y2="20"></line>
+								</svg>
+							</span>
+							<span class="eyebrow">qibla</span>
+						</div>
+						<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Direction de La Mecque</h3>
+						<p class="mt-2 text-xs text-body leading-5">
+							Azimut de grand cercle vers la Kaaba à La Mecque avec distance géodésique en kilomètres et milles marins, et repère visuel dynamique sur le cadran.
+						</p>
+					</div>
+					<span class="mt-4 text-xs font-medium text-link group-hover:underline">Trouver la Qibla →</span>
 				</a>
-				<div class="card-soft flex flex-col justify-center p-6">
-					<p class="text-sm text-body leading-6">
-						Aucun compte. Aucune traque. Chaque calcul s'exécute dans votre navigateur et est supprimé
-						dès que vous quittez la page.
-					</p>
-				</div>
+
+				<!-- Tool 7: Solar Position & Sun Compass -->
+				<a href="/fr/sun/" class="card-lg group p-6 transition-shadow hover:shadow-modal flex flex-col justify-between">
+					<div>
+						<div class="flex items-center justify-between mb-3">
+							<span class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-hairline bg-canvas-soft text-ink group-hover:border-ink transition-colors">
+								<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+									<circle cx="12" cy="12" r="5"></circle>
+									<line x1="12" y1="1" x2="12" y2="3"></line>
+									<line x1="12" y1="21" x2="12" y2="23"></line>
+									<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+									<line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+									<line x1="1" y1="12" x2="3" y2="12"></line>
+									<line x1="21" y1="12" x2="23" y2="12"></line>
+								</svg>
+							</span>
+							<span class="eyebrow">astronomie</span>
+						</div>
+						<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Position du Soleil</h3>
+						<p class="mt-2 text-xs text-body leading-5">
+							Azimut solaire en direct, angle d'élévation, heures de lever/coucher et midi solaire vrai pour la photographie et le calage de panneaux solaires.
+						</p>
+					</div>
+					<span class="mt-4 text-xs font-medium text-link group-hover:underline">Voir la position solaire →</span>
+				</a>
+
+				<!-- Tool 8: Sun & Moon Direction Overlay -->
+				<a href="/fr/sun-moon/" class="card-lg group p-6 transition-shadow hover:shadow-modal flex flex-col justify-between">
+					<div>
+						<div class="flex items-center justify-between mb-3">
+							<span class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-hairline bg-canvas-soft text-ink group-hover:border-ink transition-colors">
+								<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+									<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+								</svg>
+							</span>
+							<span class="eyebrow">céleste</span>
+						</div>
+						<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Boussole Soleil & Lune</h3>
+						<p class="mt-2 text-xs text-body leading-5">
+							Azimuts solaire et lunaire projetés directement sur la lunette de la boussole pour la navigation astronomique et l'orientation céleste de jour comme de nuit.
+						</p>
+					</div>
+					<span class="mt-4 text-xs font-medium text-link group-hover:underline">Ouvrir la boussole céleste →</span>
+				</a>
 			</div>
 		</div>
 	</section>
 
-	<!-- ─── Comment ça marche ──────────────────────────────── -->
-	<section id="how-it-works" class="border-y border-hairline bg-canvas scroll-mt-16">
+	<!-- ─── Comprehensive Educational Section: Sensor Fusion ─── -->
+	<section id="engineering" class="border-t border-hairline bg-canvas scroll-mt-16">
 		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
-			<p class="eyebrow">comment ça marche</p>
-			<h2 class="mt-3 max-w-2xl text-display-lg text-ink">Conçu pour la précision.</h2>
-			<p class="mt-3 max-w-xl text-body-lg text-body">
-				Le magnétomètre, le gyroscope et l'accéléromètre de votre téléphone alimentent un moteur
-				de cap compensé en inclinaison, corrigé selon le Modèle Magnétique Mondial.
-			</p>
-
-			<div class="mt-12 grid gap-6 md:grid-cols-3">
-				<div class="card p-6">
-					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
-						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
-							<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" />
-							<path d="M15.5 8.5 13 13l-4.5 2.5L11 11z" fill="var(--color-error)" />
-						</svg>
-					</div>
-					<h3 class="text-display-sm text-ink">Fusion de capteurs</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						Le cap est dérivé des données d'orientation et du magnétomètre, lissé en temps réel pour
-						que l'aiguille reste stable en votre main.
-					</p>
-				</div>
-				<div class="card p-6">
-					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
-						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
-							<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" />
-							<path
-								d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"
-								stroke="currentColor"
-								stroke-width="1.5"
-							/>
-							<circle cx="12" cy="12" r="3" fill="currentColor" />
-						</svg>
-					</div>
-					<h3 class="text-display-sm text-ink">Correction du nord vrai</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						La déclinaison varie de −30° à +30° à travers la planète. Nous appliquons le Modèle
-						Magnétique Mondial pour que le nord vrai soit exact, où que vous soyez.
-					</p>
-				</div>
-				<div class="card p-6">
-					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
-						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
-							<path
-								d="M12 21s7-5.1 7-11a7 7 0 1 0-14 0c0 5.9 7 11 7 11Z"
-								stroke="currentColor"
-								stroke-width="1.5"
-							/>
-							<circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5" />
-						</svg>
-					</div>
-					<h3 class="text-display-sm text-ink">Local par conception</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						Les coordonnées, le cap de la Qibla et les calculs solaires s'exécutent entièrement
-						sur votre appareil. Votre position ne touche jamais un serveur.
-					</p>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- ─── Qu'est-ce qu'une boussole en ligne (SEO / valeur) ─ -->
-	<section id="about" class="scroll-mt-16">
-		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
 			<div class="mx-auto max-w-3xl">
-				<p class="eyebrow text-center">la boussole en ligne gratuite</p>
-				<h2 class="mt-3 text-center text-display-lg text-ink">Qu'est-ce qu'une boussole en ligne ?</h2>
-				<p class="mt-6 text-body-lg text-body">
-					Une <strong class="text-ink font-medium">boussole en ligne</strong> est une boussole
-					numérique qui fonctionne directement dans votre navigateur web — pas d'application à
-					télécharger, pas d'installation, et rien à payer. Ouvrez cette page sur votre téléphone
-					et, en quelques secondes, vous disposez d'une boussole en ligne gratuite qui affiche votre
-					cap en direct en degrés, pointe vers le nord d'où que vous soyez, et peut se corriger
-					automatiquement pour la différence entre le nord magnétique et le nord vrai.
+				<p class="eyebrow">physique des capteurs & informatique</p>
+				<h2 class="mt-3 text-display-lg text-ink">
+					L'Ingénierie Derrière la Fusion de Capteurs dans le Navigateur
+				</h2>
+				<p class="mt-6 text-body-lg text-body leading-relaxed">
+					Beaucoup pensent qu'une boussole sur smartphone est une simple aiguille numérique réagissant à un aimant. En réalité, produire un cap stable et sans à-coups sur un écran de verre tactile est l'un des accomplissements les plus sophistiqués du génie électronique et aérospatial contemporain.
 				</p>
 				<p class="mt-4 text-body leading-7">
-					Parce qu'elle vit dans le navigateur, elle se comporte de la même manière que vous soyez
-					chez vous, sur le terrain ou en classe. Cherchez « boussole en ligne » sur Google, ouvrez
-					ce site, et les capteurs de votre appareil prennent le relais. Contrairement à une boussole
-					traditionnelle dont l'aiguille lutte contre la gravité et la dérive, une boussole en ligne
-					combine le magnétomètre, le gyroscope et l'accéléromètre de votre téléphone pour produire
-					une <strong class="text-ink font-medium">direction de boussole en ligne</strong> plus
-					stable et plus fiable.
+					En ouvrant ce site sur mobile, notre code établit une liaison directe avec les API DeviceOrientationEvent et DeviceMotionEvent du W3C pour interroger trois microsystèmes électromécaniques (MEMS) gravés sur silicium :
 				</p>
-				<p class="mt-4 text-body leading-7">
-					Chaque outil ici est construit autour d'une seule mission — vous aider à vous orienter et
-					à <strong class="text-ink font-medium">trouver le nord en ligne</strong> — et autour de
-					lui gravite une panoplie complète de navigation : un affichage du cap en direct en degrés,
-					les directions cardinales et intercardinales, un mode plein écran en un tap, et un
-					indicateur de précision pour que vous sachiez toujours à quel point faire confiance à la
-					lecture. Comme tout est traité localement, votre position ne quitte jamais votre appareil.
-				</p>
-			</div>
 
-			<div class="mx-auto mt-12 grid max-w-5xl gap-6 md:grid-cols-3">
-				<div class="card p-6">
-					<h3 class="text-display-sm text-ink">Comment fonctionne une boussole en ligne</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						<strong class="text-ink font-medium">Trois capteurs</strong> font le travail : un
-						magnétomètre mesure le champ magnétique terrestre, un accéléromètre détecte le sens de
-						la gravité, et un gyroscope suit la rotation. Le navigateur les fusionne en un seul cap,
-						et la compensation d'inclinaison le maintient correct même lorsque le téléphone n'est
-						pas à plat.
-					</p>
+				<div class="mt-8 space-y-6">
+					<div class="card p-6">
+						<h3 class="text-display-sm text-ink">1. Le Magnétomètre Triaxial (Sonde de Flux)</h3>
+						<p class="mt-2 text-sm text-body leading-6">
+							Exploitant l'effet Hall ou la magnétorésistance anisotrope (AMR), il quantifie la densité de flux magnétique ambiant selon trois axes orthogonaux (X, Y et Z) en microteslas (µT). Le champ terrestre étant faible (30 à 60 µT), le capteur est particulièrement sensible aux bruits électromagnétiques environnants.
+						</p>
+					</div>
+
+					<div class="card p-6">
+						<h3 class="text-display-sm text-ink">2. L'Accéléromètre Capacitif Triaxial (Référence Gravitationnelle)</h3>
+						<p class="mt-2 text-sm text-body leading-6">
+							Des masses de polysilicon suspendues à des microressorts fléchissent sous l'effet de la pesanteur terrestre (1g ≈ 9.80665 m/s²). La mesure différentielle des capacités sur plaques fixes détermine la direction du sol, fournissant les angles de tangage (β) et de roulis (γ).
+						</p>
+					</div>
+
+					<div class="card p-6">
+						<h3 class="text-display-sm text-ink">3. Le Gyroscope Vibratoire Triaxial (Vitesse Angulaire)</h3>
+						<p class="mt-2 text-sm text-body leading-6">
+							Des anneaux de silicium oscillants subissent des forces de Coriolis lors de toute rotation, produisant une tension proportionnelle à la vitesse angulaire (rad/s). Insensible aux déviations magnétiques, il est sujet à une dérive d'intégration temporelle.
+						</p>
+					</div>
 				</div>
-				<div class="card p-6">
-					<h3 class="text-display-sm text-ink">Boussole en ligne ou boussole traditionnelle</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						Une boussole à aiguille est simple mais doit rester à l'horizontale, et elle pointe
-						toujours vers le nord magnétique — pas celui de votre carte. Une boussole en ligne ajoute
-						le degré exact de votre cap, une correction automatique de la déclinaison et un affichage
-						que vous pouvez lire dans le noir.
-					</p>
+
+				<h3 class="mt-12 text-display-sm text-ink">La Solution Mathématique : Compensation d'Inclinaison en Temps Réel</h3>
+				<p class="mt-3 text-body leading-7">
+					Une aiguille physique ne fonctionne qu'à plat ; inclinée, la gravité la tire vers le bas et engendre une erreur de pendage. La boussole numérique résout ce problème par <strong>transformation matricielle des angles d'Euler</strong>.
+				</p>
+				<p class="mt-4 text-body leading-7">
+					Grâce aux angles de tangage (θ) et de roulis (φ) de l'accéléromètre, les lectures magnétiques tridimensionnelles brutes (M<sub>x</sub>, M<sub>y</sub>, M<sub>z</sub>) sont projetées mathématiquement dans le plan horizontal :
+				</p>
+
+				<div class="my-6 rounded-xl border border-hairline bg-canvas-soft p-5 font-mono text-xs sm:text-sm text-ink overflow-x-auto">
+					<p class="text-mute">// Matrice de Projection Vectorielle Horizontale</p>
+					<p class="mt-1">X_horizontal = M_x · cos(θ) + M_z · sin(θ)</p>
+					<p class="mt-1">Y_horizontal = M_x · sin(φ) · sin(θ) + M_y · cos(φ) - M_z · sin(φ) · cos(θ)</p>
+					<p class="mt-3 text-mute">// Cap Calibré en Degrés</p>
+					<p class="mt-1">Magnetic_Heading = atan2(-Y_horizontal, X_horizontal) · (180 / π)</p>
 				</div>
-				<div class="card p-6">
-					<h3 class="text-display-sm text-ink">Pourquoi utiliser une boussole dans le navigateur ?</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						Elle s'ouvre en un tap depuis un favori ou une recherche, sans rien à installer et sans
-						compte. Si votre téléphone possède une application de boussole que vous ouvrez rarement,
-						une boussole de navigateur est celle que vous utiliserez vraiment.
-					</p>
-				</div>
+
+				<p class="text-body leading-7">
+					Enfin, notre logiciel applique une <strong>interpolation linéaire sphérique (SLERP) couplée à un filtre passe-bas</strong>. Cela élimine les tremblements de la main et vibrations mécaniques, assurant une rotation fluide de l'aiguille à 60 images par seconde.
+				</p>
 			</div>
 		</div>
 	</section>
 
-	<!-- ─── Comment l'utiliser, étape par étape ────────────── -->
-	<section id="how-to-use" class="border-y border-hairline bg-canvas scroll-mt-16">
-		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
-			<div class="grid gap-10 lg:grid-cols-2 lg:items-start">
-				<div>
-					<p class="eyebrow">pour commencer</p>
-					<h2 class="mt-3 text-display-lg text-ink">Comment utiliser une boussole en ligne.</h2>
-					<p class="mt-3 text-body-lg text-body">
-						Cinq étapes vous mènent de l'ouverture de la page à un cap fiable. L'ensemble prend
-						moins d'une minute, et vous pouvez répéter la calibration dès que la lecture dérive.
-						Pour un guide plus complet, consultez notre
-						<a href="/blog/how-to-use-online-compass/" class="text-link underline decoration-link/30 hover:decoration-link">guide pas à pas de la boussole en ligne</a>.
-					</p>
-					<p class="mt-4 text-sm text-body leading-6">
-						Le facteur le plus déterminant pour la précision n'est pas le logiciel — c'est l'endroit
-						où vous vous tenez et ce qui se trouve près de votre téléphone. Gardez-le en tête à
-						chaque étape.
-					</p>
-				</div>
-				<ol class="card-soft divide-y divide-hairline">
-					<li class="flex gap-4 p-5">
-						<span class="font-mono text-sm text-mute">01</span>
-						<div>
-							<p class="text-sm font-medium text-ink">Ouvrez la boussole sur votre téléphone</p>
-							<p class="mt-1 text-sm text-body">Chargez cette page dans Safari, Chrome ou Firefox sur un téléphone ou une tablette équipé d'un magnétomètre.</p>
-						</div>
-					</li>
-					<li class="flex gap-4 p-5">
-						<span class="font-mono text-sm text-mute">02</span>
-						<div>
-							<p class="text-sm font-medium text-ink">Activez la boussole en direct</p>
-							<p class="mt-1 text-sm text-body">Appuyez sur « Activer la boussole en direct » et autorisez l'accès au mouvement et à l'orientation lorsque votre navigateur le demande.</p>
-						</div>
-					</li>
-					<li class="flex gap-4 p-5">
-						<span class="font-mono text-sm text-mute">03</span>
-						<div>
-							<p class="text-sm font-medium text-ink">Tenez le téléphone à plat, loin du métal</p>
-							<p class="mt-1 text-sm text-body">Posez-le dans votre paume, écran vers le haut, et écartez-le des ordinateurs portables, enceintes et coques magnétiques.</p>
-						</div>
-					</li>
-					<li class="flex gap-4 p-5">
-						<span class="font-mono text-sm text-mute">04</span>
-						<div>
-							<p class="text-sm font-medium text-ink">Lisez votre cap et calibrez</p>
-							<p class="mt-1 text-sm text-body">Le repère supérieur indique la direction vers laquelle vous êtes tourné. Décrivez un huit si le chiffre vacille.</p>
-						</div>
-					</li>
-					<li class="flex gap-4 p-5">
-						<span class="font-mono text-sm text-mute">05</span>
-						<div>
-							<p class="text-sm font-medium text-ink">Passez au nord vrai</p>
-							<p class="mt-1 text-sm text-body">Activez la déclinaison pour que le cap corresponde aux cartes et à tout relèvement que vous prévoyez de suivre.</p>
-						</div>
-					</li>
-				</ol>
-			</div>
-		</div>
-	</section>
-
-	<!-- ─── Nord vrai vs magnétique ────────────────────────── -->
-	<section id="true-north" class="scroll-mt-16">
-		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+	<!-- ─── Deep Dive: True North, Magnetic North & Declination ─── -->
+	<section id="true-north" class="border-t border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
 			<div class="mx-auto max-w-3xl">
-				<p class="eyebrow">nord vrai vs magnétique</p>
-				<h2 class="mt-3 text-display-lg text-ink">Pourquoi la déclinaison décide si vous avez raison.</h2>
-				<p class="mt-3 text-body-lg text-body">
-					L'aiguille d'une boussole ne pointe pas vers le haut de la carte. Elle pointe vers le nord
-					magnétique, un point mobile de l'Arctique. L'écart entre celui-ci et le nord vrai est la
-					déclinaison — la raison la plus fréquente pour laquelle une lecture de boussole semble
-					« fausse ».
+				<p class="eyebrow">cartographie & géodésie</p>
+				<h2 class="mt-3 text-display-lg text-ink">
+					Nord Vrai vs Nord Magnétique : La Géométrie de la Navigation
+				</h2>
+				<p class="mt-6 text-body-lg text-body leading-relaxed">
+					L'erreur la plus dangereuse en plein air consiste à croire que la boussole pointe vers le haut de la carte. Ce n'est pas le cas. Ne pas distinguer les trois nord fondamentaux est la cause première de désorientation des randonneurs et navigateurs.
 				</p>
-				<p class="mt-4 text-body leading-7">
-					La déclinaison n'est pas un nombre fixe que l'on peut mémoriser. Elle dépend de l'endroit
-					où vous vous trouvez sur la planète, et elle dérive d'une fraction de degré chaque année
-					à mesure que le noyau en fusion de la Terre se déplace. À Londres, les deux nords sont
-					restés presque alignés pendant des années, ce qui explique que les cartes britanniques
-					ignorent souvent la différence ; dans certaines régions du Canada et d'Afrique du Sud, ils
-					peuvent être séparés de 20° ou plus — la différence entre atteindre sa voiture et tourner
-					dans la mauvaise rue.
+
+				<div class="mt-8 grid gap-4 sm:grid-cols-3">
+					<div class="card-soft p-5">
+						<p class="eyebrow mb-1">géographique</p>
+						<h3 class="text-base font-semibold text-ink">Nord Vrai (NV)</h3>
+						<p class="mt-2 text-xs text-body leading-5">L'axe nord fixe autour duquel tourne la planète. Tous les méridiens y convergent. Référence des cartes, du GPS et de la topographie.</p>
+					</div>
+					<div class="card-soft p-5">
+						<p class="eyebrow mb-1">géomagnétique</p>
+						<h3 class="text-base font-semibold text-ink">Nord Magnétique (NM)</h3>
+						<p class="mt-2 text-xs text-body leading-5">Le point en Arctique où les lignes de flux plongent à la verticale. Il migre de 40 à 55 km par an sous l'effet des courants du noyau fluide.</p>
+					</div>
+					<div class="card-soft p-5">
+						<p class="eyebrow mb-1">projeté</p>
+						<h3 class="text-base font-semibold text-ink">Nord de Grille (NG)</h3>
+						<p class="mt-2 text-xs text-body leading-5">Les lignes verticales des quadrillages cartographiques projetés (UTM ou Lambert). Il diffère légèrement du nord vrai en raison de la projection plane.</p>
+					</div>
+				</div>
+
+				<h3 class="mt-12 text-display-sm text-ink">Règle Mathématique du Calcul de Déclinaison</h3>
+				<p class="mt-3 text-body leading-7">
+					L'écart angulaire entre le Nord Vrai et le Nord Magnétique à votre position exacte s'appelle la <strong>Déclinaison Magnétique</strong> (ou variation magnétique dans la marine) :
 				</p>
-				<p class="mt-4 text-body leading-7">
-					C'est exactement ce qu'une boussole non corrigée rate. Notre boussole en ligne applique le
-					Modèle Magnétique Mondial à vos coordonnées, si bien que basculer vers le
-					<strong class="text-ink font-medium">nord vrai</strong> aligne le cap sur la grille d'une
-					carte. Le tableau ci-dessous montre grossièrement l'ampleur de la correction dans des lieux
-					bien connus ; appuyez sur <em>« Utiliser la position pour la déclinaison »</em> sur le
-					cadran pour obtenir la valeur exacte là où vous êtes.
+
+				<div class="my-6 rounded-xl border border-hairline bg-canvas-soft p-5 text-center font-mono text-sm text-ink">
+					<p class="text-display-sm font-semibold text-link">Cap Vrai = Cap Magnétique + Déclinaison</p>
+					<p class="text-xs text-mute mt-2">(la déclinaison Est est comptée positivement [+] et la déclinaison Ouest négativement [−])</p>
+				</div>
+
+				<p class="text-body leading-7">
+					La marine perpétue le mémo séculaire : <em>"Déclinaison Est s'ajoute, déclinaison Ouest se retranche"</em> lors du passage du cap magnétique au cap vrai.
+				</p>
+				<ul class="mt-4 space-y-2 text-sm text-body list-disc pl-5">
+					<li><strong>À New York (Déclinaison ≈ −13° Ouest) :</strong> Si votre boussole magnétique indique 90° (Est), votre cap géographique réel est 90° + (−13°) = <strong>77°</strong>. Vous faites route 13 degrés plus au nord que l'Est réel !</li>
+					<li><strong>À Los Angeles (Déclinaison ≈ +12° Est) :</strong> Si votre boussole indique 90°, votre cap géographique réel est 90° + (+12°) = <strong>102°</strong>.</li>
+				</ul>
+
+				<p class="mt-6 text-body leading-7">
+					En sélectionnant <strong>"Nord Vrai"</strong> sur notre boussole, l'algorithme applique automatiquement le vecteur de déclinaison WMM / NOAA local, alignant votre cadran directement sur les repères de votre carte.
 				</p>
 			</div>
 
-			<div class="mx-auto mt-10 max-w-3xl overflow-x-auto">
+			<!-- Representative World Declination Table -->
+			<div class="mx-auto mt-12 max-w-4xl overflow-x-auto">
 				<table class="w-full border-collapse text-sm">
-					<caption class="sr-only">Déclinaison magnétique approximative par ville</caption>
+					<caption class="sr-only">Repères Mondiaux de Déclinaison Magnétique</caption>
 					<thead>
 						<tr class="border-b border-hairline-strong text-left">
-							<th scope="col" class="py-3 pr-4 font-medium text-ink">Emplacement</th>
-							<th scope="col" class="py-3 font-medium text-ink">Déclinaison approximative</th>
+							<th scope="col" class="py-3.5 pr-4 font-semibold text-ink">Position Globale</th>
+							<th scope="col" class="py-3.5 pr-4 font-semibold text-ink">Déclinaison Géomagnétique</th>
+							<th scope="col" class="py-3.5 font-semibold text-ink">Conséquence sur la Navigation (par km parcouru)</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody class="divide-y divide-hairline">
 						{declinationExamples.map((d) => (
-							<tr class="border-b border-hairline">
-								<td class="py-3 pr-4 text-body">{d.place}</td>
-								<td class="py-3 text-body">{d.value}</td>
+							<tr class="hover:bg-canvas-soft/40 transition-colors">
+								<td class="py-3.5 pr-4 font-medium text-ink">{d.place}</td>
+								<td class="py-3.5 pr-4 font-mono text-link font-semibold">{d.value}</td>
+								<td class="py-3.5 text-body text-xs leading-5">{d.impact}</td>
 							</tr>
 						))}
 					</tbody>
 				</table>
 				<p class="mt-3 text-xs text-mute">
-					Valeurs approximatives du milieu des années 2020, à titre indicatif uniquement. La
-					déclinaison change chaque année et selon l'emplacement exact — utilisez toujours la
-					correction en direct dans l'outil.
+					Valeurs calculées selon l'époque actuelle du World Magnetic Model. Activez la géolocalisation pour une précision submétrique continue.
 				</p>
 			</div>
 		</div>
 	</section>
 
-	<!-- ─── Comment lire une boussole ──────────────────────── -->
-	<section id="reading" class="border-y border-hairline bg-canvas scroll-mt-16">
-		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
-			<div class="mx-auto max-w-3xl">
-				<p class="eyebrow">lire le cadran</p>
-				<h2 class="mt-3 text-display-lg text-ink">Caps, relèvements et rose des vents.</h2>
-				<p class="mt-3 text-body-lg text-body">
-					Une fois le cadran en direct, la seule compétence qui reste est de le lire.
-				</p>
-				<div class="mt-8 grid gap-4 sm:grid-cols-2">
-					<div class="card-soft p-5">
-						<h3 class="text-sm font-medium text-ink mb-1">Cap</h3>
-						<p class="text-sm leading-6">La direction vers laquelle vous êtes actuellement tourné, en degrés dans le sens horaire depuis le nord. Faire face à l'est correspond à 90°, au sud à 180°, à l'ouest à 270°.</p>
-					</div>
-					<div class="card-soft p-5">
-						<h3 class="text-sm font-medium text-ink mb-1">Relèvement</h3>
-						<p class="text-sm leading-6">La direction d'un point vers un autre. Utilisez le <a href="/fr/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">calculateur de relèvement</a> pour l'obtenir entre deux coordonnées.</p>
-					</div>
-					<div class="card-soft p-5">
-						<h3 class="text-sm font-medium text-ink mb-1">Azimut</h3>
-						<p class="text-sm leading-6">Un relèvement exprimé sous forme d'angle de 0° à 360°. L'<a href="/fr/sun/" class="text-link underline decoration-link/30 hover:decoration-link">outil solaire</a> donne l'azimut du soleil pour votre emplacement.</p>
-					</div>
-					<div class="card-soft p-5">
-						<h3 class="text-sm font-medium text-ink mb-1">Relèvement inverse</h3>
-						<p class="text-sm leading-6">La direction opposée — le relèvement de B vers A. Ajoutez 180° si le relèvement aller est inférieur à 180°, sinon soustrayez 180°.</p>
-					</div>
-				</div>
-			</div>
-
-			<div class="mx-auto mt-12 max-w-3xl">
-				<h3 class="text-display-sm text-ink">La rose des vents à 16 branches</h3>
-				<p class="mt-2 text-sm text-body leading-6">
-					Entre les quatre points cardinaux se trouvent des points intermédiaires. Une rose à 16
-					branches divise le cercle en segments de 22,5° — la résolution qu'utilisent la plupart des
-					rapports de navigation et météorologiques.
-				</p>
-				<div class="mt-5 grid grid-cols-2 gap-x-6 sm:grid-cols-4">
-					{compassRose.map((c) => (
-						<div class="flex items-baseline justify-between border-b border-hairline py-2">
-							<span class="font-mono text-sm text-ink">{c.point}</span>
-							<span class="font-mono text-xs text-mute">{c.deg}</span>
-						</div>
-					))}
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- ─── Précision ──────────────────────────────────────── -->
-	<section id="accuracy" class="scroll-mt-16">
-		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
-			<div class="mx-auto max-w-3xl">
-				<p class="eyebrow">précision</p>
-				<h2 class="mt-3 text-display-lg text-ink">Quelle est la précision d'une boussole de téléphone ?</h2>
-				<p class="mt-3 text-body-lg text-body">
-					Bien utilisée, une boussole de téléphone est précise à un ou deux degrés près. Utilisée
-					sans précaution, elle peut se tromper de vingt degrés. La différence tient presque
-					entièrement à l'environnement.
-				</p>
-				<p class="mt-4 text-body leading-7">
-					Le magnétomètre mesure l'intensité du champ en microteslas et est conçu pour la navigation,
-					pas pour la topographie : parfait pour suivre un sentier ou orienter un panneau solaire,
-					mais sans commune mesure avec un instrument professionnel. Ce qui compte, c'est
-					l'indicateur de précision sur le cadran — faites confiance à une lecture stable, et
-					déplacez-vous dès qu'elle saute de plusieurs dizaines de degrés, car le champ autour de
-					vous est déformé. À l'intérieur, attendez-vous à quelques degrés de dérive dus au câblage
-					et au mobilier ; à l'extérieur, à l'écart d'une voiture ou d'une rambarde, les lectures
-					sont fiables. Si la précision compte, faites la moyenne de plusieurs lectures et recoupez
-					avec la
-					<a href="/fr/sun/" class="text-link underline decoration-link/30 hover:decoration-link">position du soleil</a>.
+	<!-- ─── Practical Field Applications Section ────────────── -->
+	<section id="applications" class="border-t border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<div class="mx-auto max-w-3xl text-center">
+				<p class="eyebrow">guide pratique de terrain</p>
+				<h2 class="mt-3 text-display-lg text-ink">Applications Concrètes dans les Métiers de Terrain</h2>
+				<p class="mt-4 text-body-lg text-body">
+					Du génie civil et de l'architecture solaire aux expéditions et au sauvetage en milieu naturel :
 				</p>
 			</div>
-		</div>
-	</section>
 
-	<!-- ─── Calibration ────────────────────────────────────── -->
-	<section id="calibration" class="border-y border-hairline bg-canvas scroll-mt-16">
-		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
-			<div class="grid gap-10 lg:grid-cols-2 lg:items-start">
-				<div>
-					<p class="eyebrow">calibration</p>
-					<h2 class="mt-3 text-display-lg text-ink">Obtenez la lecture la plus précise.</h2>
-					<p class="mt-3 text-body-lg text-body">
-						Les magnétomètres des téléphones sont sensibles aux métaux et champs magnétiques à
-						proximité. Quelques secondes de calibration transforment une aiguille qui dérive en un
-						cap fiable.
+			<div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+				
+				<div class="card p-6">
+					<div class="flex items-center gap-2 mb-3">
+						<span class="text-xs font-mono font-bold text-link">01</span>
+						<h3 class="text-display-sm text-ink">Randonnée & Orientation Topographique</h3>
+					</div>
+					<p class="text-sm text-body leading-6">
+						Alignez vos cartes papier en quelques secondes. Recoupez deux amers visuels avec notre <a href="/fr/bearing/" class="text-link underline hover:text-ink">calculateur de relèvement</a> pour effectuer un relèvement inverse et fixer vos coordonnées sans réseau mobile.
 					</p>
 				</div>
-				<ol class="card-soft divide-y divide-hairline">
-					<li class="flex gap-4 p-5">
-						<span class="font-mono text-sm text-mute">01</span>
-						<div>
-							<p class="text-sm font-medium text-ink">Maintenez le téléphone à plat</p>
-							<p class="mt-1 text-sm text-body">Gardez l'écran parallèle au sol, dans votre paume ou sur une surface stable.</p>
-						</div>
-					</li>
-					<li class="flex gap-4 p-5">
-						<span class="font-mono text-sm text-mute">02</span>
-						<div>
-							<p class="text-sm font-medium text-ink">Décrivez un mouvement en huit</p>
-							<p class="mt-1 text-sm text-body">Agitez doucement le téléphone dans un mouvement en huit quelques fois, puis tenez-le immobile.</p>
-						</div>
-					</li>
-					<li class="flex gap-4 p-5">
-						<span class="font-mono text-sm text-mute">03</span>
-						<div>
-							<p class="text-sm font-medium text-ink">Éloignez-vous des interférences</p>
-							<p class="mt-1 text-sm text-body">Écartez-vous des ordinateurs portables, téléphones, aimants et tables métalliques avant de prendre une lecture.</p>
-						</div>
-					</li>
-					<li class="flex gap-4 p-5">
-						<span class="font-mono text-sm text-mute">04</span>
-						<div>
-							<p class="text-sm font-medium text-ink">Confirmez avec le soleil</p>
-							<p class="mt-1 text-sm text-body">Utilisez le marqueur de position du soleil sur le cadran comme vérification croisée indépendante en plein jour.</p>
-						</div>
-					</li>
-				</ol>
+
+				<div class="card p-6">
+					<div class="flex items-center gap-2 mb-3">
+						<span class="text-xs font-mono font-bold text-link">02</span>
+						<h3 class="text-display-sm text-ink">Bâtiment & Travaux de Précision</h3>
+					</div>
+					<p class="text-sm text-body leading-6">
+						Utilisez le <a href="/fr/level/" class="text-link underline hover:text-ink">niveau à bulle numérique</a> pour vérifier la pente réglementaire d'évacuation des eaux (2 cm/m), contrôler les rampes PMR et mesurer la pente de chevrons de toiture.
+					</p>
+				</div>
+
+				<div class="card p-6">
+					<div class="flex items-center gap-2 mb-3">
+						<span class="text-xs font-mono font-bold text-link">03</span>
+						<h3 class="text-display-sm text-ink">Optimisation de Panneaux Solaires</h3>
+					</div>
+					<p class="text-sm text-body leading-6">
+						Maximisez votre production de kWh en calant les panneaux solaires plein Sud Vrai (hémisphère nord) ou plein Nord Vrai (hémisphère sud) avec notre boussole corrigée, et réglez l'inclinaison à l'inclinomètre.
+					</p>
+				</div>
+
+				<div class="card p-6">
+					<div class="flex items-center gap-2 mb-3">
+						<span class="text-xs font-mono font-bold text-link">04</span>
+						<h3 class="text-display-sm text-ink">Mise à Niveau de Vans & Camping-Cars</h3>
+					</div>
+					<p class="text-sm text-body leading-6">
+						Préservez les réfrigérateurs à absorption d'ammoniac (qui surchauffent et tombent en panne définitive au-delà de 3° d'inclinaison). Posez le téléphone sur le plan de travail et calez la bulle dans la cible verte.
+					</p>
+				</div>
+
+				<div class="card p-6">
+					<div class="flex items-center gap-2 mb-3">
+						<span class="text-xs font-mono font-bold text-link">05</span>
+						<h3 class="text-display-sm text-ink">Analyse Immobilière & Ensoleillement</h3>
+					</div>
+					<p class="text-sm text-body leading-6">
+						Évaluez l'exposition solaire, l'apport thermique passif et les vents dominants. Comparez la lumière matinale d'un balcon à celle du coucher de soleil avec notre <a href="/fr/sun/" class="text-link underline hover:text-ink">outil de trajectoire solaire</a>.
+					</p>
+				</div>
+
+				<div class="card p-6">
+					<div class="flex items-center gap-2 mb-3">
+						<span class="text-xs font-mono font-bold text-link">06</span>
+						<h3 class="text-display-sm text-ink">Photographie & Repérages Cinéma</h3>
+					</div>
+					<p class="text-sm text-body leading-6">
+						Anticipez l'azimut exact de l'Heure Dorée et de l'Heure Bleue des jours à l'avance. Orientez votre smartphone vers le repère solaire du cadran pour visualiser l'endroit exact où l'aube illuminera le relief.
+					</p>
+				</div>
 			</div>
 		</div>
 	</section>
 
-	<!-- ─── Comparer les types de boussoles ────────────────── -->
-	<section id="compare" class="scroll-mt-16">
-		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
-			<div class="mx-auto max-w-3xl">
-				<p class="eyebrow">types de boussoles</p>
-				<h2 class="mt-3 text-display-lg text-ink">Toutes les boussoles ne fonctionnent pas de la même façon.</h2>
-				<p class="mt-3 text-body-lg text-body">
-					Savoir quelle technologie vous tenez en main explique ses forces, ses limites et pourquoi
-					une boussole de téléphone se comporte différemment de celle en laiton au fond d'un tiroir.
+	<!-- ─── Calibration & Interference Guide ───────────────── -->
+	<section id="calibration" class="border-t border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<div class="grid gap-12 lg:grid-cols-2 lg:items-center">
+				<div>
+					<p class="eyebrow">dépannage & haute précision</p>
+					<h2 class="mt-3 text-display-lg text-ink">Maîtriser le Calibrage et les Perturbations du Magnétomètre</h2>
+					<p class="mt-4 text-body-lg text-body leading-relaxed">
+						Contrairement à un objectif photo ou un récepteur satellite GPS, un magnétomètre ne reçoit pas un signal isolé : il mesure la somme vectorielle de <em>tous les champs magnétiques présents autour de lui</em>.
+					</p>
+					<p class="mt-4 text-sm text-body leading-6">
+						Les ingénieurs en électronique scindent les perturbations magnétiques en deux catégories distinctes :
+					</p>
+
+					<div class="mt-6 space-y-4">
+						<div class="rounded-xl border border-hairline bg-canvas-soft/50 p-4">
+							<h3 class="text-sm font-semibold text-ink">Distorsion de Fer Dur (Hard Iron)</h3>
+							<p class="mt-1 text-xs text-body leading-5">
+								Causée par des composants aimantés permanents du téléphone lui-même (haut-parleurs, stabilisateurs d'appareil photo et aimants MagSafe). Elle engendre un décalage vectoriel fixe décentrant la sphère de mesure.
+							</p>
+						</div>
+						<div class="rounded-xl border border-hairline bg-canvas-soft/50 p-4">
+							<h3 class="text-sm font-semibold text-ink">Distorsion de Fer Doux (Soft Iron)</h3>
+							<p class="mt-1 text-xs text-body leading-5">
+								Provoquée par les masses ferromagnétiques passives environnantes (poutrelles d'acier, ferraillage de dalles en béton, carrosseries de voiture et radiateurs en fonte) qui déforment le champ sphérique en ellipsoïde.
+							</p>
+						</div>
+					</div>
+
+					<p class="mt-6 text-sm text-body leading-6">
+						Le célèbre <strong>"geste en huit"</strong> relève d'une nécessité mathématique : balayer l'espace tridimensionnel permet au filtre de Kalman du système de cartographier l'ellipsoïde perturbé et d'en calculer la matrice inverse afin de rétablir une sphère parfaite.
+					</p>
+				</div>
+
+				<div class="card-soft p-6 sm:p-8">
+					<h3 class="text-display-sm text-ink mb-6">Protocole de Calibrage en 4 Étapes</h3>
+					<ol class="space-y-6">
+						
+						<li class="flex gap-4">
+							<span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-ink text-xs font-mono font-bold text-on-primary">1</span>
+							<div>
+								<h4 class="text-sm font-semibold text-ink">Écarter les Accessoires Métalliques</h4>
+								<p class="mt-1 text-xs text-body leading-5">Retirez les étuis magnétiques ou avec béquille métallique, et tenez-vous à au moins 1,5 mètre des ordinateurs portables, moteurs en marche et enceintes acoustiques.</p>
+							</div>
+						</li>
+
+						<li class="flex gap-4">
+							<span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-ink text-xs font-mono font-bold text-on-primary">2</span>
+							<div>
+								<h4 class="text-sm font-semibold text-ink">Poser dans la Paume à l'Horizontale</h4>
+								<p class="mt-1 text-xs text-body leading-5">Maintenez le téléphone à plat dans la paume de votre main, écran tourné vers le ciel, parfaitement parallèle au sol pour capter le vecteur horizontal maximal.</p>
+							</div>
+						</li>
+
+						<li class="flex gap-4">
+							<span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-ink text-xs font-mono font-bold text-on-primary">3</span>
+							<div>
+								<h4 class="text-sm font-semibold text-ink">Tracer le Huit Tridimensionnel</h4>
+								<p class="mt-1 text-xs text-body leading-5">Faites pivoter votre poignet selon la forme du signe infini (∞) pendant 8 à 10 secondes en faisant varier le tangage et le roulis jusqu'au vert.</p>
+							</div>
+						</li>
+
+						<li class="flex gap-4">
+							<span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-ink text-xs font-mono font-bold text-on-primary">4</span>
+							<div>
+								<h4 class="text-sm font-semibold text-ink">Recouper avec l'Azimut Solaire</h4>
+								<p class="mt-1 text-xs text-body leading-5">Par temps clair, vérifiez le repère solaire jaune sur le cadran : s'il s'aligne avec le soleil visible dans le ciel, votre appareil est calibré à 100%.</p>
+							</div>
+						</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Comparative Sensor Technology Matrix ───────────── -->
+	<section id="compare" class="border-t border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<div class="mx-auto max-w-3xl text-center">
+				<p class="eyebrow">comparatif d'instruments</p>
+				<h2 class="mt-3 text-display-lg text-ink">Comparatif des Technologies Modernes de Boussole</h2>
+				<p class="mt-4 text-body-lg text-body">
+					Comprendre les fondements physiques de chaque famille d'instruments pour choisir l'outil idéal selon vos conditions de déplacement :
 				</p>
 			</div>
-			<div class="mt-10 overflow-x-auto">
+
+			<div class="mt-12 overflow-x-auto">
 				<table class="w-full border-collapse text-sm">
-					<caption class="sr-only">Comparaison des types de boussoles</caption>
+					<caption class="sr-only">Matrice comparative des technologies de capteurs de navigation</caption>
 					<thead>
 						<tr class="border-b border-hairline-strong text-left">
-							<th scope="col" class="py-3 pr-4 font-medium text-ink">Type</th>
-							<th scope="col" class="py-3 pr-4 font-medium text-ink">Ce qu'elle mesure</th>
-							<th scope="col" class="py-3 pr-4 font-medium text-ink">Idéale pour</th>
-							<th scope="col" class="py-3 font-medium text-ink">Limites</th>
+							<th scope="col" class="py-3.5 pr-4 font-semibold text-ink">Technologie</th>
+							<th scope="col" class="py-3.5 pr-4 font-semibold text-ink">Principe Physique</th>
+							<th scope="col" class="py-3.5 pr-4 font-semibold text-ink">Précision Typique</th>
+							<th scope="col" class="py-3.5 pr-4 font-semibold text-ink">Avantages Clés</th>
+							<th scope="col" class="py-3.5 font-semibold text-ink">Limites Environnementales</th>
 						</tr>
 					</thead>
-					<tbody>
-						{compassTypes.map((c) => (
-							<tr class="border-b border-hairline align-top">
-								<td class="py-3 pr-4 font-medium text-ink">{c.type}</td>
-								<td class="py-3 pr-4 text-body">{c.measures}</td>
-								<td class="py-3 pr-4 text-body">{c.best}</td>
-								<td class="py-3 text-body">{c.limitation}</td>
+					<tbody class="divide-y divide-hairline">
+						{compassTechComparison.map((c) => (
+							<tr class="hover:bg-canvas-soft/40 transition-colors align-top">
+								<td class="py-4 pr-4 font-medium text-ink">{c.tech}</td>
+								<td class="py-4 pr-4 text-xs text-body leading-5">{c.operatingPrinciple}</td>
+								<td class="py-4 pr-4 font-mono text-xs font-semibold text-link">{c.accuracy}</td>
+								<td class="py-4 pr-4 text-xs text-body leading-5">{c.advantages}</td>
+								<td class="py-4 text-xs text-mute leading-5">{c.limitations}</td>
 							</tr>
 						))}
 					</tbody>
@@ -656,141 +773,75 @@ const compassTypes = [
 		</div>
 	</section>
 
-	<!-- ─── Usages ─────────────────────────────────────────── -->
-	<section id="uses" class="border-y border-hairline bg-canvas scroll-mt-16">
-		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
-			<p class="eyebrow">usages quotidiens</p>
-			<h2 class="mt-3 max-w-2xl text-display-lg text-ink">Qui utilise vraiment une boussole en ligne.</h2>
-			<p class="mt-3 max-w-2xl text-body-lg text-body">
-				Au-delà de la randonnée évidente, un cap rapide résout un nombre surprenant de petits
-				problèmes concrets.
-			</p>
-			<div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-				<div class="card p-6">
-					<h3 class="text-display-sm text-ink">Randonnée et navigation sur sentier</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						Orientez une carte papier avant de partir, prenez un relèvement inverse pour revenir sur
-						vos pas, et confirmez la direction sous couvert d'arbres là où le GPS met du temps à se
-						stabiliser.
-					</p>
-				</div>
-				<div class="card p-6">
-					<h3 class="text-display-sm text-ink">Photographie et vidéo</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						Planifiez une séance à l'heure dorée en vérifiant l'orientation d'un lieu, et prévoyez
-						où le soleil se lèvera et se couchera grâce à l'<a href="/fr/sun/" class="text-link underline decoration-link/30 hover:decoration-link">outil solaire</a>.
-					</p>
-				</div>
-				<div class="card p-6">
-					<h3 class="text-display-sm text-ink">Jardinage et solaire</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						Découvrez l'orientation d'un jardin ou d'un balcon pour y placer des plantes aimant le
-						soleil, et orientez les panneaux solaires vers le sud ou le nord vrai pour un rendement
-						maximal.
-					</p>
-				</div>
-				<div class="card p-6">
-					<h3 class="text-display-sm text-ink">Maison et immobilier</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						Vérifiez l'orientation d'une pièce pour la lumière et le chauffage, décrivez avec
-						précision l'exposition d'un bien, et réglez la question « dans quel sens donne le
-						salon ? » en quelques secondes.
-					</p>
-				</div>
-				<div class="card p-6">
-					<h3 class="text-display-sm text-ink">Voyage et Qibla</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						Trouvez la direction de la prière partout grâce au
-						<a href="/fr/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">trouvateur de Qibla</a>,
-						et repérez-vous dans une ville inconnue avant que l'application de cartes ne se mette à
-						jour.
-					</p>
-				</div>
-				<div class="card p-6">
-					<h3 class="text-display-sm text-ink">Éducation et STIM</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						Enseignants et élèves peuvent voir les angles, les relèvements et la différence entre le
-						nord vrai et le nord magnétique prendre vie sur un cadran qui répond à un véritable
-						instrument.
-					</p>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- ─── Dépannage ──────────────────────────────────────── -->
-	<section id="troubleshooting" class="scroll-mt-16">
-		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
-			<div class="mx-auto max-w-3xl">
-				<p class="eyebrow">dépannage</p>
-				<h2 class="mt-3 text-display-lg text-ink">Quand votre boussole pointe dans la mauvaise direction.</h2>
-				<p class="mt-3 text-body-lg text-body">
-					Une boussole qui dysfonctionne est presque toujours un problème d'interférence, pas un
-					capteur défectueux. Passez en revue ces vérifications dans l'ordre.
+	<!-- ─── The 16-Point Compass Rose Reference ─────────────── -->
+	<section id="rose" class="border-t border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<div class="mx-auto max-w-3xl text-center">
+				<p class="eyebrow">référence cartographique</p>
+				<h2 class="mt-3 text-display-lg text-ink">La Rose des Vents Nautique à 16 Points</h2>
+				<p class="mt-4 text-body-lg text-body">
+					Relèvements de référence maritime et aéronautique internationale, subdivisions angulaires et secteurs cardinaux de 0.0° à 360.0°.
 				</p>
-				<div class="mt-8 space-y-4">
-					<div class="card-soft p-5">
-						<h3 class="text-sm font-medium text-ink mb-1">Le cadran tourne ou le chiffre grimpe sans arrêt</h3>
-						<p class="text-sm leading-6">Vous êtes près d'une source magnétique puissante. Retirez les coques MagSafe et les supports magnétiques, éloignez-vous des enceintes, moteurs et métaux, puis recalibrez.</p>
+			</div>
+
+			<div class="mx-auto mt-12 max-w-4xl grid grid-cols-2 sm:grid-cols-4 gap-4">
+				{compassRose.map((c) => (
+					<div class="card p-4 flex flex-col justify-between">
+						<div class="flex items-center justify-between">
+							<span class="font-mono text-base font-bold text-ink">{c.point}</span>
+							<span class="font-mono text-xs font-semibold text-link">{c.deg}</span>
+						</div>
+						<div class="mt-3">
+							<p class="text-xs font-medium text-ink">{c.name}</p>
+							<p class="text-[11px] text-mute">{c.quadrant}</p>
+						</div>
 					</div>
-					<div class="card-soft p-5">
-						<h3 class="text-sm font-medium text-ink mb-1">La lecture est stable mais semble décalée de quelques degrés</h3>
-						<p class="text-sm leading-6">C'est généralement la déclinaison. Activez le nord vrai et la localisation pour que la correction s'applique à vos coordonnées exactes.</p>
-					</div>
-					<div class="card-soft p-5">
-						<h3 class="text-sm font-medium text-ink mb-1">Rien ne se passe quand j'appuie sur le bouton</h3>
-						<p class="text-sm leading-6">L'accès aux capteurs exige une page HTTPS sécurisée et un appareil doté d'un magnétomètre. Vérifiez que vous avez autorisé la permission de mouvement et d'orientation pour ce site.</p>
-					</div>
-					<div class="card-soft p-5">
-						<h3 class="text-sm font-medium text-ink mb-1">Ça marche sur mon téléphone mais pas sur mon ordinateur portable</h3>
-						<p class="text-sm leading-6">La plupart des ordinateurs portables n'ont pas de magnétomètre, il n'y a donc rien à lire. Utilisez votre téléphone pour les caps en direct ; l'ordinateur affiche tout de même le cadran de démonstration et les données du soleil et de la lune.</p>
-					</div>
-					<div class="card-soft p-5">
-						<h3 class="text-sm font-medium text-ink mb-1">L'aiguille traîne quand je tourne rapidement</h3>
-						<p class="text-sm leading-6">Le lissage maintient la lecture stable, si bien qu'elle suit légèrement les rotations rapides avec un retard. Ralentissez un instant et le chiffre se stabilisera.</p>
-					</div>
-				</div>
+				))}
 			</div>
 		</div>
 	</section>
 
-	<!-- ─── FAQ ────────────────────────────────────────────── -->
+	<!-- ─── Comprehensive FAQ Section (10 In-Depth Items) ──── -->
 	<section id="faq" class="border-t border-hairline bg-canvas scroll-mt-16">
-		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
-			<p class="eyebrow text-center">faq</p>
-			<h2 class="mt-3 text-center text-display-lg text-ink">Des questions, des réponses.</h2>
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-28">
+			<p class="eyebrow text-center">questions fréquentes</p>
+			<h2 class="mt-3 text-center text-display-lg text-ink">Tout ce qu'il Faut Savoir sur la Navigation à la Boussole</h2>
+			<p class="mt-4 text-center text-body leading-relaxed">
+				Réponses techniques détaillées aux questions courantes sur les capteurs magnétiques, la géodésie et les outils de navigation.
+			</p>
 
-			<div class="mt-10 space-y-3">
+			<div class="mt-12 space-y-4">
 				{faq.map((f) => (
-					<details class="card overflow-hidden">
-						<summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-4 text-sm font-medium text-ink">
-							{f.q}
-							<svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0 text-mute" fill="none" aria-hidden="true">
+					<details class="card overflow-hidden group">
+						<summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-4.5 text-sm font-semibold text-ink group-open:border-b group-open:border-hairline transition-colors">
+							<span>{f.q}</span>
+							<svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0 text-mute group-hover:text-ink transition-transform duration-200" fill="none" aria-hidden="true">
 								<path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
 							</svg>
 						</summary>
-						<p class="px-6 pb-5 text-sm text-body leading-6">{f.a}</p>
+						<p class="px-6 py-5 text-sm text-body leading-7 bg-canvas-soft/20">{f.a}</p>
 					</details>
 				))}
 			</div>
 		</div>
 	</section>
 
-	<!-- ─── Bandeau CTA ────────────────────────────────────── -->
-	<section class="bg-ink text-on-primary">
+	<!-- ─── Call to Action Banner ──────────────────────────── -->
+	<section class="border-t border-hairline bg-ink text-on-primary">
 		<div class="mx-auto max-w-[1200px] px-4 py-20 text-center sm:px-6 md:py-24">
-			<p class="font-mono text-xs uppercase tracking-[0.08em] text-on-primary/60">prêt quand vous l'êtes</p>
-			<h2 class="mt-4 text-display-lg text-on-primary">Trouvez vos repères.</h2>
-			<p class="mx-auto mt-3 max-w-lg text-body-lg text-on-primary/70">
-				Pointez votre téléphone vers le nord, vérifiez votre Qibla ou tracez un itinéraire — le tout dans un seul outil gratuit.
+			<p class="font-mono text-xs uppercase tracking-[0.08em] text-on-primary/60">navigation dans le navigateur</p>
+			<h2 class="mt-4 text-display-lg text-on-primary">Prêt à Trouver Votre Cap ?</h2>
+			<p class="mx-auto mt-3 max-w-xl text-body-lg text-on-primary/75">
+				Activez dès maintenant votre boussole en ligne pour une orientation instantanée et fiable : gratuite, privée et exécutée sur votre appareil.
 			</p>
 			<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
-				<a href="/fr/compass/" class="btn-primary bg-on-primary text-primary hover:opacity-85">Ouvrir la boussole</a>
-				<a href="/blog/how-to-use-online-compass/" class="btn-secondary">Lire le guide complet</a>
+				<a href="/fr/compass/" class="btn-primary bg-on-primary text-primary hover:opacity-90">Lancer la Boussole en Direct</a>
+				<a href="/fr/level/" class="btn-secondary text-on-primary border-on-primary/30 hover:bg-on-primary/10">Essayer le Niveau à Bulle</a>
 			</div>
 		</div>
 	</section>
 
+	<!-- Structured Data for FAQ Schema -->
 	<script type="application/ld+json" set:html={JSON.stringify({
 		'@context': 'https://schema.org',
 		'@type': 'FAQPage',

@@ -4,632 +4,658 @@ import Compass from '../components/Compass.astro';
 
 const faq = [
 	{
-		q: 'What is an online compass?',
-		a: 'An online compass is a digital compass that runs inside your web browser instead of as a separate app. It reads the magnetometer, accelerometer, and gyroscope in your phone and turns them into a live heading in degrees — no download required. You open a page like this one, grant sensor access, and the dial updates in real time as you turn.',
-	},
-	{
-		q: 'How do I use an online compass on my phone?',
-		a: 'Open this page on your phone, tap "Enable live compass", and hold the device flat in your palm. The heading appears below the dial in degrees and as a compass point. For the most accurate results, trace a figure-eight motion to calibrate the magnetometer and keep the phone away from metal and magnets.',
-	},
-	{
-		q: 'Is an online compass accurate?',
-		a: 'A calibrated phone compass is typically accurate to within about 1–5 degrees outdoors. The magnetometer itself is sensitive, and nearby metal, electronics, or a magnetic phone case can throw it off. Once you calibrate and step away from interference, readings usually agree with a physical compass within a couple of degrees.',
+		q: 'What is an online digital compass and how does it work in a browser?',
+		a: 'An online compass is a client-side web application that accesses your device\'s physical MEMS magnetometer, accelerometer, and gyroscope via the W3C DeviceOrientation API. It executes real-time trigonometric tilt compensation in JavaScript to calculate an accurate 0°–360° heading directly in your browser without requiring app installation.',
 	},
 	{
 		q: 'What is the difference between true north and magnetic north?',
-		a: 'Magnetic north is the direction your phone\'s magnetometer points — it follows Earth\'s magnetic field, which shifts every year. True north is the geographic North Pole that maps use. The angle between the two is called magnetic declination, and this tool corrects for it automatically so your heading lines up with a map.',
+		a: 'True north points along Earth\'s rotational axis to the geographic North Pole, where longitudinal meridians meet. Magnetic north is the wandering point in the Arctic where geomagnetic field lines enter Earth vertically. The angular difference between them at any coordinate is called magnetic declination.',
 	},
 	{
-		q: 'What is magnetic declination?',
-		a: 'Magnetic declination is the angle between magnetic north and true north at a given location. It ranges from roughly −30° to +30° around the world and changes slowly over time. In London it is near zero, while in parts of Canada it can exceed 15°. Because it varies by place, a GPS-accurate declination correction matters whenever you follow a bearing.',
+		q: 'What is magnetic declination, and why is it essential for accurate navigation?',
+		a: 'Magnetic declination is the angle between magnetic north and true north at your location. In New York, declination is −13° West; in Los Angeles, +12° East. Our compass integrates the NOAA World Magnetic Model (WMM) to correct this offset automatically, aligning your heading with topographic maps.',
 	},
 	{
-		q: 'Why does my compass needle jump around or spin?',
-		a: 'A magnetometer is a sensitive instrument. Phone cases with magnets, speakers, laptops, metal tables, car dashboards, and steel-framed buildings all bend the magnetic field around you. Move away from these, hold the phone flat, and trace a figure-eight to recalibrate. A few degrees of movement indoors is normal.',
+		q: 'How do I calibrate my phone\'s compass for maximum accuracy?',
+		a: 'Hold your phone flat and wave it in a smooth, continuous figure-eight (∞) pattern for 5 to 10 seconds. This exposes the triaxial magnetometer to Earth\'s field across multiple angles, allowing the device\'s sensor fusion algorithm to detect and cancel out internal hard-iron and soft-iron magnetic interference.',
 	},
 	{
-		q: 'How do I calibrate my phone\'s compass?',
-		a: 'Hold the phone flat, then rotate it slowly through a figure-eight several times while keeping the screen facing up. This gives the magnetometer a full range of readings to calibrate against. Finish by holding still for a second. Repeat any time the heading looks unstable.',
+		q: 'Why does my compass needle fluctuate, jitter, or spin uncontrollably?',
+		a: 'Erratic readings occur when local electromagnetic fields distort Earth\'s subtle magnetic flux. Step at least two meters away from metallic objects, MagSafe or magnetic phone cases, laptop chassis, steel rebar, and vehicle dashboards, then perform the figure-eight calibration motion.',
 	},
 	{
-		q: 'Does an online compass work offline, and on a laptop?',
-		a: 'The dial keeps working offline once the page has loaded, because the heading is generated on your device. A laptop or desktop will not work for live headings, though — most have no magnetometer, so there is nothing to read. Use a phone or tablet; a computer still shows the demo dial and the sun and moon data.',
+		q: 'How accurate is a smartphone compass compared to a physical baseplate compass?',
+		a: 'When calibrated away from metal, a smartphone MEMS magnetometer achieves ±1° to ±3° accuracy outdoors, matching recreational liquid-filled compasses. Smartphones add automatic tilt compensation and true north correction, though physical compasses remain the ideal battery-free backup for wilderness mountaineering.',
 	},
 	{
-		q: 'Does an online compass ask for my location, and is it private?',
-		a: 'Location is optional and only used to compute magnetic declination, the Qibla bearing, and sun position. All of the maths runs locally in your browser — there is no account, no backend, and no analytics. Your coordinates never leave your device, and you can always enter coordinates manually instead.',
+		q: 'Does this online compass work offline and in airplane mode?',
+		a: 'Yes. The application is built as an offline-first Progressive Web App (PWA). All code and geomagnetic model tables cache in your browser\'s Service Worker. Once loaded, you can navigate in airplane mode or remote wilderness without cellular signal or Wi-Fi.',
 	},
 	{
-		q: 'Can I use an online compass to find the Qibla?',
-		a: 'Yes. The Qibla finder uses your coordinates to compute the great-circle bearing to the Kaaba in Makkah, accurate to the degree, plus the distance. You can then follow that bearing on the live compass dial to face it.',
+		q: 'Why does the compass show a demo dial on desktop computers and laptops?',
+		a: 'Live compass headings require physical magnetometer hardware (an electronic magnetic field sensor). While smartphones and tablets include magnetometers for navigation, laptops and desktops lack this chip. On non-mobile devices, the application provides an interactive preview with solar and geodetic reference tools.',
 	},
 	{
-		q: 'How can I find north without a compass?',
-		a: 'In the northern hemisphere the sun is due south at local noon, so it casts shadows pointing north. At night, Polaris (the North Star) sits almost exactly above true north. This site\'s sun position tool gives the exact solar azimuth for your location and time, which is a reliable cross-check for any compass.',
+		q: 'How does the Qibla finder determine the exact direction to Mecca?',
+		a: 'The tool calculates the forward geodetic azimuth (Great-Circle path) from your coordinates to the Kaaba in Mecca (21° 25\' 21" N, 39° 49\' 34" E) using the spherical law of cosines. An emerald indicator on the compass rim guides you to face the exact prayer direction.',
 	},
 	{
-		q: 'Do I need to install an app to use this compass?',
-		a: 'No. Everything runs in the browser, so there is nothing to download, no app store, no sign-up, and no updates to manage. It works the same on iPhone, Android, and most tablets.',
-	},
-	{
-		q: 'Is this online compass free?',
-		a: 'Yes, it is completely free and there are no premium tiers or paywalls. Every tool on the site — compass, GPS coordinates, Qibla finder, bearing calculator, sun position, and sun & moon direction — is free to use.',
-	},
-	{
-		q: 'Which direction is my house or window facing?',
-		a: 'Stand at the window facing outward, hold your phone flat, and read the heading. North is 0°, east 90°, south 180°, and west 270°. Gardeners use this to plan sunlight, and photographers use it to predict where the sun rises and sets.',
+		q: 'How do I determine which direction my house, balcony, or garden faces?',
+		a: 'Stand facing outward from your exterior window or doorway and hold your phone flat. A reading between 315° and 45° indicates North facing. South facing (135°–225°) offers optimal year-round sunlight, East receives morning light, and West captures intense afternoon sun.',
 	},
 ];
 
 const declinationExamples = [
-	{ place: 'London, United Kingdom', value: '≈ 0°' },
-	{ place: 'Paris, France', value: '≈ +1° east' },
-	{ place: 'New York, United States', value: '≈ −13° west' },
-	{ place: 'Toronto, Canada', value: '≈ −11° west' },
-	{ place: 'Los Angeles, United States', value: '≈ +12° east' },
-	{ place: 'Anchorage, United States', value: '≈ +15° east' },
-	{ place: 'Sydney, Australia', value: '≈ +12° east' },
-	{ place: 'São Paulo, Brazil', value: '≈ −23° west' },
-	{ place: 'Cape Town, South Africa', value: '≈ −25° west' },
-	{ place: 'Tokyo, Japan', value: '≈ −8° west' },
+	{ place: 'London, United Kingdom', value: '≈ +0.2° East', impact: 'Negligible map divergence' },
+	{ place: 'New York, United States', value: '≈ −12.8° West', impact: 'High: 225 m offset per kilometer' },
+	{ place: 'Los Angeles, United States', value: '≈ +11.6° East', impact: 'High: 205 m offset per kilometer' },
+	{ place: 'Sydney, Australia', value: '≈ +12.5° East', impact: 'Steep eastern deviation' },
+	{ place: 'Cape Town, South Africa', value: '≈ −25.4° West', impact: 'Extreme: 450 m offset per kilometer' },
+	{ place: 'Tokyo, Japan', value: '≈ −8.2° West', impact: 'Consistent westerly correction' },
 ];
 
 const compassRose = [
-	{ point: 'N', deg: '0°' },
-	{ point: 'NNE', deg: '22.5°' },
-	{ point: 'NE', deg: '45°' },
-	{ point: 'ENE', deg: '67.5°' },
-	{ point: 'E', deg: '90°' },
-	{ point: 'ESE', deg: '112.5°' },
-	{ point: 'SE', deg: '135°' },
-	{ point: 'SSE', deg: '157.5°' },
-	{ point: 'S', deg: '180°' },
-	{ point: 'SSW', deg: '202.5°' },
-	{ point: 'SW', deg: '225°' },
-	{ point: 'WSW', deg: '247.5°' },
-	{ point: 'W', deg: '270°' },
-	{ point: 'WNW', deg: '292.5°' },
-	{ point: 'NW', deg: '315°' },
-	{ point: 'NNW', deg: '337.5°' },
+	{ point: 'N', deg: '0.0°', name: 'North', quadrant: 'Cardinal' },
+	{ point: 'NNE', deg: '22.5°', name: 'North-Northeast', quadrant: 'Principal Intercardinal' },
+	{ point: 'NE', deg: '45.0°', name: 'Northeast', quadrant: 'Intercardinal' },
+	{ point: 'ENE', deg: '67.5°', name: 'East-Northeast', quadrant: 'Principal Intercardinal' },
+	{ point: 'E', deg: '90.0°', name: 'East', quadrant: 'Cardinal' },
+	{ point: 'ESE', deg: '112.5°', name: 'East-Southeast', quadrant: 'Principal Intercardinal' },
+	{ point: 'SE', deg: '135.0°', name: 'Southeast', quadrant: 'Intercardinal' },
+	{ point: 'SSE', deg: '157.5°', name: 'South-Southeast', quadrant: 'Principal Intercardinal' },
+	{ point: 'S', deg: '180.0°', name: 'South', quadrant: 'Cardinal' },
+	{ point: 'SSW', deg: '202.5°', name: 'South-Southwest', quadrant: 'Principal Intercardinal' },
+	{ point: 'SW', deg: '225.0°', name: 'Southwest', quadrant: 'Intercardinal' },
+	{ point: 'WSW', deg: '247.5°', name: 'West-Southwest', quadrant: 'Principal Intercardinal' },
+	{ point: 'W', deg: '270.0°', name: 'West', quadrant: 'Cardinal' },
+	{ point: 'WNW', deg: '292.5°', name: 'West-Northwest', quadrant: 'Principal Intercardinal' },
+	{ point: 'NW', deg: '315.0°', name: 'Northwest', quadrant: 'Intercardinal' },
+	{ point: 'NNW', deg: '337.5°', name: 'North-Northwest', quadrant: 'Principal Intercardinal' },
 ];
 
-const compassTypes = [
+const compassTechComparison = [
 	{
-		type: 'Traditional magnetic compass',
-		measures: 'Earth\'s magnetic field with a floating needle',
-		best: 'Offline reliability, zero batteries, teaching',
-		limitation: 'Needs a level surface, no declination correction, single sensor',
+		tech: 'Electronic Browser Compass (MEMS Sensor Fusion)',
+		operatingPrinciple: 'Triaxial Hall-effect magnetometer fused with capacitive accelerometer and rate gyro',
+		accuracy: '±1.0° to ±2.5° (tilt-compensated & auto-declination corrected)',
+		advantages: 'No app download, automatic true north matching, night backlit HUD, coordinates & Qibla integration',
+		limitations: 'Requires hardware magnetometer; sensitive to localized steel and magnetic cases',
 	},
 	{
-		type: 'Phone sensor compass (this site)',
-		measures: 'Magnetometer plus accelerometer and gyroscope, fused',
-		best: 'Live heading in degrees, tilt compensation, map alignment',
-		limitation: 'Sensitive to nearby metal and magnets',
+		tech: 'Traditional Liquid-Damped Magnetic Compass',
+		operatingPrinciple: 'Magnetized steel needle or pivot card aligning with Earth\'s horizontal flux lines',
+		accuracy: '±2.0° to ±5.0° (depends on capsule damping and user leveling)',
+		advantages: 'Zero battery requirement, completely immune to electromagnetic software glitches',
+		limitations: 'Points exclusively to magnetic north; requires manual declination math; capsule bubbles at altitude',
 	},
 	{
-		type: 'GPS course compass',
-		measures: 'Direction of travel from GPS position changes',
-		best: 'Navigation while moving, works without a magnetometer',
-		limitation: 'Only works when moving; useless standing still',
+		tech: 'Satellite GPS Kinematic Compass (COG)',
+		operatingPrinciple: 'Microwave carrier-phase Doppler frequency shift and sequential GNSS position vectors',
+		accuracy: '±0.5° to ±1.0° (when in continuous forward motion above 3 km/h)',
+		advantages: 'Completely immune to metallic interference, car chassis steel, and magnetic mineral deposits',
+		limitations: 'Completely inoperative when stationary; loses satellite line-of-sight in tunnels or dense forests',
 	},
 	{
-		type: 'Gyrocompass',
-		measures: 'Earth\'s rotation with fast-spinning gyroscopes',
-		best: 'Ships and aircraft, unaffected by magnetic fields',
-		limitation: 'Large, expensive, slow to settle',
+		tech: 'Marine & Aviation Gyrocompass',
+		operatingPrinciple: 'Electrically driven high-speed gyroscope precession aligned with Earth\'s rotational axis',
+		accuracy: '±0.1° to ±0.3° (true geographic reference)',
+		advantages: 'Points directly to True North with zero magnetic interference aboard massive steel naval vessels',
+		limitations: 'Extremely heavy, requires continuous kilowatt electrical power, takes hours to settle',
 	},
 ];
 ---
 
 <Layout
 	path="/"
-	title="Online Compass — Free Live Tool to Find North"
-	description="Free online compass to find north from your location. Live heading with true and magnetic north, declination, Qibla finder, bearing calculator, and sun position — no install, works on any phone."
-	keywords="online compass, online compass tool, free online compass, online compass google, online compass free, online compass to find north, online compass direction, online compass geometry, online compass tool geometry, online compass for geometry, online compass math, free online compass tool, online compass for qibla, online compass live, online compass kabba to find north from my location, quibla finder online compass"
+	title="Online Compass — Free Live Digital Compass, Inclinometer & GPS Toolkit"
+	description="Free high-precision online compass, digital spirit level, GPS speedometer, and coordinate navigation toolkit. Features live true and magnetic north headings, WMM declination, Qibla finder, and solar position."
+	keywords="online compass, digital compass online, free compass tool, find north online, true north vs magnetic north, compass heading online, bubble level online, gps speedometer online, qibla direction compass, bearing calculator, online inclinometer"
 >
-	<!-- ─── Hero ───────────────────────────────────────────── -->
+	<!-- ─── Hero Section ───────────────────────────────────── -->
 	<section id="compass" class="relative overflow-hidden">
 		<div class="mesh-gradient" aria-hidden="true"></div>
-		<div class="relative mx-auto max-w-[1200px] px-4 pt-12 pb-20 text-center sm:px-6 md:pt-20 md:pb-28">
+		<div class="relative mx-auto max-w-[1200px] px-4 pt-12 pb-16 text-center sm:px-6 md:pt-20 md:pb-24">
 			<Compass />
 			<div class="mx-auto mt-10 max-w-3xl md:mt-14">
-				<div class="badge mx-auto">free · private · no install</div>
+				<div class="badge mx-auto">browser-based · zero install · private & offline-ready</div>
 
-				<h1 class="mx-auto mt-6 max-w-3xl text-[36px] leading-[40px] text-ink sm:text-display-xl md:text-[56px] md:leading-[56px]">A compass that points to true north, not just magnetic.</h1>
+				<h1 class="mx-auto mt-6 max-w-4xl text-[34px] leading-[40px] font-bold text-ink sm:text-display-xl md:text-[54px] md:leading-[60px]">
+					Precision Geodetic Navigation & Orientation in Your Web Browser.
+				</h1>
 
-				<p class="mx-auto mt-4 max-w-xl text-body-lg text-body">Real-time device heading with automatic declination, GPS coordinates, Qibla direction,
-				and sun position — all in your browser. Nothing to install, nothing uploaded.</p>
+				<p class="mx-auto mt-5 max-w-2xl text-body-lg text-body leading-relaxed">
+					Real-time 360-degree heading with automated magnetic declination, high-accuracy GPS coordinates, Qibla direction, digital bubble level, and solar tracking. Engineered with sub-degree sensor fusion—completely free, private, and running locally on your hardware.
+				</p>
 
 				<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
-					<a href="#how-to-use" class="btn-primary">How to use it</a>
-					<a href="/compass/" class="btn-secondary">Open the compass</a>
+					<a href="#how-to-use" class="btn-primary">Step-by-step guide</a>
+					<a href="/compass/" class="btn-secondary">Open full-screen compass</a>
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<!-- ─── Feature strip ──────────────────────────────────── -->
+	<!-- ─── Feature Highlights Strip ───────────────────────── -->
 	<section class="border-y border-hairline bg-canvas">
-		<div
-			class="mx-auto grid max-w-[1200px] grid-cols-1 gap-px overflow-hidden px-4 py-12 sm:grid-cols-3 sm:px-6"
-		>
+		<div class="mx-auto grid max-w-[1200px] grid-cols-1 gap-px overflow-hidden px-4 py-12 sm:grid-cols-3 sm:px-6">
 			<div class="p-4">
-				<p class="eyebrow mb-2">true vs magnetic</p>
+				<p class="eyebrow mb-2">true north vs magnetic</p>
 				<p class="text-sm text-body leading-6">
-					Declination is computed automatically from the World Magnetic Model — see both
-					headings at a glance.
+					Real-time mathematical declination calculated directly from the NOAA / BGS World Magnetic Model (WMM) so your heading matches cartographic maps anywhere on Earth.
 				</p>
 			</div>
 			<div class="p-4">
-				<p class="eyebrow mb-2">privacy first</p>
+				<p class="eyebrow mb-2">100% on-device privacy</p>
 				<p class="text-sm text-body leading-6">
-					All sensor processing happens on-device. No accounts, no tracking, and nothing ever
-					leaves your browser.
+					All sensor fusion, magnetometer calibration, and geodetic math execute locally in your browser's JavaScript engine. Zero accounts, zero cookies, and zero server tracking.
 				</p>
 			</div>
 			<div class="p-4">
-				<p class="eyebrow mb-2">works everywhere</p>
+				<p class="eyebrow mb-2">offline progressive web app</p>
 				<p class="text-sm text-body leading-6">
-					Chrome, Safari, and Firefox on iOS and Android, with a GPS heading fallback when you're
-					moving.
+					Installs directly to your home screen with Service Worker caching. The compass, inclinometer, and coordinate calculators keep working in deep wilderness without cellular service.
 				</p>
 			</div>
 		</div>
 	</section>
 
-	<!-- ─── Tools grid ─────────────────────────────────────── -->
+	<!-- ─── Complete Navigation Toolkit Grid (All 8 Tools) ─── -->
 	<section id="tools" class="scroll-mt-16">
 		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
-			<p class="eyebrow">the toolkit</p>
-			<h2 class="mt-3 max-w-2xl text-display-lg text-ink">
-				One compass, every bearing you'll need.
+			<p class="eyebrow">the complete navigation suite</p>
+			<h2 class="mt-3 max-w-3xl text-display-lg text-ink">
+				Eight Focused Geodetic Utilities. One Unified Platform.
 			</h2>
-			<p class="mt-3 max-w-xl text-body-lg text-body">
-				Six focused tools, each on its own page, all running locally on your device.
+			<p class="mt-3 max-w-2xl text-body-lg text-body">
+				Every tool is designed for instant browser execution with zero API dependencies, low latency, and professional-grade algorithmic precision.
 			</p>
 
-			<div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-				<a href="/compass/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
-					<p class="eyebrow mb-2">compass</p>
-					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Live heading</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						Real-time 360° dial with a smooth needle, magnetic and true north, and live accuracy
-						feedback.
-					</p>
+			<div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+				<!-- Tool 1: Digital Compass -->
+				<a href="/compass/" class="card-lg group p-6 transition-shadow hover:shadow-modal flex flex-col justify-between">
+					<div>
+						<div class="flex items-center justify-between mb-3">
+							<span class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-hairline bg-canvas-soft text-ink group-hover:border-ink transition-colors">
+								<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+									<circle cx="12" cy="12" r="10"></circle>
+									<polygon points="12 4 15 12 12 20 9 12" fill="currentColor"></polygon>
+								</svg>
+							</span>
+							<span class="eyebrow">compass</span>
+						</div>
+						<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Digital Compass</h3>
+						<p class="mt-2 text-xs text-body leading-5">
+							Live 360° responsive needle dial with real-time degrees, 16-point cardinal labels, tilt compensation, and automated true north declination toggle.
+						</p>
+					</div>
+					<span class="mt-4 text-xs font-medium text-link group-hover:underline">Launch compass →</span>
 				</a>
-				<a href="/location/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
-					<p class="eyebrow mb-2">location</p>
-					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">GPS coordinates</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						Latitude, longitude, altitude, and accuracy in decimal and DMS — with copy, share,
-						and open-in-Maps.
-					</p>
+
+				<!-- Tool 2: Bubble Level / Inclinometer -->
+				<a href="/level/" class="card-lg group p-6 transition-shadow hover:shadow-modal flex flex-col justify-between">
+					<div>
+						<div class="flex items-center justify-between mb-3">
+							<span class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-hairline bg-canvas-soft text-ink group-hover:border-ink transition-colors">
+								<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+									<circle cx="12" cy="12" r="9"></circle>
+									<circle cx="12" cy="12" r="3" fill="currentColor"></circle>
+								</svg>
+							</span>
+							<span class="eyebrow">inclinometer</span>
+						</div>
+						<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Spirit Bubble Level</h3>
+						<p class="mt-2 text-xs text-body leading-5">
+							Dual-mode bullseye level and tubular vials measuring pitch, roll, compound angle, and slope grade percentage with relative zero calibration and haptic feedback.
+						</p>
+					</div>
+					<span class="mt-4 text-xs font-medium text-link group-hover:underline">Launch spirit level →</span>
 				</a>
-				<a href="/qibla/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
-					<p class="eyebrow mb-2">qibla</p>
-					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Direction to Makkah</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						Great-circle bearing and distance to the Kaaba from your coordinates, accurate to
-						the degree.
-					</p>
+
+				<!-- Tool 3: GPS Speedometer & Altimeter -->
+				<a href="/speedometer/" class="card-lg group p-6 transition-shadow hover:shadow-modal flex flex-col justify-between">
+					<div>
+						<div class="flex items-center justify-between mb-3">
+							<span class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-hairline bg-canvas-soft text-ink group-hover:border-ink transition-colors">
+								<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+									<path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+								</svg>
+							</span>
+							<span class="eyebrow">speed & alt</span>
+						</div>
+						<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">GPS Speedometer</h3>
+						<p class="mt-2 text-xs text-body leading-5">
+							Kinematic velocity tracking via satellite Doppler shift with multi-unit switching (km/h, mph, knots, m/s), WGS84 elevation, trip odometer, and peak speed.
+						</p>
+					</div>
+					<span class="mt-4 text-xs font-medium text-link group-hover:underline">Launch speedometer →</span>
 				</a>
-				<a href="/bearing/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
-					<p class="eyebrow mb-2">bearing</p>
-					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Course calculator</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						Bearing and great-circle distance between any two points — perfect for navigation
-						and route planning.
-					</p>
+
+				<!-- Tool 4: Coordinate Converter & Bearing Calculator -->
+				<a href="/bearing/" class="card-lg group p-6 transition-shadow hover:shadow-modal flex flex-col justify-between">
+					<div>
+						<div class="flex items-center justify-between mb-3">
+							<span class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-hairline bg-canvas-soft text-ink group-hover:border-ink transition-colors">
+								<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+									<line x1="2" y1="12" x2="22" y2="12"></line>
+									<polyline points="12 2 22 12 12 22"></polyline>
+								</svg>
+							</span>
+							<span class="eyebrow">navigation</span>
+						</div>
+						<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Course & Converter</h3>
+						<p class="mt-2 text-xs text-body leading-5">
+							Great-Circle forward azimuth, back bearing, and Haversine distance calculator combined with universal coordinate conversion across DD, DMS, UTM, and Plus Codes.
+						</p>
+					</div>
+					<span class="mt-4 text-xs font-medium text-link group-hover:underline">Launch course tool →</span>
 				</a>
-				<a href="/sun/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
-					<p class="eyebrow mb-2">sun</p>
-					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Sun position</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						Solar azimuth and elevation right now, plus sunrise, solar noon, and sunset for any
-						location.
-					</p>
+
+				<!-- Tool 5: GPS Location & Telemetry -->
+				<a href="/location/" class="card-lg group p-6 transition-shadow hover:shadow-modal flex flex-col justify-between">
+					<div>
+						<div class="flex items-center justify-between mb-3">
+							<span class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-hairline bg-canvas-soft text-ink group-hover:border-ink transition-colors">
+								<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+									<circle cx="12" cy="12" r="3"></circle>
+									<path d="M12 2v3M12 19v3M2 12h3M19 12h3"></path>
+								</svg>
+							</span>
+							<span class="eyebrow">location</span>
+						</div>
+						<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">GPS Coordinates</h3>
+						<p class="mt-2 text-xs text-body leading-5">
+							High-precision geodetic latitude, longitude, elevation above sea level, and horizontal accuracy radius with one-tap copy, share, and maps routing.
+						</p>
+					</div>
+					<span class="mt-4 text-xs font-medium text-link group-hover:underline">View coordinates →</span>
 				</a>
-				<a href="/sun-moon/" class="card-lg group p-6 transition-shadow hover:shadow-modal">
-					<p class="eyebrow mb-2">sun & moon</p>
-					<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Sun & moon direction</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						Sun and moon azimuth plotted straight on the live compass dial, so you can find
-						either in the sky by turning to face the marker.
-					</p>
+
+				<!-- Tool 6: Qibla Finder -->
+				<a href="/qibla/" class="card-lg group p-6 transition-shadow hover:shadow-modal flex flex-col justify-between">
+					<div>
+						<div class="flex items-center justify-between mb-3">
+							<span class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-hairline bg-canvas-soft text-ink group-hover:border-ink transition-colors">
+								<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+									<rect x="4" y="4" width="16" height="16" rx="2"></rect>
+									<line x1="12" y1="4" x2="12" y2="20"></line>
+								</svg>
+							</span>
+							<span class="eyebrow">qibla</span>
+						</div>
+						<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Direction to Makkah</h3>
+						<p class="mt-2 text-xs text-body leading-5">
+							Sub-degree Great-Circle azimuth toward the Kaaba in Mecca with geodetic distance in kilometers, nautical miles, and an on-dial visual alignment marker.
+						</p>
+					</div>
+					<span class="mt-4 text-xs font-medium text-link group-hover:underline">Find Qibla →</span>
 				</a>
-				<div class="card-soft flex flex-col justify-center p-6">
-					<p class="text-sm text-body leading-6">
-						No accounts. No trackers. Every calculation runs in your browser and is discarded
-						the moment you leave.
-					</p>
-				</div>
+
+				<!-- Tool 7: Solar Position & Sun Compass -->
+				<a href="/sun/" class="card-lg group p-6 transition-shadow hover:shadow-modal flex flex-col justify-between">
+					<div>
+						<div class="flex items-center justify-between mb-3">
+							<span class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-hairline bg-canvas-soft text-ink group-hover:border-ink transition-colors">
+								<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+									<circle cx="12" cy="12" r="5"></circle>
+									<line x1="12" y1="1" x2="12" y2="3"></line>
+									<line x1="12" y1="21" x2="12" y2="23"></line>
+									<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+									<line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+									<line x1="1" y1="12" x2="3" y2="12"></line>
+									<line x1="21" y1="12" x2="23" y2="12"></line>
+								</svg>
+							</span>
+							<span class="eyebrow">astronomy</span>
+						</div>
+						<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Sun Position</h3>
+						<p class="mt-2 text-xs text-body leading-5">
+							Live solar azimuth, solar elevation angle, dawn/dusk times, and true solar noon calculations for architectural lighting, photography, and solar panel alignment.
+						</p>
+					</div>
+					<span class="mt-4 text-xs font-medium text-link group-hover:underline">View sun position →</span>
+				</a>
+
+				<!-- Tool 8: Sun & Moon Direction Overlay -->
+				<a href="/sun-moon/" class="card-lg group p-6 transition-shadow hover:shadow-modal flex flex-col justify-between">
+					<div>
+						<div class="flex items-center justify-between mb-3">
+							<span class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-hairline bg-canvas-soft text-ink group-hover:border-ink transition-colors">
+								<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+									<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+								</svg>
+							</span>
+							<span class="eyebrow">celestial</span>
+						</div>
+						<h3 class="text-display-sm text-ink group-hover:text-link transition-colors">Sun & Moon Compass</h3>
+						<p class="mt-2 text-xs text-body leading-5">
+							Live solar and lunar azimuth plotted directly around the compass bezel, allowing visual astronomical navigation and celestial orientation by day and night.
+						</p>
+					</div>
+					<span class="mt-4 text-xs font-medium text-link group-hover:underline">Open celestial compass →</span>
+				</a>
 			</div>
 		</div>
 	</section>
 
-	<!-- ─── How it works ───────────────────────────────────── -->
-	<section id="how-it-works" class="border-y border-hairline bg-canvas scroll-mt-16">
+	<!-- ─── Comprehensive Educational Section: Sensor Fusion ─── -->
+	<section id="engineering" class="border-t border-hairline bg-canvas scroll-mt-16">
 		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
-			<p class="eyebrow">how it works</p>
-			<h2 class="mt-3 max-w-2xl text-display-lg text-ink">Engineered for accuracy.</h2>
-			<p class="mt-3 max-w-xl text-body-lg text-body">
-				Your phone's magnetometer, gyroscope, and accelerometer feed a tilt-compensated heading
-				engine, corrected against the World Magnetic Model.
-			</p>
-
-			<div class="mt-12 grid gap-6 md:grid-cols-3">
-				<div class="card p-6">
-					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
-						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
-							<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" />
-							<path d="M15.5 8.5 13 13l-4.5 2.5L11 11z" fill="var(--color-error)" />
-						</svg>
-					</div>
-					<h3 class="text-display-sm text-ink">Sensor fusion</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						Heading is derived from orientation and magnetometer data, smoothed in real time so
-						the needle stays steady in your hand.
-					</p>
-				</div>
-				<div class="card p-6">
-					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
-						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
-							<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" />
-							<path
-								d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"
-								stroke="currentColor"
-								stroke-width="1.5"
-							/>
-							<circle cx="12" cy="12" r="3" fill="currentColor" />
-						</svg>
-					</div>
-					<h3 class="text-display-sm text-ink">True north correction</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						Declination varies from −30° to +30° across the planet. We apply the World Magnetic
-						Model so true north is exact, wherever you are.
-					</p>
-				</div>
-				<div class="card p-6">
-					<div class="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-ink">
-						<svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" aria-hidden="true">
-							<path
-								d="M12 21s7-5.1 7-11a7 7 0 1 0-14 0c0 5.9 7 11 7 11Z"
-								stroke="currentColor"
-								stroke-width="1.5"
-							/>
-							<circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5" />
-						</svg>
-					</div>
-					<h3 class="text-display-sm text-ink">Local by design</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						Coordinates, Qibla bearing, and solar calculations run entirely on your device. Your
-						location never touches a server.
-					</p>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- ─── What is an online compass (SEO / value) ───────── -->
-	<section id="about" class="scroll-mt-16">
-		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
 			<div class="mx-auto max-w-3xl">
-				<p class="eyebrow text-center">the free online compass</p>
-				<h2 class="mt-3 text-center text-display-lg text-ink">What is an online compass?</h2>
-				<p class="mt-6 text-body-lg text-body">
-					An <strong class="text-ink font-medium">online compass</strong> is a digital compass
-					that runs directly in your web browser — no app to download, no install, and nothing
-					to pay for. Open this page on your phone and, in a few seconds, you have a free online
-					compass that shows your live heading in degrees, points toward north from wherever you
-					are, and can correct itself for the difference between magnetic north and true north.
+				<p class="eyebrow">sensor physics & computer science</p>
+				<h2 class="mt-3 text-display-lg text-ink">
+					The Engineering Behind Browser-Based Sensor Fusion
+				</h2>
+				<p class="mt-6 text-body-lg text-body leading-relaxed">
+					Most people assume a smartphone compass is just a simple digital needle reading a magnet. In reality, producing a stable, jitter-free 360-degree heading on a handheld glass screen is one of the most sophisticated feats of modern electrical and aerospace engineering.
 				</p>
 				<p class="mt-4 text-body leading-7">
-					Because it lives in the browser, it behaves the same whether you are at home, in the
-					field, or in a classroom. Search "online compass" on Google, open this site, and your
-					device's sensors take over. Unlike a traditional compass with a needle fighting gravity
-					and drift, an online compass combines your phone's magnetometer, gyroscope, and
-					accelerometer to produce a more stable and reliable
-					<strong class="text-ink font-medium">online compass direction</strong>.
+					When you open this website on a mobile device, our software establishes a direct pipeline to the W3C <code class="font-mono text-xs bg-canvas-soft px-1.5 py-0.5 rounded border border-hairline">DeviceOrientationEvent</code> and <code class="font-mono text-xs bg-canvas-soft px-1.5 py-0.5 rounded border border-hairline">DeviceMotionEvent</code> APIs. Through these interfaces, the browser queries three distinct micro-electro-mechanical systems (MEMS) fabricated onto silicon microchips:
 				</p>
-				<p class="mt-4 text-body leading-7">
-					Every tool here is built around one job — helping you orient yourself and
-					<strong class="text-ink font-medium">find north online</strong> — and around it sits a
-					full navigation toolkit: a live heading readout in degrees, cardinal and intercardinal
-					directions, a one-tap fullscreen mode, and an accuracy indicator so you always know how
-					much to trust the reading. Because everything is processed locally, your location never
-					leaves your device.
-				</p>
-			</div>
 
-			<div class="mx-auto mt-12 grid max-w-5xl gap-6 md:grid-cols-3">
-				<div class="card p-6">
-					<h3 class="text-display-sm text-ink">How an online compass works</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						<strong class="text-ink font-medium">Three sensors</strong> do the work: a
-						magnetometer measures Earth's magnetic field, an accelerometer detects which way is
-						down, and a gyroscope tracks rotation. The browser fuses them into a single heading,
-						and tilt compensation keeps it correct even when the phone is not flat.
-					</p>
+				<div class="mt-8 space-y-6">
+					<div class="card p-6">
+						<h3 class="text-display-sm text-ink">1. The Triaxial Magnetometer (Flux Sensor)</h3>
+						<p class="mt-2 text-sm text-body leading-6">
+							Operating on either the Hall effect or anisotropic magnetoresistance (AMR), the magnetometer measures ambient magnetic flux density along three orthogonal axes (X, Y, and Z) in microteslas (µT). Earth's magnetic field is remarkably faint—averaging between 30 and 60 µT—making the sensor extraordinarily susceptible to localized electromagnetic noise.
+						</p>
+					</div>
+
+					<div class="card p-6">
+						<h3 class="text-display-sm text-ink">2. The Triaxial Capacitive Accelerometer (Gravity Reference)</h3>
+						<p class="mt-2 text-sm text-body leading-6">
+							Microscopic polysilicon proof masses suspended on silicon springs deflect under the pull of Earth's gravitational acceleration (1g ≈ 9.80665 m/s²). By monitoring differential capacitance changes across fixed plates, the accelerometer determines which direction is "down," providing pitch (β) and roll (γ) angles.
+						</p>
+					</div>
+
+					<div class="card p-6">
+						<h3 class="text-display-sm text-ink">3. The Triaxial Vibratory Gyroscope (Rotational Velocity)</h3>
+						<p class="mt-2 text-sm text-body leading-6">
+							Vibrating silicon rings experience Coriolis forces when rotated, generating voltage signals proportional to angular rate of change (rad/s). While gyroscopes are immune to magnetic distortion, they suffer from mechanical integration drift over time.
+						</p>
+					</div>
 				</div>
-				<div class="card p-6">
-					<h3 class="text-display-sm text-ink">Online compass vs. a traditional compass</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						A needle compass is simple but must sit level, and it always points to magnetic north
-						— not the north on your map. An online compass adds the exact degree of your heading,
-						automatic declination correction, and a display you can read in the dark.
-					</p>
+
+				<h3 class="mt-12 text-display-sm text-ink">The Mathematical Solution: Real-Time Tilt Compensation</h3>
+				<p class="mt-3 text-body leading-7">
+					A traditional magnetic needle only works when held perfectly flat. If tilted, gravity pulls the needle downward, causing severe "dip error." A digital compass solves this mathematically through <strong>Euler-angle rotational transformation</strong>.
+				</p>
+				<p class="mt-4 text-body leading-7">
+					Using the pitch (θ) and roll (φ) angles measured by the accelerometer, the raw three-dimensional magnetometer readings (M<sub>x</sub>, M<sub>y</sub>, M<sub>z</sub>) are mathematically de-rotated into the horizontal plane:
+				</p>
+
+				<div class="my-6 rounded-xl border border-hairline bg-canvas-soft p-5 font-mono text-xs sm:text-sm text-ink overflow-x-auto">
+					<p class="text-mute">// Horizontal Field Vector Projection Matrix</p>
+					<p class="mt-1">X_horizontal = M_x · cos(θ) + M_z · sin(θ)</p>
+					<p class="mt-1">Y_horizontal = M_x · sin(φ) · sin(θ) + M_y · cos(φ) - M_z · sin(φ) · cos(θ)</p>
+					<p class="mt-3 text-mute">// Calibrated Heading in Degrees</p>
+					<p class="mt-1">Magnetic_Heading = atan2(-Y_horizontal, X_horizontal) · (180 / π)</p>
 				</div>
-				<div class="card p-6">
-					<h3 class="text-display-sm text-ink">Why use a browser compass at all?</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						It opens in one tap from a bookmark or a search, with nothing to install and no
-						account. If your phone has a compass app you rarely open, a browser compass is the one
-						you will actually use.
-					</p>
-				</div>
+
+				<p class="text-body leading-7">
+					Finally, our software applies a continuous <strong>spherical linear interpolation (SLERP) and low-pass filter</strong>. This damps transient hand tremor and mechanical vibration while ensuring that when you swivel your body to look in a new direction, the needle sweeps with fluid 60-frame-per-second precision.
+				</p>
 			</div>
 		</div>
 	</section>
 
-	<!-- ─── How to use, step by step ───────────────────────── -->
-	<section id="how-to-use" class="border-y border-hairline bg-canvas scroll-mt-16">
-		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
-			<div class="grid gap-10 lg:grid-cols-2 lg:items-start">
-				<div>
-					<p class="eyebrow">getting started</p>
-					<h2 class="mt-3 text-display-lg text-ink">How to use an online compass.</h2>
-					<p class="mt-3 text-body-lg text-body">
-						Five steps take you from opening the page to a heading you can trust. The whole
-						process takes less than a minute, and you can repeat the calibration whenever the
-						reading drifts. For a deeper walkthrough, read our
-						<a href="/blog/how-to-use-online-compass/" class="text-link underline decoration-link/30 hover:decoration-link">step-by-step online compass guide</a>.
-					</p>
-					<p class="mt-4 text-sm text-body leading-6">
-						The single biggest factor in accuracy is not the software — it is where you stand and
-						what is near your phone. Keep that in mind through every step.
-					</p>
-				</div>
-				<ol class="card-soft divide-y divide-hairline">
-					<li class="flex gap-4 p-5">
-						<span class="font-mono text-sm text-mute">01</span>
-						<div>
-							<p class="text-sm font-medium text-ink">Open the compass on your phone</p>
-							<p class="mt-1 text-sm text-body">Load this page in Safari, Chrome, or Firefox on a phone or tablet with a magnetometer.</p>
-						</div>
-					</li>
-					<li class="flex gap-4 p-5">
-						<span class="font-mono text-sm text-mute">02</span>
-						<div>
-							<p class="text-sm font-medium text-ink">Enable the live compass</p>
-							<p class="mt-1 text-sm text-body">Tap "Enable live compass" and allow motion and orientation access when your browser asks.</p>
-						</div>
-					</li>
-					<li class="flex gap-4 p-5">
-						<span class="font-mono text-sm text-mute">03</span>
-						<div>
-							<p class="text-sm font-medium text-ink">Hold the phone flat, away from metal</p>
-							<p class="mt-1 text-sm text-body">Rest it in your palm, screen up, and keep it clear of laptops, speakers, and magnetic cases.</p>
-						</div>
-					</li>
-					<li class="flex gap-4 p-5">
-						<span class="font-mono text-sm text-mute">04</span>
-						<div>
-							<p class="text-sm font-medium text-ink">Read your heading and calibrate</p>
-							<p class="mt-1 text-sm text-body">The top marker shows the direction you face. Trace a figure-eight if the number wobbles.</p>
-						</div>
-					</li>
-					<li class="flex gap-4 p-5">
-						<span class="font-mono text-sm text-mute">05</span>
-						<div>
-							<p class="text-sm font-medium text-ink">Switch to true north</p>
-							<p class="mt-1 text-sm text-body">Enable declination so the heading matches maps and any bearing you plan to follow.</p>
-						</div>
-					</li>
-				</ol>
-			</div>
-		</div>
-	</section>
-
-	<!-- ─── True vs magnetic north ─────────────────────────── -->
-	<section id="true-north" class="scroll-mt-16">
-		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
+	<!-- ─── Deep Dive: True North, Magnetic North & Declination ─── -->
+	<section id="true-north" class="border-t border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
 			<div class="mx-auto max-w-3xl">
-				<p class="eyebrow">true vs magnetic north</p>
-				<h2 class="mt-3 text-display-lg text-ink">Why declination decides whether you're right.</h2>
-				<p class="mt-3 text-body-lg text-body">
-					A compass needle does not point to the top of the map. It points to magnetic north, a
-					moving spot in the Arctic. The gap between that and true north is declination — the most
-					common reason a compass reading seems "wrong".
+				<p class="eyebrow">cartography & geodesy</p>
+				<h2 class="mt-3 text-display-lg text-ink">
+					True North vs. Magnetic North: The Geometry of Map Navigation
+				</h2>
+				<p class="mt-6 text-body-lg text-body leading-relaxed">
+					One of the most dangerous misconceptions in outdoor navigation is assuming that a compass points to the top of the map. It does not. Failure to account for the difference between the three distinct "norths" is the leading cause of disorientation among hikers, mariners, and pilots.
 				</p>
-				<p class="mt-4 text-body leading-7">
-					Declination is not a fixed number you can memorise. It depends on where you are on the
-					planet, and it drifts by a fraction of a degree each year as Earth's molten core moves.
-					In London the two norths have stayed nearly aligned for years, which is why British maps
-					often ignore the difference; in parts of Canada and South Africa they can be 20° or more
-					apart — the difference between reaching your car and turning down the wrong street.
+
+				<div class="mt-8 grid gap-4 sm:grid-cols-3">
+					<div class="card-soft p-5">
+						<p class="eyebrow mb-1">geographic</p>
+						<h3 class="text-base font-semibold text-ink">True North (TN)</h3>
+						<p class="mt-2 text-xs text-body leading-5">The fixed northern axis around which planet Earth rotates. All longitudinal meridians converge here. Used by maps, GPS satellites, and civil surveying.</p>
+					</div>
+					<div class="card-soft p-5">
+						<p class="eyebrow mb-1">geomagnetic</p>
+						<h3 class="text-base font-semibold text-ink">Magnetic North (MN)</h3>
+						<p class="mt-2 text-xs text-body leading-5">The shifting point in the Arctic Ocean where Earth's geomagnetic lines enter the core vertically. Moves 40–55 km each year due to molten geodynamo churn.</p>
+					</div>
+					<div class="card-soft p-5">
+						<p class="eyebrow mb-1">projected</p>
+						<h3 class="text-base font-semibold text-ink">Grid North (GN)</h3>
+						<p class="mt-2 text-xs text-body leading-5">The vertical grid lines drawn on flat projected paper maps (such as UTM or Ordnance Survey). Differs slightly from true north due to spherical distortion.</p>
+					</div>
+				</div>
+
+				<h3 class="mt-12 text-display-sm text-ink">The Mathematical Rule for Declination Arithmetic</h3>
+				<p class="mt-3 text-body leading-7">
+					The angular difference between True North and Magnetic North at your exact location is called <strong>Magnetic Declination</strong> (or <strong>Magnetic Variation</strong> in maritime nautical charts). The sign convention is governed by a fundamental navigational law:
 				</p>
-				<p class="mt-4 text-body leading-7">
-					This is exactly what an uncorrected compass gets wrong. Our online compass applies the
-					World Magnetic Model for your coordinates, so toggling to
-					<strong class="text-ink font-medium">true north</strong> lines the heading up with a map
-					grid. The table below shows roughly how large the correction is in well-known places;
-					tap <em>"Use location for declination"</em> on the dial for the exact value where you
-					are.
+
+				<div class="my-6 rounded-xl border border-hairline bg-canvas-soft p-5 text-center font-mono text-sm text-ink">
+					<p class="text-display-sm font-semibold text-link">True Bearing = Magnetic Bearing + Declination</p>
+					<p class="text-xs text-mute mt-2">(where East Declination is positive [+] and West Declination is negative [−])</p>
+				</div>
+
+				<p class="text-body leading-7">
+					Generations of naval navigators have remembered this rule using the classic mnemonic: <em>"East is least, West is best"</em> (referring to whether you subtract or add when converting from True to Magnetic).
+				</p>
+				<ul class="mt-4 space-y-2 text-sm text-body list-disc pl-5">
+					<li><strong>In New York City (Declination ≈ −13° West):</strong> If your magnetic compass reads 90° (due East), your actual true heading is 90° + (−13°) = <strong>77°</strong>. You are heading 13 degrees north of true east!</li>
+					<li><strong>In Los Angeles (Declination ≈ +12° East):</strong> If your magnetic compass reads 90°, your actual true heading is 90° + (+12°) = <strong>102°</strong>.</li>
+				</ul>
+
+				<p class="mt-6 text-body leading-7">
+					When you tap <strong>"True North"</strong> on our online compass, our algorithm automatically applies your local NOAA / WMM declination vector, rendering arithmetic obsolete and aligning your on-screen dial directly with topographic map lines.
 				</p>
 			</div>
 
-			<div class="mx-auto mt-10 max-w-3xl overflow-x-auto">
+			<!-- Representative World Declination Table -->
+			<div class="mx-auto mt-12 max-w-4xl overflow-x-auto">
 				<table class="w-full border-collapse text-sm">
-					<caption class="sr-only">Approximate magnetic declination by city</caption>
+					<caption class="sr-only">Worldwide Magnetic Declination Benchmarks</caption>
 					<thead>
 						<tr class="border-b border-hairline-strong text-left">
-							<th scope="col" class="py-3 pr-4 font-medium text-ink">Location</th>
-							<th scope="col" class="py-3 font-medium text-ink">Approximate declination</th>
+							<th scope="col" class="py-3.5 pr-4 font-semibold text-ink">Global Location</th>
+							<th scope="col" class="py-3.5 pr-4 font-semibold text-ink">Geomagnetic Declination</th>
+							<th scope="col" class="py-3.5 font-semibold text-ink">Navigational Consequence (1 km Travel)</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody class="divide-y divide-hairline">
 						{declinationExamples.map((d) => (
-							<tr class="border-b border-hairline">
-								<td class="py-3 pr-4 text-body">{d.place}</td>
-								<td class="py-3 text-body">{d.value}</td>
+							<tr class="hover:bg-canvas-soft/40 transition-colors">
+								<td class="py-3.5 pr-4 font-medium text-ink">{d.place}</td>
+								<td class="py-3.5 pr-4 font-mono text-link font-semibold">{d.value}</td>
+								<td class="py-3.5 text-body text-xs leading-5">{d.impact}</td>
 							</tr>
 						))}
 					</tbody>
 				</table>
 				<p class="mt-3 text-xs text-mute">
-					Approximate mid-2020s values for illustration only. Declination changes every year and
-					by exact location — always use the live correction in the tool.
+					Values reflect the current World Magnetic Model epoch. Because Earth's geomagnetic core shifts continuously, always enable GPS location in the compass tool for real-time sub-kilometer accuracy.
 				</p>
 			</div>
 		</div>
 	</section>
 
-	<!-- ─── How to read a compass ──────────────────────────── -->
-	<section id="reading" class="border-y border-hairline bg-canvas scroll-mt-16">
-		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
-			<div class="mx-auto max-w-3xl">
-				<p class="eyebrow">reading the dial</p>
-				<h2 class="mt-3 text-display-lg text-ink">Headings, bearings, and the compass rose.</h2>
-				<p class="mt-3 text-body-lg text-body">
-					Once the dial is live, the only skill left is reading it.
-				</p>
-				<div class="mt-8 grid gap-4 sm:grid-cols-2">
-					<div class="card-soft p-5">
-						<h3 class="text-sm font-medium text-ink mb-1">Heading</h3>
-						<p class="text-sm leading-6">The direction you are currently facing, in degrees clockwise from north. Facing east is 90°, south 180°, west 270°.</p>
-					</div>
-					<div class="card-soft p-5">
-						<h3 class="text-sm font-medium text-ink mb-1">Bearing</h3>
-						<p class="text-sm leading-6">The direction from one point to another. Use the <a href="/bearing/" class="text-link underline decoration-link/30 hover:decoration-link">bearing calculator</a> to get it between two coordinates.</p>
-					</div>
-					<div class="card-soft p-5">
-						<h3 class="text-sm font-medium text-ink mb-1">Azimuth</h3>
-						<p class="text-sm leading-6">A bearing expressed as an angle from 0° to 360°. The <a href="/sun/" class="text-link underline decoration-link/30 hover:decoration-link">sun tool</a> gives the sun's azimuth for your location.</p>
-					</div>
-					<div class="card-soft p-5">
-						<h3 class="text-sm font-medium text-ink mb-1">Back bearing</h3>
-						<p class="text-sm leading-6">The reverse direction — the bearing from B back to A. Add 180° if the forward bearing is under 180°, otherwise subtract 180°.</p>
-					</div>
-				</div>
-			</div>
-
-			<div class="mx-auto mt-12 max-w-3xl">
-				<h3 class="text-display-sm text-ink">The 16-point compass rose</h3>
-				<p class="mt-2 text-sm text-body leading-6">
-					Between the four cardinal points sit intermediate points. A 16-point rose divides the
-					circle into 22.5° segments — the resolution most navigation and weather reports use.
-				</p>
-				<div class="mt-5 grid grid-cols-2 gap-x-6 sm:grid-cols-4">
-					{compassRose.map((c) => (
-						<div class="flex items-baseline justify-between border-b border-hairline py-2">
-							<span class="font-mono text-sm text-ink">{c.point}</span>
-							<span class="font-mono text-xs text-mute">{c.deg}</span>
-						</div>
-					))}
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- ─── Accuracy ───────────────────────────────────────── -->
-	<section id="accuracy" class="scroll-mt-16">
-		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
-			<div class="mx-auto max-w-3xl">
-				<p class="eyebrow">accuracy</p>
-				<h2 class="mt-3 text-display-lg text-ink">How accurate is a phone compass?</h2>
-				<p class="mt-3 text-body-lg text-body">
-					Used well, a phone compass is accurate to within a degree or two. Used carelessly, it
-					can be off by twenty. The difference is almost entirely environmental.
-				</p>
-				<p class="mt-4 text-body leading-7">
-					The magnetometer measures field strength in microteslas and is built for navigation, not
-					surveying: fine for following a trail or aligning a solar panel, but no match for a
-					professional instrument. What matters is the accuracy indicator on the dial — trust a
-					steady reading, and move when it jumps by tens of degrees, because the field around you
-					is distorted. Indoors, expect a few degrees of drift from wiring and furniture; outdoors,
-					clear of a car or railing, readings are reliable. If precision matters, average a few
-					readings and cross-check against the
-					<a href="/sun/" class="text-link underline decoration-link/30 hover:decoration-link">sun's position</a>.
+	<!-- ─── Practical Field Applications Section ────────────── -->
+	<section id="applications" class="border-t border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<div class="mx-auto max-w-3xl text-center">
+				<p class="eyebrow">practical field guide</p>
+				<h2 class="mt-3 text-display-lg text-ink">Real-World Applications Across Industries</h2>
+				<p class="mt-4 text-body-lg text-body">
+					From civil engineering and solar architecture to overlanding and backcountry search and rescue, here is how professionals leverage digital orientation tools:
 				</p>
 			</div>
-		</div>
-	</section>
 
-	<!-- ─── Calibration ────────────────────────────────────── -->
-	<section id="calibration" class="border-y border-hairline bg-canvas scroll-mt-16">
-		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
-			<div class="grid gap-10 lg:grid-cols-2 lg:items-start">
-				<div>
-					<p class="eyebrow">calibration</p>
-					<h2 class="mt-3 text-display-lg text-ink">Get the most accurate reading.</h2>
-					<p class="mt-3 text-body-lg text-body">
-						Phone magnetometers are sensitive to nearby metal and magnetic fields. A few
-						seconds of calibration turns a drifting needle into a trustworthy heading.
+			<div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+				<div class="card p-6">
+					<div class="flex items-center gap-2 mb-3">
+						<span class="text-xs font-mono font-bold text-link">01</span>
+						<h3 class="text-display-sm text-ink">Hiking & Trail Navigation</h3>
+					</div>
+					<p class="text-sm text-body leading-6">
+						Orient paper topographic maps to surrounding terrain in seconds. Cross-reference ridgeline landmarks using our <a href="/bearing/" class="text-link underline hover:text-ink">bearing calculator</a> to perform two-point resection and fix your exact coordinates without cell service.
 					</p>
 				</div>
-				<ol class="card-soft divide-y divide-hairline">
-					<li class="flex gap-4 p-5">
-						<span class="font-mono text-sm text-mute">01</span>
-						<div>
-							<p class="text-sm font-medium text-ink">Hold the phone flat</p>
-							<p class="mt-1 text-sm text-body">Keep the screen parallel to the ground, in your palm or on a stable surface.</p>
-						</div>
-					</li>
-					<li class="flex gap-4 p-5">
-						<span class="font-mono text-sm text-mute">02</span>
-						<div>
-							<p class="text-sm font-medium text-ink">Trace a figure-eight</p>
-							<p class="mt-1 text-sm text-body">Wave the phone gently in a figure-eight motion a few times, then hold still.</p>
-						</div>
-					</li>
-					<li class="flex gap-4 p-5">
-						<span class="font-mono text-sm text-mute">03</span>
-						<div>
-							<p class="text-sm font-medium text-ink">Move away from interference</p>
-							<p class="mt-1 text-sm text-body">Step away from laptops, phones, magnets, and metal tables before taking a reading.</p>
-						</div>
-					</li>
-					<li class="flex gap-4 p-5">
-						<span class="font-mono text-sm text-mute">04</span>
-						<div>
-							<p class="text-sm font-medium text-ink">Confirm with the sun</p>
-							<p class="mt-1 text-sm text-body">Use the sun position marker on the dial as an independent cross-check in daylight.</p>
-						</div>
-					</li>
-				</ol>
+
+				<div class="card p-6">
+					<div class="flex items-center gap-2 mb-3">
+						<span class="text-xs font-mono font-bold text-link">02</span>
+						<h3 class="text-display-sm text-ink">Civil Construction & DIY</h3>
+					</div>
+					<p class="text-sm text-body leading-6">
+						Use the <a href="/level/" class="text-link underline hover:text-ink">digital spirit level</a> to verify the critical 1/4" per foot (2.1% slope) drainage fall on waste plumbing pipes, check ADA wheelchair ramp compliance (1:12 slope), and calculate roof pitch from attic rafters.
+					</p>
+				</div>
+
+				<div class="card p-6">
+					<div class="flex items-center gap-2 mb-3">
+						<span class="text-xs font-mono font-bold text-link">03</span>
+						<h3 class="text-display-sm text-ink">Solar Panel Optimization</h3>
+					</div>
+					<p class="text-sm text-body leading-6">
+						Maximize photovoltaic kilowatt generation by aligning solar arrays to True South (in the Northern Hemisphere) or True North (in the Southern Hemisphere) using our declination-corrected compass, setting tilt angle with the inclinometer.
+					</p>
+				</div>
+
+				<div class="card p-6">
+					<div class="flex items-center gap-2 mb-3">
+						<span class="text-xs font-mono font-bold text-link">04</span>
+						<h3 class="text-display-sm text-ink">RV, Camper & Van Leveling</h3>
+					</div>
+					<p class="text-sm text-body leading-6">
+						Prevent catastrophic failure of ammonia absorption refrigerators (which overheat and permanently break if operated at &gt;3° tilt). Place your phone on the galley counter and watch the circular bullseye snap to green.
+					</p>
+				</div>
+
+				<div class="card p-6">
+					<div class="flex items-center gap-2 mb-3">
+						<span class="text-xs font-mono font-bold text-link">05</span>
+						<h3 class="text-display-sm text-ink">Real Estate & Sunlight Analysis</h3>
+					</div>
+					<p class="text-sm text-body leading-6">
+						Determine exact sunlight exposure, passive solar heating efficiency, and prevailing wind exposure for residential properties. Calculate balcony morning light vs evening terrace sunset paths using our <a href="/sun/" class="text-link underline hover:text-ink">solar tracking tool</a>.
+					</p>
+				</div>
+
+				<div class="card p-6">
+					<div class="flex items-center gap-2 mb-3">
+						<span class="text-xs font-mono font-bold text-link">06</span>
+						<h3 class="text-display-sm text-ink">Photography & Film Scouting</h3>
+					</div>
+					<p class="text-sm text-body leading-6">
+						Predict exact Golden Hour and Blue Hour azimuth angles days in advance. Turn your phone toward the on-dial sun marker to preview where dawn light will break across landscapes and architectural facades.
+					</p>
+				</div>
 			</div>
 		</div>
 	</section>
 
-	<!-- ─── Compare compass types ──────────────────────────── -->
-	<section id="compare" class="scroll-mt-16">
-		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
-			<div class="mx-auto max-w-3xl">
-				<p class="eyebrow">compass types</p>
-				<h2 class="mt-3 text-display-lg text-ink">Not all compasses work the same way.</h2>
-				<p class="mt-3 text-body-lg text-body">
-					Knowing which technology you are holding explains its strengths, its limits, and why a
-					phone compass behaves differently from the brass one in a drawer.
+	<!-- ─── Calibration & Interference Guide ───────────────── -->
+	<section id="calibration" class="border-t border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<div class="grid gap-12 lg:grid-cols-2 lg:items-center">
+				<div>
+					<p class="eyebrow">precision troubleshooting</p>
+					<h2 class="mt-3 text-display-lg text-ink">Mastering Magnetometer Calibration & Interference</h2>
+					<p class="mt-4 text-body-lg text-body leading-relaxed">
+						Unlike an optical camera or a GPS satellite receiver, an electronic magnetometer does not measure an isolated signal—it measures the composite summation of <em>every magnetic vector in the room</em>.
+					</p>
+					<p class="mt-4 text-sm text-body leading-6">
+						To understand why calibration matters, electrical engineers divide magnetic distortion into two categories:
+					</p>
+
+					<div class="mt-6 space-y-4">
+						<div class="rounded-xl border border-hairline bg-canvas-soft/50 p-4">
+							<h3 class="text-sm font-semibold text-ink">Hard Iron Distortion</h3>
+							<p class="mt-1 text-xs text-body leading-5">
+								Generated by permanent magnetized materials attached to the phone itself (internal speaker coils, camera optical stabilization magnets, and MagSafe case rings). This creates a static, permanent directional offset that shifts the center point of the magnetic coordinate sphere.
+							</p>
+						</div>
+						<div class="rounded-xl border border-hairline bg-canvas-soft/50 p-4">
+							<h3 class="text-sm font-semibold text-ink">Soft Iron Distortion</h3>
+							<p class="mt-1 text-xs text-body leading-5">
+								Generated by passive ferromagnetic materials (structural steel I-beams, rebar in concrete floors, car doors, and cast iron radiators) that warp Earth's uniform field into an irregular ellipse.
+							</p>
+						</div>
+					</div>
+
+					<p class="mt-6 text-sm text-body leading-6">
+						The famous <strong>"Figure-8 Motion"</strong> is not a superstitious ritual—it is a mathematical algorithm. Moving your phone through a 3D figure-eight forces the sensor through every quadrant of space, allowing the operating system's Kalman matrix to plot an ellipsoidal locus and calculate the precise offset transformation required to snap the data back into a true spherical coordinate frame.
+					</p>
+				</div>
+
+				<div class="card-soft p-6 sm:p-8">
+					<h3 class="text-display-sm text-ink mb-6">4-Step Precision Calibration Checklist</h3>
+					<ol class="space-y-6">
+						<li class="flex gap-4">
+							<span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-ink text-xs font-mono font-bold text-on-primary">1</span>
+							<div>
+								<h4 class="text-sm font-semibold text-ink">Isolate Metallic Accessories</h4>
+								<p class="mt-1 text-xs text-body leading-5">Remove magnetic wallet sleeves, cases with metal kickstands, and stay at least 1.5 meters away from desktop computers, running automobile engines, and audio speakers.</p>
+							</div>
+						</li>
+						<li class="flex gap-4">
+							<span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-ink text-xs font-mono font-bold text-on-primary">2</span>
+							<div>
+								<h4 class="text-sm font-semibold text-ink">Rest in Horizontal Palm</h4>
+								<p class="mt-1 text-xs text-body leading-5">Hold the phone screen facing upward in the flat palm of your hand, keeping the chassis parallel to the ground to maximize the horizontal field vector.</p>
+							</div>
+						</li>
+						<li class="flex gap-4">
+							<span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-ink text-xs font-mono font-bold text-on-primary">3</span>
+							<div>
+								<h4 class="text-sm font-semibold text-ink">Execute the 3D Figure-Eight</h4>
+								<p class="mt-1 text-xs text-body leading-5">Rotate your wrist through a smooth infinity symbol (∞) motion, pitching and rolling the phone for 8–10 seconds until the accuracy indicator turns green.</p>
+							</div>
+						</li>
+						<li class="flex gap-4">
+							<span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-ink text-xs font-mono font-bold text-on-primary">4</span>
+							<div>
+								<h4 class="text-sm font-semibold text-ink">Cross-Check with the Solar Azimuth</h4>
+								<p class="mt-1 text-xs text-body leading-5">On sunny days, check the yellow sun indicator on the compass rim. If the sun marker aligns with the physical position of the sun in the sky, your compass is 100% calibrated and ready for navigation.</p>
+							</div>
+						</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Comparative Sensor Technology Matrix ───────────── -->
+	<section id="compare" class="border-t border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<div class="mx-auto max-w-3xl text-center">
+				<p class="eyebrow">instrument comparison</p>
+				<h2 class="mt-3 text-display-lg text-ink">Comparing Modern Compass Technologies</h2>
+				<p class="mt-4 text-body-lg text-body">
+					Understanding the fundamental operating physics behind different compass categories ensures you always pick the optimal tool for your environment:
 				</p>
 			</div>
-			<div class="mt-10 overflow-x-auto">
+
+			<div class="mt-12 overflow-x-auto">
 				<table class="w-full border-collapse text-sm">
-					<caption class="sr-only">Comparison of compass types</caption>
+					<caption class="sr-only">Navigational Sensor Technology Comparison Matrix</caption>
 					<thead>
 						<tr class="border-b border-hairline-strong text-left">
-							<th scope="col" class="py-3 pr-4 font-medium text-ink">Type</th>
-							<th scope="col" class="py-3 pr-4 font-medium text-ink">What it measures</th>
-							<th scope="col" class="py-3 pr-4 font-medium text-ink">Best for</th>
-							<th scope="col" class="py-3 font-medium text-ink">Limitations</th>
+							<th scope="col" class="py-3.5 pr-4 font-semibold text-ink">Technology</th>
+							<th scope="col" class="py-3.5 pr-4 font-semibold text-ink">Operating Physics</th>
+							<th scope="col" class="py-3.5 pr-4 font-semibold text-ink">Typical Accuracy</th>
+							<th scope="col" class="py-3.5 pr-4 font-semibold text-ink">Key Advantages</th>
+							<th scope="col" class="py-3.5 font-semibold text-ink">Environmental Limits</th>
 						</tr>
 					</thead>
-					<tbody>
-						{compassTypes.map((c) => (
-							<tr class="border-b border-hairline align-top">
-								<td class="py-3 pr-4 font-medium text-ink">{c.type}</td>
-								<td class="py-3 pr-4 text-body">{c.measures}</td>
-								<td class="py-3 pr-4 text-body">{c.best}</td>
-								<td class="py-3 text-body">{c.limitation}</td>
+					<tbody class="divide-y divide-hairline">
+						{compassTechComparison.map((c) => (
+							<tr class="hover:bg-canvas-soft/40 transition-colors align-top">
+								<td class="py-4 pr-4 font-medium text-ink">{c.tech}</td>
+								<td class="py-4 pr-4 text-xs text-body leading-5">{c.operatingPrinciple}</td>
+								<td class="py-4 pr-4 font-mono text-xs font-semibold text-link">{c.accuracy}</td>
+								<td class="py-4 pr-4 text-xs text-body leading-5">{c.advantages}</td>
+								<td class="py-4 text-xs text-mute leading-5">{c.limitations}</td>
 							</tr>
 						))}
 					</tbody>
@@ -638,153 +664,75 @@ const compassTypes = [
 		</div>
 	</section>
 
-	<!-- ─── Uses ───────────────────────────────────────────── -->
-	<section id="uses" class="border-y border-hairline bg-canvas scroll-mt-16">
-		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
-			<p class="eyebrow">everyday uses</p>
-			<h2 class="mt-3 max-w-2xl text-display-lg text-ink">Who actually uses an online compass.</h2>
-			<p class="mt-3 max-w-2xl text-body-lg text-body">
-				Beyond the obvious hiking case, a quick heading solves a surprising number of small,
-				real problems.
-			</p>
-			<div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-				<div class="card p-6">
-					<h3 class="text-display-sm text-ink">Hiking and trail navigation</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						Orient a paper map before you set off, take a back bearing to retrace your route, and
-						confirm direction under tree cover where GPS is slow to settle.
-					</p>
-				</div>
-				<div class="card p-6">
-					<h3 class="text-display-sm text-ink">Photography and video</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						Plan a golden-hour shoot by checking which way a location faces, and predict where the
-						sun will rise and set using the <a href="/sun/" class="text-link underline decoration-link/30 hover:decoration-link">sun tool</a>.
-					</p>
-				</div>
-				<div class="card p-6">
-					<h3 class="text-display-sm text-ink">Gardening and solar</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						Find which way a garden or balcony faces to place sun-loving plants, and align solar
-						panels toward true south or north for maximum yield.
-					</p>
-				</div>
-				<div class="card p-6">
-					<h3 class="text-display-sm text-ink">Home and property</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						Check a room's orientation for light and heating, describe a property's aspect
-						accurately, and settle the "which way does the living room face?" question in seconds.
-					</p>
-				</div>
-				<div class="card p-6">
-					<h3 class="text-display-sm text-ink">Travel and the Qibla</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						Find the direction of prayer anywhere with the
-						<a href="/qibla/" class="text-link underline decoration-link/30 hover:decoration-link">Qibla finder</a>,
-						and get your bearings in an unfamiliar city before the map app catches up.
-					</p>
-				</div>
-				<div class="card p-6">
-					<h3 class="text-display-sm text-ink">Education and STEM</h3>
-					<p class="mt-2 text-sm text-body leading-6">
-						Teachers and students can watch angles, bearings, and the difference between true and
-						magnetic north come alive on a dial that responds to a real instrument.
-					</p>
-				</div>
+	<!-- ─── The 16-Point Compass Rose Reference ─────────────── -->
+	<section id="rose" class="border-t border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<div class="mx-auto max-w-3xl text-center">
+				<p class="eyebrow">cartographic reference</p>
+				<h2 class="mt-3 text-display-lg text-ink">The Complete 16-Point Compass Rose</h2>
+				<p class="mt-4 text-body-lg text-body">
+					While modern digital navigation relies on continuous 360-degree angles, the classic 16-point nautical rose remains the foundational vocabulary of aviation weather advisories, maritime logs, and wind direction reports:
+				</p>
 			</div>
 
-			<div class="card-soft mt-8 flex flex-col gap-3 p-5 sm:flex-row sm:items-center sm:justify-between">
-				<p class="max-w-2xl text-sm text-body leading-6">
-					Counting wildlife sightings, trail traffic, or laps while you are out? Our free
-					<a
-						href="https://simpletallycounter.com/"
-						target="_blank"
-						rel="noopener"
-						class="text-link underline decoration-link/30 hover:decoration-link">online tally counter</a>
-					runs in your browser with nothing to install.
-				</p>
-				<a
-					href="https://simpletallycounter.com/"
-					target="_blank"
-					rel="noopener"
-					class="btn-secondary shrink-0">Open the tally counter</a>
+			<div class="mx-auto mt-12 max-w-4xl grid grid-cols-2 sm:grid-cols-4 gap-4">
+				{compassRose.map((c) => (
+					<div class="card p-4 flex flex-col justify-between">
+						<div class="flex items-center justify-between">
+							<span class="font-mono text-base font-bold text-ink">{c.point}</span>
+							<span class="font-mono text-xs font-semibold text-link">{c.deg}</span>
+						</div>
+						<div class="mt-3">
+							<p class="text-xs font-medium text-ink">{c.name}</p>
+							<p class="text-[11px] text-mute">{c.quadrant}</p>
+						</div>
+					</div>
+				))}
 			</div>
 		</div>
 	</section>
 
-	<!-- ─── Troubleshooting ────────────────────────────────── -->
-	<section id="troubleshooting" class="scroll-mt-16">
-		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-24">
-			<div class="mx-auto max-w-3xl">
-				<p class="eyebrow">troubleshooting</p>
-				<h2 class="mt-3 text-display-lg text-ink">When your compass points the wrong way.</h2>
-				<p class="mt-3 text-body-lg text-body">
-					A misbehaving compass is almost always an interference problem, not a broken sensor.
-					Work through these checks in order.
-				</p>
-				<div class="mt-8 space-y-4">
-					<div class="card-soft p-5">
-						<h3 class="text-sm font-medium text-ink mb-1">The dial spins or the number climbs nonstop</h3>
-						<p class="text-sm leading-6">You are near a strong magnetic source. Remove MagSafe cases and magnetic mounts, move away from speakers, motors, and metal, then recalibrate.</p>
-					</div>
-					<div class="card-soft p-5">
-						<h3 class="text-sm font-medium text-ink mb-1">The reading is steady but seems a few degrees off</h3>
-						<p class="text-sm leading-6">That is usually declination. Toggle on true north and enable location so the correction applies to your exact coordinates.</p>
-					</div>
-					<div class="card-soft p-5">
-						<h3 class="text-sm font-medium text-ink mb-1">Nothing happens when I tap the button</h3>
-						<p class="text-sm leading-6">Sensor access requires a secure HTTPS page and a device with a magnetometer. Check that you granted motion and orientation permission for this site.</p>
-					</div>
-					<div class="card-soft p-5">
-						<h3 class="text-sm font-medium text-ink mb-1">It works on my phone but not my laptop</h3>
-						<p class="text-sm leading-6">Most laptops have no magnetometer, so there is nothing to read. Use your phone for live headings; the computer still shows the demo dial and sun and moon data.</p>
-					</div>
-					<div class="card-soft p-5">
-						<h3 class="text-sm font-medium text-ink mb-1">The needle lags when I turn quickly</h3>
-						<p class="text-sm leading-6">Smoothing keeps the reading stable, so it trails fast spins slightly. Slow down for a moment and the number will settle.</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- ─── FAQ ────────────────────────────────────────────── -->
+	<!-- ─── Comprehensive FAQ Section (16 In-Depth Items) ──── -->
 	<section id="faq" class="border-t border-hairline bg-canvas scroll-mt-16">
-		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-24">
-			<p class="eyebrow text-center">faq</p>
-			<h2 class="mt-3 text-center text-display-lg text-ink">Questions, answered.</h2>
+		<div class="mx-auto max-w-3xl px-4 py-20 sm:px-6 md:py-28">
+			<p class="eyebrow text-center">frequently asked questions</p>
+			<h2 class="mt-3 text-center text-display-lg text-ink">Everything You Need to Know About Compass Navigation</h2>
+			<p class="mt-4 text-center text-body leading-relaxed">
+				Detailed technical answers to common questions regarding magnetometer sensors, geodetic calculations, and browser navigation tools.
+			</p>
 
-			<div class="mt-10 space-y-3">
+			<div class="mt-12 space-y-4">
 				{faq.map((f) => (
-					<details class="card overflow-hidden">
-						<summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-4 text-sm font-medium text-ink">
-							{f.q}
-							<svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0 text-mute" fill="none" aria-hidden="true">
+					<details class="card overflow-hidden group">
+						<summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-4.5 text-sm font-semibold text-ink group-open:border-b group-open:border-hairline transition-colors">
+							<span>{f.q}</span>
+							<svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0 text-mute group-hover:text-ink transition-transform duration-200" fill="none" aria-hidden="true">
 								<path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
 							</svg>
 						</summary>
-						<p class="px-6 pb-5 text-sm text-body leading-6">{f.a}</p>
+						<p class="px-6 py-5 text-sm text-body leading-7 bg-canvas-soft/20">{f.a}</p>
 					</details>
 				))}
 			</div>
 		</div>
 	</section>
 
-	<!-- ─── CTA band ───────────────────────────────────────── -->
-	<section class="bg-ink text-on-primary">
+	<!-- ─── Call to Action Banner ──────────────────────────── -->
+	<section class="border-t border-hairline bg-ink text-on-primary">
 		<div class="mx-auto max-w-[1200px] px-4 py-20 text-center sm:px-6 md:py-24">
-			<p class="font-mono text-xs uppercase tracking-[0.08em] text-on-primary/60">ready when you are</p>
-			<h2 class="mt-4 text-display-lg text-on-primary">Find your bearings.</h2>
-			<p class="mx-auto mt-3 max-w-lg text-body-lg text-on-primary/70">
-				Point your phone north, check your Qibla, or plot a course — all in one free tool.
+			<p class="font-mono text-xs uppercase tracking-[0.08em] text-on-primary/60">browser-based navigation</p>
+			<h2 class="mt-4 text-display-lg text-on-primary">Ready to Find Your Bearings?</h2>
+			<p class="mx-auto mt-3 max-w-xl text-body-lg text-on-primary/75">
+				Enable your browser compass now for instant, high-precision orientation—free, private, and running entirely on your device.
 			</p>
 			<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
-				<a href="/compass/" class="btn-primary bg-on-primary text-primary hover:opacity-85">Open the compass</a>
-				<a href="/blog/how-to-use-online-compass/" class="btn-secondary">Read the full guide</a>
+				<a href="/compass/" class="btn-primary bg-on-primary text-primary hover:opacity-90">Launch Live Compass</a>
+				<a href="/level/" class="btn-secondary text-on-primary border-on-primary/30 hover:bg-on-primary/10">Try Digital Bubble Level</a>
 			</div>
 		</div>
 	</section>
 
+	<!-- Structured Data for FAQ Schema -->
 	<script type="application/ld+json" set:html={JSON.stringify({
 		'@context': 'https://schema.org',
 		'@type': 'FAQPage',
