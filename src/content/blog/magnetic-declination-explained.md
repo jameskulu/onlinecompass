@@ -1,4 +1,4 @@
----
+﻿---
 title: "Magnetic Declination Explained: True North vs Magnetic North"
 description: "Magnetic declination is the gap between true north and magnetic north. Learn how to find it, when to add or subtract it, and how to keep bearings accurate."
 pubDate: 2026-10-23
@@ -19,7 +19,7 @@ Your compass needle and your map rarely agree exactly. One points at **magnetic 
 
 This guide explains what declination is, how to find it for your location, which way to add or subtract it, and how an online compass removes the arithmetic entirely.
 
-> **In short:** Magnetic declination is the angle between true north and magnetic north. Convert a magnetic heading to a true heading by adding east declination or subtracting west declination: **true = magnetic + declination**, with east positive and west negative. The [online compass](/compass/) can apply the correction automatically when you enable location and switch to true north.
+> **In short:** Magnetic declination is the angle between true north and magnetic north. Convert a magnetic heading to a true heading by adding east declination or subtracting west declination: **true = magnetic + declination**, with east positive and west negative. The [online compass](/) can apply the correction automatically when you enable location and switch to true north.
 
 ## What is magnetic declination?
 
@@ -74,7 +74,7 @@ Going the other way — from a true bearing on a map to a heading you follow on 
 
 Suppose your map shows the destination at a true bearing of 180° and the local declination is 13° west. The magnetic heading to steer is 180° − (−13°) = **193°**. If you simply walked on 180° magnetic, you would drift west of the intended line.
 
-If you use the [online compass](/compass/) in true north mode, it performs this conversion for you. You can then match the dial to the true bearing directly, without doing the sum by hand.
+If you use the [online compass](/) in true north mode, it performs this conversion for you. You can then match the dial to the true bearing directly, without doing the sum by hand.
 
 ## How to find the declination for your location
 
@@ -82,7 +82,7 @@ There are three reliable ways to get the number.
 
 ### 1. Let the online compass calculate it
 
-The [live compass tool](/compass/) includes a **true north** mode. Tap **Use location for declination**, allow location access, and the page applies the World Magnetic Model to your coordinates. The heading shown in true north mode is already corrected, so it lines up with maps and with bearings from the [bearing calculator](/bearing/).
+The [live compass tool](/) includes a **true north** mode. Tap **Use location for declination**, allow location access, and the page applies the World Magnetic Model to your coordinates. The heading shown in true north mode is already corrected, so it lines up with maps and with bearings from the [bearing calculator](/bearing/).
 
 This is the simplest option while you are outdoors, and it uses the same model that official navigation systems rely on. If you would rather not share GPS, the [GPS coordinates tool](/location/) can give you a position you can enter manually where a coordinate field is available.
 
@@ -170,7 +170,7 @@ For a quick "which way is the sea?" check, declination barely matters. For anyth
 
 ## How the online compass handles declination
 
-The [online compass](/compass/) shows both references so you can work in whichever one suits the task:
+The [online compass](/) shows both references so you can work in whichever one suits the task:
 
 - **Magnetic north** matches what a traditional compass needle reads.
 - **True north** applies the declination for your location so the heading matches a map.
@@ -197,4 +197,4 @@ You can cross-check the result in daylight against the [sun position tool](/sun/
 
 ## The bottom line
 
-Magnetic declination is a small angle with an outsized effect. Learn one rule — true equals magnetic plus declination, east positive — and check the value for your location before you trust a bearing. Or skip the arithmetic entirely: open the [online compass](/compass/), enable location, switch to true north, and let it apply the correction for you. For the full setup and calibration walkthrough, read the [complete online compass guide](/blog/how-to-use-online-compass/), and for turning a direction into a number you can follow, see [how to take a compass bearing](/blog/how-to-take-a-compass-bearing/).
+Magnetic declination is a small angle with an outsized effect. Learn one rule — true equals magnetic plus declination, east positive — and check the value for your location before you trust a bearing. Or skip the arithmetic entirely: open the [online compass](/), enable location, switch to true north, and let it apply the correction for you. For the full setup and calibration walkthrough, read the [complete online compass guide](/blog/how-to-use-online-compass/), and for turning a direction into a number you can follow, see [how to take a compass bearing](/blog/how-to-take-a-compass-bearing/).

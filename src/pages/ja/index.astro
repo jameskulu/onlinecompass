@@ -4,6 +4,30 @@ import Compass from '../../components/Compass.astro';
 
 const faq = [
 	{
+		"q": "現在地から今すぐ真北を見つけるにはどうすればよいですか？",
+		"a": "方位センサーと位置情報の利用を許可したスマホで本コンパスを開き、水平に持ちます。針が自動的に真北（0°）を指し、現地の磁気偏角も自動補正されます。"
+	},
+	{
+		"q": "室内や家の中にいるとき、北はどちら側になりますか？",
+		"a": "大型家電、電子レンジ、パソコン、鉄筋コンクリートの柱から2メートルほど離れてください。水平に持って0°を示せば正面が北、90°なら左手が北になります。"
+	},
+	{
+		"q": "スマホのコンパスが狂ったり方向がずれたりするのはなぜですか？",
+		"a": "マグネット式ケース（MagSafeなど）や周囲の金属による磁気干渉が原因です。磁石付きカバーを外し、スマホを持って空間でゆっくりと「8の字」を数回描いてセンサーを校正してください。"
+	},
+	{
+		"q": "「北はどっち？」と「自分が向いている方角」の違いは何ですか？",
+		"a": "北は固定された地理的な基準（真北0°）です。向いている方角は北に対する角度（方位角）です。コンパスが180°を示している場合、あなたは南を向いており、北は真後ろにあります。"
+	},
+	{
+		"q": "アプリをインストールせずにブラウザだけで北を探せますか？",
+		"a": "はい。本ツールはW3C標準のDeviceOrientation APIを利用し、SafariやChromeなどのブラウザ内で100%ローカルに動作します。インストール不要・完全無料です。"
+	},
+	{
+		"q": "コンパスセンサーのないパソコンやノートPCで北を見つける方法は？",
+		"a": "デスクトップPCやノートPCには地磁気センサーが搭載されていません。PC環境では、当サイトの「太陽位置計算ツール」を使い、太陽の方位角や影の伸びる方向から真北を正確に特定できます。"
+	},
+	{
 		"q": "オンラインデジタルコンパスとは何ですか？ブラウザでどのように機能しますか？",
 		"a": "オンラインデジタルコンパスは、アプリをダウンロードすることなく、W3C DeviceOrientation APIを介してスマートフォンに内蔵された物理MEMSセンサー（磁力計・加速度計・ジャイロ）を直接読み取るウェブアプリケーションです。JavaScriptによるリアルタイムの三角関数傾斜補正により、端末が傾いていても0°〜360°の正確な方位を瞬時に算出します。"
 	},
@@ -211,9 +235,9 @@ const compassTechComparison = [
 
 <Layout
 	path="/ja/"
-	title="オンラインコンパス — 測地ナビゲーション・水準器・GPS速度計"
-	description="真北・磁北、WMM磁気偏角自動補正、水準器、GPS速度計、キブラ方位を備えた無料の高精度オンラインデジタルコンパス。インストール不要。"
-	keywords="オンラインコンパス, 無料デジタルコンパス, 真北 磁北 違い, 磁気偏角, 水準器 オンライン, gps速度計 オンライン, 方位角計算, キブラ 方角"
+	title="北はどっち？無料オンラインコンパス（真北・磁北リアルタイム表示）"
+	description="現在地から今すぐ北の方角（真北・磁北）を確認。アプリのインストール不要でブラウザですぐに使える高精度デジタルオンラインコンパスです。"
+	keywords="北はどっち, 北の方角, オンラインコンパス, コンパス 無料, 真北 磁北, 方位磁石 オンライン, スマホ コンパス"
 >
 	<!-- ─── Hero Section ───────────────────────────────────── -->
 	<section id="compass" class="relative overflow-hidden">
@@ -224,7 +248,7 @@ const compassTechComparison = [
 				<div class="badge mx-auto">無料・プライバシー重視・インストール不要</div>
 
 				<h1 class="mx-auto mt-6 max-w-4xl text-[34px] leading-[40px] font-bold text-ink sm:text-display-xl md:text-[54px] md:leading-[60px]">
-					真北を指すコンパス。磁気だけではありません。
+					北はどっち？真北を正確に指す無料オンラインコンパス
 				</h1>
 
 				<p class="mx-auto mt-4 max-w-2xl text-body-lg text-body">
@@ -232,7 +256,7 @@ const compassTechComparison = [
 				</p>
 
 				<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
-					<a href="#engineering" class="btn-primary">センサー工学解説</a>
+					<a href="#find-north" class="btn-primary">北の方角を確認する</a>
 					<a href="/ja/compass/" class="btn-secondary">全画面コンパスを起動</a>
 				</div>
 			</div>
@@ -262,6 +286,56 @@ const compassTechComparison = [
 			</div>
 		</div>
 	</section>
+
+	<!-- ─── Where Is North Guide Section ───────────────────── -->
+	<section id="find-north" class="border-b border-hairline bg-canvas-soft scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-16 sm:px-6 md:py-20">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">リアルタイム方位確認</p>
+				<h2 class="mt-3 text-display-lg text-ink">
+					現在地から北の方角はどっち？
+				</h2>
+				<div class="mt-6 rounded-xl border border-hairline bg-canvas p-6 text-body leading-relaxed shadow-xs">
+					<p class="text-body-lg">
+						<strong>直接の答え：</strong>現在地から今すぐ北の方角を調べるには、スマホを手のひらに載せて水平に平らに保ちます。上のコンパス画面を確認してください。針が真上の<strong class="text-ink font-semibold">0°（N）</strong>を指したとき、スマホの先端が<strong class="text-ink font-semibold">「真北（本当の北）」</strong>を向いています。90°（E）と表示されている場合は東を向いており、北は真左にあります。
+					</p>
+				</div>
+
+				<div class="mt-8 grid gap-5 sm:grid-cols-3">
+					<div class="card p-5">
+						<p class="eyebrow mb-2">1. 即時測定</p>
+						<h3 class="text-base font-semibold text-ink mb-2">GPSと地磁気センサー</h3>
+						<p class="text-sm text-body leading-6">
+							スマホのブラウザが端末内の3軸磁気センサーとGPS情報をリアルタイムで読み取り、アプリをダウンロードすることなく瞬時に方角を算出します。
+						</p>
+					</div>
+					<div class="card p-5">
+						<p class="eyebrow mb-2">2. 真北と磁北</p>
+						<h3 class="text-base font-semibold text-ink mb-2">偏角の自動補正</h3>
+						<p class="text-sm text-body leading-6">
+							一般的な磁石の針は「磁北」を指し、地域によって最大数十度ずれます。本ツールはNOAA世界磁気モデルで地図と一致する「真北」を自動表示します。
+						</p>
+					</div>
+					<div class="card p-5">
+						<p class="eyebrow mb-2">3. 向いている方角</p>
+						<h3 class="text-base font-semibold text-ink mb-2">自分が向いている方角は？</h3>
+						<p class="text-sm text-body leading-6">
+							ダイヤル上部の数値があなたの向いている正確な方位角です（0°＝北、90°＝東、180°＝南、270°＝西）。
+						</p>
+					</div>
+				</div>
+
+				<div class="mt-8 flex flex-wrap items-center gap-3 text-sm">
+					<a href="/blog/what-way-am-i-facing-online-compass/" class="text-link font-medium hover:underline">解説ガイド：自分が向いている方角を調べる →</a>
+					<span class="text-mute" aria-hidden="true">·</span>
+					<a href="/blog/which-direction-does-my-house-face/" class="text-link font-medium hover:underline">家の窓やベランダの方角を調べる →</a>
+					<span class="text-mute" aria-hidden="true">·</span>
+					<a href="/blog/phone-compass-calibration-fix/" class="text-link font-medium hover:underline">スマホのコンパスを校正する →</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
 
 	<!-- ─── Complete Navigation Toolkit Grid (All 8 Tools) ─── -->
 	<section id="tools" class="scroll-mt-16">

@@ -4,6 +4,30 @@ import Compass from '../../components/Compass.astro';
 
 const faq = [
 	{
+		"q": "আমার অবস্থান থেকে এখনই সঠিক উত্তর দিক কীভাবে খুঁজে পাব?",
+		"a": "লোকেশন ও সেন্সর পারমিশন অন করে আপনার স্মার্টফোনে এই অনলাইন কম্পাসটি খুলুন এবং ফোনটি সমান্তরালভাবে রাখুন। কাঁটাটি স্বয়ংক্রিয়ভাবে সঠিক উত্তর দিক (0°) দেখাবে।"
+	},
+	{
+		"q": "ঘরের বা রুমের ভেতরে থাকলে উত্তর দিক কীভাবে বুঝব?",
+		"a": "ভারী ধাতব বস্তু, মাইক্রোওয়েভ এবং রডের পিলার থেকে কিছুটা দূরে দাঁড়ান। ফোনটি সোজা রাখুন: 0° হলে সামনে উত্তর, এবং 90° হলে আপনার বাম পাশে উত্তর।"
+	},
+	{
+		"q": "ফোনের কম্পাস ভুল দিক দেখায় বা কাঁটা অনবরত ঘোরে কেন?",
+		"a": "ম্যাগনেটিক মোবাইল কভার (যেমন MagSafe) বা লোহার কাঠামোর কারণে সেন্সর বিভ্রান্ত হয়। ম্যাগনেটিক কভার খুলে ফোনটি বাতাসে ইংরেজি ৮ (∞) আকারে ৫ সেকেন্ড ঘুরিয়ে ক্যালিব্রেট করুন।"
+	},
+	{
+		"q": "‘উত্তর কোন দিকে’ আর ‘আমার মুখ কোন দিকে’ এর মধ্যে পার্থক্য কী?",
+		"a": "উত্তর দিক একটি নির্দিষ্ট ভৌগোলিক বিন্দু (0° True North)। আর আপনার অবস্থান হলো উত্তরের সাপেক্ষে আপনার মুখ কোন দিকে। কম্পাসে 180° দেখালে আপনি দক্ষিণে মুখ করে আছেন এবং উত্তর ঠিক আপনার পেছনে।"
+	},
+	{
+		"q": "কোনো অ্যাপ ইনস্টল না করেই কি এই অনলাইন কম্পাস দিয়ে দিক জানা যায়?",
+		"a": "হ্যাঁ। এই অনলাইন কম্পাসটি সাফারি বা ক্রোম ব্রাউজারে সম্পূর্ণ বিনামূল্যে এবং কোনো অ্যাপ ইনস্টল বা রেজিস্ট্রেশন ছাড়াই ১০০% সুরক্ষিতভাবে চলে।"
+	},
+	{
+		"q": "ল্যাপটপ বা কম্পিউটারে কম্পাস সেন্সর না থাকলে উত্তর দিক কীভাবে বের করব?",
+		"a": "কম্পিউটার বা ল্যাপটপে ম্যাগনেটোমিটার থাকে না। পিসিতে আমাদের ‘সূর্যের অবস্থান ক্যালকুলেটর’ ব্যবহার করে সূর্যের কোণ এবং ছায়ার দিক দেখে নির্ভুল উত্তর দিক বের করতে পারবেন।"
+	},
+	{
 		"q": "অনলাইন ডিজিটাল কম্পাস কী এবং এটি ব্রাউজারে কীভাবে কাজ করে?",
 		"a": "অনলাইন ডিজিটাল কম্পাস হলো একটি ব্রাউজার-ভিত্তিক ওয়েব অ্যাপ্লিকেশন যা W3C DeviceOrientation API-এর মাধ্যমে আপনার স্মার্টফোনের অভ্যন্তরীণ MEMS সেন্সর (ম্যাগনেটোমিটার, অ্যাক্সিলেরোমিটার ও জাইরোস্কোপ) সরাসরি রিড করে। কোনো অ্যাপ ইনস্টল না করেই জাভাস্ক্রিপ্টে রিয়েল-টাইম ত্রিকোণমিতিক টিল্ট ক্ষতিপূরণ করে এটি ০° থেকে ৩৬০° পর্যন্ত নির্ভুল দিকনির্দেশ প্রদান করে।"
 	},
@@ -211,9 +235,9 @@ const compassTechComparison = [
 
 <Layout
 	path="/bn/"
-	title="অনলাইন কম্পাস — জিওডেটিক নেভিগেশন, স্পিরিট লেভেল ও জিপিএস স্পিডোমিটার"
-	description="প্রকৃত ও চৌম্বক উত্তর, ডব্লিউএমএম বিচ্যুতি স্বয়ংক্রিয় সমন্বয়, বাবল লেভেল, জিপিএস স্পিডোমিটার ও কিবলা কম্পাস সহ বিনামূল্যের অনলাইন কম্পাস।"
-	keywords="অনলাইন কম্পাস, ডিজিটাল কম্পাস ফ্রি, প্রকৃত উত্তর বনাম চৌম্বক উত্তর, চৌম্বক বিচ্যুতি, বাবল লেভেল অনলাইন, জিপিএস স্পিডোমিটার অনলাইন, কিবলা দিক"
+	title="উত্তর দিক কোন দিকে? অনলাইন কম্পাস (সরাসরি সঠিক উত্তর দিক)"
+	description="আপনার বর্তমান অবস্থান থেকে উত্তর দিক কোথায় তা এখনই জানুন। কোনো অ্যাপ ইনস্টল ছাড়াই ব্রাউজারে বিনামূল্যে সঠিক ও নির্ভুল ডিজিটাল অনলাইন কম্পাস।"
+	keywords="উত্তর দিক কোন দিকে, উত্তর দিক নির্ণয়, অনলাইন কম্পাস, দিক নির্ণয় কম্পাস, ডিজিটাল কম্পাস ফ্রি, কম্পাস অনলাইন, সঠিক উত্তর দিক"
 >
 	<!-- ─── Hero Section ───────────────────────────────────── -->
 	<section id="compass" class="relative overflow-hidden">
@@ -224,7 +248,7 @@ const compassTechComparison = [
 				<div class="badge mx-auto">বিনামূল্যে · গোপনীয় · ইনস্টল ছাড়াই</div>
 
 				<h1 class="mx-auto mt-6 max-w-4xl text-[34px] leading-[40px] font-bold text-ink sm:text-display-xl md:text-[54px] md:leading-[60px]">
-					একটি কম্পাস যা শুধু চৌম্বক নয়, প্রকৃত উত্তর দেখায়।
+					উত্তর দিক কোন দিকে? লাইভ অনলাইন কম্পাস যা সঠিক উত্তর দেখায়
 				</h1>
 
 				<p class="mx-auto mt-4 max-w-2xl text-body-lg text-body">
@@ -232,7 +256,7 @@ const compassTechComparison = [
 				</p>
 
 				<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
-					<a href="#engineering" class="btn-primary">সেন্সর স্থাপত্য ব্যাখ্যা</a>
+					<a href="#find-north" class="btn-primary">উত্তর দিক জেনে নিন</a>
 					<a href="/bn/compass/" class="btn-secondary">ফুল-স্ক্রিন কম্পাস খুলুন</a>
 				</div>
 			</div>
@@ -262,6 +286,56 @@ const compassTechComparison = [
 			</div>
 		</div>
 	</section>
+
+	<!-- ─── Where Is North Guide Section ───────────────────── -->
+	<section id="find-north" class="border-b border-hairline bg-canvas-soft scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-16 sm:px-6 md:py-20">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">তাৎক্ষণিক দিক নির্ণয়</p>
+				<h2 class="mt-3 text-display-lg text-ink">
+					আমার বর্তমান অবস্থান থেকে উত্তর দিক কোন দিকে?
+				</h2>
+				<div class="mt-6 rounded-xl border border-hairline bg-canvas p-6 text-body leading-relaxed shadow-xs">
+					<p class="text-body-lg">
+						<strong>সরাসরি উত্তর:</strong> আপনার বর্তমান অবস্থান থেকে এখনই উত্তর দিক জানতে ফোনটি হাতের তালুতে সম্পূর্ণ সোজা এবং অনুভূমিকভাবে ধরুন। ওপরের কম্পাস ডায়ালটি লক্ষ্য করুন: যখন কাঁটাটি সোজা ওপরের <strong class="text-ink font-semibold">0° (N)</strong> নির্দেশ করবে, তখন আপনার ফোনটি <strong class="text-ink font-semibold">সঠিক ভূ-তাত্ত্বিক উত্তরের (True North)</strong> দিকে মুখ করে আছে। ডায়ালে <strong class="text-ink font-semibold">90° (E)</strong> দেখালে আপনি পূর্ব দিকে মুখ করে আছেন এবং উত্তর দিক ঠিক আপনার বাম পাশে।
+					</p>
+				</div>
+
+				<div class="mt-8 grid gap-5 sm:grid-cols-3">
+					<div class="card p-5">
+						<p class="eyebrow mb-2">১. তাৎক্ষণিক সেন্সর শনাক্তকরণ</p>
+						<h3 class="text-base font-semibold text-ink mb-2">জিপিএস এবং ম্যাগনেটোমিটার</h3>
+						<p class="text-sm text-body leading-6">
+							আপনার ফোনের অভ্যন্তরীণ ৩-অক্ষীয় ম্যাগনেটোমিটার ও জিপিএস কোনো অ্যাপ ডাউনলোড ছাড়াই রিয়েল-টাইমে নিখুঁত দিক গণনা করে।
+						</p>
+					</div>
+					<div class="card p-5">
+						<p class="eyebrow mb-2">২. আসল বনাম চৌম্বক উত্তর</p>
+						<h3 class="text-base font-semibold text-ink mb-2">সঠিক কোণ সংশোধন</h3>
+						<p class="text-sm text-body leading-6">
+							সাধারণ কম্পাসের কাঁটা চৌম্বক উত্তরের দিকে নির্দেশ করে যা প্রায় ২০° পর্যন্ত ভুল হতে পারে। আমাদের কম্পাস সঠিক ভৌগোলیک উত্তর দেখায়।
+						</p>
+					</div>
+					<div class="card p-5">
+						<p class="eyebrow mb-2">৩. আপনার মুখ কোন দিকে</p>
+						<h3 class="text-base font-semibold text-ink mb-2">আমি কোন দিকে মুখ করে আছি?</h3>
+						<p class="text-sm text-body leading-6">
+							ডায়ালের ওপরের সংখ্যাটি আপনার বর্তমান কোণ নির্দেশ করে: 0° উত্তর, 90° পূর্ব, 180° দক্ষিণ এবং 270° পশ্চিম।
+						</p>
+					</div>
+				</div>
+
+				<div class="mt-8 flex flex-wrap items-center gap-3 text-sm">
+					<a href="/blog/what-way-am-i-facing-online-compass/" class="text-link font-medium hover:underline">নির্দেশিকা: আমি কোন দিকে মুখ করে আছি? →</a>
+					<span class="text-mute" aria-hidden="true">·</span>
+					<a href="/blog/which-direction-does-my-house-face/" class="text-link font-medium hover:underline">আপনার বাড়ির অভিমুখ বা দিক নির্ণয় করুন →</a>
+					<span class="text-mute" aria-hidden="true">·</span>
+					<a href="/blog/phone-compass-calibration-fix/" class="text-link font-medium hover:underline">ফোনের কম্পাস ক্যালিব্রেশন ও ত্রুটি দূর করার উপায় →</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
 
 	<!-- ─── Complete Navigation Toolkit Grid (All 8 Tools) ─── -->
 	<section id="tools" class="scroll-mt-16">

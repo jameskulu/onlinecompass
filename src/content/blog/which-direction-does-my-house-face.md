@@ -1,4 +1,4 @@
----
+﻿---
 title: "Which Direction Does My House Face? A Compass Guide"
 description: "Find which direction your house, window, or balcony faces using a phone compass or map. Includes a degree chart, common mistakes, and daylight tips."
 pubDate: 2026-10-29
@@ -12,7 +12,7 @@ keywords:
   - north facing house
 ---
 
-**To find which direction your house faces, stand at the front entrance looking outward, hold your phone flat, and point its top edge straight away from the building.** Read the heading on the [online compass](/compass/): roughly 0° is north, 90° east, 180° south, and 270° west.
+**To find which direction your house faces, stand at the front entrance looking outward, hold your phone flat, and point its top edge straight away from the building.** Read the heading on the [online compass](/): roughly 0° is north, 90° east, 180° south, and 270° west.
 
 For a room, window, or balcony, measure outward from that particular opening instead. A house can have an east-facing entrance and a west-facing living room; both descriptions can be correct.
 
@@ -35,7 +35,7 @@ The front door and front facade are not always aligned. A recessed entrance or a
 ## How to check house facing direction with your phone
 
 1. **Choose your reference.** For the entrance, stand at the threshold facing outside. For a window, face directly out through the glass rather than along the wall.
-2. **Open the [live compass](/compass/).** Enable the live reading and grant motion or orientation permission if requested. A dial on screen alone does not confirm that live sensor readings are available.
+2. **Open the [live compass](/).** Enable the live reading and grant motion or orientation permission if requested. A dial on screen alone does not confirm that live sensor readings are available.
 3. **Use true north for map comparisons.** If available, enable the true-north correction and allow location access so it can calculate local magnetic declination. Otherwise, note that the reading is magnetic.
 4. **Hold the phone flat, screen upward.** Point the top edge straight outward, perpendicular to the wall. Avoid aiming diagonally toward a view or along a driveway.
 5. **Check for interference.** Move away from steel doors, railings, vehicles, speakers, and magnetic accessories. If needed, step outside while keeping the phone parallel to the original outward direction.
@@ -128,7 +128,7 @@ Face outward from the feature you are measuring. For a front door, look from ins
 
 ### Can I check my house direction without installing an app?
 
-Yes. Use the [browser compass](/compass/) on a compatible phone with live heading access, or use a north-up map to estimate the outward direction of the facade. Browser and device sensor support vary.
+Yes. Use the [browser compass](/) on a compatible phone with live heading access, or use a north-up map to estimate the outward direction of the facade. Browser and device sensor support vary.
 
 ### Does a north-facing front door mean every room faces north?
 
@@ -142,4 +142,4 @@ An address helps locate the property, but it does not identify which facade, win
 
 That depends on climate, hemisphere, shading, and when you use each room. Establish the window directions first, then check sunlight at the times and seasons that matter to you. A direction label alone cannot predict comfort or room brightness.
 
-Start with the [online compass](/compass/), take two or more readings along the same outward alignment, and save the approximate degrees together with the feature you measured.
+Start with the [online compass](/), take two or more readings along the same outward alignment, and save the approximate degrees together with the feature you measured.

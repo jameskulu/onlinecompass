@@ -4,6 +4,30 @@ import Compass from '../../components/Compass.astro';
 
 const faq = [
 	{
+		"q": "Wie finde ich den Wahren Norden von meinem aktuellen Standort aus?",
+		"a": "Öffnen Sie diesen Online-Kompass auf Ihrem Smartphone mit aktivierten Standort- und Sensorrechten. Halten Sie das Gerät flach in der Hand; die Nadel weist automatisch auf den Wahren Norden (0°), korrigiert um die lokale magnetische Deklination."
+	},
+	{
+		"q": "In welcher Richtung liegt Norden, wenn ich im Haus oder Zimmer stehe?",
+		"a": "Halten Sie Abstand zu großen Metallgeräten, Mikrowellen, Computern und Stahlbetonträgern. Halten Sie das Handy flach: Zeigt die Nadel 0°, blicken Sie nach Norden; bei 90° liegt Norden links von Ihnen."
+	},
+	{
+		"q": "Warum zeigt mein Smartphone-Kompass in die falsche Richtung oder weicht ab?",
+		"a": "Sensoren reagieren auf Magnete in Hüllen (z. B. MagSafe-Halterungen) und Elektronik. Nehmen Sie magnetische Hüllen ab und führen Sie 5 Sekunden lang eine ruhige Achterbewegung (∞) durch, um das Magnetometer neu zu kalibrieren."
+	},
+	{
+		"q": "Was ist der Unterschied zwischen „Wo ist Norden?“ und „In welche Richtung blicke ich?“?",
+		"a": "Norden ist ein fester geografischer Punkt (0° Wahr). Ihre Blickrichtung ist der relative Winkel zu Norden. Zeigt der Kompass 180°, blicken Sie nach Süden und Norden liegt genau hinter Ihnen."
+	},
+	{
+		"q": "Kann ich Norden mit diesem Online-Kompass ohne App-Installation finden?",
+		"a": "Ja. Dieser Online-Kompass läuft zu 100 % in Ihrem mobilen Browser (Safari, Chrome, Edge, Firefox) über moderne W3C-Standards – ganz ohne App Store, ohne Registrierung und mit vollem Datenschutz."
+	},
+	{
+		"q": "Wie finde ich Norden am Desktop-PC oder Laptop ohne Kompass-Sensor?",
+		"a": "Desktop-PCs und Notebooks besitzen kein Magnetometer. Nutzen Sie auf PCs unseren Sonnenstands-Rechner, um den exakten Wahren Norden anhand des Sonnenazimuts und des Schattenverlaufs zu bestimmen."
+	},
+	{
 		"q": "Was ist ein digitaler Online-Kompass und wie funktioniert er im Browser?",
 		"a": "Ein digitaler Online-Kompass ist eine Webanwendung, die über die W3C DeviceOrientation-API direkt auf die physischen MEMS-Sensoren (Magnetometer, Beschleunigungssensor und Gyroskop) Ihres Smartphones zugreift. Mittels trigonometrischer Echtzeit-Neigungskompensation in JavaScript berechnet er einen stabilen Kurs von 0° bis 360° ohne App-Installation."
 	},
@@ -211,9 +235,9 @@ const compassTechComparison = [
 
 <Layout
 	path="/de/"
-	title="Online-Kompass — Geodätische Navigation, Wasserwaage & GPS-Tachometer"
-	description="Kostenloser hochpräziser digitaler Online-Kompass mit wahrem und magnetischem Norden, WMM-Deklination, digitaler Wasserwaage, GPS-Tachometer und Qibla-Finder."
-	keywords="online kompass, digitaler kompass kostenlos, wahrer norden vs magnetisch, magnetische deklination, wasserwaage online, gps tachometer online, kurs berechnen, qibla richtung"
+	title="Kompass Online — Wo ist Norden? Kostenloser Digitaler Kompass"
+	description="Wo ist Norden? Kostenloser digitaler Online-Kompass für Ihr Smartphone. Zeigt sofort den wahren und magnetischen Norden mit automatischer WMM-Deklination. Ohne App-Installation direkt im Browser."
+	keywords="kompass online, online kompass, wo ist norden, kompass online kostenlos, digitaler kompass kostenlos, wahrer norden vs magnetisch, magnetische deklination, kompass handy"
 >
 	<!-- ─── Hero Section ───────────────────────────────────── -->
 	<section id="compass" class="relative overflow-hidden">
@@ -224,7 +248,7 @@ const compassTechComparison = [
 				<div class="badge mx-auto">kostenlos · privat · keine installation</div>
 
 				<h1 class="mx-auto mt-6 max-w-4xl text-[34px] leading-[40px] font-bold text-ink sm:text-display-xl md:text-[54px] md:leading-[60px]">
-					Ein Kompass, der zum wahren Norden zeigt, nicht nur zum magnetischen.
+					Wo ist Norden? Live Online-Kompass mit Wahrem Norden
 				</h1>
 
 				<p class="mx-auto mt-4 max-w-2xl text-body-lg text-body">
@@ -232,7 +256,7 @@ const compassTechComparison = [
 				</p>
 
 				<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
-					<a href="#engineering" class="btn-primary">Sensor-Architektur</a>
+					<a href="#find-north" class="btn-primary">Wo ist Norden finden</a>
 					<a href="/de/compass/" class="btn-secondary">Vollbild-Kompass Öffnen</a>
 				</div>
 			</div>
@@ -262,6 +286,56 @@ const compassTechComparison = [
 			</div>
 		</div>
 	</section>
+
+	<!-- ─── Where Is North Guide Section ───────────────────── -->
+	<section id="find-north" class="border-b border-hairline bg-canvas-soft scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-16 sm:px-6 md:py-20">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">sofortige richtungsbestimmung</p>
+				<h2 class="mt-3 text-display-lg text-ink">
+					Wo Ist Norden Von Meinem Standort Aus Gerade Jetzt?
+				</h2>
+				<div class="mt-6 rounded-xl border border-hairline bg-canvas p-6 text-body leading-relaxed shadow-xs">
+					<p class="text-body-lg">
+						<strong>Direkte Antwort:</strong> Um Norden von Ihrem aktuellen Standort sofort zu finden, halten Sie Ihr Smartphone waagerecht in der Handfläche. Sehen Sie auf das Zifferblatt oben: Sobald die Nadel senkrecht auf <strong class="text-ink font-semibold">0° (N)</strong> zeigt, blickt Ihr Smartphone exakt nach <strong class="text-ink font-semibold">Wahrem Norden</strong>. Zeigt das Zifferblatt <strong class="text-ink font-semibold">90° (E)</strong>, blicken Sie nach Osten und Norden liegt direkt links von Ihnen.
+					</p>
+				</div>
+
+				<div class="mt-8 grid gap-5 sm:grid-cols-3">
+					<div class="card p-5">
+						<p class="eyebrow mb-2">1. sofortige erkennung</p>
+						<h3 class="text-base font-semibold text-ink mb-2">GPS & Magnetometer</h3>
+						<p class="text-sm text-body leading-6">
+							Ihr mobiler Browser fragt das 3-Achsen-Magnetometer und die GPS-Koordinaten in Echtzeit ab, um Ihren Kurs ohne App-Download stabil zu bestimmen.
+						</p>
+					</div>
+					<div class="card p-5">
+						<p class="eyebrow mb-2">2. wahrer vs magnetischer norden</p>
+						<h3 class="text-base font-semibold text-ink mb-2">Deklination Korrigiert</h3>
+						<p class="text-sm text-body leading-6">
+							Klassische Nadeln weisen zum magnetischen Norden (bis zu 20° Abweichung). Unser Kompass nutzt das NOAA World Magnetic Model für echten geografischen Norden.
+						</p>
+					</div>
+					<div class="card p-5">
+						<p class="eyebrow mb-2">3. blickrichtung</p>
+						<h3 class="text-base font-semibold text-ink mb-2">In Welche Richtung Blicke Ich?</h3>
+						<p class="text-sm text-body leading-6">
+							Die Gradzahl am oberen Zifferblattrand zeigt Ihre genaue Blickrichtung: 0° ist Norden, 90° Osten, 180° Süden und 270° Westen.
+						</p>
+					</div>
+				</div>
+
+				<div class="mt-8 flex flex-wrap items-center gap-3 text-sm">
+					<a href="/blog/what-way-am-i-facing-online-compass/" class="text-link font-medium hover:underline">Leitfaden: In welche Richtung blicke ich? →</a>
+					<span class="text-mute" aria-hidden="true">·</span>
+					<a href="/blog/which-direction-does-my-house-face/" class="text-link font-medium hover:underline">Hausausrichtung ermitteln →</a>
+					<span class="text-mute" aria-hidden="true">·</span>
+					<a href="/blog/phone-compass-calibration-fix/" class="text-link font-medium hover:underline">Handy-Kompass kalibrieren →</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
 
 	<!-- ─── Complete Navigation Toolkit Grid (All 8 Tools) ─── -->
 	<section id="tools" class="scroll-mt-16">

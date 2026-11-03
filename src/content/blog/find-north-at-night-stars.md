@@ -1,4 +1,4 @@
----
+﻿---
 title: "How to Find North at Night: Pole Star, Southern Cross, and Star Trails"
 description: "Find true north after dark without a compass — locate Polaris with the Big Dipper, use the Southern Cross and the Pointers, read star trails from a phone photo, and convert what you see into a bearing you can actually follow."
 pubDate: 2026-10-27
@@ -18,7 +18,7 @@ keywords:
 
 A compass is a convenience until the battery dies, the needle sticks, or a steel bridge warps the reading. The night sky has no such weaknesses. Every star you can see is wheeling around a single point in the sky, and that point sits above **true north** — or true south, if you are in the southern hemisphere. Find the pivot, and you have found a direction no magnet can argue with.
 
-This guide covers the whole skill: how to locate Polaris quickly, what to do when the Big Dipper is hidden, how to find south with the Southern Cross, how to read a star-trail photo, what the Moon can and cannot tell you, and how to turn a patch of sky into a bearing you can walk on. The [live compass](/compass/) and the [sun & moon tool](/sun-moon/) are useful cross-checks; the sky is the fallback that never runs out of power.
+This guide covers the whole skill: how to locate Polaris quickly, what to do when the Big Dipper is hidden, how to find south with the Southern Cross, how to read a star-trail photo, what the Moon can and cannot tell you, and how to turn a patch of sky into a bearing you can walk on. The [live compass](/) and the [sun & moon tool](/sun-moon/) are useful cross-checks; the sky is the fallback that never runs out of power.
 
 > **In short:** In the northern hemisphere, find the two outer stars of the Big Dipper's bowl, run a line through them, and extend it about five times their separation to reach **Polaris**. Polaris sits within about two-thirds of a degree of true north, so the direction from you to Polaris *is* north. In the southern hemisphere, extend the long axis of the **Southern Cross** about 4.5 times its length to reach the south celestial pole, and drop straight down to the horizon for south. Stars give **true** north; convert to magnetic before you use a compass bearing.
 
@@ -210,7 +210,7 @@ A bearing is a direction, not a guarantee. At night, the ground hides itself: cl
 - **Use a red headtorch** and keep it low. Bright white light destroys night vision — yours and your companions'.
 - **Set a turn-around time** before you leave, and honour it. Being benighted is a planning failure, not a navigation one.
 - **Tell someone your route** and expected return. This is the single highest-value habit in all of outdoor navigation.
-- **Keep the phone in reserve.** Use the [online compass](/compass/) and the [sun & moon tool](/sun-moon/) while the battery lasts, and treat the sky as the backup that always works. The [calibration guide](/blog/phone-compass-calibration-fix/) explains why a phone reading can drift, and the [sun guide](/blog/find-direction-using-the-sun/) covers the daylight version of the same skill.
+- **Keep the phone in reserve.** Use the [online compass](/) and the [sun & moon tool](/sun-moon/) while the battery lasts, and treat the sky as the backup that always works. The [calibration guide](/blog/phone-compass-calibration-fix/) explains why a phone reading can drift, and the [sun guide](/blog/find-direction-using-the-sun/) covers the daylight version of the same skill.
 
 ## Frequently asked questions
 
@@ -240,4 +240,4 @@ The night sky is the most reliable direction-finder you own, and it costs nothin
 
 Learn **one** method properly: the Big Dipper pointers in the north, or the Southern Cross and Pointers in the south. Add the star-trail photo as a universal backup. Then do the one thing that turns knowledge into navigation — take the bearing, apply your declination, pick a landmark on the line, and walk to it. When the stars, the compass, and the map all agree, you can move with confidence; when they disagree, you now know exactly which one to check first.
 
-If you want to close the loop, read the [declination guide](/blog/magnetic-declination-explained/) and the [bearing guide](/blog/how-to-take-a-compass-bearing/), then practise the daylight versions with the [online compass](/compass/) and — when the terrain is confusing — the [resection method](/blog/find-your-location-with-a-compass-resection/). Night navigation is the same skill with the lights off, and it is worth having before you need it.
+If you want to close the loop, read the [declination guide](/blog/magnetic-declination-explained/) and the [bearing guide](/blog/how-to-take-a-compass-bearing/), then practise the daylight versions with the [online compass](/) and — when the terrain is confusing — the [resection method](/blog/find-your-location-with-a-compass-resection/). Night navigation is the same skill with the lights off, and it is worth having before you need it.

@@ -4,6 +4,30 @@ import Compass from '../../components/Compass.astro';
 
 const faq = [
 	{
+		"q": "كيف أحدد اتجاه الشمال الحقيقي من موقعي الحالي فوراً؟",
+		"a": "افتح هذه البوصلة الرقمية على هاتفك وتأكد من تفعيل أذونات الحركة والموقع. احمل الهاتف مستوياً في يدك؛ سيشير المؤشر تلقائياً إلى الشمال الحقيقي (0°) مع تصحيح الانحراف المغناطيسي."
+	},
+	{
+		"q": "في أي اتجاه يقع الشمال إذا كنت داخل المنزل أو الغرفة؟",
+		"a": "ابتعد عن الأجهزة الكهربائية والميكروويف وأعمدة الخرسانة المسلحة بالحديد. امسك الهاتف بشكل مسطح: إذا ظهرت الدرجة 0° فأنت تنظر للشمال، وإذا ظهرت 90° فالشمال عن يسارك."
+	},
+	{
+		"q": "لماذا تشير بوصلة الهاتف إلى اتجاه خاطئ أو تدور باستمرار؟",
+		"a": "تتأثر المستشعرات بالحافظات المغناطيسية (مثل MagSafe) والقطع الفولاذية. انزع الأغطية المغناطيسية وحرك الهاتف في الهواء برسم الرقم ثمانية بالإنجليزية (∞) لمدة 5 ثوانٍ لإعادة المعايرة."
+	},
+	{
+		"q": "ما الفرق بين \"أين يقع الشمال؟\" و \"إلى أي اتجاه أنظر؟\"؟",
+		"a": "الشمال هو نقطة جغرافية ثابتة (0° حقيقي). أما اتجاه نظرك فهو زاويتك الحالية بالنسبة للشمال. إذا كانت القراءة 180°، فأنت تواجه الجنوب تماماً والشمال خلف ظهرك."
+	},
+	{
+		"q": "هل يمكنني معرفة اتجاه الشمال بهذه البوصلة دون تثبيت تطبيق؟",
+		"a": "نعم، تعمل هذه البوصلة 100% داخل متصفح هاتفك (Safari أو Chrome) عبر تقنيات W3C القياسية دون تنزيل تطبيقات ودون تسجيل، وبخصوصية كاملة داخل جهازك."
+	},
+	{
+		"q": "كيف أحدد الشمال على جهاز الكمبيوتر الذي لا يحتوي على مستشعر بوصلة؟",
+		"a": "لا تحتوي أجهزة الكمبيوتر والمحمول على مستشعر مغناطيسي. يمكنك استخدام أداة \"حاسبة موقع الشمس\" على موقعنا لتحديد الشمال الحقيقي بدقة من خلال زاوية الشمس واتجاه الظل."
+	},
+	{
 		"q": "ما هي البوصلة الرقمية عبر الإنترنت وكيف تعمل داخل المتصفح؟",
 		"a": "البوصلة الرقمية عبر الإنترنت هي تطبيق ويب يقرأ الحساسات الفيزيائية MEMS (المغناطيسية والتسارع والجيروسكوب) المدمجة بهاتفك عبر واجهة W3C DeviceOrientation API. وبدون تحميل أي تطبيق، ينفذ المتصفح معادلات رياضية لحظية لتعويض ميلان الهاتف بالاعتماد على الجافاسكريبت ليمنحك اتجاهاً مستقراً من 0° إلى 360°."
 	},
@@ -211,9 +235,9 @@ const compassTechComparison = [
 
 <Layout
 	path="/ar/"
-	title="بوصلة أون لاين — ملاحة جيوديسية، ميزان ماء ومقياس سرعة GPS"
-	description="بوصلة رقمية مجانية دقيقة عبر المتصفح مع الشمال الحقيقي والمغناطيسي، تصحيح الانحراف المغناطيسي WMM، ميزان ماء، مقياس سرعة GPS ومحدد اتجاه القبلة."
-	keywords="بوصلة أون لاين, بوصلة رقمية مجانا, الشمال الحقيقي والمغناطيسي, الانحراف المغناطيسي, ميزان ماء أون لاين, عداد سرعة gps, حساب زاوية الاتجاه, اتجاه القبلة"
+	title="أين يقع الشمال؟ بوصلة إلكترونية مجانية (تحديد الشمال الحقيقي مباشر)"
+	description="اعرف اتجاه الشمال الآن من موقعك الحالي بدقة. بوصلة رقمية مجانية عبر الإنترنت تحدد الشمال الحقيقي والمغناطيسي مباشرة في المتصفح دون تثبيت أي تطبيق."
+	keywords="أين يقع الشمال, اتجاه الشمال من موقعي, بوصلة اونلاين, بوصلة الاتجاهات, الشمال الحقيقي, بوصلة رقمية مجانية, تحديد اتجاه الشمال"
 >
 	<!-- ─── Hero Section ───────────────────────────────────── -->
 	<section id="compass" class="relative overflow-hidden">
@@ -224,7 +248,7 @@ const compassTechComparison = [
 				<div class="badge mx-auto">مجاني · خاص · بدون تثبيت</div>
 
 				<h1 class="mx-auto mt-6 max-w-4xl text-[34px] leading-[40px] font-bold text-ink sm:text-display-xl md:text-[54px] md:leading-[60px]">
-					بوصلة تشير إلى الشمال الحقيقي، لا إلى المغناطيسي فقط.
+					أين يقع الشمال؟ بوصلة رقمية تشير إلى الشمال الحقيقي مباشرة
 				</h1>
 
 				<p class="mx-auto mt-4 max-w-2xl text-body-lg text-body">
@@ -232,7 +256,7 @@ const compassTechComparison = [
 				</p>
 
 				<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
-					<a href="#engineering" class="btn-primary">هندسة الحساسات</a>
+					<a href="#find-north" class="btn-primary">اعرف اتجاه الشمال الآن</a>
 					<a href="/ar/compass/" class="btn-secondary">فتح البوصلة بملء الشاشة</a>
 				</div>
 			</div>
@@ -262,6 +286,56 @@ const compassTechComparison = [
 			</div>
 		</div>
 	</section>
+
+	<!-- ─── Where Is North Guide Section ───────────────────── -->
+	<section id="find-north" class="border-b border-hairline bg-canvas-soft scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-16 sm:px-6 md:py-20">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">محدد الاتجاهات الفوري</p>
+				<h2 class="mt-3 text-display-lg text-ink">
+					أين يقع اتجاه الشمال من موقعي الحالي الآن؟
+				</h2>
+				<div class="mt-6 rounded-xl border border-hairline bg-canvas p-6 text-body leading-relaxed shadow-xs">
+					<p class="text-body-lg">
+						<strong>إجابة مباشرة:</strong> لمعرفة اتجاه الشمال من موقعك الحالي الآن، احمل هاتفك بشكل أفقي ومسطح في راحة يدك. انظر إلى قرص البوصلة أعلاه: عندما يشير المؤشر مباشرة إلى <strong class="text-ink font-semibold">0° (N)</strong>، فإن هاتفك يتجه نحو <strong class="text-ink font-semibold">الشمال الحقيقي</strong> تماماً. وإذا أظهر القرص <strong class="text-ink font-semibold">90° (E)</strong>، فأنت تتجه نحو الشرق ويقع الشمال مباشرة إلى يسارك.
+					</p>
+				</div>
+
+				<div class="mt-8 grid gap-5 sm:grid-cols-3">
+					<div class="card p-5">
+						<p class="eyebrow mb-2">1. كشف فوري</p>
+						<h3 class="text-base font-semibold text-ink mb-2">نظام GPS ومستشعر المغناطيسية</h3>
+						<p class="text-sm text-body leading-6">
+							يقرأ متصفح هاتفك مستشعر المغناطيسية ثلاثي المحاور وإحداثيات الموقع مباشرة لحساب اتجاهك اللحظي دون الحاجة لتحميل أي تطبيق.
+						</p>
+					</div>
+					<div class="card p-5">
+						<p class="eyebrow mb-2">2. الشمال الحقيقي والمغناطيسي</p>
+						<h3 class="text-base font-semibold text-ink mb-2">تصحيح الانحراف تلقائياً</h3>
+						<p class="text-sm text-body leading-6">
+							تشير البوصلة التقليدية إلى الشمال المغناطيسي الذي قد ينحرف حتى 20 درجة. تعتمد بوصلتنا على نموذج NOAA العالمي لتوجيهك نحو الشمال الجغرافي الحقيقي.
+						</p>
+					</div>
+					<div class="card p-5">
+						<p class="eyebrow mb-2">3. اتجاه نظرك</p>
+						<h3 class="text-base font-semibold text-ink mb-2">إلى أين أتجه الآن؟</h3>
+						<p class="text-sm text-body leading-6">
+							يشير الرقم الموجود أعلى القرص إلى اتجاه نظرك الدقيق: 0° للشمال، 90° للشرق، 180° للجنوب، و 270° للغرب.
+						</p>
+					</div>
+				</div>
+
+				<div class="mt-8 flex flex-wrap items-center gap-3 text-sm">
+					<a href="/blog/what-way-am-i-facing-online-compass/" class="text-link font-medium hover:underline">دليل: إلى أي اتجاه أنظر الآن؟ ←</a>
+					<span class="text-mute" aria-hidden="true">·</span>
+					<a href="/blog/which-direction-does-my-house-face/" class="text-link font-medium hover:underline">معرفة اتجاه واجهة منزلك ←</a>
+					<span class="text-mute" aria-hidden="true">·</span>
+					<a href="/blog/phone-compass-calibration-fix/" class="text-link font-medium hover:underline">معايرة بوصلة الهاتف وحل مشكلة الانحراف ←</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
 
 	<!-- ─── Complete Navigation Toolkit Grid (All 8 Tools) ─── -->
 	<section id="tools" class="scroll-mt-16">

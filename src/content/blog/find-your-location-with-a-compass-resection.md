@@ -1,4 +1,4 @@
----
+﻿---
 title: "Find Your Location With a Compass: Back Bearings and Resection Explained"
 description: "A complete field guide to fixing your own position without GPS — how back bearings work, how to run a two-point and three-point resection, how to judge the accuracy of the result, and the mistakes that put you hundreds of metres off."
 pubDate: 2026-10-26
@@ -20,7 +20,7 @@ Most compass questions are about *direction*: which way is north, which way is t
 
 If you can see two or three identifiable features on the horizon, a compass alone can tell you where you are standing to within a few dozen metres on a map. The technique is called **resection**, and it rests on one small piece of arithmetic that almost everyone gets wrong at least once: the **back bearing**.
 
-This guide covers the whole method — the arithmetic, the geometry that decides whether your answer will be good or useless, the difference between resection and the things people usually call triangulation, and what to do when you have only one landmark or no map at all. The [online compass](/compass/) and the [bearing calculator](/bearing/) handle the numbers; the judgement is yours.
+This guide covers the whole method — the arithmetic, the geometry that decides whether your answer will be good or useless, the difference between resection and the things people usually call triangulation, and what to do when you have only one landmark or no map at all. The [online compass](/) and the [bearing calculator](/bearing/) handle the numbers; the judgement is yours.
 
 > **In short:** Take a compass bearing to a known landmark, add or subtract 180° to get the **back bearing**, and draw that line from the landmark on your map. Do it with a second landmark and the two lines cross at your position. A third line turns the crossing into a small triangle whose size tells you how much to trust the answer. Best results come from landmarks 60°–120° apart, taken while standing still, with the compass away from metal and set to the same north reference as your map.
 
@@ -99,7 +99,7 @@ Imagine you are on open moorland with a paper map, a baseplate compass, and no p
 
 ### Step 1: Prepare the compass and yourself
 
-Stand still. Hold the compass flat, level, and away from your body. Take off gloves with magnetic closures, move away from fence wire, a car, a steel gate, or a phone in your chest pocket. If you are using a phone, hold it flat and keep the top edge pointed at the target; the [online compass](/compass/) shows a live heading, and the [calibration guide](/blog/phone-compass-calibration-fix/) covers the figure-eight routine if the reading drifts.
+Stand still. Hold the compass flat, level, and away from your body. Take off gloves with magnetic closures, move away from fence wire, a car, a steel gate, or a phone in your chest pocket. If you are using a phone, hold it flat and keep the top edge pointed at the target; the [online compass](/) shows a live heading, and the [calibration guide](/blog/phone-compass-calibration-fix/) covers the figure-eight routine if the reading drifts.
 
 Decide your north reference now. If the map has a magnetic north diagram, you can work in magnetic and adjust later, but it is far easier to set the compass to **true north** and keep everything in one frame.
 
@@ -229,7 +229,7 @@ If you know the time and your approximate position, the sun's azimuth is a known
 The mathematics of resection is identical to the mathematics of a bearing calculator, just run in reverse. Here is how to use this site's tools when you have coordinates but no paper map.
 
 1. **Get a rough idea of your position** — a grid reference from memory, a trailhead, a junction, a lake you are beside. It does not need to be accurate.
-2. **Take a bearing to a landmark** with the [online compass](/compass/), set to true north. Write down the number and the landmark.
+2. **Take a bearing to a landmark** with the [online compass](/), set to true north. Write down the number and the landmark.
 3. **Look up the landmark's coordinates** — from a map, a gazetteer, or a previous trip.
 4. **Run the [bearing calculator](/bearing/)** from the landmark's coordinates to your rough position. The initial bearing it returns should match your observed back bearing.
 5. **Iterate.** If the calculator says 246° and you observed 232°, your assumed position is wrong by about 14° of azimuth — shift your guess and try again. Two landmarks converge in a couple of iterations, which is perfectly adequate for navigation.
@@ -287,4 +287,4 @@ Resection turns a compass from a direction-finder into a position-finder, and it
 
 The two things that decide whether the answer is good are **geometry** and **reference frame**. Choose landmarks 60°–120° apart, favour nearby features you can identify without doubt, and keep your compass and your map on the same north. Get those right and the triangle will be small, the fix will be honest, and the moment your phone dies will stop being a navigation emergency.
 
-If you are new to bearings, start with [how to take and follow a compass bearing](/blog/how-to-take-a-compass-bearing/); if your readings wander, the [calibration guide](/blog/phone-compass-calibration-fix/) is the first thing to read. And when you are ready to practise, open the [online compass](/compass/) and the [bearing calculator](/bearing/) side by side and run the drill above once. Five minutes now is worth a great deal more than five minutes of uncertainty later.
+If you are new to bearings, start with [how to take and follow a compass bearing](/blog/how-to-take-a-compass-bearing/); if your readings wander, the [calibration guide](/blog/phone-compass-calibration-fix/) is the first thing to read. And when you are ready to practise, open the [online compass](/) and the [bearing calculator](/bearing/) side by side and run the drill above once. Five minutes now is worth a great deal more than five minutes of uncertainty later.

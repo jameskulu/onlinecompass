@@ -1,4 +1,4 @@
----
+﻿---
 title: "Qibla Direction: How to Find the Qibla From Anywhere on Earth"
 description: "A complete guide to finding the Qibla direction — why it is a great-circle bearing rather than a straight line on a map, how to use an online Qibla finder, how to handle declination and moving transport, and the mistakes that send people the wrong way."
 pubDate: 2026-10-25
@@ -20,7 +20,7 @@ Five times a day, Muslims around the world turn toward the same point on the map
 
 The good news is that the Qibla is pure geometry. It does not depend on a special instrument, a particular school of thought, or a subscription. Given your coordinates, it is a calculable bearing. This guide explains what the Qibla really is, why it is not the direction you would draw on a flat map, how to find it in seconds with the [online Qibla finder](/qibla/), and how to put the answer into practice at home, on the road, and in the awkward cases that trip people up.
 
-> **In short:** The Qibla is the initial great-circle bearing from your position to the Kaaba at 21.4225° N, 39.8262° E. Open the [Qibla finder](/qibla/), allow location access or type your coordinates, and it returns the bearing in degrees and as a compass point. Then either turn until the [online compass](/compass/) reads that bearing, or — for a fixed room — mark the direction once and keep it.
+> **In short:** The Qibla is the initial great-circle bearing from your position to the Kaaba at 21.4225° N, 39.8262° E. Open the [Qibla finder](/qibla/), allow location access or type your coordinates, and it returns the bearing in degrees and as a compass point. Then either turn until the [online compass](/) reads that bearing, or — for a fixed room — mark the direction once and keep it.
 
 ## What the Qibla is — and what it is not
 
@@ -91,7 +91,7 @@ The [Qibla finder](/qibla/) is the fastest route from "where am I?" to "which wa
 1. **Open the finder.** Load [/qibla/](/qibla/) on the phone you will use. No app or account is required.
 2. **Share your location, or enter coordinates.** Tapping the location button uses your device's GPS. If you would rather not share your position, type latitude and longitude manually — the [GPS coordinates tool](/location/) can give you a precise pair if you have a location but not the numbers.
 3. **Read the bearing.** The tool returns the great-circle direction in degrees from **true north**, along with the compass point and the distance to Makkah.
-4. **Turn toward it.** Open the [online compass](/compass/) and rotate until your heading matches the Qibla bearing. Make sure the compass is set to **true north**, since that is the reference the Qibla figure uses.
+4. **Turn toward it.** Open the [online compass](/) and rotate until your heading matches the Qibla bearing. Make sure the compass is set to **true north**, since that is the reference the Qibla figure uses.
 5. **Calibrate if the reading drifts.** Hold the phone flat, away from metal and magnets, and trace a figure-eight if the heading wanders. The [calibration guide](/blog/phone-compass-calibration-fix/) covers the fixes in detail.
 
 If you are using a physical compass rather than a phone, you have one extra step: your compass needle points to **magnetic north**, while the Qibla bearing is measured from **true north**. Convert the bearing before you turn, or use a compass with an adjustable declination scale. The section below explains how.
@@ -161,7 +161,7 @@ Most wrong Qibla readings come from a short list of avoidable errors.
 
 **Using a flat-map bearing.** A straight line on a web map is not a great-circle bearing. Use a proper calculator, not a ruler on a screenshot.
 
-**Forgetting declination.** A true bearing applied directly to a magnetic needle is off by the local declination — potentially 20° or more. Convert, or use true-north mode on the [online compass](/compass/).
+**Forgetting declination.** A true bearing applied directly to a magnetic needle is off by the local declination — potentially 20° or more. Convert, or use true-north mode on the [online compass](/).
 
 **Trusting the phone case.** Magnetic cases, car mounts, and even some watch bands distort the magnetometer. Remove them or move the phone clear before taking a reading.
 
@@ -194,7 +194,7 @@ A bearing of 119° falls in the south-east band, and more precisely east-south-e
 
 **Do I need to face the exact Kaaba, or just its direction?** You need to face its direction, to the best of your ability. Scholars generally allow for the accuracy a person can reasonably achieve. A correct bearing from good coordinates is more than sufficient.
 
-**Can I use a phone compass for the Qibla?** Yes. A phone magnetometer is accurate to a few degrees when calibrated and kept away from metal, which is plenty for prayer. Use the [Qibla finder](/qibla/) for the bearing and the [online compass](/compass/) to turn to it.
+**Can I use a phone compass for the Qibla?** Yes. A phone magnetometer is accurate to a few degrees when calibrated and kept away from metal, which is plenty for prayer. Use the [Qibla finder](/qibla/) for the bearing and the [online compass](/) to turn to it.
 
 **Why is the Qibla different from the direction on Google Maps?** Google Maps draws a projected flat map. A straight line on that projection is not the great-circle initial bearing. The difference is largest at long distances and high latitudes.
 
@@ -204,7 +204,7 @@ A bearing of 119° falls in the south-east band, and more precisely east-south-e
 
 **What if I am in a moving vehicle?** Recalculate with your current coordinates at prayer time and face the best estimate you can. Do not let a moving frame become a reason to delay prayer.
 
-**Is it better to use true north or magnetic north?** Use true north for the Qibla bearing, then convert to magnetic if you are using a magnetic compass. The [online compass](/compass/) can handle the conversion when location is enabled.
+**Is it better to use true north or magnetic north?** Use true north for the Qibla bearing, then convert to magnetic if you are using a magnetic compass. The [online compass](/) can handle the conversion when location is enabled.
 
 **Do I need an internet connection?** The bearing calculation itself is local once the page has loaded. Location lookup and the page assets need a connection the first time, but the geometry does not depend on a live server.
 

@@ -1,4 +1,4 @@
----
+﻿---
 title: "How to Find Your Direction Using the Sun"
 description: "No compass? The sun is enough. Learn the shadow-stick and watch-face methods to find north, south, east, and west — plus when the sun misleads you and how to check with an online tool."
 pubDate: 2026-10-15
@@ -88,7 +88,7 @@ If you have a phone, you can skip the guesswork entirely. The [sun position tool
 
 You can also work backwards. Once you know the sun's azimuth, you know that the opposite direction is its shadow, and a right angle to that lines up with east and west. The [sun & moon tool](/sun-moon/) plots both bodies on a live dial, and the [bearing calculator](/bearing/) gives the exact direction and distance between any two points you care about.
 
-Better still, pair the sun with a magnetometer compass. Read your heading on the [online compass](/compass/), then glance at the sun's reported azimuth. If the two agree, your compass is calibrated and correctly set to true north. If they disagree, one of them needs attention — and the [guide to finding which way you are facing](/blog/what-way-am-i-facing-online-compass/) walks through the fix.
+Better still, pair the sun with a magnetometer compass. Read your heading on the [online compass](/), then glance at the sun's reported azimuth. If the two agree, your compass is calibrated and correctly set to true north. If they disagree, one of them needs attention — and the [guide to finding which way you are facing](/blog/what-way-am-i-facing-online-compass/) walks through the fix.
 
 ## Combining sun and shadow for confidence
 
@@ -104,8 +104,8 @@ The strongest answer comes from using both at once. Stand in sunlight, note the 
 
 **Which way does the sun rise?** Broadly east, but the precise point shifts north or south through the year and is only exactly east at the equinoxes.
 
-**What if it is cloudy?** You cannot use the sun directly, but the brightest patch of sky usually marks the sun's position, and you can fall back on the [online compass](/compass/) instead.
+**What if it is cloudy?** You cannot use the sun directly, but the brightest patch of sky usually marks the sun's position, and you can fall back on the [online compass](/) instead.
 
 ## Find the sun, find your way
 
-Next time you are outdoors without a compass, plant a stick, mark two shadows, and read the direction straight from the ground beneath you. It is an old trick, but a dependable one — and with the [sun position tool](/sun/) in your pocket, you can put an exact number on it whenever your phone is available. Explore the rest of the [toolkit](/compass/) to lock in a heading you can trust.
+Next time you are outdoors without a compass, plant a stick, mark two shadows, and read the direction straight from the ground beneath you. It is an old trick, but a dependable one — and with the [sun position tool](/sun/) in your pocket, you can put an exact number on it whenever your phone is available. Explore the rest of the [toolkit](/) to lock in a heading you can trust.

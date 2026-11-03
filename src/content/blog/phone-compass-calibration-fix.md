@@ -1,4 +1,4 @@
----
+﻿---
 title: "Phone Compass Wrong? How to Calibrate It and Fix a Drifting Heading"
 description: "Is your phone compass stuck, jumpy, or pointing the wrong way? Learn why digital compasses drift, how to calibrate with the figure-eight method, and how to fix the most common accuracy problems."
 pubDate: 2026-10-24
@@ -20,7 +20,7 @@ You open the compass, turn slowly, and watch the heading swing 40° the wrong wa
 
 This guide explains what makes a digital compass drift, how to calibrate it in under a minute, and how to tell a sensor problem apart from the two other reasons a heading looks wrong: magnetic declination and local interference.
 
-> **In short:** Open the [online compass](/compass/), tap **Enable live compass**, and move away from metal and electronics. If the heading still drifts, sweep the phone through a slow figure-eight two or three times, turning the screen to face outward as you go. If it remains wrong, remove the magnetic case and check that location and true-north settings are correct.
+> **In short:** Open the [online compass](/), tap **Enable live compass**, and move away from metal and electronics. If the heading still drifts, sweep the phone through a slow figure-eight two or three times, turning the screen to face outward as you go. If it remains wrong, remove the magnetic case and check that location and true-north settings are correct.
 
 ## How a phone compass works
 
@@ -49,7 +49,7 @@ This is the standard fix, and it works on iPhone, Android, and every browser-bas
 
 1. **Take the phone out of any magnetic case or mount.** Folio covers with magnets, wallet cases, and car mounts are frequent culprits.
 2. **Move away from metal.** Step outside or into an open part of the room, away from desks, speakers, appliances, and other phones.
-3. **Open the [online compass](/compass/)** and enable the live compass.
+3. **Open the [online compass](/)** and enable the live compass.
 4. **Hold the phone flat** and slowly trace a **figure-eight** in the air two or three times, rotating your wrist so the top of the phone sweeps around.
 5. **Turn the phone over** and repeat the figure-eight with the screen facing down. This exercises the sensor across all three axes.
 6. **Pause and check the heading.** It should settle within a second or two. If it is still unstable, wait a moment and repeat.
@@ -58,7 +58,7 @@ The motion matters more than speed. Fast shaking does not help; slow, wide arcs 
 
 ### Calibrating on iPhone
 
-The built-in Compass app can run its own calibration. Open it, and if iOS detects a problem it shows a figure-eight prompt. You can also open **Settings → Privacy & Security → Location Services → System Services → Compass Calibration** and make sure it is on. On iOS 17 and later, the Compass app can show a **true north** toggle in its settings; compare it with the [online compass](/compass/) if the two disagree.
+The built-in Compass app can run its own calibration. Open it, and if iOS detects a problem it shows a figure-eight prompt. You can also open **Settings → Privacy & Security → Location Services → System Services → Compass Calibration** and make sure it is on. On iOS 17 and later, the Compass app can show a **true north** toggle in its settings; compare it with the [online compass](/) if the two disagree.
 
 ### Calibrating on Android
 
@@ -87,7 +87,7 @@ Step two metres away and watch the heading. If it changes as you move, the envir
 
 If the compass is consistently off by a fixed number of degrees that matches your region's **magnetic declination**, the sensor is likely fine. A magnetic compass points at magnetic north; most maps and GPS use true north. In New York the gap is around 13° west, in Cape Town around 25° west, and in parts of the Pacific it can exceed 20° east. That is enough to look like a broken compass.
 
-Switch the [online compass](/compass/) to **true north** and enable location, or read our full explanation of [true north versus magnetic north and declination](/blog/magnetic-declination-explained/) to apply the correction by hand.
+Switch the [online compass](/) to **true north** and enable location, or read our full explanation of [true north versus magnetic north and declination](/blog/magnetic-declination-explained/) to apply the correction by hand.
 
 ### 3. Tilt and grip
 
@@ -145,7 +145,7 @@ Our guide on [what way am I facing](/blog/what-way-am-i-facing-online-compass/) 
 
 Calibration makes the compass honest; a bearing makes it useful. If you want to walk toward a specific place rather than just know which way you face, open the [bearing calculator](/bearing/), enter your start and destination, and note the initial bearing. Then:
 
-- switch the [compass](/compass/) to **true north** if you are comparing with a map;
+- switch the [compass](/) to **true north** if you are comparing with a map;
 - hold the phone flat and turn until the heading matches the bearing;
 - recheck the bearing every few hundred metres, since a straight-line bearing from your origin is not the same as following a curve.
 
@@ -173,4 +173,4 @@ For a full walkthrough, read [how to take and follow a compass bearing](/blog/ho
 
 A phone compass that points the wrong way is usually a calibration or interference problem, not a dead sensor. Remove magnetic accessories, step away from metal, trace a slow figure-eight, and check whether the remaining error is simply declination. With those steps, most headings settle within about 5° — accurate enough to answer "which way am I facing?" and to follow a bearing outdoors.
 
-Ready to test it? Open the [online compass](/compass/), enable the live compass, and run through the calibration once before you rely on it. If you are new to the tool, start with the [complete guide to using an online compass](/blog/how-to-use-online-compass/).
+Ready to test it? Open the [online compass](/), enable the live compass, and run through the calibration once before you rely on it. If you are new to the tool, start with the [complete guide to using an online compass](/blog/how-to-use-online-compass/).

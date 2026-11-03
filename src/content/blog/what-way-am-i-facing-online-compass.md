@@ -1,4 +1,4 @@
----
+﻿---
 title: "What Way Am I Facing? How to Find Out With an Online Compass"
 description: "Which direction are you facing right now? An online compass answers in seconds — how to read your heading, turn degrees into a direction, and use it for rooms, streets, and trails."
 pubDate: 2026-10-14
@@ -15,7 +15,7 @@ keywords:
 
 Standing somewhere unfamiliar, or just curious whether the sofa faces east, the question is the same: **what way am I facing?** An online compass answers it in seconds — open the page, hold your phone flat, and the dial shows your direction as a number and a compass point. This guide covers how to get that answer, how to translate it into something useful, and how to avoid the traps that make a heading read wrong.
 
-> **In short:** Open the [online compass](/compass/), tap **Enable live compass**, hold the phone flat and level, and read the heading below the dial. If it drifts, trace a figure-eight. Turn on **true north** before you compare the answer with a map.
+> **In short:** Open the [online compass](/), tap **Enable live compass**, hold the phone flat and level, and read the heading below the dial. If it drifts, trace a figure-eight. Turn on **true north** before you compare the answer with a map.
 
 ## "What way am I facing?" vs. "which way is north?"
 
@@ -38,7 +38,7 @@ Together they produce a heading that stays accurate even when the phone is not p
 
 ## Find out in four steps
 
-1. **Open the compass.** Load the [live compass tool](/compass/) on a phone or tablet. You get a working dial immediately; the sensors kick in when you allow them.
+1. **Open the compass.** Load the [live compass tool](/) on a phone or tablet. You get a working dial immediately; the sensors kick in when you allow them.
 2. **Enable it.** Tap **Enable live compass** and allow motion and orientation access when your browser asks. On iOS you have to grant this once; on most Android phones it is automatic.
 3. **Hold it flat and still.** Rest the phone in your palm, screen up and parallel to the ground, and keep it away from metal, magnets, and other electronics. Point the top edge in the direction you want to test.
 4. **Read the answer.** The heading appears below the dial as a number from 0° to 359° and as a compass point (N, NE, E, SE, S, SW, W, NW). That is the direction you are facing.
@@ -117,4 +117,4 @@ You do not need a compass to sanity-check a heading. In the northern hemisphere 
 
 ## Find out which way you are facing now
 
-Open the [online compass](/compass/), hold your phone flat, and you will have your heading — and the answer to "what way am I facing?" — in under a minute. No app, no account, and nothing leaves your device. For the complete walkthrough of setup and calibration, read the [full online compass guide](/blog/how-to-use-online-compass/).
+Open the [online compass](/), hold your phone flat, and you will have your heading — and the answer to "what way am I facing?" — in under a minute. No app, no account, and nothing leaves your device. For the complete walkthrough of setup and calibration, read the [full online compass guide](/blog/how-to-use-online-compass/).

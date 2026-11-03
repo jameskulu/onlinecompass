@@ -1,4 +1,4 @@
----
+﻿---
 title: "How to Orient a Map With a Compass: A Practical Step-by-Step Guide"
 description: "Set a paper map to match the ground with a compass or phone. Includes grid versus magnetic north, a worked correction example, and landmark checks."
 pubDate: 2026-10-28
@@ -21,7 +21,7 @@ An oriented map makes the landscape easier to read: the ridge on your left appea
 
 ## What you need before you start
 
-Use a map with a legible north arrow or labelled north-south grid lines. A baseplate compass is convenient because its straight edge can sit along a grid line. A phone running the [online compass](/compass/) can also give you a heading, provided its sensor is working and you know which north reference it displays.
+Use a map with a legible north arrow or labelled north-south grid lines. A baseplate compass is convenient because its straight edge can sit along a grid line. A phone running the [online compass](/) can also give you a heading, provided its sensor is working and you know which north reference it displays.
 
 Choose a place where you can stop safely and hold the map level. Move away from vehicles, steel gates, magnetic phone cases, and other objects that can disturb the compass. If a phone heading jumps while you stand still, work through the [compass calibration guide](/blog/phone-compass-calibration-fix/) before using it to set the map.
 
@@ -69,7 +69,7 @@ As a numerical check, a direction of 0° grid is 354° magnetic in this example.
 
 A phone can supply the north direction, but it adds two checks: the displayed reference and the physical edge used for the heading.
 
-1. Open the [online compass](/compass/) and confirm whether the reading uses true or magnetic north.
+1. Open the [online compass](/) and confirm whether the reading uses true or magnetic north.
 2. Identify the matching reference on your map. For a true-north display, use the map's true-north arrow. For a magnetic display, use a current magnetic-north line as described above.
 3. Hold the phone flat and point its top edge toward north, turning until the heading is near 0°. Keep the screen orientation consistent while doing this.
 4. Keeping the phone pointing north, turn the map until the chosen north arrow runs parallel to the phone's top-to-bottom axis and points toward its top edge.

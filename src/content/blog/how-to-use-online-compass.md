@@ -1,4 +1,4 @@
----
+﻿---
 title: "How to Use an Online Compass: The Complete Guide"
 description: "A practical guide to using an online compass on your phone — enabling sensors, calibrating the magnetometer, reading true vs magnetic north, and getting a heading you can trust."
 pubDate: 2026-10-13
@@ -14,7 +14,7 @@ keywords:
 
 An **online compass** turns the phone in your pocket into a real navigation instrument. There is nothing to install and no account to create: you open a page in your browser, allow it to read your device's sensors, and a live 360° dial appears with the direction you are facing in degrees.
 
-This guide covers the whole process on our [live compass tool](/compass/) — how to get it running, how to calibrate it so the reading is trustworthy, how to read the dial, and how it behaves in the real world. If you only take one thing away, make it this: a phone compass is only as good as where you are standing.
+This guide covers the whole process on our [live compass tool](/) — how to get it running, how to calibrate it so the reading is trustworthy, how to read the dial, and how it behaves in the real world. If you only take one thing away, make it this: a phone compass is only as good as where you are standing.
 
 > **In short:** Open the compass on your phone, tap **Enable live compass**, hold the device flat and away from metal, and read the heading. If the number drifts, trace a figure-eight to recalibrate. Turn on **true north** whenever you compare the reading to a map.
 
@@ -38,7 +38,7 @@ You do **not** need an internet connection for the compass itself once the page 
 
 ### 1. Open the compass on your phone
 
-Load the [online compass](/compass/) in Safari, Chrome, or Firefox. The dial appears immediately in a demo state until the real sensors start reporting, so you always see what the tool looks like before you grant anything.
+Load the [online compass](/) in Safari, Chrome, or Firefox. The dial appears immediately in a demo state until the real sensors start reporting, so you always see what the tool looks like before you grant anything.
 
 ### 2. Enable the live compass
 
@@ -152,4 +152,4 @@ There is no backend, no analytics, and no account. Location access is optional a
 
 ## Start using it
 
-Open the [live online compass](/compass/), enable the sensors, hold the phone flat, and you will have a trustworthy heading in under a minute. If you want the quick-reference version, the [homepage](/compass/) includes a short calibration checklist and a full FAQ; for everything else, the toolkit pages above are one tap away.
+Open the [live online compass](/), enable the sensors, hold the phone flat, and you will have a trustworthy heading in under a minute. If you want the quick-reference version, the [homepage](/) includes a short calibration checklist and a full FAQ; for everything else, the toolkit pages above are one tap away.

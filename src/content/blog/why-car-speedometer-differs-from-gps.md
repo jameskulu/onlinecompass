@@ -1,4 +1,4 @@
----
+﻿---
 title: "Why Your Car Speedometer and GPS Disagree: The Science of Satellite Kinematics"
 description: "Ever noticed your car speedometer shows 70 mph while phone GPS says 66? Learn why car speedometers intentionally read high, how GPS Doppler shift calculates true ground speed, and how altitude accuracy works."
 pubDate: 2026-10-31
@@ -256,7 +256,7 @@ Because average speed cameras measure actual distance over time, your true GPS s
 When stationary, slight atmospheric fluctuations and ionospheric delays cause the calculated satellite pseudorange to shift by fractions of a meter from second to second. In cheaper apps without filtering, this creates "stationary drift" of 0.5 to 2 km/h. High-quality tools like our [GPS Speedometer](/speedometer/) integrate a **stationary jitter filter** that automatically snaps the gauge to zero whenever movement falls below walking threshold.
 
 ### How does magnetic heading relate to GPS course over ground?
-A magnetic compass (like our [online digital compass](/compass/)) measures the physical direction your device chassis is pointing relative to Earth's magnetic field. A GPS speedometer, by contrast, measures your **Course Over Ground (COG)**—the direction your vehicle is actually moving across the landscape. 
+A magnetic compass (like our [online digital compass](/)) measures the physical direction your device chassis is pointing relative to Earth's magnetic field. A GPS speedometer, by contrast, measures your **Course Over Ground (COG)**—the direction your vehicle is actually moving across the landscape. 
 
 If your car is parked facing North, the compass reads 0° (North). If your car slides sideways on black ice heading East, the compass still reads North, but the GPS course heading will report East (90°). At highway speeds on dry roads, your compass heading and GPS course generally align once adjusted for [magnetic declination](/blog/magnetic-declination-explained/).
 
@@ -265,7 +265,7 @@ If your car is parked facing North, the compass reads 0° (North). If your car s
 ## Explore More Navigation & Sensor Tools
 
 - **[GPS Speedometer & Altimeter](/speedometer/):** Test your live velocity, peak speed, trip distance, and altitude above sea level in your browser.
-- **[Digital Compass](/compass/):** Accurate live heading with true north vs. magnetic north toggle and magnetic declination calculation.
+- **[Digital Compass](/):** Accurate live heading with true north vs. magnetic north toggle and magnetic declination calculation.
 - **[Bubble Level & Inclinometer](/level/):** Measure surface level, roll, pitch, and slope grade percentage with your phone's gyroscope.
 - **[Bearing & Distance Calculator](/bearing/):** Calculate Great-Circle routes, initial headings, and convert between DD, DMS, and UTM coordinates.
 

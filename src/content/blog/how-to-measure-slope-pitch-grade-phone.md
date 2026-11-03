@@ -1,4 +1,4 @@
----
+﻿---
 title: "How to Measure Slope, Pitch, and Grade with Your Phone: The Complete Inclinometer Guide"
 description: "Learn how to measure surface angle, roof pitch, slope grade percentage, and level with your smartphone. Formulas for degrees to grade, MEMS sensor physics, and practical leveling guides."
 pubDate: 2026-11-01
@@ -107,7 +107,7 @@ When you open our [online bubble level](/level/) in a mobile browser, the W3C `D
 
 1. **Beta ($\beta$ / Pitch):** Rotation around the device's lateral $X$-axis (tilting the phone forward or backward from -180° to +180°).
 2. **Gamma ($\gamma$ / Roll):** Rotation around the device's longitudinal $Y$-axis (tilting the phone side-to-side from -90° to +90°).
-3. **Alpha ($\alpha$ / Yaw):** Rotation around the vertical $Z$-axis (compass heading relative to magnetic north, as used by our [digital compass](/compass/)).
+3. **Alpha ($\alpha$ / Yaw):** Rotation around the vertical $Z$-axis (compass heading relative to magnetic north, as used by our [digital compass](/)).
 
 To calculate true three-dimensional angular deflection ($\theta$) across compound surfaces (such as a floor that slopes both forward and sideways), our inclinometer algorithm combines both vectors using spherical trigonometry:
 
@@ -226,7 +226,7 @@ You can eliminate this error completely using three methods:
 Beginning with iOS 13, Apple requires web applications to request explicit user permission before reading accelerometer and gyroscope data via `DeviceOrientationEvent`. This is an Apple privacy safeguard to prevent tracking across advertising networks. Our tool performs all calculations locally on your device hardware—no sensor data is ever transmitted or stored on any server.
 
 ### Does a phone spirit level work without internet or mobile service?
-Yes! Our website is built as an offline-capable Progressive Web App (PWA). Once loaded in your browser cache, the [online bubble level](/level/), [digital compass](/compass/), and [bearing calculator](/bearing/) work completely offline in remote wilderness areas, basements, or airplanes.
+Yes! Our website is built as an offline-capable Progressive Web App (PWA). Once loaded in your browser cache, the [online bubble level](/level/), [digital compass](/), and [bearing calculator](/bearing/) work completely offline in remote wilderness areas, basements, or airplanes.
 
 ### What is the difference between pitch, roll, and yaw?
 These are the three fundamental aeronautical axes of rotation:
@@ -243,6 +243,6 @@ MEMS accelerometers measure continuous tilt from **0.0° to 90.0°** (from flat 
 
 - **[Digital Bubble Level & Inclinometer](/level/):** Test live pitch, roll, compound angle, and slope grade percentage in your browser.
 - **[GPS Speedometer & Altimeter](/speedometer/):** Measure real-time ground speed, elevation above sea level, and trip distance.
-- **[Online Digital Compass](/compass/):** Find true north and magnetic headings with automatic magnetic declination correction.
+- **[Online Digital Compass](/):** Find true north and magnetic headings with automatic magnetic declination correction.
 - **[Bearing & Distance Calculator](/bearing/):** Calculate Great-Circle navigation routes, back azimuths, and coordinate conversions.
 

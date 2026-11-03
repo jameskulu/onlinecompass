@@ -4,6 +4,30 @@ import Compass from '../../components/Compass.astro';
 
 const faq = [
 	{
+		"q": "میں اپنے موجودہ مقام سے فوراً حقیقی شمال کیسے معلوم کر سکتا ہوں؟",
+		"a": "اپنے اسمارٹ فون پر اس آن لائن قطب نما کو کھولیں اور لوکیشن کی اجازت دیں۔ موبائل کو ہاتھ میں بالکل سیدھا رکھیں؛ سوئی خود بخود حقیقی شمال (0°) کی نشاندہی کرے گی۔"
+	},
+	{
+		"q": "اگر میں گھر یا کمرے کے اندر ہوں تو شمال کس طرف ہوگا؟",
+		"a": "بڑی دھاتی اشیاء، مائیکرو ویو اور سیمنٹ کے ستونوں سے تھوڑا دور ہو جائیں۔ موبائل کو ہموار رکھیں: اگر 0° ہو تو سامنے شمال ہے، اور اگر 90° ہو تو بائیں جانب شمال ہے۔"
+	},
+	{
+		"q": "میرے فون کا قطب نما غلط سمت کیوں دکھاتا ہے یا سوئی گھومتی کیوں رہتی ہے؟",
+		"a": "فون کا سینسر مقناطیسی کور (جیسے MagSafe) اور برقی اشیاء سے متاثر ہو جاتا ہے۔ مقناطیسی کور ہٹائیں اور فون کو ہوا میں انگریزی کے 8 (∞) کی شکل میں 5 سیکنڈ تک گھمائیں۔"
+	},
+	{
+		"q": "‘شمال کس طرف ہے’ اور ‘میرا رخ کس طرف ہے’ میں کیا فرق ہے؟",
+		"a": "شمال ایک مستقل جغرافیائی سمت (0° حقیقی) ہے۔ آپ کا رخ شمال کے مقابلے میں آپ کا زاویہ ہے۔ اگر ریڈنگ 180° ہے تو آپ جنوب کی طرف دیکھ رہے ہیں اور شمال آپ کے پیچھے ہے۔"
+	},
+	{
+		"q": "کیا میں بغیر کوئی ایپ انسٹال کیے اس قطب نما سے سمت معلوم کر سکتا ہوں؟",
+		"a": "جی ہاں! یہ آن لائن قطب نما براؤزر میں بالکل مفت اور بغیر کسی ایپ یا اکاؤنٹ کے 100% پرائیویٹ طریقے سے چلتا ہے۔"
+	},
+	{
+		"q": "اگر لیپ ٹاپ یا کمپیوٹر میں سینسر نہ ہو تو شمال کیسے تلاش کریں؟",
+		"a": "لیپ ٹاپ اور کمپیوٹر میں میگنیٹومیٹر سینسر نہیں ہوتا۔ کمپیوٹر پر آپ ہماری ‘سورج کے مقام کا کیلکولیٹر’ استعمال کر کے سورج اور سائے کے زاویے سے اصلی شمال معلوم کر سکتے ہیں۔"
+	},
+	{
 		"q": "آن لائن ڈیجیٹل کمپاس کیا ہے اور یہ ویب براؤزر میں کیسے کام کرتا ہے؟",
 		"a": "آن لائن ڈیجیٹل کمپاس ایک ویب ایپلی کیشن ہے جو W3C DeviceOrientation API کے ذریعے آپ کے اسمارٹ فون کے اندرونی فزیکل سینسرز (میگنیٹومیٹر، ایکسلرومیٹر اور جائروسکوپ) کو براہ راست پڑھتی ہے۔ کسی ایپ کو انسٹال کیے بغیر جاوا اسکرپٹ پر فوری سہ جہتی ٹلٹ کمپنسیشن کر کے یہ 0° سے 360° تک بالکل درست زاویہ فراہم کرتا ہے۔"
 	},
@@ -211,9 +235,9 @@ const compassTechComparison = [
 
 <Layout
 	path="/ur/"
-	title="آن لائن کمپاس — جیوڈیٹک نیویگیشن، اسپرٹ لیول اور جی پی ایس اسپیڈومیٹر"
-	description="حقیقی اور مقناطیسی شمال، خودکار WMM مقناطیسی انحراف، ڈیجیٹل لیول، جی پی ایس اسپیڈومیٹر اور قبلہ رخ کے ساتھ مفت آن لائن قطب نما۔"
-	keywords="آن لائن کمپاس, ڈیجیٹل قطب نما مفت, حقیقی شمال بمقابلہ مقناطیسی, مقناطیسی انحراف, اسپرٹ لیول آن لائن, جی پی ایس اسپیڈومیٹر, قبلہ رخ قطب نما"
+	title="شمال کس طرف ہے؟ آن لائن قطب نما (حقیقی شمال لائیو)"
+	description="اپنے موجودہ مقام سے فوری طور پر معلوم کریں کہ شمال کس طرف ہے۔ بغیر کسی ایپ کو انسٹال کیے براؤزر میں بالکل مفت اور درست آن لائن قطب نما۔"
+	keywords="شمال کس طرف ہے, شمال کا رخ, آن لائن قطب نما, ڈیجیٹل کمپاس, قبلہ رخ, سمت معلوم کرنے کا طریقہ, شمال کی سمت"
 >
 	<!-- ─── Hero Section ───────────────────────────────────── -->
 	<section id="compass" class="relative overflow-hidden">
@@ -224,7 +248,7 @@ const compassTechComparison = [
 				<div class="badge mx-auto">مفت · نجی · کوئی انسٹال نہیں</div>
 
 				<h1 class="mx-auto mt-6 max-w-4xl text-[34px] leading-[40px] font-bold text-ink sm:text-display-xl md:text-[54px] md:leading-[60px]">
-					ایک کمپاس جو اصل شمال کی طرف اشارہ کرتا ہے، صرف معدنی نہیں۔
+					شمال کس طرف ہے؟ حقیقی شمال بتانے والا لائیو آن لائن قطب نما
 				</h1>
 
 				<p class="mx-auto mt-4 max-w-2xl text-body-lg text-body">
@@ -232,7 +256,7 @@ const compassTechComparison = [
 				</p>
 
 				<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
-					<a href="#engineering" class="btn-primary">سینسرز کی تفصیل</a>
+					<a href="#find-north" class="btn-primary">شمال کی سمت معلوم کریں</a>
 					<a href="/ur/compass/" class="btn-secondary">فل اسکرین کمپاس کھولیں</a>
 				</div>
 			</div>
@@ -262,6 +286,56 @@ const compassTechComparison = [
 			</div>
 		</div>
 	</section>
+
+	<!-- ─── Where Is North Guide Section ───────────────────── -->
+	<section id="find-north" class="border-b border-hairline bg-canvas-soft scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-16 sm:px-6 md:py-20">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">فوری سمت کا تعین</p>
+				<h2 class="mt-3 text-display-lg text-ink">
+					میرے موجودہ مقام سے شمال کس طرف ہے؟
+				</h2>
+				<div class="mt-6 rounded-xl border border-hairline bg-canvas p-6 text-body leading-relaxed shadow-xs">
+					<p class="text-body-lg">
+						<strong>براہِ راست جواب:</strong> اپنے مقام سے فوراً شمال معلوم کرنے کے لیے اپنے موبائل کو ہتھیلی پر بالکل سیدھا اور ہموار رکھیں۔ اوپر قطب نما کے ڈائل پر دیکھیں: جب سوئی بالکل اوپر <strong class="text-ink font-semibold">0° (N)</strong> کی طرف اشارہ کرے تو آپ کا فون <strong class="text-ink font-semibold">حقیقی شمال</strong> کی طرف ہے۔ اگر ڈائل پر <strong class="text-ink font-semibold">90° (E)</strong> نظر آئے تو آپ کا رخ مشرق کی طرف ہے اور شمال بالکل آپ کے بائیں جانب ہے۔
+					</p>
+				</div>
+
+				<div class="mt-8 grid gap-5 sm:grid-cols-3">
+					<div class="card p-5">
+						<p class="eyebrow mb-2">1. فوری نشاندہی</p>
+						<h3 class="text-base font-semibold text-ink mb-2">جی پی ایس اور میگنیٹومیٹر</h3>
+						<p class="text-sm text-body leading-6">
+							آپ کا موبائل براؤزر کسی بھی ایپ کو ڈاؤن لوڈ کیے بغیر فون کے اندرونی مقناطیسی سینسر اور جی پی ایس سے فوراً درست زاویہ معلوم کر لیتا ہے۔
+						</p>
+					</div>
+					<div class="card p-5">
+						<p class="eyebrow mb-2">2. حقیقی بمقابلہ مقناطیسی شمال</p>
+						<h3 class="text-base font-semibold text-ink mb-2">خودکار تصحیح</h3>
+						<p class="text-sm text-body leading-6">
+							عام مقناطیسی سوئی مقناطیسی قطب کی طرف اشارہ کرتی ہے جس میں 20 درجے تک فرق ہو سکتا ہے۔ ہمارا قطب نما سرکاری NOAA ماڈل کے تحت اصلی جغرافیائی شمال دکھاتا ہے۔
+						</p>
+					</div>
+					<div class="card p-5">
+						<p class="eyebrow mb-2">3. آپ کا رخ</p>
+						<h3 class="text-base font-semibold text-ink mb-2">میرا رخ کس طرف ہے؟</h3>
+						<p class="text-sm text-body leading-6">
+							ڈائل کے اوپری حصے پر موجود نمبر آپ کے رخ کی درست سمت بتاتا ہے: 0° شمال، 90° مشرق، 180° جنوب اور 270° مغرب ہے۔
+						</p>
+					</div>
+				</div>
+
+				<div class="mt-8 flex flex-wrap items-center gap-3 text-sm">
+					<a href="/blog/what-way-am-i-facing-online-compass/" class="text-link font-medium hover:underline">رہنما: میرا رخ کس سمت میں ہے؟ ←</a>
+					<span class="text-mute" aria-hidden="true">·</span>
+					<a href="/blog/which-direction-does-my-house-face/" class="text-link font-medium hover:underline">اپنے مکان یا کھڑکی کا رخ معلوم کریں ←</a>
+					<span class="text-mute" aria-hidden="true">·</span>
+					<a href="/blog/phone-compass-calibration-fix/" class="text-link font-medium hover:underline">موبائل قطب نما کی درستگی اور کیلیبریشن ←</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
 
 	<!-- ─── Complete Navigation Toolkit Grid (All 8 Tools) ─── -->
 	<section id="tools" class="scroll-mt-16">

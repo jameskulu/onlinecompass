@@ -1,4 +1,4 @@
----
+﻿---
 title: "How to Walk in a Straight Line With a Compass: Aiming Off, Pacing, and Low-Visibility Navigation"
 description: "Master the field craft of following a compass bearing when visibility drops. Learn why humans walk in circles, how to calculate pace count, box around obstacles, use handrails, and execute deliberate aiming off."
 pubDate: 2026-10-30
@@ -20,7 +20,7 @@ Try walking a straight line across an open meadow on a clear day and you will su
 
 Walking a straight line through the wilderness is not a basic human instinct — it is an acquired technical skill. When visual horizons vanish, staying on course requires more than just glancing at a magnetic needle. It demands **distance estimation (pacing and timing)**, **sighting disciplines (leapfrogging)**, **geometry for bypassing obstacles (boxing)**, and tactical planning techniques like **aiming off**, **handrails**, and **attack points**.
 
-Whether you are using a baseplate compass or a phone running the [online compass](/compass/), this guide explains the field craft navigators, mountaineers, and search-and-rescue teams use to walk miles across featureless terrain and hit their target every time.
+Whether you are using a baseplate compass or a phone running the [online compass](/), this guide explains the field craft navigators, mountaineers, and search-and-rescue teams use to walk miles across featureless terrain and hit their target every time.
 
 > **In short:** Humans deprived of visual anchors drift into circles due to cumulative sensory noise. To walk a true straight line, establish a bearing, convert it to the correct north reference, sight intermediate landmarks, and measure your distance using a calibrated pace count. When visibility is near zero, use two-person leapfrogging. When encountering an impassable barrier, navigate a 90-degree box. And when your target lies on a linear feature like a river or trail, use **aiming off** to eliminate fatal 50/50 guessing games.
 
@@ -149,7 +149,7 @@ Instead, use the **sighting technique**:
                                             [New Sight line on 045°] ────────(Repeat)─┘
 ```
 
-1. Hold the compass level at mid-chest or eye level. Turn your entire body until the needle or heading reads your desired bearing (use the [online compass](/compass/) in true north mode or adjust your mechanical compass for [magnetic declination](/blog/magnetic-declination-explained/)).
+1. Hold the compass level at mid-chest or eye level. Turn your entire body until the needle or heading reads your desired bearing (use the [online compass](/) in true north mode or adjust your mechanical compass for [magnetic declination](/blog/magnetic-declination-explained/)).
 2. Look straight across the sight line into the distance.
 3. Identify a prominent, unique feature that falls precisely on that line: a dead birch tree with a snapped crown, a pale boulder, or a distinct rock tooth on a ridge.
 4. Put the compass away or let it hang. Walk directly to that feature, choosing the easiest footing around obstacles.
@@ -315,7 +315,7 @@ A **handrail** is any unmistakable linear feature that runs roughly parallel to 
 - A stream or drainage ditch
 - An old logging track, fence line, or power transmission clearing
 
-Instead of bushwhacking on a strict compass bearing through thick briars, walk alongside the handrail. You can move twice as fast, conserve energy, and periodically check your heading with the [bearing calculator](/bearing/) or [online compass](/compass/) to ensure the feature has not branched.
+Instead of bushwhacking on a strict compass bearing through thick briars, walk alongside the handrail. You can move twice as fast, conserve energy, and periodically check your heading with the [bearing calculator](/bearing/) or [online compass](/) to ensure the feature has not branched.
 
 ### 2. Catching features (backstops)
 A **catching feature** is a prominent, unmistakable barrier that lies across your path *behind* your target. 
@@ -376,7 +376,7 @@ To see how these techniques interact in the field, review this realistic scenari
 
 ### Can I use my phone's online compass to walk a bearing in the woods?
 
-Yes, provided the phone's magnetometer is properly calibrated and you keep the device away from magnetic interference (such as magnetic wallet cases, magnetic phone mounts, or heavy metal pack frames). The [online compass](/compass/) offers a distinct advantage: when connected to GPS, it automatically computes local magnetic declination and can display true north headings directly, saving you manual math. However, in dense wilderness, cold weather can drain phone batteries rapidly, so always carry a physical baseplate compass and a paper map as an indestructible backup.
+Yes, provided the phone's magnetometer is properly calibrated and you keep the device away from magnetic interference (such as magnetic wallet cases, magnetic phone mounts, or heavy metal pack frames). The [online compass](/) offers a distinct advantage: when connected to GPS, it automatically computes local magnetic declination and can display true north headings directly, saving you manual math. However, in dense wilderness, cold weather can drain phone batteries rapidly, so always carry a physical baseplate compass and a paper map as an indestructible backup.
 
 ### Why do I keep drifting to the right when hiking off-trail?
 
@@ -404,5 +404,5 @@ Do not wait for a blizzard or a fogged-in ridge to test these skills for the fir
 2. **Execute a blind box:** Pick an open lawn. Set a bearing of 000° (due North). Walk 50 paces. Turn 90° right (090°), walk 30 paces. Turn 90° right (180°), walk 50 paces. Turn 90° right (270°), walk 30 paces.
 3. **Check your landing spot:** If your pacing and turns were accurate, your final step should plant your foot within 1–2 metres of the exact spot where you started.
 
-Once your feet and your compass speak the same language, low visibility ceases to be a cause for panic. Open the [online compass](/compass/), calculate your bearings with the [bearing calculator](/bearing/), and step into the field with complete navigational confidence.
+Once your feet and your compass speak the same language, low visibility ceases to be a cause for panic. Open the [online compass](/), calculate your bearings with the [bearing calculator](/bearing/), and step into the field with complete navigational confidence.
 

@@ -1,4 +1,4 @@
----
+﻿---
 title: "How to Take and Follow a Compass Bearing"
 description: "Learn what a compass bearing means, how to get one from a map or destination, and how to follow it with your phone's online compass."
 pubDate: 2026-10-22
@@ -14,7 +14,7 @@ keywords:
 
 A **compass bearing** is a direction written as an angle from north. Instead of saying “walk toward the hill,” you can say “the hill is on a bearing of sixty degrees.” That makes directions precise and easy to check with a map or compass.
 
-You can get a bearing between two places with our [bearing calculator](/bearing/), then follow it with the [online compass](/compass/). Here is how the numbers fit together and how to use them without confusing your destination's direction with the way you are currently facing.
+You can get a bearing between two places with our [bearing calculator](/bearing/), then follow it with the [online compass](/). Here is how the numbers fit together and how to use them without confusing your destination's direction with the way you are currently facing.
 
 > **In short:** Enter your starting point and destination in the bearing calculator, note the initial bearing, switch your compass to true north when comparing it with a map, then turn until your phone's heading matches the bearing.
 
@@ -42,7 +42,7 @@ The quickest way to get a bearing is to calculate it from your starting location
 1. Open the [bearing calculator](/bearing/).
 2. Enter or select your starting point and destination. You can use your current location as the start if you allow location access.
 3. Read the initial bearing. This is the direction to begin travelling from the starting point toward the destination.
-4. Open the [compass](/compass/) and use the same north reference as the calculator.
+4. Open the [compass](/) and use the same north reference as the calculator.
 
 The initial bearing gives you the direction of travel at the start of the route. On a long journey, the direction along the surface of the Earth curves slightly, so the initial bearing may not point directly at the destination from every point along the way. For a short walk, use it to orient yourself, then check your position and direction again as you go.
 
@@ -90,4 +90,4 @@ For better results, check your location, use a map that shows paths and terrain,
 
 Suppose the bearing calculator says a lookout point is 70° from your current position. Set your compass to true north, hold the phone flat, and rotate until the heading reads close to 70°. The direction is a little north of north-east. Find a landmark along that line, walk to it using an appropriate path, and check the bearing again from there. The destination's bearing will change as your position changes, so recalculate when you need a fresh direction.
 
-A bearing turns a vague direction into a number you can check. Pair it with the [bearing calculator](/bearing/) to find the direction between places and the [online compass](/compass/) to orient yourself on the ground.
+A bearing turns a vague direction into a number you can check. Pair it with the [bearing calculator](/bearing/) to find the direction between places and the [online compass](/) to orient yourself on the ground.
