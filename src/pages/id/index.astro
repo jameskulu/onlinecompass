@@ -1,71 +1,70 @@
 ---
+const geometryCompassComparison = [
+	{
+		"feature": "Tujuan Utama",
+		"geometryCompass": "Menggambar lingkaran geometri, membagi dua sudut, dan mengukur garis Euclidean pada kertas",
+		"digitalCompass": "Mengukur sudut azimut waktu nyata, arah mata angin, dan orientasi sudut terhadap Bumi"
+	},
+	{
+		"feature": "Satuan Pengukuran",
+		"geometryCompass": "Jarak radius (cm, inci) dan radian busur untuk konstruksi lingkaran",
+		"digitalCompass": "Derajat kontinu 360° (0.0° hingga 359.9°), mil sudut, dan 16 arah mata angin"
+	},
+	{
+		"feature": "Dasar Matematika",
+		"geometryCompass": "Geometri bidang Euclidean (konstruksi jangka dan penggaris, teorema Pythagoras)",
+		"digitalCompass": "Trigonometri bola (matriks rotasi sudut Euler, geodesi WGS84, dan navigasi Lingkaran Besar)"
+	},
+	{
+		"feature": "Kerangka Referensi",
+		"geometryCompass": "Bidang datar 2D lokal (koordinat kartesius x, y)",
+		"digitalCompass": "Kerangka acuan geografis 3D global (Utara Sejati, Utara Magnetik, dan gravitasi)"
+	}
+];
+
 import Layout from '../../layouts/Layout.astro';
 import Compass from '../../components/Compass.astro';
 
 const faq = [
 	{
-		"q": "Bagaimana cara menemukan arah Utara Sejati dari lokasi saya saat ini?",
-		"a": "Buka kompas online ini di smartphone dengan izin orientasi dan lokasi aktif. Pegang ponsel mendatar; jarum akan otomatis menunjuk ke Utara Sejati (0°) dengan koreksi deklinasi magnetik otomatis."
+		"q": "Ke arah mana saya menghadap dengan kompas online?",
+		"a": "Pegang ponsel secara mendatar dan lihat bagian atas dial kompas ini. Angka besar menunjukkan arah Anda dalam derajat (0° hingga 360°) dan huruf menunjukkan arah mata angin: 0° adalah Utara (N), 90° Timur (E), 180° Selatan (S), dan 270° Barat (W). Jika dial menunjukkan 45°, Anda menghadap Timur Laut (NE); jika 225°, Anda menghadap Barat Daya (SW)."
 	},
 	{
-		"q": "Ke mana arah Utara jika saya berada di dalam rumah atau ruangan?",
-		"a": "Menjauhlah dari benda logam besar, microwave, laptop, dan tiang beton bertulang. Pegang ponsel mendatar: jika jarum menunjuk 0°, Anda menghadap utara; jika 90°, utara ada di sebelah kiri Anda."
+		"q": "Kompas online: Di mana arah Utara dan ke mana arah utara saya?",
+		"a": "Pada kompas online ini, ujung jarum merah selalu menunjuk ke Utara Sejati (0°/360°). Pegang smartphone Anda mendatar di telapak tangan. Arah yang ditunjuk ujung merah adalah arah Utara Anda. Jika jarum menunjuk lurus ke depan, Anda menghadap Utara; jika menunjuk ke kiri, Utara berada di sebelah kiri Anda."
 	},
 	{
-		"q": "Mengapa kompas HP saya menunjuk ke arah yang salah atau berputar sendiri?",
-		"a": "Sensor MEMS rentan terhadap gangguan casing bermagnet (seperti MagSafe) atau logam. Lepaskan casing magnet dan gerakkan ponsel membentuk pola angka delapan (∞) selama 5 detik untuk kalibrasi ulang."
+		"q": "Ke arah mana saya menghadap / apa arah hadap saya pada kompas?",
+		"a": "Arah hadap Anda (azimut) ditentukan oleh tepi atas ponsel Anda. Saat Anda memutar tubuh, lingkaran kompas berputar di bawah garis acuan atas dan menampilkan arah mata angin (N, NE, E, SE, S, SW, W, NW) serta derajat 360° secara real-time."
 	},
 	{
-		"q": "Apa perbedaan antara \"Di mana arah utara?\" dan \"Ke mana saya menghadap?\"?",
-		"a": "Utara adalah titik kardinal tetap (0° Sejati). Arah hadap Anda adalah sudut relatif terhadap utara. Jika kompas menunjukkan 180°, Anda menghadap ke Selatan dan Utara berada tepat di belakang Anda."
+		"q": "Bagaimana cara menggunakan kompas online?",
+		"a": "Sangat mudah: (1) Buka trueonlinecompass.com di browser ponsel (Safari, Chrome, Firefox). (2) Ketuk \"Aktifkan kompas langsung\" dan izinkan sensor dan lokasi. (3) Pegang ponsel mendatar menjauh dari benda logam. (4) Putar tubuh Anda; dial 360° akan berputar mulus pada 60fps menampilkan arah dan koordinat GPS."
 	},
 	{
-		"q": "Bisakah saya mencari arah utara dengan kompas online ini tanpa instal aplikasi?",
-		"a": "Bisa. Kompas online ini bekerja 100% di browser HP Anda (Safari, Chrome, Edge, Firefox) menggunakan API W3C standar, tanpa perlu mengunduh aplikasi, tanpa daftar, dan data tetap privat."
+		"q": "Bisakah saya menggunakan ponsel saya sebagai kompas?",
+		"a": "Ya. Hampir semua smartphone modern berfungsi sebagai kompas digital berpresisi tinggi. Di dalam ponsel terdapat sensor magnetometer triaksial MEMS (sensor medan magnet) bersama akselerometer dan giroskop. Kompas web kami membaca sensor ini langsung di browser tanpa perlu mengunduh aplikasi."
 	},
 	{
-		"q": "Bagaimana cara mengetahui arah utara di komputer atau laptop tanpa sensor kompas?",
-		"a": "Komputer desktop dan laptop tidak memiliki sensor magnetometer. Di PC, gunakan Kalkulator Posisi Matahari kami untuk menentukan arah Utara Sejati berdasarkan azimut matahari dan arah bayangan."
+		"q": "Bisakah ponsel memberi tahu ke arah mana saya menghadap?",
+		"a": "Ya. Algoritma fusi sensor menggabungkan data medan magnet dan kemiringan gravitasi untuk menghitung orientasi akurat hingga 0.1° relatif terhadap kutub Bumi."
 	},
 	{
-		"q": "Apa itu kompas digital online dan bagaimana cara kerjanya di peramban web?",
-		"a": "Kompas digital online adalah aplikasi web yang mengakses langsung sensor fisik MEMS (magnetometer, akselerometer, dan giroskop) perangkat ponsel Anda melalui W3C DeviceOrientation API. Algoritma melakukan kompensasi kemiringan trigonometri secara langsung di JavaScript untuk menghasilkan arah derajat 0°–360° tanpa perlu instalasi aplikasi."
+		"q": "Di mana kompas saya di Google (Google Maps & Chrome)?",
+		"a": "Di aplikasi Google Maps, ikon jarum merah-putih kecil muncul di pojok kanan atas saat peta diputar; mengetuknya akan menghadapkan peta kembali ke Utara. Di Google Chrome tidak ada kompas layar penuh bawaan; buka trueonlinecompass.com di Chrome untuk kompas digital 360° lengkap dengan waterpass."
 	},
 	{
-		"q": "Apa perbedaan antara utara sejati dan utara magnetik?",
-		"a": "Utara sejati mengarah sepanjang sumbu rotasi Bumi menuju Kutub Utara geografis tempat semua garis bujur bertemu. Utara magnetik adalah titik di wilayah Arktik tempat garis medan geomagnetik Bumi masuk secara vertikal ke inti bumi. Selisih sudut antara keduanya disebut deklinasi magnetik."
+		"q": "Di mana letak kompas di ponsel saya dan cara melihatnya?",
+		"a": "Di iPhone, Apple menyediakan aplikasi \"Kompas\" bawaan di folder Utilitas, atau buka situs ini di Safari. Di Android, buka situs ini di Chrome atau gunakan panel alat bawaan ponsel. Sensor fisik kompas adalah microchip MEMS yang terpasang di papan sirkuit utama ponsel."
 	},
 	{
-		"q": "Apa itu deklinasi magnetik dan mengapa penting untuk navigasi yang akurat?",
-		"a": "Deklinasi magnetik adalah sudut horizontal antara utara magnetik dan utara sejati di koordinat Anda. Di New York bernilai sekitar −13° Barat, di Los Angeles +12° Timur. Kompas kami mengintegrasikan World Magnetic Model (WMM) dari NOAA untuk mengoreksi selisih ini secara otomatis agar sesuai dengan peta topografi."
+		"q": "Ponsel apa saja yang memiliki sensor kompas?",
+		"a": "Hampir semua iPhone Apple (dari iPhone 3GS hingga iPhone 16 / Pro) dan sebagian besar smartphone Android kelas menengah hingga atas (Samsung Galaxy S dan A, Google Pixel, Xiaomi, Motorola) memiliki sensor kompas magnetometer."
 	},
 	{
-		"q": "Bagaimana cara mengalibrasi kompas ponsel untuk akurasi maksimal?",
-		"a": "Pegang ponsel mendatar lalu gerakkan perlahan membentuk pola angka delapan (∞) di udara selama 5 hingga 10 detik. Gerakan ini menghadapkan magnetometer triaksial ke medan magnet Bumi dari berbagai sudut sehingga algoritma dapat mendeteksi dan meniadakan interferensi magnetik internal ponsel."
-	},
-	{
-		"q": "Mengapa jarum kompas saya bergetar atau berputar tidak menentu?",
-		"a": "Pembacaan yang tidak stabil disebabkan oleh interferensi medan elektromagnetik di sekitar Anda. Menjauhlah minimal dua meter dari benda logam, casing bermagnet atau MagSafe, laptop, rangka baja beton, dan dasbor mobil, kemudian ulangi kalibrasi angka delapan."
-	},
-	{
-		"q": "Seberapa akurat kompas smartphone dibanding kompas bidik konvensional?",
-		"a": "Bila terkalibrasi dan jauh dari logam, magnetometer MEMS ponsel memiliki akurasi ±1° hingga ±3° di luar ruangan, setara dengan kompas bidik cair. Smartphone juga memiliki keunggulan kompensasi kemiringan dan koreksi deklinasi otomatis, meski kompas fisik tetap menjadi cadangan wajib saat mendaki gunung."
-	},
-	{
-		"q": "Apakah kompas online ini dapat bekerja secara offline dan dalam mode pesawat?",
-		"a": "Ya. Situs ini dirancang sebagai Progressive Web App (PWA) offline-first. Semua kode dan tabel model geomagnetik tersimpan di memori Service Worker peramban Anda. Begitu halaman dimuat, kompas dan kalkulator koordinat tetap berfungsi di hutan belantara tanpa jaringan seluler atau Wi-Fi."
-	},
-	{
-		"q": "Mengapa kompas menampilkan dial demo pada komputer dan laptop?",
-		"a": "Penentuan arah secara langsung membutuhkan perangkat keras sensor medan magnet (magnetometer). Smartphone dan tablet memiliki chip ini, sementara laptop dan PC hampir selalu tidak memilikinya. Pada komputer, aplikasi menyediakan simulasi interaktif beserta perangkat kalkulator matahari dan geodesi."
-	},
-	{
-		"q": "Bagaimana pencari kiblat menentukan arah Ka'bah secara presisi?",
-		"a": "Alat ini menghitung azimut busur lingkaran besar (geodesik) dari koordinat lokasi Anda menuju Ka'bah di Makkah (21° 25' 21\" LU, 39° 49' 34\" BT) menggunakan rumus trigonometri bola. Indikator hijau zamrud pada cincin kompas memandu Anda menghadap arah kiblat dengan akurasi sub-derajat."
-	},
-	{
-		"q": "Ke arah mana rumah, balkon, atau taman saya menghadap?",
-		"a": "Berdirilah menghadap jendela atau pintu keluar rumah dengan ponsel dipegang mendatar. Nilai antara 315° dan 45° menandakan arah Utara. Arah Selatan (135°–225°) menerima sinar matahari terpanjang sepanjang tahun, Timur menerima matahari pagi, dan Barat mendapatkan terik sore."
+		"q": "Bagaimana cara mengetahui arah tanpa kompas online?",
+		"a": "Gunakan tanda-tanda alam: (1) Matahari dan bayangan: Matahari terbit di timur dan terbenam di barat. Ujung bayangan tongkat bergerak dari barat ke timur. (2) Jam tangan jarum: arahkan jarum jam ke matahari; titik tengah antara jarum jam dan angka 12 menunjukkan arah Selatan/Utara. (3) Bintang: di belahan bumi selatan gunakan rasi bintang Salib Selatan (Pari) untuk menemukan arah Selatan. (4) Kalkulator Matahari Online: buka alat Posisi Matahari kami."
 	}
 ];
 
@@ -336,6 +335,174 @@ const compassTechComparison = [
 		</div>
 	</section>
 
+
+	
+	<!-- ─── Online Compass Geometry & Math Section ──────────── -->
+	<section id="geometry-math" class="border-t border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">matematika & geometri</p>
+				<h2 class="mt-3 text-display-lg text-ink">
+					Geometri & Matematika Kompas: Lingkaran Penuh 360°
+				</h2>
+				<p class="mt-6 text-body-lg text-body leading-relaxed">
+					Mengapa kompas memiliki 360 derajat dan bagaimana geometri lingkaran berhubungan dengan navigasi? Pahami azimut, sudut balik (back-bearing), dan triangulasi.
+				</p>
+
+				<div class="mt-8 space-y-6">
+					<div class="card p-6">
+						<h3 class="text-display-sm text-ink">1. Geometri Lingkaran 360 Derajat</h3>
+						<p class="mt-2 text-sm text-body leading-6">
+							Satu putaran penuh membentuk lingkaran 360 derajat. Pembagian seksagesimal Babilonia ini dipilih karena 360 memiliki 24 pembagi bilangan bulat, memudahkan pembagian kuadran tanpa pecahan berulang.
+						</p>
+					</div>
+
+					<div class="card p-6">
+						<h3 class="text-display-sm text-ink">2. Derajat Kompas vs. Radian</h3>
+						<p class="mt-2 text-sm text-body leading-6">
+							Navigasi membaca derajat (0°–360°), sedangkan mesin komputasi menghitung dalam radian. Konversinya: Radian = Derajat × (π / 180°).
+						</p>
+						<div class="my-4 rounded-xl border border-hairline bg-canvas-soft p-4 font-mono text-xs sm:text-sm text-ink">
+							<p>θ_radians = θ_degrees × (π / 180°)</p>
+							<p class="mt-1">θ_degrees = θ_radians × (180° / π)</p>
+							<p class="mt-2 text-mute text-xs">// 0° (N) = 0 rad | 90° (E) = π/2 rad ≈ 1.5708 rad | 180° (S) = π rad ≈ 3.1416 rad | 270° (W) = 3π/2 rad ≈ 4.7124 rad</p>
+						</div>
+					</div>
+
+					<div class="card p-6">
+						<h3 class="text-display-sm text-ink">3. Jangka Geometri vs. Kompas Navigasi</h3>
+						<p class="mt-2 text-sm text-body leading-6">
+							Dalam bahasa Indonesia, jangka digunakan untuk menggambar lingkaran pada kertas, sedangkan kompas navigasi mengukur arah relatif terhadap Bumi:
+						</p>
+					</div>
+				</div>
+
+				<!-- Comparison Table: Geometry Compass vs Navigational Online Compass -->
+				<div class="mt-10 overflow-x-auto">
+					<table class="w-full border-collapse text-sm">
+						<caption class="sr-only">Perbandingan: Jangka Geometri vs Kompas Digital Navigasi</caption>
+						<thead>
+							<tr class="border-b border-hairline-strong text-left">
+								<th scope="col" class="py-3.5 pr-4 font-semibold text-ink">Fitur</th>
+								<th scope="col" class="py-3.5 pr-4 font-semibold text-ink">Jangka Geometri (Gambar)</th>
+								<th scope="col" class="py-3.5 font-semibold text-ink">Kompas Digital Online</th>
+							</tr>
+						</thead>
+						<tbody class="divide-y divide-hairline">
+							{geometryCompassComparison.map((row) => (
+								<tr class="hover:bg-canvas-soft/40 transition-colors align-top">
+									<td class="py-4 pr-4 font-medium text-ink">{row.feature}</td>
+									<td class="py-4 pr-4 text-xs text-body leading-5">{row.geometryCompass}</td>
+									<td class="py-4 text-xs text-body leading-5 font-medium text-ink">{row.digitalCompass}</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</div>
+
+				<div class="mt-8 rounded-xl border border-hairline bg-canvas-soft p-6">
+					<h3 class="text-base font-semibold text-ink">Perhitungan Balik Matematika (Back-Bearing)</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Untuk kembali tepat di jalur semula:
+					</p>
+					<div class="my-3 font-mono text-xs text-ink bg-canvas p-3 rounded border border-hairline">
+						<p>If Forward_Bearing &lt; 180°: Back_Bearing = Forward_Bearing + 180°</p>
+						<p class="mt-1">If Forward_Bearing ≥ 180°: Back_Bearing = Forward_Bearing - 180°</p>
+					</div>
+					<p class="text-xs text-mute">
+						Contoh: Berjalan ke arah 045° (Timur Laut) berarti arah balik pulang Anda adalah 045° + 180° = 225° (Barat Daya).
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Online Compass for Qibla & Kaaba Section ────────── -->
+	<section id="qibla-finder" class="border-t border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">arah kiblat sholat</p>
+				<h2 class="mt-3 text-display-lg text-ink">
+					Kompas Online untuk Kiblat: Arah Akurat ke Makkah
+				</h2>
+				<p class="mt-6 text-body-lg text-body leading-relaxed">
+					Tentukan arah Kiblat yang akurat ke Ka'bah di Makkah dari posisi GPS Anda saat ini, sejajar dengan Utara Sejati.
+				</p>
+
+				<div class="mt-8 grid gap-6 sm:grid-cols-2">
+					<div class="card p-6">
+						<h3 class="text-display-sm text-ink mb-2">Perhitungan Azimut Geodesi Kiblat</h3>
+						<p class="text-sm text-body leading-6">
+							Kiblat adalah jalur lingkaran besar dari koordinat Anda ke Ka'bah di Makkah (21° 25′ 21″ N, 39° 49′ 34″ E), dihitung menggunakan trigonometri bola:
+						</p>
+						<div class="my-3 rounded-lg border border-hairline bg-canvas-soft p-3 font-mono text-xs text-ink overflow-x-auto">
+							<p>ΔL = λ_mecca - λ_user</p>
+							<p class="mt-1">y = sin(ΔL)</p>
+							<p class="mt-1">x = cos(φ_user) · tan(φ_mecca) - sin(φ_user) · cos(ΔL)</p>
+							<p class="mt-1">Qibla_Azimuth = atan2(y, x) · (180 / π)</p>
+						</div>
+						<p class="text-xs text-mute">
+							Rumus lingkaran besar memperhitungkan kelengkungan Bumi untuk rute terpendek ke Makkah.
+						</p>
+					</div>
+
+					<div class="card p-6 flex flex-col justify-between">
+						<div>
+							<h3 class="text-display-sm text-ink mb-2">Langkah Menghadap Kiblat</h3>
+							<ol class="space-y-3 text-sm text-body list-decimal pl-4">
+								<li>Izinkan akses lokasi GPS pada browser Anda.</li>
+								<li>Pegang ponsel mendatar di telapak tangan.</li>
+								<li>Cari ikon Ka'bah hijau zamrud di lingkaran kompas.</li>
+								<li>Putar tubuh hingga jarum kompas sejajar dengan ikon Ka'bah.</li>
+							</ol>
+						</div>
+						<div class="mt-4 pt-4 border-t border-hairline">
+							<a href="/id/qibla/" class="text-link text-xs font-semibold hover:underline">Buka halaman khusus Kiblat lengkap dengan jarak ke Makkah →</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Google & Browser Compatibility Section ──────────── -->
+	<section id="browser-support" class="border-t border-hairline bg-canvas-soft scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">kompatibilitas browser</p>
+				<h2 class="mt-3 text-display-lg text-ink">
+					Kompas Online di Google Chrome & Browser Ponsel
+				</h2>
+				<p class="mt-6 text-body-lg text-body leading-relaxed">
+					Banyak orang mencari kompas di Google. Google Maps membantu saat berkendara, tetapi tidak memiliki kompas layar penuh 360° mandiri dengan waterpass.
+				</p>
+				<p class="mt-4 text-body leading-7">
+					Kompas web kami berjalan lancar di Google Chrome, Android, Safari di iOS, Firefox, dan Samsung Internet.
+				</p>
+
+				<div class="mt-8 grid gap-4 sm:grid-cols-3">
+					<div class="card p-5">
+						<h3 class="text-base font-semibold text-ink mb-2">Google Chrome di Android</h3>
+						<p class="text-xs text-body leading-5">
+							Akses sensor gerak instan melalui W3C DeviceOrientation API. Cukup ketuk "Izinkan".
+						</p>
+					</div>
+					<div class="card p-5">
+						<h3 class="text-base font-semibold text-ink mb-2">Apple Safari di iOS</h3>
+						<p class="text-xs text-body leading-5">
+							Mendukung webkitCompassHeading untuk arah utara sejati tanpa memasang aplikasi.
+						</p>
+					</div>
+					<div class="card p-5">
+						<h3 class="text-base font-semibold text-ink mb-2">Penyelarasan dengan Google Maps</h3>
+						<p class="text-xs text-body leading-5">
+							Cocokkan arah Anda dengan citra satelit Google Maps, koordinat GPS, dan peta jalan.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
 	<!-- ─── Complete Navigation Toolkit Grid (All 8 Tools) ─── -->
 	<section id="tools" class="scroll-mt-16">
@@ -910,7 +1077,7 @@ const compassTechComparison = [
 			</p>
 			<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
 				<a href="/id/compass/" class="btn-primary bg-on-primary text-primary hover:opacity-90">Mulai Kompas Langsung</a>
-				<a href="/id/level/" class="btn-secondary text-on-primary border-on-primary/30 hover:bg-on-primary/10">Coba Waterpass Digital</a>
+				<a href="/id/level/" class="btn-secondary-inverted">Coba Waterpass Digital</a>
 			</div>
 		</div>
 	</section>

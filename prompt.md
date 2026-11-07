@@ -43,6 +43,21 @@ online compass for qibla
 online compass live
 online compass kabba to find north from my location
 quibla finder online compass
+digital compass online
+online digital compass
+live online compass
+compass online free
+compass direction online
+find north online
+find direction online
+online north compass
+online compass with directions
+real time online compass
+online magnetic compass
+compass finder online
+online compass reading
+compass degrees online
+360 degree compass online
 
 these above keywords, also use proper og meta tags for SEO
 on home page write 800 - 1200 words about the tool for SEO
@@ -65,6 +80,14 @@ How to see compass on mobile?
 Which is my north direction?
 Where is the compass on my phone?
 Which mobile phones have a compass sensor?
+which direction am i facing compass online
+online compass where is north
+what direction am i facing compass online
+what way am i facing compass online
+which way am i facing compass online
+how to know direction without compass online
+how to use compass online
+how to use online compass
 
 
 NOTE: Use JSON-LD for FAQ SEO

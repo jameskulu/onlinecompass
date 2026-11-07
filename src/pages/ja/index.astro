@@ -1,71 +1,70 @@
 ---
+const geometryCompassComparison = [
+	{
+		"feature": "主な目的",
+		"geometryCompass": "紙上での幾何学的な円の描画、角の二等分、ユークリッド幾何学の線分測定",
+		"digitalCompass": "リアルタイムの方位角（アジマス）、方角、地球に対する角度の測定"
+	},
+	{
+		"feature": "測定単位",
+		"geometryCompass": "半径の長さ（cm・インチ）および作図用の弧度法（ラジアン）",
+		"digitalCompass": "連続的な360度（0.0°〜359.9°）、角ミル、16方位の羅針盤方位"
+	},
+	{
+		"feature": "数学的基礎",
+		"geometryCompass": "ユークリッド平面幾何学（定規とコンパスによる作図、ピタゴラスの定理）",
+		"digitalCompass": "球面三角法（オイラー回転行列、WGS84測地系、大圏航路計算）"
+	},
+	{
+		"feature": "基準系",
+		"geometryCompass": "局所的な2次元平面（直交デカルト座標系 x, y）",
+		"digitalCompass": "全地球規模の3次元基準系（真北・磁北および地球重力ベクトル）"
+	}
+];
+
 import Layout from '../../layouts/Layout.astro';
 import Compass from '../../components/Compass.astro';
 
 const faq = [
 	{
-		"q": "現在地から今すぐ真北を見つけるにはどうすればよいですか？",
-		"a": "方位センサーと位置情報の利用を許可したスマホで本コンパスを開き、水平に持ちます。針が自動的に真北（0°）を指し、現地の磁気偏角も自動補正されます。"
+		"q": "オンラインコンパスで自分は今どの方向を向いていますか？",
+		"a": "スマートフォンを水平に持ち、コンパスダイヤルの上部を確認してください。大きな数値が現在の正確な方位（0°〜360°）を示し、英字が方角を示します：0°は北（N）、90°は東（E）、180°は南（S）、270°は西（W）です。45°なら北東（NE）、225°なら南西（SW）を向いています。"
 	},
 	{
-		"q": "室内や家の中にいるとき、北はどちら側になりますか？",
-		"a": "大型家電、電子レンジ、パソコン、鉄筋コンクリートの柱から2メートルほど離れてください。水平に持って0°を示せば正面が北、90°なら左手が北になります。"
+		"q": "オンラインコンパス：北はどこですか？自分の北の方角は？",
+		"a": "このオンラインコンパスでは、赤い矢印の針が常に真北（0°/360°）を指します。スマートフォンを手のひらに平らに乗せてください。針の赤い先端が向いている方向が「北」です。針が真っ直ぐ前を指していれば正面が北、左を指していれば左手が北です。"
 	},
 	{
-		"q": "スマホのコンパスが狂ったり方向がずれたりするのはなぜですか？",
-		"a": "マグネット式ケース（MagSafeなど）や周囲の金属による磁気干渉が原因です。磁石付きカバーを外し、スマホを持って空間でゆっくりと「8の字」を数回描いてセンサーを校正してください。"
+		"q": "自分が向いている方角・コンパスの進路（アジマス）は？",
+		"a": "向いている方角（アジマス）は端末の上端が指す方向です。体を回転させると、コンパスリングが上部の固定基準線の真下でリアルタイムに回転し、16方位（N, NE, E, SE, S, SW, W, NW）と360度の正確な数値を表示します。"
 	},
 	{
-		"q": "「北はどっち？」と「自分が向いている方角」の違いは何ですか？",
-		"a": "北は固定された地理的な基準（真北0°）です。向いている方角は北に対する角度（方位角）です。コンパスが180°を示している場合、あなたは南を向いており、北は真後ろにあります。"
+		"q": "オンラインコンパスの使い方は？",
+		"a": "使い方は簡単です：(1) スマホのブラウザ（Safari、Chrome、Firefoxなど）で trueonlinecompass.com を開きます。(2)「ライブコンパスを有効にする」をタップし、センサーと位置情報の権限を許可します。(3) 金属類から離れてスマホを水平に持ちます。(4) 体を向けると、360度ダイヤルが60fpsで滑らかに回転し、方位とGPS座標を表示します。"
 	},
 	{
-		"q": "アプリをインストールせずにブラウザだけで北を探せますか？",
-		"a": "はい。本ツールはW3C標準のDeviceOrientation APIを利用し、SafariやChromeなどのブラウザ内で100%ローカルに動作します。インストール不要・完全無料です。"
+		"q": "スマホをコンパスとして使えますか？",
+		"a": "はい。現代のほぼすべてのスマートフォンは高精度デジタルコンパスとして使用できます。内部に3軸MEMS磁気センサー（地磁気センサー）、加速度センサー、ジャイロスコープが搭載されています。本サイトはアプリをインストールすることなくブラウザ上で直接これらのセンサーを読み取ります。"
 	},
 	{
-		"q": "コンパスセンサーのないパソコンやノートPCで北を見つける方法は？",
-		"a": "デスクトップPCやノートPCには地磁気センサーが搭載されていません。PC環境では、当サイトの「太陽位置計算ツール」を使い、太陽の方位角や影の伸びる方向から真北を正確に特定できます。"
+		"q": "スマホで向いている方角を教えてくれますか？",
+		"a": "はい。このオンラインコンパスを開くと、センサーフュージョンアルゴリズムが地磁気と重力傾斜データを統合計算し、地球の極に対して向いている方向を0.1度単位の精度で即座に判定します。"
 	},
 	{
-		"q": "オンラインデジタルコンパスとは何ですか？ブラウザでどのように機能しますか？",
-		"a": "オンラインデジタルコンパスは、アプリをダウンロードすることなく、W3C DeviceOrientation APIを介してスマートフォンに内蔵された物理MEMSセンサー（磁力計・加速度計・ジャイロ）を直接読み取るウェブアプリケーションです。JavaScriptによるリアルタイムの三角関数傾斜補正により、端末が傾いていても0°〜360°の正確な方位を瞬時に算出します。"
+		"q": "Googleでコンパスはどこにありますか（GoogleマップやChrome）？",
+		"a": "スマホのGoogleマップアプリでは、地図を回転させると右上に小さな赤白のコンパス針アイコンが表示され、タップすると北が上に戻ります。Google Chromeブラウザ単体には全画面コンパス機能が内蔵されていないため、trueonlinecompass.com をChromeで開くことで360度全画面コンパスや水準器を利用できます。"
 	},
 	{
-		"q": "「真北（しんぽく）」と「磁北（じほく）」の違いは何ですか？",
-		"a": "真北は地球の自転軸に沿った地理的な北極点（すべての経線が収束する地点）を指し、地図やGPSが基準とします。磁北は地球の地磁気ラインが鉛直に地核へ入る北極海の地点であり、地球内部のコア活動によって毎年数十キロ移動します。この両者の角度のズレを「磁気偏角」と呼びます。"
+		"q": "スマホのコンパスはどこにあり、どうやって表示しますか？",
+		"a": "iPhoneでは「便利ツール」フォルダ内にある標準の「コンパス」アプリを開くか、Safariで当サイトを開きます。AndroidではGoogle Chromeで当サイトを開くか、端末付属のコンパスツールを利用します。物理的なセンサーはスマホ内部のマザーボード上に搭載された超小型MEMSチップです。"
 	},
 	{
-		"q": "磁気偏角とは何ですか？正確なナビゲーションになぜ必須なのですか？",
-		"a": "磁気偏角とは、観測地点における磁北と真北の間の水平角度です。例えばニューヨークでは約−13°西偏、東京では約−8°西偏しています。偏角を補正しないと、地図上の目的地から距離1kmあたり数十〜数百メートル以上ずれてしまいます。当サイトは米国NOAAの最新世界磁気モデル（WMM）を統合し、偏角を自動加減算して地図と完全一致させます。"
+		"q": "どのスマートフォンにコンパスセンサーが搭載されていますか？",
+		"a": "ほぼすべてのApple iPhone（iPhone 3GSからiPhone 16 / Proまで）および主要なAndroidスマートフォン（Samsung Galaxy S/Aシリーズ、Google Pixel、AQUOS、Xperia、Xiaomiなど）に地磁気センサーが内蔵されています。ごく一部の超低価格エントリー機種でのみ省略されることがあります。"
 	},
 	{
-		"q": "スマートフォンのコンパスを最高精度に校正（キャリブレーション）する方法は？",
-		"a": "端末を手のひらに平らに乗せ、画面を上に向けた状態で、空間にゆっくりと大きな「8の字（∞）」を描くように5〜10秒間動かしてください。これにより3軸磁力計が地球磁場を全方位から受光し、スマホ内部のスピーカーやカメラ部品による固定磁気ノイズを自動的に相殺補正します。"
-	},
-	{
-		"q": "コンパスの針が震えたり、激しく回転して定まらない原因は何ですか？",
-		"a": "局所的な電磁気干渉が主な原因です。金属製の手帳型ケース、MagSafeリング、ノートPC、鉄筋コンクリートの梁、車のダッシュボードなどの金属や磁石から2メートル以上離れ、平らな場所で8の字校正を行ってください。"
-	},
-	{
-		"q": "スマホのコンパスは市販のアナログコンパス（シルバコンパス等）と比べて正確ですか？",
-		"a": "金属干渉のない屋外で適切に校正されたスマホのMEMS磁力計は、±1°〜±3°の測定精度を持ち、一般的なオイル封入式コンパスと同等以上の精度を発揮します。さらに傾斜補正や真北自動計算が作動する利点があります。ただし過酷な雪山登山では電池切れのないアナログコンパスの携行が推奨されます。"
-	},
-	{
-		"q": "このオンラインコンパスはオフラインや機内モードでも動作しますか？",
-		"a": "はい。当サイトはオフラインファーストのProgressive Web App（PWA）として設計されています。主要なコードやWMM地磁気計算データはブラウザのService Workerにキャッシュされるため、一度読み込めば携帯の電波が圏外の山奥でも問題なく動作します。"
-	},
-	{
-		"q": "PCやノートパソコンで開いた際にデモ画面が表示されるのはなぜですか？",
-		"a": "リアルタイムの方位計測には磁界を検出するハードウェア（磁気センサー）が必要です。スマートフォンやタブレットには搭載されていますが、一般的なノートPCやデスクトップPCには搭載されていません。PC環境では各種計算ツールとシミュレーション機能が起動します。"
-	},
-	{
-		"q": "キブラ（Qibla）ファインダーはどのようにメッカの方角を算出しますか？",
-		"a": "現在地の緯度経度からサウジアラビア・メッカのカアバ神殿（北緯21°25'21\"、東経39°49'34\"）への大圏航路（大円方位角）を球面三角法により正確に計算します。コンパス外周のエメラルドグリーンのマーカーに体の向きを合わせるだけで、正確にメッカへ正対できます。"
-	},
-	{
-		"q": "自宅やバルコニー、庭が向いている方角を調べるには？",
-		"a": "窓際やベランダに立ち、スマートフォンを水平にして外に向けてください。方位角が315°〜45°なら北向き、135°〜225°なら日当たりが最も良い南向きです。東向きは朝日が入り、西向きは午後の強い西日を受けます。"
+		"q": "オンラインコンパスを使わずに方角を知る方法は？",
+		"a": "自然のサインを利用して方角を特定できます：(1) 太陽と影：太陽は東から昇り、正午に南中し（北半球）、西に沈みます。地面に立てた棒の影の先端は西から東へ移動します。(2) アナログ時計法：短針を太陽に向けたとき、短針と12時の中間が南を指します。(3) 夜の星：北斗七星の先端を伸ばして北極星を見つけると、そこが真北です。(4) オンライン太陽計算機：当サイトの太陽位置計算ツールでリアルタイムの方位角を確認できます。"
 	}
 ];
 
@@ -336,6 +335,174 @@ const compassTechComparison = [
 		</div>
 	</section>
 
+
+	
+	<!-- ─── Online Compass Geometry & Math Section ──────────── -->
+	<section id="geometry-math" class="border-t border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">数学と幾何学</p>
+				<h2 class="mt-3 text-display-lg text-ink">
+					コンパスの幾何学と数学：360度の完全な円
+				</h2>
+				<p class="mt-6 text-body-lg text-body leading-relaxed">
+					なぜコンパスは360度なのか、そして円幾何学はどのようにナビゲーションと結びついているのか？方位角、逆方位角（バックベアリング）、三角測量の基礎を解説します。
+				</p>
+
+				<div class="mt-8 space-y-6">
+					<div class="card p-6">
+						<h3 class="text-display-sm text-ink">1. 360度の円幾何学</h3>
+						<p class="mt-2 text-sm text-body leading-6">
+							1周の回転は360度です。古代バビロニアの60進法に由来するこの数値は、24個もの約数を持つため、端数を出さずに円を4象限や8方位にきれいに分割できます。
+						</p>
+					</div>
+
+					<div class="card p-6">
+						<h3 class="text-display-sm text-ink">2. コンパスの度数 vs ラジアン（弧度法）</h3>
+						<p class="mt-2 text-sm text-body leading-6">
+							実地の方位は度（0°〜360°）で読み取りますが、物理演算エンジンはラジアンで計算します。変換式：ラジアン = 度 × (π / 180°)。
+						</p>
+						<div class="my-4 rounded-xl border border-hairline bg-canvas-soft p-4 font-mono text-xs sm:text-sm text-ink">
+							<p>θ_radians = θ_degrees × (π / 180°)</p>
+							<p class="mt-1">θ_degrees = θ_radians × (180° / π)</p>
+							<p class="mt-2 text-mute text-xs">// 0° (N) = 0 rad | 90° (E) = π/2 rad ≈ 1.5708 rad | 180° (S) = π rad ≈ 3.1416 rad | 270° (W) = 3π/2 rad ≈ 4.7124 rad</p>
+						</div>
+					</div>
+
+					<div class="card p-6">
+						<h3 class="text-display-sm text-ink">3. 製図用コンパス vs 方位磁針（ナビゲーションコンパス）</h3>
+						<p class="mt-2 text-sm text-body leading-6">
+							日本語では作図用の「コンパス（ぶんまわし）」と方角を知る「方位磁針」は別の道具ですが、幾何学的な円の原理は共通しています：
+						</p>
+					</div>
+				</div>
+
+				<!-- Comparison Table: Geometry Compass vs Navigational Online Compass -->
+				<div class="mt-10 overflow-x-auto">
+					<table class="w-full border-collapse text-sm">
+						<caption class="sr-only">作図用コンパスとデジタル方位磁針の比較</caption>
+						<thead>
+							<tr class="border-b border-hairline-strong text-left">
+								<th scope="col" class="py-3.5 pr-4 font-semibold text-ink">比較項目</th>
+								<th scope="col" class="py-3.5 pr-4 font-semibold text-ink">作図用コンパス（文房具）</th>
+								<th scope="col" class="py-3.5 font-semibold text-ink">デジタルオンライン方位磁針</th>
+							</tr>
+						</thead>
+						<tbody class="divide-y divide-hairline">
+							{geometryCompassComparison.map((row) => (
+								<tr class="hover:bg-canvas-soft/40 transition-colors align-top">
+									<td class="py-4 pr-4 font-medium text-ink">{row.feature}</td>
+									<td class="py-4 pr-4 text-xs text-body leading-5">{row.geometryCompass}</td>
+									<td class="py-4 text-xs text-body leading-5 font-medium text-ink">{row.digitalCompass}</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</div>
+
+				<div class="mt-8 rounded-xl border border-hairline bg-canvas-soft p-6">
+					<h3 class="text-base font-semibold text-ink">逆方位角（バックベアリング）の計算数学</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						登山や測量で来た道を正確に戻るための計算式：
+					</p>
+					<div class="my-3 font-mono text-xs text-ink bg-canvas p-3 rounded border border-hairline">
+						<p>If Forward_Bearing &lt; 180°: Back_Bearing = Forward_Bearing + 180°</p>
+						<p class="mt-1">If Forward_Bearing ≥ 180°: Back_Bearing = Forward_Bearing - 180°</p>
+					</div>
+					<p class="text-xs text-mute">
+						例：往路の方位角が045°（北東）の場合、復路の正確な逆方位は 045° + 180° = 225°（南西）となります。
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Online Compass for Qibla & Kaaba Section ────────── -->
+	<section id="qibla-finder" class="border-t border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">キブラ（礼拝方角）</p>
+				<h2 class="mt-3 text-display-lg text-ink">
+					キブラ測定用オンラインコンパス：メッカのカアバ神殿への正確な方角
+				</h2>
+				<p class="mt-6 text-body-lg text-body leading-relaxed">
+					現在地のGPS座標からサウジアラビア・メッカのカアバ神殿への正確な大圏航路方位を真北基準で瞬時に算出します。
+				</p>
+
+				<div class="mt-8 grid gap-6 sm:grid-cols-2">
+					<div class="card p-6">
+						<h3 class="text-display-sm text-ink mb-2">キブラ方位角の測地学計算</h3>
+						<p class="text-sm text-body leading-6">
+							現在地からカアバ神殿（北緯21°25′21″、東経39°49′34″）への最短大圏コースを球面三角法により算出：
+						</p>
+						<div class="my-3 rounded-lg border border-hairline bg-canvas-soft p-3 font-mono text-xs text-ink overflow-x-auto">
+							<p>ΔL = λ_mecca - λ_user</p>
+							<p class="mt-1">y = sin(ΔL)</p>
+							<p class="mt-1">x = cos(φ_user) · tan(φ_mecca) - sin(φ_user) · cos(ΔL)</p>
+							<p class="mt-1">Qibla_Azimuth = atan2(y, x) · (180 / π)</p>
+						</div>
+						<p class="text-xs text-mute">
+							地球の曲率を考慮した球面余弦定理により、最短直行コースを算出します。
+						</p>
+					</div>
+
+					<div class="card p-6 flex flex-col justify-between">
+						<div>
+							<h3 class="text-display-sm text-ink mb-2">メッカの方角に合わせる手順</h3>
+							<ol class="space-y-3 text-sm text-body list-decimal pl-4">
+								<li>ブラウザで位置情報の取得を許可します。</li>
+								<li>スマートフォンを水平に保ちます。</li>
+								<li>コンパス外周にあるエメラルドグリーンのカアバ神殿アイコンを確認します。</li>
+								<li>コンパスの針がエメラルドのアイコンに重なるまで体を向けます。</li>
+							</ol>
+						</div>
+						<div class="mt-4 pt-4 border-t border-hairline">
+							<a href="/ja/qibla/" class="text-link text-xs font-semibold hover:underline">メッカまでの正確な距離がわかるキブラ専用ツールを開く →</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Google & Browser Compatibility Section ──────────── -->
+	<section id="browser-support" class="border-t border-hairline bg-canvas-soft scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">ブラウザ互換性</p>
+				<h2 class="mt-3 text-display-lg text-ink">
+					Google Chromeおよび各種モバイルブラウザでの動作
+				</h2>
+				<p class="mt-6 text-body-lg text-body leading-relaxed">
+					Googleの検索でコンパスを探す方は多くいます。Googleマップは運転時のナビに最適ですが、水準器付きの独立した360度全画面コンパス機能はありません。
+				</p>
+				<p class="mt-4 text-body leading-7">
+					当コンパスは Google Chrome、Android、iOSのSafari、Firefox、Samsungブラウザでアプリ不要で快適に動作します。
+				</p>
+
+				<div class="mt-8 grid gap-4 sm:grid-cols-3">
+					<div class="card p-5">
+						<h3 class="text-base font-semibold text-ink mb-2">Android版 Google Chrome</h3>
+						<p class="text-xs text-body leading-5">
+							W3C DeviceOrientation APIを介して3軸センサーに直接アクセス。「許可」をタップするだけです。
+						</p>
+					</div>
+					<div class="card p-5">
+						<h3 class="text-base font-semibold text-ink mb-2">iOS版 Apple Safari</h3>
+						<p class="text-xs text-body leading-5">
+							webkitCompassHeading APIに対応し、アプリなしで正確な真北を取得できます。
+						</p>
+					</div>
+					<div class="card p-5">
+						<h3 class="text-base font-semibold text-ink mb-2">Googleマップとの照合</h3>
+						<p class="text-xs text-body leading-5">
+							Googleマップの航空写真やストリートビューと組み合わせて現在の方位を多角的に確認できます。
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
 	<!-- ─── Complete Navigation Toolkit Grid (All 8 Tools) ─── -->
 	<section id="tools" class="scroll-mt-16">
@@ -910,7 +1077,7 @@ const compassTechComparison = [
 			</p>
 			<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
 				<a href="/ja/compass/" class="btn-primary bg-on-primary text-primary hover:opacity-90">ライブコンパスを起動</a>
-				<a href="/ja/level/" class="btn-secondary text-on-primary border-on-primary/30 hover:bg-on-primary/10">水準器を試す</a>
+				<a href="/ja/level/" class="btn-secondary-inverted">水準器を試す</a>
 			</div>
 		</div>
 	</section>

@@ -1,71 +1,70 @@
 ---
+const geometryCompassComparison = [
+	{
+		"feature": "Objetivo Principal",
+		"geometryCompass": "Desenhar círculos geométricos, bissetrizes e medir segmentos euclidianos em papel ou desenho técnico",
+		"digitalCompass": "Medir azimutes em tempo real, direções cardeais e orientação angular em relação à Terra"
+	},
+	{
+		"feature": "Unidades de Medida",
+		"geometryCompass": "Raio (cm, polegadas) e radianos de arco para construção geométrica",
+		"digitalCompass": "Graus contínuos de 360° (0.0° a 359.9°), milésimos angulares e 16 rumos da rosa dos ventos"
+	},
+	{
+		"feature": "Base Matemática",
+		"geometryCompass": "Geometria euclidiana plana (construções com régua e compasso, teorema de Pitágoras)",
+		"digitalCompass": "Trigonometria esférica (matrizes de rotação de Euler, geodésia WGS84 e rotas ortodrômicas)"
+	},
+	{
+		"feature": "Sistema de Referência",
+		"geometryCompass": "Plano bidimensional local (coordenadas cartesianas x, y)",
+		"digitalCompass": "Referencial geográfico global 3D (Norte Verdadeiro, Norte Magnético e vetor gravidade)"
+	}
+];
+
 import Layout from '../../layouts/Layout.astro';
 import Compass from '../../components/Compass.astro';
 
 const faq = [
 	{
-		"q": "Como descubro o Norte Verdadeiro da minha localização atual agora mesmo?",
-		"a": "Abra esta bússola em qualquer smartphone com permissão de orientação e localização concedida. Segure o celular na horizontal; a agulha apontará para o Norte Verdadeiro (0°), corrigindo a declinação magnética."
+		"q": "Para qual direção estou virado com uma bússola online?",
+		"a": "Para saber para onde você está virado, segure o celular na horizontal e observe o topo do mostrador. O número grande mostra seu rumo exato em graus (0° a 360°) e a letra indica o ponto cardeal: 0° é Norte (N), 90° é Leste (E), 180° é Sul (S) e 270° é Oeste (W). Se marcar 45°, você está virado para o Nordeste (NE); se marcar 225°, para o Sudoeste (SW)."
 	},
 	{
-		"q": "Para que lado fica o Norte se eu estiver dentro de casa ou no quarto?",
-		"a": "Afaste-se de grandes aparelhos de metal, micro-ondas, computadores e vigas de concreto armado. Mantenha o celular plano: se marcar 0°, você está virado para o norte; se marcar 90°, o norte fica à sua esquerda."
+		"q": "Bússola online: Onde fica o Norte e qual é a minha direção norte?",
+		"a": "Nesta bússola online, a ponta vermelha da agulha sempre aponta para o Norte Verdadeiro (0°/360°). Segure o celular na horizontal na palma da mão. A direção para onde a ponta vermelha aponta é o seu Norte. Se a agulha apontar para a frente, você está virado para o Norte; se apontar para a esquerda, o Norte está à sua esquerda."
 	},
 	{
-		"q": "Por que a bússola do celular aponta para o lado errado ou fica oscilando?",
-		"a": "Sensores MEMS sofrem interferência de capinhas magnéticas (como MagSafe), metais e circuitos eletrônicos. Retire acessórios com ímãs e faça um movimento suave em forma de oito (∞) durante 5 segundos."
+		"q": "Que rumo tenho / para onde estou olhando na bússola?",
+		"a": "Sua direção de visada (azimute) é dada pela borda superior do aparelho. Ao girar seu corpo, o disco da bússola gira sob o marcador superior exibindo sua direção cardeal (N, NE, E, SE, S, SO, O, NO) e os graus contínuos em tempo real."
 	},
 	{
-		"q": "Qual é a diferença entre \"Onde fica o norte?\" e \"Para onde estou olhando?\"?",
-		"a": "O norte é uma coordenada geográfica fixa (0° Verdadeiro). A direção em que você olha é o seu rumo relativo ao norte. Se marcar 180°, você está virado para o Sul e o Norte fica atrás de você."
+		"q": "Como usar uma bússola online?",
+		"a": "Usar é muito fácil: (1) Abra trueonlinecompass.com no navegador do celular (Safari, Chrome, Firefox). (2) Toque em \"Ativar bússola ao vivo\" e autorize os sensores. (3) Segure o celular na horizontal longe de metais. (4) Gire o corpo; o mostrador de 360° responderá com fluidez a 60 fps exibindo seu rumo e coordenadas GPS."
 	},
 	{
-		"q": "Posso achar o norte com esta bússola online sem instalar aplicativo?",
-		"a": "Sim. Esta bússola roda 100% no navegador do seu smartphone (Safari, Chrome, Edge, Firefox) através das APIs do W3C, sem downloads, sem cadastros e com total privacidade no dispositivo."
+		"q": "Posso usar meu celular como bússola?",
+		"a": "Sim. Quase todos os smartphones modernos possuem um magnetômetro triaxial MEMS (sensor magnético eletrônico) combinado com acelerômetro e giroscópio. Nossa bússola online lê esses sensores diretamente no navegador sem exigir instalação de aplicativo."
 	},
 	{
-		"q": "Como achar o norte no computador ou notebook sem sensor de bússola?",
-		"a": "Computadores de mesa e notebooks não possuem magnetômetro integrado. No computador, utilize nossa Calculadora de Posição Solar para encontrar o Norte Verdadeiro pelo azimute do sol e direção da sombra."
+		"q": "Meu celular pode me dizer em qual direção estou virado?",
+		"a": "Sim. Ao abrir esta bússola, os algoritmos de fusão sensorial combinam os dados do campo magnético e da gravidade para calcular sua orientação com precisão de até 0.1° em relação aos polos terrestres."
 	},
 	{
-		"q": "O que é uma bússola digital online e como ela funciona no navegador?",
-		"a": "Uma bússola digital online é uma aplicação web que acessa diretamente os sensores físicos MEMS (magnetômetro, acelerômetro e giroscópio) do seu dispositivo móvel através da API DeviceOrientation do W3C. Ela executa compensação trigonométrica de inclinação em tempo real via JavaScript para calcular um rumo estável de 0° a 360° sem instalar nenhum aplicativo."
+		"q": "Onde fica a bússola no Google (Google Maps e Chrome)?",
+		"a": "No aplicativo Google Maps, uma pequena agulha vermelha e branca aparece no canto superior direito ao girar o mapa; tocar nela volta a alinhar o mapa ao Norte. No Google Chrome não há bússola nativa em tela cheia; em trueonlinecompass.com você tem uma bússola digital de 360° com nível de bolha."
 	},
 	{
-		"q": "Qual é a diferença entre o norte verdadeiro e o norte magnético?",
-		"a": "O norte verdadeiro aponta ao longo do eixo de rotação da Terra para o Polo Norte geográfico, onde todos os meridianos convergem. O norte magnético é o ponto no Ártico onde as linhas do campo geomagnético penetram verticalmente no planeta. A diferença angular entre ambos é a declinação magnética."
+		"q": "Onde fica a bússola no meu celular e como vê-la?",
+		"a": "No iPhone, a Apple inclui o app \"Bússola\" na pasta Utilitários, ou você pode abrir este site no Safari. No Android, abra este site no Chrome ou use as ferramentas do fabricante. O sensor físico é um microchip MEMS soldado na placa-mãe do celular."
 	},
 	{
-		"q": "O que é declinação magnética e por que ela é indispensável para navegação?",
-		"a": "A declinação magnética é o ângulo horizontal entre o norte magnético e o verdadeiro nas suas coordenadas. Em Nova York, é de aprox. −13° Oeste; em Los Angeles, +12° Leste. Nossa bússola integra o Modelo Magnético Mundial (WMM) da NOAA para corrigir esse desvio automaticamente e alinhar seu rumo com mapas topográficos."
+		"q": "Quais celulares têm sensor de bússola?",
+		"a": "Praticamente todos os iPhones da Apple (do iPhone 3GS até o iPhone 16 / Pro) e a maioria dos smartphones Android intermediários e topo de linha (Samsung Galaxy S e A, Google Pixel, Xiaomi, Motorola) têm magnetômetro integrado."
 	},
 	{
-		"q": "Como calibrar a bússola do meu celular para obter precisão máxima?",
-		"a": "Segure o celular plano e faça um movimento suave em forma de oito (∞) no ar durante 5 a 10 segundos. Isso expõe o magnetômetro triaxial ao campo da Terra sob múltiplos ângulos, permitindo que o algoritmo filtre e cancele interferências de ferro duro e ferro doce dos componentes internos do aparelho."
-	},
-	{
-		"q": "Por que a agulha da bússola oscila ou gira sem parar?",
-		"a": "Leituras instáveis decorrem de campos eletromagnéticos locais. Afaste-se pelo menos dois metros de peças de metal, capinhas magnéticas ou MagSafe, notebooks, vigas de concreto armado e painéis de veículos, e repita o movimento de calibração em oito."
-	},
-	{
-		"q": "Qual a precisão da bússola de um celular comparada a uma bússola de placa?",
-		"a": "Quando calibrado e longe de metais, o magnetômetro MEMS de um celular alcança precisão de ±1° a ±3° ao ar livre, equiparando-se a bússolas manuais com líquido amortecedor. Os celulares trazem a vantagem da compensação de inclinação e correção automática de declinação, embora bússolas físicas sejam a reserva sem bateria ideal para montanhismo."
-	},
-	{
-		"q": "Esta bússola online funciona offline e em modo avião?",
-		"a": "Sim. A aplicação foi construída como uma Progressive Web App (PWA) offline-first. Todo o código e as tabelas geomagnéticas do WMM ficam salvos no cache do Service Worker do seu navegador. Uma vez carregada, ela funciona perfeitamente em áreas remotas sem sinal de celular ou Wi-Fi."
-	},
-	{
-		"q": "Por que a bússola exibe um mostrador de demonstração em computadores e notebooks?",
-		"a": "A leitura de rumo ao vivo requer um sensor físico de campo magnético (magnetômetro). Enquanto celulares e tablets contam com esse chip para navegação, computadores e notebooks não possuem o componente. Em desktops, o site oferece uma simulação interativa e ferramentas de azimute solar e coordenadas."
-	},
-	{
-		"q": "Como o localizador de Qibla calcula a direção exata para Meca?",
-		"a": "A ferramenta calcula o azimute geodésico de grande círculo (rota ortodrômica) desde suas coordenadas até a Caaba em Meca (21° 25' 21\" N, 39° 49' 34\" E) usando a lei esférica dos cossenos. Um marcador verde-esmeralda no mostrador guia visualmente o seu alinhamento com máxima precisão."
-	},
-	{
-		"q": "Para qual direção minha casa, varanda ou jardim está voltada?",
-		"a": "Posicione-se em frente à janela ou porta externa segurando o celular plano. Um valor entre 315° e 45° indica orientação Norte. A face Sul (135°–225°) no hemisfério norte (ou Norte no hemisfério sul) garante insolação constante, o Leste capta o sol nascente e o Oeste o calor da tarde."
+		"q": "Como saber a direção sem bússola online?",
+		"a": "Você pode encontrar os pontos cardeais usando métodos naturais: (1) Sol e sombras: o sol nasce a Leste, fica ao Sul ao meio-dia (hemisfério norte) ou ao Norte (hemisfério sul) e se põe a Oeste. A ponta da sombra de uma estaca se desloca de oeste para leste. (2) Relógio analógico: aponte o ponteiro das horas para o sol; a bissetriz com as 12 horas marca o Norte/Sul. (3) Estrelas: no hemisfério sul, use o Cruzeiro do Sul para encontrar o Sul. (4) Calculadora Solar Online: use nossa ferramenta de posição do sol."
 	}
 ];
 
@@ -336,6 +335,174 @@ const compassTechComparison = [
 		</div>
 	</section>
 
+
+	
+	<!-- ─── Online Compass Geometry & Math Section ──────────── -->
+	<section id="geometry-math" class="border-t border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">matemática e geometria</p>
+				<h2 class="mt-3 text-display-lg text-ink">
+					Geometria e Matemática da Bússola: O Círculo de 360°
+				</h2>
+				<p class="mt-6 text-body-lg text-body leading-relaxed">
+					Por que a bússola tem 360 graus e como isso se relaciona com trigonometria e navegação? Aprenda sobre azimute, rumo inverso e triangulação.
+				</p>
+
+				<div class="mt-8 space-y-6">
+					<div class="card p-6">
+						<h3 class="text-display-sm text-ink">1. A Geometria do Círculo de 360 Graus</h3>
+						<p class="mt-2 text-sm text-body leading-6">
+							Uma volta completa forma um círculo de exatamente 360 graus. Esta divisão babilônica foi escolhida por ter 24 divisores inteiros, permitindo dividir a bússola em quadrantes sem frações infinitas.
+						</p>
+					</div>
+
+					<div class="card p-6">
+						<h3 class="text-display-sm text-ink">2. Graus de Bússola vs. Radianos</h3>
+						<p class="mt-2 text-sm text-body leading-6">
+							Enquanto navegadores leem graus (0° a 360°), motores de física e computação calculam em radianos. A conversão é: Radianos = Graus × (π / 180°).
+						</p>
+						<div class="my-4 rounded-xl border border-hairline bg-canvas-soft p-4 font-mono text-xs sm:text-sm text-ink">
+							<p>θ_radians = θ_degrees × (π / 180°)</p>
+							<p class="mt-1">θ_degrees = θ_radians × (180° / π)</p>
+							<p class="mt-2 text-mute text-xs">// 0° (N) = 0 rad | 90° (E) = π/2 rad ≈ 1.5708 rad | 180° (S) = π rad ≈ 3.1416 rad | 270° (W) = 3π/2 rad ≈ 4.7124 rad</p>
+						</div>
+					</div>
+
+					<div class="card p-6">
+						<h3 class="text-display-sm text-ink">3. Compasso de Desenho vs. Bússola de Navegação</h3>
+						<p class="mt-2 text-sm text-body leading-6">
+							Em português, o compasso serve para traçar círculos em papel, enquanto a bússola mede ângulos em relação à Terra. Ambos compartilham as mesmas regras geométricas:
+						</p>
+					</div>
+				</div>
+
+				<!-- Comparison Table: Geometry Compass vs Navigational Online Compass -->
+				<div class="mt-10 overflow-x-auto">
+					<table class="w-full border-collapse text-sm">
+						<caption class="sr-only">Comparação entre Compasso de Desenho e Bússola Digital</caption>
+						<thead>
+							<tr class="border-b border-hairline-strong text-left">
+								<th scope="col" class="py-3.5 pr-4 font-semibold text-ink">Característica</th>
+								<th scope="col" class="py-3.5 pr-4 font-semibold text-ink">Compasso de Desenho Geométrico</th>
+								<th scope="col" class="py-3.5 font-semibold text-ink">Bússola Digital de Navegação</th>
+							</tr>
+						</thead>
+						<tbody class="divide-y divide-hairline">
+							{geometryCompassComparison.map((row) => (
+								<tr class="hover:bg-canvas-soft/40 transition-colors align-top">
+									<td class="py-4 pr-4 font-medium text-ink">{row.feature}</td>
+									<td class="py-4 pr-4 text-xs text-body leading-5">{row.geometryCompass}</td>
+									<td class="py-4 text-xs text-body leading-5 font-medium text-ink">{row.digitalCompass}</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</div>
+
+				<div class="mt-8 rounded-xl border border-hairline bg-canvas-soft p-6">
+					<h3 class="text-base font-semibold text-ink">Cálculo Matemático do Rumo Inverso (Rumo Recíproco)</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Para retornar com exatidão pelo mesmo caminho:
+					</p>
+					<div class="my-3 font-mono text-xs text-ink bg-canvas p-3 rounded border border-hairline">
+						<p>If Forward_Bearing &lt; 180°: Back_Bearing = Forward_Bearing + 180°</p>
+						<p class="mt-1">If Forward_Bearing ≥ 180°: Back_Bearing = Forward_Bearing - 180°</p>
+					</div>
+					<p class="text-xs text-mute">
+						Exemplo: Rumo de ida a 045° (Nordeste) equivale a um rumo de volta de 045° + 180° = 225° (Sudoeste).
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Online Compass for Qibla & Kaaba Section ────────── -->
+	<section id="qibla-finder" class="border-t border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">direção de oração qibla</p>
+				<h2 class="mt-3 text-display-lg text-ink">
+					Bússola Online para a Qibla: Direção Exata para Meca
+				</h2>
+				<p class="mt-6 text-body-lg text-body leading-relaxed">
+					Encontre a direção precisa da Qibla até a Kaaba em Meca a partir de sua localização GPS atual, alinhada ao Norte Verdadeiro.
+				</p>
+
+				<div class="mt-8 grid gap-6 sm:grid-cols-2">
+					<div class="card p-6">
+						<h3 class="text-display-sm text-ink mb-2">Cálculo Geodésico do Azimute da Qibla</h3>
+						<p class="text-sm text-body leading-6">
+							A Qibla é a rota ortodrômica (círculo máximo) das suas coordenadas até a Kaaba em Meca (21° 25′ 21″ N, 39° 49′ 34″ E), calculada por trigonometria esférica:
+						</p>
+						<div class="my-3 rounded-lg border border-hairline bg-canvas-soft p-3 font-mono text-xs text-ink overflow-x-auto">
+							<p>ΔL = λ_mecca - λ_user</p>
+							<p class="mt-1">y = sin(ΔL)</p>
+							<p class="mt-1">x = cos(φ_user) · tan(φ_mecca) - sin(φ_user) · cos(ΔL)</p>
+							<p class="mt-1">Qibla_Azimuth = atan2(y, x) · (180 / π)</p>
+						</div>
+						<p class="text-xs text-mute">
+							A fórmula ortodrômica considera a curvatura da Terra para oferecer a menor distância.
+						</p>
+					</div>
+
+					<div class="card p-6 flex flex-col justify-between">
+						<div>
+							<h3 class="text-display-sm text-ink mb-2">Passo a Passo para se Alinhar a Meca</h3>
+							<ol class="space-y-3 text-sm text-body list-decimal pl-4">
+								<li>Permita o acesso à sua localização GPS no navegador.</li>
+								<li>Segure o celular na horizontal na palma da mão.</li>
+								<li>Encontre o ícone verde esmeralda da Kaaba na borda da bússola.</li>
+								<li>Gire o corpo até a agulha coincidir com o marcador esmeralda.</li>
+							</ol>
+						</div>
+						<div class="mt-4 pt-4 border-t border-hairline">
+							<a href="/pt/qibla/" class="text-link text-xs font-semibold hover:underline">Acessar página dedicada da Qibla com distância até Meca →</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Google & Browser Compatibility Section ──────────── -->
+	<section id="browser-support" class="border-t border-hairline bg-canvas-soft scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">compatibilidade de navegadores</p>
+				<h2 class="mt-3 text-display-lg text-ink">
+					Bússola Online no Google Chrome e Navegadores Móveis
+				</h2>
+				<p class="mt-6 text-body-lg text-body leading-relaxed">
+					Muitos procuram bússola no Google. Embora o Google Maps oriente o mapa ao navegar em rotas, falta uma bússola de tela cheia de 360° com nível de bolha.
+				</p>
+				<p class="mt-4 text-body leading-7">
+					Nossa bússola web roda de forma fluida no Google Chrome, Android, Safari no iOS, Firefox e Samsung Internet.
+				</p>
+
+				<div class="mt-8 grid gap-4 sm:grid-cols-3">
+					<div class="card p-5">
+						<h3 class="text-base font-semibold text-ink mb-2">Google Chrome no Android</h3>
+						<p class="text-xs text-body leading-5">
+							Acesso direto aos sensores pela API W3C DeviceOrientation. Basta tocar em "Permitir".
+						</p>
+					</div>
+					<div class="card p-5">
+						<h3 class="text-base font-semibold text-ink mb-2">Apple Safari no iOS</h3>
+						<p class="text-xs text-body leading-5">
+							Compatibilidade com a API webkitCompassHeading para norte verdadeiro sem baixar apps.
+						</p>
+					</div>
+					<div class="card p-5">
+						<h3 class="text-base font-semibold text-ink mb-2">Alinhamento com o Google Maps</h3>
+						<p class="text-xs text-body leading-5">
+							Confirme sua direção cruzando com imagens de satélite do Google Maps e coordenadas GPS.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
 	<!-- ─── Complete Navigation Toolkit Grid (All 8 Tools) ─── -->
 	<section id="tools" class="scroll-mt-16">
@@ -910,7 +1077,7 @@ const compassTechComparison = [
 			</p>
 			<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
 				<a href="/pt/compass/" class="btn-primary bg-on-primary text-primary hover:opacity-90">Abrir Bússola ao Vivo</a>
-				<a href="/pt/level/" class="btn-secondary text-on-primary border-on-primary/30 hover:bg-on-primary/10">Testar Nível de Bolha</a>
+				<a href="/pt/level/" class="btn-secondary-inverted">Testar Nível de Bolha</a>
 			</div>
 		</div>
 	</section>

@@ -1,71 +1,70 @@
 ---
+const geometryCompassComparison = [
+	{
+		"feature": "Hauptzweck",
+		"geometryCompass": "Zeichnen geometrischer Kreise, Winkelhalbierung und Messen euklidischer Strecken auf Papier",
+		"digitalCompass": "Messung von Echtzeit-Azimutkursen, Himmelsrichtungen und Orientierungswinkeln zur Erde"
+	},
+	{
+		"feature": "Masseinheiten",
+		"geometryCompass": "Radiusabstand (cm, Zoll) und Kreisbogen-Radianten für die geometrische Konstruktion",
+		"digitalCompass": "Fortlaufende 360°-Grade (0.0° bis 359.9°), Winkel-Mils und 16-teilige Kompassrose"
+	},
+	{
+		"feature": "Mathematische Basis",
+		"geometryCompass": "Euklidische Planimetrie (Zirkel- und Lineal-Konstruktionen, Satz des Pythagoras)",
+		"digitalCompass": "Sphärische Trigonometrie (Euler-Rotationsmatrizen, WGS84-Geodäsie und Großkreisnavigation)"
+	},
+	{
+		"feature": "Referenzsystem",
+		"geometryCompass": "Lokale zweidimensionale Ebene (kartesische x, y-Koordinaten)",
+		"digitalCompass": "Globales 3D-Koordinatensystem (Wahrer Norden, Magnetischer Norden und Erdgravitationsvektor)"
+	}
+];
+
 import Layout from '../../layouts/Layout.astro';
 import Compass from '../../components/Compass.astro';
 
 const faq = [
 	{
-		"q": "Wie finde ich den Wahren Norden von meinem aktuellen Standort aus?",
-		"a": "Öffnen Sie diesen Online-Kompass auf Ihrem Smartphone mit aktivierten Standort- und Sensorrechten. Halten Sie das Gerät flach in der Hand; die Nadel weist automatisch auf den Wahren Norden (0°), korrigiert um die lokale magnetische Deklination."
+		"q": "In welche Richtung blicke ich mit dem Online-Kompass?",
+		"a": "Halten Sie Ihr Smartphone waagerecht in der Hand und blicken Sie auf den oberen Rand des Kompasses. Die große Zahl zeigt Ihren genauen Kurs in Grad (0° bis 360°) und der Buchstabe die Himmelsrichtung an: 0° ist Norden (N), 90° Osten (E), 180° Süden (S) und 270° Westen (W). Bei 45° blicken Sie nach Nordosten (NE); bei 225° nach Südwesten (SW)."
 	},
 	{
-		"q": "In welcher Richtung liegt Norden, wenn ich im Haus oder Zimmer stehe?",
-		"a": "Halten Sie Abstand zu großen Metallgeräten, Mikrowellen, Computern und Stahlbetonträgern. Halten Sie das Handy flach: Zeigt die Nadel 0°, blicken Sie nach Norden; bei 90° liegt Norden links von Ihnen."
+		"q": "Online-Kompass: Wo ist Norden und in welcher Richtung liegt mein Norden?",
+		"a": "Auf diesem Online-Kompass weist die rote Pfeilspitze immer zuverlässig auf den Wahren Norden (0°/360°). Halten Sie Ihr Smartphone flach in der Hand. Die Richtung, in die die rote Spitze zeigt, ist Ihre Nordrichtung. Zeigt die Nadel geradeaus, blicken Sie nach Norden; zeigt sie nach links, liegt Norden links von Ihnen."
 	},
 	{
-		"q": "Warum zeigt mein Smartphone-Kompass in die falsche Richtung oder weicht ab?",
-		"a": "Sensoren reagieren auf Magnete in Hüllen (z. B. MagSafe-Halterungen) und Elektronik. Nehmen Sie magnetische Hüllen ab und führen Sie 5 Sekunden lang eine ruhige Achterbewegung (∞) durch, um das Magnetometer neu zu kalibrieren."
+		"q": "Welchen Kurs habe ich / in welche Richtung schaue ich?",
+		"a": "Ihre Blickrichtung (Azimut) wird durch die obere Kante Ihres Smartphones definiert. Wenn Sie sich drehen, rotiert die Kompassrose unter der feststehenden Peilmarke und zeigt Ihre Himmelsrichtung (N, NE, E, SE, S, SW, W, NW) sowie den 360°-Winkel in Echtzeit an."
 	},
 	{
-		"q": "Was ist der Unterschied zwischen „Wo ist Norden?“ und „In welche Richtung blicke ich?“?",
-		"a": "Norden ist ein fester geografischer Punkt (0° Wahr). Ihre Blickrichtung ist der relative Winkel zu Norden. Zeigt der Kompass 180°, blicken Sie nach Süden und Norden liegt genau hinter Ihnen."
+		"q": "Wie benutze ich einen Online-Kompass?",
+		"a": "Die Bedienung ist unkompliziert: (1) Öffnen Sie trueonlinecompass.com in Ihrem Browser (Safari, Chrome, Firefox). (2) Tippen Sie auf „Live-Kompass aktivieren“ und erlauben Sie Sensor- und Standortrechte. (3) Halten Sie das Smartphone flach und fern von Metall. (4) Drehen Sie sich; das Zifferblatt reagiert flüssig mit 60 Bildern pro Sekunde."
 	},
 	{
-		"q": "Kann ich Norden mit diesem Online-Kompass ohne App-Installation finden?",
-		"a": "Ja. Dieser Online-Kompass läuft zu 100 % in Ihrem mobilen Browser (Safari, Chrome, Edge, Firefox) über moderne W3C-Standards – ganz ohne App Store, ohne Registrierung und mit vollem Datenschutz."
+		"q": "Kann ich mein Smartphone als Kompass verwenden?",
+		"a": "Ja. Nahezu alle modernen Smartphones besitzen ein dreiachsiges MEMS-Magnetometer (elektronischer Kompass-Chip) zusammen mit Beschleunigungsmessern und Gyroskopen. Unser Online-Kompass liest diese Sensoren direkt im Browser ohne App-Download aus."
 	},
 	{
-		"q": "Wie finde ich Norden am Desktop-PC oder Laptop ohne Kompass-Sensor?",
-		"a": "Desktop-PCs und Notebooks besitzen kein Magnetometer. Nutzen Sie auf PCs unseren Sonnenstands-Rechner, um den exakten Wahren Norden anhand des Sonnenazimuts und des Schattenverlaufs zu bestimmen."
+		"q": "Kann mir mein Smartphone sagen, in welche Richtung ich blicke?",
+		"a": "Ja. Beim Öffnen dieses Online-Kompasses berechnet ein Sensorfusionsfilter aus Magnetfeld- und Erdbeschleunigungsdaten Ihre Ausrichtung auf 0.1° genau im Bezug auf die Pole der Erde."
 	},
 	{
-		"q": "Was ist ein digitaler Online-Kompass und wie funktioniert er im Browser?",
-		"a": "Ein digitaler Online-Kompass ist eine Webanwendung, die über die W3C DeviceOrientation-API direkt auf die physischen MEMS-Sensoren (Magnetometer, Beschleunigungssensor und Gyroskop) Ihres Smartphones zugreift. Mittels trigonometrischer Echtzeit-Neigungskompensation in JavaScript berechnet er einen stabilen Kurs von 0° bis 360° ohne App-Installation."
+		"q": "Wo finde ich den Kompass in Google (Google Maps & Chrome)?",
+		"a": "In der mobilen Google Maps-App erscheint der Kompass oben rechts als kleine rot-weiße Nadel, wenn die Karte gedreht wird; ein Antippen richtet die Karte nach Norden aus. In Chrome gibt es keinen integrierten Vollbildkompass; über trueonlinecompass.com öffnen Sie direkt einen vollständigen 360°-Digitalkompass."
 	},
 	{
-		"q": "Was ist der Unterschied zwischen wahrem und magnetischem Norden?",
-		"a": "Der wahre Norden weist entlang der Rotationsachse der Erde zum geografischen Nordpol, an dem alle Längengrade zusammenlaufen. Der magnetische Norden ist der Punkt in der Arktis, an dem die geomagnetischen Feldlinien senkrecht in den Erdkern eintreten. Die Winkeldifferenz zwischen beiden bezeichnet man als magnetische Deklination."
+		"q": "Wo befindet sich der Kompass auf meinem Smartphone?",
+		"a": "Auf dem iPhone finden Sie die vorinstallierte App „Kompass“ im Ordner Dienstprogramme oder nutzen diese Webseite in Safari. Bei Android-Geräten öffnen Sie die Seite in Chrome oder nutzen Hersteller-Tools. Der physische Sensor ist ein winziger MEMS-Mikrochip auf der Hauptplatine."
 	},
 	{
-		"q": "Was ist die magnetische Deklination und warum ist sie beim Navigieren unverzichtbar?",
-		"a": "Die magnetische Deklination ist der Horizontalwinkel zwischen magnetischem und wahrem Norden an Ihrem Standort. In New York beträgt sie etwa −13° West, in Los Angeles +12° Ost. Unser Kompass nutzt das World Magnetic Model (WMM) der NOAA, um diesen Versatz automatisch zu korrigieren und Ihren Kurs exakt auf topografische Karten abzustimmen."
+		"q": "Welche Smartphones besitzen einen Kompass-Sensor?",
+		"a": "Praktisch alle Apple iPhones (ab iPhone 3GS bis iPhone 16 / Pro) sowie die meisten Android-Smartphones der Mittel- und Oberklasse (Samsung Galaxy S/A, Google Pixel, Xiaomi, Motorola, OnePlus) verfügen über ein Magnetometer. Nur wenige Einsteigergeräte verzichten darauf."
 	},
 	{
-		"q": "Wie kalibriere ich den Kompass meines Smartphones für maximale Präzision?",
-		"a": "Halten Sie das Smartphone flach und führen Sie es 5 bis 10 Sekunden lang in einer flüssigen dreidimensionalen Achterbewegung (∞) durch die Luft. Dadurch wird das dreiachsige Magnetometer aus allen Winkeln dem Erdmagnetfeld ausgesetzt, sodass der Fusionsfilter interne Störfelder von Gehäuse und Lautsprechern herausrechnen kann."
-	},
-	{
-		"q": "Warum zittert die Kompassnadel oder dreht sich unkontrolliert im Kreis?",
-		"a": "Instabile Werte entstehen durch lokale elektromagnetische Störquellen. Halten Sie mindestens zwei Meter Abstand zu Metallgegenständen, MagSafe- oder Magnet-Hüllen, Laptops, Stahlbeton und Fahrzeug-Armaturenbrettern und führen Sie anschließend die Achter-Kalibrierung durch."
-	},
-	{
-		"q": "Wie genau ist ein Smartphone-Kompass im Vergleich zu einem Wanderkompass?",
-		"a": "Nach korrekter Kalibrierung und fernab von Metall erreicht ein Smartphone-MEMS-Magnetometer im Freien eine Genauigkeit von ±1° bis ±3°, vergleichbar mit flüssigkeitsgedämpften Handkompassen. Smartphones bieten zudem automatische Neigungskompensation und Deklinationskorrektur, während physische Kompasse das stromlose Backup bleiben."
-	},
-	{
-		"q": "Funktioniert dieser Online-Kompass auch offline und im Flugmodus?",
-		"a": "Ja. Die Plattform ist als Offline-first Progressive Web App (PWA) konzipiert. Der gesamte Quellcode und die geomagnetischen WMM-Tabellen werden im Service-Worker-Speicher Ihres Browsers abgelegt. Einmal geladen, funktioniert die Navigation auch in unberührter Wildnis ohne Mobilfunknetz oder WLAN."
-	},
-	{
-		"q": "Warum zeigt der Kompass auf Desktop-PCs und Laptops ein Demo-Zifferblatt?",
-		"a": "Ein Echtzeit-Kompasskurs setzt einen physischen Magnetfeldsensor (Magnetometer) voraus. Während Smartphones und Tablets standardmäßig damit ausgestattet sind, fehlt dieser Chip in Laptops und Desktop-Rechnern fast ausnahmslos. Auf PCs steht daher eine interaktive Simulation mit Sonnen- und Geodaten-Tools bereit."
-	},
-	{
-		"q": "Wie berechnet der Qibla-Finder die exakte Richtung nach Mekka?",
-		"a": "Das Werkzeug berechnet das geodätische Großkreis-Azimut (Orthodrome) von Ihren Koordinaten zur Kaaba in Mekka (21° 25' 21\" N, 39° 49' 34\" E) mithilfe des sphärischen Kosinussatzes. Eine smaragdgrüne Markierung auf dem Zifferblatt führt Sie visuell zur punktgenauen Ausrichtung."
-	},
-	{
-		"q": "In welche Himmelsrichtung blickt mein Haus, mein Balkon oder mein Garten?",
-		"a": "Stellen Sie sich mit flach gehaltenem Smartphone an Ihr Fenster oder Ihre Außentür. Ein Wert zwischen 315° und 45° bedeutet Nordausrichtung. Eine Südausrichtung (135°–225°) liefert ganzjährig maximalen Sonnenschein, Osten bringt Morgensonne und Westen warme Nachmittagsstrahlen."
+		"q": "Wie bestimme ich die Himmelsrichtung ohne Kompass online?",
+		"a": "Nutzen Sie Naturmethoden: (1) Sonnenstand: Die Sonne geht im Osten auf, steht mittags im Süden (Nordhalbkugel) und geht im Westen unter. Ein Schattenstab wandert von West nach Ost. (2) Analoguhr: Stundenzeiger zur Sonne richten; die Mitte zwischen Zeiger und 12 Uhr weist nach Süden. (3) Sternenhimmel: Der Polarstern über dem Großen Wagen markiert exakt Norden. (4) Online-Sonnenrechner: Nutzen Sie unser Sonnenstands-Tool."
 	}
 ];
 
@@ -336,6 +335,174 @@ const compassTechComparison = [
 		</div>
 	</section>
 
+
+	
+	<!-- ─── Online Compass Geometry & Math Section ──────────── -->
+	<section id="geometry-math" class="border-t border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">mathematik & geometrie</p>
+				<h2 class="mt-3 text-display-lg text-ink">
+					Kompass-Geometrie & Mathematik: Der 360°-Vollkreis
+				</h2>
+				<p class="mt-6 text-body-lg text-body leading-relaxed">
+					Warum hat ein Kompass 360 Grad und wie hängen Kreisgeometrie und Navigation zusammen? Mathematisches Grundwissen für Azimut, Rückpeilung und Triangulation.
+				</p>
+
+				<div class="mt-8 space-y-6">
+					<div class="card p-6">
+						<h3 class="text-display-sm text-ink">1. Die Geometrie des 360°-Kreises</h3>
+						<p class="mt-2 text-sm text-body leading-6">
+							Ein Vollkreis umfasst genau 360 Grad. Die babylonische Sexagesimalteilung wurde gewählt, weil 360 genau 24 ganzzahlige Teiler besitzt, was das Teilen in Quadranten ohne Rest ermöglicht.
+						</p>
+					</div>
+
+					<div class="card p-6">
+						<h3 class="text-display-sm text-ink">2. Kompassgrade vs. Bogenmaß (Radiant)</h3>
+						<p class="mt-2 text-sm text-body leading-6">
+							Während Navigatoren Grad (0°–360°) ablesen, rechnen Grafik- und Physik-Engines in Radiant. Die Umrechnung lautet: Bogenmaß = Grad × (π / 180°).
+						</p>
+						<div class="my-4 rounded-xl border border-hairline bg-canvas-soft p-4 font-mono text-xs sm:text-sm text-ink">
+							<p>θ_radians = θ_degrees × (π / 180°)</p>
+							<p class="mt-1">θ_degrees = θ_radians × (180° / π)</p>
+							<p class="mt-2 text-mute text-xs">// 0° (N) = 0 rad | 90° (E) = π/2 rad ≈ 1.5708 rad | 180° (S) = π rad ≈ 3.1416 rad | 270° (W) = 3π/2 rad ≈ 4.7124 rad</p>
+						</div>
+					</div>
+
+					<div class="card p-6">
+						<h3 class="text-display-sm text-ink">3. Geometrie-Zirkel vs. Navigations-Kompass</h3>
+						<p class="mt-2 text-sm text-body leading-6">
+							Im Deutschen unterscheidet man zwischen dem Zirkel (Zeichengerät für Kreise) und dem Navigations-Kompass (Richtungsmesser). Beide basieren auf denselben Kreisgesetzen:
+						</p>
+					</div>
+				</div>
+
+				<!-- Comparison Table: Geometry Compass vs Navigational Online Compass -->
+				<div class="mt-10 overflow-x-auto">
+					<table class="w-full border-collapse text-sm">
+						<caption class="sr-only">Vergleich: Geometrischer Zirkel vs. Digitaler Kompass</caption>
+						<thead>
+							<tr class="border-b border-hairline-strong text-left">
+								<th scope="col" class="py-3.5 pr-4 font-semibold text-ink">Merkmal</th>
+								<th scope="col" class="py-3.5 pr-4 font-semibold text-ink">Geometrischer Zirkel (Zeichengerät)</th>
+								<th scope="col" class="py-3.5 font-semibold text-ink">Digitaler Online-Kompass</th>
+							</tr>
+						</thead>
+						<tbody class="divide-y divide-hairline">
+							{geometryCompassComparison.map((row) => (
+								<tr class="hover:bg-canvas-soft/40 transition-colors align-top">
+									<td class="py-4 pr-4 font-medium text-ink">{row.feature}</td>
+									<td class="py-4 pr-4 text-xs text-body leading-5">{row.geometryCompass}</td>
+									<td class="py-4 text-xs text-body leading-5 font-medium text-ink">{row.digitalCompass}</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</div>
+
+				<div class="mt-8 rounded-xl border border-hairline bg-canvas-soft p-6">
+					<h3 class="text-base font-semibold text-ink">Mathematische Rückpeilung (Gegenkurs)</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Um auf demselben Pfad zurückzukehren:
+					</p>
+					<div class="my-3 font-mono text-xs text-ink bg-canvas p-3 rounded border border-hairline">
+						<p>If Forward_Bearing &lt; 180°: Back_Bearing = Forward_Bearing + 180°</p>
+						<p class="mt-1">If Forward_Bearing ≥ 180°: Back_Bearing = Forward_Bearing - 180°</p>
+					</div>
+					<p class="text-xs text-mute">
+						Beispiel: Hinweg mit Kurs 045° (Nordost) ergibt einen Rückkurs von 045° + 180° = 225° (Südwest).
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Online Compass for Qibla & Kaaba Section ────────── -->
+	<section id="qibla-finder" class="border-t border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">qibla-gebetsrichtung</p>
+				<h2 class="mt-3 text-display-lg text-ink">
+					Online-Kompass für Qibla: Genaue Ausrichtung nach Mekka
+				</h2>
+				<p class="mt-6 text-body-lg text-body leading-relaxed">
+					Ermitteln Sie die exakte Gebetsrichtung zur Kaaba in Mekka von Ihrem aktuellen GPS-Standort aus, präzise zum Wahren Norden ausgerichtet.
+				</p>
+
+				<div class="mt-8 grid gap-6 sm:grid-cols-2">
+					<div class="card p-6">
+						<h3 class="text-display-sm text-ink mb-2">Berechnung des Qibla-Azimuts</h3>
+						<p class="text-sm text-body leading-6">
+							Die Qibla ist der Großkreis-Azimut von Ihren Koordinaten zur Kaaba in Mekka (21° 25′ 21″ N, 39° 49′ 34″ E), berechnet über die sphärische Trigonometrie:
+						</p>
+						<div class="my-3 rounded-lg border border-hairline bg-canvas-soft p-3 font-mono text-xs text-ink overflow-x-auto">
+							<p>ΔL = λ_mecca - λ_user</p>
+							<p class="mt-1">y = sin(ΔL)</p>
+							<p class="mt-1">x = cos(φ_user) · tan(φ_mecca) - sin(φ_user) · cos(ΔL)</p>
+							<p class="mt-1">Qibla_Azimuth = atan2(y, x) · (180 / π)</p>
+						</div>
+						<p class="text-xs text-mute">
+							Die Großkreisformel berücksichtigt die Erdkrümmung für die kürzeste Entfernung.
+						</p>
+					</div>
+
+					<div class="card p-6 flex flex-col justify-between">
+						<div>
+							<h3 class="text-display-sm text-ink mb-2">Schritt-für-Schritt zur Ausrichtung nach Mekka</h3>
+							<ol class="space-y-3 text-sm text-body list-decimal pl-4">
+								<li>Standortzugriff im Browser gestatten.</li>
+								<li>Smartphone flach waagerecht in der Hand halten.</li>
+								<li>Smaragdgrünes Kaaba-Symbol auf dem äußeren Kompassring suchen.</li>
+								<li>Körper drehen, bis die Kompassnadel mit dem Symbol übereinstimmt.</li>
+							</ol>
+						</div>
+						<div class="mt-4 pt-4 border-t border-hairline">
+							<a href="/de/qibla/" class="text-link text-xs font-semibold hover:underline">Spezielle Qibla-Seite mit Mekka-Entfernung öffnen →</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Google & Browser Compatibility Section ──────────── -->
+	<section id="browser-support" class="border-t border-hairline bg-canvas-soft scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">browser-kompatibilität</p>
+				<h2 class="mt-3 text-display-lg text-ink">
+					Online-Kompass in Google Chrome & mobilen Browsern
+				</h2>
+				<p class="mt-6 text-body-lg text-body leading-relaxed">
+					Viele suchen nach einem Kompass in Google. Während Google Maps beim Fahren hilft, fehlt ein Vollbild-Kompass mit 360°-Gradanzeige und Wasserwaage.
+				</p>
+				<p class="mt-4 text-body leading-7">
+					Unser browserbasierter Kompass läuft direkt in Google Chrome, Android, Safari auf iOS, Firefox und Samsung Internet.
+				</p>
+
+				<div class="mt-8 grid gap-4 sm:grid-cols-3">
+					<div class="card p-5">
+						<h3 class="text-base font-semibold text-ink mb-2">Google Chrome auf Android</h3>
+						<p class="text-xs text-body leading-5">
+							Direkter Zugriff auf Bewegungssensoren über die W3C DeviceOrientation-API. Einfach auf „Erlauben“ tippen.
+						</p>
+					</div>
+					<div class="card p-5">
+						<h3 class="text-base font-semibold text-ink mb-2">Apple Safari auf iOS</h3>
+						<p class="text-xs text-body leading-5">
+							Volle Unterstützung der webkitCompassHeading-Schnittstelle für echten Norden ohne App Store.
+						</p>
+					</div>
+					<div class="card p-5">
+						<h3 class="text-base font-semibold text-ink mb-2">Abgleich mit Google Maps</h3>
+						<p class="text-xs text-body leading-5">
+							Vergleichen Sie Ihre Richtung mit Satellitenbildern, GPS-Koordinaten und Katasterkarten.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
 	<!-- ─── Complete Navigation Toolkit Grid (All 8 Tools) ─── -->
 	<section id="tools" class="scroll-mt-16">
@@ -910,7 +1077,7 @@ const compassTechComparison = [
 			</p>
 			<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
 				<a href="/de/compass/" class="btn-primary bg-on-primary text-primary hover:opacity-90">Live-Kompass Starten</a>
-				<a href="/de/level/" class="btn-secondary text-on-primary border-on-primary/30 hover:bg-on-primary/10">Wasserwaage Ausprobieren</a>
+				<a href="/de/level/" class="btn-secondary-inverted">Wasserwaage Ausprobieren</a>
 			</div>
 		</div>
 	</section>

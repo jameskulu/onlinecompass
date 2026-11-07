@@ -1,71 +1,70 @@
 ---
+const geometryCompassComparison = [
+	{
+		"feature": "주요 목적",
+		"geometryCompass": "종이 위에 기하학적 원 작도, 각의 이등분, 유클리드 선분 측정",
+		"digitalCompass": "실시간 방위각(아지무스), 방위 및 지구 기준 각도 방향 측정"
+	},
+	{
+		"feature": "측정 단위",
+		"geometryCompass": "반지름 길이(cm, 인치) 및 원 작도용 호도법(라디안)",
+		"digitalCompass": "연속적인 360도(0.0°~359.9°), 각밀, 16방위 나침반 방위"
+	},
+	{
+		"feature": "수학적 기초",
+		"geometryCompass": "유클리드 평면기하학 (자-컴퍼스 작도, 피타고라스 정리)",
+		"digitalCompass": "구면삼각법 (오일러 회전 행렬, WGS84 측지학, 대권 항법)"
+	},
+	{
+		"feature": "기준 좌표계",
+		"geometryCompass": "로컬 2차원 평면 (직교 데카르트 좌표계 x, y)",
+		"digitalCompass": "전 지구 3차원 기준계 (진북, 자북 및 중력 가속도 벡터)"
+	}
+];
+
 import Layout from '../../layouts/Layout.astro';
 import Compass from '../../components/Compass.astro';
 
 const faq = [
 	{
-		"q": "현재 내 위치에서 진북을 즉시 찾으려면 어떻게 해야 하나요?",
-		"a": "방위 센서와 위치 접근이 허용된 스마트폰에서 이 나침반을 열고 수평으로 잡으세요. 바늘이 지역 편각을 자동으로 계산하여 진북(0°)을 정확히 가리킵니다."
+		"q": "온라인 나침반으로 내가 어느 방향을 보고 있는지 어떻게 아나요?",
+		"a": "스마트폰을 수평으로 평평하게 들고 나침반 다이얼 상단을 확인하세요. 큰 숫자가 도(0°~360°) 단위의 정확한 방위각을 나타내고 문자가 동서남북 방위를 표시합니다: 0°는 북(N), 90°는 동(E), 180°는 남(S), 270°는 서(W)입니다. 45°는 북동(NE), 225°는 남서(SW)를 가리킵니다."
 	},
 	{
-		"q": "집 안이나 방 안에 있을 때 북쪽은 어느 쪽인가요?",
-		"a": "대형 가전제품, 전자레인지, 컴퓨터, 철근 콘크리트 벽에서 떨어지세요. 스마트폰을 평평하게 들었을 때 0°면 앞이 북쪽이고, 90°면 왼쪽이 북쪽입니다."
+		"q": "온라인 나침반: 북쪽은 어디이고 내 북쪽 방향은 어떻게 찾나요?",
+		"a": "이 온라인 나침반에서 빨간색 바늘 끝은 항상 진북(0°/360°)을 가리킵니다. 휴대폰을 손바닥 위에 평평하게 올려놓으세요. 바늘의 빨간 팁이 가리키는 방향이 바로 북쪽입니다. 바늘이 정면을 가리키면 정면이 북쪽이고, 왼쪽을 가리키면 북쪽이 왼편에 있습니다."
 	},
 	{
-		"q": "스마트폰 나침반이 엉뚱한 방향을 가리키거나 흔들리는 이유는 무엇인가요?",
-		"a": "자석이 내장된 폰 케이스(MagSafe 등)나 주변 금속의 간섭 때문입니다. 자석 액세서리를 분리한 후 공중에서 천천히 숫자 8(∞)을 그리며 흔들어 센서를 재보정하세요."
+		"q": "내가 향한 방위와 각도(헤딩)는 어디에 표시되나요?",
+		"a": "보고 있는 방향(방위각)은 기기의 상단 모서리가 결정합니다. 몸을 돌리면 나침반 링이 상단 기준점 아래에서 회전하며 16방위와 360도 각도를 실시간으로 표시합니다."
 	},
 	{
-		"q": "‘북쪽이 어디인가요?’와 ‘내가 향한 방향’의 차이는 무엇인가요?",
-		"a": "북쪽은 고정된 지리적 기준점(진북 0°)입니다. 내가 향한 방향은 북쪽을 기준으로 한 회전 각도입니다. 180°를 가리키면 남쪽을 보고 있는 것이며 북쪽은 등 뒤에 있습니다."
+		"q": "온라인 나침반은 어떻게 사용하나요?",
+		"a": "사용법은 매우 간단합니다: (1) 모바일 브라우저(Safari, Chrome 등)에서 trueonlinecompass.com을 엽니다. (2) \"실시간 나침반 활성화\"를 누르고 센서 및 위치 권한을 허용합니다. (3) 금속 물체와 떨어진 상태에서 수평으로 평평하게 듭니다. (4) 몸을 회전하면 360도 다이얼이 부드럽게 방위각과 GPS 좌표를 보여줍니다."
 	},
 	{
-		"q": "앱을 설치하지 않고도 온라인 나침반으로 북쪽을 찾을 수 있나요?",
-		"a": "네. 이 나침반은 W3C DeviceOrientation API를 이용해 모바일 브라우저에서 100% 작동합니다. 설치나 회원가입이 필요 없으며 완벽한 개인정보 보호를 제공합니다."
+		"q": "스마트폰을 나침반으로 사용할 수 있나요?",
+		"a": "네. 현대의 거의 모든 스마트폰은 고정밀 디지털 나침반 기능을 갖추고 있습니다. 기기 내부에 3축 MEMS 지자기 센서, 가속도계, 자이로스코프가 탑재되어 있어 별도 앱 설치 없이 브라우저에서 바로 측정할 수 있습니다."
 	},
 	{
-		"q": "나침반 센서가 없는 PC나 노트북에서 북쪽을 찾는 방법은?",
-		"a": "데스크톱 PC나 노트북에는 자력계가 없습니다. PC에서는 당사의 ‘태양 위치 계산기’를 활용해 태양의 방위각과 그림자 방향으로 진북을 정확히 찾을 수 있습니다."
+		"q": "휴대폰이 내가 어느 방향을 보고 있는지 알려줄 수 있나요?",
+		"a": "네. 센서 융합 알고리즘이 지자기 데이터와 중력 기울기를 결합하여 지구 극을 기준으로 0.1도 단위의 정밀한 방향을 계산하여 알려줍니다."
 	},
 	{
-		"q": "온라인 디지털 나침반이란 무엇이며 웹 브라우저에서 어떻게 작동합니까?",
-		"a": "온라인 디지털 나침반은 별도의 앱 설치 없이 W3C DeviceOrientation API를 통해 스마트폰에 내장된 물리적 MEMS 센서(자력계, 가속도계, 자이로스코프)를 브라우저에서 직접 읽어내는 웹 애플리케이션입니다. 자바스크립트로 구동되는 실시간 삼각함수 기울기 보정 알고리즘을 통해 휴대폰을 기울여도 0°~360°의 정확한 방위각을 즉각 계산합니다."
+		"q": "구글에서 나침반은 어디에 있나요(구글 지도 및 크롬)?",
+		"a": "모바일 구글 지도 앱에서는 지도를 회전할 때 우측 상단에 작은 빨간색-흰색 나침반 바늘 아이콘이 나타나며, 탭하면 북쪽이 위로 재정렬됩니다. 구글 크롬에는 전체 화면 나침반이 내장되어 있지 않으므로 trueonlinecompass.com을 방문하여 수평계가 포함된 전체 360도 나침반을 이용할 수 있습니다."
 	},
 	{
-		"q": "진북(True North)과 자북(Magnetic North)의 차이점은 무엇입니까?",
-		"a": "진북은 지구의 자전축에 위치한 지리적 북극점(모든 경선이 모이는 지점)을 가리키며 지도와 GPS의 기준입니다. 자북은 지구 내부 외핵의 대류로 형성된 지구 자기장 선이 수직으로 들어가는 북극해 지점으로 매년 수십 킬로미터씩 이동합니다. 이 둘 사이의 각도 차이를 자기 편각이라고 부릅니다."
+		"q": "내 휴대폰에서 나침반 센서와 앱은 어디에 있나요?",
+		"a": "아이폰의 경우 기본 제공되는 \"나침반\" 앱을 열거나 사파리에서 본 사이트를 열 수 있습니다. 안드로이드폰의 경우 크롬에서 본 사이트를 열거나 제조사 툴을 이용합니다. 실제 센서는 스마트폰 메인보드에 장착된 초소형 MEMS 칩입니다."
 	},
 	{
-		"q": "자기 편각이란 무엇이며 왜 정확한 내비게이션에 필수적입니까?",
-		"a": "자기 편각은 현재 위치에서 자북과 진북 사이의 수평 각도 차이입니다. 서울은 약 −8°~−9° 서편각, 뉴욕은 약 −13° 서편각을 가집니다. 편각을 보정하지 않으면 이동 거리가 길어질수록 실제 목표 지점에서 수백 미터 이상 벗어납니다. 본 나침반은 미국 NOAA의 세계 자기 모델(WMM)을 탑재하여 지도 좌표와 일치하도록 편각을 자동 계산합니다."
+		"q": "어떤 스마트폰에 나침반 센서가 탑재되어 있나요?",
+		"a": "애플의 모든 아이폰(iPhone 3GS부터 iPhone 16 / Pro 시리즈까지)과 삼성 갤럭시 S 및 A 시리즈, 구글 픽셀 등 대부분의 중상급 안드로이드 스마트폰에 지자기 센서가 내장되어 있습니다."
 	},
 	{
-		"q": "스마트폰 나침반을 최고 정밀도로 보정(캘리브레이션)하는 방법은 무엇입니까?",
-		"a": "휴대폰을 손바닥 위에 평평하게 올려놓고 화면이 하늘을 향한 상태에서 공중에 큰 8자(∞) 모양을 그리며 5~10초간 부드럽게 회전시키십시오. 이를 통해 3축 자력계가 지구 자기장을 전 방위에서 감지하여 내부 스피커나 금속 부품으로 인한 고유 자기장 왜곡을 상쇄합니다."
-	},
-	{
-		"q": "나침반 바늘이 심하게 떨리거나 제자리에서 헛도는 이유는 무엇입니까?",
-		"a": "주변의 강한 전자기 간섭이 원인입니다. 자석이 포함된 휴대폰 케이스, 맥세이프 액세서리, 노트북, 철근 콘크리트 기둥, 자동차 대시보드 등 금속 물체로부터 최소 2미터 이상 떨어진 후 8자 회전 캘리브레이션을 진행하십시오."
-	},
-	{
-		"q": "스마트폰 나침반은 전통적인 아날로그 나침반에 비해 얼마나 정확합니까?",
-		"a": "금속 간섭이 없는 야외에서 캘리브레이션을 마친 스마트폰 MEMS 자력계는 ±1°~±3° 수준의 정확도를 보여주며, 일반 액체 제동식 실바 나침반과 대등합니다. 또한 경사 보정과 진북 자동 변환 기능을 갖추고 있습니다. 다만 극한의 설산 등반 시에는 배터리가 필요 없는 실물 나침반을 비상용으로 함께 소지하는 것이 좋습니다."
-	},
-	{
-		"q": "이 온라인 나침반은 오프라인 및 비행기 탑승 모드에서도 작동합니까?",
-		"a": "네, 작동합니다. 본 사이트는 오프라인 우선 Progressive Web App(PWA) 기술로 구축되었습니다. 모든 실행 코드와 WMM 자기장 계산 데이터는 브라우저의 서비스 워커에 캐시되므로 인터넷 연결이나 통신망이 없는 깊은 산속에서도 완벽하게 작동합니다."
-	},
-	{
-		"q": "데스크톱 PC나 노트북에서 나침반이 데모 모드로 표시되는 이유는 무엇입니까?",
-		"a": "실시간 나침반 기능은 자기장을 감지하는 물리적 센서(자력계) 하드웨어가 필요합니다. 스마트폰과 태블릿에는 기본 탑재되어 있으나, 일반 노트북과 데스크톱 PC에는 센서가 없습니다. PC 환경에서는 시뮬레이션 다이얼과 태양/좌표 계산기가 제공됩니다."
-	},
-	{
-		"q": "키블라(Qibla) 나침반은 메카 방향을 어떻게 정밀하게 찾아냅니까?",
-		"a": "본 도구는 사용자의 현재 GPS 좌표에서 사우디아라비아 메카의 카바 신전(북위 21° 25' 21\", 동경 39° 49' 34\")까지의 대권 항로(대원 방위각)를 구면삼각법으로 계산합니다. 나침반 외곽의 에메랄드색 카바 마커에 몸의 방향을 맞추면 정확하게 메카를 향할 수 있습니다."
-	},
-	{
-		"q": "내 집, 발코니 또는 정원이 향하고 있는 방위를 확인하려면 어떻게 합니까?",
-		"a": "창문이나 문 앞마당에 서서 스마트폰을 수평으로 쥐고 정면을 바라보십시오. 나침반 각도가 315°~45° 사이라면 북향이며, 135°~225° 사이라면 사계절 일조량이 가장 풍부한 남향입니다. 동향은 아침 햇살을, 서향은 따뜻한 오후 햇살을 받습니다."
+		"q": "온라인 나침반 없이 방향을 확인하는 방법은?",
+		"a": "자연의 징표로 방향을 알 수 있습니다: (1) 태양과 그림자: 태양은 동쪽에서 떠서 남쪽을 지나 서쪽으로 집니다. 막대기 그림자 끝은 서쪽에서 동쪽으로 이동합니다. (2) 아날로그 시계법: 시침을 태양에 맞췄을 때 시침과 12시의 중간 지점이 남쪽입니다. (3) 밤하늘의 별: 북두칠성을 통해 북극성을 찾으면 그곳이 진북입니다. (4) 온라인 태양 계산기: 본 사이트의 태양 위치 계산 도구를 이용하세요."
 	}
 ];
 
@@ -336,6 +335,174 @@ const compassTechComparison = [
 		</div>
 	</section>
 
+
+	
+	<!-- ─── Online Compass Geometry & Math Section ──────────── -->
+	<section id="geometry-math" class="border-t border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">수학과 기하학</p>
+				<h2 class="mt-3 text-display-lg text-ink">
+					나침반 기하학과 수학: 360도 원의 법칙
+				</h2>
+				<p class="mt-6 text-body-lg text-body leading-relaxed">
+					왜 나침반은 360도이며, 기하학과 내비게이션은 어떻게 연결되어 있을까요? 방위각, 역방위각 및 삼각측량의 원리를 알아봅니다.
+				</p>
+
+				<div class="mt-8 space-y-6">
+					<div class="card p-6">
+						<h3 class="text-display-sm text-ink">1. 360도 원 기하학</h3>
+						<p class="mt-2 text-sm text-body leading-6">
+							1회전은 360도입니다. 바빌로니아의 60진법에서 유래한 360은 무려 24개의 약수를 가지고 있어 원을 분수 없이 4분면과 8방위로 균등하게 나눌 수 있습니다.
+						</p>
+					</div>
+
+					<div class="card p-6">
+						<h3 class="text-display-sm text-ink">2. 나침반 각도(도) vs 호도법(라디안)</h3>
+						<p class="mt-2 text-sm text-body leading-6">
+							실제 방위는 도(0°~360°)로 읽지만, 컴퓨터 물리 엔진은 라디안으로 계산합니다. 변환 공식: 라디안 = 도 × (π / 180°).
+						</p>
+						<div class="my-4 rounded-xl border border-hairline bg-canvas-soft p-4 font-mono text-xs sm:text-sm text-ink">
+							<p>θ_radians = θ_degrees × (π / 180°)</p>
+							<p class="mt-1">θ_degrees = θ_radians × (180° / π)</p>
+							<p class="mt-2 text-mute text-xs">// 0° (N) = 0 rad | 90° (E) = π/2 rad ≈ 1.5708 rad | 180° (S) = π rad ≈ 3.1416 rad | 270° (W) = 3π/2 rad ≈ 4.7124 rad</p>
+						</div>
+					</div>
+
+					<div class="card p-6">
+						<h3 class="text-display-sm text-ink">3. 작도용 컴퍼스 vs 내비게이션 나침반</h3>
+						<p class="mt-2 text-sm text-body leading-6">
+							한국어에서는 원을 그리는 도구를 컴퍼스, 방향을 찾는 도구를 나침반이라고 구분하지만 두 도구는 동일한 원 기하학 원리를 공유합니다:
+						</p>
+					</div>
+				</div>
+
+				<!-- Comparison Table: Geometry Compass vs Navigational Online Compass -->
+				<div class="mt-10 overflow-x-auto">
+					<table class="w-full border-collapse text-sm">
+						<caption class="sr-only">작도용 컴퍼스와 디지털 나침반 비교</caption>
+						<thead>
+							<tr class="border-b border-hairline-strong text-left">
+								<th scope="col" class="py-3.5 pr-4 font-semibold text-ink">구분</th>
+								<th scope="col" class="py-3.5 pr-4 font-semibold text-ink">작도용 컴퍼스 (제도기구)</th>
+								<th scope="col" class="py-3.5 font-semibold text-ink">디지털 온라인 나침반</th>
+							</tr>
+						</thead>
+						<tbody class="divide-y divide-hairline">
+							{geometryCompassComparison.map((row) => (
+								<tr class="hover:bg-canvas-soft/40 transition-colors align-top">
+									<td class="py-4 pr-4 font-medium text-ink">{row.feature}</td>
+									<td class="py-4 pr-4 text-xs text-body leading-5">{row.geometryCompass}</td>
+									<td class="py-4 text-xs text-body leading-5 font-medium text-ink">{row.digitalCompass}</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</div>
+
+				<div class="mt-8 rounded-xl border border-hairline bg-canvas-soft p-6">
+					<h3 class="text-base font-semibold text-ink">역방위각 (돌아오는 코스) 수학 계산법</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						등산이나 측량에서 왔던 길을 정확히 되돌아가기 위한 공식:
+					</p>
+					<div class="my-3 font-mono text-xs text-ink bg-canvas p-3 rounded border border-hairline">
+						<p>If Forward_Bearing &lt; 180°: Back_Bearing = Forward_Bearing + 180°</p>
+						<p class="mt-1">If Forward_Bearing ≥ 180°: Back_Bearing = Forward_Bearing - 180°</p>
+					</div>
+					<p class="text-xs text-mute">
+						예: 045°(북동) 방향으로 전진했다면, 기지로 복귀하는 역방위각은 045° + 180° = 225°(남서)가 됩니다.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Online Compass for Qibla & Kaaba Section ────────── -->
+	<section id="qibla-finder" class="border-t border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">키블라 기도 방향</p>
+				<h2 class="mt-3 text-display-lg text-ink">
+					키블라 온라인 나침반: 메카 카바 신전 방향 찾기
+				</h2>
+				<p class="mt-6 text-body-lg text-body leading-relaxed">
+					현재 GPS 위치에서 사우디아라비아 메카 카바 신전까지의 정확한 대권 항로 방위를 진북 기준으로 계산합니다.
+				</p>
+
+				<div class="mt-8 grid gap-6 sm:grid-cols-2">
+					<div class="card p-6">
+						<h3 class="text-display-sm text-ink mb-2">키블라 방위각 측지학적 계산</h3>
+						<p class="text-sm text-body leading-6">
+							현재 좌표에서 카바 신전(북위 21° 25′ 21″, 동경 39° 49′ 34″)까지의 최단 경로를 구면 삼각법으로 도출:
+						</p>
+						<div class="my-3 rounded-lg border border-hairline bg-canvas-soft p-3 font-mono text-xs text-ink overflow-x-auto">
+							<p>ΔL = λ_mecca - λ_user</p>
+							<p class="mt-1">y = sin(ΔL)</p>
+							<p class="mt-1">x = cos(φ_user) · tan(φ_mecca) - sin(φ_user) · cos(ΔL)</p>
+							<p class="mt-1">Qibla_Azimuth = atan2(y, x) · (180 / π)</p>
+						</div>
+						<p class="text-xs text-mute">
+							지구 곡률을 반영한 구면 코사인 법칙으로 메카까지의 최단 비행 경로를 산출합니다.
+						</p>
+					</div>
+
+					<div class="card p-6 flex flex-col justify-between">
+						<div>
+							<h3 class="text-display-sm text-ink mb-2">메카 방향으로 정렬하는 단계</h3>
+							<ol class="space-y-3 text-sm text-body list-decimal pl-4">
+								<li>브라우저에서 위치 정보 접근을 허용합니다.</li>
+								<li>휴대폰을 손바닥 위에 수평으로 평평하게 듭니다.</li>
+								<li>나침반 림에 위치한 에메랄드 카바 신전 아이콘을 확인합니다.</li>
+								<li>나침반 바늘이 에메랄드 마커와 일치할 때까지 몸을 돌립니다.</li>
+							</ol>
+						</div>
+						<div class="mt-4 pt-4 border-t border-hairline">
+							<a href="/ko/qibla/" class="text-link text-xs font-semibold hover:underline">메카까지의 거리를 확인할 수 있는 키블라 전용 페이지 열기 →</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Google & Browser Compatibility Section ──────────── -->
+	<section id="browser-support" class="border-t border-hairline bg-canvas-soft scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">브라우저 호환성</p>
+				<h2 class="mt-3 text-display-lg text-ink">
+					구글 크롬 및 모바일 브라우저 호환성
+				</h2>
+				<p class="mt-6 text-body-lg text-body leading-relaxed">
+					많은 분들이 구글에서 나침반을 찾습니다. 구글 지도는 운전 경로에 유용하지만 수평계가 포함된 독립형 360도 나침반은 제공하지 않습니다.
+				</p>
+				<p class="mt-4 text-body leading-7">
+					저희 온라인 나침반은 구글 크롬, 안드로이드, 사파리(iOS), 파이어폭스, 삼성 인터넷에서 완벽하게 구동됩니다.
+				</p>
+
+				<div class="mt-8 grid gap-4 sm:grid-cols-3">
+					<div class="card p-5">
+						<h3 class="text-base font-semibold text-ink mb-2">안드로이드 구글 크롬</h3>
+						<p class="text-xs text-body leading-5">
+							W3C DeviceOrientation API를 통한 모션 센서 직접 연동. "허용"을 누르면 즉시 작동합니다.
+						</p>
+					</div>
+					<div class="card p-5">
+						<h3 class="text-base font-semibold text-ink mb-2">애플 iOS 사파리</h3>
+						<p class="text-xs text-body leading-5">
+							webkitCompassHeading API 지원으로 앱 설치 없이 진북 방향을 정확히 측정합니다.
+						</p>
+					</div>
+					<div class="card p-5">
+						<h3 class="text-base font-semibold text-ink mb-2">구글 지도와의 교차 확인</h3>
+						<p class="text-xs text-body leading-5">
+							구글 위성 지도, GPS 좌표와 나침반 각도를 함께 대조하여 지형을 파악할 수 있습니다.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
 	<!-- ─── Complete Navigation Toolkit Grid (All 8 Tools) ─── -->
 	<section id="tools" class="scroll-mt-16">
@@ -910,7 +1077,7 @@ const compassTechComparison = [
 			</p>
 			<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
 				<a href="/ko/compass/" class="btn-primary bg-on-primary text-primary hover:opacity-90">실시간 나침반 실행</a>
-				<a href="/ko/level/" class="btn-secondary text-on-primary border-on-primary/30 hover:bg-on-primary/10">수평계 사용해보기</a>
+				<a href="/ko/level/" class="btn-secondary-inverted">수평계 사용해보기</a>
 			</div>
 		</div>
 	</section>

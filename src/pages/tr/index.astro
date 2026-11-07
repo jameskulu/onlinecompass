@@ -1,71 +1,70 @@
 ---
+const geometryCompassComparison = [
+	{
+		"feature": "Temel Amaç",
+		"geometryCompass": "Kağıt üzerinde geometrik daireler çizmek, açıortay almak ve Öklid doğru parçalarını ölçmek",
+		"digitalCompass": "Gerçek zamanlı azimut yönü, ana yönler ve Dünya'ya göre açısal yönelimi ölçmek"
+	},
+	{
+		"feature": "Ölçü Birimleri",
+		"geometryCompass": "Daire çizimi için yarıçap mesafesi (cm, inç) ve yay radyanları",
+		"digitalCompass": "Kesintisiz 360° derece (0.0° - 359.9°), açısal mil ve 16 yönlü pusula gülü"
+	},
+	{
+		"feature": "Matematiksel Temel",
+		"geometryCompass": "Öklid düzlem geometrisi (pergel-cetvel çizimleri, Pisagor teoremi)",
+		"digitalCompass": "Küre trigonometrisi (Euler dönüşüm matrisleri, WGS84 jeodezisi ve Büyük Daire rotaları)"
+	},
+	{
+		"feature": "Referans Sistemi",
+		"geometryCompass": "Yerel 2B düzlem (Kartezyen x, y koordinatları)",
+		"digitalCompass": "Küresel 3B coğrafi referans (Gerçek Kuzey, Manyetik Kuzey ve yerçekimi vektörü)"
+	}
+];
+
 import Layout from '../../layouts/Layout.astro';
 import Compass from '../../components/Compass.astro';
 
 const faq = [
 	{
-		"q": "Şu an bulunduğum yerden Gerçek Kuzeyi hemen nasıl bulurum?",
-		"a": "Yön ve konum izni verilmiş akıllı telefonunuzda bu çevrim içi pusulayı açın. Cihazı düz tutun; ibre yerel manyetik sapmayı hesaba katarak otomatik olarak Gerçek Kuzeyi (0°) gösterecektir."
+		"q": "Çevrimiçi pusula ile hangi yöne bakıyorum?",
+		"a": "Telefonunuzu yatay tutun ve pusula kadranının üst kısmına bakın. Büyük sayı tam yönünüzü derece (0° - 360°) cinsinden, harf ise ana yönü gösterir: 0° Kuzey (N), 90° Doğu (E), 180° Güney (S) ve 270° Batı (W). Kadran 45° gösteriyorsa Kuzeydoğuya (NE), 225° gösteriyorsa Güneybatıya (SW) bakıyorsunuzdur."
 	},
 	{
-		"q": "Evin veya odanın içindeyken kuzey ne tarafta kalır?",
-		"a": "Büyük metal eşyalardan, mikrodalga fırınlardan, bilgisayarlardan ve betonarme kolonlardan uzak durun. Telefonu düz tutun: 0° ise baktığınız yön kuzeydir, 90° ise kuzey solunuzdadır."
+		"q": "Çevrimiçi pusula: Kuzey nerede ve benim kuzey yönüm hangisi?",
+		"a": "Bu çevrimiçi pusulada kırmızı ibre ucu her zaman Gerçek Kuzeyi (0°/360°) gösterir. Akıllı telefonunuzu avucunuzda yatay tutun. Kırmızı ucun gösterdiği yön sizin Kuzey yönünüzdür. İbre tam ileri bakıyorsa Kuzeye bakıyorsunuzdur; sola bakıyorsa Kuzey solunuzdadır."
 	},
 	{
-		"q": "Telefonumun pusulası neden yanlış yönü gösteriyor veya sapıyor?",
-		"a": "Manyetometre sensörleri mıknatıslı kılıflardan (MagSafe gibi), metalden ve elektronikten etkilenir. Mıknatıslı kılıfı çıkarın ve sensörü sıfırlamak için telefonu 5 saniye boyunca sekiz (∞) şeklinde havada çevirin."
+		"q": "Pusulada hangi yöne dönüğüm / hangi istikametteyim?",
+		"a": "Baktığınız yön cihazınızın üst kenarı ile belirlenir. Vücudunuzu döndürdükçe pusula halkası üstteki sabit çizginin altında dönerek ana yönleri (N, NE, E, SE, S, SW, W, NW) ve 360 derece açınızı gerçek zamanlı gösterir."
 	},
 	{
-		"q": "“Kuzey nerede?” ile “Hangi yöne bakıyorum?” arasındaki fark nedir?",
-		"a": "Kuzey sabit bir coğrafi yöndür (0° Gerçek). Baktığınız yön ise kuzeye göre dönüş açınızdır. Kadran 180° gösteriyorsa Güneye bakıyorsunuzdur ve Kuzey tam arkanızdadır."
+		"q": "Çevrimiçi pusula nasıl kullanılır?",
+		"a": "Kullanımı çok kolaydır: (1) Telefonunuzun tarayıcısında (Safari, Chrome, Firefox) trueonlinecompass.com adresini açın. (2) \"Canlı pusulayı etkinleştir\"e dokunun ve sensör izinlerini verin. (3) Telefonu metallerden uzakta yatay tutun. (4) Vücudunuzu döndürün; 360° kadran yönünüzü ve GPS koordinatlarınızı gösterecektir."
 	},
 	{
-		"q": "Uygulama yüklemeden bu çevrim içi pusulayla kuzeyi bulabilir miyim?",
-		"a": "Evet. Bu pusula W3C DeviceOrientation API kullanarak mobil tarayıcınızda (Safari, Chrome, Edge) %100 çalışır. İndirme yok, kayıt yok, verileriniz tamamen gizli kalır."
+		"q": "Telefonumu pusula olarak kullanabilir miyim?",
+		"a": "Evet. Neredeyse tüm modern akıllı telefonlar yüksek hassasiyetli pusula olarak çalışabilir. Telefonunuzun içinde 3 eksenli MEMS manyetometresi (elektronik manyetik sensör), ivmeölçer ve jiroskop bulunur. Web pusulamız bu sensörleri uygulama indirmeden doğrudan okur."
 	},
 	{
-		"q": "Pusula sensörü olmayan masaüstü bilgisayarda kuzeyi nasıl bulurum?",
-		"a": "Masaüstü ve dizüstü bilgisayarlarda manyetometre bulunmaz. Bilgisayarda Güneş Konumu Hesaplayıcımızı kullanarak güneş açısı ve gölge yönünden Gerçek Kuzeyi kesin olarak bulabilirsiniz."
+		"q": "Telefonum hangi yöne baktığımı söyleyebilir mi?",
+		"a": "Evet. Sensör füzyon algoritmaları manyetik alan ve yerçekimi eğim verilerini birleştirerek Dünya kutuplarına göre 0.1° hassasiyetle baktığınız yönü hesaplar."
 	},
 	{
-		"q": "Çevrimiçi dijital pusula nedir ve tarayıcıda nasıl çalışır?",
-		"a": "Çevrimiçi dijital pusula, akıllı telefonunuzdaki donanımsal MEMS sensörlerini (manyetometre, ivmeölçer ve jiroskop) W3C DeviceOrientation API aracılığıyla doğrudan okuyan bir web uygulamasıdır. Herhangi bir uygulama yüklemenize gerek kalmadan, JavaScript üzerinde gerçek zamanlı trigonometrik eğim telafisi yaparak 0°–360° arasında kararlı bir yön açısı üretir."
+		"q": "Google'da pusulam nerede (Google Haritalar ve Chrome)?",
+		"a": "Google Haritalar uygulamasında haritayı döndürdüğünüzde sağ üstte küçük kırmızı-beyaz bir ibre simgesi belirir; dokunulduğunda harita Kuzeye döner. Google Chrome'da yerleşik tam ekran pusula yoktur; Chrome'da trueonlinecompass.com adresini açarak su terazili 360° tam ekran pusulaya ulaşabilirsiniz."
 	},
 	{
-		"q": "Gerçek kuzey ile manyetik kuzey arasındaki fark nedir?",
-		"a": "Gerçek kuzey, Dünya'nın dönme ekseni boyunca tüm meridyenlerin birleştiği coğrafi Kuzey Kutbu'nu gösterir. Manyetik kuzey ise Dünya'nın jeomanyetik alan çizgilerinin dikey olarak gezegenin çekirdeğine girdiği kutup bölgesidir. Bu iki yön arasındaki açısal farka manyetik sapma (deklinasyon) denir."
+		"q": "Telefonumda pusula nerede ve mobilde nasıl görülür?",
+		"a": "iPhone'da İzlenceler klasöründeki \"Pusula\" uygulamasını açın veya Safari'de bu siteye girin. Android'de Chrome'da bu siteyi açın veya cihazın araçlarını kullanın. Fiziksel sensör, anakart üzerine lehimlenmiş mikroskobik bir MEMS çipidir."
 	},
 	{
-		"q": "Manyetik sapma nedir ve hassas navigasyon için neden hayati önem taşır?",
-		"a": "Manyetik sapma, bulunduğunuz koordinattaki manyetik kuzey ile gerçek kuzey arasındaki yatay açıdır. New York'ta yaklaşık −13° Batı, Los Angeles'ta ise +12° Doğu civarındadır. Pusulamız, bu sapmayı otomatik olarak düzeltmek ve rotanızı topografik haritalarla birebir eşleştirmek için NOAA'nın Dünya Manyetik Modeli'ni (WMM) kullanır."
+		"q": "Hangi cep telefonlarında pusula sensörü vardır?",
+		"a": "Tüm Apple iPhone'lar (iPhone 3GS'ten iPhone 16 / Pro'ya kadar) ve orta-üst segment Android telefonların büyük çoğunluğu (Samsung Galaxy S ve A serisi, Google Pixel, Xiaomi, Motorola) manyetometre sensörüne sahiptir."
 	},
 	{
-		"q": "Telefonumun pusulasını en yüksek hassasiyet için nasıl kalibre ederim?",
-		"a": "Telefonunuzu avucunuzda düz tutun ve havada 5 ila 10 saniye boyunca akıcı bir sonsuzluk işareti (∞) veya sekiz çizin. Bu hareket, üç eksenli manyetometreyi Dünya'nın alanına her açıdan maruz bırakarak dahili bileşenlerden kaynaklanan manyetik bozulmaların filtrelenmesini sağlar."
-	},
-	{
-		"q": "Pusula ibrem neden titriyor veya kontrolsüzce dönüyor?",
-		"a": "Kararsız okumalar çevredeki elektromanyetik alan parazitlerinden kaynaklanır. Metal nesnelerden, mıknatıslı kılıflardan, MagSafe aksesuarlarından, dizüstü bilgisayarlardan, betonarme demirlerinden ve araç konsollarından en az iki metre uzaklaşın ve ardından sekiz çizerek kalibre edin."
-	},
-	{
-		"q": "Akıllı telefon pusulası fiziksel bir harita pusulasına göre ne kadar hassastır?",
-		"a": "Kalibre edildiğinde ve metallerden uzak tutulduğunda, bir akıllı telefonun MEMS manyetometresi açık alanda ±1° ila ±3° doğruluk sağlar. Bu değer sıvı sönümlemeli klasik pusulalarla eşdeğerdir. Ayrıca dijital eğim telafisi ve otomatik gerçek kuzey düzeltmesi gibi büyük avantajlar sunar."
-	},
-	{
-		"q": "Bu çevrimiçi pusula çevrimdışı ve uçak modunda çalışır mı?",
-		"a": "Evet. Bu web sitesi çevrimdışı öncelikli bir Progressive Web App (PWA) olarak tasarlanmıştır. Tüm kodlar ve jeomanyetik WMM tabloları tarayıcınızın Service Worker önbelleğinde saklanır. Sayfa bir kez açıldıktan sonra, hücresel kapsama alanı veya Wi-Fi olmayan dağlarda bile tam olarak çalışır."
-	},
-	{
-		"q": "Pusula masaüstü bilgisayarlarda ve laptoplarda neden demo kadranı gösterir?",
-		"a": "Canlı yön tespiti fiziksel bir manyetometre (manyetik alan sensörü) gerektirir. Akıllı telefonlar ve tabletlerde bu donanım bulunurken, dizüstü ve masaüstü bilgisayarlarda neredeyse hiç yer almaz. Bilgisayarlarda uygulama, etkileşimli bir simülasyon ve güneş/koordinat araçları sunar."
-	},
-	{
-		"q": "Kıble bulucu Mekke'nin yönünü nasıl tam doğrulukla tespit eder?",
-		"a": "Araç, bulunduğunuz koordinatlardan Mekke'deki Kabe'ye (21° 25' 21\" K, 39° 49' 34\" D) doğru olan büyük daire yayını (ortodromik azimut) küresel trigonometri formülleriyle hesaplar. Pusula halkasındaki zümrüt yeşili Kabe simgesi, yönünüzü tam olarak hizalamanız için görsel kılavuzluk eder."
-	},
-	{
-		"q": "Evim, balkonum veya bahçem hangi yöne bakıyor?",
-		"a": "Pencerenizin veya dış kapınızın önünde telefonunuzu düz tutarak durun. 315° ile 45° arasındaki değerler Kuzey cepheyi gösterir. Güney cephe (135°–225°) yıl boyunca en istikrarlı güneş ışığını alırken, Doğu sabah güneşini, Batı ise sıcak öğleden sonra ışığını yakalar."
+		"q": "Çevrimiçi pusula olmadan yön nasıl bulunur?",
+		"a": "Doğal yöntemlerle yön bulabilirsiniz: (1) Güneş ve gölgeler: Güneş doğudan doğar, öğleyin güneye gelir (kuzey yarımkürede) ve batıdan batar. Yere dikilen çubuğun gölge ucu batıdan doğuya ilerler. (2) Analog saat yöntemi: Akrebi güneşe çevirin; akrep ile 12'nin ortası Güneyi gösterir. (3) Gece yıldızları: Büyük Ayı'dan Kutup Yıldızı'nı bulun, orası Gerçek Kuzeydir. (4) Çevrimiçi Güneş Hesaplayıcı: Güneş konumu aracımızı kullanın."
 	}
 ];
 
@@ -336,6 +335,174 @@ const compassTechComparison = [
 		</div>
 	</section>
 
+
+	
+	<!-- ─── Online Compass Geometry & Math Section ──────────── -->
+	<section id="geometry-math" class="border-t border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">matematik ve geometri</p>
+				<h2 class="mt-3 text-display-lg text-ink">
+					Pusula Geometrisi ve Matematiği: 360° Tam Daire
+				</h2>
+				<p class="mt-6 text-body-lg text-body leading-relaxed">
+					Pusula neden 360 derecedir ve daire geometrisi yön bulmayla nasıl bağlantılıdır? Azimut, ters açı (back-bearing) ve nirengi hesaplarını öğrenin.
+				</p>
+
+				<div class="mt-8 space-y-6">
+					<div class="card p-6">
+						<h3 class="text-display-sm text-ink">1. 360 Derecelik Daire Geometrisi</h3>
+						<p class="mt-2 text-sm text-body leading-6">
+							Tam bir tur 360 derecedir. Babil altmışlık sayı sisteminden gelen 360 sayısı, tam 24 tam bölene sahip olduğu için pusulayı kesirsiz biçimde 4 kadrana ve 8 ana yöne ayırmayı sağlar.
+						</p>
+					</div>
+
+					<div class="card p-6">
+						<h3 class="text-display-sm text-ink">2. Pusula Derecesi vs Radyan</h3>
+						<p class="mt-2 text-sm text-body leading-6">
+							Sahada derece (0°–360°) okunurken, bilgisayar ve fizik motorları radyan ile işlem yapar. Dönüşüm formülü: Radyan = Derece × (π / 180°).
+						</p>
+						<div class="my-4 rounded-xl border border-hairline bg-canvas-soft p-4 font-mono text-xs sm:text-sm text-ink">
+							<p>θ_radians = θ_degrees × (π / 180°)</p>
+							<p class="mt-1">θ_degrees = θ_radians × (180° / π)</p>
+							<p class="mt-2 text-mute text-xs">// 0° (N) = 0 rad | 90° (E) = π/2 rad ≈ 1.5708 rad | 180° (S) = π rad ≈ 3.1416 rad | 270° (W) = 3π/2 rad ≈ 4.7124 rad</p>
+						</div>
+					</div>
+
+					<div class="card p-6">
+						<h3 class="text-display-sm text-ink">3. Geometri Pergeli vs Yön Pusulası</h3>
+						<p class="mt-2 text-sm text-body leading-6">
+							Türkçede daire çizen alete pergel, yön gösterene pusula denir. Ancak her ikisi de aynı geometrik açı kanunlarını paylaşır:
+						</p>
+					</div>
+				</div>
+
+				<!-- Comparison Table: Geometry Compass vs Navigational Online Compass -->
+				<div class="mt-10 overflow-x-auto">
+					<table class="w-full border-collapse text-sm">
+						<caption class="sr-only">Geometri Pergeli ile Dijital Yön Pusulası Karşılaştırması</caption>
+						<thead>
+							<tr class="border-b border-hairline-strong text-left">
+								<th scope="col" class="py-3.5 pr-4 font-semibold text-ink">Özellik</th>
+								<th scope="col" class="py-3.5 pr-4 font-semibold text-ink">Geometri Pergeli (Çizim)</th>
+								<th scope="col" class="py-3.5 font-semibold text-ink">Dijital Çevrimiçi Pusula</th>
+							</tr>
+						</thead>
+						<tbody class="divide-y divide-hairline">
+							{geometryCompassComparison.map((row) => (
+								<tr class="hover:bg-canvas-soft/40 transition-colors align-top">
+									<td class="py-4 pr-4 font-medium text-ink">{row.feature}</td>
+									<td class="py-4 pr-4 text-xs text-body leading-5">{row.geometryCompass}</td>
+									<td class="py-4 text-xs text-body leading-5 font-medium text-ink">{row.digitalCompass}</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</div>
+
+				<div class="mt-8 rounded-xl border border-hairline bg-canvas-soft p-6">
+					<h3 class="text-base font-semibold text-ink">Geri Yön (Ters Azimut) Matematiksel Hesabı</h3>
+					<p class="mt-2 text-sm text-body leading-6">
+						Doğa yürüyüşünde aynı rotadan geri dönmek için:
+					</p>
+					<div class="my-3 font-mono text-xs text-ink bg-canvas p-3 rounded border border-hairline">
+						<p>If Forward_Bearing &lt; 180°: Back_Bearing = Forward_Bearing + 180°</p>
+						<p class="mt-1">If Forward_Bearing ≥ 180°: Back_Bearing = Forward_Bearing - 180°</p>
+					</div>
+					<p class="text-xs text-mute">
+						Örnek: 045° (Kuzeydoğu) rotasıyla gittiyseniz, geri dönüş rotanız 045° + 180° = 225° (Güneybatı) olur.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Online Compass for Qibla & Kaaba Section ────────── -->
+	<section id="qibla-finder" class="border-t border-hairline bg-canvas scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">kıble namaz yönü</p>
+				<h2 class="mt-3 text-display-lg text-ink">
+					Kıble için Çevrimiçi Pusula: Mekke Kabe Yönü Bulucu
+				</h2>
+				<p class="mt-6 text-body-lg text-body leading-relaxed">
+					Bulunduğunuz GPS konumundan Mekke'deki Kabe-i Muazzama'ya olan tam yönü Gerçek Kuzey referansıyla belirleyin.
+				</p>
+
+				<div class="mt-8 grid gap-6 sm:grid-cols-2">
+					<div class="card p-6">
+						<h3 class="text-display-sm text-ink mb-2">Kıble Azimutunun Jeodezik Hesabı</h3>
+						<p class="text-sm text-body leading-6">
+							Kıble, koordinatlarınızdan Mekke'deki Kabe'ye (21° 25′ 21″ K, 39° 49′ 34″ D) uzanan Büyük Daire rotasıdır ve küresel trigonometriyle hesaplanır:
+						</p>
+						<div class="my-3 rounded-lg border border-hairline bg-canvas-soft p-3 font-mono text-xs text-ink overflow-x-auto">
+							<p>ΔL = λ_mecca - λ_user</p>
+							<p class="mt-1">y = sin(ΔL)</p>
+							<p class="mt-1">x = cos(φ_user) · tan(φ_mecca) - sin(φ_user) · cos(ΔL)</p>
+							<p class="mt-1">Qibla_Azimuth = atan2(y, x) · (180 / π)</p>
+						</div>
+						<p class="text-xs text-mute">
+							Büyük daire formülü Dünya eğriliğini hesaba katarak Mekke'ye olan en kısa mesafeyi sunar.
+						</p>
+					</div>
+
+					<div class="card p-6 flex flex-col justify-between">
+						<div>
+							<h3 class="text-display-sm text-ink mb-2">Mekke Yönüne Hizalanma Adımları</h3>
+							<ol class="space-y-3 text-sm text-body list-decimal pl-4">
+								<li>Tarayıcıda konum (GPS) erişimine izin verin.</li>
+								<li>Telefonunuzu elinizde yatay olarak düz tutun.</li>
+								<li>Pusula kadranında zümrüt yeşili Kabe simgesini bulun.</li>
+								<li>İbre zümrüt simgeyle örtüşene kadar vücudunuzu döndürün.</li>
+							</ol>
+						</div>
+						<div class="mt-4 pt-4 border-t border-hairline">
+							<a href="/tr/qibla/" class="text-link text-xs font-semibold hover:underline">Mekke mesafesini gösteren özel Kıble sayfasına git →</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ─── Google & Browser Compatibility Section ──────────── -->
+	<section id="browser-support" class="border-t border-hairline bg-canvas-soft scroll-mt-16">
+		<div class="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 md:py-28">
+			<div class="mx-auto max-w-3xl">
+				<p class="eyebrow">tarayıcı uyumluluğu</p>
+				<h2 class="mt-3 text-display-lg text-ink">
+					Google Chrome ve Mobil Tarayıcılarda Çevrimiçi Pusula
+				</h2>
+				<p class="mt-6 text-body-lg text-body leading-relaxed">
+					Birçok kullanıcı Google'da pusula arar. Google Haritalar araç navigasyonu için haritayı çevirir fakat su terazili bağımsız bir 360° pusula sunmaz.
+				</p>
+				<p class="mt-4 text-body leading-7">
+					Web pusulamız Google Chrome, Android, Safari (iOS), Firefox ve Samsung İnternet üzerinde sorunsuz çalışır.
+				</p>
+
+				<div class="mt-8 grid gap-4 sm:grid-cols-3">
+					<div class="card p-5">
+						<h3 class="text-base font-semibold text-ink mb-2">Android'de Google Chrome</h3>
+						<p class="text-xs text-body leading-5">
+							W3C DeviceOrientation API ile hareket sensörlerine doğrudan erişim. "İzin Ver" demeniz yeterlidir.
+						</p>
+					</div>
+					<div class="card p-5">
+						<h3 class="text-base font-semibold text-ink mb-2">Apple iOS'ta Safari</h3>
+						<p class="text-xs text-body leading-5">
+							Uygulama yüklemeden gerçek kuzeyi veren webkitCompassHeading desteği.
+						</p>
+					</div>
+					<div class="card p-5">
+						<h3 class="text-base font-semibold text-ink mb-2">Google Haritalar ile Eşleştirme</h3>
+						<p class="text-xs text-body leading-5">
+							Yönünüzü uydu görüntüleri ve sokak haritalarıyla çapraz kontrol edin.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
 	<!-- ─── Complete Navigation Toolkit Grid (All 8 Tools) ─── -->
 	<section id="tools" class="scroll-mt-16">
@@ -910,7 +1077,7 @@ const compassTechComparison = [
 			</p>
 			<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
 				<a href="/tr/compass/" class="btn-primary bg-on-primary text-primary hover:opacity-90">Canlı Pusulayı Başlat</a>
-				<a href="/tr/level/" class="btn-secondary text-on-primary border-on-primary/30 hover:bg-on-primary/10">Su Terazisini Dene</a>
+				<a href="/tr/level/" class="btn-secondary-inverted">Su Terazisini Dene</a>
 			</div>
 		</div>
 	</section>
