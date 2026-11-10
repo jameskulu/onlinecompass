@@ -1082,18 +1082,36 @@ const compassTechComparison = [
 		</div>
 	</section>
 
-	<!-- Structured Data for FAQ Schema -->
+	<!-- Structured Data for WebApplication & FAQ Schema -->
 	<script type="application/ld+json" set:html={JSON.stringify({
 		'@context': 'https://schema.org',
-		'@type': 'FAQPage',
-		mainEntity: faq.map((f) => ({
-			'@type': 'Question',
-			name: f.q,
-			acceptedAnswer: {
-				'@type': 'Answer',
-				text: f.a,
+		'@graph': [
+			{
+				'@type': 'WebApplication',
+				name: 'آن لائن قطب نما',
+				url: 'https://trueonlinecompass.com/ur/',
+				applicationCategory: 'UtilitiesApplication',
+				operatingSystem: 'All',
+				browserRequirements: 'Requires JavaScript and HTML5 DeviceOrientation API',
+				offers: {
+					'@type': 'Offer',
+					price: '0',
+					priceCurrency: 'USD',
+				},
+				description: 'مفت اور درست آن لائن ڈیجیٹل قطب نما جو حقیقی اور مقناطیسی شمال کی سمت فوری بتاتا ہے۔',
 			},
-		})),
+			{
+				'@type': 'FAQPage',
+				mainEntity: faq.map((f) => ({
+					'@type': 'Question',
+					name: f.q,
+					acceptedAnswer: {
+						'@type': 'Answer',
+						text: f.a,
+					},
+				})),
+			},
+		],
 	})} />
 </Layout>
 

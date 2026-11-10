@@ -1082,18 +1082,36 @@ const compassTechComparison = [
 		</div>
 	</section>
 
-	<!-- Structured Data for FAQ Schema -->
+	<!-- Structured Data for WebApplication & FAQ Schema -->
 	<script type="application/ld+json" set:html={JSON.stringify({
 		'@context': 'https://schema.org',
-		'@type': 'FAQPage',
-		mainEntity: faq.map((f) => ({
-			'@type': 'Question',
-			name: f.q,
-			acceptedAnswer: {
-				'@type': 'Answer',
-				text: f.a,
+		'@graph': [
+			{
+				'@type': 'WebApplication',
+				name: 'بوصلة إلكترونية',
+				url: 'https://trueonlinecompass.com/ar/',
+				applicationCategory: 'UtilitiesApplication',
+				operatingSystem: 'All',
+				browserRequirements: 'Requires JavaScript and HTML5 DeviceOrientation API',
+				offers: {
+					'@type': 'Offer',
+					price: '0',
+					priceCurrency: 'USD',
+				},
+				description: 'بوصلة رقمية دقيقة ومجانية لتحديد الشمال الحقيقي والمغناطيسي والقبلة مباشرة في المتصفح.',
 			},
-		})),
+			{
+				'@type': 'FAQPage',
+				mainEntity: faq.map((f) => ({
+					'@type': 'Question',
+					name: f.q,
+					acceptedAnswer: {
+						'@type': 'Answer',
+						text: f.a,
+					},
+				})),
+			},
+		],
 	})} />
 </Layout>
 

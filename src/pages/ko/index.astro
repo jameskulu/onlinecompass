@@ -1082,18 +1082,36 @@ const compassTechComparison = [
 		</div>
 	</section>
 
-	<!-- Structured Data for FAQ Schema -->
+	<!-- Structured Data for WebApplication & FAQ Schema -->
 	<script type="application/ld+json" set:html={JSON.stringify({
 		'@context': 'https://schema.org',
-		'@type': 'FAQPage',
-		mainEntity: faq.map((f) => ({
-			'@type': 'Question',
-			name: f.q,
-			acceptedAnswer: {
-				'@type': 'Answer',
-				text: f.a,
+		'@graph': [
+			{
+				'@type': 'WebApplication',
+				name: '온라인 나침반',
+				url: 'https://trueonlinecompass.com/ko/',
+				applicationCategory: 'UtilitiesApplication',
+				operatingSystem: 'All',
+				browserRequirements: 'Requires JavaScript and HTML5 DeviceOrientation API',
+				offers: {
+					'@type': 'Offer',
+					price: '0',
+					priceCurrency: 'USD',
+				},
+				description: '앱 설치 없이 브라우저에서 바로 사용하는 무료 온라인 디지털 나침반. 실시간 진북 및 자북 측정.',
 			},
-		})),
+			{
+				'@type': 'FAQPage',
+				mainEntity: faq.map((f) => ({
+					'@type': 'Question',
+					name: f.q,
+					acceptedAnswer: {
+						'@type': 'Answer',
+						text: f.a,
+					},
+				})),
+			},
+		],
 	})} />
 </Layout>
 
